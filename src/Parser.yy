@@ -8,6 +8,7 @@
 #include <Pointers/SmartPointer.hpp>
 #include <Statement/IntStatement.hpp>
 #include <Statement/FloatStatement.hpp>
+#include <Statement/AddStatement.hpp>
 #include <Value/Value.hpp>
 
 extern int yylex();
@@ -52,7 +53,7 @@ Program: { Statements = new std::vector<std::string*>(); $$ = Statements; }
 Statement: REAL { $$ = new FloatStatement($1); }
 	| INT { $$ = new IntStatement($1); }
 	| LPAREN Statement RPAREN { $$ = $2; }
-	| Statement PLUS Statement { $$ = $1;}
+	| Statement PLUS Statement { $$ = new AddStatement($1, $3); }
 	| Statement MINUS Statement { $$ = $1;}
 	| WORD EQUALS Statement { $$ = $3;}
 	| Statement TIMES Statement {  $$ = $1; }

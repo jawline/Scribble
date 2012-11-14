@@ -4,6 +4,7 @@
 #include <Pointers/SmartPointer.hpp>
 #include <Statement/IntStatement.hpp>
 #include <Statement/FloatStatement.hpp>
+#include <Statement/AddStatement.hpp>
 #include "Parser.hpp"
 #include <stdlib.h>
 

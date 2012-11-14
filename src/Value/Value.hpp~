@@ -6,7 +6,7 @@ private:
 	float floatValue_;
 
 public:
-	Value(float v);
+	Value(float floatValue);
 
 	float FloatValue();
 };

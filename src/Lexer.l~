@@ -3,6 +3,7 @@
 #include <vector>
 #include <Pointers/SmartPointer.hpp>
 #include <Statement/IntStatement.hpp>
+#include <Statement/FloatStatement.hpp>
 #include "Parser.hpp"
 #include <stdlib.h>
 
