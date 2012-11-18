@@ -1,16 +1,15 @@
 %{
 #include <string>
 #include <vector>
-#include <Pointers/SmartPointer.hpp>
 #include <Statement/IntStatement.hpp>
 #include <Statement/FloatStatement.hpp>
 #include <Statement/AddStatement.hpp>
+#include <VirtualMachine/VirtualMachine.hpp>
 #include "Parser.hpp"
-#include <stdlib.h>
 
 #define SAVE_INT yylval.integer = atoi(yytext);
 #define SAVE_REAL yylval.real = atof(yytext);
-#define SAVE_TOKEN yylval.string = new SmartPointer<std::string>(new std::string(yytext, yyleng))
+#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng);
 
 extern "C" int yywrap() { }
 %}

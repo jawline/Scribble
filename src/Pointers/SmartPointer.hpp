@@ -52,14 +52,14 @@ public:
 		return pointerData;
 	}
 
-	SmartPointer<T>& operator= (SmartPointer<T> const& sp) {
+	SmartPointer<T>& operator= (SmartPointer<T> const& rhs) {
 
-		if (this != sp) {
+		if (this != &rhs) {
 
 			Release();
 
-			pointerData = sp.pointerData;
-			counter = sp.counter;
+			pointerData = rhs.pointerData;
+			counter = rhs.counter;
 			counter->Attach();
 
 		}

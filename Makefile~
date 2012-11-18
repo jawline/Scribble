@@ -4,9 +4,12 @@ LDFLAGS=
 EXECUTABLE=./bin/scribble
 SOURCE_DIR=src
 SOURCES=gen/Lexer.cpp gen/Parser.cpp $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp)
-OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES)) 
+OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 
 all: preprocess $(SOURCES) $(EXECUTABLE)
+
+test: all
+	@$(EXECUTABLE)
 
 clean:
 	rm -r ./obj/ $(EXECUTABLE) ./gen/

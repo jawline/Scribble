@@ -7,6 +7,7 @@ private:
 
 public:
 	Value(float floatValue);
+	Value();
 
 	float FloatValue();
 };

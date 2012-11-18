@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Pointers/SmartPointer.hpp>
 #include <Statement/IntStatement.hpp>
 #include <Statement/FloatStatement.hpp>
 #include <Statement/AddStatement.hpp>
@@ -19,7 +18,7 @@ std::vector<std::string*>* Statements;
 %}
 
 %union {
-	SmartPointer<std::string>* string;
+	std::string* string;
 	std::vector<std::string*>* strings;
 	Statement* statement;
 	float real;
@@ -62,8 +61,8 @@ Statement: REAL { $$ = new FloatStatement($1); }
 
 %%
 
+/**
 int main() {
-
 	// open a file handle to a particular file:
 	FILE *myfile = fopen("test.scribble", "r");
 
@@ -79,4 +78,4 @@ int main() {
 	// lex through the input:
 	yyparse();
 }
-
+*/
