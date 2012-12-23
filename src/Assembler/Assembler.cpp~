@@ -1,0 +1,4 @@
+#include "Assembler.hpp"
+
+unsigned char* generateBytecode(unsigned char* code) {
+}

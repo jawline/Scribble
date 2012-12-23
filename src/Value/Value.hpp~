@@ -23,7 +23,7 @@ public:
 		return Value(floatValue_ * rhs.floatValue_);
 	}
 
-	Value Divide(Value const& rhs) {
+	void Divide(Value const& rhs) {
 		return Value(floatValue_ / rhs.floatValue_);
 	}
 };

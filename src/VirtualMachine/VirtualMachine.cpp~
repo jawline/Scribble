@@ -28,25 +28,94 @@ void VirtualMachine::execute() {
 	while (running_ && position_ < currentCode_->length()) {
 
 		unsigned char opcode = currentCode_->getChar(position_);
+		position_++;
+		printf("Op %i\n", opcode);
+		printf("VM stack size %i\n", stack_.size());
 		
 		switch (opcode) {
 
-			case LoadConst: {
-				position_++;
+
+			case LoadConstOp: {
 				unsigned char variableType = currentCode_->getChar(position_);
 				position_++;
 
-				int val = currentCode_->getInt(Position);
+				int val = currentCode_->getInt(position_);
 				printf("V: %i\n", val);
 
 				position_ += sizeof(int);
+
+				stack_.pushb(val);
+				stack_.pushb(variableType);
+
+				break;
+			}
+
+			case AddOp: {
+
+				uint8_t rhs_type = stack_.popb();
+				uint8_t rhs_val = stack_.popb();
+
+				uint8_t lhs_type = stack_.popb();
+				uint8_t lhs_val = stack_.popb();
+
+				printf("ADD %i %i\n", lhs_val, rhs_val);
+
+				stack_.pushb(lhs_type);
+				stack_.pushb(lhs_val + rhs_val);
+
+				break;
+			}
+
+			case SubtractOp: {
+
+				uint8_t rhs_type = stack_.popb();
+				uint8_t rhs_val = stack_.popb();
+
+				uint8_t lhs_type = stack_.popb();
+				uint8_t lhs_val = stack_.popb();
+
+				printf("ADD %i %i\n", lhs_val, rhs_val);
+
+				stack_.pushb(lhs_type);
+				stack_.pushb(lhs_val + rhs_val);
+
+				break;
+			}
+
+			case MultiplyOp: {
+
+				uint8_t rhs_type = stack_.popb();
+				uint8_t rhs_val = stack_.popb();
+
+				uint8_t lhs_type = stack_.popb();
+				uint8_t lhs_val = stack_.popb();
+
+				printf("MUL %i %i\n", lhs_val, rhs_val);
+
+				stack_.pushb(lhs_type);
+				stack_.pushb(lhs_val * rhs_val);
+
+				break;
+			}
+
+			case DivideOp: {
+
+				uint8_t rhs_type = stack_.popb();
+				uint8_t rhs_val = stack_.popb();
+
+				uint8_t lhs_type = stack_.popb();
+				uint8_t lhs_val = stack_.popb();
+
+				printf("DIV %i %i\n", lhs_val, rhs_val);
+
+				stack_.pushb(lhs_type);
+				stack_.pushb(lhs_val / rhs_val);
 
 				break;
 			}
 
 			case NoOp: {
 				printf("VM %i NoOp\n", vmID_);
-				position_++;
 				break;
 			}
 
@@ -59,4 +128,5 @@ void VirtualMachine::execute() {
 	}
 
 	printf("VM %i finished execution\n", vmID_);
+	printf("VM %i at end of execution stack size %i\n", vmID_, stack_.size());
 }

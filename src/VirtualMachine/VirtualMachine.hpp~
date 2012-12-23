@@ -2,6 +2,7 @@
 #define _VIRTUAL_MACHINE_DEF_H_
 
 #include <Pointers/SmartPointer.hpp>
+#include <Stack/Stack.hpp>
 
 #include "InstructionList.hpp"
 #include "OpCodes.hpp"
@@ -22,6 +23,7 @@ private:
 	size_t position_;
 	bool running_;
 
+	Stack<uint8_t> stack_;
 
 public:
 	VirtualMachine();

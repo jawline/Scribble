@@ -7,7 +7,7 @@ enum ByteCode {
 	SubtractOp = 2,
 	MultiplyOp = 3,
 	DivideOp = 4,
-	LoadConstOp = 5
+	LoadConst = 5
 };
 
 #endif //_OPCODE_DEF_H_

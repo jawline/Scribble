@@ -19,6 +19,7 @@ public:
 	int getInt(size_t position) {
 		unsigned char* cur = bytecode_.Get();
 		cur += position;
+		printf("%i %i\n", *cur, *((int*)cur));
 		return *((int*)cur);
 	}
 

@@ -11,12 +11,11 @@ class StackEmptyException : public std::exception {
     return "Pop called on empty stack";
   }
 
-} stackEmpty;
+};
 
-template <class Type>
 class Stack {
 private:
-	Type* data_;
+	uint8_t* data_;
 	size_t current_;
 	size_t max_;
 
@@ -27,8 +26,8 @@ private:
 	void expand() {
 		printf("Expanding stack from %i to %i entries\n", max_, max_ + cExpandChunkSize);
 
-		Type* newData = new Type[max_ + cExpandChunkSize];
-		memcpy(newData, data_,sizeof(Type) * max_);
+		uint8_t* newData = new uint8_t[max_ + cExpandChunkSize];
+		memcpy(newData, data_,sizeof(uint8_t) * max_);
 		delete[] data_;
 
 		data_ = newData;
@@ -39,7 +38,7 @@ public:
 
 	Stack() {
 
-		data_ = new Type[cDefaultSize];
+		data_ = new uint8_t[cDefaultSize];
 		current_ = 0;
 		max_ = cDefaultSize;
 
@@ -56,7 +55,7 @@ public:
 		}
 	}
 
-	void push(Type a) {
+	void pushb(uint8_t a) {
 
 		if (current_ >= max_) {
 			expand();
@@ -66,27 +65,24 @@ public:
 		current_++;
 	}
 
-	Type pop() {
+	uint8_t popb() {
 
 		if (current_ == 0) {
 			throw StackEmptyException();
 		}
+
+		printf("pop %i %i\n", current_, current_-1);
 
 		current_--;
 		return data_[current_];
 	}
 
-	Type peek() {
-
-		if (current_ == 0) {
-			throw StackEmptyException();
-		}
-
-		return data_[current_ - 1];
-	}
-
 	size_t size() {
 		return current_;
+	}
+
+	void reset() {
+		current_ = 0;
 	}
 };
 
