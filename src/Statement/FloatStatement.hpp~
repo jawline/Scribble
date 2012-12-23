@@ -10,6 +10,7 @@ public:
 	
 	FloatStatement(float floatValue);
 	std::string GenerateBytecode();
+
 };
 
 #endif //_FLOAT_STATEMENT_DEF_H_

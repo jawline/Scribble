@@ -10,7 +10,7 @@ public:
 	~AddStatement();
 
 
-	virtual std::string GenerateBytecode();
+	virtual Value Execute();
 
 };
 

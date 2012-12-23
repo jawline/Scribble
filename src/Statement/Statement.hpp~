@@ -1,6 +1,6 @@
 #ifndef _STATEMENT_DEF_H_
 #define _STATEMENT_DEF_H_
-#include <iostream>
+#include <string.h>
 
 class Value;
 

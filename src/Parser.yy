@@ -1,3 +1,4 @@
+%error-verbose
 %{
 #include <math.h>
 #include <stdio.h>
@@ -8,6 +9,7 @@
 #include <Statement/IntStatement.hpp>
 #include <Statement/FloatStatement.hpp>
 #include <Statement/AddStatement.hpp>
+#include <Statement/StringStatement.hpp>
 #include <Value/Value.hpp>
 
 extern int yylex();
@@ -40,17 +42,23 @@ std::vector<std::string*>* Statements;
 
 %type <statement> Statement 
 %type <strings> Program
+%type <statement> Declaration;
 
 %start Program
 %%
 
 Program: { Statements = new std::vector<std::string*>(); $$ = Statements; }
-	| Program Statement END { printf("Statement: %f", ($2)->Execute().FloatValue()); $$=$1; }
-	| Program VARIABLE WORD END {  $$=$1; }
+	| Program Declaration END { $$ = $1; }
+	| Program Statement END { printf("Statement: %s", ($2)->GenerateBytecode().c_str()); $$=$1; }
+;
+
+Declaration: VARIABLE WORD { printf("New variable %s\n", $2->c_str()); $$ = NULL; }
+	| Declaration EQUALS Statement { printf("Assign new variable to %s", $3->GenerateBytecode().c_str()); $$ = NULL; }
 ;
 
 Statement: REAL { $$ = new FloatStatement($1); }
 	| INT { $$ = new IntStatement($1); }
+	| STRING { $$ = new StringStatement(*$1); }
 	| LPAREN Statement RPAREN { $$ = $2; }
 	| Statement PLUS Statement { $$ = new AddStatement($1, $3); }
 	| Statement MINUS Statement { $$ = $1;}

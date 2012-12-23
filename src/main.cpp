@@ -34,8 +34,14 @@ int Multiply(unsigned char* instructions, int current) {
 	return current;	
 }
 
+
+extern int yylex();
+extern void yyparse();
+extern FILE* yyin;
+
 int main(int argc, char** argv) {
 
+/**
 	int c = 0;
 	unsigned char* instructions = new unsigned char[4096];
 	c = PushInt(instructions, c, 12);
@@ -62,5 +68,21 @@ int main(int argc, char** argv) {
 	a.setInstructions(aList);
 
 	a.execute();
+*/
 
+	// open a file handle to a particular file:
+	FILE *myfile = fopen("test.scribble", "r");
+
+	// make sure it's valid:
+	if (!myfile) {
+		printf("unable to open input\n");
+		return -1;
+	}
+
+	// set lex to read from it instead of defaulting to STDIN:
+	yyin = myfile;
+	
+	// lex through the input:
+	yyparse();
+	printf("Exit\n");
 }

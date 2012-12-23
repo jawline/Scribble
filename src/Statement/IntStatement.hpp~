@@ -8,7 +8,7 @@ private:
 
 public:
 	IntStatement(int intValue);
-	virtual std::string GenerateBytecode();
+	virtual Value Execute();
 };
 
 #endif //_INT_STATEMENT_DEF_H_

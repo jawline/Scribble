@@ -67,7 +67,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 20 "./src/Parser.yy"
+#line 22 "./src/Parser.yy"
 
 	std::string* string;
 	std::vector<std::string*>* strings;

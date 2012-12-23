@@ -1,9 +1,0 @@
-!SESSION 2012-12-17 22:53:29.942 -----------------------------------------------
-eclipse.buildId=I20110613-1736
-java.version=1.6.0_24
-java.vendor=Sun Microsystems Inc.
-BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_GB
-Command-line arguments:  -data /home/blake/Dropbox/Current/Scribble -os linux -ws gtk -arch x86_64
-
-!ENTRY org.eclipse.ui 4 4 2012-12-17 22:53:49.979
-!MESSAGE Invalid preference page path: XML Syntax
