@@ -15,13 +15,13 @@
 extern int yylex();
 extern FILE* yyin;
 void yyerror(const char *s) { printf("ERROR: %s\n", s); }
-std::vector<std::string*>* Statements;
+std::vector<Statement*>* Statements;
 
 %}
 
 %union {
 	std::string* string;
-	std::vector<std::string*>* strings;
+	std::vector<Statement*>* statements;
 	Statement* statement;
 	float real;
 	int integer;
@@ -41,19 +41,19 @@ std::vector<std::string*>* Statements;
 %right POWER
 
 %type <statement> Statement 
-%type <strings> Program
+%type <statements> Program
 %type <statement> Declaration;
 
 %start Program
 %%
 
-Program: { Statements = new std::vector<std::string*>(); $$ = Statements; }
-	| Program Declaration END { $$ = $1; }
-	| Program Statement END { printf("Statement: %s", ($2)->GenerateBytecode().c_str()); $$=$1; }
+Program: { Statements = new std::vector<Statement*>(); $$ = Statements; }
+	| Program Declaration END { $1->push_back($2); $$ = $1; }
+	| Program Statement END { $1->push_back($2); $$=$1; }
 ;
 
-Declaration: VARIABLE WORD { printf("New variable %s\n", $2->c_str()); $$ = NULL; }
-	| Declaration EQUALS Statement { printf("Assign new variable to %s", $3->GenerateBytecode().c_str()); $$ = NULL; }
+Declaration: VARIABLE WORD { $$ = new FloatStatement(0); }
+	| Declaration EQUALS Statement { $$ = new FloatStatement(0); }
 ;
 
 Statement: REAL { $$ = new FloatStatement($1); }

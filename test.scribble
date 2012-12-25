@@ -3,5 +3,4 @@ var World = "World";
 
 Hello = 96 + 32.0;
 World = 16;
-
-log("Hello World");
+Jello = "Hello World";

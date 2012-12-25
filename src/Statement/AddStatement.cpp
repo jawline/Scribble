@@ -15,5 +15,6 @@ std::string AddStatement::GenerateBytecode() {
 	std::string resultingString;
 	resultingString = lhs_->GenerateBytecode();
 	resultingString += rhs_->GenerateBytecode();
-	resultingString += "add";
+	resultingString += "add\n";
+	return resultingString;
 }
