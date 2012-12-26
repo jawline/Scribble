@@ -10,6 +10,5 @@ std::string FloatStatement::GenerateBytecode() {
 	std::stringstream generated;
 	generated << "pushf ";
 	generated << floatValue_;
-	generated << "\n";
 	return generated.str();
 }

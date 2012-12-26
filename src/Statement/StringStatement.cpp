@@ -5,5 +5,5 @@ StringStatement::StringStatement(std::string stringValue) {
 }
 
 std::string StringStatement::GenerateBytecode() {
-	return std::string("pushs ") + stringValue_ + "\n";
+	return std::string("pushs ") + stringValue_;
 }

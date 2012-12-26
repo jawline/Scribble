@@ -13,8 +13,8 @@ AddStatement::~AddStatement() {
 
 std::string AddStatement::GenerateBytecode() {
 	std::string resultingString;
-	resultingString = lhs_->GenerateBytecode();
-	resultingString += rhs_->GenerateBytecode();
-	resultingString += "add\n";
+	resultingString = lhs_->GenerateBytecode() + "\n";
+	resultingString += rhs_->GenerateBytecode() + "\n";
+	resultingString += "add";
 	return resultingString;
 }

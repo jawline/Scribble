@@ -1,6 +1,9 @@
-var Hello = 32.0;
+var Hello;
 var World = "World";
 
-Hello = 96 + 32.0;
-World = 16;
-Jello = "Hello World";
+Hello = "Hello";
+
+
+var HelloWorld = 32 + 54;
+HelloWorld = Hello + " " + World;
+HelloWorld = HelloWorld;

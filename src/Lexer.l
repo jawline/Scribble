@@ -37,6 +37,7 @@ word [a-z|A-Z][a-z|A-Z|0-9]*
 "}" return RBRACKET;
 "," return COMMA;
 ";" return END;
+"\n" ;;
 "function" return FUNCTION;
 "var" return VARIABLE;
 "const" return CONST;

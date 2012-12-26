@@ -5,7 +5,6 @@
 #include <Statement/FloatStatement.hpp>
 #include <Statement/AddStatement.hpp>
 #include <VirtualMachine/VirtualMachine.hpp>
-
 #include "Parser.hpp"
 
 #define SAVE_INT yylval.integer = atoi(yytext);
@@ -38,6 +37,7 @@ word [a-z|A-Z][a-z|A-Z|0-9]*
 "}" return RBRACKET;
 "," return COMMA;
 ";" return END;
+"\n" printf("");
 "function" return FUNCTION;
 "var" return VARIABLE;
 "const" return CONST;

@@ -9,8 +9,9 @@ IntStatement::IntStatement(int intValue) {
 
 std::string IntStatement::GenerateBytecode() {
 	std::stringstream generated;
-	std::string generated = "pushi ";
-	generated += intValue_;
-	generated += "\n";
-	return generated;
+
+	generated << "pushi ";
+	generated << intValue_;
+	generated << "\n";
+	return generated.str();
 }

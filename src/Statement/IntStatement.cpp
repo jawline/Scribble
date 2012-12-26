@@ -12,6 +12,5 @@ std::string IntStatement::GenerateBytecode() {
 
 	generated << "pushi ";
 	generated << intValue_;
-	generated << "\n";
 	return generated.str();
 }

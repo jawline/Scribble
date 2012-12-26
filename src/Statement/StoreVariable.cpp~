@@ -1,0 +1,11 @@
+#include "StoreVariable.hpp"
+#include <sstream>
+
+StoreVariableStatement::StoreVariableStatement(int variableId) {
+	variableId_ = variableId;
+}
+
+std::string StoreVariableStatement::GenerateBytecode() {
+	std::stringstream generated;
+	return generated.str();
+}
