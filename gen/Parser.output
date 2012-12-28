@@ -1,0 +1,392 @@
+Terminals unused in grammar
+
+   POWER
+   LBRACKET
+   RBRACKET
+   COMMA
+   FUNCTION
+   CONST
+   NEG
+
+
+State 20 conflicts: 4 shift/reduce
+
+
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: /* empty */
+    2        | Program Declaration END
+    3        | Program Statement END
+
+    4 Declaration: VARIABLE WORD
+    5            | VARIABLE WORD EQUALS Statement
+
+    6 Statement: REAL
+    7          | INT
+    8          | STRING
+    9          | WORD
+   10          | LPAREN Statement RPAREN
+   11          | Statement PLUS Statement
+   12          | Statement MINUS Statement
+   13          | WORD EQUALS Statement
+   14          | Statement TIMES Statement
+   15          | Statement DIVIDE Statement
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+WORD (258) 4 5 9 13
+STRING (259) 8
+REAL (260) 6
+INT (261) 7
+PLUS (262) 11
+MINUS (263) 12
+TIMES (264) 14
+DIVIDE (265) 15
+POWER (266)
+EQUALS (267) 5 13
+LPAREN (268) 10
+RPAREN (269) 10
+LBRACKET (270)
+RBRACKET (271)
+COMMA (272)
+FUNCTION (273)
+VARIABLE (274) 4 5
+CONST (275)
+END (276) 2 3
+NEG (277)
+
+
+Nonterminals, with rules where they appear
+
+$accept (23)
+    on left: 0
+Program (24)
+    on left: 1 2 3, on right: 0 2 3
+Declaration (25)
+    on left: 4 5, on right: 2
+Statement (26)
+    on left: 6 7 8 9 10 11 12 13 14 15, on right: 3 5 10 11 12 13 14
+    15
+
+
+state 0
+
+    0 $accept: . Program $end
+
+    $default  reduce using rule 1 (Program)
+
+    Program  go to state 1
+
+
+state 1
+
+    0 $accept: Program . $end
+    2 Program: Program . Declaration END
+    3        | Program . Statement END
+
+    $end      shift, and go to state 2
+    WORD      shift, and go to state 3
+    STRING    shift, and go to state 4
+    REAL      shift, and go to state 5
+    INT       shift, and go to state 6
+    LPAREN    shift, and go to state 7
+    VARIABLE  shift, and go to state 8
+
+    Declaration  go to state 9
+    Statement    go to state 10
+
+
+state 2
+
+    0 $accept: Program $end .
+
+    $default  accept
+
+
+state 3
+
+    9 Statement: WORD .
+   13          | WORD . EQUALS Statement
+
+    EQUALS  shift, and go to state 11
+
+    $default  reduce using rule 9 (Statement)
+
+
+state 4
+
+    8 Statement: STRING .
+
+    $default  reduce using rule 8 (Statement)
+
+
+state 5
+
+    6 Statement: REAL .
+
+    $default  reduce using rule 6 (Statement)
+
+
+state 6
+
+    7 Statement: INT .
+
+    $default  reduce using rule 7 (Statement)
+
+
+state 7
+
+   10 Statement: LPAREN . Statement RPAREN
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    REAL    shift, and go to state 5
+    INT     shift, and go to state 6
+    LPAREN  shift, and go to state 7
+
+    Statement  go to state 12
+
+
+state 8
+
+    4 Declaration: VARIABLE . WORD
+    5            | VARIABLE . WORD EQUALS Statement
+
+    WORD  shift, and go to state 13
+
+
+state 9
+
+    2 Program: Program Declaration . END
+
+    END  shift, and go to state 14
+
+
+state 10
+
+    3 Program: Program Statement . END
+   11 Statement: Statement . PLUS Statement
+   12          | Statement . MINUS Statement
+   14          | Statement . TIMES Statement
+   15          | Statement . DIVIDE Statement
+
+    PLUS    shift, and go to state 15
+    MINUS   shift, and go to state 16
+    TIMES   shift, and go to state 17
+    DIVIDE  shift, and go to state 18
+    END     shift, and go to state 19
+
+
+state 11
+
+   13 Statement: WORD EQUALS . Statement
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    REAL    shift, and go to state 5
+    INT     shift, and go to state 6
+    LPAREN  shift, and go to state 7
+
+    Statement  go to state 20
+
+
+state 12
+
+   10 Statement: LPAREN Statement . RPAREN
+   11          | Statement . PLUS Statement
+   12          | Statement . MINUS Statement
+   14          | Statement . TIMES Statement
+   15          | Statement . DIVIDE Statement
+
+    PLUS    shift, and go to state 15
+    MINUS   shift, and go to state 16
+    TIMES   shift, and go to state 17
+    DIVIDE  shift, and go to state 18
+    RPAREN  shift, and go to state 21
+
+
+state 13
+
+    4 Declaration: VARIABLE WORD .
+    5            | VARIABLE WORD . EQUALS Statement
+
+    EQUALS  shift, and go to state 22
+
+    $default  reduce using rule 4 (Declaration)
+
+
+state 14
+
+    2 Program: Program Declaration END .
+
+    $default  reduce using rule 2 (Program)
+
+
+state 15
+
+   11 Statement: Statement PLUS . Statement
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    REAL    shift, and go to state 5
+    INT     shift, and go to state 6
+    LPAREN  shift, and go to state 7
+
+    Statement  go to state 23
+
+
+state 16
+
+   12 Statement: Statement MINUS . Statement
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    REAL    shift, and go to state 5
+    INT     shift, and go to state 6
+    LPAREN  shift, and go to state 7
+
+    Statement  go to state 24
+
+
+state 17
+
+   14 Statement: Statement TIMES . Statement
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    REAL    shift, and go to state 5
+    INT     shift, and go to state 6
+    LPAREN  shift, and go to state 7
+
+    Statement  go to state 25
+
+
+state 18
+
+   15 Statement: Statement DIVIDE . Statement
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    REAL    shift, and go to state 5
+    INT     shift, and go to state 6
+    LPAREN  shift, and go to state 7
+
+    Statement  go to state 26
+
+
+state 19
+
+    3 Program: Program Statement END .
+
+    $default  reduce using rule 3 (Program)
+
+
+state 20
+
+   11 Statement: Statement . PLUS Statement
+   12          | Statement . MINUS Statement
+   13          | WORD EQUALS Statement .
+   14          | Statement . TIMES Statement
+   15          | Statement . DIVIDE Statement
+
+    PLUS    shift, and go to state 15
+    MINUS   shift, and go to state 16
+    TIMES   shift, and go to state 17
+    DIVIDE  shift, and go to state 18
+
+    PLUS      [reduce using rule 13 (Statement)]
+    MINUS     [reduce using rule 13 (Statement)]
+    TIMES     [reduce using rule 13 (Statement)]
+    DIVIDE    [reduce using rule 13 (Statement)]
+    $default  reduce using rule 13 (Statement)
+
+
+state 21
+
+   10 Statement: LPAREN Statement RPAREN .
+
+    $default  reduce using rule 10 (Statement)
+
+
+state 22
+
+    5 Declaration: VARIABLE WORD EQUALS . Statement
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    REAL    shift, and go to state 5
+    INT     shift, and go to state 6
+    LPAREN  shift, and go to state 7
+
+    Statement  go to state 27
+
+
+state 23
+
+   11 Statement: Statement . PLUS Statement
+   11          | Statement PLUS Statement .
+   12          | Statement . MINUS Statement
+   14          | Statement . TIMES Statement
+   15          | Statement . DIVIDE Statement
+
+    TIMES   shift, and go to state 17
+    DIVIDE  shift, and go to state 18
+
+    $default  reduce using rule 11 (Statement)
+
+
+state 24
+
+   11 Statement: Statement . PLUS Statement
+   12          | Statement . MINUS Statement
+   12          | Statement MINUS Statement .
+   14          | Statement . TIMES Statement
+   15          | Statement . DIVIDE Statement
+
+    TIMES   shift, and go to state 17
+    DIVIDE  shift, and go to state 18
+
+    $default  reduce using rule 12 (Statement)
+
+
+state 25
+
+   11 Statement: Statement . PLUS Statement
+   12          | Statement . MINUS Statement
+   14          | Statement . TIMES Statement
+   14          | Statement TIMES Statement .
+   15          | Statement . DIVIDE Statement
+
+    $default  reduce using rule 14 (Statement)
+
+
+state 26
+
+   11 Statement: Statement . PLUS Statement
+   12          | Statement . MINUS Statement
+   14          | Statement . TIMES Statement
+   15          | Statement . DIVIDE Statement
+   15          | Statement DIVIDE Statement .
+
+    $default  reduce using rule 15 (Statement)
+
+
+state 27
+
+    5 Declaration: VARIABLE WORD EQUALS Statement .
+   11 Statement: Statement . PLUS Statement
+   12          | Statement . MINUS Statement
+   14          | Statement . TIMES Statement
+   15          | Statement . DIVIDE Statement
+
+    PLUS    shift, and go to state 15
+    MINUS   shift, and go to state 16
+    TIMES   shift, and go to state 17
+    DIVIDE  shift, and go to state 18
+
+    $default  reduce using rule 5 (Declaration)
