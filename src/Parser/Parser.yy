@@ -1,4 +1,6 @@
 %error-verbose
+%locations
+
 %{
 #include <math.h>
 #include <stdio.h>
@@ -6,28 +8,27 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
 #include <Statement/IntStatement.hpp>
-#include <Statement/FloatStatement.hpp>
-#include <Statement/AddStatement.hpp>
 #include <Statement/StringStatement.hpp>
-#include <Statement/LoadVariable.hpp>
-#include <Statement/StoreVariable.hpp>
 #include <Statement/AssignVariable.hpp>
-#include <Value/Value.hpp>
+#include <Statement/GetVariableStatement.hpp>
+#include <Statement/FunctionStatement.hpp>
+#include <Pointers/SmartPointer.hpp>
+#include <Function/Function.hpp>
+#include <Function/WriteFunction.hpp>
+
+#include <Value/Variable.hpp>
 
 int yylex();
 void yyerror(const char* s);
-std::vector<Statement*>* Statements;
-std::map<std::string, int> Variables;
-int VariableCount;
-typedef std::pair<std::string, int> VariableDefinition;
+std::vector<SmartPointer<Statement>>* Statements;
+std::map<std::string, Variable*> Variables;
 
 %}
 
 %union {
 	std::string* string;
-	std::vector<Statement*>* statements;
+	std::vector<SmartPointer<Statement>>* statements;
 	Statement* statement;
 	float real;
 	int integer;
@@ -36,9 +37,10 @@ typedef std::pair<std::string, int> VariableDefinition;
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
-%token <token> FUNCTION VARIABLE CONST
+%token <token> FUNCTION VARIABLE CONST STRUCT
+%token <token> TYPE_INT TYPE_STRING COLON
 %token <token> END
 
 %left PLUS MINUS
@@ -49,86 +51,105 @@ typedef std::pair<std::string, int> VariableDefinition;
 %type <statement> Statement;
 %type <statements> Program;
 %type <statement> Declaration;
+%type <void> Structure;
+%type <statement> Variable;
+%type <statements> Arguments;
 
 %start Program
 %%
 
 Program: { 
-		Statements = new std::vector<Statement*>();
+		Statements = new std::vector<SmartPointer<Statement>>();
 		Variables.clear();
-		VariableCount = 0;
 		$$ = Statements; 
-	} | Program Declaration END {
-		if ($2 != NULL) {
-			$1->push_back($2);
-		}
-		$$ = $1; 
+	} | Program Declaration {
 	} | Program Statement END {
 		$1->push_back($2);
 		$$ = $1; 
 	}
 ;
 
-Declaration: VARIABLE WORD {
+Structure: STRUCT WORD LBRACKET Declarations RBRACKET { printf("Structure %s\n", $2->c_str()); }
 
-		if (Variables.find(*$2) == Variables.end()) {
-			Variables.insert(VariableDefinition(*$2, VariableCount++));
-		} else {
+Declarations: { }
+	| Declarations Declaration { }
+;
+
+Declaration: Variable END { }
+	| Structure { }
+;
+
+Variable:  VARIABLE WORD COLON TYPE_INT {
+		std::map<std::string, Variable*>::iterator it;
+
+		it = Variables.find(*$2);
+
+		if (it != Variables.end()) {
 			yyerror("Variable already defined");
 			return -1;
-		}
-
-		$$ = NULL;
-	}
-	| VARIABLE WORD EQUALS Statement {
-
-		if (Variables.find(*$2) == Variables.end()) {
-			Variables.insert(VariableDefinition(*$2, VariableCount++));
 		} else {
+			Variables[*$2] = new Variable(Int);
+		}
+	} | VARIABLE WORD COLON TYPE_STRING {
+		std::map<std::string, Variable*>::iterator it;
+		it = Variables.find(*$2);
+		if (it != Variables.end()) {
 			yyerror("Variable already defined");
 			return -1;
+		} else {
+			Variables[*$2] = new Variable(String);
 		}
-
-		$$ = new AssignVariableStatement(Variables.find(*$2)->second, $4);
 	}
 ;
 
-Statement: REAL {
-		$$ = new FloatStatement($1);
-	} | INT {
+Arguments: Statement {
+		$$ = new std::vector<SmartPointer<Statement>>();
+		$$->push_back($1);
+	} | Arguments COMMA Statement {
+		$$ = $1;
+		$$->push_back($3);
+	}
+;
+
+Statement: INT {
 		$$ = new IntStatement($1);
 	} | STRING {
 		$$ = new StringStatement(*$1);
 	} | WORD {
 
-		if (Variables.find(*$1) != Variables.end()) {
-			$$ = new LoadVariableStatement(Variables.find(*$1)->second);
-		} else {
-			printf("%s\n", $1->c_str());
-			yyerror("Error variable not defined");
+	std::map<std::string, Variable*>::iterator it;
+
+		it = Variables.find(*$1);
+
+		if (it == Variables.end()) {
+			yyerror("Variable not defined");
 			return -1;
+		} else {
+			$$ = new GetVariableStatement(it->second);
 		}
 
+	} | WORD LPAREN Arguments RPAREN {
+		std::vector<SmartPointer<Statement>> args;
+
+		for (unsigned int i = 0; i < $3->size(); ++i) {
+			args.push_back($3->at(i));
+		}
+
+		delete $3;
+
+		$$ = new FunctionStatement( SmartPointer<Function>(new WriteFunction()) , args);
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
-	} | Statement PLUS Statement {
-		$$ = new AddStatement($1, $3);
-	} | Statement MINUS Statement {
-		$$ = $1;
-	} | WORD EQUALS Statement {
+	} | WORD ASSIGN Statement {
+		std::map<std::string, Variable*>::iterator it;
 
-		if (Variables.find(*$1) != Variables.end()) {
-			$$ = new AssignVariableStatement(Variables.find(*$1)->second, $3);
+		it = Variables.find(*$1);
+
+		if (it == Variables.end()) {
+			yyerror("Variable not defined");
 		} else {
-			printf("%s\n", $1->c_str());
-			yyerror("Error variable not defined");
-			return -1;
-		}		
-
-	} | Statement TIMES Statement {
-		$$ = $1;
-	} | Statement DIVIDE Statement {
-		$$ = $1;
+			$$ = new AssignVariableStatement(it->second, $3);
+		}
 	}
 ;
 

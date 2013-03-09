@@ -9,8 +9,7 @@ OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 all: preprocess $(SOURCES) $(EXECUTABLE)
 
 test: all
-	@$(EXECUTABLE) compile test.scribble test.out
-	@$(EXECUTABLE) run test.out
+	@$(EXECUTABLE) test.scribble
 
 clean:
 	rm -r ./obj/ $(EXECUTABLE) ./gen/

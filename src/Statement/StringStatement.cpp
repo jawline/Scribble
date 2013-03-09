@@ -1,9 +1,10 @@
 #include "StringStatement.hpp"
+#include <Value/String.hpp>
 
 StringStatement::StringStatement(std::string stringValue) {
 	stringValue_ = stringValue;
 }
 
-std::string StringStatement::GenerateBytecode() {
-	return std::string("pushs ") + stringValue_;
+Value* StringStatement::execute() {
+	return new StringValue(stringValue_);
 }

@@ -1,6 +1,7 @@
 #ifndef _STR_STATEMENT_DEF_H_
 #define _STR_STATEMENT_DEF_H_
 #include "Statement.hpp"
+#include <Value/Value.hpp>
 
 class StringStatement : public Statement {
 private:
@@ -8,7 +9,8 @@ private:
 
 public:
 	StringStatement(std::string stringValue);
-	virtual std::string GenerateBytecode();
+	Value* execute();
+
 };
 
 #endif //_STR_STATEMENT_DEF_H_

@@ -1,9 +1,5 @@
-var Hello;
-var World = "World";
+var i : int;
+i := 23;
 
-Hello = "Hello";
-
-
-var HelloWorld = 32 + 54;
-HelloWorld = Hello + " " + World;
-HelloWorld = HelloWorld;
+write("Hello world, how are you?");
+write("I'm fine, thank you.");

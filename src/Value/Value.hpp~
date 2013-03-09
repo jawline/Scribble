@@ -1,31 +1,26 @@
-#ifndef _VALUE_DEF_H_
-#define _VALUE_DEF_H_
+#ifndef _VALUE_H_
+#define _VALUE_H_
+
+enum ValueType {
+ String,
+ Int
+};
+
+enum ValueOperator {
+ Add,
+ Subtract,
+ Multiply,
+ Divide
+};
 
 class Value {
 private:
-	float floatValue_;
 
 public:
-	Value(float floatValue);
-	Value();
-
-	float FloatValue();
-
-	Value Add(Value const& rhs) {
-		return Value(floatValue_ += rhs.floatValue_);
-	}
-
-	Value Subtract(Value const& rhs) {
-		return Value(floatValue_ -= rhs.floatValue_);
-	}
-
-	Value Multiply(Value const& rhs) {
-		return Value(floatValue_ * rhs.floatValue_);
-	}
-
-	void Divide(Value const& rhs) {
-		return Value(floatValue_ / rhs.floatValue_);
-	}
+	virtual Value() {}
+	virtual void applyOperator(ValueOperator, Value* other) = 0;
+	virtual ValueType type() = 0;
+	virtual Value* clone() = 0;
 };
 
-#endif //_VALUE_DEF_H_
+#endif //_VALUE_H_

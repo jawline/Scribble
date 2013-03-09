@@ -1,15 +1,15 @@
 Terminals unused in grammar
 
+   REAL
+   PLUS
+   MINUS
+   TIMES
+   DIVIDE
    POWER
-   LBRACKET
-   RBRACKET
-   COMMA
+   EQUALS
    FUNCTION
    CONST
    NEG
-
-
-State 20 conflicts: 4 shift/reduce
 
 
 Grammar
@@ -17,61 +17,80 @@ Grammar
     0 $accept: Program $end
 
     1 Program: /* empty */
-    2        | Program Declaration END
+    2        | Program Declaration
     3        | Program Statement END
 
-    4 Declaration: VARIABLE WORD
-    5            | VARIABLE WORD EQUALS Statement
+    4 Structure: STRUCT WORD LBRACKET Declarations RBRACKET
 
-    6 Statement: REAL
-    7          | INT
-    8          | STRING
-    9          | WORD
-   10          | LPAREN Statement RPAREN
-   11          | Statement PLUS Statement
-   12          | Statement MINUS Statement
-   13          | WORD EQUALS Statement
-   14          | Statement TIMES Statement
-   15          | Statement DIVIDE Statement
+    5 Declarations: /* empty */
+    6             | Declarations Declaration
+
+    7 Declaration: Variable END
+    8            | Structure
+
+    9 Variable: VARIABLE WORD COLON TYPE_INT
+   10         | VARIABLE WORD COLON TYPE_STRING
+
+   11 Arguments: Statement
+   12          | Arguments COMMA Statement
+
+   13 Statement: INT
+   14          | STRING
+   15          | WORD
+   16          | WORD LPAREN Arguments RPAREN
+   17          | LPAREN Statement RPAREN
+   18          | WORD ASSIGN Statement
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-WORD (258) 4 5 9 13
-STRING (259) 8
-REAL (260) 6
-INT (261) 7
-PLUS (262) 11
-MINUS (263) 12
-TIMES (264) 14
-DIVIDE (265) 15
+WORD (258) 4 9 10 15 16 18
+STRING (259) 14
+REAL (260)
+INT (261) 13
+PLUS (262)
+MINUS (263)
+TIMES (264)
+DIVIDE (265)
 POWER (266)
-EQUALS (267) 5 13
-LPAREN (268) 10
-RPAREN (269) 10
-LBRACKET (270)
-RBRACKET (271)
-COMMA (272)
-FUNCTION (273)
-VARIABLE (274) 4 5
-CONST (275)
-END (276) 2 3
-NEG (277)
+EQUALS (267)
+ASSIGN (268) 18
+LPAREN (269) 16 17
+RPAREN (270) 16 17
+LBRACKET (271) 4
+RBRACKET (272) 4
+COMMA (273) 12
+FUNCTION (274)
+VARIABLE (275) 9 10
+CONST (276)
+STRUCT (277) 4
+TYPE_INT (278) 9
+TYPE_STRING (279) 10
+COLON (280) 9 10
+END (281) 3 7
+NEG (282)
 
 
 Nonterminals, with rules where they appear
 
-$accept (23)
+$accept (28)
     on left: 0
-Program (24)
+Program (29)
     on left: 1 2 3, on right: 0 2 3
-Declaration (25)
-    on left: 4 5, on right: 2
-Statement (26)
-    on left: 6 7 8 9 10 11 12 13 14 15, on right: 3 5 10 11 12 13 14
-    15
+Structure (30)
+    on left: 4, on right: 8
+Declarations (31)
+    on left: 5 6, on right: 4 6
+Declaration (32)
+    on left: 7 8, on right: 2 6
+Variable (33)
+    on left: 9 10, on right: 7
+Arguments (34)
+    on left: 11 12, on right: 12 16
+Statement (35)
+    on left: 13 14 15 16 17 18, on right: 3 11 12 17 18
 
 
 state 0
@@ -86,19 +105,21 @@ state 0
 state 1
 
     0 $accept: Program . $end
-    2 Program: Program . Declaration END
+    2 Program: Program . Declaration
     3        | Program . Statement END
 
     $end      shift, and go to state 2
     WORD      shift, and go to state 3
     STRING    shift, and go to state 4
-    REAL      shift, and go to state 5
-    INT       shift, and go to state 6
-    LPAREN    shift, and go to state 7
-    VARIABLE  shift, and go to state 8
+    INT       shift, and go to state 5
+    LPAREN    shift, and go to state 6
+    VARIABLE  shift, and go to state 7
+    STRUCT    shift, and go to state 8
 
-    Declaration  go to state 9
-    Statement    go to state 10
+    Structure    go to state 9
+    Declaration  go to state 10
+    Variable     go to state 11
+    Statement    go to state 12
 
 
 state 2
@@ -110,173 +131,137 @@ state 2
 
 state 3
 
-    9 Statement: WORD .
-   13          | WORD . EQUALS Statement
+   15 Statement: WORD .
+   16          | WORD . LPAREN Arguments RPAREN
+   18          | WORD . ASSIGN Statement
 
-    EQUALS  shift, and go to state 11
+    ASSIGN  shift, and go to state 13
+    LPAREN  shift, and go to state 14
 
-    $default  reduce using rule 9 (Statement)
+    $default  reduce using rule 15 (Statement)
 
 
 state 4
 
-    8 Statement: STRING .
+   14 Statement: STRING .
 
-    $default  reduce using rule 8 (Statement)
+    $default  reduce using rule 14 (Statement)
 
 
 state 5
 
-    6 Statement: REAL .
+   13 Statement: INT .
 
-    $default  reduce using rule 6 (Statement)
+    $default  reduce using rule 13 (Statement)
 
 
 state 6
 
-    7 Statement: INT .
+   17 Statement: LPAREN . Statement RPAREN
 
-    $default  reduce using rule 7 (Statement)
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    INT     shift, and go to state 5
+    LPAREN  shift, and go to state 6
+
+    Statement  go to state 15
 
 
 state 7
 
-   10 Statement: LPAREN . Statement RPAREN
+    9 Variable: VARIABLE . WORD COLON TYPE_INT
+   10         | VARIABLE . WORD COLON TYPE_STRING
 
-    WORD    shift, and go to state 3
-    STRING  shift, and go to state 4
-    REAL    shift, and go to state 5
-    INT     shift, and go to state 6
-    LPAREN  shift, and go to state 7
-
-    Statement  go to state 12
+    WORD  shift, and go to state 16
 
 
 state 8
 
-    4 Declaration: VARIABLE . WORD
-    5            | VARIABLE . WORD EQUALS Statement
+    4 Structure: STRUCT . WORD LBRACKET Declarations RBRACKET
 
-    WORD  shift, and go to state 13
+    WORD  shift, and go to state 17
 
 
 state 9
 
-    2 Program: Program Declaration . END
+    8 Declaration: Structure .
 
-    END  shift, and go to state 14
+    $default  reduce using rule 8 (Declaration)
 
 
 state 10
 
-    3 Program: Program Statement . END
-   11 Statement: Statement . PLUS Statement
-   12          | Statement . MINUS Statement
-   14          | Statement . TIMES Statement
-   15          | Statement . DIVIDE Statement
-
-    PLUS    shift, and go to state 15
-    MINUS   shift, and go to state 16
-    TIMES   shift, and go to state 17
-    DIVIDE  shift, and go to state 18
-    END     shift, and go to state 19
-
-
-state 11
-
-   13 Statement: WORD EQUALS . Statement
-
-    WORD    shift, and go to state 3
-    STRING  shift, and go to state 4
-    REAL    shift, and go to state 5
-    INT     shift, and go to state 6
-    LPAREN  shift, and go to state 7
-
-    Statement  go to state 20
-
-
-state 12
-
-   10 Statement: LPAREN Statement . RPAREN
-   11          | Statement . PLUS Statement
-   12          | Statement . MINUS Statement
-   14          | Statement . TIMES Statement
-   15          | Statement . DIVIDE Statement
-
-    PLUS    shift, and go to state 15
-    MINUS   shift, and go to state 16
-    TIMES   shift, and go to state 17
-    DIVIDE  shift, and go to state 18
-    RPAREN  shift, and go to state 21
-
-
-state 13
-
-    4 Declaration: VARIABLE WORD .
-    5            | VARIABLE WORD . EQUALS Statement
-
-    EQUALS  shift, and go to state 22
-
-    $default  reduce using rule 4 (Declaration)
-
-
-state 14
-
-    2 Program: Program Declaration END .
+    2 Program: Program Declaration .
 
     $default  reduce using rule 2 (Program)
 
 
-state 15
+state 11
 
-   11 Statement: Statement PLUS . Statement
+    7 Declaration: Variable . END
+
+    END  shift, and go to state 18
+
+
+state 12
+
+    3 Program: Program Statement . END
+
+    END  shift, and go to state 19
+
+
+state 13
+
+   18 Statement: WORD ASSIGN . Statement
 
     WORD    shift, and go to state 3
     STRING  shift, and go to state 4
-    REAL    shift, and go to state 5
-    INT     shift, and go to state 6
-    LPAREN  shift, and go to state 7
+    INT     shift, and go to state 5
+    LPAREN  shift, and go to state 6
 
-    Statement  go to state 23
+    Statement  go to state 20
+
+
+state 14
+
+   16 Statement: WORD LPAREN . Arguments RPAREN
+
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    INT     shift, and go to state 5
+    LPAREN  shift, and go to state 6
+
+    Arguments  go to state 21
+    Statement  go to state 22
+
+
+state 15
+
+   17 Statement: LPAREN Statement . RPAREN
+
+    RPAREN  shift, and go to state 23
 
 
 state 16
 
-   12 Statement: Statement MINUS . Statement
+    9 Variable: VARIABLE WORD . COLON TYPE_INT
+   10         | VARIABLE WORD . COLON TYPE_STRING
 
-    WORD    shift, and go to state 3
-    STRING  shift, and go to state 4
-    REAL    shift, and go to state 5
-    INT     shift, and go to state 6
-    LPAREN  shift, and go to state 7
-
-    Statement  go to state 24
+    COLON  shift, and go to state 24
 
 
 state 17
 
-   14 Statement: Statement TIMES . Statement
+    4 Structure: STRUCT WORD . LBRACKET Declarations RBRACKET
 
-    WORD    shift, and go to state 3
-    STRING  shift, and go to state 4
-    REAL    shift, and go to state 5
-    INT     shift, and go to state 6
-    LPAREN  shift, and go to state 7
-
-    Statement  go to state 25
+    LBRACKET  shift, and go to state 25
 
 
 state 18
 
-   15 Statement: Statement DIVIDE . Statement
+    7 Declaration: Variable END .
 
-    WORD    shift, and go to state 3
-    STRING  shift, and go to state 4
-    REAL    shift, and go to state 5
-    INT     shift, and go to state 6
-    LPAREN  shift, and go to state 7
-
-    Statement  go to state 26
+    $default  reduce using rule 7 (Declaration)
 
 
 state 19
@@ -288,105 +273,115 @@ state 19
 
 state 20
 
-   11 Statement: Statement . PLUS Statement
-   12          | Statement . MINUS Statement
-   13          | WORD EQUALS Statement .
-   14          | Statement . TIMES Statement
-   15          | Statement . DIVIDE Statement
+   18 Statement: WORD ASSIGN Statement .
 
-    PLUS    shift, and go to state 15
-    MINUS   shift, and go to state 16
-    TIMES   shift, and go to state 17
-    DIVIDE  shift, and go to state 18
-
-    PLUS      [reduce using rule 13 (Statement)]
-    MINUS     [reduce using rule 13 (Statement)]
-    TIMES     [reduce using rule 13 (Statement)]
-    DIVIDE    [reduce using rule 13 (Statement)]
-    $default  reduce using rule 13 (Statement)
+    $default  reduce using rule 18 (Statement)
 
 
 state 21
 
-   10 Statement: LPAREN Statement RPAREN .
+   12 Arguments: Arguments . COMMA Statement
+   16 Statement: WORD LPAREN Arguments . RPAREN
 
-    $default  reduce using rule 10 (Statement)
+    RPAREN  shift, and go to state 26
+    COMMA   shift, and go to state 27
 
 
 state 22
 
-    5 Declaration: VARIABLE WORD EQUALS . Statement
+   11 Arguments: Statement .
 
-    WORD    shift, and go to state 3
-    STRING  shift, and go to state 4
-    REAL    shift, and go to state 5
-    INT     shift, and go to state 6
-    LPAREN  shift, and go to state 7
-
-    Statement  go to state 27
+    $default  reduce using rule 11 (Arguments)
 
 
 state 23
 
-   11 Statement: Statement . PLUS Statement
-   11          | Statement PLUS Statement .
-   12          | Statement . MINUS Statement
-   14          | Statement . TIMES Statement
-   15          | Statement . DIVIDE Statement
+   17 Statement: LPAREN Statement RPAREN .
 
-    TIMES   shift, and go to state 17
-    DIVIDE  shift, and go to state 18
-
-    $default  reduce using rule 11 (Statement)
+    $default  reduce using rule 17 (Statement)
 
 
 state 24
 
-   11 Statement: Statement . PLUS Statement
-   12          | Statement . MINUS Statement
-   12          | Statement MINUS Statement .
-   14          | Statement . TIMES Statement
-   15          | Statement . DIVIDE Statement
+    9 Variable: VARIABLE WORD COLON . TYPE_INT
+   10         | VARIABLE WORD COLON . TYPE_STRING
 
-    TIMES   shift, and go to state 17
-    DIVIDE  shift, and go to state 18
-
-    $default  reduce using rule 12 (Statement)
+    TYPE_INT     shift, and go to state 28
+    TYPE_STRING  shift, and go to state 29
 
 
 state 25
 
-   11 Statement: Statement . PLUS Statement
-   12          | Statement . MINUS Statement
-   14          | Statement . TIMES Statement
-   14          | Statement TIMES Statement .
-   15          | Statement . DIVIDE Statement
+    4 Structure: STRUCT WORD LBRACKET . Declarations RBRACKET
 
-    $default  reduce using rule 14 (Statement)
+    $default  reduce using rule 5 (Declarations)
+
+    Declarations  go to state 30
 
 
 state 26
 
-   11 Statement: Statement . PLUS Statement
-   12          | Statement . MINUS Statement
-   14          | Statement . TIMES Statement
-   15          | Statement . DIVIDE Statement
-   15          | Statement DIVIDE Statement .
+   16 Statement: WORD LPAREN Arguments RPAREN .
 
-    $default  reduce using rule 15 (Statement)
+    $default  reduce using rule 16 (Statement)
 
 
 state 27
 
-    5 Declaration: VARIABLE WORD EQUALS Statement .
-   11 Statement: Statement . PLUS Statement
-   12          | Statement . MINUS Statement
-   14          | Statement . TIMES Statement
-   15          | Statement . DIVIDE Statement
+   12 Arguments: Arguments COMMA . Statement
 
-    PLUS    shift, and go to state 15
-    MINUS   shift, and go to state 16
-    TIMES   shift, and go to state 17
-    DIVIDE  shift, and go to state 18
+    WORD    shift, and go to state 3
+    STRING  shift, and go to state 4
+    INT     shift, and go to state 5
+    LPAREN  shift, and go to state 6
 
-    $default  reduce using rule 5 (Declaration)
+    Statement  go to state 31
+
+
+state 28
+
+    9 Variable: VARIABLE WORD COLON TYPE_INT .
+
+    $default  reduce using rule 9 (Variable)
+
+
+state 29
+
+   10 Variable: VARIABLE WORD COLON TYPE_STRING .
+
+    $default  reduce using rule 10 (Variable)
+
+
+state 30
+
+    4 Structure: STRUCT WORD LBRACKET Declarations . RBRACKET
+    6 Declarations: Declarations . Declaration
+
+    RBRACKET  shift, and go to state 32
+    VARIABLE  shift, and go to state 7
+    STRUCT    shift, and go to state 8
+
+    Structure    go to state 9
+    Declaration  go to state 33
+    Variable     go to state 11
+
+
+state 31
+
+   12 Arguments: Arguments COMMA Statement .
+
+    $default  reduce using rule 12 (Arguments)
+
+
+state 32
+
+    4 Structure: STRUCT WORD LBRACKET Declarations RBRACKET .
+
+    $default  reduce using rule 4 (Structure)
+
+
+state 33
+
+    6 Declarations: Declarations Declaration .
+
+    $default  reduce using rule 6 (Declarations)

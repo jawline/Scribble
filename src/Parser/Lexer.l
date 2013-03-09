@@ -1,10 +1,10 @@
+%option yylineno
+
 %{
 #include <string>
 #include <vector>
 #include <Statement/IntStatement.hpp>
-#include <Statement/FloatStatement.hpp>
-#include <Statement/AddStatement.hpp>
-#include <VirtualMachine/VirtualMachine.hpp>
+#include <Pointers/SmartPointer.hpp>
 #include "Parser.hpp"
 
 #define SAVE_INT yylval.integer = atoi(yytext);
@@ -20,7 +20,7 @@ integer {digit}+
 exponent [eE][+-]?{integer}
 real {integer}("."{integer})
 string \"[^\"\n]*\"
-word [a-z|A-Z][a-z|A-Z|0-9]*
+word [_|a-z|A-Z][a-z|A-Z|0-9]*
 
 %%
 
@@ -31,16 +31,21 @@ word [a-z|A-Z][a-z|A-Z|0-9]*
 "/" return DIVIDE;
 "^" return POWER;
 "=" return EQUALS;
+":=" return ASSIGN;
 "(" return LPAREN;
 ")" return RPAREN;
 "{" return LBRACKET;
 "}" return RBRACKET;
 "," return COMMA;
 ";" return END;
+":" return COLON;
 "\n" ;;
+"struct" return STRUCT;
 "function" return FUNCTION;
 "var" return VARIABLE;
 "const" return CONST;
+"int" return TYPE_INT;
+"string" return TYPE_STRING;
 
 {integer} { SAVE_INT;
  return INT;

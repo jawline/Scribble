@@ -1,8 +1,10 @@
 #include "AssignVariable.hpp"
+#include "StatementException.hpp"
 #include <sstream>
 
-AssignVariableStatement::AssignVariableStatement(int variableId, Statement* exp) {
-	variableId_ = variableId;
+AssignVariableStatement::AssignVariableStatement(Variable* var,
+		Statement* exp) {
+	var_ = var;
 	exp_ = exp;
 }
 
@@ -10,10 +12,13 @@ AssignVariableStatement::~AssignVariableStatement() {
 	delete exp_;
 }
 
-std::string AssignVariableStatement::GenerateBytecode() {
-	std::stringstream generated;
-	generated << exp_->GenerateBytecode() << "\n"; 
-	generated << "storev ";
-	generated << variableId_;
-	return generated.str();
+Value* AssignVariableStatement::execute() {
+	Value* ex = exp_->execute();
+
+	if (ex->type() != var_->type) {
+		throw StatementException("Cannot assign incorrect type");
+	}
+
+	var_->value = exp_->execute();
+	return var_->value->clone();
 }

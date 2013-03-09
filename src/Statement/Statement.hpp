@@ -1,6 +1,7 @@
 #ifndef _STATEMENT_DEF_H_
 #define _STATEMENT_DEF_H_
-#include <iostream>
+#include <Value/Value.hpp>
+#include <string>
 
 class Value;
 
@@ -9,7 +10,12 @@ private:
 public:
 	Statement() {}
 	virtual ~Statement() {}
-	virtual std::string GenerateBytecode() = 0;
+
+	virtual std::string generateDebugInformation() { 
+		return "Error: Debug info for this type not finished";
+	}
+
+	virtual Value* execute() = 0;
 };
 
 #endif //_STATEMENT_DEF_H_

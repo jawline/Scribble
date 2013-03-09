@@ -6,18 +6,15 @@
 #include <sstream>
 #include <map>
 #include <Statement/Statement.hpp>
+#include <Function/Function.hpp>
 
 /**
  * Parser facade, hides the Parser implementation and provides function to convert between files and returns low level code.
  */
 
 class Parser {
-private:
-	Parser() {}
-	~Parser() {}
 public:
-	
-	static std::string generateAssembly(std::string inputSource);
+	static Function* generateProgram(std::string inputSource);
 };
 
 #endif //_PARSER_DEF_H_

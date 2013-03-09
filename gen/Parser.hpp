@@ -47,16 +47,21 @@
      DIVIDE = 265,
      POWER = 266,
      EQUALS = 267,
-     LPAREN = 268,
-     RPAREN = 269,
-     LBRACKET = 270,
-     RBRACKET = 271,
-     COMMA = 272,
-     FUNCTION = 273,
-     VARIABLE = 274,
-     CONST = 275,
-     END = 276,
-     NEG = 277
+     ASSIGN = 268,
+     LPAREN = 269,
+     RPAREN = 270,
+     LBRACKET = 271,
+     RBRACKET = 272,
+     COMMA = 273,
+     FUNCTION = 274,
+     VARIABLE = 275,
+     CONST = 276,
+     STRUCT = 277,
+     TYPE_INT = 278,
+     TYPE_STRING = 279,
+     COLON = 280,
+     END = 281,
+     NEG = 282
    };
 #endif
 
@@ -67,10 +72,10 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 28 "./src/Parser/Parser.yy"
+#line 29 "./src/Parser/Parser.yy"
 
 	std::string* string;
-	std::vector<Statement*>* statements;
+	std::vector<SmartPointer<Statement>>* statements;
 	Statement* statement;
 	float real;
 	int integer;
@@ -78,7 +83,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 82 "./gen/Parser.hpp"
+#line 87 "./gen/Parser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -87,4 +92,18 @@ typedef union YYSTYPE
 
 extern YYSTYPE yylval;
 
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+} YYLTYPE;
+# define yyltype YYLTYPE /* obsolescent; will be withdrawn */
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
+
+extern YYLTYPE yylloc;
 
