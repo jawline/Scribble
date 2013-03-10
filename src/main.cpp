@@ -1,14 +1,13 @@
+/**
+ * Entry point for Scribble
+ * @author Blake Loring
+ */
+
 #include <Statement/Statement.hpp>
+#include <Function/WriteFunction.hpp>
 #include <Parser/Parser.hpp>
 #include <version_info.hpp>
 #include <string.h>
-
-void printHelp(char const* exeName) {
-	printf("-- %s Usage --\n", exeName);
-	printf("compile Input Output\n");
-	printf("run File\n");
-	printf("--------------\n");
-}
 
 int main(int argc, char** argv) {
 
@@ -30,9 +29,12 @@ int main(int argc, char** argv) {
 	fread(buffer, 1, f_size, fin);
 	fclose(fin);
 
+	std::map<std::string, SmartPointer<Function>> builtinFunctions;
+	builtinFunctions["write"] = SmartPointer<Function>(new WriteFunction());
+
 	printf("Parsing %s\n", argv[1]);
 
-	Function* entry = Parser::generateProgram(buffer);
+	Function* entry = Parser::generateProgram(buffer, builtinFunctions);
 
 	printf("Freeing Buffers\n");
 	delete[] buffer;

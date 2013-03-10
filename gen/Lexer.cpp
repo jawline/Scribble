@@ -352,6 +352,9 @@ void yyfree (void *  );
 
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
+#define yywrap(n) 1
+#define YY_SKIP_YYWRAP
+
 typedef unsigned char YY_CHAR;
 
 FILE *yyin = (FILE *) 0, *yyout = (FILE *) 0;
@@ -514,7 +517,7 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "./src/Parser/Lexer.l"
-#line 4 "./src/Parser/Lexer.l"
+#line 5 "./src/Parser/Lexer.l"
 #include <string>
 #include <vector>
 #include <Statement/IntStatement.hpp>
@@ -525,8 +528,7 @@ char *yytext;
 #define SAVE_REAL yylval.real = atof(yytext);
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng);
 
-extern "C" int yywrap() { }
-#line 530 "./gen/Lexer.cpp"
+#line 532 "./gen/Lexer.cpp"
 
 #define INITIAL 0
 
@@ -716,7 +718,7 @@ YY_DECL
 #line 25 "./src/Parser/Lexer.l"
 
 
-#line 720 "./gen/Lexer.cpp"
+#line 722 "./gen/Lexer.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -949,7 +951,7 @@ YY_RULE_SETUP
 #line 60 "./src/Parser/Lexer.l"
 ECHO;
 	YY_BREAK
-#line 953 "./gen/Lexer.cpp"
+#line 955 "./gen/Lexer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

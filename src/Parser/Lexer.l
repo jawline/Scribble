@@ -1,4 +1,5 @@
 %option yylineno
+%option noyywrap
 
 %{
 #include <string>
@@ -11,7 +12,6 @@
 #define SAVE_REAL yylval.real = atof(yytext);
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng);
 
-extern "C" int yywrap() { }
 %}
 
 white [ \t]+

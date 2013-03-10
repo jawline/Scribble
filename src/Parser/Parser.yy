@@ -21,8 +21,11 @@
 
 int yylex();
 void yyerror(const char* s);
+
+bool ParsingError;
 std::vector<SmartPointer<Statement>>* Statements;
 std::map<std::string, Variable*> Variables;
+std::map<std::string, SmartPointer<Function>> Functions;
 
 %}
 
@@ -80,9 +83,8 @@ Declaration: Variable END { }
 ;
 
 Variable:  VARIABLE WORD COLON TYPE_INT {
-		std::map<std::string, Variable*>::iterator it;
-
-		it = Variables.find(*$2);
+		
+		auto it = Variables.find(*$2);
 
 		if (it != Variables.end()) {
 			yyerror("Variable already defined");
@@ -90,9 +92,9 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 		} else {
 			Variables[*$2] = new Variable(Int);
 		}
+		
 	} | VARIABLE WORD COLON TYPE_STRING {
-		std::map<std::string, Variable*>::iterator it;
-		it = Variables.find(*$2);
+		auto it = Variables.find(*$2);
 		if (it != Variables.end()) {
 			yyerror("Variable already defined");
 			return -1;
@@ -117,9 +119,7 @@ Statement: INT {
 		$$ = new StringStatement(*$1);
 	} | WORD {
 
-	std::map<std::string, Variable*>::iterator it;
-
-		it = Variables.find(*$1);
+		auto it = Variables.find(*$1);
 
 		if (it == Variables.end()) {
 			yyerror("Variable not defined");
@@ -136,14 +136,19 @@ Statement: INT {
 		}
 
 		delete $3;
+		
+		auto it = Functions.find(*$1);
 
-		$$ = new FunctionStatement( SmartPointer<Function>(new WriteFunction()) , args);
+		if (it == Functions.end()) {
+			yyerror("Function does not exist");
+		} else {
+			$$ = new FunctionStatement( it->second, args);
+		}
+		
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Statement {
-		std::map<std::string, Variable*>::iterator it;
-
-		it = Variables.find(*$1);
+		auto it = Variables.find(*$1);
 
 		if (it == Variables.end()) {
 			yyerror("Variable not defined");
@@ -161,6 +166,7 @@ void yyerror(std::string s)
   extern char *yytext;	// defined and maintained in lex.c
 
   printf("ERROR: %s at symbol %s on line %i\n", s.c_str(), yytext, yylineno);
+  ParsingError = true;
 }
 
 void yyerror(const char* s)

@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <vector>
 
+
 class FunctionStatement : public Statement {
 private:
 	SmartPointer<Function> func_;

@@ -1,15 +1,24 @@
 #include "Parser.hpp"
-#include <Pointers/SmartPointer.hpp>
 #include <Function/ScriptedFunction.hpp>
 #include <string.h>
 
 extern std::vector<SmartPointer<Statement>>* Statements;
-extern std::map<std::string, int> Variables;
+extern std::map<std::string, SmartPointer<Function>> Functions;
+extern bool ParsingError;
 extern void yyparse();
 extern void yy_scan_string(char const*);
 extern void yylex_destroy();
 
-Function* Parser::generateProgram(std::string inputSource) {
+Function* Parser::generateProgram(std::string inputSource,
+		std::map<std::string, SmartPointer<Function>> functions) {
+
+	Functions.empty();
+
+	for (auto it = functions.begin(); it != functions.end(); it++) {
+		Functions[it->first] = it->second;
+	}
+
+	ParsingError = false;
 
 	char* a = strdup(inputSource.c_str());
 
@@ -21,9 +30,13 @@ Function* Parser::generateProgram(std::string inputSource) {
 
 	delete[] a;
 
-	Function* f = new ScriptedFunction(*Statements);
+	if (!ParsingError) {
+		Function* f = new ScriptedFunction(*Statements);
 
-	delete Statements;
+		delete Statements;
 
-	return f;
+		return f;
+	} else {
+		return 0;
+	}
 }

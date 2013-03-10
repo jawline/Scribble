@@ -1,5 +1,9 @@
 var i : int;
 i := 23;
 
+var j : string;
+j := "Slinky Motherfucker";
+
 write("Hello world, how are you?");
+write(j);
 write("I'm fine, thank you.");

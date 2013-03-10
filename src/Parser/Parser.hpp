@@ -1,5 +1,6 @@
 #ifndef _PARSER_DEF_H_
 #define _PARSER_DEF_H_
+#include <Pointers/SmartPointer.hpp>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -14,7 +15,8 @@
 
 class Parser {
 public:
-	static Function* generateProgram(std::string inputSource);
+	static Function* generateProgram(std::string inputSource,
+			std::map<std::string, SmartPointer<Function>> functions);
 };
 
 #endif //_PARSER_DEF_H_
