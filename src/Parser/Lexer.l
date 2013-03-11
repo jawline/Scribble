@@ -6,6 +6,7 @@
 #include <vector>
 #include <Statement/IntStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
+#include <Value/Variable.hpp>
 #include "Parser.hpp"
 
 #define SAVE_INT yylval.integer = atoi(yytext);

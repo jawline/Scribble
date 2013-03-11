@@ -1,2 +1,6 @@
-write("Hello World");
-write(string(5));
+var simpleNumber : int := 5;
+var simpleString : string := "Hello World";
+write(string(simpleNumber));
+write(simpleString);
+simpleString := "Doggy Bag";
+write(simpleString);

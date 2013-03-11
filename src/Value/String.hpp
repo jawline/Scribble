@@ -21,8 +21,7 @@ public:
 		return new StringValue(value_.c_str());
 	}
 
-	void applyOperator(ValueOperator v, Value* r) {
-	}
+	void applyOperator(ValueOperator v, Value* r);
 
 	std::string getValue() {
 		return value_;

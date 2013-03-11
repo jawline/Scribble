@@ -41,7 +41,11 @@ int main(int argc, char** argv) {
 	printf("Freeing Buffers\n");
 	delete[] buffer;
 
-	printf("Executing\n");
-	entry->execute(std::vector<Value*>());
-	delete entry;
+	if (entry != 0) {
+		printf("Executing\n");
+		entry->execute(std::vector<Value*>());
+		delete entry;
+	} else {
+		printf("Error\n");
+	}
 }

@@ -8,5 +8,5 @@ GetVariableStatement::~GetVariableStatement() {
 }
 
 Value* GetVariableStatement::execute() {
-	return var_->value->clone();
+	return var_->getValue()->clone();
 }

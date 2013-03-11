@@ -2,23 +2,19 @@
 #define _VALUE_H_
 
 enum ValueType {
- String,
- Int,
- Void
+	String, Int, Void
 };
 
 enum ValueOperator {
- Add,
- Subtract,
- Multiply,
- Divide
+	Assign, Add, Subtract, Multiply, Divide
 };
 
 class Value {
 private:
 
 public:
-	virtual ~Value() {}
+	virtual ~Value() {
+	}
 	virtual void applyOperator(ValueOperator, Value* other) = 0;
 	virtual ValueType type() = 0;
 	virtual Value* clone() = 0;

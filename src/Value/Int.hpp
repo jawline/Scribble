@@ -23,8 +23,7 @@ public:
 		return new IntValue(value_);
 	}
 
-	void applyOperator(ValueOperator v, Value* r) {
-	}
+	void applyOperator(ValueOperator v, Value* r);
 };
 
 #endif //_INT_H_

@@ -15,10 +15,7 @@ AssignVariableStatement::~AssignVariableStatement() {
 Value* AssignVariableStatement::execute() {
 	Value* ex = exp_->execute();
 
-	if (ex->type() != var_->type) {
-		throw StatementException("Cannot assign incorrect type");
-	}
-
-	var_->value = exp_->execute();
-	return var_->value->clone();
+	Value* res = exp_->execute();
+	var_->getValue()->applyOperator(Assign, res);
+	return res;
 }

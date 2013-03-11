@@ -34,6 +34,7 @@ std::map<std::string, SmartPointer<Function>> Functions;
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
 	Statement* statement;
+	Variable* variable;
 	float real;
 	int integer;
 }
@@ -54,9 +55,7 @@ std::map<std::string, SmartPointer<Function>> Functions;
 
 %type <statement> Statement;
 %type <statements> Program;
-%type <statement> Declaration;
-%type <void> Structure;
-%type <statement> Variable;
+%type <variable> Variable;
 %type <statements> Arguments;
 
 %start Program
@@ -66,32 +65,34 @@ Program: {
 		Statements = new std::vector<SmartPointer<Statement>>();
 		Variables.clear();
 		$$ = Statements; 
-	} | Program Declaration {
+	} | Program Variable END {
+	} | Program Variable ASSIGN Statement END {
+		
+		if ($2->getType() != $4->type()) {
+			yyerror("Invalid type");
+			return -1;
+		}
+		
+		Statement* assign = new AssignVariableStatement($2, $4);
+		$1->push_back(assign);
+		$$ = $1;
 	} | Program Statement END {
 		$1->push_back($2);
 		$$ = $1; 
 	}
 ;
 
-Structure: STRUCT WORD LBRACKET Declarations RBRACKET { printf("Structure %s\n", $2->c_str()); }
-
-Declarations: { }
-	| Declarations Declaration { }
-;
-
-Declaration: Variable END { }
-	| Structure { }
-;
-
 Variable:  VARIABLE WORD COLON TYPE_INT {
-		
-		auto it = Variables.find(*$2);
 
+		auto it = Variables.find(*$2);
+		
 		if (it != Variables.end()) {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variables[*$2] = new Variable(Int, new IntValue(0));
+			Variable* nVar = new Variable(Int, new IntValue(0));
+			Variables[*$2] = nVar;
+			$$ = nVar;
 		}
 		
 	} | VARIABLE WORD COLON TYPE_STRING {
@@ -100,7 +101,9 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variables[*$2] = new Variable(String, new StringValue(""));
+			Variable* nVar = new Variable(String, new StringValue(""));
+			Variables[*$2] = nVar;
+			$$ = nVar;
 		}
 	}
 ;
