@@ -5,6 +5,7 @@
 
 #include <Statement/Statement.hpp>
 #include <Function/WriteFunction.hpp>
+#include <Function/StringFunction.hpp>
 #include <Parser/Parser.hpp>
 #include <version_info.hpp>
 #include <string.h>
@@ -31,6 +32,7 @@ int main(int argc, char** argv) {
 
 	std::map<std::string, SmartPointer<Function>> builtinFunctions;
 	builtinFunctions["write"] = SmartPointer<Function>(new WriteFunction());
+	builtinFunctions["string"] = SmartPointer<Function>(new StringFunction());
 
 	printf("Parsing %s\n", argv[1]);
 

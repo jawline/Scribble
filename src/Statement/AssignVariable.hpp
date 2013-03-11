@@ -12,6 +12,10 @@ public:
 	AssignVariableStatement(Variable* var, Statement* exp);
 	~AssignVariableStatement();
 	Value* execute();
+
+	ValueType type() {
+		return exp_->type();
+	}
 };
 
 #endif //_ASSIGN_VARIABLE_DEF_H_

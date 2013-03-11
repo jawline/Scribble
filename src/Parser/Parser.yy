@@ -18,6 +18,7 @@
 #include <Function/WriteFunction.hpp>
 
 #include <Value/Variable.hpp>
+#include <Value/String.hpp>
 
 int yylex();
 void yyerror(const char* s);
@@ -90,7 +91,7 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variables[*$2] = new Variable(Int);
+			Variables[*$2] = new Variable(Int, new IntValue(0));
 		}
 		
 	} | VARIABLE WORD COLON TYPE_STRING {
@@ -99,7 +100,7 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variables[*$2] = new Variable(String);
+			Variables[*$2] = new Variable(String, new StringValue(""));
 		}
 	}
 ;
@@ -142,6 +143,54 @@ Statement: INT {
 		if (it == Functions.end()) {
 			yyerror("Function does not exist");
 		} else {
+		
+			//Check the number of arguments
+			if (args.size() != it->second->numArgs()) {
+				yyerror("Incorrect number of arguments");
+				return -1;
+			}
+		
+			//Check that they are valid
+			for (unsigned int i = 0; i < args.size(); ++i) {
+				
+				if (args[i]->type() != it->second->argType(i)) {
+					yyerror("Unexpected argument type");
+					return -1;
+				}
+				
+			}
+		
+			$$ = new FunctionStatement( it->second, args);
+		}
+		
+	} | TYPE_STRING LPAREN Arguments RPAREN {
+	
+		//Copy arguments over
+		std::vector<SmartPointer<Statement>> args;
+
+		for (unsigned int i = 0; i < $3->size(); ++i) {
+			args.push_back($3->at(i));
+		}
+
+		delete $3;
+		
+		auto it = Functions.find("string");
+
+		if (it == Functions.end()) {
+			yyerror("Function does not exist");
+		} else {
+		
+			//Check the number of arguments
+			if (args.size() != it->second->numArgs()) {
+				yyerror("Incorrect number of arguments");
+				return -1;
+			}
+		
+			//Check that they are valid
+			for (unsigned int i = 0; i < args.size(); ++i) {
+				
+			}
+		
 			$$ = new FunctionStatement( it->second, args);
 		}
 		

@@ -5,14 +5,17 @@
 #include <map>
 
 class Variable {
-public:
-	SmartPointer<Value> value;
-	ValueType type;
+private:
+	Value* value_;
+	ValueType type_;
 
-	Variable(ValueType t) {
-		type = t;
-		value = 0;
-	}
+public:
+
+	Variable(ValueType t, Value* value);
+	~Variable();
+
+	Value* getValue();
+	ValueType getType();
 };
 
 #endif //_VARIABLE_H_

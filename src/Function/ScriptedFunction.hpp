@@ -20,6 +20,18 @@ public:
 	virtual ~ScriptedFunction();
 
 	Value* execute(std::vector<Value*> arguments);
+
+	ValueType type() {
+		return Void;
+	}
+
+	unsigned int numArgs() {
+		return 0;
+	}
+
+	ValueType argType(int arg) {
+		return Void;
+	}
 };
 
 #endif /* SCRIPTEDFUNCTION_HPP_ */

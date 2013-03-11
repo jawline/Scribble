@@ -11,9 +11,12 @@ public:
 		value_ = value;
 	}
 
-
 	ValueType type() {
 		return Int;
+	}
+
+	int value() {
+		return value_;
 	}
 
 	Value* clone() {

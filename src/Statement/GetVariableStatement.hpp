@@ -3,7 +3,7 @@
 #include "Statement.hpp"
 #include <Value/Variable.hpp>
 
-class GetVariableStatement : public Statement {
+class GetVariableStatement: public Statement {
 private:
 	Variable* var_;
 
@@ -11,7 +11,10 @@ public:
 	GetVariableStatement(Variable* var);
 	~GetVariableStatement();
 	Value* execute();
-};
 
+	ValueType type() {
+		return var_->getType();
+	}
+};
 
 #endif //_GET_VARIABLE_DEF_H_

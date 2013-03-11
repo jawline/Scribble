@@ -11,6 +11,10 @@ public:
 	StringStatement(std::string stringValue);
 	Value* execute();
 
+	ValueType type() {
+		return String;
+	}
+
 };
 
 #endif //_STR_STATEMENT_DEF_H_

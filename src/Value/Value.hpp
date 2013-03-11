@@ -3,7 +3,8 @@
 
 enum ValueType {
  String,
- Int
+ Int,
+ Void
 };
 
 enum ValueOperator {

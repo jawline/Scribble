@@ -16,6 +16,7 @@ public:
 	}
 
 	virtual Value* execute() = 0;
+	virtual ValueType type() = 0;
 };
 
 #endif //_STATEMENT_DEF_H_
