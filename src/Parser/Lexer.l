@@ -40,7 +40,11 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "," return COMMA;
 ";" return END;
 ":" return COLON;
+">" return GREATER;
+"<" return LESSER;
 "\n" ;;
+"if" return IF;
+"else" return ELSE;
 "struct" return STRUCT;
 "function" return FUNCTION;
 "var" return VARIABLE;

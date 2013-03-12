@@ -2,7 +2,7 @@
 #define _VALUE_H_
 
 enum ValueType {
-	String, Int, Void
+	String, Boolean, Int, Void
 };
 
 enum ValueOperator {

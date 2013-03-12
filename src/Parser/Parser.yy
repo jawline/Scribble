@@ -13,6 +13,8 @@
 #include <Statement/AssignVariable.hpp>
 #include <Statement/GetVariableStatement.hpp>
 #include <Statement/FunctionStatement.hpp>
+#include <Statement/TestStatement.hpp>
+#include <Statement/IfStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/WriteFunction.hpp>
@@ -42,7 +44,7 @@ std::map<std::string, SmartPointer<Function>> Functions;
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
@@ -57,6 +59,7 @@ std::map<std::string, SmartPointer<Function>> Functions;
 %type <statements> Program;
 %type <variable> Variable;
 %type <statements> Arguments;
+%type <statements> Statements;
 
 %start Program
 %%
@@ -65,8 +68,8 @@ Program: {
 		Statements = new std::vector<SmartPointer<Statement>>();
 		Variables.clear();
 		$$ = Statements; 
-	} | Program Variable END {
-	} | Program Variable ASSIGN Statement END {
+	} | Program Variable {
+	} | Program Variable ASSIGN Statement {
 		
 		if ($2->getType() != $4->type()) {
 			yyerror("Invalid type");
@@ -76,7 +79,7 @@ Program: {
 		Statement* assign = new AssignVariableStatement($2, $4);
 		$1->push_back(assign);
 		$$ = $1;
-	} | Program Statement END {
+	} | Program Statement {
 		$1->push_back($2);
 		$$ = $1; 
 	}
@@ -117,6 +120,15 @@ Arguments: Statement {
 	}
 ;
 
+Statements: {
+		$$ = new std::vector<SmartPointer<Statement>>();
+	} | Statements Statement {
+		$$ = $1;
+		$$->push_back($2);
+	}
+;
+
+
 Statement: INT {
 		$$ = new IntStatement($1);
 	} | STRING {
@@ -132,6 +144,12 @@ Statement: INT {
 			$$ = new GetVariableStatement(it->second);
 		}
 
+	} | IF Statement LBRACKET Statements RBRACKET {
+		$$ = new IfStatement($2, *$4, std::vector<SP<Statement>>());
+		printf("IFd\n");
+	} | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET {
+		$$ = new IfStatement($2, *$4, *$8);
+		printf("IFd\n");
 	} | WORD LPAREN Arguments RPAREN {
 		std::vector<SmartPointer<Statement>> args;
 
@@ -166,6 +184,30 @@ Statement: INT {
 			$$ = new FunctionStatement( it->second, args);
 		}
 		
+	} | Statement EQUALS Statement {
+	
+		if ($1->type() != $3->type()) {
+			yyerror("Error, cannot compare two different types");
+			return -1;
+		}
+	
+		$$ = new TestStatement(TestEquals, $1, $3);
+	}  | Statement GREATER Statement {
+	
+		if ($1->type() != $3->type()) {
+			yyerror("Error, cannot compare two different types");
+			return -1;
+		}
+	
+		$$ = new TestStatement(TestGreater, $1, $3);
+	}  | Statement LESSER Statement {
+	
+		if ($1->type() != $3->type()) {
+			yyerror("Error, cannot compare two different types");
+			return -1;
+		}
+	
+		$$ = new TestStatement(TestLess, $1, $3);
 	} | TYPE_STRING LPAREN Arguments RPAREN {
 	
 		//Copy arguments over

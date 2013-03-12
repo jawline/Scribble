@@ -1,6 +1,28 @@
-var simpleNumber : int := 5;
-var simpleString : string := "Hello World";
-write(string(simpleNumber));
-write(simpleString);
-simpleString := "Doggy Bag";
-write(simpleString);
+var simpleNumber : int := 5
+var otherNumber : int := 6
+
+simpleNumber = otherNumber
+
+var simpleString : string := "Hello World"
+write(string(simpleNumber))
+write(simpleString)
+simpleString := "Doggy Bag"
+write(simpleString)
+
+var i : int := 0;
+
+if simpleNumber = 5 {
+	write("ITS AN IF STATEMENT")
+} else {
+	write("This should not execute")
+}
+
+if simpleNumber > 6 {
+	write("This shouldn't be executed")
+} else {
+	write("This should")
+}
+
+if simpleNumber < 6 {
+	write("This should execute")
+}
