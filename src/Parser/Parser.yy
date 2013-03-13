@@ -13,8 +13,10 @@
 #include <Statement/AssignVariable.hpp>
 #include <Statement/GetVariableStatement.hpp>
 #include <Statement/FunctionStatement.hpp>
+#include <Statement/ForStatement.hpp>
 #include <Statement/TestStatement.hpp>
 #include <Statement/IfStatement.hpp>
+#include <Statement/AddStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/WriteFunction.hpp>
@@ -44,7 +46,7 @@ std::map<std::string, SmartPointer<Function>> Functions;
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
@@ -145,11 +147,37 @@ Statement: INT {
 		}
 
 	} | IF Statement LBRACKET Statements RBRACKET {
+		
+		if ($2->type() != Boolean) {
+			yyerror("Statement is not a bool");
+			return -1;
+		}
+		
 		$$ = new IfStatement($2, *$4, std::vector<SP<Statement>>());
-		printf("IFd\n");
 	} | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET {
+	
+		if ($2->type() != Boolean) {
+			yyerror("Statement is not a bool");
+			return -1;
+		}
+	
 		$$ = new IfStatement($2, *$4, *$8);
-		printf("IFd\n");
+	} | Statement PLUS Statement {
+	
+		if ($1->type() != $3->type()) {
+			yyerror("Cannot add values of different types");
+			return -1;
+		}
+	
+		$$ = new AddStatement($1, $3);
+	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
+	
+		if ($4->type() != Boolean) {
+			yyerror("Statement is not a bool");
+			return -1;
+		}
+		
+		$$ = new ForStatement($2, $4, $6, *$8);
 	} | WORD LPAREN Arguments RPAREN {
 		std::vector<SmartPointer<Statement>> args;
 

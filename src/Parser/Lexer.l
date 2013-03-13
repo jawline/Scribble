@@ -46,7 +46,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "if" return IF;
 "else" return ELSE;
 "struct" return STRUCT;
-"function" return FUNCTION;
+"func" return FUNCTION;
+"for" return FOR;
 "var" return VARIABLE;
 "const" return CONST;
 "int" return TYPE_INT;

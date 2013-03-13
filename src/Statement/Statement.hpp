@@ -1,9 +1,8 @@
 #ifndef _STATEMENT_DEF_H_
 #define _STATEMENT_DEF_H_
+#include <Pointers/SmartPointer.hpp>
 #include <Value/Value.hpp>
 #include <string>
-
-class Value;
 
 class Statement {
 private:
@@ -18,5 +17,7 @@ public:
 	virtual Value* execute() = 0;
 	virtual ValueType type() = 0;
 };
+
+typedef SP<Statement> SafeStatement;
 
 #endif //_STATEMENT_DEF_H_
