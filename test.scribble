@@ -1,6 +1,10 @@
-var i : int := 0
+var l1 : int := 0
+var l2 : int := 1
+var fib : int
 
-for i := 0; i < 20; i := i+1 {
-	write("HELLO")
-	write(string(i))
+for var i : int := 0; i < 6; i := i + 1 {
+	fib := l1 + l2
+	l2 := l1
+	l1 := fib
+	write(string(fib) + "\n")
 }

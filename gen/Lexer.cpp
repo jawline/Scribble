@@ -532,7 +532,17 @@ char *yytext;
 #define SAVE_REAL yylval.real = atof(yytext);
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng);
 
-#line 536 "./gen/Lexer.cpp"
+void myReplace(std::string& str, const std::string& oldStr, const std::string& newStr)
+{
+  size_t pos = 0;
+  while((pos = str.find(oldStr, pos)) != std::string::npos)
+  {
+     str.replace(pos, oldStr.length(), newStr);
+     pos += newStr.length();
+  }
+}
+
+#line 546 "./gen/Lexer.cpp"
 
 #define INITIAL 0
 
@@ -719,10 +729,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 26 "./src/Parser/Lexer.l"
+#line 36 "./src/Parser/Lexer.l"
 
 
-#line 726 "./gen/Lexer.cpp"
+#line 736 "./gen/Lexer.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -817,170 +827,170 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 28 "./src/Parser/Lexer.l"
+#line 38 "./src/Parser/Lexer.l"
 { }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "./src/Parser/Lexer.l"
+#line 39 "./src/Parser/Lexer.l"
 return PLUS;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "./src/Parser/Lexer.l"
+#line 40 "./src/Parser/Lexer.l"
 return MINUS;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 31 "./src/Parser/Lexer.l"
+#line 41 "./src/Parser/Lexer.l"
 return TIMES;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "./src/Parser/Lexer.l"
+#line 42 "./src/Parser/Lexer.l"
 return DIVIDE;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "./src/Parser/Lexer.l"
+#line 43 "./src/Parser/Lexer.l"
 return POWER;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "./src/Parser/Lexer.l"
+#line 44 "./src/Parser/Lexer.l"
 return EQUALS;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 35 "./src/Parser/Lexer.l"
+#line 45 "./src/Parser/Lexer.l"
 return ASSIGN;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 36 "./src/Parser/Lexer.l"
+#line 46 "./src/Parser/Lexer.l"
 return LPAREN;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 37 "./src/Parser/Lexer.l"
+#line 47 "./src/Parser/Lexer.l"
 return RPAREN;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 38 "./src/Parser/Lexer.l"
+#line 48 "./src/Parser/Lexer.l"
 return LBRACKET;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 39 "./src/Parser/Lexer.l"
+#line 49 "./src/Parser/Lexer.l"
 return RBRACKET;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 40 "./src/Parser/Lexer.l"
+#line 50 "./src/Parser/Lexer.l"
 return COMMA;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 41 "./src/Parser/Lexer.l"
+#line 51 "./src/Parser/Lexer.l"
 return END;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 42 "./src/Parser/Lexer.l"
+#line 52 "./src/Parser/Lexer.l"
 return COLON;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 43 "./src/Parser/Lexer.l"
+#line 53 "./src/Parser/Lexer.l"
 return GREATER;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 44 "./src/Parser/Lexer.l"
+#line 54 "./src/Parser/Lexer.l"
 return LESSER;
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 45 "./src/Parser/Lexer.l"
+#line 55 "./src/Parser/Lexer.l"
 ;;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 46 "./src/Parser/Lexer.l"
+#line 56 "./src/Parser/Lexer.l"
 return IF;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 47 "./src/Parser/Lexer.l"
+#line 57 "./src/Parser/Lexer.l"
 return ELSE;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 48 "./src/Parser/Lexer.l"
+#line 58 "./src/Parser/Lexer.l"
 return STRUCT;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 49 "./src/Parser/Lexer.l"
+#line 59 "./src/Parser/Lexer.l"
 return FUNCTION;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 50 "./src/Parser/Lexer.l"
+#line 60 "./src/Parser/Lexer.l"
 return FOR;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 51 "./src/Parser/Lexer.l"
+#line 61 "./src/Parser/Lexer.l"
 return VARIABLE;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 52 "./src/Parser/Lexer.l"
+#line 62 "./src/Parser/Lexer.l"
 return CONST;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 53 "./src/Parser/Lexer.l"
+#line 63 "./src/Parser/Lexer.l"
 return TYPE_INT;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 54 "./src/Parser/Lexer.l"
+#line 64 "./src/Parser/Lexer.l"
 return TYPE_STRING;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 56 "./src/Parser/Lexer.l"
+#line 66 "./src/Parser/Lexer.l"
 { SAVE_INT;
  return INT;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 60 "./src/Parser/Lexer.l"
+#line 70 "./src/Parser/Lexer.l"
 { SAVE_REAL; 
  return REAL;
 }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 64 "./src/Parser/Lexer.l"
+#line 74 "./src/Parser/Lexer.l"
 { SAVE_TOKEN; return WORD; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 65 "./src/Parser/Lexer.l"
-{ SAVE_TOKEN; return STRING; }
+#line 75 "./src/Parser/Lexer.l"
+{ std::string r(yytext, yyleng); myReplace(r, "\\n", "\n"); myReplace(r, "\"", ""); yylval.string = new std::string(r); return STRING; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 66 "./src/Parser/Lexer.l"
+#line 76 "./src/Parser/Lexer.l"
 ECHO;
 	YY_BREAK
-#line 984 "./gen/Lexer.cpp"
+#line 994 "./gen/Lexer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1990,4 +2000,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 66 "./src/Parser/Lexer.l"
+#line 76 "./src/Parser/Lexer.l"

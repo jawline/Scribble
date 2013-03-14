@@ -13,6 +13,16 @@
 #define SAVE_REAL yylval.real = atof(yytext);
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng);
 
+void myReplace(std::string& str, const std::string& oldStr, const std::string& newStr)
+{
+  size_t pos = 0;
+  while((pos = str.find(oldStr, pos)) != std::string::npos)
+  {
+     str.replace(pos, oldStr.length(), newStr);
+     pos += newStr.length();
+  }
+}
+
 %}
 
 white [ \t]+
@@ -62,4 +72,4 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 }
 
 {word} { SAVE_TOKEN; return WORD; }
-{string} { SAVE_TOKEN; return STRING; }
+{string} { std::string r(yytext, yyleng); myReplace(r, "\\n", "\n"); myReplace(r, "\"", ""); yylval.string = new std::string(r); return STRING; }

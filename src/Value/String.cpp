@@ -11,6 +11,10 @@ void StringValue::applyOperator(ValueOperator e, Value* r) {
 		value_ = other->getValue();
 		break;
 
+	case Add:
+		value_ = value_ + other->getValue();
+		break;
+
 	default:
 		throw StatementException("Not yet implemented");
 		break;

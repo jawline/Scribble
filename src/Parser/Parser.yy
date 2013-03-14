@@ -70,17 +70,6 @@ Program: {
 		Statements = new std::vector<SmartPointer<Statement>>();
 		Variables.clear();
 		$$ = Statements; 
-	} | Program Variable {
-	} | Program Variable ASSIGN Statement {
-		
-		if ($2->getType() != $4->type()) {
-			yyerror("Invalid type");
-			return -1;
-		}
-		
-		Statement* assign = new AssignVariableStatement($2, $4);
-		$1->push_back(assign);
-		$$ = $1;
 	} | Program Statement {
 		$1->push_back($2);
 		$$ = $1; 
@@ -135,6 +124,10 @@ Statement: INT {
 		$$ = new IntStatement($1);
 	} | STRING {
 		$$ = new StringStatement(*$1);
+	} | Variable {
+		$$ = new GetVariableStatement($1);
+	} | Variable ASSIGN Statement {
+		$$ = new AssignVariableStatement($1, $3);
 	} | WORD {
 
 		auto it = Variables.find(*$1);
