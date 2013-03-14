@@ -1,10 +1,23 @@
-var l1 : int := 0
-var l2 : int := 1
-var fib : int
+func fib(var n : int) : int {
 
-for var i : int := 0; i < 6; i := i + 1 {
-	fib := l1 + l2
-	l2 := l1
-	l1 := fib
-	write(string(fib) + "\n")
+	write("Fibonacci Numbers to " + string(n) + "\n")
+
+	var l1 : int := 0
+	var l2 : int := 1
+	
+	for var i : int := 0; i < n; i := i + 1 {
+		var fib : int := l1 + l2
+		l2 := l1
+		l1 := fib
+		write(string(fib) + "\n")
+	}
+
 }
+
+func add(var a : int, var b : int) : int {
+	write(string(a+b))
+}
+
+fib(6+1)fib(6)fib(3)
+write("Adding: ")
+add(6,5)

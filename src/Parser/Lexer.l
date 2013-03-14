@@ -2,6 +2,7 @@
 %option noyywrap
 
 %{
+#include <Function/Function.hpp>
 #include <string>
 #include <vector>
 #include <Statement/IntStatement.hpp>

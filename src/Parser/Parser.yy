@@ -19,6 +19,7 @@
 #include <Statement/AddStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
+#include <Function/ScriptedFunction.hpp>
 #include <Function/WriteFunction.hpp>
 
 #include <Value/Variable.hpp>
@@ -37,7 +38,9 @@ std::map<std::string, SmartPointer<Function>> Functions;
 %union {
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
+	std::vector<SmartPointer<Variable>>* variables;
 	Statement* statement;
+	Function* function;
 	Variable* variable;
 	float real;
 	int integer;
@@ -62,6 +65,8 @@ std::map<std::string, SmartPointer<Function>> Functions;
 %type <variable> Variable;
 %type <statements> Arguments;
 %type <statements> Statements;
+%type <function> Function;
+%type <variables> Variables;
 
 %start Program
 %%
@@ -73,6 +78,8 @@ Program: {
 	} | Program Statement {
 		$1->push_back($2);
 		$$ = $1; 
+	} | Program Function {
+		$$ = $1;
 	}
 ;
 
@@ -99,6 +106,21 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			Variables[*$2] = nVar;
 			$$ = nVar;
 		}
+	}
+;
+
+Variables: Variable {
+		$$ = new std::vector<SP<Variable>>();
+		$$->push_back($1);
+	} | Variables COMMA Variable {
+		$$ = $1;
+		$$->push_back($3);
+	}
+;
+
+Function: FUNCTION WORD LPAREN Variables RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET {
+	$$ = new ScriptedFunction(*$9, *$4);
+	Functions[*$2] = $$;
 	}
 ;
 

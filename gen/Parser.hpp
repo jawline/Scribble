@@ -77,11 +77,13 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 37 "./src/Parser/Parser.yy"
+#line 38 "./src/Parser/Parser.yy"
 
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
+	std::vector<SmartPointer<Variable>>* variables;
 	Statement* statement;
+	Function* function;
 	Variable* variable;
 	float real;
 	int integer;
@@ -89,7 +91,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 93 "./gen/Parser.hpp"
+#line 95 "./gen/Parser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

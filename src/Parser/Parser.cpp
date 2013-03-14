@@ -33,7 +33,7 @@ Function* Parser::generateProgram(std::string inputSource,
 	if (!ParsingError) {
 
 		//If it hasn't return the source as a function
-		Function* f = new ScriptedFunction(*Statements);
+		Function* f = new ScriptedFunction(*Statements, std::vector<SP<Variable>>());
 		delete Statements;
 		return f;
 	} else {

@@ -5,19 +5,18 @@ Terminals unused in grammar
    TIMES
    DIVIDE
    POWER
-   FUNCTION
    CONST
    STRUCT
    NEG
 
 
 State 3 conflicts: 1 shift/reduce
-State 25 conflicts: 4 shift/reduce
-State 33 conflicts: 4 shift/reduce
-State 34 conflicts: 3 shift/reduce
-State 35 conflicts: 4 shift/reduce
-State 36 conflicts: 4 shift/reduce
+State 28 conflicts: 4 shift/reduce
 State 37 conflicts: 4 shift/reduce
+State 38 conflicts: 3 shift/reduce
+State 39 conflicts: 4 shift/reduce
+State 40 conflicts: 4 shift/reduce
+State 41 conflicts: 4 shift/reduce
 
 
 Grammar
@@ -26,67 +25,73 @@ Grammar
 
     1 Program: /* empty */
     2        | Program Statement
+    3        | Program Function
 
-    3 Variable: VARIABLE WORD COLON TYPE_INT
-    4         | VARIABLE WORD COLON TYPE_STRING
+    4 Variable: VARIABLE WORD COLON TYPE_INT
+    5         | VARIABLE WORD COLON TYPE_STRING
 
-    5 Arguments: Statement
-    6          | Arguments COMMA Statement
+    6 Variables: Variable
+    7          | Variables COMMA Variable
 
-    7 Statements: /* empty */
-    8           | Statements Statement
+    8 Function: FUNCTION WORD LPAREN Variables RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET
 
-    9 Statement: INT
-   10          | STRING
-   11          | Variable
-   12          | Variable ASSIGN Statement
-   13          | WORD
-   14          | IF Statement LBRACKET Statements RBRACKET
-   15          | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
-   16          | Statement PLUS Statement
-   17          | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET
-   18          | WORD LPAREN Arguments RPAREN
-   19          | Statement EQUALS Statement
-   20          | Statement GREATER Statement
-   21          | Statement LESSER Statement
-   22          | TYPE_STRING LPAREN Arguments RPAREN
-   23          | LPAREN Statement RPAREN
-   24          | WORD ASSIGN Statement
+    9 Arguments: Statement
+   10          | Arguments COMMA Statement
+
+   11 Statements: /* empty */
+   12           | Statements Statement
+
+   13 Statement: INT
+   14          | STRING
+   15          | Variable
+   16          | Variable ASSIGN Statement
+   17          | WORD
+   18          | IF Statement LBRACKET Statements RBRACKET
+   19          | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
+   20          | Statement PLUS Statement
+   21          | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET
+   22          | WORD LPAREN Arguments RPAREN
+   23          | Statement EQUALS Statement
+   24          | Statement GREATER Statement
+   25          | Statement LESSER Statement
+   26          | TYPE_STRING LPAREN Arguments RPAREN
+   27          | LPAREN Statement RPAREN
+   28          | WORD ASSIGN Statement
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-WORD (258) 3 4 13 18 24
-STRING (259) 10
+WORD (258) 4 5 8 17 22 28
+STRING (259) 14
 REAL (260)
-INT (261) 9
-PLUS (262) 16
+INT (261) 13
+PLUS (262) 20
 MINUS (263)
 TIMES (264)
 DIVIDE (265)
 POWER (266)
-EQUALS (267) 19
-ASSIGN (268) 12 24
-IF (269) 14 15
-ELSE (270) 15
-GREATER (271) 20
-LESSER (272) 21
-FOR (273) 17
-LPAREN (274) 18 22 23
-RPAREN (275) 18 22 23
-LBRACKET (276) 14 15 17
-RBRACKET (277) 14 15 17
-COMMA (278) 6
-FUNCTION (279)
-VARIABLE (280) 3 4
+EQUALS (267) 23
+ASSIGN (268) 16 28
+IF (269) 18 19
+ELSE (270) 19
+GREATER (271) 24
+LESSER (272) 25
+FOR (273) 21
+LPAREN (274) 8 22 26 27
+RPAREN (275) 8 22 26 27
+LBRACKET (276) 8 18 19 21
+RBRACKET (277) 8 18 19 21
+COMMA (278) 7 10
+FUNCTION (279) 8
+VARIABLE (280) 4 5
 CONST (281)
 STRUCT (282)
-TYPE_INT (283) 3
-TYPE_STRING (284) 4 22
-COLON (285) 3 4
-END (286) 17
+TYPE_INT (283) 4 8
+TYPE_STRING (284) 5 26
+COLON (285) 4 5 8
+END (286) 21
 NEG (287)
 
 
@@ -95,16 +100,20 @@ Nonterminals, with rules where they appear
 $accept (33)
     on left: 0
 Program (34)
-    on left: 1 2, on right: 0 2
+    on left: 1 2 3, on right: 0 2 3
 Variable (35)
-    on left: 3 4, on right: 11 12
-Arguments (36)
-    on left: 5 6, on right: 6 18 22
-Statements (37)
-    on left: 7 8, on right: 8 14 15 17
-Statement (38)
-    on left: 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24, on right:
-    2 5 6 8 12 14 15 16 17 19 20 21 23 24
+    on left: 4 5, on right: 6 7 15 16
+Variables (36)
+    on left: 6 7, on right: 7 8
+Function (37)
+    on left: 8, on right: 3
+Arguments (38)
+    on left: 9 10, on right: 10 22 26
+Statements (39)
+    on left: 11 12, on right: 8 12 18 19 21
+Statement (40)
+    on left: 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28, on right:
+    2 9 10 12 16 18 19 20 21 23 24 25 27 28
 
 
 state 0
@@ -120,6 +129,7 @@ state 1
 
     0 $accept: Program . $end
     2 Program: Program . Statement
+    3        | Program . Function
 
     $end         shift, and go to state 2
     WORD         shift, and go to state 3
@@ -128,11 +138,13 @@ state 1
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    FUNCTION     shift, and go to state 9
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 12
+    Variable   go to state 12
+    Function   go to state 13
+    Statement  go to state 14
 
 
 state 2
@@ -144,35 +156,35 @@ state 2
 
 state 3
 
-   13 Statement: WORD .
-   18          | WORD . LPAREN Arguments RPAREN
-   24          | WORD . ASSIGN Statement
+   17 Statement: WORD .
+   22          | WORD . LPAREN Arguments RPAREN
+   28          | WORD . ASSIGN Statement
 
-    ASSIGN  shift, and go to state 13
-    LPAREN  shift, and go to state 14
+    ASSIGN  shift, and go to state 15
+    LPAREN  shift, and go to state 16
 
-    LPAREN    [reduce using rule 13 (Statement)]
-    $default  reduce using rule 13 (Statement)
+    LPAREN    [reduce using rule 17 (Statement)]
+    $default  reduce using rule 17 (Statement)
 
 
 state 4
 
-   10 Statement: STRING .
+   14 Statement: STRING .
 
-    $default  reduce using rule 10 (Statement)
+    $default  reduce using rule 14 (Statement)
 
 
 state 5
 
-    9 Statement: INT .
+   13 Statement: INT .
 
-    $default  reduce using rule 9 (Statement)
+    $default  reduce using rule 13 (Statement)
 
 
 state 6
 
-   14 Statement: IF . Statement LBRACKET Statements RBRACKET
-   15          | IF . Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
+   18 Statement: IF . Statement LBRACKET Statements RBRACKET
+   19          | IF . Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
 
     WORD         shift, and go to state 3
     STRING       shift, and go to state 4
@@ -180,16 +192,16 @@ state 6
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 15
+    Variable   go to state 12
+    Statement  go to state 17
 
 
 state 7
 
-   17 Statement: FOR . Statement END Statement END Statement LBRACKET Statements RBRACKET
+   21 Statement: FOR . Statement END Statement END Statement LBRACKET Statements RBRACKET
 
     WORD         shift, and go to state 3
     STRING       shift, and go to state 4
@@ -197,16 +209,16 @@ state 7
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 16
+    Variable   go to state 12
+    Statement  go to state 18
 
 
 state 8
 
-   23 Statement: LPAREN . Statement RPAREN
+   27 Statement: LPAREN . Statement RPAREN
 
     WORD         shift, and go to state 3
     STRING       shift, and go to state 4
@@ -214,198 +226,167 @@ state 8
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 17
+    Variable   go to state 12
+    Statement  go to state 19
 
 
 state 9
 
-    3 Variable: VARIABLE . WORD COLON TYPE_INT
-    4         | VARIABLE . WORD COLON TYPE_STRING
+    8 Function: FUNCTION . WORD LPAREN Variables RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET
 
-    WORD  shift, and go to state 18
+    WORD  shift, and go to state 20
 
 
 state 10
 
-   22 Statement: TYPE_STRING . LPAREN Arguments RPAREN
+    4 Variable: VARIABLE . WORD COLON TYPE_INT
+    5         | VARIABLE . WORD COLON TYPE_STRING
 
-    LPAREN  shift, and go to state 19
+    WORD  shift, and go to state 21
 
 
 state 11
 
-   11 Statement: Variable .
-   12          | Variable . ASSIGN Statement
+   26 Statement: TYPE_STRING . LPAREN Arguments RPAREN
 
-    ASSIGN  shift, and go to state 20
-
-    $default  reduce using rule 11 (Statement)
+    LPAREN  shift, and go to state 22
 
 
 state 12
 
-    2 Program: Program Statement .
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
+   15 Statement: Variable .
+   16          | Variable . ASSIGN Statement
 
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
+    ASSIGN  shift, and go to state 23
 
-    $default  reduce using rule 2 (Program)
+    $default  reduce using rule 15 (Statement)
 
 
 state 13
 
-   24 Statement: WORD ASSIGN . Statement
+    3 Program: Program Function .
 
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Statement  go to state 25
+    $default  reduce using rule 3 (Program)
 
 
 state 14
 
-   18 Statement: WORD LPAREN . Arguments RPAREN
+    2 Program: Program Statement .
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
 
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
 
-    Variable   go to state 11
-    Arguments  go to state 26
-    Statement  go to state 27
+    $default  reduce using rule 2 (Program)
 
 
 state 15
 
-   14 Statement: IF Statement . LBRACKET Statements RBRACKET
-   15          | IF Statement . LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
-   16          | Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
+   28 Statement: WORD ASSIGN . Statement
 
-    PLUS      shift, and go to state 21
-    EQUALS    shift, and go to state 22
-    GREATER   shift, and go to state 23
-    LESSER    shift, and go to state 24
-    LBRACKET  shift, and go to state 28
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 28
 
 
 state 16
 
-   16 Statement: Statement . PLUS Statement
-   17          | FOR Statement . END Statement END Statement LBRACKET Statements RBRACKET
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
+   22 Statement: WORD LPAREN . Arguments RPAREN
 
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-    END      shift, and go to state 29
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Arguments  go to state 29
+    Statement  go to state 30
 
 
 state 17
 
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
-   23          | LPAREN Statement . RPAREN
+   18 Statement: IF Statement . LBRACKET Statements RBRACKET
+   19          | IF Statement . LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
+   20          | Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-    RPAREN   shift, and go to state 30
+    PLUS      shift, and go to state 24
+    EQUALS    shift, and go to state 25
+    GREATER   shift, and go to state 26
+    LESSER    shift, and go to state 27
+    LBRACKET  shift, and go to state 31
 
 
 state 18
 
-    3 Variable: VARIABLE WORD . COLON TYPE_INT
-    4         | VARIABLE WORD . COLON TYPE_STRING
+   20 Statement: Statement . PLUS Statement
+   21          | FOR Statement . END Statement END Statement LBRACKET Statements RBRACKET
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
 
-    COLON  shift, and go to state 31
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+    END      shift, and go to state 32
 
 
 state 19
 
-   22 Statement: TYPE_STRING LPAREN . Arguments RPAREN
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+   27          | LPAREN Statement . RPAREN
 
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Arguments  go to state 32
-    Statement  go to state 27
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+    RPAREN   shift, and go to state 33
 
 
 state 20
 
-   12 Statement: Variable ASSIGN . Statement
+    8 Function: FUNCTION WORD . LPAREN Variables RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET
 
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Statement  go to state 33
+    LPAREN  shift, and go to state 34
 
 
 state 21
 
-   16 Statement: Statement PLUS . Statement
+    4 Variable: VARIABLE WORD . COLON TYPE_INT
+    5         | VARIABLE WORD . COLON TYPE_STRING
 
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Statement  go to state 34
+    COLON  shift, and go to state 35
 
 
 state 22
 
-   19 Statement: Statement EQUALS . Statement
+   26 Statement: TYPE_STRING LPAREN . Arguments RPAREN
 
     WORD         shift, and go to state 3
     STRING       shift, and go to state 4
@@ -413,16 +394,17 @@ state 22
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 35
+    Variable   go to state 12
+    Arguments  go to state 36
+    Statement  go to state 30
 
 
 state 23
 
-   20 Statement: Statement GREATER . Statement
+   16 Statement: Variable ASSIGN . Statement
 
     WORD         shift, and go to state 3
     STRING       shift, and go to state 4
@@ -430,16 +412,16 @@ state 23
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 36
+    Variable   go to state 12
+    Statement  go to state 37
 
 
 state 24
 
-   21 Statement: Statement LESSER . Statement
+   20 Statement: Statement PLUS . Statement
 
     WORD         shift, and go to state 3
     STRING       shift, and go to state 4
@@ -447,25 +429,241 @@ state 24
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 37
+    Variable   go to state 12
+    Statement  go to state 38
 
 
 state 25
 
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
-   24          | WORD ASSIGN Statement .
+   23 Statement: Statement EQUALS . Statement
 
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 39
+
+
+state 26
+
+   24 Statement: Statement GREATER . Statement
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 40
+
+
+state 27
+
+   25 Statement: Statement LESSER . Statement
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 41
+
+
+state 28
+
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+   28          | WORD ASSIGN Statement .
+
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+
+    PLUS      [reduce using rule 28 (Statement)]
+    EQUALS    [reduce using rule 28 (Statement)]
+    GREATER   [reduce using rule 28 (Statement)]
+    LESSER    [reduce using rule 28 (Statement)]
+    $default  reduce using rule 28 (Statement)
+
+
+state 29
+
+   10 Arguments: Arguments . COMMA Statement
+   22 Statement: WORD LPAREN Arguments . RPAREN
+
+    RPAREN  shift, and go to state 42
+    COMMA   shift, and go to state 43
+
+
+state 30
+
+    9 Arguments: Statement .
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+
+    $default  reduce using rule 9 (Arguments)
+
+
+state 31
+
+   18 Statement: IF Statement LBRACKET . Statements RBRACKET
+   19          | IF Statement LBRACKET . Statements RBRACKET ELSE LBRACKET Statements RBRACKET
+
+    $default  reduce using rule 11 (Statements)
+
+    Statements  go to state 44
+
+
+state 32
+
+   21 Statement: FOR Statement END . Statement END Statement LBRACKET Statements RBRACKET
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 45
+
+
+state 33
+
+   27 Statement: LPAREN Statement RPAREN .
+
+    $default  reduce using rule 27 (Statement)
+
+
+state 34
+
+    8 Function: FUNCTION WORD LPAREN . Variables RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET
+
+    VARIABLE  shift, and go to state 10
+
+    Variable   go to state 46
+    Variables  go to state 47
+
+
+state 35
+
+    4 Variable: VARIABLE WORD COLON . TYPE_INT
+    5         | VARIABLE WORD COLON . TYPE_STRING
+
+    TYPE_INT     shift, and go to state 48
+    TYPE_STRING  shift, and go to state 49
+
+
+state 36
+
+   10 Arguments: Arguments . COMMA Statement
+   26 Statement: TYPE_STRING LPAREN Arguments . RPAREN
+
+    RPAREN  shift, and go to state 50
+    COMMA   shift, and go to state 43
+
+
+state 37
+
+   16 Statement: Variable ASSIGN Statement .
+   20          | Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+
+    PLUS      [reduce using rule 16 (Statement)]
+    EQUALS    [reduce using rule 16 (Statement)]
+    GREATER   [reduce using rule 16 (Statement)]
+    LESSER    [reduce using rule 16 (Statement)]
+    $default  reduce using rule 16 (Statement)
+
+
+state 38
+
+   20 Statement: Statement . PLUS Statement
+   20          | Statement PLUS Statement .
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+
+    EQUALS    [reduce using rule 20 (Statement)]
+    GREATER   [reduce using rule 20 (Statement)]
+    LESSER    [reduce using rule 20 (Statement)]
+    $default  reduce using rule 20 (Statement)
+
+
+state 39
+
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   23          | Statement EQUALS Statement .
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+
+    PLUS      [reduce using rule 23 (Statement)]
+    EQUALS    [reduce using rule 23 (Statement)]
+    GREATER   [reduce using rule 23 (Statement)]
+    LESSER    [reduce using rule 23 (Statement)]
+    $default  reduce using rule 23 (Statement)
+
+
+state 40
+
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   24          | Statement GREATER Statement .
+   25          | Statement . LESSER Statement
+
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
 
     PLUS      [reduce using rule 24 (Statement)]
     EQUALS    [reduce using rule 24 (Statement)]
@@ -474,383 +672,167 @@ state 25
     $default  reduce using rule 24 (Statement)
 
 
-state 26
-
-    6 Arguments: Arguments . COMMA Statement
-   18 Statement: WORD LPAREN Arguments . RPAREN
-
-    RPAREN  shift, and go to state 38
-    COMMA   shift, and go to state 39
-
-
-state 27
-
-    5 Arguments: Statement .
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
-
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    $default  reduce using rule 5 (Arguments)
-
-
-state 28
-
-   14 Statement: IF Statement LBRACKET . Statements RBRACKET
-   15          | IF Statement LBRACKET . Statements RBRACKET ELSE LBRACKET Statements RBRACKET
-
-    $default  reduce using rule 7 (Statements)
-
-    Statements  go to state 40
-
-
-state 29
-
-   17 Statement: FOR Statement END . Statement END Statement LBRACKET Statements RBRACKET
-
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Statement  go to state 41
-
-
-state 30
-
-   23 Statement: LPAREN Statement RPAREN .
-
-    $default  reduce using rule 23 (Statement)
-
-
-state 31
-
-    3 Variable: VARIABLE WORD COLON . TYPE_INT
-    4         | VARIABLE WORD COLON . TYPE_STRING
-
-    TYPE_INT     shift, and go to state 42
-    TYPE_STRING  shift, and go to state 43
-
-
-state 32
-
-    6 Arguments: Arguments . COMMA Statement
-   22 Statement: TYPE_STRING LPAREN Arguments . RPAREN
-
-    RPAREN  shift, and go to state 44
-    COMMA   shift, and go to state 39
-
-
-state 33
-
-   12 Statement: Variable ASSIGN Statement .
-   16          | Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
-
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    PLUS      [reduce using rule 12 (Statement)]
-    EQUALS    [reduce using rule 12 (Statement)]
-    GREATER   [reduce using rule 12 (Statement)]
-    LESSER    [reduce using rule 12 (Statement)]
-    $default  reduce using rule 12 (Statement)
-
-
-state 34
-
-   16 Statement: Statement . PLUS Statement
-   16          | Statement PLUS Statement .
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
-
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    EQUALS    [reduce using rule 16 (Statement)]
-    GREATER   [reduce using rule 16 (Statement)]
-    LESSER    [reduce using rule 16 (Statement)]
-    $default  reduce using rule 16 (Statement)
-
-
-state 35
-
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   19          | Statement EQUALS Statement .
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
-
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    PLUS      [reduce using rule 19 (Statement)]
-    EQUALS    [reduce using rule 19 (Statement)]
-    GREATER   [reduce using rule 19 (Statement)]
-    LESSER    [reduce using rule 19 (Statement)]
-    $default  reduce using rule 19 (Statement)
-
-
-state 36
-
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   20          | Statement GREATER Statement .
-   21          | Statement . LESSER Statement
-
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    PLUS      [reduce using rule 20 (Statement)]
-    EQUALS    [reduce using rule 20 (Statement)]
-    GREATER   [reduce using rule 20 (Statement)]
-    LESSER    [reduce using rule 20 (Statement)]
-    $default  reduce using rule 20 (Statement)
-
-
-state 37
-
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
-   21          | Statement LESSER Statement .
-
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    PLUS      [reduce using rule 21 (Statement)]
-    EQUALS    [reduce using rule 21 (Statement)]
-    GREATER   [reduce using rule 21 (Statement)]
-    LESSER    [reduce using rule 21 (Statement)]
-    $default  reduce using rule 21 (Statement)
-
-
-state 38
-
-   18 Statement: WORD LPAREN Arguments RPAREN .
-
-    $default  reduce using rule 18 (Statement)
-
-
-state 39
-
-    6 Arguments: Arguments COMMA . Statement
-
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Statement  go to state 45
-
-
-state 40
-
-    8 Statements: Statements . Statement
-   14 Statement: IF Statement LBRACKET Statements . RBRACKET
-   15          | IF Statement LBRACKET Statements . RBRACKET ELSE LBRACKET Statements RBRACKET
-
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    RBRACKET     shift, and go to state 46
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Statement  go to state 47
-
-
 state 41
 
-   16 Statement: Statement . PLUS Statement
-   17          | FOR Statement END Statement . END Statement LBRACKET Statements RBRACKET
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+   25          | Statement LESSER Statement .
 
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-    END      shift, and go to state 48
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+
+    PLUS      [reduce using rule 25 (Statement)]
+    EQUALS    [reduce using rule 25 (Statement)]
+    GREATER   [reduce using rule 25 (Statement)]
+    LESSER    [reduce using rule 25 (Statement)]
+    $default  reduce using rule 25 (Statement)
 
 
 state 42
 
-    3 Variable: VARIABLE WORD COLON TYPE_INT .
-
-    $default  reduce using rule 3 (Variable)
-
-
-state 43
-
-    4 Variable: VARIABLE WORD COLON TYPE_STRING .
-
-    $default  reduce using rule 4 (Variable)
-
-
-state 44
-
-   22 Statement: TYPE_STRING LPAREN Arguments RPAREN .
+   22 Statement: WORD LPAREN Arguments RPAREN .
 
     $default  reduce using rule 22 (Statement)
 
 
+state 43
+
+   10 Arguments: Arguments COMMA . Statement
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 51
+
+
+state 44
+
+   12 Statements: Statements . Statement
+   18 Statement: IF Statement LBRACKET Statements . RBRACKET
+   19          | IF Statement LBRACKET Statements . RBRACKET ELSE LBRACKET Statements RBRACKET
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    RBRACKET     shift, and go to state 52
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 53
+
+
 state 45
 
-    6 Arguments: Arguments COMMA Statement .
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
+   20 Statement: Statement . PLUS Statement
+   21          | FOR Statement END Statement . END Statement LBRACKET Statements RBRACKET
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    $default  reduce using rule 6 (Arguments)
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
+    END      shift, and go to state 54
 
 
 state 46
 
-   14 Statement: IF Statement LBRACKET Statements RBRACKET .
-   15          | IF Statement LBRACKET Statements RBRACKET . ELSE LBRACKET Statements RBRACKET
+    6 Variables: Variable .
 
-    ELSE  shift, and go to state 49
-
-    $default  reduce using rule 14 (Statement)
+    $default  reduce using rule 6 (Variables)
 
 
 state 47
 
-    8 Statements: Statements Statement .
-   16 Statement: Statement . PLUS Statement
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
+    7 Variables: Variables . COMMA Variable
+    8 Function: FUNCTION WORD LPAREN Variables . RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET
 
-    PLUS     shift, and go to state 21
-    EQUALS   shift, and go to state 22
-    GREATER  shift, and go to state 23
-    LESSER   shift, and go to state 24
-
-    $default  reduce using rule 8 (Statements)
+    RPAREN  shift, and go to state 55
+    COMMA   shift, and go to state 56
 
 
 state 48
 
-   17 Statement: FOR Statement END Statement END . Statement LBRACKET Statements RBRACKET
+    4 Variable: VARIABLE WORD COLON TYPE_INT .
 
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
-
-    Variable   go to state 11
-    Statement  go to state 50
+    $default  reduce using rule 4 (Variable)
 
 
 state 49
 
-   15 Statement: IF Statement LBRACKET Statements RBRACKET ELSE . LBRACKET Statements RBRACKET
+    5 Variable: VARIABLE WORD COLON TYPE_STRING .
 
-    LBRACKET  shift, and go to state 51
+    $default  reduce using rule 5 (Variable)
 
 
 state 50
 
-   16 Statement: Statement . PLUS Statement
-   17          | FOR Statement END Statement END Statement . LBRACKET Statements RBRACKET
-   19          | Statement . EQUALS Statement
-   20          | Statement . GREATER Statement
-   21          | Statement . LESSER Statement
+   26 Statement: TYPE_STRING LPAREN Arguments RPAREN .
 
-    PLUS      shift, and go to state 21
-    EQUALS    shift, and go to state 22
-    GREATER   shift, and go to state 23
-    LESSER    shift, and go to state 24
-    LBRACKET  shift, and go to state 52
+    $default  reduce using rule 26 (Statement)
 
 
 state 51
 
-   15 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET . Statements RBRACKET
+   10 Arguments: Arguments COMMA Statement .
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
 
-    $default  reduce using rule 7 (Statements)
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
 
-    Statements  go to state 53
+    $default  reduce using rule 10 (Arguments)
 
 
 state 52
 
-   17 Statement: FOR Statement END Statement END Statement LBRACKET . Statements RBRACKET
+   18 Statement: IF Statement LBRACKET Statements RBRACKET .
+   19          | IF Statement LBRACKET Statements RBRACKET . ELSE LBRACKET Statements RBRACKET
 
-    $default  reduce using rule 7 (Statements)
+    ELSE  shift, and go to state 57
 
-    Statements  go to state 54
+    $default  reduce using rule 18 (Statement)
 
 
 state 53
 
-    8 Statements: Statements . Statement
-   15 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements . RBRACKET
+   12 Statements: Statements Statement .
+   20 Statement: Statement . PLUS Statement
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
 
-    WORD         shift, and go to state 3
-    STRING       shift, and go to state 4
-    INT          shift, and go to state 5
-    IF           shift, and go to state 6
-    FOR          shift, and go to state 7
-    LPAREN       shift, and go to state 8
-    RBRACKET     shift, and go to state 55
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    PLUS     shift, and go to state 24
+    EQUALS   shift, and go to state 25
+    GREATER  shift, and go to state 26
+    LESSER   shift, and go to state 27
 
-    Variable   go to state 11
-    Statement  go to state 47
+    $default  reduce using rule 12 (Statements)
 
 
 state 54
 
-    8 Statements: Statements . Statement
-   17 Statement: FOR Statement END Statement END Statement LBRACKET Statements . RBRACKET
+   21 Statement: FOR Statement END Statement END . Statement LBRACKET Statements RBRACKET
 
     WORD         shift, and go to state 3
     STRING       shift, and go to state 4
@@ -858,23 +840,172 @@ state 54
     IF           shift, and go to state 6
     FOR          shift, and go to state 7
     LPAREN       shift, and go to state 8
-    RBRACKET     shift, and go to state 56
-    VARIABLE     shift, and go to state 9
-    TYPE_STRING  shift, and go to state 10
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
 
-    Variable   go to state 11
-    Statement  go to state 47
+    Variable   go to state 12
+    Statement  go to state 58
 
 
 state 55
 
-   15 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET .
+    8 Function: FUNCTION WORD LPAREN Variables RPAREN . COLON TYPE_INT LBRACKET Statements RBRACKET
 
-    $default  reduce using rule 15 (Statement)
+    COLON  shift, and go to state 59
 
 
 state 56
 
-   17 Statement: FOR Statement END Statement END Statement LBRACKET Statements RBRACKET .
+    7 Variables: Variables COMMA . Variable
 
-    $default  reduce using rule 17 (Statement)
+    VARIABLE  shift, and go to state 10
+
+    Variable  go to state 60
+
+
+state 57
+
+   19 Statement: IF Statement LBRACKET Statements RBRACKET ELSE . LBRACKET Statements RBRACKET
+
+    LBRACKET  shift, and go to state 61
+
+
+state 58
+
+   20 Statement: Statement . PLUS Statement
+   21          | FOR Statement END Statement END Statement . LBRACKET Statements RBRACKET
+   23          | Statement . EQUALS Statement
+   24          | Statement . GREATER Statement
+   25          | Statement . LESSER Statement
+
+    PLUS      shift, and go to state 24
+    EQUALS    shift, and go to state 25
+    GREATER   shift, and go to state 26
+    LESSER    shift, and go to state 27
+    LBRACKET  shift, and go to state 62
+
+
+state 59
+
+    8 Function: FUNCTION WORD LPAREN Variables RPAREN COLON . TYPE_INT LBRACKET Statements RBRACKET
+
+    TYPE_INT  shift, and go to state 63
+
+
+state 60
+
+    7 Variables: Variables COMMA Variable .
+
+    $default  reduce using rule 7 (Variables)
+
+
+state 61
+
+   19 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET . Statements RBRACKET
+
+    $default  reduce using rule 11 (Statements)
+
+    Statements  go to state 64
+
+
+state 62
+
+   21 Statement: FOR Statement END Statement END Statement LBRACKET . Statements RBRACKET
+
+    $default  reduce using rule 11 (Statements)
+
+    Statements  go to state 65
+
+
+state 63
+
+    8 Function: FUNCTION WORD LPAREN Variables RPAREN COLON TYPE_INT . LBRACKET Statements RBRACKET
+
+    LBRACKET  shift, and go to state 66
+
+
+state 64
+
+   12 Statements: Statements . Statement
+   19 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements . RBRACKET
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    RBRACKET     shift, and go to state 67
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 53
+
+
+state 65
+
+   12 Statements: Statements . Statement
+   21 Statement: FOR Statement END Statement END Statement LBRACKET Statements . RBRACKET
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    RBRACKET     shift, and go to state 68
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 53
+
+
+state 66
+
+    8 Function: FUNCTION WORD LPAREN Variables RPAREN COLON TYPE_INT LBRACKET . Statements RBRACKET
+
+    $default  reduce using rule 11 (Statements)
+
+    Statements  go to state 69
+
+
+state 67
+
+   19 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET .
+
+    $default  reduce using rule 19 (Statement)
+
+
+state 68
+
+   21 Statement: FOR Statement END Statement END Statement LBRACKET Statements RBRACKET .
+
+    $default  reduce using rule 21 (Statement)
+
+
+state 69
+
+    8 Function: FUNCTION WORD LPAREN Variables RPAREN COLON TYPE_INT LBRACKET Statements . RBRACKET
+   12 Statements: Statements . Statement
+
+    WORD         shift, and go to state 3
+    STRING       shift, and go to state 4
+    INT          shift, and go to state 5
+    IF           shift, and go to state 6
+    FOR          shift, and go to state 7
+    LPAREN       shift, and go to state 8
+    RBRACKET     shift, and go to state 70
+    VARIABLE     shift, and go to state 10
+    TYPE_STRING  shift, and go to state 11
+
+    Variable   go to state 12
+    Statement  go to state 53
+
+
+state 70
+
+    8 Function: FUNCTION WORD LPAREN Variables RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET .
+
+    $default  reduce using rule 8 (Function)

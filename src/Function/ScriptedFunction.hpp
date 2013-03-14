@@ -10,13 +10,17 @@
 #include "Function.hpp"
 #include <Statement/Statement.hpp>
 #include <Pointers/SmartPointer.hpp>
+#include <Value/Variable.hpp>
 
 class ScriptedFunction: public Function {
 private:
 	std::vector<SmartPointer<Statement>> statements_;
+	std::vector<SmartPointer<Variable>> variables_;
+	int numArguments_;
 
 public:
-	ScriptedFunction(std::vector<SmartPointer<Statement>> statements);
+	ScriptedFunction(std::vector<SmartPointer<Statement>> statements,
+			std::vector<SmartPointer<Variable>> variables);
 	virtual ~ScriptedFunction();
 
 	Value* execute(std::vector<Value*> arguments);
@@ -26,11 +30,11 @@ public:
 	}
 
 	unsigned int numArgs() {
-		return 0;
+		return variables_.size();
 	}
 
 	ValueType argType(int arg) {
-		return Void;
+		return variables_[arg]->getType();
 	}
 };
 
