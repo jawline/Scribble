@@ -18,8 +18,9 @@ private:
 	std::vector<SP<Statement>> ifFalseStatements_;
 
 public:
-	IfStatement(SP<Statement> condition,
-			std::vector<SP<Statement>> ifTrueStatements, std::vector<SP<Statement>> ifFalseStatements);
+	IfStatement(int lineNo, std::string sym, SP<Statement> condition,
+			std::vector<SP<Statement>> ifTrueStatements,
+			std::vector<SP<Statement>> ifFalseStatements);
 	virtual ~IfStatement();
 
 	Value* execute();
@@ -27,6 +28,8 @@ public:
 	ValueType type() {
 		return Void;
 	}
+
+	void checkTree(ValueType functionType);
 };
 
 #endif /* IFSTATEMENT_HPP_ */

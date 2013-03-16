@@ -17,6 +17,7 @@
 #include <Statement/TestStatement.hpp>
 #include <Statement/IfStatement.hpp>
 #include <Statement/AddStatement.hpp>
+#include <Statement/ReturnStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -29,9 +30,11 @@ int yylex();
 void yyerror(const char* s);
 
 bool ParsingError;
-std::vector<SmartPointer<Statement>>* Statements;
 std::map<std::string, Variable*> Variables;
 std::map<std::string, SmartPointer<Function>> Functions;
+
+extern int yylineno;	// defined and maintained in lex.c
+extern char *yytext;	// defined and maintained in lex.c
 
 %}
 
@@ -44,12 +47,13 @@ std::map<std::string, SmartPointer<Function>> Functions;
 	Variable* variable;
 	float real;
 	int integer;
+	ValueType type;
 }
 
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
@@ -67,19 +71,26 @@ std::map<std::string, SmartPointer<Function>> Functions;
 %type <statements> Statements;
 %type <function> Function;
 %type <variables> Variables;
+%type <type> Type;
 
 %start Program
 %%
 
 Program: { 
-		Statements = new std::vector<SmartPointer<Statement>>();
 		Variables.clear();
-		$$ = Statements; 
-	} | Program Statement {
-		$1->push_back($2);
-		$$ = $1; 
+		$$ = 0;
 	} | Program Function {
+		$2->check();
 		$$ = $1;
+	}
+;
+
+Type: TYPE_INT {
+		$$ = Int;
+	} | TYPE_STRING {
+		$$ = String;
+	} | TYPE_VOID {
+		$$ = Void;
 	}
 ;
 
@@ -118,8 +129,11 @@ Variables: Variable {
 	}
 ;
 
-Function: FUNCTION WORD LPAREN Variables RPAREN COLON TYPE_INT LBRACKET Statements RBRACKET {
-	$$ = new ScriptedFunction(*$9, *$4);
+Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements RBRACKET {
+	$$ = new ScriptedFunction($7, *$9, *$4);
+	Functions[*$2] = $$;
+	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
+	$$ = new ScriptedFunction($6, *$8, std::vector<SP<Variable>>());
 	Functions[*$2] = $$;
 	}
 ;
@@ -138,18 +152,21 @@ Statements: {
 	} | Statements Statement {
 		$$ = $1;
 		$$->push_back($2);
+	} | Statements RETURN Statement {
+		$$ = $1;
+		$$->push_back(new ReturnStatement(yylineno, yytext, $3));
 	}
 ;
 
 
 Statement: INT {
-		$$ = new IntStatement($1);
+		$$ = new IntStatement(yylineno, yytext, $1);
 	} | STRING {
-		$$ = new StringStatement(*$1);
+		$$ = new StringStatement(yylineno, yytext, *$1);
 	} | Variable {
-		$$ = new GetVariableStatement($1);
+		$$ = new GetVariableStatement(yylineno, yytext, $1);
 	} | Variable ASSIGN Statement {
-		$$ = new AssignVariableStatement($1, $3);
+		$$ = new AssignVariableStatement(yylineno, yytext, $1, $3);
 	} | WORD {
 
 		auto it = Variables.find(*$1);
@@ -158,42 +175,19 @@ Statement: INT {
 			yyerror("Variable not defined");
 			return -1;
 		} else {
-			$$ = new GetVariableStatement(it->second);
+			$$ = new GetVariableStatement(yylineno, yytext, it->second);
 		}
 
 	} | IF Statement LBRACKET Statements RBRACKET {
-		
-		if ($2->type() != Boolean) {
-			yyerror("Statement is not a bool");
-			return -1;
-		}
-		
-		$$ = new IfStatement($2, *$4, std::vector<SP<Statement>>());
+		$$ = new IfStatement(yylineno, yytext, $2, *$4, std::vector<SP<Statement>>());
 	} | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET {
-	
-		if ($2->type() != Boolean) {
-			yyerror("Statement is not a bool");
-			return -1;
-		}
-	
-		$$ = new IfStatement($2, *$4, *$8);
+		$$ = new IfStatement(yylineno, yytext, $2, *$4, *$8);
 	} | Statement PLUS Statement {
-	
-		if ($1->type() != $3->type()) {
-			yyerror("Cannot add values of different types");
-			return -1;
-		}
-	
-		$$ = new AddStatement($1, $3);
+		$$ = new AddStatement(yylineno, yytext, $1, $3);
 	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
-	
-		if ($4->type() != Boolean) {
-			yyerror("Statement is not a bool");
-			return -1;
-		}
-		
-		$$ = new ForStatement($2, $4, $6, *$8);
+		$$ = new ForStatement(yylineno, yytext, $2, $4, $6, *$8);
 	} | WORD LPAREN Arguments RPAREN {
+	
 		std::vector<SmartPointer<Statement>> args;
 
 		for (unsigned int i = 0; i < $3->size(); ++i) {
@@ -206,51 +200,17 @@ Statement: INT {
 
 		if (it == Functions.end()) {
 			yyerror("Function does not exist");
+			return -1;
 		} else {
-		
-			//Check the number of arguments
-			if (args.size() != it->second->numArgs()) {
-				yyerror("Incorrect number of arguments");
-				return -1;
-			}
-		
-			//Check that they are valid
-			for (unsigned int i = 0; i < args.size(); ++i) {
-				
-				if (args[i]->type() != it->second->argType(i)) {
-					yyerror("Unexpected argument type");
-					return -1;
-				}
-				
-			}
-		
-			$$ = new FunctionStatement( it->second, args);
+			$$ = new FunctionStatement(yylineno, yytext, it->second, args);
 		}
 		
 	} | Statement EQUALS Statement {
-	
-		if ($1->type() != $3->type()) {
-			yyerror("Error, cannot compare two different types");
-			return -1;
-		}
-	
-		$$ = new TestStatement(TestEquals, $1, $3);
+		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
 	}  | Statement GREATER Statement {
-	
-		if ($1->type() != $3->type()) {
-			yyerror("Error, cannot compare two different types");
-			return -1;
-		}
-	
-		$$ = new TestStatement(TestGreater, $1, $3);
+		$$ = new TestStatement(yylineno, yytext, TestGreater, $1, $3);
 	}  | Statement LESSER Statement {
-	
-		if ($1->type() != $3->type()) {
-			yyerror("Error, cannot compare two different types");
-			return -1;
-		}
-	
-		$$ = new TestStatement(TestLess, $1, $3);
+		$$ = new TestStatement(yylineno, yytext, TestLess, $1, $3);
 	} | TYPE_STRING LPAREN Arguments RPAREN {
 	
 		//Copy arguments over
@@ -267,19 +227,7 @@ Statement: INT {
 		if (it == Functions.end()) {
 			yyerror("Function does not exist");
 		} else {
-		
-			//Check the number of arguments
-			if (args.size() != it->second->numArgs()) {
-				yyerror("Incorrect number of arguments");
-				return -1;
-			}
-		
-			//Check that they are valid
-			for (unsigned int i = 0; i < args.size(); ++i) {
-				
-			}
-		
-			$$ = new FunctionStatement( it->second, args);
+			$$ = new FunctionStatement(yylineno, yytext, it->second, args);
 		}
 		
 	} | LPAREN Statement RPAREN {
@@ -290,7 +238,7 @@ Statement: INT {
 		if (it == Variables.end()) {
 			yyerror("Variable not defined");
 		} else {
-			$$ = new AssignVariableStatement(it->second, $3);
+			$$ = new AssignVariableStatement(yylineno, yytext, it->second, $3);
 		}
 	}
 ;
@@ -299,8 +247,6 @@ Statement: INT {
 
 void yyerror(std::string s)
 {
-  extern int yylineno;	// defined and maintained in lex.c
-  extern char *yytext;	// defined and maintained in lex.c
 
   printf("ERROR: %s at symbol %s on line %i\n", s.c_str(), yytext, yylineno);
   ParsingError = true;

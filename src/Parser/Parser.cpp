@@ -2,14 +2,13 @@
 #include <Function/ScriptedFunction.hpp>
 #include <string.h>
 
-extern std::vector<SmartPointer<Statement>>* Statements;
 extern std::map<std::string, SmartPointer<Function>> Functions;
 extern bool ParsingError;
 extern void yyparse();
 extern void yy_scan_string(char const*);
 extern void yylex_destroy();
 
-Function* Parser::generateProgram(std::string inputSource,
+SP<Function> Parser::generateProgram(std::string inputSource,
 		std::map<std::string, SmartPointer<Function>> functions) {
 
 	//Copy over builtin functions to functions map
@@ -33,9 +32,7 @@ Function* Parser::generateProgram(std::string inputSource,
 	if (!ParsingError) {
 
 		//If it hasn't return the source as a function
-		Function* f = new ScriptedFunction(*Statements, std::vector<SP<Variable>>());
-		delete Statements;
-		return f;
+		return Functions["main"];
 	} else {
 		return 0;
 	}

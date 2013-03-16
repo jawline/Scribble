@@ -16,7 +16,7 @@ public:
 
 	Value* execute(std::vector<Value*> arguments);
 
-	ValueType type() {
+	ValueType getType() {
 		return String;
 	}
 
@@ -31,6 +31,10 @@ public:
 		}
 
 		return Void;
+	}
+
+	virtual void check() {
+
 	}
 };
 

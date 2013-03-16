@@ -2,8 +2,8 @@
 #include "StatementException.hpp"
 #include <sstream>
 
-AssignVariableStatement::AssignVariableStatement(Variable* var,
-		Statement* exp) {
+AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym, Variable* var,
+		Statement* exp) : Statement(lineNo, sym) {
 	var_ = var;
 	exp_ = exp;
 }
@@ -14,8 +14,14 @@ AssignVariableStatement::~AssignVariableStatement() {
 
 Value* AssignVariableStatement::execute() {
 	Value* ex = exp_->execute();
+	var_->getValue()->applyOperator(Assign, ex);
+	return ex;
+}
 
-	Value* res = exp_->execute();
-	var_->getValue()->applyOperator(Assign, res);
-	return res;
+void AssignVariableStatement::checkTree(ValueType functionType) {
+	exp_->checkTree(functionType);
+
+	if (var_->getType() != exp_->type()) {
+		throw StatementException(this, "Cannot assign statement to a variable of a different type");
+	}
 }

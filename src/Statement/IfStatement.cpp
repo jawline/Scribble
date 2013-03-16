@@ -7,10 +7,12 @@
 
 #include "IfStatement.hpp"
 #include <Value/Bool.hpp>
+#include <Value/Void.hpp>
 
-IfStatement::IfStatement(SP<Statement> condition,
+IfStatement::IfStatement(int lineNo, std::string sym, SP<Statement> condition,
 		std::vector<SP<Statement>> ifTrueStatements,
-		std::vector<SP<Statement>> ifFalseStatements) {
+		std::vector<SP<Statement>> ifFalseStatements) :
+		Statement(lineNo, sym) {
 	condition_ = condition;
 	ifTrueStatements_ = ifTrueStatements;
 	ifFalseStatements_ = ifFalseStatements;
@@ -26,14 +28,26 @@ Value* IfStatement::execute() {
 	if (v->value()) {
 
 		for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {
-			ifTrueStatements_[i]->execute();
+			delete ifTrueStatements_[i]->execute();
 		}
 
 	} else {
 
 		for (unsigned int i = 0; i < ifFalseStatements_.size(); i++) {
-			ifFalseStatements_[i]->execute();
+			delete ifFalseStatements_[i]->execute();
 		}
 
+	}
+
+	delete v;
+
+	return new VoidValue();
+}
+
+void IfStatement::checkTree(ValueType functionType) {
+	condition_->checkTree(functionType);
+
+	if (condition_->type() != Boolean) {
+		throw StatementException(this, "If statement needs boolean condition");
 	}
 }

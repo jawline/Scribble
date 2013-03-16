@@ -7,7 +7,9 @@
 
 #include "AddStatement.hpp"
 
-AddStatement::AddStatement(SafeStatement lhs, SafeStatement rhs) {
+AddStatement::AddStatement(int lineNo, std::string sym, SafeStatement lhs,
+		SafeStatement rhs) :
+		Statement(lineNo, sym) {
 	lhs_ = lhs;
 	rhs_ = rhs;
 }
@@ -26,4 +28,13 @@ Value* AddStatement::execute() {
 
 ValueType AddStatement::type() {
 	return lhs_->type();
+}
+
+void AddStatement::checkTree(ValueType type) {
+	lhs_->checkTree(type);
+	rhs_->checkTree(type);
+
+	if (lhs_->type() != rhs_->type()) {
+		throw new StatementException(this, "Cannot add variables of different types");
+	}
 }

@@ -7,9 +7,12 @@
 
 #include "ForStatement.hpp"
 #include <Value/Bool.hpp>
+#include <Value/Void.hpp>
 
-ForStatement::ForStatement(SafeStatement initial, SafeStatement condition,
-		SafeStatement step, std::vector<SafeStatement> statements) {
+ForStatement::ForStatement(int lineNo, std::string sym, SafeStatement initial,
+		SafeStatement condition, SafeStatement step,
+		std::vector<SafeStatement> statements) :
+		Statement(lineNo, sym) {
 	initial_ = initial;
 	condition_ = condition;
 	step_ = step;
@@ -21,22 +24,41 @@ ForStatement::~ForStatement() {
 	// TODO Auto-generated destructor stub
 }
 
-
 Value* ForStatement::execute() {
 
-	initial_->execute();
+	delete initial_->execute();
 
-	while (((BoolValue*)condition_->execute())->value()) {
+	BoolValue* condition;
+	while ((condition = ((BoolValue*) condition_->execute()))->value()) {
+		delete condition;
 
 		for (unsigned int i = 0; i < statements_.size(); ++i) {
-			statements_[i]->execute();
+			delete statements_[i]->execute();
 		}
 
-		step_->execute();
+		delete step_->execute();
 	}
 
+	delete condition;
+
+	return new VoidValue();
 }
 
 ValueType ForStatement::type() {
 	return Void;
+}
+
+void ForStatement::checkTree(ValueType functionType) {
+	initial_->checkTree(functionType);
+	condition_->checkTree(functionType);
+	step_->checkTree(functionType);
+
+	for (unsigned int i = 0; i < statements_.size(); ++i) {
+		statements_[i]->checkTree(functionType);
+	}
+
+	if (condition_->type() != Boolean) {
+		throw StatementException(this,
+				"For second paramater must evaluate to a boolean");
+	}
 }

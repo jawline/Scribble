@@ -17,17 +17,16 @@ private:
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variables_;
 	int numArguments_;
+	ValueType fType_;
 
 public:
-	ScriptedFunction(std::vector<SmartPointer<Statement>> statements,
+	ScriptedFunction(ValueType functionType, std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variables);
 	virtual ~ScriptedFunction();
 
 	Value* execute(std::vector<Value*> arguments);
 
-	ValueType type() {
-		return Void;
-	}
+	ValueType getType();
 
 	unsigned int numArgs() {
 		return variables_.size();
@@ -35,6 +34,14 @@ public:
 
 	ValueType argType(int arg) {
 		return variables_[arg]->getType();
+	}
+
+	void check() {
+
+		for (unsigned int i = 0; i < statements_.size(); ++i) {
+			statements_[i]->checkTree(getType());
+		}
+
 	}
 };
 

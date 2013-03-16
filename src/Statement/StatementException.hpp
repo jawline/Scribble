@@ -5,15 +5,15 @@
 #include <exception>
 using namespace std;
 
+class Statement;
+
 class StatementException : public exception
 {
   private:
 	std::string error_;
 
   public:
-  StatementException(std::string error) {
-	error_ = error;
-  }
+  StatementException(Statement* statement, std::string error);
 
   virtual const char* what() const throw()
   {

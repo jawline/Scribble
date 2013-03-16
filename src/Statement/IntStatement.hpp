@@ -8,12 +8,14 @@ private:
 	int intValue_;
 
 public:
-	IntStatement(int intValue);
+	IntStatement(int lineNo, std::string sym, int intValue);
 	Value* execute();
 
 	ValueType type() {
 		return Int;
 	}
+
+	void checkTree(ValueType functionType);
 };
 
 #endif //_INT_STATEMENT_DEF_H_

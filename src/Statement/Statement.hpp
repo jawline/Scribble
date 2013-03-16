@@ -1,19 +1,36 @@
 #ifndef _STATEMENT_DEF_H_
 #define _STATEMENT_DEF_H_
+#include "StatementException.hpp"
 #include <Pointers/SmartPointer.hpp>
 #include <Value/Value.hpp>
 #include <string>
+#include <sstream>
 
 class Statement {
 private:
-public:
-	Statement() {}
-	virtual ~Statement() {}
+	int lineNumber_;
+	std::string symbolName_;
 
-	virtual std::string generateDebugInformation() { 
-		return "Error: Debug info for this type not finished";
+public:
+
+	Statement(int lineNumber, std::string symbol) {
+		lineNumber_ = lineNumber;
+		symbolName_ = symbol;
 	}
 
+	virtual ~Statement() {
+	}
+
+	virtual std::string generateDebugInformation() {
+		std::stringstream stream;
+		stream << "Line Number: ";
+		stream << lineNumber_;
+		stream << " Symbol: ";
+		stream << symbolName_;
+		return stream.str();
+	}
+
+	virtual void checkTree(ValueType functionType) = 0;
 	virtual Value* execute() = 0;
 	virtual ValueType type() = 0;
 };

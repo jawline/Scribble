@@ -6,7 +6,7 @@ class WriteFunction: public Function {
 public:
 	Value* execute(std::vector<Value*> arguments);
 
-	ValueType type() {
+	ValueType getType() {
 		return Void;
 	}
 
@@ -22,6 +22,8 @@ public:
 
 		return Void;
 	}
+
+	virtual void check() {}
 };
 
 #endif //_WRITE_FUNCTION_H_

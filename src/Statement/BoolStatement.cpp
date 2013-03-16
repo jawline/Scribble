@@ -8,7 +8,7 @@
 #include "BoolStatement.hpp"
 #include <Value/Bool.hpp>
 
-BoolStatement::BoolStatement(bool value) {
+BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) : Statement(lineNo, sym) {
 	value_ = value;
 }
 
@@ -21,4 +21,7 @@ Value* BoolStatement::execute() {
 
 ValueType BoolStatement::type() {
 	return Boolean;
+}
+
+void BoolStatement::checkTree(ValueType functionType) {
 }

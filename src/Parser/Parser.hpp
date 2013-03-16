@@ -15,7 +15,7 @@
 
 class Parser {
 public:
-	static Function* generateProgram(std::string inputSource,
+	static SP<Function> generateProgram(std::string inputSource,
 			std::map<std::string, SmartPointer<Function>> functions);
 };
 

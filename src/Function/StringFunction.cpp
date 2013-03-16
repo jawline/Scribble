@@ -35,7 +35,9 @@ Value* StringFunction::execute(std::vector<Value*> arguments) {
 		return new StringValue(st.str());
 
 	default:
-		throw StatementException("Cannot convert type");
+		throw StatementException(0, "Cannot convert type");
 		break;
 	}
+
+	return 0;
 }

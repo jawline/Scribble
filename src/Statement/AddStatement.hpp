@@ -9,15 +9,18 @@
 #define ADDSTATEMENT_HPP_
 #include "Statement.hpp"
 
-class AddStatement: public Statement{
+class AddStatement: public Statement {
 private:
 	SafeStatement lhs_, rhs_;
+
 public:
-	AddStatement(SafeStatement lhs, SafeStatement rhs);
+	AddStatement(int lineNo, std::string symbol, SafeStatement lhs,
+			SafeStatement rhs);
 	virtual ~AddStatement();
 
 	Value* execute();
 	ValueType type();
+	void checkTree(ValueType functionType);
 };
 
 #endif /* ADDSTATEMENT_HPP_ */

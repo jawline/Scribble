@@ -9,13 +9,15 @@ private:
 	Statement* exp_;
 
 public:
-	AssignVariableStatement(Variable* var, Statement* exp);
+	AssignVariableStatement(int lineNo, std::string sym, Variable* var, Statement* exp);
 	~AssignVariableStatement();
 	Value* execute();
 
 	ValueType type() {
 		return exp_->type();
 	}
+
+	void checkTree(ValueType functionType);
 };
 
 #endif //_ASSIGN_VARIABLE_DEF_H_

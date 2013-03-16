@@ -8,13 +8,15 @@ private:
 	Variable* var_;
 
 public:
-	GetVariableStatement(Variable* var);
+	GetVariableStatement(int lineNo, std::string sym, Variable* var);
 	~GetVariableStatement();
 	Value* execute();
 
 	ValueType type() {
 		return var_->getType();
 	}
+
+	void checkTree(ValueType functionType);
 };
 
 #endif //_GET_VARIABLE_DEF_H_

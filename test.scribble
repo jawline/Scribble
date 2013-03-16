@@ -1,23 +1,30 @@
 func fib(var n : int) : int {
 
-	write("Fibonacci Numbers to " + string(n) + "\n")
-
 	var l1 : int := 0
 	var l2 : int := 1
+	
+	if n = 0 {
+		return 0
+	}
+	
+	if n = 1 {
+		return 1
+	}
+	
+	n := n - 2
 	
 	for var i : int := 0; i < n; i := i + 1 {
 		var fib : int := l1 + l2
 		l2 := l1
 		l1 := fib
-		write(string(fib) + "\n")
 	}
 
+	return fib
 }
 
-func add(var a : int, var b : int) : int {
-	write(string(a+b))
+func main() : void {
+	var fibsTo : int := 7
+	write("Calculating " + string(fibsTo) + " of fibs\n")
+	var fibsResult : int := fib(7)
+	write("Result: " + string(fibsResult) + "\n")
 }
-
-fib(6+1)fib(6)fib(3)
-write("Adding: ")
-add(6,5)

@@ -36,15 +36,14 @@ int main(int argc, char** argv) {
 
 	printf("Parsing %s\n", argv[1]);
 
-	Function* entry = Parser::generateProgram(buffer, builtinFunctions);
+	SP<Function> entry = Parser::generateProgram(buffer, builtinFunctions);
 
 	printf("Freeing Buffers\n");
 	delete[] buffer;
 
-	if (entry != 0) {
+	if (entry.Get()!=0) {
 		printf("Executing\n");
 		entry->execute(std::vector<Value*>());
-		delete entry;
 	} else {
 		printf("Error\n");
 	}

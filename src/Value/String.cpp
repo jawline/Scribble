@@ -16,7 +16,7 @@ void StringValue::applyOperator(ValueOperator e, Value* r) {
 		break;
 
 	default:
-		throw StatementException("Not yet implemented");
+		throw StatementException(0, "Not yet implemented");
 		break;
 	}
 

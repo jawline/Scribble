@@ -14,11 +14,13 @@ private:
 	bool value_;
 
 public:
-	BoolStatement(bool value);
+	BoolStatement(int lineNo, std::string sym, bool value);
 	virtual ~BoolStatement();
 
 	Value* execute();
 	ValueType type();
+
+	void checkTree(ValueType functionType);
 };
 
 #endif /* BOOLSTATEMENT_HPP_ */

@@ -6,12 +6,14 @@
  */
 
 #include "ScriptedFunction.hpp"
+#include <Statement/ReturnStatement.hpp>
 
-ScriptedFunction::ScriptedFunction(
+ScriptedFunction::ScriptedFunction(ValueType fType,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> variables) {
 	statements_ = statements;
 	variables_ = variables;
+	fType_ = fType;
 }
 
 ScriptedFunction::~ScriptedFunction() {
@@ -25,7 +27,17 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 
 	//Execute the statements in the function
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
-		statements_[i]->execute();
+
+		try {
+			Value* r = statements_[i]->execute();
+			delete r;
+		} catch (Return r) {
+			return r.val_;
+		}
 	}
 
+}
+
+ValueType ScriptedFunction::getType() {
+	return fType_;
 }

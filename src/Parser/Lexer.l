@@ -63,6 +63,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "const" return CONST;
 "int" return TYPE_INT;
 "string" return TYPE_STRING;
+"void" return TYPE_VOID;
+"return" return RETURN;
 
 {integer} { SAVE_INT;
  return INT;

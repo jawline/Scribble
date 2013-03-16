@@ -26,7 +26,7 @@ void BoolValue::applyOperator(ValueOperator v, Value* r) {
 		break;
 
 	default:
-		throw StatementException("No implemented yet");
+		throw StatementException(0, "No implemented yet");
 		break;
 	}
 

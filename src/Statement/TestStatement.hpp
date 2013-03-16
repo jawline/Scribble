@@ -20,13 +20,14 @@ private:
 	Statement* rhs_;
 
 public:
-	TestStatement(TestType testType, Statement* leftHandSide,
-			Statement* rightHandSide);
+	TestStatement(int lineNo, std::string sym, TestType testType,
+			Statement* leftHandSide, Statement* rightHandSide);
 	virtual ~TestStatement();
 
 	Value* execute();
 
 	ValueType type();
+	void checkTree(ValueType functionType);
 
 };
 

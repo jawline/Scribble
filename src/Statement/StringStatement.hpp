@@ -8,13 +8,14 @@ private:
 	std::string stringValue_;
 
 public:
-	StringStatement(std::string stringValue);
+	StringStatement(int lineNo, std::string sym, std::string stringValue);
 	Value* execute();
 
 	ValueType type() {
 		return String;
 	}
 
+	void checkTree(ValueType functionType);
 };
 
 #endif //_STR_STATEMENT_DEF_H_

@@ -15,7 +15,7 @@ void IntValue::applyOperator(ValueOperator v, Value* r) {
 		break;
 
 	default:
-		throw StatementException("Not implemented yet");
+		throw StatementException(0, "Not implemented yet");
 		break;
 	}
 }

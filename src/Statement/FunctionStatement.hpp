@@ -12,8 +12,8 @@ private:
 	std::vector<SmartPointer<Statement>> args_;
 
 public:
-	FunctionStatement(SmartPointer<Function> function,
-			std::vector<SmartPointer<Statement>> arguments) {
+	FunctionStatement(int lineNo, std::string sym, SmartPointer<Function> function,
+			std::vector<SmartPointer<Statement>> arguments) : Statement(lineNo, sym) {
 		func_ = function;
 		args_ = arguments;
 	}
@@ -36,9 +36,10 @@ public:
 	}
 
 	ValueType type() {
-		return func_->type();
+		return func_->getType();
 	}
 
+	void checkTree(ValueType functionType);
 };
 
 #endif //_FUNCTION_STATEMENT_H

@@ -19,11 +19,12 @@ private:
 	std::vector<SafeStatement> statements_;
 
 public:
-	ForStatement(SafeStatement initial, SafeStatement condition, SafeStatement step, std::vector<SafeStatement> statements);
+	ForStatement(int lineNo, std::string sym, SafeStatement initial, SafeStatement condition, SafeStatement step, std::vector<SafeStatement> statements);
 	virtual ~ForStatement();
 
 	Value* execute();
 	ValueType type();
+	void checkTree(ValueType functionType);
 };
 
 #endif /* FORSTATEMENT_HPP_ */

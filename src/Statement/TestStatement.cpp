@@ -10,8 +10,8 @@
 #include <Value/Int.hpp>
 #include <Value/Bool.hpp>
 
-TestStatement::TestStatement(TestType testType, Statement* leftHandSide,
-		Statement* rightHandSide) {
+TestStatement::TestStatement(int lineNo, std::string sym, TestType testType, Statement* leftHandSide,
+		Statement* rightHandSide) : Statement(lineNo, sym) {
 	tType_ = testType;
 	lhs_ = leftHandSide;
 	rhs_ = rightHandSide;
@@ -68,7 +68,7 @@ Value* TestStatement::execute() {
 	}
 
 	default:
-		throw StatementException("Not implemented yet");
+		throw StatementException(this, "Not implemented yet");
 	}
 
 	delete lhRes;
@@ -79,4 +79,13 @@ Value* TestStatement::execute() {
 
 ValueType TestStatement::type() {
 	return Boolean;
+}
+
+void TestStatement::checkTree(ValueType functionType) {
+	lhs_->checkTree(functionType);
+	rhs_->checkTree(functionType);
+
+	if (lhs_->type() != rhs_->type()) {
+		throw StatementException(this, "Left hand side type should be the same as right hand side type");
+	}
 }
