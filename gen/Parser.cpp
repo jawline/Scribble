@@ -1843,7 +1843,7 @@ yyreduce:
 			yyerror("Function does not exist");
 			return -1;
 		} else {
-			(yyval.statement) = new FunctionStatement(yylineno, yytext, it->second, args);
+			(yyval.statement) = new FunctionStatement(yylineno, yytext, SmartPointer<FunctionReference>(new FunctionReference(*(yyvsp[(1) - (4)].string), it->second)), args);
 		}
 		
 	}
@@ -1896,7 +1896,7 @@ yyreduce:
 		if (it == Functions.end()) {
 			yyerror("Function does not exist");
 		} else {
-			(yyval.statement) = new FunctionStatement(yylineno, yytext, it->second, args);
+			(yyval.statement) = new FunctionStatement(yylineno, yytext, SmartPointer<FunctionReference>(new FunctionReference("string", it->second)), args);
 		}
 		
 	}

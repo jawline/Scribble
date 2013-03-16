@@ -3,16 +3,17 @@
 #include "Statement.hpp"
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
+#include <Function/FunctionReference.hpp>
 #include <stdio.h>
 #include <vector>
 
 class FunctionStatement: public Statement {
 private:
-	SmartPointer<Function> func_;
+	SmartPointer<FunctionReference> func_;
 	std::vector<SmartPointer<Statement>> args_;
 
 public:
-	FunctionStatement(int lineNo, std::string sym, SmartPointer<Function> function,
+	FunctionStatement(int lineNo, std::string sym, SmartPointer<FunctionReference> function,
 			std::vector<SmartPointer<Statement>> arguments) : Statement(lineNo, sym) {
 		func_ = function;
 		args_ = arguments;
@@ -26,7 +27,7 @@ public:
 			pArgs.push_back(args_[i]->execute());
 		}
 
-		Value* res = func_->execute(pArgs);
+		Value* res = func_->getFunction()->execute(pArgs);
 
 		for (unsigned int i = 0; i < pArgs.size(); i++) {
 			delete pArgs[i];
@@ -36,7 +37,7 @@ public:
 	}
 
 	ValueType type() {
-		return func_->getType();
+		return func_->getFunction()->getType();
 	}
 
 	void checkTree(ValueType functionType);

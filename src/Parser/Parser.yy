@@ -202,7 +202,7 @@ Statement: INT {
 			yyerror("Function does not exist");
 			return -1;
 		} else {
-			$$ = new FunctionStatement(yylineno, yytext, it->second, args);
+			$$ = new FunctionStatement(yylineno, yytext, SmartPointer<FunctionReference>(new FunctionReference(*$1, it->second)), args);
 		}
 		
 	} | Statement EQUALS Statement {
@@ -227,7 +227,7 @@ Statement: INT {
 		if (it == Functions.end()) {
 			yyerror("Function does not exist");
 		} else {
-			$$ = new FunctionStatement(yylineno, yytext, it->second, args);
+			$$ = new FunctionStatement(yylineno, yytext, SmartPointer<FunctionReference>(new FunctionReference("string", it->second)), args);
 		}
 		
 	} | LPAREN Statement RPAREN {
