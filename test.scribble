@@ -7,18 +7,37 @@
 // Extended Description - This function recursively generates
 // the factorial of the given argument n
 
-func fact(var factN : int) : int {
+func fact(var n : int) : int {
 
-	if (factN < 1) {
-		write("Only works on values > 1")
+	if (n < 1) {
+		Write("Only works on values > 1")
 		return 0
 	}
 
-	if (factN = 1) {
+	if (n = 1) {
 		return 1
 	}
 
-	return factN * fact(factN-1)
+	return n*fact(n-1)
+}
+
+func snake() : void {
+	var i : int
+	
+	Write("Number of trys to roll a six\n")
+	
+	while (i = 0) {
+	
+		var j : int := RandomInt(5)
+		j := j + 1
+		
+		if j = 6 {
+			i := 1
+		}
+	
+	}
+	
+	Write("Returning now\n")
 }
 
 // Recursive fibs implementation
@@ -31,22 +50,22 @@ func fact(var factN : int) : int {
 // fibonacci problem into a very simple algorithm. It is however considerably less
 // memory efficient than its iterative counterparts
 
-func fibs(var fibsN : int) : int {
+func fibs(var n : int) : int {
 	
-	if (fibsN < 0) {
-		write("N Should be a positive value\n")
+	if (n < 0) {
+		Write("N Should be a positive value\n")
 		return 0
 	}
 
-	if (fibsN = 0) {
+	if (n = 0) {
 		return 0
 	}
 	
-	if (fibsN = 1) {
+	if (n = 1) {
 		return 1
 	}
 	
-	return fibs(fibsN - 1) + fibs(fibsN - 2)
+	return fibs(n - 1) + fibs(n - 2)
 }
 
 // The main function in this test situation
@@ -58,28 +77,31 @@ func fibs(var fibsN : int) : int {
 // Runs some simple tests
 
 func main() : void {
+
 	var fibsTo : int := 8
 	var factTo : int := 6
 	
-	write("Calculating " + string(fibsTo) + " of fibs\n")
-	write(string(fibs(fibsTo)) + "\n")
+	Write("Calculating " + String(fibsTo) + " of fibs\n")
+	Write(String(fibs(fibsTo)) + "\n")
 	
-	write("Looping fibs between 0 and 10\n")
+	Write("Looping fibs between 0 and 10\n")
 	
 	for var i : int := 0; i < 10; i := i + 1 {
-		write(string(fibs(i)) + " ")
+		Write(String(fibs(i)) + " ")
 	}
 	
-	write("\n")
+	Write("\n")
 
-	write("Writing the factorial of " + string(factTo) + "\n")
-	write(string(fact(factTo)) + "\n")
+	Write("Writing the factorial of " + String(factTo) + "\n")
+	Write(String(fact(factTo)) + "\n")
 	
-	write("For looping factorial between 1 and 10\n")
+	Write("For looping factorial between 1 and 10\n")
 	
 	for var x : int := 1; x < 10; x := x + 1 {
-		write(string(fact(x)) + " ")
+		Write(String(fact(x)) + " ")
 	}
 	
-	write("\n")
+	Write("\n")
+	
+	snake()
 }

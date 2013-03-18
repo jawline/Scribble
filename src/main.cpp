@@ -31,8 +31,8 @@ int main(int argc, char** argv) {
 	fclose(fin);
 
 	std::map<std::string, SmartPointer<Function>> builtinFunctions;
-	builtinFunctions["write"] = SmartPointer<Function>(new WriteFunction());
-	builtinFunctions["string"] = SmartPointer<Function>(new StringFunction());
+	builtinFunctions["Write"] = SmartPointer<Function>(new WriteFunction());
+	builtinFunctions["String"] = SmartPointer<Function>(new StringFunction());
 
 	printf("Parsing %s\n", argv[1]);
 

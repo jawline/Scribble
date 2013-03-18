@@ -19,6 +19,7 @@
 #include <Statement/IfStatement.hpp>
 #include <Statement/OperateStatement.hpp>
 #include <Statement/ReturnStatement.hpp>
+#include <Statement/WhileStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -55,7 +56,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
@@ -131,11 +132,13 @@ Variables: Variable {
 ;
 
 Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements RBRACKET {
-	$$ = new ScriptedFunction($7, *$9, *$4);
-	Functions[*$2] = $$;
+		$$ = new ScriptedFunction($7, *$9, *$4);
+		Functions[*$2] = $$;
+		Variables.clear();
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
-	$$ = new ScriptedFunction($6, *$8, std::vector<SP<Variable>>());
-	Functions[*$2] = $$;
+		$$ = new ScriptedFunction($6, *$8, std::vector<SP<Variable>>());
+		Functions[*$2] = $$;
+		Variables.clear();
 	}
 ;
 
@@ -191,6 +194,8 @@ Statement: INT {
 		$$ = new OperateStatement(yylineno, yytext, Multiply, $1, $3);
 	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
 		$$ = new ForStatement(yylineno, yytext, $2, $4, $6, *$8);
+	} | WHILE Statement LBRACKET Statements RBRACKET {
+		$$ = new WhileStatement(yylineno, yytext, $2, *$4);
 	} | WORD LPAREN Arguments RPAREN {
 	
 		std::vector<SmartPointer<Statement>> args;
@@ -204,26 +209,17 @@ Statement: INT {
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, 0));
 		References.push_back(reference);
 		$$ = new FunctionStatement(yylineno, yytext, reference, args);
-	} | Statement EQUALS Statement {
-		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
-	}  | Statement GREATER Statement {
-		$$ = new TestStatement(yylineno, yytext, TestGreater, $1, $3);
-	}  | Statement LESSER Statement {
-		$$ = new TestStatement(yylineno, yytext, TestLess, $1, $3);
-	} | TYPE_STRING LPAREN Arguments RPAREN {
-	
-		//Copy arguments over
+	} | WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
-
-		for (unsigned int i = 0; i < $3->size(); ++i) {
-			args.push_back($3->at(i));
-		}
-
-		delete $3;
-		
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("string", 0));
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, 0));
 		References.push_back(reference);
 		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+	} | Statement EQUALS Statement {
+		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
+	} | Statement GREATER Statement {
+		$$ = new TestStatement(yylineno, yytext, TestGreater, $1, $3);
+	} | Statement LESSER Statement {
+		$$ = new TestStatement(yylineno, yytext, TestLess, $1, $3);
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Statement {

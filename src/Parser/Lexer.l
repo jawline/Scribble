@@ -70,6 +70,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "string" return TYPE_STRING;
 "void" return TYPE_VOID;
 "return" return RETURN;
+"while" return WHILE;
 
 {integer} { SAVE_INT;
  return INT;
