@@ -21,9 +21,14 @@ ScriptedFunction::~ScriptedFunction() {
 
 Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 
+	Value** storedVariables = new Value*[variables_.size()];
+
 	for (unsigned int i = 0; i < variables_.size(); ++i) {
+		storedVariables[i] = variables_[i]->getValue()->clone();
 		variables_[i]->getValue()->applyOperator(Assign, arguments[i]);
 	}
+
+	Value* returnVal = 0;
 
 	//Execute the statements in the function
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
@@ -32,10 +37,19 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 			Value* r = statements_[i]->execute();
 			delete r;
 		} catch (Return r) {
-			return r.val_;
+			returnVal = r.val_;
+			break;
 		}
 	}
 
+	for (unsigned int i = 0; i < variables_.size(); ++i) {
+		variables_[i]->getValue()->applyOperator(Assign, storedVariables[i]);
+		delete storedVariables[i];
+	}
+
+	delete[] storedVariables;
+
+	return returnVal;
 }
 
 ValueType ScriptedFunction::getType() {

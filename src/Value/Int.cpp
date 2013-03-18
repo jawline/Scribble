@@ -14,6 +14,14 @@ void IntValue::applyOperator(ValueOperator v, Value* r) {
 		value_ = value_ + other->value();
 		break;
 
+	case Subtract:
+		value_ -= other->value();
+		break;
+
+	case Multiply:
+		value_ *= other->value();
+		break;
+
 	default:
 		throw StatementException(0, "Not implemented yet");
 		break;

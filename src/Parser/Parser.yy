@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <Statement/IntStatement.hpp>
+#include <Statement/OperateStatement.hpp>
 #include <Statement/StringStatement.hpp>
 #include <Statement/AssignVariable.hpp>
 #include <Statement/GetVariableStatement.hpp>
@@ -16,7 +17,7 @@
 #include <Statement/ForStatement.hpp>
 #include <Statement/TestStatement.hpp>
 #include <Statement/IfStatement.hpp>
-#include <Statement/AddStatement.hpp>
+#include <Statement/OperateStatement.hpp>
 #include <Statement/ReturnStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
@@ -32,6 +33,7 @@ void yyerror(const char* s);
 bool ParsingError;
 std::map<std::string, Variable*> Variables;
 std::map<std::string, SmartPointer<Function>> Functions;
+std::vector<SmartPointer<FunctionReference>> References;
 
 extern int yylineno;	// defined and maintained in lex.c
 extern char *yytext;	// defined and maintained in lex.c
@@ -80,7 +82,6 @@ Program: {
 		Variables.clear();
 		$$ = 0;
 	} | Program Function {
-		$2->check();
 		$$ = $1;
 	}
 ;
@@ -183,7 +184,11 @@ Statement: INT {
 	} | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET {
 		$$ = new IfStatement(yylineno, yytext, $2, *$4, *$8);
 	} | Statement PLUS Statement {
-		$$ = new AddStatement(yylineno, yytext, $1, $3);
+		$$ = new OperateStatement(yylineno, yytext, Add, $1, $3);
+	} | Statement MINUS Statement {
+		$$ = new OperateStatement(yylineno, yytext, Subtract, $1, $3);
+	} | Statement TIMES Statement {
+		$$ = new OperateStatement(yylineno, yytext, Multiply, $1, $3);
 	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
 		$$ = new ForStatement(yylineno, yytext, $2, $4, $6, *$8);
 	} | WORD LPAREN Arguments RPAREN {
@@ -196,15 +201,9 @@ Statement: INT {
 
 		delete $3;
 		
-		auto it = Functions.find(*$1);
-
-		if (it == Functions.end()) {
-			yyerror("Function does not exist");
-			return -1;
-		} else {
-			$$ = new FunctionStatement(yylineno, yytext, SmartPointer<FunctionReference>(new FunctionReference(*$1, it->second)), args);
-		}
-		
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, 0));
+		References.push_back(reference);
+		$$ = new FunctionStatement(yylineno, yytext, reference, args);
 	} | Statement EQUALS Statement {
 		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
 	}  | Statement GREATER Statement {
@@ -222,14 +221,9 @@ Statement: INT {
 
 		delete $3;
 		
-		auto it = Functions.find("string");
-
-		if (it == Functions.end()) {
-			yyerror("Function does not exist");
-		} else {
-			$$ = new FunctionStatement(yylineno, yytext, SmartPointer<FunctionReference>(new FunctionReference("string", it->second)), args);
-		}
-		
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("string", 0));
+		References.push_back(reference);
+		$$ = new FunctionStatement(yylineno, yytext, reference, args);
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Statement {

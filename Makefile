@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -I src -I gen -std=c++0x
+CFLAGS=-c -Wall -I src -I gen -std=c++0x -g -O0
 LDFLAGS=
 EXECUTABLE=./bin/scribble
 SOURCE_DIR=src

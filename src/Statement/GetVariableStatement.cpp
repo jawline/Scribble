@@ -11,6 +11,10 @@ Value* GetVariableStatement::execute() {
 	return var_->getValue()->clone();
 }
 
+ValueType GetVariableStatement::type() {
+	return var_->getType();
+}
+
 void GetVariableStatement::checkTree(ValueType functionType) {
 
 }

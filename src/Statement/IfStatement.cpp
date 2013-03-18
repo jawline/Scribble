@@ -50,4 +50,12 @@ void IfStatement::checkTree(ValueType functionType) {
 	if (condition_->type() != Boolean) {
 		throw StatementException(this, "If statement needs boolean condition");
 	}
+
+	for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {
+		ifTrueStatements_[i]->checkTree(functionType);
+	}
+
+	for (unsigned int i = 0; i < ifFalseStatements_.size(); ++i) {
+		ifFalseStatements_[i]->checkTree(functionType);
+	}
 }

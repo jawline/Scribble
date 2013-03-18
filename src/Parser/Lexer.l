@@ -1,6 +1,8 @@
 %option yylineno
 %option noyywrap
 
+%x C_COMMENT
+
 %{
 #include <Function/Function.hpp>
 #include <string>
@@ -36,6 +38,9 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 
 %%
 
+"//"            { BEGIN(C_COMMENT); }
+<C_COMMENT>"\n" { BEGIN(INITIAL); }
+<C_COMMENT>.    { }
 {white} { }
 "+" return PLUS;
 "-" return MINUS;

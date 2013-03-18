@@ -20,8 +20,10 @@ private:
 	ValueType fType_;
 
 public:
-	ScriptedFunction(ValueType functionType, std::vector<SmartPointer<Statement>> statements,
+	ScriptedFunction(ValueType functionType,
+			std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variables);
+
 	virtual ~ScriptedFunction();
 
 	Value* execute(std::vector<Value*> arguments);

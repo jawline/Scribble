@@ -1,8 +1,10 @@
 #include "Parser.hpp"
 #include <Function/ScriptedFunction.hpp>
+#include <Function/FunctionReference.hpp>
 #include <string.h>
 
 extern std::map<std::string, SmartPointer<Function>> Functions;
+extern std::vector<SmartPointer<FunctionReference>> References;
 extern bool ParsingError;
 extern void yyparse();
 extern void yy_scan_string(char const*);
@@ -27,6 +29,22 @@ SP<Function> Parser::generateProgram(std::string inputSource,
 	yyparse();
 	yylex_destroy();
 	delete[] a;
+
+	for (unsigned int i = 0; i < References.size(); ++i) {
+
+		auto it = Functions.find(References[i]->getName());
+
+		if (it != Functions.end()) {
+			References[i]->setFunction(it->second);
+		}
+
+	}
+
+	References.clear();
+
+	for (auto it = Functions.begin(); it != Functions.end(); it++) {
+		it->second->check();
+	}
 
 	//Check whether an error has occurred
 	if (!ParsingError) {

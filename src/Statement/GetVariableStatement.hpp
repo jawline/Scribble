@@ -12,9 +12,7 @@ public:
 	~GetVariableStatement();
 	Value* execute();
 
-	ValueType type() {
-		return var_->getType();
-	}
+	ValueType type();
 
 	void checkTree(ValueType functionType);
 };

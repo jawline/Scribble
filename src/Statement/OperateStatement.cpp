@@ -5,32 +5,33 @@
  *      Author: blake
  */
 
-#include "AddStatement.hpp"
+#include "OperateStatement.hpp"
 
-AddStatement::AddStatement(int lineNo, std::string sym, SafeStatement lhs,
+OperateStatement::OperateStatement(int lineNo, std::string sym, ValueOperator op, SafeStatement lhs,
 		SafeStatement rhs) :
 		Statement(lineNo, sym) {
+	op_ = op;
 	lhs_ = lhs;
 	rhs_ = rhs;
 }
 
-AddStatement::~AddStatement() {
+OperateStatement::~OperateStatement() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* AddStatement::execute() {
+Value* OperateStatement::execute() {
 	Value* lhR = lhs_->execute();
 	Value* rhR = rhs_->execute();
-	lhR->applyOperator(Add, rhR);
+	lhR->applyOperator(op_, rhR);
 	delete rhR;
 	return lhR;
 }
 
-ValueType AddStatement::type() {
+ValueType OperateStatement::type() {
 	return lhs_->type();
 }
 
-void AddStatement::checkTree(ValueType type) {
+void OperateStatement::checkTree(ValueType type) {
 	lhs_->checkTree(type);
 	rhs_->checkTree(type);
 
