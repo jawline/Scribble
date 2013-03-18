@@ -9,7 +9,7 @@
 #define RANDOMINT_HPP_
 #include "Function.hpp"
 
-class RandomInt: Function {
+class RandomInt : Function {
 public:
 	RandomInt();
 	virtual ~RandomInt();

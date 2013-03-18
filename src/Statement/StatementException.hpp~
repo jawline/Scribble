@@ -14,7 +14,7 @@ class StatementException : public exception
 
   public:
   StatementException(Statement* statement, std::string error);
-  virtual ~StatementException() throw ();
+  virtual ~Error() throw ();
 
   virtual const char* what() const throw()
   {

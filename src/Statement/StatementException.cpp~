@@ -11,5 +11,5 @@ StatementException::StatementException(Statement* statement,
 	}
 }
 
-StatementException::~StatementException() throw() {
+StatementException::~StatementException() {
 }
