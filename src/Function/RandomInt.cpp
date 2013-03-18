@@ -6,13 +6,31 @@
  */
 
 #include "RandomInt.hpp"
+#include <Value/Int.hpp>
+#include <stdlib.h>     /* srand, rand */
 
 RandomInt::RandomInt() {
-	// TODO Auto-generated constructor stub
-
 }
 
 RandomInt::~RandomInt() {
 	// TODO Auto-generated destructor stub
 }
 
+Value* RandomInt::execute(std::vector<Value*> arguments) {
+	return new IntValue(rand() % (((IntValue*) arguments[0])->value() + 1));
+}
+
+ValueType RandomInt::getType() {
+	return Int;
+}
+
+unsigned int RandomInt::numArgs() {
+	return 1;
+}
+
+ValueType RandomInt::argType(int arg) {
+	return Int;
+}
+
+void RandomInt::check() {
+}

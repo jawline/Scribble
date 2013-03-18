@@ -10,8 +10,9 @@
 #include <Value/Int.hpp>
 #include <Value/Bool.hpp>
 
-TestStatement::TestStatement(int lineNo, std::string sym, TestType testType, Statement* leftHandSide,
-		Statement* rightHandSide) : Statement(lineNo, sym) {
+TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
+		Statement* leftHandSide, Statement* rightHandSide) :
+		Statement(lineNo, sym) {
 	tType_ = testType;
 	lhs_ = leftHandSide;
 	rhs_ = rightHandSide;
@@ -44,6 +45,16 @@ Value* TestStatement::execute() {
 			}
 
 			break;
+
+		case TestNotEquals:
+			if (il->value() == rl->value()) {
+				result = new BoolValue(false);
+			} else {
+				result = new BoolValue(true);
+			}
+
+			break;
+
 		case TestLess:
 
 			if (il->value() < rl->value()) {
@@ -86,6 +97,7 @@ void TestStatement::checkTree(ValueType functionType) {
 	rhs_->checkTree(functionType);
 
 	if (lhs_->type() != rhs_->type()) {
-		throw StatementException(this, "Left hand side type should be the same as right hand side type");
+		throw StatementException(this,
+				"Left hand side type should be the same as right hand side type");
 	}
 }

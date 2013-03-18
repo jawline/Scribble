@@ -56,7 +56,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE NOT
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
@@ -216,6 +216,8 @@ Statement: INT {
 		$$ = new FunctionStatement(yylineno, yytext, reference, args);
 	} | Statement EQUALS Statement {
 		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
+	} | Statement NOT EQUALS Statement {
+		$$ = new TestStatement(yylineno, yytext, TestNotEquals, $1, $4);
 	} | Statement GREATER Statement {
 		$$ = new TestStatement(yylineno, yytext, TestGreater, $1, $3);
 	} | Statement LESSER Statement {

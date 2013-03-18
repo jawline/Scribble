@@ -6,11 +6,16 @@
 #include <Statement/Statement.hpp>
 #include <Function/WriteFunction.hpp>
 #include <Function/StringFunction.hpp>
+#include <Function/RandomInt.hpp>
 #include <Parser/Parser.hpp>
 #include <version_info.hpp>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main(int argc, char** argv) {
+	srand(time(0));
 
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_REVISION);
@@ -33,6 +38,7 @@ int main(int argc, char** argv) {
 	std::map<std::string, SmartPointer<Function>> builtinFunctions;
 	builtinFunctions["Write"] = SmartPointer<Function>(new WriteFunction());
 	builtinFunctions["String"] = SmartPointer<Function>(new StringFunction());
+	builtinFunctions["RandomInt"] = SmartPointer<Function>(new RandomInt());
 
 	printf("Parsing %s\n", argv[1]);
 
@@ -41,7 +47,7 @@ int main(int argc, char** argv) {
 	printf("Freeing Buffers\n");
 	delete[] buffer;
 
-	if (entry.Get()!=0) {
+	if (entry.Get() != 0) {
 		printf("Executing\n");
 		entry->execute(std::vector<Value*>());
 	} else {

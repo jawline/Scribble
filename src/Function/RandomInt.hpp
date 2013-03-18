@@ -9,10 +9,19 @@
 #define RANDOMINT_HPP_
 #include "Function.hpp"
 
-class RandomInt: Function {
+/**
+ * Random integer implementation. Returns a random integer between zero and n
+ */
+class RandomInt: public Function {
 public:
 	RandomInt();
 	virtual ~RandomInt();
+
+	Value* execute(std::vector<Value*> arguments);
+	ValueType getType();
+	unsigned int numArgs();
+	ValueType argType(int arg);
+	void check();
 };
 
 #endif /* RANDOMINT_HPP_ */

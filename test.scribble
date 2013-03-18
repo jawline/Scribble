@@ -21,23 +21,30 @@ func fact(var n : int) : int {
 	return n*fact(n-1)
 }
 
+// Loop until a six is generated at random
+//
+// No Arguments
+//
+// No Return
+//
+// This function continuously generates random numbers between 1 and 
+// 6 using the RandomInt function until a six is found at which point
+// it prints the number of iterations to hit a six and returns
+
 func snake() : void {
-	var i : int
+
+	Write("Generating random numbers until we get six\n")
 	
-	Write("Number of trys to roll a six\n")
+	var temp : int := 0
+	var iter : int := 0
 	
-	while (i = 0) {
-	
-		var j : int := RandomInt(5)
-		j := j + 1
-		
-		if j = 6 {
-			i := 1
-		}
-	
+	while (temp != 6) {
+		temp := RandomInt(5)
+		temp := temp+1
+		iter := iter + 1
 	}
-	
-	Write("Returning now\n")
+
+	Write(String(iter) + " attempts til " + String(temp)+ "\n")	
 }
 
 // Recursive fibs implementation

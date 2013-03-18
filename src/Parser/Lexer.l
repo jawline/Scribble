@@ -58,6 +58,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 ":" return COLON;
 ">" return GREATER;
 "<" return LESSER;
+"!" return NOT;
 "\n" ;;
 "if" return IF;
 "else" return ELSE;
