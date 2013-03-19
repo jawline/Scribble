@@ -104,7 +104,7 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variable* nVar = new Variable(Int, new IntValue(0));
+			Variable* nVar = new Variable(Int, 0, new IntValue(0));
 			Variables[*$2] = nVar;
 			$$ = nVar;
 		}
@@ -115,7 +115,7 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variable* nVar = new Variable(String, new StringValue(""));
+			Variable* nVar = new Variable(String, 0, new StringValue(""));
 			Variables[*$2] = nVar;
 			$$ = nVar;
 		}
@@ -132,11 +132,31 @@ Variables: Variable {
 ;
 
 Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements RBRACKET {
-		$$ = new ScriptedFunction($7, *$9, *$4);
+
+		std::vector<SP<Variable>> values;
+
+		int pos = 0;
+		for (auto it = Variables.begin(); it != Variables.end(); it++) {
+			it->second->setPosition(pos);
+			values.push_back(it->second);
+			pos++;
+		}
+
+		$$ = new ScriptedFunction($7, *$9, values, *$4);
 		Functions[*$2] = $$;
 		Variables.clear();
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
-		$$ = new ScriptedFunction($6, *$8, std::vector<SP<Variable>>());
+	
+		std::vector<SP<Variable>> values;
+
+		int pos = 0;
+		for (auto it = Variables.begin(); it != Variables.end(); it++) {
+			it->second->setPosition(pos);
+			values.push_back(it->second);
+			pos++;
+		}
+	
+		$$ = new ScriptedFunction($6, *$8, values, std::vector<SP<Variable>>());
 		Functions[*$2] = $$;
 		Variables.clear();
 	}

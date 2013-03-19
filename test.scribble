@@ -10,7 +10,7 @@
 func fact(var n : int) : int {
 
 	if (n < 1) {
-		Write("Only works on values > 1")
+		Write("Only works on values > 1\n")
 		return 0
 	}
 

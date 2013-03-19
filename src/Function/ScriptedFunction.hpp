@@ -14,14 +14,17 @@
 
 class ScriptedFunction: public Function {
 private:
-	std::vector<SmartPointer<Statement>> statements_;
-	std::vector<SmartPointer<Variable>> arguments_;
-	int numArguments_;
+
 	ValueType fType_;
+	std::vector<SmartPointer<Statement>> statements_;
+	std::vector<SmartPointer<Variable>> variableTemplates_;
+	std::vector<SmartPointer<Variable>> arguments_;
 
 public:
+
 	ScriptedFunction(ValueType functionType,
 			std::vector<SmartPointer<Statement>> statements,
+			std::vector<SmartPointer<Variable>> variableTemplates,
 			std::vector<SmartPointer<Variable>> variables);
 
 	virtual ~ScriptedFunction();

@@ -8,7 +8,7 @@ GetVariableStatement::~GetVariableStatement() {
 }
 
 Value* GetVariableStatement::execute(std::vector<Value*> const& variables) {
-	return var_->getValue()->clone();
+	return variables[var_->getPosition()]->clone();
 }
 
 ValueType GetVariableStatement::type() {

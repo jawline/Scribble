@@ -15,7 +15,7 @@ AssignVariableStatement::~AssignVariableStatement() {
 
 Value* AssignVariableStatement::execute(std::vector<Value*> const& variables) {
 	Value* ex = exp_->execute(variables);
-	var_->getValue()->applyOperator(Assign, ex);
+	variables[var_->getPosition()]->applyOperator(Assign, ex);
 	return ex;
 }
 

@@ -1,8 +1,7 @@
 #include "Variable.hpp"
 
-Variable::Variable(ValueType type, Value* value) {
-	type_ = type;
-	value_ = value;
+Variable::Variable(ValueType type, int position, Value* value) :
+		value_(value), position_(position), type_(type) {
 }
 
 Variable::~Variable() {
