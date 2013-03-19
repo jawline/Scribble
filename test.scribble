@@ -75,6 +75,9 @@ func fibs(var n : int) : int {
 	return fibs(n - 1) + fibs(n - 2)
 }
 
+func emptyReturn() : int {
+}
+
 // The main function in this test situation
 //
 // No Arguments
@@ -111,4 +114,6 @@ func main() : void {
 	Write("\n")
 	
 	snake()
+	
+	Write(String(emptyReturn()) + "\n")
 }

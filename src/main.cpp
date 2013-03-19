@@ -20,8 +20,6 @@ int main(int argc, char** argv) {
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_REVISION);
 
-	printf("Buffering %s\n", argv[1]);
-
 	// Read the input file
 	FILE* fin = fopen(argv[1], "r");
 
@@ -39,16 +37,10 @@ int main(int argc, char** argv) {
 	builtinFunctions["Write"] = SmartPointer<Function>(new WriteFunction());
 	builtinFunctions["String"] = SmartPointer<Function>(new StringFunction());
 	builtinFunctions["RandomInt"] = SmartPointer<Function>(new RandomInt());
-
-	printf("Parsing %s\n", argv[1]);
-
 	SP<Function> entry = Parser::generateProgram(buffer, builtinFunctions);
-
-	printf("Freeing Buffers\n");
 	delete[] buffer;
 
 	if (entry.Get() != 0) {
-		printf("Executing\n");
 		entry->execute(std::vector<Value*>());
 	} else {
 		printf("Error\n");

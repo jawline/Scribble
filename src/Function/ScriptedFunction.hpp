@@ -16,6 +16,7 @@ class ScriptedFunction: public Function {
 private:
 
 	ValueType fType_;
+	SP<Value> templateReturn_;
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variableTemplates_;
 	std::vector<SmartPointer<Variable>> arguments_;
@@ -23,6 +24,7 @@ private:
 public:
 
 	ScriptedFunction(ValueType functionType,
+			SP<Value> templateReturn,
 			std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variableTemplates,
 			std::vector<SmartPointer<Variable>> variables);

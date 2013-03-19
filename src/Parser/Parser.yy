@@ -24,6 +24,7 @@
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
 #include <Function/WriteFunction.hpp>
+#include <Value/Util.hpp>
 
 #include <Value/Variable.hpp>
 #include <Value/String.hpp>
@@ -104,7 +105,7 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variable* nVar = new Variable(Int, 0, new IntValue(0));
+			Variable* nVar = new Variable(Int, 0, ValueUtil::generateValue(Int));
 			Variables[*$2] = nVar;
 			$$ = nVar;
 		}
@@ -115,7 +116,7 @@ Variable:  VARIABLE WORD COLON TYPE_INT {
 			yyerror("Variable already defined");
 			return -1;
 		} else {
-			Variable* nVar = new Variable(String, 0, new StringValue(""));
+			Variable* nVar = new Variable(String, 0, ValueUtil::generateValue(String));
 			Variables[*$2] = nVar;
 			$$ = nVar;
 		}
@@ -142,7 +143,7 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 			pos++;
 		}
 
-		$$ = new ScriptedFunction($7, *$9, values, *$4);
+		$$ = new ScriptedFunction($7, ValueUtil::generateValue($7), *$9, values, *$4);
 		Functions[*$2] = $$;
 		Variables.clear();
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
@@ -156,7 +157,7 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 			pos++;
 		}
 	
-		$$ = new ScriptedFunction($6, *$8, values, std::vector<SP<Variable>>());
+		$$ = new ScriptedFunction($6, ValueUtil::generateValue($6), *$8, values, std::vector<SP<Variable>>());
 		Functions[*$2] = $$;
 		Variables.clear();
 	}

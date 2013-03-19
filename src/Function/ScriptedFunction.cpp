@@ -8,12 +8,12 @@
 #include "ScriptedFunction.hpp"
 #include <Statement/ReturnStatement.hpp>
 
-ScriptedFunction::ScriptedFunction(ValueType fType,
+ScriptedFunction::ScriptedFunction(ValueType fType, SP<Value> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
-		fType_(fType), statements_(statements), variableTemplates_(templates), arguments_(
-				arguments) {
+		fType_(fType), templateReturn_(templateReturn), statements_(statements), variableTemplates_(
+				templates), arguments_(arguments) {
 }
 
 ScriptedFunction::~ScriptedFunction() {
@@ -53,6 +53,11 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 	// Free up memory allocated to function variables
 	for (unsigned int i = 0; i < values.size(); ++i) {
 		delete values[i];
+	}
+
+	//If no memory has been returned fill it with the function template
+	if (returnVal == 0) {
+		returnVal = templateReturn_->clone();
 	}
 
 	return returnVal;
