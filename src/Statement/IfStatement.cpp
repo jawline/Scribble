@@ -21,20 +21,20 @@ IfStatement::IfStatement(int lineNo, std::string sym, SP<Statement> condition,
 IfStatement::~IfStatement() {
 }
 
-Value* IfStatement::execute() {
+Value* IfStatement::execute(std::vector<Value*> const& variables) {
 
-	BoolValue* v = (BoolValue*) condition_->execute();
+	BoolValue* v = (BoolValue*) condition_->execute(variables);
 
 	if (v->value()) {
 
 		for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {
-			delete ifTrueStatements_[i]->execute();
+			delete ifTrueStatements_[i]->execute(variables);
 		}
 
 	} else {
 
 		for (unsigned int i = 0; i < ifFalseStatements_.size(); i++) {
-			delete ifFalseStatements_[i]->execute();
+			delete ifFalseStatements_[i]->execute(variables);
 		}
 
 	}

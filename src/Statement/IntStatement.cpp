@@ -6,7 +6,7 @@ IntStatement::IntStatement(int lineNo, std::string sym, int intValue) :
 	intValue_ = intValue;
 }
 
-Value* IntStatement::execute() {
+Value* IntStatement::execute(std::vector<Value*> const& variables) {
 	return new IntValue(intValue_);
 }
 

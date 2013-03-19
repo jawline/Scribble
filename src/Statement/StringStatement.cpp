@@ -5,7 +5,7 @@ StringStatement::StringStatement(int lineNo, std::string sym, std::string string
 	stringValue_ = stringValue;
 }
 
-Value* StringStatement::execute() {
+Value* StringStatement::execute(std::vector<Value*> const& variables) {
 	return new StringValue(stringValue_);
 }
 

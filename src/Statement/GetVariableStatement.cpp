@@ -7,7 +7,7 @@ GetVariableStatement::GetVariableStatement(int lineNo, std::string sym, Variable
 GetVariableStatement::~GetVariableStatement() {
 }
 
-Value* GetVariableStatement::execute() {
+Value* GetVariableStatement::execute(std::vector<Value*> const& variables) {
 	return var_->getValue()->clone();
 }
 

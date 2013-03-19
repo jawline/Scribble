@@ -15,7 +15,7 @@ BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) : Statemen
 BoolStatement::~BoolStatement() {
 }
 
-Value* BoolStatement::execute() {
+Value* BoolStatement::execute(std::vector<Value*> const& variables) {
 	return new BoolValue(value_);
 }
 

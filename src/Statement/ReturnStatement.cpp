@@ -25,7 +25,7 @@ void ReturnStatement::checkTree(ValueType functionType) {
 	}
 }
 
-Value* ReturnStatement::execute() {
-	Return r(stm_->execute());
+Value* ReturnStatement::execute(std::vector<Value*> const& variables) {
+	Return r(stm_->execute(variables));
 	throw r;
 }

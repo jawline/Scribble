@@ -9,7 +9,7 @@ private:
 
 public:
 	StringStatement(int lineNo, std::string sym, std::string stringValue);
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 
 	ValueType type() {
 		return String;

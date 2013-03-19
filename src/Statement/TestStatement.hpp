@@ -24,7 +24,7 @@ public:
 			Statement* leftHandSide, Statement* rightHandSide);
 	virtual ~TestStatement();
 
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 
 	ValueType type();
 	void checkTree(ValueType functionType);

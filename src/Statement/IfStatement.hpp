@@ -23,7 +23,7 @@ public:
 			std::vector<SP<Statement>> ifFalseStatements);
 	virtual ~IfStatement();
 
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 
 	ValueType type() {
 		return Void;

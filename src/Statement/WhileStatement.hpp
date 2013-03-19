@@ -21,7 +21,7 @@ public:
 	virtual ~WhileStatement();
 
 	void checkTree(ValueType functionType);
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 	ValueType type();
 };
 

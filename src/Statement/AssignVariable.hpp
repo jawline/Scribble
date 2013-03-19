@@ -2,6 +2,7 @@
 #define _ASSIGN_VARIABLE_DEF_H_
 #include "Statement.hpp"
 #include <Value/Variable.hpp>
+#include <vector>
 
 class AssignVariableStatement: public Statement {
 private:
@@ -11,7 +12,7 @@ private:
 public:
 	AssignVariableStatement(int lineNo, std::string sym, Variable* var, Statement* exp);
 	~AssignVariableStatement();
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 
 	ValueType type() {
 		return exp_->type();

@@ -17,7 +17,7 @@ public:
 	BoolStatement(int lineNo, std::string sym, bool value);
 	virtual ~BoolStatement();
 
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 	ValueType type();
 
 	void checkTree(ValueType functionType);

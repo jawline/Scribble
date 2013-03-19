@@ -22,10 +22,10 @@ TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
 TestStatement::~TestStatement() {
 }
 
-Value* TestStatement::execute() {
+Value* TestStatement::execute(std::vector<Value*> const& variables) {
 
-	Value* lhRes = lhs_->execute();
-	Value* rhRes = rhs_->execute();
+	Value* lhRes = lhs_->execute(variables);
+	Value* rhRes = rhs_->execute(variables);
 	Value* result = 0;
 
 	switch (lhRes->type()) {

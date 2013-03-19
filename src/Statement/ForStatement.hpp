@@ -22,7 +22,7 @@ public:
 	ForStatement(int lineNo, std::string sym, SafeStatement initial, SafeStatement condition, SafeStatement step, std::vector<SafeStatement> statements);
 	virtual ~ForStatement();
 
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 	ValueType type();
 	void checkTree(ValueType functionType);
 };

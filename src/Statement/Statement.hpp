@@ -3,6 +3,7 @@
 #include "StatementException.hpp"
 #include <Pointers/SmartPointer.hpp>
 #include <Value/Value.hpp>
+#include <vector>
 #include <string>
 #include <sstream>
 
@@ -31,7 +32,7 @@ public:
 	}
 
 	virtual void checkTree(ValueType functionType) = 0;
-	virtual Value* execute() = 0;
+	virtual Value* execute(std::vector<Value*> const& variables) = 0;
 	virtual ValueType type() = 0;
 };
 

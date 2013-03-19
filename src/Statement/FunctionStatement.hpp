@@ -19,12 +19,12 @@ public:
 		args_ = arguments;
 	}
 
-	virtual Value* execute() {
+	virtual Value* execute(std::vector<Value*> const& variables) {
 
 		std::vector<Value*> pArgs;
 
 		for (unsigned int i = 0; i < args_.size(); i++) {
-			pArgs.push_back(args_[i]->execute());
+			pArgs.push_back(args_[i]->execute(variables));
 		}
 
 		Value* res = func_->getFunction()->execute(pArgs);

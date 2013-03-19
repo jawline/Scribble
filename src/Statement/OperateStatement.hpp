@@ -19,7 +19,7 @@ public:
 			SafeStatement rhs);
 	virtual ~OperateStatement();
 
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 	ValueType type();
 	void checkTree(ValueType functionType);
 };

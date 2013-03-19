@@ -10,10 +10,8 @@
 
 ScriptedFunction::ScriptedFunction(ValueType fType,
 		std::vector<SmartPointer<Statement>> statements,
-		std::vector<SmartPointer<Variable>> variables) {
-	statements_ = statements;
-	variables_ = variables;
-	fType_ = fType;
+		std::vector<SmartPointer<Variable>> arguments) :
+		fType_(fType), statements_(statements), arguments_(arguments) {
 }
 
 ScriptedFunction::~ScriptedFunction() {
@@ -21,11 +19,11 @@ ScriptedFunction::~ScriptedFunction() {
 
 Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 
-	Value** storedVariables = new Value*[variables_.size()];
+	Value** storedVariables = new Value*[arguments_.size()];
 
-	for (unsigned int i = 0; i < variables_.size(); ++i) {
-		storedVariables[i] = variables_[i]->getValue()->clone();
-		variables_[i]->getValue()->applyOperator(Assign, arguments[i]);
+	for (unsigned int i = 0; i < arguments_.size(); ++i) {
+		storedVariables[i] = arguments_[i]->getValue()->clone();
+		arguments_[i]->getValue()->applyOperator(Assign, arguments[i]);
 	}
 
 	Value* returnVal = 0;
@@ -34,7 +32,7 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
 		try {
-			Value* r = statements_[i]->execute();
+			Value* r = statements_[i]->execute(std::vector<Value*>());
 			delete r;
 		} catch (Return r) {
 			returnVal = r.val_;
@@ -42,8 +40,8 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 		}
 	}
 
-	for (unsigned int i = 0; i < variables_.size(); ++i) {
-		variables_[i]->getValue()->applyOperator(Assign, storedVariables[i]);
+	for (unsigned int i = 0; i < arguments_.size(); ++i) {
+		arguments_[i]->getValue()->applyOperator(Assign, storedVariables[i]);
 		delete storedVariables[i];
 	}
 

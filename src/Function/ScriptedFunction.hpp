@@ -15,7 +15,7 @@
 class ScriptedFunction: public Function {
 private:
 	std::vector<SmartPointer<Statement>> statements_;
-	std::vector<SmartPointer<Variable>> variables_;
+	std::vector<SmartPointer<Variable>> arguments_;
 	int numArguments_;
 	ValueType fType_;
 
@@ -31,11 +31,11 @@ public:
 	ValueType getType();
 
 	unsigned int numArgs() {
-		return variables_.size();
+		return arguments_.size();
 	}
 
 	ValueType argType(int arg) {
-		return variables_[arg]->getType();
+		return arguments_[arg]->getType();
 	}
 
 	void check() {

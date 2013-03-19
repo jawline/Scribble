@@ -9,7 +9,7 @@ private:
 
 public:
 	IntStatement(int lineNo, std::string sym, int intValue);
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 
 	ValueType type() {
 		return Int;

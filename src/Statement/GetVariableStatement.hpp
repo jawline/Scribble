@@ -10,7 +10,7 @@ private:
 public:
 	GetVariableStatement(int lineNo, std::string sym, Variable* var);
 	~GetVariableStatement();
-	Value* execute();
+	Value* execute(std::vector<Value*> const& variables);
 
 	ValueType type();
 

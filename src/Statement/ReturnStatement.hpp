@@ -27,7 +27,7 @@ public:
 	virtual ~ReturnStatement();
 
 	virtual void checkTree(ValueType functionType);
-	virtual Value* execute();
+	virtual Value* execute(std::vector<Value*> const& variables);
 	virtual ValueType type() {
 		return Void;
 	}
