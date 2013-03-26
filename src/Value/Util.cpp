@@ -9,6 +9,20 @@
 #include "Int.hpp"
 #include "String.hpp"
 #include "Void.hpp"
+#include <exception>
+
+UtilException::UtilException(std::string const& reason) throw () :
+		reason_(reason) {
+
+}
+
+UtilException::~UtilException() throw () {
+
+}
+
+const char* UtilException::what() const throw () {
+	return reason_.c_str();
+}
 
 ValueUtil::ValueUtil() {
 	// TODO Auto-generated constructor stub
@@ -36,8 +50,8 @@ Value* ValueUtil::generateValue(ValueType type) {
 		break;
 
 	default:
-		return 0;
 		break;
 	}
 
+	throw UtilException("Type generation not valid/unimplemented");
 }

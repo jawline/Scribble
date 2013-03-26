@@ -23,7 +23,8 @@ public:
 		return Void;
 	}
 
-	virtual void check() {}
+	virtual void check() {
+	}
 };
 
 #endif //_WRITE_FUNCTION_H_

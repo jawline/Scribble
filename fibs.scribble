@@ -1,0 +1,27 @@
+// Recursive fibs implementation
+//
+// n, The desired position in the sequence (Between 0 and infinity)
+//
+// The resulting value in the Fibonacci sequence
+//
+// This recursive fibs implementation recursively breaks down the
+// fibonacci problem into a very simple algorithm. It is however considerably less
+// memory efficient than its iterative counterparts
+
+func Fibs(var n : int) : int {
+	
+	if (n < 0) {
+		System.Write("N Should be a positive value\n")
+		return 0
+	}
+
+	if (n = 0) {
+		return 0
+	}
+	
+	if (n = 1) {
+		return 1
+	}
+	
+	return Fibs(n - 1) + Fibs(n - 2)
+}

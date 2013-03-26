@@ -7,8 +7,9 @@
 
 #include "FunctionReference.hpp"
 
-FunctionReference::FunctionReference(std::string name, SmartPointer<Function> func) {
+FunctionReference::FunctionReference(std::string fnNamespace, std::string name, SmartPointer<Function> func) {
 	name_ = name;
+	fnNamespace_ = fnNamespace;
 	func_ = func;
 }
 

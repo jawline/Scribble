@@ -5,6 +5,6 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_REVISION 0
+#define VERSION_REVISION 2
 
 #endif //_VERSION_INFO_DEF_H_

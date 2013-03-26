@@ -14,9 +14,15 @@
  */
 
 class Parser {
+private:
+	static std::string bufferText(std::string const& filePath);
+
 public:
-	static SP<Function> generateProgram(std::string inputSource,
-			std::map<std::string, SmartPointer<Function>> functions);
+
+	static void setupNamespace(std::string name,
+			std::map<std::string, SP<Function>> functions);
+
+	static SP<Function> generateProgram(std::string const& inputSource);
 };
 
 #endif //_PARSER_DEF_H_

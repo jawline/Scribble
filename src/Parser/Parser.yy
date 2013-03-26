@@ -33,8 +33,10 @@ int yylex();
 void yyerror(const char* s);
 
 bool ParsingError;
+std::vector<std::string> ImportList;
 std::map<std::string, Variable*> Variables;
 std::map<std::string, SmartPointer<Function>> Functions;
+std::map<std::string, std::map<std::string, SP<Function>>> Namespace;
 std::vector<SmartPointer<FunctionReference>> References;
 
 extern int yylineno;	// defined and maintained in lex.c
@@ -57,7 +59,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE NOT
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE NOT IMPORT LINK
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
@@ -76,15 +78,20 @@ extern char *yytext;	// defined and maintained in lex.c
 %type <function> Function;
 %type <variables> Variables;
 %type <type> Type;
+%type <statement> FunctionCall
 
 %start Program
 %%
 
-Program: { 
+Program: {
 		Variables.clear();
 		$$ = 0;
+	} | Program IMPORT LPAREN STRING RPAREN {
+		ImportList.push_back(*$4);
+		delete $4;
+		$$ = 0;
 	} | Program Function {
-		$$ = $1;
+		$$ = 0;
 	}
 ;
 
@@ -183,6 +190,41 @@ Statements: {
 	}
 ;
 
+FunctionCall: WORD LPAREN Arguments RPAREN {
+	
+		std::vector<SmartPointer<Statement>> args;
+
+		for (unsigned int i = 0; i < $3->size(); ++i) {
+			args.push_back($3->at(i));
+		}
+
+		delete $3;
+		
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, 0));
+		References.push_back(reference);
+		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+		
+	} | WORD LPAREN RPAREN {
+		std::vector<SmartPointer<Statement>> args;
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, 0));
+		References.push_back(reference);
+		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+	} | WORD LINK WORD LPAREN Arguments RPAREN {
+		std::vector<SmartPointer<Statement>> args;
+		for (unsigned int i = 0; i < $5->size(); ++i) {
+			args.push_back($5->at(i));
+		}
+		delete $5;
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, 0));
+		References.push_back(reference);
+		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+	} | WORD LINK WORD LPAREN RPAREN {
+		std::vector<SmartPointer<Statement>> args;
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, 0));
+		References.push_back(reference);
+		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+	}
+;
 
 Statement: INT {
 		$$ = new IntStatement(yylineno, yytext, $1);
@@ -203,6 +245,8 @@ Statement: INT {
 			$$ = new GetVariableStatement(yylineno, yytext, it->second);
 		}
 
+	} | FunctionCall {
+		$$ = $1;
 	} | IF Statement LBRACKET Statements RBRACKET {
 		$$ = new IfStatement(yylineno, yytext, $2, *$4, std::vector<SP<Statement>>());
 	} | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET {
@@ -217,24 +261,6 @@ Statement: INT {
 		$$ = new ForStatement(yylineno, yytext, $2, $4, $6, *$8);
 	} | WHILE Statement LBRACKET Statements RBRACKET {
 		$$ = new WhileStatement(yylineno, yytext, $2, *$4);
-	} | WORD LPAREN Arguments RPAREN {
-	
-		std::vector<SmartPointer<Statement>> args;
-
-		for (unsigned int i = 0; i < $3->size(); ++i) {
-			args.push_back($3->at(i));
-		}
-
-		delete $3;
-		
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, 0));
-		References.push_back(reference);
-		$$ = new FunctionStatement(yylineno, yytext, reference, args);
-	} | WORD LPAREN RPAREN {
-		std::vector<SmartPointer<Statement>> args;
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, 0));
-		References.push_back(reference);
-		$$ = new FunctionStatement(yylineno, yytext, reference, args);
 	} | Statement EQUALS Statement {
 		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
 	} | Statement NOT EQUALS Statement {

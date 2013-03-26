@@ -41,10 +41,11 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 	//Execute the statements in the function
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
+		//Execute each statement waiting to catch the error if a return is thrown.
 		try {
 			Value* r = statements_[i]->execute(values);
 			delete r;
-		} catch (Return r) {
+		} catch (Return &r) {
 			returnVal = r.val_;
 			break;
 		}

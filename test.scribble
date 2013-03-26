@@ -1,25 +1,6 @@
-// Brief Description - Recursive factorial function
-//
-// Variable - n, the value you want the factorial of
-//
-// Return Description - The factorial of n 
-//
-// Extended Description - This function recursively generates
-// the factorial of the given argument n
-
-func fact(var n : int) : int {
-
-	if (n < 1) {
-		Write("Only works on values > 1\n")
-		return 0
-	}
-
-	if (n = 1) {
-		return 1
-	}
-
-	return n*fact(n-1)
-}
+import("fibs")
+import("fibs")
+import("fact")
 
 // Loop until a six is generated at random
 //
@@ -31,51 +12,48 @@ func fact(var n : int) : int {
 // 6 using the RandomInt function until a six is found at which point
 // it prints the number of iterations to hit a six and returns
 
-func snake() : void {
-
-	Write("Generating random numbers until we get six\n")
+func snake() : int {
 	
 	var temp : int := 0
 	var iter : int := 0
 	
 	while (temp != 6) {
-		temp := RandomInt(5)
+		temp := System.RandomInt(5)
 		temp := temp+1
 		iter := iter + 1
 	}
 
-	Write(String(iter) + " attempts til " + String(temp)+ "\n")	
+	return iter
 }
 
-// Recursive fibs implementation
+// Empty function to ensure language doesn't choke when there are no returns
 //
-// n, The desired position in the sequence (Between 0 and infinity)
+// No Arguments
 //
-// The resulting value in the Fibonacci sequence
+// Return template int
 //
-// This recursive fibs implementation recursively breaks down the
-// fibonacci problem into a very simple algorithm. It is however considerably less
-// memory efficient than its iterative counterparts
-
-func fibs(var n : int) : int {
-	
-	if (n < 0) {
-		Write("N Should be a positive value\n")
-		return 0
-	}
-
-	if (n = 0) {
-		return 0
-	}
-	
-	if (n = 1) {
-		return 1
-	}
-	
-	return fibs(n - 1) + fibs(n - 2)
-}
+// This is the test case to make sure the language could handle functions
+// that did not explicitely return.
 
 func emptyReturn() : int {
+}
+
+// Infinate loop test
+//
+// No Arguments
+//
+// No Returns
+//
+// Infinate loop used to try and spot memory leaks in statements
+
+func infinateLoop() : void {
+
+	while 1 > 0 {
+	
+		snake()
+	
+	}
+
 }
 
 // The main function in this test situation
@@ -88,32 +66,54 @@ func emptyReturn() : int {
 
 func main() : void {
 
-	var fibsTo : int := 8
-	var factTo : int := 6
-	
-	Write("Calculating " + String(fibsTo) + " of fibs\n")
-	Write(String(fibs(fibsTo)) + "\n")
-	
-	Write("Looping fibs between 0 and 10\n")
-	
-	for var i : int := 0; i < 10; i := i + 1 {
-		Write(String(fibs(i)) + " ")
-	}
-	
-	Write("\n")
+	System.Write("HALLO WORLD\n")
 
-	Write("Writing the factorial of " + String(factTo) + "\n")
-	Write(String(fact(factTo)) + "\n")
+	var cookies : int := 0
 	
-	Write("For looping factorial between 1 and 10\n")
-	
-	for var x : int := 1; x < 10; x := x + 1 {
-		Write(String(fact(x)) + " ")
+	System.Write("So many cookies: " + System.String(cookies) + "\n")
+
+	for var i : int := 0; i < 10; i := i + 1 {
+		System.Write( System.String ( fibs.Fibs(i) ) + " ")
 	}
 	
-	Write("\n")
+	System.Write("\n")
 	
-	snake()
+	for i := 0; i < 10; i := i + 1 {
+		System.Write( System.String(fact.Fact(i)) + " ")
+	}
+	System.Write("\n")
 	
-	Write(String(emptyReturn()) + "\n")
+	infinateLoop()
+	
+	//Write(String(i) + "\n")
+
+	//var fibsTo : int := 8
+	//var factTo : int := 6
+	
+	//Write("Calculating " + String(fibsTo) + " of fibs\n")
+	//Write(String(fibs(fibsTo)) + "\n")
+	
+	//Write("Looping fibs between 0 and 10\n")
+	
+	//for var i : int := 0; i < 10; i := i + 1 {
+	//	Write(String(fibs(i)) + " ")
+	//}
+	
+	//Write("\n")
+
+	//Write("Writing the factorial of " + String(factTo) + "\n")
+	//Write(String(fact(factTo)) + "\n")
+	
+	//Write("For looping factorial between 1 and 10\n")
+	
+	//for var x : int := 1; x < 10; x := x + 1 {
+	//	Write(String(fact(x)) + " ")
+	//}
+	
+	//Write("\n")
+	
+	//Write(String(snake()) + " attempts required until a six was rolled\n")
+	
+	//Write(String(emptyReturn()) + "\n")
+	//infinateLoop()
 }

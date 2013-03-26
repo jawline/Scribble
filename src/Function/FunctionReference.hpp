@@ -14,15 +14,21 @@
 class FunctionReference {
 private:
 	std::string name_;
+	std::string fnNamespace_;
 	SmartPointer<Function> func_;
 
 public:
-	FunctionReference(std::string name, SmartPointer<Function> func);
+	FunctionReference(std::string fnNamespace, std::string name, SmartPointer<Function> func);
 	virtual ~FunctionReference();
 
 	std::string getName() {
 		return name_;
 	}
+
+	std::string getNamespace() {
+		return fnNamespace_;
+	}
+
 	SmartPointer<Function> getFunction() {
 		return func_;
 	}

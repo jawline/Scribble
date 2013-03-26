@@ -72,6 +72,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "void" return TYPE_VOID;
 "return" return RETURN;
 "while" return WHILE;
+"import" return IMPORT;
+"." return LINK;
 
 {integer} { SAVE_INT;
  return INT;
