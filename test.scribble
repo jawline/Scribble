@@ -1,6 +1,9 @@
 import("fibs")
-import("fibs")
 import("fact")
+
+func inc(var i : int) : int {
+	return i+1
+}
 
 // Loop until a six is generated at random
 //
@@ -19,7 +22,7 @@ func snake() : int {
 	
 	while (temp != 6) {
 		temp := System.RandomInt(5)
-		temp := temp+1
+		temp := temp + 1
 		iter := iter + 1
 	}
 
@@ -66,54 +69,38 @@ func infinateLoop() : void {
 
 func main() : void {
 
-	System.Write("HALLO WORLD\n")
+	System.Write("-- Scribble test program --\n")
+	
+	System.Write("J: ")
+	
+	for var j : int := 10; j > 0; j-- {
+		System.Write(System.String(j) + " ")
+	}
+	
+	System.Write(System.String(j--))
+	
+	System.Write("\n")
 
-	var cookies : int := 0
+	var cookies : int := 2
+	cookies := cookies * 3
 	
 	System.Write("So many cookies: " + System.String(cookies) + "\n")
 
-	for var i : int := 0; i < 10; i := i + 1 {
+	for var i : int := 0; i < 10; i++ {
 		System.Write( System.String ( fibs.Fibs(i) ) + " ")
 	}
 	
 	System.Write("\n")
 	
-	for i := 0; i < 10; i := i + 1 {
+	for i := 0; i < 10; i++ {
 		System.Write( System.String(fact.Fact(i)) + " ")
 	}
+	
 	System.Write("\n")
 	
-	infinateLoop()
+	System.Write( System.String(snake()) + " attempts till a six was rolled\n")
 	
-	//Write(String(i) + "\n")
-
-	//var fibsTo : int := 8
-	//var factTo : int := 6
+	System.Write( "Calling a function that does not return: " + System.String(emptyReturn()) + "\n")
 	
-	//Write("Calculating " + String(fibsTo) + " of fibs\n")
-	//Write(String(fibs(fibsTo)) + "\n")
-	
-	//Write("Looping fibs between 0 and 10\n")
-	
-	//for var i : int := 0; i < 10; i := i + 1 {
-	//	Write(String(fibs(i)) + " ")
-	//}
-	
-	//Write("\n")
-
-	//Write("Writing the factorial of " + String(factTo) + "\n")
-	//Write(String(fact(factTo)) + "\n")
-	
-	//Write("For looping factorial between 1 and 10\n")
-	
-	//for var x : int := 1; x < 10; x := x + 1 {
-	//	Write(String(fact(x)) + " ")
-	//}
-	
-	//Write("\n")
-	
-	//Write(String(snake()) + " attempts required until a six was rolled\n")
-	
-	//Write(String(emptyReturn()) + "\n")
-	//infinateLoop()
+	System.Write("-- End of scribble test program --")
 }

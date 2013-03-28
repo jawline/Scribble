@@ -42,7 +42,9 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 <C_COMMENT>"\n" { BEGIN(INITIAL); }
 <C_COMMENT>.    { }
 {white} { }
+"++" return TWOPLUS;
 "+" return PLUS;
+"--" return TWOMINUS;
 "-" return MINUS;
 "*" return TIMES;
 "/" return DIVIDE;

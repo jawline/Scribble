@@ -64,15 +64,17 @@
      LBRACKET = 282,
      RBRACKET = 283,
      COMMA = 284,
-     FUNCTION = 285,
-     VARIABLE = 286,
-     CONST = 287,
-     STRUCT = 288,
-     TYPE_INT = 289,
-     TYPE_STRING = 290,
-     COLON = 291,
-     END = 292,
-     NEG = 293
+     TWOMINUS = 285,
+     TWOPLUS = 286,
+     FUNCTION = 287,
+     VARIABLE = 288,
+     CONST = 289,
+     STRUCT = 290,
+     TYPE_INT = 291,
+     TYPE_STRING = 292,
+     COLON = 293,
+     END = 294,
+     NEG = 295
    };
 #endif
 
@@ -83,7 +85,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 47 "./src/Parser/Parser.yy"
+#line 48 "./src/Parser/Parser.yy"
 
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
@@ -98,7 +100,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 102 "./gen/Parser.hpp"
+#line 104 "./gen/Parser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

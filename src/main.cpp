@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 	srand(time(0));
 
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
-			VERSION_REVISION);
+			VERSION_BUILD_NUMBER);
 
 	std::map<std::string, SmartPointer<Function>> builtinFunctions;
 	builtinFunctions["Write"] = SmartPointer<Function>(new WriteFunction());

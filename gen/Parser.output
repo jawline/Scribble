@@ -8,16 +8,16 @@ Terminals unused in grammar
    NEG
 
 
-State 32 conflicts: 1 shift/reduce
-State 62 conflicts: 7 shift/reduce
-State 71 conflicts: 7 shift/reduce
-State 72 conflicts: 4 shift/reduce
-State 73 conflicts: 4 shift/reduce
-State 74 conflicts: 4 shift/reduce
-State 75 conflicts: 7 shift/reduce
-State 76 conflicts: 7 shift/reduce
+State 32 conflicts: 3 shift/reduce
+State 68 conflicts: 7 shift/reduce
 State 77 conflicts: 7 shift/reduce
-State 85 conflicts: 7 shift/reduce
+State 78 conflicts: 4 shift/reduce
+State 79 conflicts: 4 shift/reduce
+State 80 conflicts: 4 shift/reduce
+State 81 conflicts: 7 shift/reduce
+State 82 conflicts: 7 shift/reduce
+State 83 conflicts: 7 shift/reduce
+State 91 conflicts: 7 shift/reduce
 
 
 Grammar
@@ -72,13 +72,17 @@ Grammar
    38          | Statement LESSER Statement
    39          | LPAREN Statement RPAREN
    40          | WORD ASSIGN Statement
+   41          | WORD TWOPLUS
+   42          | TWOPLUS WORD
+   43          | WORD TWOMINUS
+   44          | TWOMINUS WORD
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-WORD (258) 7 8 11 12 18 19 20 21 26 40
+WORD (258) 7 8 11 12 18 19 20 21 26 40 41 42 43 44
 STRING (259) 2 23
 REAL (260)
 INT (261) 22
@@ -105,41 +109,43 @@ RPAREN (281) 2 11 12 18 19 20 21 39
 LBRACKET (282) 11 12 28 29 33 34
 RBRACKET (283) 11 12 28 29 33 34
 COMMA (284) 10 14
-FUNCTION (285) 11 12
-VARIABLE (286) 7 8
-CONST (287)
-STRUCT (288)
-TYPE_INT (289) 4 7
-TYPE_STRING (290) 5 8
-COLON (291) 7 8 11 12
-END (292) 33
-NEG (293)
+TWOMINUS (285) 43 44
+TWOPLUS (286) 41 42
+FUNCTION (287) 11 12
+VARIABLE (288) 7 8
+CONST (289)
+STRUCT (290)
+TYPE_INT (291) 4 7
+TYPE_STRING (292) 5 8
+COLON (293) 7 8 11 12
+END (294) 33
+NEG (295)
 
 
 Nonterminals, with rules where they appear
 
-$accept (39)
+$accept (41)
     on left: 0
-Program (40)
+Program (42)
     on left: 1 2 3, on right: 0 2 3
-Type (41)
+Type (43)
     on left: 4 5 6, on right: 11 12
-Variable (42)
+Variable (44)
     on left: 7 8, on right: 9 10 24 25
-Variables (43)
+Variables (45)
     on left: 9 10, on right: 10 11
-Function (44)
+Function (46)
     on left: 11 12, on right: 3
-Arguments (45)
+Arguments (47)
     on left: 13 14, on right: 14 18 20
-Statements (46)
+Statements (48)
     on left: 15 16 17, on right: 11 12 16 17 28 29 33 34
-FunctionCall (47)
+FunctionCall (49)
     on left: 18 19 20 21, on right: 27
-Statement (48)
+Statement (50)
     on left: 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39
-    40, on right: 13 14 16 17 25 28 29 30 31 32 33 34 35 36 37 38 39
-    40
+    40 41 42 43 44, on right: 13 14 16 17 25 28 29 30 31 32 33 34 35
+    36 37 38 39 40
 
 
 state 0
@@ -400,11 +406,13 @@ state 30
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
     RBRACKET  shift, and go to state 40
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 43
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 45
 
 
 state 31
@@ -413,7 +421,7 @@ state 31
 
     $default  reduce using rule 15 (Statements)
 
-    Statements  go to state 44
+    Statements  go to state 46
 
 
 state 32
@@ -424,12 +432,18 @@ state 32
    21             | WORD . LINK WORD LPAREN RPAREN
    26 Statement: WORD .
    40          | WORD . ASSIGN Statement
+   41          | WORD . TWOPLUS
+   43          | WORD . TWOMINUS
 
-    ASSIGN  shift, and go to state 45
-    LINK    shift, and go to state 46
-    LPAREN  shift, and go to state 47
+    ASSIGN    shift, and go to state 47
+    LINK      shift, and go to state 48
+    LPAREN    shift, and go to state 49
+    TWOMINUS  shift, and go to state 50
+    TWOPLUS   shift, and go to state 51
 
     LPAREN    [reduce using rule 26 (Statement)]
+    TWOMINUS  [reduce using rule 26 (Statement)]
+    TWOPLUS   [reduce using rule 26 (Statement)]
     $default  reduce using rule 26 (Statement)
 
 
@@ -459,11 +473,13 @@ state 35
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 48
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 52
 
 
 state 36
@@ -477,11 +493,13 @@ state 36
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 49
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 53
 
 
 state 37
@@ -495,11 +513,13 @@ state 37
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 50
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 54
 
 
 state 38
@@ -513,11 +533,13 @@ state 38
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 51
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 55
 
 
 state 39
@@ -531,11 +553,13 @@ state 39
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 52
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 56
 
 
 state 40
@@ -547,22 +571,36 @@ state 40
 
 state 41
 
+   44 Statement: TWOMINUS . WORD
+
+    WORD  shift, and go to state 57
+
+
+state 42
+
+   42 Statement: TWOPLUS . WORD
+
+    WORD  shift, and go to state 58
+
+
+state 43
+
    24 Statement: Variable .
    25          | Variable . ASSIGN Statement
 
-    ASSIGN  shift, and go to state 53
+    ASSIGN  shift, and go to state 59
 
     $default  reduce using rule 24 (Statement)
 
 
-state 42
+state 44
 
    27 Statement: FunctionCall .
 
     $default  reduce using rule 27 (Statement)
 
 
-state 43
+state 45
 
    16 Statements: Statements Statement .
    30 Statement: Statement . PLUS Statement
@@ -573,18 +611,18 @@ state 43
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     $default  reduce using rule 16 (Statements)
 
 
-state 44
+state 46
 
    11 Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements . RBRACKET
    16 Statements: Statements . Statement
@@ -598,15 +636,17 @@ state 44
     RETURN    shift, and go to state 37
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
-    RBRACKET  shift, and go to state 61
+    RBRACKET  shift, and go to state 67
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 43
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 45
 
 
-state 45
+state 47
 
    40 Statement: WORD ASSIGN . Statement
 
@@ -617,22 +657,24 @@ state 45
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 62
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 68
 
 
-state 46
+state 48
 
    20 FunctionCall: WORD LINK . WORD LPAREN Arguments RPAREN
    21             | WORD LINK . WORD LPAREN RPAREN
 
-    WORD  shift, and go to state 63
+    WORD  shift, and go to state 69
 
 
-state 47
+state 49
 
    18 FunctionCall: WORD LPAREN . Arguments RPAREN
    19             | WORD LPAREN . RPAREN
@@ -644,16 +686,32 @@ state 47
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
-    RPAREN    shift, and go to state 64
+    RPAREN    shift, and go to state 70
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    Arguments     go to state 65
-    FunctionCall  go to state 42
-    Statement     go to state 66
+    Variable      go to state 43
+    Arguments     go to state 71
+    FunctionCall  go to state 44
+    Statement     go to state 72
 
 
-state 48
+state 50
+
+   43 Statement: WORD TWOMINUS .
+
+    $default  reduce using rule 43 (Statement)
+
+
+state 51
+
+   41 Statement: WORD TWOPLUS .
+
+    $default  reduce using rule 41 (Statement)
+
+
+state 52
 
    28 Statement: IF Statement . LBRACKET Statements RBRACKET
    29          | IF Statement . LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
@@ -665,17 +723,17 @@ state 48
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS      shift, and go to state 54
-    MINUS     shift, and go to state 55
-    TIMES     shift, and go to state 56
-    EQUALS    shift, and go to state 57
-    GREATER   shift, and go to state 58
-    LESSER    shift, and go to state 59
-    NOT       shift, and go to state 60
-    LBRACKET  shift, and go to state 67
+    PLUS      shift, and go to state 60
+    MINUS     shift, and go to state 61
+    TIMES     shift, and go to state 62
+    EQUALS    shift, and go to state 63
+    GREATER   shift, and go to state 64
+    LESSER    shift, and go to state 65
+    NOT       shift, and go to state 66
+    LBRACKET  shift, and go to state 73
 
 
-state 49
+state 53
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -686,17 +744,17 @@ state 49
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
-    END      shift, and go to state 68
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
+    END      shift, and go to state 74
 
 
-state 50
+state 54
 
    17 Statements: Statements RETURN Statement .
    30 Statement: Statement . PLUS Statement
@@ -707,18 +765,18 @@ state 50
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     $default  reduce using rule 17 (Statements)
 
 
-state 51
+state 55
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -729,17 +787,17 @@ state 51
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS      shift, and go to state 54
-    MINUS     shift, and go to state 55
-    TIMES     shift, and go to state 56
-    EQUALS    shift, and go to state 57
-    GREATER   shift, and go to state 58
-    LESSER    shift, and go to state 59
-    NOT       shift, and go to state 60
-    LBRACKET  shift, and go to state 69
+    PLUS      shift, and go to state 60
+    MINUS     shift, and go to state 61
+    TIMES     shift, and go to state 62
+    EQUALS    shift, and go to state 63
+    GREATER   shift, and go to state 64
+    LESSER    shift, and go to state 65
+    NOT       shift, and go to state 66
+    LBRACKET  shift, and go to state 75
 
 
-state 52
+state 56
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -750,17 +808,31 @@ state 52
    38          | Statement . LESSER Statement
    39          | LPAREN Statement . RPAREN
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
-    RPAREN   shift, and go to state 70
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
+    RPAREN   shift, and go to state 76
 
 
-state 53
+state 57
+
+   44 Statement: TWOMINUS WORD .
+
+    $default  reduce using rule 44 (Statement)
+
+
+state 58
+
+   42 Statement: TWOPLUS WORD .
+
+    $default  reduce using rule 42 (Statement)
+
+
+state 59
 
    25 Statement: Variable ASSIGN . Statement
 
@@ -771,14 +843,16 @@ state 53
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 71
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 77
 
 
-state 54
+state 60
 
    30 Statement: Statement PLUS . Statement
 
@@ -789,14 +863,16 @@ state 54
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 72
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 78
 
 
-state 55
+state 61
 
    31 Statement: Statement MINUS . Statement
 
@@ -807,14 +883,16 @@ state 55
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 73
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 79
 
 
-state 56
+state 62
 
    32 Statement: Statement TIMES . Statement
 
@@ -825,14 +903,16 @@ state 56
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 74
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 80
 
 
-state 57
+state 63
 
    35 Statement: Statement EQUALS . Statement
 
@@ -843,14 +923,16 @@ state 57
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 75
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 81
 
 
-state 58
+state 64
 
    37 Statement: Statement GREATER . Statement
 
@@ -861,14 +943,16 @@ state 58
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 76
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 82
 
 
-state 59
+state 65
 
    38 Statement: Statement LESSER . Statement
 
@@ -879,28 +963,30 @@ state 59
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 77
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 83
 
 
-state 60
+state 66
 
    36 Statement: Statement NOT . EQUALS Statement
 
-    EQUALS  shift, and go to state 78
+    EQUALS  shift, and go to state 84
 
 
-state 61
+state 67
 
    11 Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements RBRACKET .
 
     $default  reduce using rule 11 (Function)
 
 
-state 62
+state 68
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -911,13 +997,13 @@ state 62
    38          | Statement . LESSER Statement
    40          | WORD ASSIGN Statement .
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     PLUS      [reduce using rule 40 (Statement)]
     MINUS     [reduce using rule 40 (Statement)]
@@ -929,31 +1015,31 @@ state 62
     $default  reduce using rule 40 (Statement)
 
 
-state 63
+state 69
 
    20 FunctionCall: WORD LINK WORD . LPAREN Arguments RPAREN
    21             | WORD LINK WORD . LPAREN RPAREN
 
-    LPAREN  shift, and go to state 79
+    LPAREN  shift, and go to state 85
 
 
-state 64
+state 70
 
    19 FunctionCall: WORD LPAREN RPAREN .
 
     $default  reduce using rule 19 (FunctionCall)
 
 
-state 65
+state 71
 
    14 Arguments: Arguments . COMMA Statement
    18 FunctionCall: WORD LPAREN Arguments . RPAREN
 
-    RPAREN  shift, and go to state 80
-    COMMA   shift, and go to state 81
+    RPAREN  shift, and go to state 86
+    COMMA   shift, and go to state 87
 
 
-state 66
+state 72
 
    13 Arguments: Statement .
    30 Statement: Statement . PLUS Statement
@@ -964,28 +1050,28 @@ state 66
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     $default  reduce using rule 13 (Arguments)
 
 
-state 67
+state 73
 
    28 Statement: IF Statement LBRACKET . Statements RBRACKET
    29          | IF Statement LBRACKET . Statements RBRACKET ELSE LBRACKET Statements RBRACKET
 
     $default  reduce using rule 15 (Statements)
 
-    Statements  go to state 82
+    Statements  go to state 88
 
 
-state 68
+state 74
 
    33 Statement: FOR Statement END . Statement END Statement LBRACKET Statements RBRACKET
 
@@ -996,30 +1082,32 @@ state 68
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 83
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 89
 
 
-state 69
+state 75
 
    34 Statement: WHILE Statement LBRACKET . Statements RBRACKET
 
     $default  reduce using rule 15 (Statements)
 
-    Statements  go to state 84
+    Statements  go to state 90
 
 
-state 70
+state 76
 
    39 Statement: LPAREN Statement RPAREN .
 
     $default  reduce using rule 39 (Statement)
 
 
-state 71
+state 77
 
    25 Statement: Variable ASSIGN Statement .
    30          | Statement . PLUS Statement
@@ -1030,13 +1118,13 @@ state 71
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     PLUS      [reduce using rule 25 (Statement)]
     MINUS     [reduce using rule 25 (Statement)]
@@ -1048,7 +1136,7 @@ state 71
     $default  reduce using rule 25 (Statement)
 
 
-state 72
+state 78
 
    30 Statement: Statement . PLUS Statement
    30          | Statement PLUS Statement .
@@ -1059,11 +1147,11 @@ state 72
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     EQUALS    [reduce using rule 30 (Statement)]
     GREATER   [reduce using rule 30 (Statement)]
@@ -1072,7 +1160,7 @@ state 72
     $default  reduce using rule 30 (Statement)
 
 
-state 73
+state 79
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1083,11 +1171,11 @@ state 73
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     EQUALS    [reduce using rule 31 (Statement)]
     GREATER   [reduce using rule 31 (Statement)]
@@ -1096,7 +1184,7 @@ state 73
     $default  reduce using rule 31 (Statement)
 
 
-state 74
+state 80
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1107,10 +1195,10 @@ state 74
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     EQUALS    [reduce using rule 32 (Statement)]
     GREATER   [reduce using rule 32 (Statement)]
@@ -1119,7 +1207,7 @@ state 74
     $default  reduce using rule 32 (Statement)
 
 
-state 75
+state 81
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1130,13 +1218,13 @@ state 75
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     PLUS      [reduce using rule 35 (Statement)]
     MINUS     [reduce using rule 35 (Statement)]
@@ -1148,7 +1236,7 @@ state 75
     $default  reduce using rule 35 (Statement)
 
 
-state 76
+state 82
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1159,13 +1247,13 @@ state 76
    37          | Statement GREATER Statement .
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     PLUS      [reduce using rule 37 (Statement)]
     MINUS     [reduce using rule 37 (Statement)]
@@ -1177,7 +1265,7 @@ state 76
     $default  reduce using rule 37 (Statement)
 
 
-state 77
+state 83
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1188,13 +1276,13 @@ state 77
    38          | Statement . LESSER Statement
    38          | Statement LESSER Statement .
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     PLUS      [reduce using rule 38 (Statement)]
     MINUS     [reduce using rule 38 (Statement)]
@@ -1206,7 +1294,7 @@ state 77
     $default  reduce using rule 38 (Statement)
 
 
-state 78
+state 84
 
    36 Statement: Statement NOT EQUALS . Statement
 
@@ -1217,14 +1305,16 @@ state 78
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 85
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 91
 
 
-state 79
+state 85
 
    20 FunctionCall: WORD LINK WORD LPAREN . Arguments RPAREN
    21             | WORD LINK WORD LPAREN . RPAREN
@@ -1236,23 +1326,25 @@ state 79
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
-    RPAREN    shift, and go to state 86
+    RPAREN    shift, and go to state 92
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    Arguments     go to state 87
-    FunctionCall  go to state 42
-    Statement     go to state 66
+    Variable      go to state 43
+    Arguments     go to state 93
+    FunctionCall  go to state 44
+    Statement     go to state 72
 
 
-state 80
+state 86
 
    18 FunctionCall: WORD LPAREN Arguments RPAREN .
 
     $default  reduce using rule 18 (FunctionCall)
 
 
-state 81
+state 87
 
    14 Arguments: Arguments COMMA . Statement
 
@@ -1263,14 +1355,16 @@ state 81
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 88
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 94
 
 
-state 82
+state 88
 
    16 Statements: Statements . Statement
    17           | Statements . RETURN Statement
@@ -1285,15 +1379,17 @@ state 82
     RETURN    shift, and go to state 37
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
-    RBRACKET  shift, and go to state 89
+    RBRACKET  shift, and go to state 95
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 43
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 45
 
 
-state 83
+state 89
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1304,17 +1400,17 @@ state 83
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
-    END      shift, and go to state 90
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
+    END      shift, and go to state 96
 
 
-state 84
+state 90
 
    16 Statements: Statements . Statement
    17           | Statements . RETURN Statement
@@ -1328,15 +1424,17 @@ state 84
     RETURN    shift, and go to state 37
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
-    RBRACKET  shift, and go to state 91
+    RBRACKET  shift, and go to state 97
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 43
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 45
 
 
-state 85
+state 91
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1347,13 +1445,13 @@ state 85
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     PLUS      [reduce using rule 36 (Statement)]
     MINUS     [reduce using rule 36 (Statement)]
@@ -1365,23 +1463,23 @@ state 85
     $default  reduce using rule 36 (Statement)
 
 
-state 86
+state 92
 
    21 FunctionCall: WORD LINK WORD LPAREN RPAREN .
 
     $default  reduce using rule 21 (FunctionCall)
 
 
-state 87
+state 93
 
    14 Arguments: Arguments . COMMA Statement
    20 FunctionCall: WORD LINK WORD LPAREN Arguments . RPAREN
 
-    RPAREN  shift, and go to state 92
-    COMMA   shift, and go to state 81
+    RPAREN  shift, and go to state 98
+    COMMA   shift, and go to state 87
 
 
-state 88
+state 94
 
    14 Arguments: Arguments COMMA Statement .
    30 Statement: Statement . PLUS Statement
@@ -1392,28 +1490,28 @@ state 88
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS     shift, and go to state 54
-    MINUS    shift, and go to state 55
-    TIMES    shift, and go to state 56
-    EQUALS   shift, and go to state 57
-    GREATER  shift, and go to state 58
-    LESSER   shift, and go to state 59
-    NOT      shift, and go to state 60
+    PLUS     shift, and go to state 60
+    MINUS    shift, and go to state 61
+    TIMES    shift, and go to state 62
+    EQUALS   shift, and go to state 63
+    GREATER  shift, and go to state 64
+    LESSER   shift, and go to state 65
+    NOT      shift, and go to state 66
 
     $default  reduce using rule 14 (Arguments)
 
 
-state 89
+state 95
 
    28 Statement: IF Statement LBRACKET Statements RBRACKET .
    29          | IF Statement LBRACKET Statements RBRACKET . ELSE LBRACKET Statements RBRACKET
 
-    ELSE  shift, and go to state 93
+    ELSE  shift, and go to state 99
 
     $default  reduce using rule 28 (Statement)
 
 
-state 90
+state 96
 
    33 Statement: FOR Statement END Statement END . Statement LBRACKET Statements RBRACKET
 
@@ -1424,35 +1522,37 @@ state 90
     FOR       shift, and go to state 36
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 94
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 100
 
 
-state 91
+state 97
 
    34 Statement: WHILE Statement LBRACKET Statements RBRACKET .
 
     $default  reduce using rule 34 (Statement)
 
 
-state 92
+state 98
 
    20 FunctionCall: WORD LINK WORD LPAREN Arguments RPAREN .
 
     $default  reduce using rule 20 (FunctionCall)
 
 
-state 93
+state 99
 
    29 Statement: IF Statement LBRACKET Statements RBRACKET ELSE . LBRACKET Statements RBRACKET
 
-    LBRACKET  shift, and go to state 95
+    LBRACKET  shift, and go to state 101
 
 
-state 94
+state 100
 
    30 Statement: Statement . PLUS Statement
    31          | Statement . MINUS Statement
@@ -1463,35 +1563,35 @@ state 94
    37          | Statement . GREATER Statement
    38          | Statement . LESSER Statement
 
-    PLUS      shift, and go to state 54
-    MINUS     shift, and go to state 55
-    TIMES     shift, and go to state 56
-    EQUALS    shift, and go to state 57
-    GREATER   shift, and go to state 58
-    LESSER    shift, and go to state 59
-    NOT       shift, and go to state 60
-    LBRACKET  shift, and go to state 96
+    PLUS      shift, and go to state 60
+    MINUS     shift, and go to state 61
+    TIMES     shift, and go to state 62
+    EQUALS    shift, and go to state 63
+    GREATER   shift, and go to state 64
+    LESSER    shift, and go to state 65
+    NOT       shift, and go to state 66
+    LBRACKET  shift, and go to state 102
 
 
-state 95
+state 101
 
    29 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET . Statements RBRACKET
 
     $default  reduce using rule 15 (Statements)
 
-    Statements  go to state 97
+    Statements  go to state 103
 
 
-state 96
+state 102
 
    33 Statement: FOR Statement END Statement END Statement LBRACKET . Statements RBRACKET
 
     $default  reduce using rule 15 (Statements)
 
-    Statements  go to state 98
+    Statements  go to state 104
 
 
-state 97
+state 103
 
    16 Statements: Statements . Statement
    17           | Statements . RETURN Statement
@@ -1505,15 +1605,17 @@ state 97
     RETURN    shift, and go to state 37
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
-    RBRACKET  shift, and go to state 99
+    RBRACKET  shift, and go to state 105
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 43
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 45
 
 
-state 98
+state 104
 
    16 Statements: Statements . Statement
    17           | Statements . RETURN Statement
@@ -1527,22 +1629,24 @@ state 98
     RETURN    shift, and go to state 37
     WHILE     shift, and go to state 38
     LPAREN    shift, and go to state 39
-    RBRACKET  shift, and go to state 100
+    RBRACKET  shift, and go to state 106
+    TWOMINUS  shift, and go to state 41
+    TWOPLUS   shift, and go to state 42
     VARIABLE  shift, and go to state 12
 
-    Variable      go to state 41
-    FunctionCall  go to state 42
-    Statement     go to state 43
+    Variable      go to state 43
+    FunctionCall  go to state 44
+    Statement     go to state 45
 
 
-state 99
+state 105
 
    29 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET .
 
     $default  reduce using rule 29 (Statement)
 
 
-state 100
+state 106
 
    33 Statement: FOR Statement END Statement END Statement LBRACKET Statements RBRACKET .
 

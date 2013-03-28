@@ -18,6 +18,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 preprocess: gen bison
+	@sh build_number_increment.sh 
 
 gen:
 	@mkdir -p gen

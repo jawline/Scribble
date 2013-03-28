@@ -20,6 +20,7 @@
 #include <Statement/OperateStatement.hpp>
 #include <Statement/ReturnStatement.hpp>
 #include <Statement/WhileStatement.hpp>
+#include <Statement/IncrementStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -60,7 +61,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <real> REAL
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE NOT IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
 %token <token> END
@@ -278,6 +279,34 @@ Statement: INT {
 			yyerror("Variable not defined");
 		} else {
 			$$ = new AssignVariableStatement(yylineno, yytext, it->second, $3);
+		}
+	} | WORD TWOPLUS {
+		auto it = Variables.find(*$1);
+		if (it == Variables.end()) {
+			yyerror("Variable not defined");
+		} else {
+			$$ = new IncrementStatement(yylineno, yytext, it->second, Increment, false);
+		}
+	} | TWOPLUS WORD {
+		auto it = Variables.find(*$2);
+		if (it == Variables.end()) {
+			yyerror("Variable not defined");
+		} else {
+			$$ = new IncrementStatement(yylineno, yytext, it->second, Increment, true);
+		}
+	} | WORD TWOMINUS {
+		auto it = Variables.find(*$1);
+		if (it == Variables.end()) {
+			yyerror("Variable not defined");
+		} else {
+			$$ = new IncrementStatement(yylineno, yytext, it->second, Decrement, false);
+		}
+	} | TWOMINUS WORD {
+		auto it = Variables.find(*$2);
+		if (it == Variables.end()) {
+			yyerror("Variable not defined");
+		} else {
+			$$ = new IncrementStatement(yylineno, yytext, it->second, Decrement, true);
 		}
 	}
 ;
