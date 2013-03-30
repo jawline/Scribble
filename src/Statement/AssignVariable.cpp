@@ -3,14 +3,11 @@
 #include <sstream>
 
 AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym,
-		Variable* var, Statement* exp) :
-		Statement(lineNo, sym) {
-	var_ = var;
-	exp_ = exp;
+		Variable* var, SafeStatement exp) :
+		Statement(lineNo, sym), exp_(exp), var_(var) {
 }
 
 AssignVariableStatement::~AssignVariableStatement() {
-	delete exp_;
 }
 
 Value* AssignVariableStatement::execute(std::vector<Value*> const& variables) {

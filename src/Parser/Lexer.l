@@ -1,5 +1,6 @@
 %option yylineno
 %option noyywrap
+%option nounput
 
 %x C_COMMENT
 

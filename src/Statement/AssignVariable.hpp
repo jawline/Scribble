@@ -6,11 +6,11 @@
 
 class AssignVariableStatement: public Statement {
 private:
+	SafeStatement exp_;
 	Variable* var_;
-	Statement* exp_;
 
 public:
-	AssignVariableStatement(int lineNo, std::string sym, Variable* var, Statement* exp);
+	AssignVariableStatement(int lineNo, std::string sym, Variable* var, SafeStatement exp);
 	~AssignVariableStatement();
 	Value* execute(std::vector<Value*> const& variables);
 
