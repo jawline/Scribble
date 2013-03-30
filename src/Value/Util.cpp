@@ -9,6 +9,7 @@
 #include "Int.hpp"
 #include "String.hpp"
 #include "Void.hpp"
+#include "Bool.hpp"
 #include <exception>
 
 UtilException::UtilException(std::string const& reason) throw () :
@@ -48,6 +49,9 @@ Value* ValueUtil::generateValue(ValueType type) {
 	case Void:
 		return new VoidValue();
 		break;
+
+	case Boolean:
+		return new BoolValue(false);
 
 	default:
 		break;

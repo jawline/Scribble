@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <Statement/BoolStatement.hpp>
 #include <Statement/IntStatement.hpp>
 #include <Statement/OperateStatement.hpp>
 #include <Statement/StringStatement.hpp>
@@ -61,7 +62,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <real> REAL
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE NOT IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
 %token <token> END
@@ -100,34 +101,31 @@ Type: TYPE_INT {
 		$$ = Int;
 	} | TYPE_STRING {
 		$$ = String;
+	} | TYPE_BOOL {
+		$$ = Boolean;
 	} | TYPE_VOID {
 		$$ = Void;
 	}
 ;
 
-Variable:  VARIABLE WORD COLON TYPE_INT {
+Variable:  VARIABLE WORD COLON Type {
+
+		if ($4 == TYPE_VOID) {
+			yyerror("Cannot declare a variable as a void.");
+			return -1;
+		}
 
 		auto it = Variables.find(*$2);
-		
+			
 		if (it != Variables.end()) {
-			yyerror("Variable already defined");
+			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			Variable* nVar = new Variable(Int, 0, ValueUtil::generateValue(Int));
+			Variable* nVar = new Variable($4, 0, ValueUtil::generateValue($4));
 			Variables[*$2] = nVar;
 			$$ = nVar;
 		}
 		
-	} | VARIABLE WORD COLON TYPE_STRING {
-		auto it = Variables.find(*$2);
-		if (it != Variables.end()) {
-			yyerror("Variable already defined");
-			return -1;
-		} else {
-			Variable* nVar = new Variable(String, 0, ValueUtil::generateValue(String));
-			Variables[*$2] = nVar;
-			$$ = nVar;
-		}
 	}
 ;
 
@@ -205,32 +203,62 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		References.push_back(reference);
 		$$ = new FunctionStatement(yylineno, yytext, reference, args);
 		
+		//Free the name pointer
+		delete $1;
+		
 	} | WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, 0));
 		References.push_back(reference);
 		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+		
+		//Free the name pointer
+		delete $1;
 	} | WORD LINK WORD LPAREN Arguments RPAREN {
+	
 		std::vector<SmartPointer<Statement>> args;
+	
 		for (unsigned int i = 0; i < $5->size(); ++i) {
 			args.push_back($5->at(i));
 		}
+	
 		delete $5;
+	
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, 0));
 		References.push_back(reference);
+	
 		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+	
+		//Free the name pointers
+		delete $1;
+		delete $3;
+		
 	} | WORD LINK WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, 0));
 		References.push_back(reference);
 		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+		
+		//Free the name pointers
+		delete $1;
+		delete $3;
+
 	}
 ;
 
-Statement: INT {
+Statement: TRUE {
+		$$ = new BoolStatement(yylineno, yytext, true);
+	} | FALSE {
+		$$ = new BoolStatement(yylineno, yytext, false);
+	} | INT {
 		$$ = new IntStatement(yylineno, yytext, $1);
 	} | STRING {
+		
 		$$ = new StringStatement(yylineno, yytext, *$1);
+		
+		//Free string pointer
+		delete $1;
+		
 	} | Variable {
 		$$ = new GetVariableStatement(yylineno, yytext, $1);
 	} | Variable ASSIGN Statement {
@@ -246,6 +274,9 @@ Statement: INT {
 			$$ = new GetVariableStatement(yylineno, yytext, it->second);
 		}
 
+		//Free name pointer
+		delete $1;
+		
 	} | FunctionCall {
 		$$ = $1;
 	} | IF Statement LBRACKET Statements RBRACKET {
@@ -273,6 +304,7 @@ Statement: INT {
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Statement {
+		
 		auto it = Variables.find(*$1);
 
 		if (it == Variables.end()) {
@@ -280,13 +312,22 @@ Statement: INT {
 		} else {
 			$$ = new AssignVariableStatement(yylineno, yytext, it->second, $3);
 		}
+		
+		//Free up string pointer.
+		delete $1;
+		
 	} | WORD TWOPLUS {
+	
 		auto it = Variables.find(*$1);
 		if (it == Variables.end()) {
 			yyerror("Variable not defined");
 		} else {
 			$$ = new IncrementStatement(yylineno, yytext, it->second, Increment, false);
 		}
+		
+		//Free name pointer
+		delete $1;
+		
 	} | TWOPLUS WORD {
 		auto it = Variables.find(*$2);
 		if (it == Variables.end()) {
@@ -294,6 +335,10 @@ Statement: INT {
 		} else {
 			$$ = new IncrementStatement(yylineno, yytext, it->second, Increment, true);
 		}
+		
+		//Free name pointer
+		delete $2;
+		
 	} | WORD TWOMINUS {
 		auto it = Variables.find(*$1);
 		if (it == Variables.end()) {
@@ -301,6 +346,10 @@ Statement: INT {
 		} else {
 			$$ = new IncrementStatement(yylineno, yytext, it->second, Decrement, false);
 		}
+		
+		//Free name pointer
+		delete $1;
+		
 	} | TWOMINUS WORD {
 		auto it = Variables.find(*$2);
 		if (it == Variables.end()) {
@@ -308,6 +357,9 @@ Statement: INT {
 		} else {
 			$$ = new IncrementStatement(yylineno, yytext, it->second, Decrement, true);
 		}
+		
+		//Free name pointer
+		delete $2;
 	}
 ;
 

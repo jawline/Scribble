@@ -30,6 +30,28 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 
 	switch (lhRes->type()) {
 
+	case Boolean: {
+		BoolValue* bl = (BoolValue*) lhRes;
+		BoolValue* br = (BoolValue*) rhRes;
+
+		switch (tType_) {
+		case TestEquals:
+			if (bl->value() == br->value()) {
+				result = new BoolValue(true);
+			} else {
+				result = new BoolValue(false);
+			}
+			break;
+
+		default:
+			throw StatementException(this,
+					"Boolean cannot be tested with anything other than assign");
+			break;
+		}
+
+		break;
+	}
+
 	case Int: {
 
 		IntValue* il = (IntValue*) lhRes;

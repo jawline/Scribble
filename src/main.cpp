@@ -29,9 +29,11 @@ int main(int argc, char** argv) {
 
 	SP<Function> entry = Parser::generateProgram(argv[1]);
 
-	if (entry.Get() != 0) {
-		entry->execute(std::vector<Value*>());
-	} else {
-		printf("Error\n");
-	}
+	double seconds;
+
+	seconds = clock();
+	entry->execute(std::vector<Value*>());
+	seconds = clock() - seconds;
+
+	printf("%f seconds to execute.\n", seconds / CLOCKS_PER_SEC);
 }

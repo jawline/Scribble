@@ -1,10 +1,6 @@
 import("fibs")
 import("fact")
 
-func inc(var i : int) : int {
-	return i+1
-}
-
 // Loop until a six is generated at random
 //
 // No Arguments
@@ -69,6 +65,13 @@ func infinateLoop() : void {
 
 func main() : void {
 
+	var jrDog : bool := false
+	
+	while jrDog = false {
+		System.Write("Hello world\n")
+		jrDog := true
+	}
+
 	System.Write("-- Scribble test program --\n")
 	
 	System.Write("J: ")
@@ -102,5 +105,5 @@ func main() : void {
 	
 	System.Write( "Calling a function that does not return: " + System.String(emptyReturn()) + "\n")
 	
-	System.Write("-- End of scribble test program --")
+	System.Write("-- End of scribble test program --\n")
 }

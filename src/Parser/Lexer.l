@@ -70,11 +70,14 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "var" return VARIABLE;
 "const" return CONST;
 "int" return TYPE_INT;
+"bool" return TYPE_BOOL;
 "string" return TYPE_STRING;
 "void" return TYPE_VOID;
 "return" return RETURN;
 "while" return WHILE;
 "import" return IMPORT;
+"true" return TRUE;
+"false" return FALSE;
 "." return LINK;
 
 {integer} { SAVE_INT;

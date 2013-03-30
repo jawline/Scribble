@@ -26,7 +26,7 @@ void BoolValue::applyOperator(ValueOperator v, Value* r) {
 		break;
 
 	default:
-		throw StatementException(0, "No implemented yet");
+		throw StatementException(0, "Booleans cannot have any operations other than assign.");
 		break;
 	}
 

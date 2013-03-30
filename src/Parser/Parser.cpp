@@ -1,6 +1,7 @@
 #include "Parser.hpp"
 #include <Function/ScriptedFunction.hpp>
 #include <Function/FunctionReference.hpp>
+#include "ParserException.hpp"
 #include <string.h>
 
 extern std::map<std::string, std::map<std::string, SP<Function>>>Namespace;
@@ -46,24 +47,24 @@ void Parser::setupNamespace(std::string name,
 
 SP<Function> Parser::generateProgram(std::string const& filename) {
 
-	printf("Parsing: %s\n", filename.c_str());
-
 	//Create the inputSource from the buffer
 	std::string inputSource = bufferText(filename + ".scribble");
 
 	//Clear and previous errors
 	ParsingError = false;
 
-	//Copy the source to the Parser
+	//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
 	char* a = strdup(inputSource.c_str());
+
 	yy_scan_string(a);
 	yyparse();
 	yylex_destroy();
+
+	//Free the bison buffer
 	delete[] a;
 
 	if (ParsingError) {
-		printf("A parser error occured\n");
-		return 0;
+		throw ParserException(filename, "Parser error occurred");
 	}
 
 	Namespace[filename] = Functions;
@@ -75,24 +76,20 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	std::vector<SmartPointer<FunctionReference>> references = References;
 	References = std::vector<SP<FunctionReference>>();
 
-	//Handle all imports
+	//Look at the list of requested imports and attempt to resolve them.
 	for (unsigned int i = 0; i < imports.size(); ++i) {
 
+		//If not already loaded attempt to load the file.
 		if (Namespace.find(imports[i]) == Namespace.end()) {
 			generateProgram(imports[i]);
 			Functions = std::map<std::string, SmartPointer<Function>>();
-		} else {
-			printf("%s already loaded\n", imports[i].c_str());
 		}
 
 	}
 
 	Functions = Namespace[filename];
 
-	for (auto it = Functions.begin(); it != Functions.end(); it++) {
-		printf("Function %s\n", it->first.c_str());
-	}
-
+	//Loop through all of the references and resolve them.
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
 		if (references[i]->getNamespace().size() == 0) {
@@ -119,13 +116,18 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 
 	}
 
-	if (Functions.size() > 0) {
-		for (auto it = Functions.begin(); it != Functions.end(); it++) {
-			it->second->check();
-		}
-	}
+	try {
+		//Run the check function on all functions which will throw StatementExceptions if there is an issue.
+		if (Functions.size() > 0) {
 
-	printf("Stopped parsing %s\n", filename.c_str());
+			for (auto it = Functions.begin(); it != Functions.end(); it++) {
+				it->second->check();
+			}
+
+		}
+	} catch (StatementException e) {
+		throw ParserException(filename, e.what());
+	}
 
 	//If it hasn't return the source as a function
 	return Functions["main"];
