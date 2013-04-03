@@ -1,3 +1,5 @@
+import("sys")
+
 // Recursive fibs implementation
 //
 // n, The desired position in the sequence (Between 0 and infinity)
@@ -11,7 +13,7 @@
 func Fibs(var n : int) : int {
 	
 	if (n < 0) {
-		System.Write("N Should be a positive value\n")
+		sys.Write("N Should be a positive value\n")
 		return 0
 	}
 

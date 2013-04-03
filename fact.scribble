@@ -1,3 +1,5 @@
+import ("sys")
+
 // Brief Description - Recursive factorial function
 //
 // Variable - n, the value you want the factorial of
@@ -10,7 +12,7 @@
 func Fact(var n : int) : int {
 
 	if (n < 0) {
-		System.Write("Only works on values > 1\n")
+		sys.Write("Only works on values > 1\n")
 		return 0
 	}
 	

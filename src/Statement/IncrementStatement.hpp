@@ -11,8 +11,7 @@
 #include <Value/Variable.hpp>
 
 enum IncrementType {
-	Increment,
-	Decrement
+	Increment, Decrement
 };
 
 class IncrementStatement: public Statement {
@@ -24,7 +23,8 @@ private:
 
 public:
 
-	IncrementStatement(int line, std::string sym, Variable* statement, IncrementType op, bool post);
+	IncrementStatement(int line, std::string sym, Variable* statement,
+			IncrementType op, bool post);
 	virtual ~IncrementStatement();
 
 	virtual void checkTree(ValueType functionType);

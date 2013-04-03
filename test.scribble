@@ -1,3 +1,4 @@
+import("sys")
 import("fibs")
 import("fact")
 
@@ -17,7 +18,7 @@ func snake() : int {
 	var iter : int := 0
 	
 	while (temp != 6) {
-		temp := System.RandomInt(5)
+		temp := sys.RandomInt(5)
 		temp := temp + 1
 		iter := iter + 1
 	}
@@ -68,42 +69,42 @@ func main() : void {
 	var jrDog : bool := false
 	
 	while jrDog = false {
-		System.Write("Hello world\n")
+		sys.Write("Hello world\n")
 		jrDog := true
 	}
 
-	System.Write("-- Scribble test program --\n")
+	sys.Write("-- Scribble test program --\n")
 	
-	System.Write("J: ")
+	sys.Write("J: ")
 	
 	for var j : int := 10; j > 0; j-- {
-		System.Write(System.String(j) + " ")
+		sys.Write(sys.String(j) + " ")
 	}
 	
-	System.Write(System.String(j--))
+	sys.Write(sys.String(j--))
 	
-	System.Write("\n")
+	sys.Write("\n")
 
 	var cookies : int := 2
 	cookies := cookies * 3
 	
-	System.Write("So many cookies: " + System.String(cookies) + "\n")
+	sys.Write("So many cookies: " + sys.String(cookies) + "\n")
 
 	for var i : int := 0; i < 10; i++ {
-		System.Write( System.String ( fibs.Fibs(i) ) + " ")
+		sys.Write( sys.String ( fibs.Fibs(i) ) + " ")
 	}
 	
-	System.Write("\n")
+	sys.Write("\n")
 	
 	for i := 0; i < 10; i++ {
-		System.Write( System.String(fact.Fact(i)) + " ")
+		sys.Write( sys.String(fact.Fact(i)) + " ")
 	}
 	
-	System.Write("\n")
+	sys.Write("\n")
 	
-	System.Write( System.String(snake()) + " attempts till a six was rolled\n")
+	sys.Write( sys.String(snake()) + " attempts till a six was rolled\n")
 	
-	System.Write( "Calling a function that does not return: " + System.String(emptyReturn()) + "\n")
+	sys.Write( "Calling a function that does not return: " + sys.String(emptyReturn()) + "\n")
 	
-	System.Write("-- End of scribble test program --\n")
+	sys.Write("-- End of scribble test program --\n")
 }

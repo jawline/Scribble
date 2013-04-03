@@ -45,6 +45,20 @@ void Parser::setupNamespace(std::string name,
 	Namespace[name] = functions;
 }
 
+bool Parser::listContains(std::string target,
+		std::vector<std::string> const& list) {
+
+	for (unsigned int i = 0; i < list.size(); i++) {
+
+		if (list[i].compare(target) == 0) {
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
 SP<Function> Parser::generateProgram(std::string const& filename) {
 
 	//Create the inputSource from the buffer
@@ -93,25 +107,52 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
 		if (references[i]->getNamespace().size() == 0) {
+
+			//Look for function in the current namespace
 			auto it = Functions.find(references[i]->getName());
 
 			if (it != Functions.end()) {
 				references[i]->setFunction(it->second);
 			} else {
-				printf("Could not resolve %s\n",
-						references[i]->getName().c_str());
+				references[i]->setResolveIssue(
+						references[i]->getName() + "Not defined in namespace");
 			}
-		} else {
-			std::map<std::string, SP<Function>> currentNamespace =
-					Namespace[references[i]->getNamespace()];
-			auto it = currentNamespace.find(references[i]->getName());
 
-			if (it != currentNamespace.end()) {
-				references[i]->setFunction(it->second);
+		} else {
+
+			//Look for it in an external namespace
+
+			//Check the namespace has been loaded. If not then do not resolve the reference.
+			if (Parser::listContains(references[i]->getNamespace(), imports)) {
+
+				//Pull a reference to the selected namespace.
+				std::map<std::string, SP<Function>>& selectedNamespace =
+						Namespace[references[i]->getNamespace()];
+
+				//Search for function in namespace.
+				auto it = selectedNamespace.find(references[i]->getName());
+
+				//If the function is in the namespace then resolve it. otherwise leave it blank and the statement will throw an exception when checked.
+				if (it != selectedNamespace.end()) {
+
+					references[i]->setFunction(it->second);
+
+				} else {
+
+					references[i]->setResolveIssue(
+							std::string("Function ") + references[i]->getName()
+									+ " does not exist in namespace "
+									+ references[i]->getNamespace());
+
+				}
+
 			} else {
-				printf("Could not resolve %s\n",
-						references[i]->getName().c_str());
+				references[i]->setResolveIssue(
+						std::string("Namespace ")
+								+ references[i]->getNamespace()
+								+ " has not been imported.");
 			}
+
 		}
 
 	}

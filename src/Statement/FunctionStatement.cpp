@@ -3,7 +3,22 @@
 void FunctionStatement::checkTree(ValueType functionType) {
 
 	if (func_->getFunction().Get() == 0) {
-		throw StatementException(this, "Error, function has not been defined");
+
+		std::string error = "";
+
+		if (func_->getNamespace().length() > 0) {
+			error = std::string("Function ") + func_->getNamespace() + "."
+					+ func_->getName() + " could not be resolved. "
+					+ func_->getResolveIssue();
+		} else {
+			error = std::string("Function ") + func_->getName()
+					+ " could not be resolved. " + func_->getResolveIssue();
+		}
+
+		throw StatementException(this,
+				std::string("Function ") + func_->getNamespace() + "."
+						+ func_->getName() + " could not be resolved. "
+						+ func_->getResolveIssue());
 	}
 
 	if (func_->getFunction()->numArgs() != args_.size()) {

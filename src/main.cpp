@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 	builtinFunctions["String"] = SmartPointer<Function>(new StringFunction());
 	builtinFunctions["RandomInt"] = SmartPointer<Function>(new RandomInt());
 
-	Parser::setupNamespace("System", builtinFunctions);
+	Parser::setupNamespace("sys", builtinFunctions);
 
 	SP<Function> entry = Parser::generateProgram(argv[1]);
 

@@ -15,6 +15,7 @@ class FunctionReference {
 private:
 	std::string name_;
 	std::string fnNamespace_;
+	std::string resolveIssue_;
 	SmartPointer<Function> func_;
 
 public:
@@ -27,6 +28,14 @@ public:
 
 	std::string getNamespace() {
 		return fnNamespace_;
+	}
+
+	std::string getResolveIssue() {
+		return resolveIssue_;
+	}
+
+	void setResolveIssue(std::string issue) {
+		resolveIssue_ = issue;
 	}
 
 	SmartPointer<Function> getFunction() {

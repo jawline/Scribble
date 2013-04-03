@@ -20,7 +20,9 @@ void AssignVariableStatement::checkTree(ValueType functionType) {
 	exp_->checkTree(functionType);
 
 	if (var_->getType() != exp_->type()) {
+
 		throw StatementException(this,
 				"Cannot assign statement to a variable of a different type");
+
 	}
 }

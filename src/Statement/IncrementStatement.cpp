@@ -48,11 +48,13 @@ Value* IncrementStatement::execute(std::vector<Value*> const& variables) {
 		Value* result = 0;
 
 		if (post_) {
-			variables[variable_->getPosition()]->applyOperator(Subtract, oneVal_);
+			variables[variable_->getPosition()]->applyOperator(Subtract,
+					oneVal_);
 			result = variables[variable_->getPosition()]->clone();
 		} else {
 			result = variables[variable_->getPosition()]->clone();
-			variables[variable_->getPosition()]->applyOperator(Subtract, oneVal_);
+			variables[variable_->getPosition()]->applyOperator(Subtract,
+					oneVal_);
 		}
 
 		return result;

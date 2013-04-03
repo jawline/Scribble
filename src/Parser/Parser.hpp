@@ -22,6 +22,8 @@ public:
 	static void setupNamespace(std::string name,
 			std::map<std::string, SP<Function>> functions);
 
+	static bool listContains(std::string target, std::vector<std::string> const& list);
+
 	static SP<Function> generateProgram(std::string const& inputSource);
 };
 
