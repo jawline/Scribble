@@ -27,6 +27,7 @@
 #include <Function/ScriptedFunction.hpp>
 #include <Function/WriteFunction.hpp>
 #include <Value/Util.hpp>
+#include <Parser/Parser.hpp>
 
 #include <Value/Variable.hpp>
 #include <Value/String.hpp>
@@ -37,8 +38,10 @@ void yyerror(const char* s);
 bool ParsingError;
 std::vector<std::string> ImportList;
 std::map<std::string, Variable*> Variables;
-std::map<std::string, SmartPointer<Function>> Functions;
-std::map<std::string, std::map<std::string, SP<Function>>> Namespace;
+
+std::map<std::string, NamespaceType> Namespace;
+NamespaceType Functions;
+
 std::vector<SmartPointer<FunctionReference>> References;
 
 extern int yylineno;	// defined and maintained in lex.c
@@ -110,7 +113,7 @@ Type: TYPE_INT {
 
 Variable:  VARIABLE WORD COLON Type {
 
-		if ($4 == TYPE_VOID) {
+		if (((ValueType)$4) == TYPE_VOID) {
 			yyerror("Cannot declare a variable as a void.");
 			return -1;
 		}
@@ -150,8 +153,29 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 		}
 
 		$$ = new ScriptedFunction($7, ValueUtil::generateValue($7), *$9, values, *$4);
-		Functions[*$2] = $$;
+		
+		if ( Functions[*$2].size() > 0) {
+		
+			if (Parser::functionSetType(Functions[*$2]) != $7) {
+				yyerror("Function differs from predefined function type");
+				return -1;
+			}
+			
+			if (Parser::functionSetNumArguments(Functions[*$2]) != values.size()) {
+				yyerror("Due to previous definition function is expected to have a specific number of arguments");
+				return -1;
+			}
+			
+			if (Parser::functionSetAlreadyContainsEquivilent($$, Functions[*$2]) == true) {
+				yyerror("Identical function already defined");
+				return -1;
+			}
+		}
+		
+		Functions[*$2].push_back($$);
 		Variables.clear();
+		
+		delete $2;
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
 	
 		std::vector<SP<Variable>> values;
@@ -164,7 +188,26 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 		}
 	
 		$$ = new ScriptedFunction($6, ValueUtil::generateValue($6), *$8, values, std::vector<SP<Variable>>());
-		Functions[*$2] = $$;
+		
+		if ( Functions[*$2].size() > 0) {
+		
+			if (Parser::functionSetType(Functions[*$2]) != $6) {
+				yyerror("Function differs from predefined function type");
+				return -1;
+			}
+			
+			if (Parser::functionSetNumArguments(Functions[*$2]) != values.size()) {
+				yyerror("Due to previous definition function is expected to have a specific number of arguments");
+				return -1;
+			}
+			
+			if (Parser::functionSetAlreadyContainsEquivilent($$, Functions[*$2]) == true) {
+				yyerror("Identical function already defined");
+				return -1;
+			}
+		}
+		
+		Functions[*$2].push_back($$);
 		Variables.clear();
 	}
 ;

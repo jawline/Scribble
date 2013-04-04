@@ -20,15 +20,15 @@ Value* RandomInt::execute(std::vector<Value*> arguments) {
 	return new IntValue(rand() % (((IntValue*) arguments[0])->value() + 1));
 }
 
-ValueType RandomInt::getType() {
+const ValueType RandomInt::getType() {
 	return Int;
 }
 
-unsigned int RandomInt::numArgs() {
+const unsigned int RandomInt::numArgs() {
 	return 1;
 }
 
-ValueType RandomInt::argType(int arg) {
+const ValueType RandomInt::argType(int arg) {
 	return Int;
 }
 

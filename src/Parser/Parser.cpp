@@ -4,11 +4,14 @@
 #include "ParserException.hpp"
 #include <string.h>
 
-extern std::map<std::string, std::map<std::string, SP<Function>>>Namespace;
-extern std::map<std::string, SmartPointer<Function>> Functions;
+extern std::map<std::string, NamespaceType> Namespace;
+extern NamespaceType Functions;
+
 extern std::vector<std::string> ImportList;
 extern std::vector<SmartPointer<FunctionReference>> References;
+
 extern bool ParsingError;
+
 extern void yyparse();
 extern void yy_scan_string(char const*);
 extern void yylex_destroy();
@@ -40,8 +43,7 @@ std::string Parser::bufferText(std::string const& filePath) {
 	return inputSource;
 }
 
-void Parser::setupNamespace(std::string name,
-		std::map<std::string, SP<Function>> functions) {
+void Parser::setupNamespace(std::string name, NamespaceType const& functions) {
 	Namespace[name] = functions;
 }
 
@@ -57,6 +59,44 @@ bool Parser::listContains(std::string target,
 	}
 
 	return false;
+}
+
+bool Parser::functionSetAlreadyContainsEquivilent(SP<Function> function,
+		FunctionSet const& functionSet) {
+	bool duplicate = false;
+	SP<Function> compared;
+
+	//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
+	for (unsigned int i = 0; i < functionSet.size(); ++i) {
+
+		duplicate = true;
+		compared = functionSet[i];
+
+		for (unsigned int j = 0; j < function->numArgs(); ++j) {
+
+			if (function->argType(j) != compared->argType(j)) {
+				duplicate = false;
+				break;
+			}
+
+		}
+
+		if (duplicate) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+unsigned int Parser::functionSetNumArguments(FunctionSet const& set) {
+	SP<Function> fn = set[0];
+	return fn->numArgs();
+}
+
+ValueType Parser::functionSetType(FunctionSet const& functionSet) {
+	SP<Function> fn = functionSet[0];
+	return fn->getType();
 }
 
 SP<Function> Parser::generateProgram(std::string const& filename) {
@@ -82,7 +122,7 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	}
 
 	Namespace[filename] = Functions;
-	Functions = std::map<std::string, SmartPointer<Function>>();
+	Functions = NamespaceType();
 
 	std::vector<std::string> imports = ImportList;
 	ImportList.clear();
@@ -96,7 +136,7 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 		//If not already loaded attempt to load the file.
 		if (Namespace.find(imports[i]) == Namespace.end()) {
 			generateProgram(imports[i]);
-			Functions = std::map<std::string, SmartPointer<Function>>();
+			Functions = NamespaceType();
 		}
 
 	}
@@ -111,8 +151,8 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 			//Look for function in the current namespace
 			auto it = Functions.find(references[i]->getName());
 
-			if (it != Functions.end()) {
-				references[i]->setFunction(it->second);
+			if (it != Functions.end() && it->second.size() > 0) {
+				references[i]->setFunction(it->second[0]);
 			} else {
 				references[i]->setResolveIssue(
 						references[i]->getName() + "Not defined in namespace");
@@ -126,16 +166,16 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 			if (Parser::listContains(references[i]->getNamespace(), imports)) {
 
 				//Pull a reference to the selected namespace.
-				std::map<std::string, SP<Function>>& selectedNamespace =
+				NamespaceType& selectedNamespace =
 						Namespace[references[i]->getNamespace()];
 
 				//Search for function in namespace.
 				auto it = selectedNamespace.find(references[i]->getName());
 
 				//If the function is in the namespace then resolve it. otherwise leave it blank and the statement will throw an exception when checked.
-				if (it != selectedNamespace.end()) {
+				if (it != selectedNamespace.end() && it->second.size() > 0) {
 
-					references[i]->setFunction(it->second);
+					references[i]->setFunction(it->second[0]);
 
 				} else {
 
@@ -162,14 +202,24 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 		if (Functions.size() > 0) {
 
 			for (auto it = Functions.begin(); it != Functions.end(); it++) {
-				it->second->check();
+
+				for (unsigned int i = 0; i < it->second.size(); ++i) {
+					it->second[i]->check();
+				}
+
 			}
 
 		}
-	} catch (StatementException e) {
+	} catch (StatementException& e) {
 		throw ParserException(filename, e.what());
 	}
 
-	//If it hasn't return the source as a function
-	return Functions["main"];
+	if (Functions["main"].size() > 0) {
+
+		//If it hasn't return the source as a function
+		return Functions["main"][0];
+
+	}
+
+	return 0;
 }

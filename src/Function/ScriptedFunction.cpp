@@ -64,6 +64,6 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 	return returnVal;
 }
 
-ValueType ScriptedFunction::getType() {
+const ValueType ScriptedFunction::getType() {
 	return fType_;
 }

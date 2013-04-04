@@ -26,6 +26,12 @@ func snake() : int {
 	return iter
 }
 
+func snakeR(var i : int) : int {
+}
+
+func snakeR(var i : bool) : int {
+}
+
 // Empty function to ensure language doesn't choke when there are no returns
 //
 // No Arguments
@@ -49,9 +55,7 @@ func emptyReturn() : int {
 func infinateLoop() : void {
 
 	while 1 > 0 {
-	
 		snake()
-	
 	}
 
 }
@@ -66,14 +70,14 @@ func infinateLoop() : void {
 
 func main() : void {
 
+	sys.Write("-- Scribble test program --\n")
+	
 	var jrDog : bool := false
 	
 	while jrDog = false {
 		sys.Write("Hello world\n")
 		jrDog := true
 	}
-
-	sys.Write("-- Scribble test program --\n")
 	
 	sys.Write("J: ")
 	

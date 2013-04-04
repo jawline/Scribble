@@ -33,13 +33,13 @@ public:
 
 	Value* execute(std::vector<Value*> arguments);
 
-	ValueType getType();
+	const ValueType getType();
 
-	unsigned int numArgs() {
+	const unsigned int numArgs() {
 		return arguments_.size();
 	}
 
-	ValueType argType(int arg) {
+	const ValueType argType(int arg) {
 		return arguments_[arg]->getType();
 	}
 

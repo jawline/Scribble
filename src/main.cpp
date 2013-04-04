@@ -20,10 +20,16 @@ int main(int argc, char** argv) {
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
 
-	std::map<std::string, SmartPointer<Function>> builtinFunctions;
-	builtinFunctions["Write"] = SmartPointer<Function>(new WriteFunction());
-	builtinFunctions["String"] = SmartPointer<Function>(new StringFunction());
-	builtinFunctions["RandomInt"] = SmartPointer<Function>(new RandomInt());
+	NamespaceType builtinFunctions;
+
+	builtinFunctions["Write"].push_back(
+			SmartPointer<Function>(new WriteFunction()));
+
+	builtinFunctions["String"].push_back(
+			SmartPointer<Function>(new StringFunction()));
+
+	builtinFunctions["RandomInt"].push_back(
+			SmartPointer<Function>(new RandomInt()));
 
 	Parser::setupNamespace("sys", builtinFunctions);
 
