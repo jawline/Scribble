@@ -12,7 +12,14 @@ public:
 	virtual ~Function() {
 	}
 
+	/**
+	 * Execute the function and return the result value.
+	 */
 	virtual Value* execute(std::vector<Value*> arguments) = 0;
+
+	/**
+	 * Get the return type of the function.
+	 */
 	virtual const ValueType getType() = 0;
 	virtual const unsigned int numArgs() = 0;
 	virtual const ValueType argType(int arg) = 0;
