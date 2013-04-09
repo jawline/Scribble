@@ -8,6 +8,7 @@
 #ifndef FUNCTIONREFERENCE_HPP_
 #define FUNCTIONREFERENCE_HPP_
 #include <Pointers/SmartPointer.hpp>
+#include <Statement/Statement.hpp>
 #include "Function.hpp"
 #include <string>
 
@@ -16,22 +17,36 @@ private:
 	std::string name_;
 	std::string fnNamespace_;
 	std::string resolveIssue_;
+	std::vector<SafeStatement> fnArgs_;
 	SmartPointer<Function> func_;
 
 public:
-	FunctionReference(std::string fnNamespace, std::string name, SmartPointer<Function> func);
+	FunctionReference(std::string fnNamespace, std::string name,
+			std::vector<SafeStatement> fnArgs, SmartPointer<Function> func);
 	virtual ~FunctionReference();
 
-	std::string getName() {
+	std::string const& getName() {
 		return name_;
 	}
 
-	std::string getNamespace() {
+	std::string const& getNamespace() {
 		return fnNamespace_;
 	}
 
-	std::string getResolveIssue() {
+	std::string const& getResolveIssue() {
 		return resolveIssue_;
+	}
+
+	std::string getDebugName() {
+		if (getNamespace().size() > 0) {
+			return getNamespace() + "." + getName();
+		} else {
+			return getName();
+		}
+	}
+
+	std::vector<SafeStatement> const& getArgs() {
+		return fnArgs_;
 	}
 
 	void setResolveIssue(std::string issue) {

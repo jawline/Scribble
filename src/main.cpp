@@ -20,6 +20,11 @@ int main(int argc, char** argv) {
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
 
+	if (argc != 2) {
+		printf("Expected usage %s filename\n", argv[0]);
+		return -1;
+	}
+
 	NamespaceType builtinFunctions;
 
 	builtinFunctions["Write"].push_back(
@@ -35,7 +40,7 @@ int main(int argc, char** argv) {
 
 	SP<Function> entry = Parser::generateProgram(argv[1]);
 
-	double seconds;
+	double seconds = 0;
 
 	seconds = clock();
 	entry->execute(std::vector<Value*>());

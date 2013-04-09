@@ -21,14 +21,15 @@ void FunctionStatement::checkTree(ValueType functionType) {
 						+ func_->getResolveIssue());
 	}
 
-	if (func_->getFunction()->numArgs() != args_.size()) {
+	if (func_->getFunction()->numArgs() != func_->getArgs().size()) {
 		throw StatementException(this, "Invalid number of arguments");
 	}
 
-	for (unsigned int i = 0; i < args_.size(); ++i) {
-		args_[i]->checkTree(functionType);
+	for (unsigned int i = 0; i < func_->getArgs().size(); ++i) {
+		SafeStatement arg = func_->getArgs()[i];
+		arg->checkTree(functionType);
 
-		if (func_->getFunction()->argType(i) != args_[i]->type()) {
+		if (func_->getFunction()->argType(i) != arg->type()) {
 			throw StatementException(this,
 					"Argument type does not match function type");
 		}

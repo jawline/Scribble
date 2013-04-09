@@ -22,14 +22,8 @@ func snake() : int {
 		temp := temp + 1
 		iter := iter + 1
 	}
-
+	
 	return iter
-}
-
-func snakeR(var i : int) : int {
-}
-
-func snakeR(var i : bool) : int {
 }
 
 // Empty function to ensure language doesn't choke when there are no returns
@@ -71,7 +65,7 @@ func infinateLoop() : void {
 func main() : void {
 
 	sys.Write("-- Scribble test program --\n")
-	
+
 	var jrDog : bool := false
 	
 	while jrDog = false {

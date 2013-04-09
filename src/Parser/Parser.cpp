@@ -16,6 +16,50 @@ extern void yyparse();
 extern void yy_scan_string(char const*);
 extern void yylex_destroy();
 
+SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
+		FunctionSet const& set) {
+
+	if (set.size() == 0) {
+		return 0;
+	}
+
+	std::vector<SafeStatement> const& args = toFind->getArgs();
+
+	if (args.size() == 0) {
+
+		SP<Function> fn = set[0];
+
+		if (fn->numArgs() == 0) {
+			return fn;
+		} else {
+			return 0;
+		}
+	}
+
+	for (unsigned int i = 0; i < set.size(); ++i) {
+
+		SP<Function> fn = set[i];
+
+		if (fn->numArgs() == args.size()) {
+
+			for (unsigned int i = 0; i < args.size(); ++i) {
+
+				SafeStatement arg = args[i];
+
+				if (fn->argType(i) != arg->type()) {
+					break;
+				}
+
+				return fn;
+			}
+
+		}
+
+	}
+
+	return 0;
+}
+
 std::string Parser::bufferText(std::string const& filePath) {
 	FILE* fin = fopen(filePath.c_str(), "r");
 
@@ -23,10 +67,10 @@ std::string Parser::bufferText(std::string const& filePath) {
 		return "ERROR";
 	}
 
-	// Run to the end of the file
+// Run to the end of the file
 	fseek(fin, 0, SEEK_END);
 
-	// Get the length of the file
+// Get the length of the file
 	size_t f_size = ftell(fin);
 	fseek(fin, 0, SEEK_SET);
 
@@ -36,7 +80,7 @@ std::string Parser::bufferText(std::string const& filePath) {
 	buffer[f_size] = '\0';
 	fclose(fin);
 
-	//Create the inputSource from the buffer
+//Create the inputSource from the buffer
 	std::string inputSource = std::string(buffer);
 	delete[] buffer;
 
@@ -63,27 +107,34 @@ bool Parser::listContains(std::string target,
 
 bool Parser::functionSetAlreadyContainsEquivilent(SP<Function> function,
 		FunctionSet const& functionSet) {
-	bool duplicate = false;
-	SP<Function> compared;
 
-	//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
+	bool duplicate = false;
+
+//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
 	for (unsigned int i = 0; i < functionSet.size(); ++i) {
 
-		duplicate = true;
-		compared = functionSet[i];
+		auto compared = functionSet[i];
 
-		for (unsigned int j = 0; j < function->numArgs(); ++j) {
+		if (compared.Get() == function.Get()) {
+			return true;
+		} else {
+			duplicate = true;
 
-			if (function->argType(j) != compared->argType(j)) {
-				duplicate = false;
-				break;
+			for (unsigned int j = 0; j < function->numArgs(); ++j) {
+
+				if (function->argType(j) != compared->argType(j)) {
+					duplicate = false;
+					break;
+				}
+
+			}
+
+			if (duplicate) {
+				return true;
 			}
 
 		}
 
-		if (duplicate) {
-			return true;
-		}
 	}
 
 	return false;
@@ -101,20 +152,20 @@ ValueType Parser::functionSetType(FunctionSet const& functionSet) {
 
 SP<Function> Parser::generateProgram(std::string const& filename) {
 
-	//Create the inputSource from the buffer
+//Create the inputSource from the buffer
 	std::string inputSource = bufferText(filename + ".scribble");
 
-	//Clear and previous errors
+//Clear and previous errors
 	ParsingError = false;
 
-	//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
+//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
 	char* a = strdup(inputSource.c_str());
 
 	yy_scan_string(a);
 	yyparse();
 	yylex_destroy();
 
-	//Free the bison buffer
+//Free the bison buffer
 	delete[] a;
 
 	if (ParsingError) {
@@ -130,7 +181,7 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	std::vector<SmartPointer<FunctionReference>> references = References;
 	References = std::vector<SP<FunctionReference>>();
 
-	//Look at the list of requested imports and attempt to resolve them.
+//Look at the list of requested imports and attempt to resolve them.
 	for (unsigned int i = 0; i < imports.size(); ++i) {
 
 		//If not already loaded attempt to load the file.
@@ -146,51 +197,47 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	//Loop through all of the references and resolve them.
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
-		if (references[i]->getNamespace().size() == 0) {
+		NamespaceType selectedNamespace = Functions;
 
-			//Look for function in the current namespace
-			auto it = Functions.find(references[i]->getName());
-
-			if (it != Functions.end() && it->second.size() > 0) {
-				references[i]->setFunction(it->second[0]);
-			} else {
-				references[i]->setResolveIssue(
-						references[i]->getName() + "Not defined in namespace");
-			}
-
-		} else {
-
-			//Look for it in an external namespace
+		if (references[i]->getNamespace().size() != 0) {
 
 			//Check the namespace has been loaded. If not then do not resolve the reference.
 			if (Parser::listContains(references[i]->getNamespace(), imports)) {
-
-				//Pull a reference to the selected namespace.
-				NamespaceType& selectedNamespace =
-						Namespace[references[i]->getNamespace()];
-
-				//Search for function in namespace.
-				auto it = selectedNamespace.find(references[i]->getName());
-
-				//If the function is in the namespace then resolve it. otherwise leave it blank and the statement will throw an exception when checked.
-				if (it != selectedNamespace.end() && it->second.size() > 0) {
-
-					references[i]->setFunction(it->second[0]);
-
-				} else {
-
-					references[i]->setResolveIssue(
-							std::string("Function ") + references[i]->getName()
-									+ " does not exist in namespace "
-									+ references[i]->getNamespace());
-
-				}
-
+				selectedNamespace = Namespace[references[i]->getNamespace()];
 			} else {
 				references[i]->setResolveIssue(
 						std::string("Namespace ")
 								+ references[i]->getNamespace()
 								+ " has not been imported.");
+			}
+		}
+
+		//Search for function in namespace.
+		auto it = selectedNamespace.find(references[i]->getName());
+
+		//If the function is in the namespace then resolve it. otherwise leave it blank and the statement will throw an exception when checked.
+		if (it == selectedNamespace.end()) {
+
+			references[i]->setResolveIssue(
+					std::string("the function ") + references[i]->getDebugName()
+							+ " is not defined");
+
+		} else {
+
+			SP<Function> searchResult = Parser::findFunctionInSet(references[i],
+					it->second);
+
+			if (!searchResult.Null()) {
+
+				references[i]->setFunction(searchResult);
+
+			} else {
+
+				references[i]->setResolveIssue(
+						std::string("the function ")
+								+ references[i]->getDebugName()
+								+ " is defined but does not have any versions which take the specified argument types.");
+
 			}
 
 		}

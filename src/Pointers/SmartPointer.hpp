@@ -52,6 +52,15 @@ public:
 		return pointerData;
 	}
 
+	inline bool Null() {
+
+		if (pointerData == 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	SmartPointer<T>& operator= (SmartPointer<T> const& rhs) {
 
 		if (this != &rhs) {

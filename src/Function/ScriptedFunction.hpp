@@ -40,6 +40,11 @@ public:
 	}
 
 	const ValueType argType(int arg) {
+
+		if (numArgs() <= arg) {
+			return TypeUnresolved;
+		}
+
 		return arguments_[arg]->getType();
 	}
 

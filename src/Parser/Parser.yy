@@ -142,7 +142,6 @@ Variables: Variable {
 ;
 
 Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements RBRACKET {
-
 		std::vector<SP<Variable>> values;
 
 		int pos = 0;
@@ -152,7 +151,7 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 			pos++;
 		}
 
-		$$ = new ScriptedFunction($7, ValueUtil::generateValue($7), *$9, values, *$4);
+		SP<Function> fn = new ScriptedFunction($7, ValueUtil::generateValue($7), *$9, values, *$4);
 		
 		if ( Functions[*$2].size() > 0) {
 		
@@ -166,18 +165,20 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 				return -1;
 			}
 			
-			if (Parser::functionSetAlreadyContainsEquivilent($$, Functions[*$2]) == true) {
+			if (Parser::functionSetAlreadyContainsEquivilent(fn, Functions[*$2]) == true) {
 				yyerror("Identical function already defined");
 				return -1;
 			}
 		}
 		
-		Functions[*$2].push_back($$);
+		Functions[*$2].push_back(fn);
+		
 		Variables.clear();
 		
 		delete $2;
+
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
-	
+		
 		std::vector<SP<Variable>> values;
 
 		int pos = 0;
@@ -187,28 +188,32 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 			pos++;
 		}
 	
-		$$ = new ScriptedFunction($6, ValueUtil::generateValue($6), *$8, values, std::vector<SP<Variable>>());
-		
+		SP<Function> fn = SP<Function>(new ScriptedFunction($6, ValueUtil::generateValue($6), *$8, values, std::vector<SP<Variable>>()));
+
 		if ( Functions[*$2].size() > 0) {
-		
+
 			if (Parser::functionSetType(Functions[*$2]) != $6) {
 				yyerror("Function differs from predefined function type");
 				return -1;
 			}
-			
+
 			if (Parser::functionSetNumArguments(Functions[*$2]) != values.size()) {
 				yyerror("Due to previous definition function is expected to have a specific number of arguments");
 				return -1;
 			}
-			
-			if (Parser::functionSetAlreadyContainsEquivilent($$, Functions[*$2]) == true) {
+
+			if (Parser::functionSetAlreadyContainsEquivilent(fn, Functions[*$2]) == true) {
 				yyerror("Identical function already defined");
 				return -1;
 			}
+
 		}
 		
-		Functions[*$2].push_back($$);
+		Functions[*$2].push_back(fn);
+	
 		Variables.clear();
+
+		delete $2;
 	}
 ;
 
@@ -235,25 +240,25 @@ Statements: {
 FunctionCall: WORD LPAREN Arguments RPAREN {
 	
 		std::vector<SmartPointer<Statement>> args;
-
+	
 		for (unsigned int i = 0; i < $3->size(); ++i) {
 			args.push_back($3->at(i));
 		}
-
+	
 		delete $3;
 		
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, 0));
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
 		References.push_back(reference);
-		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+		$$ = new FunctionStatement(yylineno, yytext, reference);
 		
 		//Free the name pointer
 		delete $1;
 		
 	} | WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, 0));
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
 		References.push_back(reference);
-		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+		$$ = new FunctionStatement(yylineno, yytext, reference);
 		
 		//Free the name pointer
 		delete $1;
@@ -267,10 +272,10 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 	
 		delete $5;
 	
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, 0));
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
 		References.push_back(reference);
 	
-		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+		$$ = new FunctionStatement(yylineno, yytext, reference);
 	
 		//Free the name pointers
 		delete $1;
@@ -278,9 +283,9 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		
 	} | WORD LINK WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, 0));
+		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
 		References.push_back(reference);
-		$$ = new FunctionStatement(yylineno, yytext, reference, args);
+		$$ = new FunctionStatement(yylineno, yytext, reference);
 		
 		//Free the name pointers
 		delete $1;
