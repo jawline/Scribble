@@ -59,6 +59,7 @@ func autoTest() : void {
 	for auto i := 0; i < 100; i++ {
 		sys.Write(sys.String(i) + " ")
 	}
+	
 	sys.Write("\n")
 	
 	auto b := true
@@ -88,11 +89,13 @@ func main() : void {
 		jrDog := true
 	}
 	
+	sys.Write(sys.String(true) + "\n")
+	
 	autoTest()
 	
 	sys.Write("J: ")
 	
-	for var j : int := 10; j > 0; j-- {
+	for auto j := 10; j > 0; j-- {
 		sys.Write(sys.String(j) + " ")
 	}
 	
@@ -105,7 +108,7 @@ func main() : void {
 	
 	sys.Write("So many cookies: " + sys.String(cookies) + "\n")
 
-	for var i : int := 0; i < 10; i++ {
+	for auto i := 0; i < 10; i++ {
 		sys.Write( sys.String ( fibs.Fibs(i) ) + " ")
 	}
 	

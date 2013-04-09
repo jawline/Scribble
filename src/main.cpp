@@ -31,7 +31,10 @@ int main(int argc, char** argv) {
 			SmartPointer<Function>(new WriteFunction()));
 
 	builtinFunctions["String"].push_back(
-			SmartPointer<Function>(new StringFunction()));
+			SmartPointer<Function>(new IntToStringFunction()));
+
+	builtinFunctions["String"].push_back(
+			SmartPointer<Function>(new BoolToStringFunction()));
 
 	builtinFunctions["RandomInt"].push_back(
 			SmartPointer<Function>(new RandomInt()));

@@ -8,36 +8,80 @@
 #include "StringFunction.hpp"
 #include <Statement/StatementException.hpp>
 #include <Value/Int.hpp>
+#include <Value/Bool.hpp>
 #include <Value/String.hpp>
 #include <sstream>
 
-StringFunction::StringFunction() {
+IntToStringFunction::IntToStringFunction() {
 	// TODO Auto-generated constructor stub
 
 }
 
-StringFunction::~StringFunction() {
+IntToStringFunction::~IntToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* StringFunction::execute(std::vector<Value*> arguments) {
-
+Value* IntToStringFunction::execute(std::vector<Value*> arguments) {
 	Value* arg = arguments[0];
-	int iVal;
 	std::stringstream st;
 
-	switch (arg->type()) {
+	st << ((IntValue*) arg)->value();
 
-	case Int:
+	return new StringValue(st.str());
+}
 
-		iVal = ((IntValue*) arg)->value();
-		st << iVal;
-		return new StringValue(st.str());
+ValueType const IntToStringFunction::getType() {
+	return String;
+}
 
-	default:
-		throw StatementException(0, "Cannot convert type");
-		break;
+unsigned int const IntToStringFunction::numArgs() {
+	return 1;
+}
+
+ValueType const IntToStringFunction::argType(int arg) {
+
+	if (arg == 0) {
+		return Int;
 	}
 
-	return 0;
+	return TypeUnresolved;
+}
+
+BoolToStringFunction::BoolToStringFunction() {
+	// TODO Auto-generated constructor stub
+
+}
+
+BoolToStringFunction::~BoolToStringFunction() {
+	// TODO Auto-generated destructor stub
+}
+
+Value* BoolToStringFunction::execute(std::vector<Value*> arguments) {
+	Value* arg = arguments[0];
+	std::stringstream st;
+
+	if (((BoolValue*) arg)->value()) {
+		st << "true";
+	} else {
+		st << "false";
+	}
+
+	return new StringValue(st.str());
+}
+
+ValueType const BoolToStringFunction::getType() {
+	return String;
+}
+
+unsigned int const BoolToStringFunction::numArgs() {
+	return 1;
+}
+
+ValueType const BoolToStringFunction::argType(int arg) {
+
+	if (arg == 0) {
+		return Boolean;
+	}
+
+	return TypeUnresolved;
 }

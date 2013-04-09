@@ -9,33 +9,36 @@
 #define STRINGFUNCTION_HPP_
 #include "Function.hpp"
 
-class StringFunction: public Function {
+class IntToStringFunction: public Function {
 public:
-	StringFunction();
-	virtual ~StringFunction();
+	IntToStringFunction();
+	virtual ~IntToStringFunction();
 
 	Value* execute(std::vector<Value*> arguments);
 
-	const ValueType getType() {
-		return String;
-	}
-
-	const unsigned int numArgs() {
-		return 1;
-	}
-
-	const ValueType argType(int arg) {
-
-		if (arg == 0) {
-			return Int;
-		}
-
-		return Void;
-	}
+	ValueType const getType();
+	const unsigned int numArgs();
+	const ValueType argType(int arg);
 
 	virtual void check() {
-
 	}
 };
+
+
+class BoolToStringFunction: public Function {
+public:
+	BoolToStringFunction();
+	virtual ~BoolToStringFunction();
+
+	Value* execute(std::vector<Value*> arguments);
+
+	ValueType const getType();
+	const unsigned int numArgs();
+	const ValueType argType(int arg);
+
+	virtual void check() {
+	}
+};
+
 
 #endif /* STRINGFUNCTION_HPP_ */
