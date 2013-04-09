@@ -79,6 +79,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "import" return IMPORT;
 "true" return TRUE;
 "false" return FALSE;
+"auto" return AUTO;
 "." return LINK;
 
 {integer} { SAVE_INT;

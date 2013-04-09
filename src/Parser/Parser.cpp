@@ -1,6 +1,7 @@
 #include "Parser.hpp"
 #include <Function/ScriptedFunction.hpp>
 #include <Function/FunctionReference.hpp>
+#include <Value/Util.hpp>
 #include "ParserException.hpp"
 #include <string.h>
 
@@ -8,7 +9,7 @@ extern std::map<std::string, NamespaceType> Namespace;
 extern NamespaceType Functions;
 
 extern std::vector<std::string> ImportList;
-extern std::vector<SmartPointer<FunctionReference>> References;
+extern std::vector<Reference> References;
 
 extern bool ParsingError;
 
@@ -61,16 +62,18 @@ SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 }
 
 std::string Parser::bufferText(std::string const& filePath) {
+
 	FILE* fin = fopen(filePath.c_str(), "r");
 
+	//If the file cannot be opened return an error
 	if (fin == 0) {
-		return "ERROR";
+		throw ParserException(filePath, "file could not be opened");
 	}
 
-// Run to the end of the file
+	// Run to the end of the file
 	fseek(fin, 0, SEEK_END);
 
-// Get the length of the file
+	// Get the length of the file
 	size_t f_size = ftell(fin);
 	fseek(fin, 0, SEEK_SET);
 
@@ -80,7 +83,7 @@ std::string Parser::bufferText(std::string const& filePath) {
 	buffer[f_size] = '\0';
 	fclose(fin);
 
-//Create the inputSource from the buffer
+	//Create the inputSource from the buffer
 	std::string inputSource = std::string(buffer);
 	delete[] buffer;
 
@@ -94,6 +97,7 @@ void Parser::setupNamespace(std::string name, NamespaceType const& functions) {
 bool Parser::listContains(std::string target,
 		std::vector<std::string> const& list) {
 
+	//Check each member of the list to see if it contains the target string.
 	for (unsigned int i = 0; i < list.size(); i++) {
 
 		if (list[i].compare(target) == 0) {
@@ -110,7 +114,8 @@ bool Parser::functionSetAlreadyContainsEquivilent(SP<Function> function,
 
 	bool duplicate = false;
 
-//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
+	//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
+
 	for (unsigned int i = 0; i < functionSet.size(); ++i) {
 
 		auto compared = functionSet[i];
@@ -178,8 +183,8 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	std::vector<std::string> imports = ImportList;
 	ImportList.clear();
 
-	std::vector<SmartPointer<FunctionReference>> references = References;
-	References = std::vector<SP<FunctionReference>>();
+	std::vector<Reference> references = References;
+	References = std::vector<Reference>();
 
 //Look at the list of requested imports and attempt to resolve them.
 	for (unsigned int i = 0; i < imports.size(); ++i) {
@@ -197,48 +202,64 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	//Loop through all of the references and resolve them.
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
-		NamespaceType selectedNamespace = Functions;
+		if (!references[i].fRef.Null()) {
 
-		if (references[i]->getNamespace().size() != 0) {
+			SP<FunctionReference> ref = references[i].fRef;
 
-			//Check the namespace has been loaded. If not then do not resolve the reference.
-			if (Parser::listContains(references[i]->getNamespace(), imports)) {
-				selectedNamespace = Namespace[references[i]->getNamespace()];
-			} else {
-				references[i]->setResolveIssue(
-						std::string("Namespace ")
-								+ references[i]->getNamespace()
-								+ " has not been imported.");
+			NamespaceType selectedNamespace = Functions;
+
+			if (ref->getNamespace().size() != 0) {
+
+				//Check the namespace has been loaded. If not then do not resolve the reference.
+				if (Parser::listContains(ref->getNamespace(),
+						imports)) {
+					selectedNamespace =
+							Namespace[ref->getNamespace()];
+				} else {
+					ref->setResolveIssue(
+							std::string("Namespace ")
+									+ ref->getNamespace()
+									+ " has not been imported.");
+				}
 			}
-		}
 
-		//Search for function in namespace.
-		auto it = selectedNamespace.find(references[i]->getName());
+			//Search for function in namespace.
+			auto it = selectedNamespace.find(ref->getName());
 
-		//If the function is in the namespace then resolve it. otherwise leave it blank and the statement will throw an exception when checked.
-		if (it == selectedNamespace.end()) {
+			//If the function is in the namespace then resolve it. otherwise leave it blank and the statement will throw an exception when checked.
+			if (it == selectedNamespace.end()) {
 
-			references[i]->setResolveIssue(
-					std::string("the function ") + references[i]->getDebugName()
-							+ " is not defined");
+				ref->setResolveIssue(
+						std::string("the function ")
+								+ ref->getDebugName()
+								+ " is not defined");
+
+			} else {
+
+				SP<Function> searchResult = Parser::findFunctionInSet(
+						ref, it->second);
+
+				if (!searchResult.Null()) {
+
+					ref->setFunction(searchResult);
+
+				} else {
+
+					ref->setResolveIssue(
+							std::string("the function ")
+									+ ref->getDebugName()
+									+ " is defined but does not have any versions which take the specified argument types.");
+
+				}
+
+			}
 
 		} else {
 
-			SP<Function> searchResult = Parser::findFunctionInSet(references[i],
-					it->second);
+			AutoVariablePair p = references[i].avRef;
 
-			if (!searchResult.Null()) {
-
-				references[i]->setFunction(searchResult);
-
-			} else {
-
-				references[i]->setResolveIssue(
-						std::string("the function ")
-								+ references[i]->getDebugName()
-								+ " is defined but does not have any versions which take the specified argument types.");
-
-			}
+			p.first->setType(p.second->type());
+			p.first->setValue(ValueUtil::generateValue(p.second->type()));
 
 		}
 

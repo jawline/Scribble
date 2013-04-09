@@ -54,6 +54,21 @@ func infinateLoop() : void {
 
 }
 
+func autoTest() : void {
+
+	for auto i := 0; i < 100; i++ {
+		sys.Write(sys.String(i) + " ")
+	}
+	sys.Write("\n")
+	
+	auto b := true
+	
+	if b = true {
+		sys.Write("Definately true\n")
+	}
+
+}
+
 // The main function in this test situation
 //
 // No Arguments
@@ -72,6 +87,8 @@ func main() : void {
 		sys.Write("Hello world\n")
 		jrDog := true
 	}
+	
+	autoTest()
 	
 	sys.Write("J: ")
 	

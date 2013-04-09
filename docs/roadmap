@@ -2,7 +2,9 @@ Planned features
 
 Version 0.4 should include
 	A value heap to handle allocation of values which could significantly speed up execution.
+	Automatic typing variables. auto a := blah
 	Better debugging information for the programmer.
+	
 
 Version 0.5 should include
 	Support for arrays.

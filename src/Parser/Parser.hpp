@@ -9,9 +9,17 @@
 #include <Statement/Statement.hpp>
 #include <Function/Function.hpp>
 #include <Function/FunctionReference.hpp>
+#include <Value/Variable.hpp>
+
 
 typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, FunctionSet> NamespaceType;
+typedef std::pair<Variable*, SafeStatement> AutoVariablePair;
+
+struct Reference {
+	SmartPointer<FunctionReference> fRef;
+	AutoVariablePair avRef;
+};
 
 /**
  * Parser facade, hides the Parser implementation and provides function to convert between files and returns low level code.
@@ -33,7 +41,8 @@ public:
 	static bool functionSetAlreadyContainsEquivilent(SP<Function> function,
 			FunctionSet const& functionSet);
 
-	static SP<Function> findFunctionInSet(SP<FunctionReference> toFind, FunctionSet const& set);
+	static SP<Function> findFunctionInSet(SP<FunctionReference> toFind,
+			FunctionSet const& set);
 
 	static SP<Function> functionSetSearch(FunctionSet const& functionSet,
 			std::vector<int> argumentTypes);

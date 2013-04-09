@@ -42,7 +42,7 @@ std::map<std::string, Variable*> Variables;
 std::map<std::string, NamespaceType> Namespace;
 NamespaceType Functions;
 
-std::vector<SmartPointer<FunctionReference>> References;
+std::vector<Reference> References;
 
 extern int yylineno;	// defined and maintained in lex.c
 extern char *yytext;	// defined and maintained in lex.c
@@ -65,7 +65,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <real> REAL
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE NOT IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
 %token <token> END
@@ -82,6 +82,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %type <statements> Statements;
 %type <function> Function;
 %type <variables> Variables;
+%type <statement> AutoVariable;
 %type <type> Type;
 %type <statement> FunctionCall
 
@@ -129,6 +130,32 @@ Variable:  VARIABLE WORD COLON Type {
 			$$ = nVar;
 		}
 		
+	}
+;
+
+AutoVariable: AUTO WORD ASSIGN Statement {
+
+		auto it = Variables.find(*$2);
+				
+		if (it != Variables.end()) {
+			yyerror("Variable already defined.");
+			return -1;
+		} else {
+		
+			SafeStatement sp = $4;
+		
+			Variable* nVar = new Variable(TypeUnresolved, 0, 0);
+			Variables[*$2] = nVar;
+			
+			Reference r;
+			r.fRef = 0;
+			r.avRef = AutoVariablePair(nVar, sp);
+			References.push_back(r);			
+
+			$$ = new AssignVariableStatement(yylineno, yytext, nVar, sp);
+		}
+		
+		delete $2;
 	}
 ;
 
@@ -248,7 +275,11 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		delete $3;
 		
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
-		References.push_back(reference);
+		Reference r;
+		r.fRef = reference;
+		References.push_back(r);
+		
+		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
 		
 		//Free the name pointer
@@ -257,7 +288,12 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 	} | WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
-		References.push_back(reference);
+		
+		Reference r;
+		r.fRef = reference;
+		References.push_back(r);
+		
+		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
 		
 		//Free the name pointer
@@ -273,8 +309,11 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		delete $5;
 	
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
-		References.push_back(reference);
 	
+		Reference r;
+		r.fRef = reference;
+		References.push_back(r);
+		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
 	
 		//Free the name pointers
@@ -284,7 +323,11 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 	} | WORD LINK WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
-		References.push_back(reference);
+		
+		Reference r;
+		r.fRef = reference;
+		References.push_back(r);
+		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
 		
 		//Free the name pointers
@@ -311,6 +354,8 @@ Statement: TRUE {
 		$$ = new GetVariableStatement(yylineno, yytext, $1);
 	} | Variable ASSIGN Statement {
 		$$ = new AssignVariableStatement(yylineno, yytext, $1, $3);
+	} | AutoVariable {
+		$$ = $1;
 	} | WORD {
 
 		auto it = Variables.find(*$1);
