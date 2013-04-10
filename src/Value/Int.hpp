@@ -1,6 +1,7 @@
 #ifndef _INT_H_
 #define _INT_H_
 #include "Value.hpp"
+#include <Statement/Heap.hpp>
 
 class IntValue : public Value {
 private:
@@ -24,7 +25,9 @@ public:
 	}
 
 	Value* clone() {
-		return new IntValue(value_);
+		IntValue* gen = (IntValue*) valueHeap.make(Int);
+		gen->setValue(value_);
+		return gen;
 	}
 
 	void applyOperator(ValueOperator v, Value* r);

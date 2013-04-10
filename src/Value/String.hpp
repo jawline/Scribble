@@ -2,6 +2,7 @@
 #define _STRING_H_
 #include "Value.hpp"
 #include <string>
+#include <Statement/Heap.hpp>
 
 class StringValue : public Value {
 private:
@@ -18,7 +19,9 @@ public:
 	}
 
 	Value* clone() {
-		return new StringValue(value_.c_str());
+		StringValue* gen = (StringValue*) valueHeap.make(String);
+		gen->setValue(value_);
+		return gen;
 	}
 
 	void applyOperator(ValueOperator v, Value* r);

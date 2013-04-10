@@ -7,6 +7,7 @@
 
 #include "Void.hpp"
 #include <Statement/StatementException.hpp>
+#include <Statement/Heap.hpp>
 
 VoidValue::VoidValue() {
 	// TODO Auto-generated constructor stub
@@ -26,5 +27,5 @@ ValueType VoidValue::type() {
 }
 
 Value* VoidValue::clone() {
-	return new VoidValue;
+	return valueHeap.make(Void);
 }

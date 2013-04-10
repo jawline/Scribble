@@ -8,6 +8,7 @@
 #ifndef BOOL_HPP_
 #define BOOL_HPP_
 #include "Value.hpp"
+#include <Statement/Heap.hpp>
 
 class BoolValue: public Value {
 private:
@@ -30,7 +31,9 @@ public:
 	}
 
 	Value* clone() {
-		return new BoolValue(value_);
+		BoolValue* gen = (BoolValue*) valueHeap.make(Boolean);
+		gen->setValue(value_);
+		return gen;
 	}
 
 	void applyOperator(ValueOperator v, Value* r);
