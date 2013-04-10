@@ -19,6 +19,10 @@ public:
 		return value_;
 	}
 
+	void setValue(int v) {
+		value_ = v;
+	}
+
 	Value* clone() {
 		return new IntValue(value_);
 	}

@@ -26,6 +26,10 @@ public:
 	std::string getValue() {
 		return value_;
 	}
+
+	void setValue(std::string const& ref) {
+		value_ = ref;
+	}
 };
 
 #endif //_STRING_H_

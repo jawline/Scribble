@@ -21,6 +21,10 @@ public:
 		return value_;
 	}
 
+	void setValue(bool v) {
+		value_ = v;
+	}
+
 	ValueType type() {
 		return Boolean;
 	}

@@ -9,6 +9,7 @@
 #include <Statement/StatementException.hpp>
 #include <Value/Int.hpp>
 #include <Value/Bool.hpp>
+#include <Statement/Heap.hpp>
 
 TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
 		Statement* leftHandSide, Statement* rightHandSide) :
@@ -104,8 +105,8 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 		throw StatementException(this, "Not implemented yet");
 	}
 
-	delete lhRes;
-	delete rhRes;
+	valueHeap.free(lhRes);
+	valueHeap.free(rhRes);
 
 	return result;
 }

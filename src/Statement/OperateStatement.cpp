@@ -6,6 +6,7 @@
  */
 
 #include "OperateStatement.hpp"
+#include <Statement/Heap.hpp>
 
 OperateStatement::OperateStatement(int lineNo, std::string sym, ValueOperator op, SafeStatement lhs,
 		SafeStatement rhs) :
@@ -23,7 +24,7 @@ Value* OperateStatement::execute(std::vector<Value*> const& variables) {
 	Value* lhR = lhs_->execute(variables);
 	Value* rhR = rhs_->execute(variables);
 	lhR->applyOperator(op_, rhR);
-	delete rhR;
+	valueHeap.free(rhR);
 	return lhR;
 }
 

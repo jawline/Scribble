@@ -1,6 +1,7 @@
 #ifndef _FUNCTION_STATEMENT_H_
 #define _FUNCTION_STATEMENT_H_
 #include "Statement.hpp"
+#include <Statement/Heap.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/FunctionReference.hpp>
@@ -30,7 +31,7 @@ public:
 		Value* res = func_->getFunction()->execute(pArgs);
 
 		for (unsigned int i = 0; i < pArgs.size(); i++) {
-			delete pArgs[i];
+			valueHeap.free(pArgs[i]);
 		}
 
 		return res;

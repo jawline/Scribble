@@ -1,5 +1,6 @@
 #include "IntStatement.hpp"
 #include <sstream>
+#include <Statement/Heap.hpp>
 
 IntStatement::IntStatement(int lineNo, std::string sym, int intValue) :
 		Statement(lineNo, sym) {
@@ -7,7 +8,9 @@ IntStatement::IntStatement(int lineNo, std::string sym, int intValue) :
 }
 
 Value* IntStatement::execute(std::vector<Value*> const& variables) {
-	return new IntValue(intValue_);
+	IntValue* gen = (IntValue*) valueHeap.make(Int);
+	gen->setValue(intValue_);
+	return gen;
 }
 
 void IntStatement::checkTree(ValueType functionType) {

@@ -8,6 +8,7 @@
 #include "IfStatement.hpp"
 #include <Value/Bool.hpp>
 #include <Value/Void.hpp>
+#include <Statement/Heap.hpp>
 
 IfStatement::IfStatement(int lineNo, std::string sym, SP<Statement> condition,
 		std::vector<SP<Statement>> ifTrueStatements,
@@ -28,20 +29,20 @@ Value* IfStatement::execute(std::vector<Value*> const& variables) {
 	if (v->value()) {
 
 		for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {
-			delete ifTrueStatements_[i]->execute(variables);
+			valueHeap.free(ifTrueStatements_[i]->execute(variables));
 		}
 
 	} else {
 
 		for (unsigned int i = 0; i < ifFalseStatements_.size(); i++) {
-			delete ifFalseStatements_[i]->execute(variables);
+			valueHeap.free(ifFalseStatements_[i]->execute(variables));
 		}
 
 	}
 
-	delete v;
+	valueHeap.free(v);
 
-	return new VoidValue();
+	return valueHeap.make(Void);
 }
 
 void IfStatement::checkTree(ValueType functionType) {

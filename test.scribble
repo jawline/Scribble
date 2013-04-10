@@ -108,8 +108,8 @@ func main() : void {
 	
 	sys.Write("So many cookies: " + sys.String(cookies) + "\n")
 
-	for auto i := 0; i < 10; i++ {
-		sys.Write( sys.String ( fibs.Fibs(i) ) + " ")
+	for auto i := 0; i < 30; i++ {
+		sys.Write( sys.String ( fibs.FibsIterative(i) ) + " ")
 	}
 	
 	sys.Write("\n")

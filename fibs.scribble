@@ -27,3 +27,26 @@ func Fibs(var n : int) : int {
 	
 	return Fibs(n - 1) + Fibs(n - 2)
 }
+
+func FibsIterative(var n : int) : int {
+
+	if n = 0 {
+		return 0
+	}
+	
+	if n = 1 {
+		return 1
+	}
+
+	auto l1 := 1
+	auto l2 := 1
+	auto c := 0
+
+	for auto i := 0; i < n-1; i++ {
+		c := l1 + l2
+		l2 := l1
+		l1 := c
+	}
+	
+	return c
+}

@@ -8,6 +8,7 @@
 #include "ForStatement.hpp"
 #include <Value/Bool.hpp>
 #include <Value/Void.hpp>
+#include <Statement/Heap.hpp>
 
 ForStatement::ForStatement(int lineNo, std::string sym, SafeStatement initial,
 		SafeStatement condition, SafeStatement step,
@@ -26,22 +27,22 @@ ForStatement::~ForStatement() {
 
 Value* ForStatement::execute(std::vector<Value*> const& variables) {
 
-	delete initial_->execute(variables);
+	valueHeap.free(initial_->execute(variables));
 
 	BoolValue* condition;
 	while ((condition = ((BoolValue*) condition_->execute(variables)))->value()) {
-		delete condition;
+		valueHeap.free(condition);
 
 		for (unsigned int i = 0; i < statements_.size(); ++i) {
-			delete statements_[i]->execute(variables);
+			valueHeap.free(statements_[i]->execute(variables));
 		}
 
-		delete step_->execute(variables);
+		valueHeap.free(step_->execute(variables));
 	}
 
-	delete condition;
+	valueHeap.free(condition);
 
-	return new VoidValue();
+	return valueHeap.make(Void);
 }
 
 ValueType ForStatement::type() {
