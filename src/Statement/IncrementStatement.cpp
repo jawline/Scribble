@@ -66,6 +66,7 @@ Value* IncrementStatement::execute(std::vector<Value*> const& variables) {
 
 	}
 
+	return 0;
 }
 
 ValueType IncrementStatement::type() {

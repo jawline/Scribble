@@ -67,3 +67,24 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 const ValueType ScriptedFunction::getType() {
 	return fType_;
 }
+
+void ScriptedFunction::check() {
+
+	for (unsigned int i = 0; i < statements_.size(); ++i) {
+		statements_[i]->checkTree(getType());
+	}
+
+}
+
+const ValueType ScriptedFunction::argType(unsigned int arg) {
+
+	if (numArgs() <= arg) {
+		return TypeUnresolved;
+	}
+
+	return arguments_[arg]->getType();
+}
+
+const unsigned int ScriptedFunction::numArgs() {
+	return arguments_.size();
+}

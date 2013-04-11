@@ -19,3 +19,39 @@ FunctionReference::~FunctionReference() {
 	// TODO Auto-generated destructor stub
 }
 
+std::string FunctionReference::getDebugName() {
+	if (getNamespace().size() > 0) {
+		return getNamespace() + "." + getName();
+	} else {
+		return getName();
+	}
+}
+
+std::vector<SafeStatement> const& FunctionReference::getArgs() {
+	return fnArgs_;
+}
+
+void FunctionReference::setResolveIssue(std::string issue) {
+	resolveIssue_ = issue;
+}
+
+SmartPointer<Function> FunctionReference::getFunction() {
+	return func_;
+}
+
+void FunctionReference::setFunction(SmartPointer<Function> func) {
+	func_ = func;
+}
+
+
+std::string const& FunctionReference::getName() {
+	return name_;
+}
+
+std::string const& FunctionReference::getNamespace() {
+	return fnNamespace_;
+}
+
+std::string const& FunctionReference::getResolveIssue() {
+	return resolveIssue_;
+}

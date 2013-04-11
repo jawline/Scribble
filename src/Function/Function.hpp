@@ -22,7 +22,7 @@ public:
 	 */
 	virtual const ValueType getType() = 0;
 	virtual const unsigned int numArgs() = 0;
-	virtual const ValueType argType(int arg) = 0;
+	virtual const ValueType argType(unsigned int arg) = 0;
 	virtual void check() = 0;
 };
 

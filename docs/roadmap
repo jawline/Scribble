@@ -8,6 +8,7 @@ Version 0.5 should include
 	Support for arrays.
 
 Version 0.6 should include
+	Support for function references
 	Floats
 	Improved type support at runtime ( Implementing many operations or providing compile time checks for operations that should never be implemented )
 	Support for user defined structures

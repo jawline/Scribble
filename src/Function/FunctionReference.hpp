@@ -25,41 +25,14 @@ public:
 			std::vector<SafeStatement> fnArgs, SmartPointer<Function> func);
 	virtual ~FunctionReference();
 
-	std::string const& getName() {
-		return name_;
-	}
-
-	std::string const& getNamespace() {
-		return fnNamespace_;
-	}
-
-	std::string const& getResolveIssue() {
-		return resolveIssue_;
-	}
-
-	std::string getDebugName() {
-		if (getNamespace().size() > 0) {
-			return getNamespace() + "." + getName();
-		} else {
-			return getName();
-		}
-	}
-
-	std::vector<SafeStatement> const& getArgs() {
-		return fnArgs_;
-	}
-
-	void setResolveIssue(std::string issue) {
-		resolveIssue_ = issue;
-	}
-
-	SmartPointer<Function> getFunction() {
-		return func_;
-	}
-
-	void setFunction(SmartPointer<Function> func) {
-		func_ = func;
-	}
+	std::string const& getName();
+	std::string const& getNamespace();
+	std::string const& getResolveIssue();
+	std::string getDebugName();
+	std::vector<SafeStatement> const& getArgs();
+	void setResolveIssue(std::string issue);
+	SmartPointer<Function> getFunction();
+	void setFunction(SmartPointer<Function> func);
 };
 
 #endif /* FUNCTIONREFERENCE_HPP_ */

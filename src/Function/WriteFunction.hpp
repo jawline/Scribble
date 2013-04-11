@@ -6,22 +6,9 @@ class WriteFunction: public Function {
 public:
 	Value* execute(std::vector<Value*> arguments);
 
-	const ValueType getType() {
-		return Void;
-	}
-
-	const unsigned int numArgs() {
-		return 1;
-	}
-
-	const ValueType argType(int arg) {
-
-		if (arg == 0) {
-			return String;
-		}
-
-		return Void;
-	}
+	const ValueType getType();
+	const unsigned int numArgs();
+	const ValueType argType(unsigned int arg);
 
 	virtual void check() {
 	}

@@ -18,7 +18,7 @@ public:
 
 	ValueType const getType();
 	const unsigned int numArgs();
-	const ValueType argType(int arg);
+	const ValueType argType(unsigned int arg);
 
 	virtual void check() {
 	}
@@ -34,7 +34,7 @@ public:
 
 	ValueType const getType();
 	const unsigned int numArgs();
-	const ValueType argType(int arg);
+	const ValueType argType(unsigned int arg);
 
 	virtual void check() {
 	}

@@ -35,26 +35,9 @@ public:
 
 	const ValueType getType();
 
-	const unsigned int numArgs() {
-		return arguments_.size();
-	}
-
-	const ValueType argType(int arg) {
-
-		if (numArgs() <= arg) {
-			return TypeUnresolved;
-		}
-
-		return arguments_[arg]->getType();
-	}
-
-	void check() {
-
-		for (unsigned int i = 0; i < statements_.size(); ++i) {
-			statements_[i]->checkTree(getType());
-		}
-
-	}
+	const unsigned int numArgs();
+	const ValueType argType(unsigned int arg);
+	void check();
 };
 
 #endif /* SCRIPTEDFUNCTION_HPP_ */

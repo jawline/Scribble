@@ -20,7 +20,7 @@ public:
 	Value* execute(std::vector<Value*> arguments);
 	const ValueType getType();
 	const unsigned int numArgs();
-	const ValueType argType(int arg);
+	const ValueType argType(unsigned int arg);
 	void check();
 };
 

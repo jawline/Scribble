@@ -28,7 +28,7 @@ const unsigned int RandomInt::numArgs() {
 	return 1;
 }
 
-const ValueType RandomInt::argType(int arg) {
+const ValueType RandomInt::argType(unsigned int arg) {
 	return Int;
 }
 

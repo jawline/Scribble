@@ -38,7 +38,7 @@ unsigned int const IntToStringFunction::numArgs() {
 	return 1;
 }
 
-ValueType const IntToStringFunction::argType(int arg) {
+ValueType const IntToStringFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
 		return Int;
@@ -77,7 +77,7 @@ unsigned int const BoolToStringFunction::numArgs() {
 	return 1;
 }
 
-ValueType const BoolToStringFunction::argType(int arg) {
+ValueType const BoolToStringFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
 		return Boolean;
