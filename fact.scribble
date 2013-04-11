@@ -27,3 +27,15 @@ func Fact(var n : int) : int {
 	return n*Fact(n-1)
 }
 
+func Test() : bool {
+
+	sys.Write("Recursive factorial test ")
+	
+	for auto i := 0; i < 10; i++ {
+		sys.Write(sys.String(Fact(i)) + " ")
+	}
+	
+	sys.Write("\n")
+	
+	return true
+}

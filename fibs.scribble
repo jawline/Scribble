@@ -30,6 +30,11 @@ func Fibs(var n : int) : int {
 
 func FibsIterative(var n : int) : int {
 
+	if n < 0 {
+		sys.Write("Fibs is only valid on n > 0\n")
+		return 0
+	}
+	
 	if n = 0 {
 		return 0
 	}
@@ -49,4 +54,25 @@ func FibsIterative(var n : int) : int {
 	}
 	
 	return c
+}
+
+func Test() : bool {
+	
+	sys.Write("Fibonacci test. ")
+	
+	for auto i := 0; i < 20; i++ {
+		sys.Write(sys.String(Fibs(i)) + " ")
+	}
+	
+	sys.Write("\n")
+	
+	sys.Write("Iterative fibs test. ")
+	
+	for i := 0; i < 20; i++ {
+		sys.Write(sys.String(FibsIterative(i)) + " ")
+	}
+	
+	sys.Write("\n")
+	
+	return true
 }

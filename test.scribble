@@ -1,86 +1,10 @@
 import("sys")
 import("fibs")
 import("fact")
-
-// Loop until a six is generated at random
-//
-// No Arguments
-//
-// No Return
-//
-// This function continuously generates random numbers between 1 and 
-// 6 using the RandomInt function until a six is found at which point
-// it prints the number of iterations to hit a six and returns
-
-func snake() : int {
-	
-	var temp : int := 0
-	var iter : int := 0
-	
-	while (temp != 6) {
-		temp := sys.RandomInt(5)
-		temp := temp + 1
-		iter := iter + 1
-	}
-	
-	return iter
-}
-
-// Empty function to ensure language doesn't choke when there are no returns
-//
-// No Arguments
-//
-// Return template int
-//
-// This is the test case to make sure the language could handle functions
-// that did not explicitely return.
-
-func emptyReturn() : int {
-}
-
-// Infinate loop test
-//
-// No Arguments
-//
-// No Returns
-//
-// Infinate loop used to try and spot memory leaks in statements
-
-func infinateLoop() : void {
-
-	while 1 > 0 {
-		snake()
-	}
-
-}
-
-func autoTest() : void {
-
-	for auto i := 0; i < 100; i++ {
-		sys.Write(sys.String(i) + " ")
-	}
-	
-	sys.Write("\n")
-	
-	auto b := true
-	
-	if b = true {
-		sys.Write("Definately true\n")
-	}
-
-}
-
-func arrayTests() : void {
-
-	var j : array(int)
-	var r : array(array(int))
-
-	j := [5]int
-	r := [5]array(int)
-
-	auto k := [6]int
-
-}
+import("arrays")
+import("random")
+import("variables")
+import("functions")
 
 // The main function in this test situation
 //
@@ -94,47 +18,29 @@ func main() : void {
 
 	sys.Write("-- Scribble test program --\n")
 
-	var jrDog : bool := false
-	
-	while jrDog = false {
-		sys.Write("Hello world\n")
-		jrDog := true
+	if (variables.Test() = false) {
+		sys.Write("Variables test failed.\n")
 	}
 
-	sys.Write(sys.String(true) + "\n")
-	
-	autoTest()
-	
-	sys.Write("J: ")
-	
-	for auto j := 10; j > 0; j-- {
-		sys.Write(sys.String(j) + " ")
+	if (arrays.Test() = false) {
+		sys.Write("Arrays test failed.\n")
 	}
 	
-	sys.Write(sys.String(j--))
-	
-	sys.Write("\n")
+	if (functions.Test() = false) {
+		sys.Write("Functions test failed.\n")
+	}
 
-	var cookies : int := 2
-	cookies := cookies * 3
+	if (random.Test() = false) {
+		sys.Write("Random test failed.\n")
+	}
 	
-	sys.Write("So many cookies: " + sys.String(cookies) + "\n")
+	if (fibs.Test() = false) {
+		sys.Write("Fibonacci test failed.\n")
+	}
+	
+	if (fact.Test() = false) {
+		sys.Write("Factorial test failed.\n")
+	}
 
-	for auto i := 0; i < 30; i++ {
-		sys.Write( sys.String ( fibs.FibsIterative(i) ) + " ")
-	}
-	
-	sys.Write("\n")
-	
-	for i := 0; i < 10; i++ {
-		sys.Write( sys.String(fact.Fact(i)) + " ")
-	}
-	
-	sys.Write("\n")
-	
-	sys.Write( sys.String(snake()) + " attempts till a six was rolled\n")
-	
-	sys.Write( "Calling a function that does not return: " + sys.String(emptyReturn()) + "\n")
-	
 	sys.Write("-- End of scribble test program --\n")
 }

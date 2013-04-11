@@ -1,6 +1,8 @@
 import ("sys")
 
 func Test() : bool {
-	sys.Write("Arrays test not implemented\n")
+
+	sys.Write("Variable tests unimplemented\n")
+
 	return true
 }
