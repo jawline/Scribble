@@ -12,23 +12,13 @@ public:
 		value_ = value;
 	}
 
-	ValueType type() {
-		return Int;
-	}
+	ValueType type();
 
-	int value() {
-		return value_;
-	}
+	int value();
 
-	void setValue(int v) {
-		value_ = v;
-	}
+	void setValue(int v);
 
-	Value* clone() {
-		IntValue* gen = (IntValue*) valueHeap.make(Int);
-		gen->setValue(value_);
-		return gen;
-	}
+	Value* clone();
 
 	void applyOperator(ValueOperator v, Value* r);
 };

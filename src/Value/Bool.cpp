@@ -26,8 +26,27 @@ void BoolValue::applyOperator(ValueOperator v, Value* r) {
 		break;
 
 	default:
-		throw StatementException(0, "Booleans cannot have any operations other than assign.");
+		throw StatementException(0,
+				"Booleans cannot have any operations other than assign.");
 		break;
 	}
 
+}
+
+Value* BoolValue::clone() {
+	BoolValue* gen = (BoolValue*) valueHeap.make(Boolean);
+	gen->setValue(value_);
+	return gen;
+}
+
+ValueType BoolValue::type() {
+	return Boolean;
+}
+
+bool BoolValue::value() {
+	return value_;
+}
+
+void BoolValue::setValue(bool v) {
+	value_ = v;
 }

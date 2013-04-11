@@ -18,23 +18,13 @@ public:
 	BoolValue(bool value);
 	virtual ~BoolValue();
 
-	bool value() {
-		return value_;
-	}
+	bool value();
 
-	void setValue(bool v) {
-		value_ = v;
-	}
+	void setValue(bool v);
 
-	ValueType type() {
-		return Boolean;
-	}
+	ValueType type();
 
-	Value* clone() {
-		BoolValue* gen = (BoolValue*) valueHeap.make(Boolean);
-		gen->setValue(value_);
-		return gen;
-	}
+	Value* clone();
 
 	void applyOperator(ValueOperator v, Value* r);
 };

@@ -9,10 +9,20 @@
 #include <Value/Util.hpp>
 
 ValueHeap::ValueHeap() {
+
 	valueStore_ = new std::stack<Value*>[ValueTypeMax];
+
 }
 
 ValueHeap::~ValueHeap() {
+
+	for (unsigned int i = 0; i < ValueTypeMax; ++i) {
+		for (unsigned int j = 0; j < valueStore_[i].size(); ++j) {
+			delete valueStore_[j].top();
+			valueStore_[j].pop();
+		}
+	}
+
 	delete[] valueStore_;
 }
 

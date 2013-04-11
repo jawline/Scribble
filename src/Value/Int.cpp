@@ -27,3 +27,21 @@ void IntValue::applyOperator(ValueOperator v, Value* r) {
 		break;
 	}
 }
+
+ValueType IntValue::type() {
+	return Int;
+}
+
+int IntValue::value() {
+	return value_;
+}
+
+void IntValue::setValue(int v) {
+	value_ = v;
+}
+
+Value* IntValue::clone() {
+	IntValue* gen = (IntValue*) valueHeap.make(Int);
+	gen->setValue(value_);
+	return gen;
+}
