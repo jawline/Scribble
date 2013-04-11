@@ -1,10 +1,9 @@
 Planned features
 
 Version 0.4 should include
-	A value heap to handle allocation of values which could significantly speed up execution.
-	Automatic typing variables. auto a := blah
-	Better debugging information for the programmer.
-
+	A value heap to handle allocation of values which could significantly speed up execution. [DONE]
+	Automatic typing variables. auto a := blah [DONE]
+	
 Version 0.5 should include
 	Support for arrays.
 
@@ -12,3 +11,11 @@ Version 0.6 should include
 	Floats
 	Improved type support at runtime ( Implementing many operations or providing compile time checks for operations that should never be implemented )
 	Support for user defined structures
+
+Version 0.7 should include
+	Compiled dynamic library linking support.
+	For example a .so or .dll file could be distributed with a binary which would
+	provide the runtime sys namespace.
+
+Version 0.8
+	Better debugging information for the programmer.

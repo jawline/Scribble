@@ -44,13 +44,16 @@ int main(int argc, char** argv) {
 	SP<Function> entry = Parser::generateProgram(argv[1]);
 
 	if (!entry.Null()) {
-		double seconds = 0;
+		clock_t startClocks = 0;
+		clock_t endClocks = 0;
 
-		seconds = clock();
+		startClocks = clock();
 		entry->execute(std::vector<Value*>());
-		seconds = clock() - seconds;
+		endClocks = clock();
 
-		printf("%f seconds to execute.\n", seconds / CLOCKS_PER_SEC);
+		printf("%ld clocks to execute. %f seconds to execute.\n",
+				(endClocks - startClocks),
+				((float) (endClocks - startClocks)) / CLOCKS_PER_SEC);
 	} else {
 		printf(
 				"It appears that the main function was not declared within the scope");

@@ -1,0 +1,6 @@
+import ("sys")
+
+func Test() : bool {
+
+	return true
+}

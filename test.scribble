@@ -70,6 +70,18 @@ func autoTest() : void {
 
 }
 
+func arrayTests() : void {
+
+	var j : array(int)
+	var r : array(array(int))
+
+	j := [5]int
+	r := [5]array(int)
+
+	auto k := [6]int
+
+}
+
 // The main function in this test situation
 //
 // No Arguments
@@ -88,7 +100,7 @@ func main() : void {
 		sys.Write("Hello world\n")
 		jrDog := true
 	}
-	
+
 	sys.Write(sys.String(true) + "\n")
 	
 	autoTest()
