@@ -10,29 +10,15 @@ private:
 
 public:
 
-	StringValue(std::string const value) {
-		value_ = std::string(value);	
-	}
-
-	ValueType type() {
-		return String;
-	}
-
-	Value* clone() {
-		StringValue* gen = (StringValue*) valueHeap.make(String);
-		gen->setValue(value_);
-		return gen;
-	}
+	StringValue(std::string const value);
+	ValueType type();
+	Value* clone();
 
 	void applyOperator(ValueOperator v, Value* r);
 
-	std::string getValue() {
-		return value_;
-	}
+	std::string getValue();
 
-	void setValue(std::string const& ref) {
-		value_ = ref;
-	}
+	void setValue(std::string const& ref);
 };
 
 #endif //_STRING_H_

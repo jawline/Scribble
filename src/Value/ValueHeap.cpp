@@ -15,14 +15,7 @@ ValueHeap::ValueHeap() {
 }
 
 ValueHeap::~ValueHeap() {
-
-	for (unsigned int i = 0; i < ValueTypeMax; ++i) {
-		for (unsigned int j = 0; j < valueStore_[i].size(); ++j) {
-			delete valueStore_[j].top();
-			valueStore_[j].pop();
-		}
-	}
-
+	freeAll();
 	delete[] valueStore_;
 }
 
@@ -44,4 +37,15 @@ void ValueHeap::free(Value* v) {
 	} else {
 		delete v;
 	}
+}
+
+void ValueHeap::freeAll() {
+
+	for (unsigned int i = 0; i < ValueTypeMax; ++i) {
+		while (valueStore_[i].size() > 0) {
+			delete valueStore_[i].top();
+			valueStore_[i].pop();
+		}
+	}
+
 }

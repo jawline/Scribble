@@ -20,12 +20,15 @@ extern void yylex_destroy();
 SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 		FunctionSet const& set) {
 
+	//If the target set is empty return null
 	if (set.size() == 0) {
 		return 0;
 	}
 
+	//Grab a reference to the functions arguments.
 	std::vector<SafeStatement> const& args = toFind->getArgs();
 
+	//If the function takes zero arguments then there can only be one option.
 	if (args.size() == 0) {
 
 		SP<Function> fn = set[0];
@@ -37,6 +40,7 @@ SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 		}
 	}
 
+	//Otherwise search through each function and do a thorough search.
 	for (unsigned int i = 0; i < set.size(); ++i) {
 
 		SP<Function> fn = set[i];
@@ -75,16 +79,24 @@ std::string Parser::bufferText(std::string const& filePath) {
 
 	// Get the length of the file
 	size_t f_size = ftell(fin);
+
+	// Rewind to the beginning
 	fseek(fin, 0, SEEK_SET);
 
+	// Allocate space for the test
 	char* buffer = new char[f_size + 1];
 
+	// Read it in and null point the end
 	fread(buffer, 1, f_size, fin);
 	buffer[f_size] = '\0';
+
+	//Close the file
 	fclose(fin);
 
 	//Create the inputSource from the buffer
 	std::string inputSource = std::string(buffer);
+
+	//Free the buffers
 	delete[] buffer;
 
 	return inputSource;
@@ -211,14 +223,11 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 			if (ref->getNamespace().size() != 0) {
 
 				//Check the namespace has been loaded. If not then do not resolve the reference.
-				if (Parser::listContains(ref->getNamespace(),
-						imports)) {
-					selectedNamespace =
-							Namespace[ref->getNamespace()];
+				if (Parser::listContains(ref->getNamespace(), imports)) {
+					selectedNamespace = Namespace[ref->getNamespace()];
 				} else {
 					ref->setResolveIssue(
-							std::string("Namespace ")
-									+ ref->getNamespace()
+							std::string("Namespace ") + ref->getNamespace()
 									+ " has not been imported.");
 				}
 			}
@@ -230,14 +239,13 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 			if (it == selectedNamespace.end()) {
 
 				ref->setResolveIssue(
-						std::string("the function ")
-								+ ref->getDebugName()
+						std::string("the function ") + ref->getDebugName()
 								+ " is not defined");
 
 			} else {
 
-				SP<Function> searchResult = Parser::findFunctionInSet(
-						ref, it->second);
+				SP<Function> searchResult = Parser::findFunctionInSet(ref,
+						it->second);
 
 				if (!searchResult.Null()) {
 
@@ -246,8 +254,7 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 				} else {
 
 					ref->setResolveIssue(
-							std::string("the function ")
-									+ ref->getDebugName()
+							std::string("the function ") + ref->getDebugName()
 									+ " is defined but does not have any versions which take the specified argument types.");
 
 				}

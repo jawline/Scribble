@@ -19,32 +19,8 @@ public:
 		func_ = function;
 	}
 
-	virtual Value* execute(std::vector<Value*> const& variables) {
-
-		std::vector<Value*> pArgs;
-
-		for (unsigned int i = 0; i < func_->getArgs().size(); i++) {
-			SafeStatement arg = func_->getArgs()[i];
-			pArgs.push_back(arg->execute(variables));
-		}
-
-		Value* res = func_->getFunction()->execute(pArgs);
-
-		for (unsigned int i = 0; i < pArgs.size(); i++) {
-			valueHeap.free(pArgs[i]);
-		}
-
-		return res;
-	}
-
-	ValueType type() {
-
-		if (func_->getFunction().Null()) {
-			return TypeUnresolved;
-		}
-
-		return func_->getFunction()->getType();
-	}
+	virtual Value* execute(std::vector<Value*> const& variables);
+	ValueType type();
 
 	void checkTree(ValueType functionType);
 };

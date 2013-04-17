@@ -29,6 +29,7 @@ private:
 public:
 
 	static Value* generateValue(ValueType type);
+	static bool sameType(Value* a, Value* b);
 
 };
 

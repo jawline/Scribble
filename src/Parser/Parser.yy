@@ -202,7 +202,11 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 		
 		Variables.clear();
 		
+		//Delete name
 		delete $2;
+		
+		//Delete statements vector
+		delete $9;
 
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
 		
@@ -241,6 +245,7 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 		Variables.clear();
 
 		delete $2;
+		delete $8;
 	}
 ;
 
@@ -374,18 +379,24 @@ Statement: TRUE {
 		$$ = $1;
 	} | IF Statement LBRACKET Statements RBRACKET {
 		$$ = new IfStatement(yylineno, yytext, $2, *$4, std::vector<SP<Statement>>());
+		delete $4;
 	} | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET {
 		$$ = new IfStatement(yylineno, yytext, $2, *$4, *$8);
+		delete $4;
+		delete $8;
 	} | Statement PLUS Statement {
 		$$ = new OperateStatement(yylineno, yytext, Add, $1, $3);
 	} | Statement MINUS Statement {
 		$$ = new OperateStatement(yylineno, yytext, Subtract, $1, $3);
 	} | Statement TIMES Statement {
 		$$ = new OperateStatement(yylineno, yytext, Multiply, $1, $3);
+	} | Statement DIVIDE Statement {
+		$$ = new OperateStatement(yylineno, yytext, Divide, $1, $3);
 	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
 		$$ = new ForStatement(yylineno, yytext, $2, $4, $6, *$8);
 	} | WHILE Statement LBRACKET Statements RBRACKET {
 		$$ = new WhileStatement(yylineno, yytext, $2, *$4);
+		delete $4;
 	} | Statement EQUALS Statement {
 		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
 	} | Statement NOT EQUALS Statement {

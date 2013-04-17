@@ -3,7 +3,13 @@
 
 // Enum defining variable types (Integer, Boolean, Etcetera)
 enum ValueType {
-	TypeUnresolved = -1, String = 0, Boolean = 1, Int = 2, Void = 3, ValueTypeMax = 4
+	TypeUnresolved = -1,
+	String = 0,
+	Boolean = 1,
+	Int = 2,
+	Void = 3,
+	Array = 4,
+	ValueTypeMax = 5
 };
 
 // Enum defining all value operators (Add, Divide, Assign, Subtract, Mod etc)

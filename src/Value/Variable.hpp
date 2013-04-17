@@ -15,24 +15,12 @@ public:
 	Variable(ValueType t, int position, Value* value);
 	~Variable();
 
-	void setType(ValueType newType) {
-		type_ = newType;
-	}
-
-	void setValue(Value* v) {
-		value_ = v;
-	}
-
+	void setType(ValueType newType);
+	void setValue(Value* v);
 	Value* getValue();
 	ValueType getType();
-
-	void setPosition(int pos) {
-		position_ = pos;
-	}
-
-	int getPosition() {
-		return position_;
-	}
+	void setPosition(int pos);
+	int getPosition();
 
 };
 

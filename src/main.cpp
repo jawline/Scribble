@@ -7,6 +7,7 @@
 #include <Function/WriteFunction.hpp>
 #include <Function/StringFunction.hpp>
 #include <Function/RandomInt.hpp>
+#include <Statement/Heap.hpp>
 #include <Parser/Parser.hpp>
 #include <version_info.hpp>
 #include <string.h>
@@ -48,7 +49,7 @@ int main(int argc, char** argv) {
 		clock_t endClocks = 0;
 
 		startClocks = clock();
-		entry->execute(std::vector<Value*>());
+		delete entry->execute(std::vector<Value*>());
 		endClocks = clock();
 
 		printf("%ld clocks to execute. %f seconds to execute.\n",
@@ -58,4 +59,6 @@ int main(int argc, char** argv) {
 		printf(
 				"It appears that the main function was not declared within the scope");
 	}
+
+	valueHeap.freeAll();
 }

@@ -59,3 +59,12 @@ Value* ValueUtil::generateValue(ValueType type) {
 
 	throw UtilException("Type generation not valid/unimplemented");
 }
+
+bool ValueUtil::sameType(Value* a, Value* b) {
+
+	if (a->type() != b->type()) {
+		return false;
+	}
+
+	return true;
+}

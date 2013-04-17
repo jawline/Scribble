@@ -38,16 +38,12 @@ func FibsIterative(var n : int) : int {
 	if n = 0 {
 		return 0
 	}
-	
-	if n = 1 {
-		return 1
-	}
 
-	auto l1 := 1
+	auto l1 := 0
 	auto l2 := 1
-	auto c := 0
+	auto c := 1
 
-	for auto i := 0; i < n-1; i++ {
+	for auto i := 0; i < n; i++ {
 		c := l1 + l2
 		l2 := l1
 		l1 := c

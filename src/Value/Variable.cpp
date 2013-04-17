@@ -15,3 +15,19 @@ Value* Variable::getValue() {
 ValueType Variable::getType() {
 	return type_;
 }
+
+void Variable::setPosition(int pos) {
+	position_ = pos;
+}
+
+int Variable::getPosition() {
+	return position_;
+}
+
+void Variable::setType(ValueType newType) {
+	type_ = newType;
+}
+
+void Variable::setValue(Value* v) {
+	value_ = v;
+}

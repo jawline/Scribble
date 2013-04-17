@@ -5,6 +5,8 @@ Version 0.4 should include
 	Automatic typing variables. auto a := blah [DONE]
 	
 Version 0.5 should include
+	Memory profiling.
+	Changes to parser interface.
 	Support for arrays.
 
 Version 0.6 should include

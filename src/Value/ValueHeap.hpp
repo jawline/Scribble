@@ -21,6 +21,7 @@ public:
 
 	Value* make(ValueType type);
 	void free(Value* value);
+	void freeAll();
 };
 
 #endif /* VALUEHEAP_HPP_ */
