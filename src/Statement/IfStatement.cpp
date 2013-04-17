@@ -9,6 +9,7 @@
 #include <Value/Bool.hpp>
 #include <Value/Void.hpp>
 #include <Statement/Heap.hpp>
+#include <Statement/ReturnStatement.hpp>
 
 IfStatement::IfStatement(int lineNo, std::string sym, SP<Statement> condition,
 		std::vector<SP<Statement>> ifTrueStatements,
@@ -25,8 +26,10 @@ IfStatement::~IfStatement() {
 Value* IfStatement::execute(std::vector<Value*> const& variables) {
 
 	BoolValue* v = (BoolValue*) condition_->execute(variables);
+	bool val = v->value();
+	valueHeap.free(v);
 
-	if (v->value()) {
+	if (val) {
 
 		for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {
 			valueHeap.free(ifTrueStatements_[i]->execute(variables));
@@ -39,8 +42,6 @@ Value* IfStatement::execute(std::vector<Value*> const& variables) {
 		}
 
 	}
-
-	valueHeap.free(v);
 
 	return valueHeap.make(Void);
 }

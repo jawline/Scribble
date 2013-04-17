@@ -102,10 +102,6 @@ std::string Parser::bufferText(std::string const& filePath) {
 	return inputSource;
 }
 
-void Parser::setupNamespace(std::string name, NamespaceType const& functions) {
-	Namespace[name] = functions;
-}
-
 bool Parser::listContains(std::string target,
 		std::vector<std::string> const& list) {
 
@@ -167,7 +163,7 @@ ValueType Parser::functionSetType(FunctionSet const& functionSet) {
 	return fn->getType();
 }
 
-SP<Function> Parser::generateProgram(std::string const& filename) {
+NamespaceType Parser::include(std::string const& filename) {
 
 //Create the inputSource from the buffer
 	std::string inputSource = bufferText(filename + ".scribble");
@@ -198,12 +194,12 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 	std::vector<Reference> references = References;
 	References = std::vector<Reference>();
 
-//Look at the list of requested imports and attempt to resolve them.
+	//Look at the list of requested imports and attempt to resolve them.
 	for (unsigned int i = 0; i < imports.size(); ++i) {
 
 		//If not already loaded attempt to load the file.
 		if (Namespace.find(imports[i]) == Namespace.end()) {
-			generateProgram(imports[i]);
+			include(imports[i]);
 			Functions = NamespaceType();
 		}
 
@@ -289,12 +285,22 @@ SP<Function> Parser::generateProgram(std::string const& filename) {
 		throw ParserException(filename, e.what());
 	}
 
-	if (Functions["main"].size() > 0) {
+	return Functions;
+}
 
-		//If it hasn't return the source as a function
-		return Functions["main"][0];
+FunctionSet Parser::compile(std::string const& file, std::map<std::string, NamespaceType> builtinNamespace) {
+	Namespace.clear();
+	Functions.clear();
+	ImportList.clear();
+	References.clear();
 
-	}
+	Namespace = builtinNamespace;
+	NamespaceType ns = include(file);
 
-	return 0;
+	Namespace.clear();
+	Functions.clear();
+	ImportList.clear();
+	References.clear();
+
+	return ns["main"];
 }

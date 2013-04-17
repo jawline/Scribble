@@ -37,11 +37,7 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 
 		switch (tType_) {
 		case TestEquals:
-			if (bl->value() == br->value()) {
-				result = new BoolValue(true);
-			} else {
-				result = new BoolValue(false);
-			}
+			result = valueHeap.make(bl->value() == br->value());
 			break;
 
 		default:

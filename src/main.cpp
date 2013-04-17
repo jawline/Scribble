@@ -40,9 +40,10 @@ int main(int argc, char** argv) {
 	builtinFunctions["RandomInt"].push_back(
 			SmartPointer<Function>(new RandomInt()));
 
-	Parser::setupNamespace("sys", builtinFunctions);
+	std::map<std::string, NamespaceType> builtinNamespaces;
+	builtinNamespaces["sys"] = builtinFunctions;
 
-	SP<Function> entry = Parser::generateProgram(argv[1]);
+	SP<Function> entry = Parser::compile(argv[1], builtinNamespaces)[0];
 
 	if (!entry.Null()) {
 		clock_t startClocks = 0;

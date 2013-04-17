@@ -29,10 +29,9 @@ class Parser {
 private:
 	static std::string bufferText(std::string const& filePath);
 
-public:
+	static NamespaceType include(std::string const& inputSource);
 
-	static void setupNamespace(std::string name,
-			NamespaceType const& functions);
+public:
 
 	//Check the number of arguments a function must have in this set
 	static unsigned int functionSetNumArguments(FunctionSet const& functionSet);
@@ -53,7 +52,7 @@ public:
 	static bool listContains(std::string target,
 			std::vector<std::string> const& list);
 
-	static SP<Function> generateProgram(std::string const& inputSource);
+	static FunctionSet compile(std::string const& file, std::map<std::string, NamespaceType> builtinNamespace);
 };
 
 #endif //_PARSER_DEF_H_

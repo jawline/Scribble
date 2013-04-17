@@ -37,18 +37,16 @@ Value* WhileStatement::execute(std::vector<Value*> const& variables) {
 
 	while ((conditionResult = ((BoolValue*) condition_->execute(variables)))->value()
 			== true) {
-
-		delete conditionResult;
+		valueHeap.free(conditionResult);
 
 		for (unsigned int i = 0; i < statements_.size(); ++i) {
-			delete statements_[i]->execute(variables);
+			valueHeap.free(statements_[i]->execute(variables));
 		}
 
 	}
 
-	delete conditionResult;
-
-	return new VoidValue();
+	valueHeap.free(conditionResult);
+	return valueHeap.make(Void);
 }
 
 ValueType WhileStatement::type() {
