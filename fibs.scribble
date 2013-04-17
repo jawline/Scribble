@@ -57,15 +57,17 @@ func Test() : bool {
 	sys.Write("Fibonacci test. ")
 	
 	for auto i := 0; i < 20; i++ {
+		
+		auto sFibsResult := Fibs(i)
+		auto iFibsResult := FibsIterative(i)
+		
 		sys.Write(sys.String(Fibs(i)) + " ")
-	}
-	
-	sys.Write("\n")
-	
-	sys.Write("Iterative fibs test. ")
-	
-	for i := 0; i < 20; i++ {
-		sys.Write(sys.String(FibsIterative(i)) + " ")
+		
+		if (sFibsResult != iFibsResult) {
+			sys.Write("\nFibonacci test failed. iterative does not equal recursive result")
+			return false
+		}
+		
 	}
 	
 	sys.Write("\n")

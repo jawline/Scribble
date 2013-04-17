@@ -132,6 +132,11 @@ bool Parser::functionSetAlreadyContainsEquivilent(SP<Function> function,
 		if (compared.Get() == function.Get()) {
 			return true;
 		} else {
+
+			if (function->numArgs() != compared->numArgs()) {
+				return false;
+			}
+
 			duplicate = true;
 
 			for (unsigned int j = 0; j < function->numArgs(); ++j) {
@@ -289,7 +294,8 @@ NamespaceType Parser::include(std::string const& filename) {
 	return Functions;
 }
 
-FunctionSet Parser::compile(std::string const& file, std::map<std::string, NamespaceType> builtinNamespace) {
+FunctionSet Parser::compile(std::string const& file,
+		std::map<std::string, NamespaceType> builtinNamespace) {
 	parser_free_all();
 
 	Namespace = builtinNamespace;

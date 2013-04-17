@@ -9,6 +9,7 @@
 #include <Statement/StatementException.hpp>
 #include <Value/Int.hpp>
 #include <Value/Bool.hpp>
+#include <Value/String.hpp>
 #include <Statement/Heap.hpp>
 
 TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
@@ -70,6 +71,30 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 		case TestGreater:
 			result = valueHeap.make((il->value() > rl->value()));
 			break;
+		}
+
+		break;
+	}
+
+	case String: {
+
+		StringValue* sl = (StringValue*) lhRes;
+		StringValue* sr = (StringValue*) rhRes;
+
+		switch (tType_) {
+
+		case TestEquals:
+			result = valueHeap.make(
+					sl->getValue().compare(sr->getValue()) == 0);
+			break;
+
+		case TestNotEquals:
+			result = valueHeap.make(
+					!(sl->getValue().compare(sr->getValue()) == 0));
+			break;
+
+		default:
+			throw StatementException(this, "Not implemented yet");
 		}
 
 		break;

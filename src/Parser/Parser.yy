@@ -219,11 +219,6 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 				return -1;
 			}
 			
-			if (Parser::functionSetNumArguments(Functions[*$2]) != values.size()) {
-				yyerror("Due to previous definition function is expected to have a specific number of arguments");
-				return -1;
-			}
-			
 			if (Parser::functionSetAlreadyContainsEquivilent(fn, Functions[*$2]) == true) {
 				yyerror("Identical function already defined");
 				return -1;
@@ -260,11 +255,6 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 			if (Parser::functionSetType(Functions[*$2]) != $6) {
 				yyerror("Function differs from predefined function type");
-				return -1;
-			}
-
-			if (Parser::functionSetNumArguments(Functions[*$2]) != values.size()) {
-				yyerror("Due to previous definition function is expected to have a specific number of arguments");
 				return -1;
 			}
 
