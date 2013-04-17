@@ -16,6 +16,7 @@ extern bool ParsingError;
 extern void yyparse();
 extern void yy_scan_string(char const*);
 extern void yylex_destroy();
+extern void parser_free_all();
 
 SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 		FunctionSet const& set) {
@@ -289,18 +290,12 @@ NamespaceType Parser::include(std::string const& filename) {
 }
 
 FunctionSet Parser::compile(std::string const& file, std::map<std::string, NamespaceType> builtinNamespace) {
-	Namespace.clear();
-	Functions.clear();
-	ImportList.clear();
-	References.clear();
+	parser_free_all();
 
 	Namespace = builtinNamespace;
 	NamespaceType ns = include(file);
 
-	Namespace.clear();
-	Functions.clear();
-	ImportList.clear();
-	References.clear();
+	parser_free_all();
 
 	return ns["main"];
 }

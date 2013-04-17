@@ -10,7 +10,7 @@ import("sys")
 // fibonacci problem into a very simple algorithm. It is however considerably less
 // memory efficient than its iterative counterparts
 
-func Fibs(var n : int) : int {
+func Fibs(n : int) : int {
 	
 	if (n < 0) {
 		sys.Write("N Should be a positive value\n")
@@ -28,7 +28,7 @@ func Fibs(var n : int) : int {
 	return Fibs(n - 1) + Fibs(n - 2)
 }
 
-func FibsIterative(var n : int) : int {
+func FibsIterative(n : int) : int {
 
 	if n < 0 {
 		sys.Write("Fibs is only valid on n > 0\n")

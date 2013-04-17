@@ -44,6 +44,15 @@ NamespaceType Functions;
 
 std::vector<Reference> References;
 
+void parser_free_all() {
+	ImportList.clear();
+	Variables.clear();
+	Namespace.clear();
+	Functions.clear();
+	References.clear();
+	ParsingError = false;
+}
+
 extern int yylineno;	// defined and maintained in lex.c
 extern char *yytext;	// defined and maintained in lex.c
 
@@ -78,10 +87,11 @@ extern char *yytext;	// defined and maintained in lex.c
 %type <statement> Statement;
 %type <statements> Program;
 %type <variable> Variable;
+%type <variable> ArgumentDefinition;
 %type <statements> Arguments;
 %type <statements> Statements;
 %type <function> Function;
-%type <variables> Variables;
+%type <variables> ArgumentDefinitions;
 %type <statement> AutoVariable;
 %type <type> Type;
 %type <statement> FunctionCall
@@ -129,7 +139,7 @@ Variable:  VARIABLE WORD COLON Type {
 			Variables[*$2] = nVar;
 			$$ = nVar;
 		}
-		
+		delete $2;
 	}
 ;
 
@@ -159,16 +169,38 @@ AutoVariable: AUTO WORD ASSIGN Statement {
 	}
 ;
 
-Variables: Variable {
+ArgumentDefinition: WORD COLON Type {
+
+		if (((ValueType)$3) == TYPE_VOID) {
+			yyerror("Cannot declare a variable as a void.");
+			return -1;
+		}
+
+		auto it = Variables.find(*$1);
+			
+		if (it != Variables.end()) {
+			yyerror("Variable already defined.");
+			return -1;
+		} else {
+			Variable* nVar = new Variable($3, 0, ValueUtil::generateValue($3));
+			Variables[*$1] = nVar;
+			$$ = nVar;
+		}
+		
+		delete $1;
+	}
+;
+
+ArgumentDefinitions: ArgumentDefinition {
 		$$ = new std::vector<SP<Variable>>();
 		$$->push_back($1);
-	} | Variables COMMA Variable {
+	} | ArgumentDefinitions COMMA ArgumentDefinition {
 		$$ = $1;
 		$$->push_back($3);
 	}
 ;
 
-Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements RBRACKET {
+Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET Statements RBRACKET {
 		std::vector<SP<Variable>> values;
 
 		int pos = 0;
@@ -207,6 +239,9 @@ Function: FUNCTION WORD LPAREN Variables RPAREN COLON Type LBRACKET Statements R
 		
 		//Delete statements vector
 		delete $9;
+		
+		//Delete variables vector
+		delete $4;
 
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
 		

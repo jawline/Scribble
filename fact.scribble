@@ -9,7 +9,7 @@ import ("sys")
 // Extended Description - This function recursively generates
 // the factorial of the given argument n
 
-func Fact(var n : int) : int {
+func Fact(n : int) : int {
 
 	if (n < 0) {
 		sys.Write("Only works on values > 1\n")
