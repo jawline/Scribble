@@ -60,41 +60,19 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 
 		switch (tType_) {
 		case TestEquals:
-
-			if (il->value() == rl->value()) {
-				result = new BoolValue(true);
-			} else {
-				result = new BoolValue(false);
-			}
-
+			//Result is a bool test of truth
+			result = valueHeap.make((il->value() == rl->value()));
 			break;
 
 		case TestNotEquals:
-			if (il->value() == rl->value()) {
-				result = new BoolValue(false);
-			} else {
-				result = new BoolValue(true);
-			}
-
+			result = valueHeap.make(!(il->value() == rl->value()));
 			break;
 
 		case TestLess:
-
-			if (il->value() < rl->value()) {
-				result = new BoolValue(true);
-			} else {
-				result = new BoolValue(false);
-			}
-
+			result = valueHeap.make((il->value() < rl->value()));
 			break;
 		case TestGreater:
-
-			if (il->value() > rl->value()) {
-				result = new BoolValue(true);
-			} else {
-				result = new BoolValue(false);
-			}
-
+			result = valueHeap.make((il->value() > rl->value()));
 			break;
 		}
 

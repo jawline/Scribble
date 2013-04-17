@@ -7,6 +7,8 @@
 
 #include "ValueHeap.hpp"
 #include <Value/Util.hpp>
+#include <Value/Bool.hpp>
+#include <Value/Int.hpp>
 
 ValueHeap::ValueHeap() {
 
@@ -28,6 +30,19 @@ Value* ValueHeap::make(ValueType type) {
 	}
 
 	return ValueUtil::generateValue(type);
+}
+
+
+Value* ValueHeap::make(bool value) {
+	Value* val = make(Boolean);
+	((BoolValue*)val)->setValue(value);
+	return val;
+}
+
+Value* ValueHeap::make(int value) {
+	Value* val = make(Int);
+	((IntValue*)val)->setValue(value);
+	return val;
 }
 
 void ValueHeap::free(Value* v) {
