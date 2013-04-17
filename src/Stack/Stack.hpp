@@ -13,21 +13,25 @@ class StackEmptyException : public std::exception {
 
 };
 
+template <class s_Type>
 class Stack {
 private:
-	uint8_t* data_;
+	s_Type* data_;
 	size_t current_;
 	size_t max_;
 
-	static const int cDefaultSize = 1024;
-	static const int cExpandChunkSize = 1024;
+	static const int cDefaultSize = 64;
+	static const int cExpandChunkSize = 64;
 
 
 	void expand() {
-		printf("Expanding stack from %i to %i entries\n", max_, max_ + cExpandChunkSize);
 
-		uint8_t* newData = new uint8_t[max_ + cExpandChunkSize];
-		memcpy(newData, data_,sizeof(uint8_t) * max_);
+		s_Type* newData = new s_Type[max_ + cExpandChunkSize];
+
+		for (int i = 0; i < max_; ++i) {
+			newData[i] = data_[i];
+		}
+
 		delete[] data_;
 
 		data_ = newData;
@@ -38,12 +42,9 @@ public:
 
 	Stack() {
 
-		data_ = new uint8_t[cDefaultSize];
+		data_ = new s_Type[cDefaultSize];
 		current_ = 0;
 		max_ = cDefaultSize;
-
-		printf("Initialized new stack of size %i\n", cDefaultSize);
-
 	}
 
 	~Stack() {
@@ -53,9 +54,10 @@ public:
 			current_ = 0;
 			max_ = 0;
 		}
+
 	}
 
-	void pushb(uint8_t a) {
+	void push(s_Type a) {
 
 		if (current_ >= max_) {
 			expand();
@@ -65,7 +67,7 @@ public:
 		current_++;
 	}
 
-	uint8_t popb() {
+	s_Type pop() {
 
 		if (current_ == 0) {
 			throw StackEmptyException();

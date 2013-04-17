@@ -12,7 +12,7 @@
 
 ValueHeap::ValueHeap() {
 
-	valueStore_ = new std::stack<Value*>[ValueTypeMax];
+	valueStore_ = new Stack<Value*> [ValueTypeMax];
 
 }
 
@@ -24,24 +24,21 @@ ValueHeap::~ValueHeap() {
 Value* ValueHeap::make(ValueType type) {
 
 	if (valueStore_[type].size() > 0) {
-		Value* stored = valueStore_[type].top();
-		valueStore_[type].pop();
-		return stored;
+		return valueStore_[type].pop();
 	}
 
 	return ValueUtil::generateValue(type);
 }
 
-
 Value* ValueHeap::make(bool value) {
 	Value* val = make(Boolean);
-	((BoolValue*)val)->setValue(value);
+	((BoolValue*) val)->setValue(value);
 	return val;
 }
 
 Value* ValueHeap::make(int value) {
 	Value* val = make(Int);
-	((IntValue*)val)->setValue(value);
+	((IntValue*) val)->setValue(value);
 	return val;
 }
 
@@ -57,10 +54,11 @@ void ValueHeap::free(Value* v) {
 void ValueHeap::freeAll() {
 
 	for (unsigned int i = 0; i < ValueTypeMax; ++i) {
+
 		while (valueStore_[i].size() > 0) {
-			delete valueStore_[i].top();
-			valueStore_[i].pop();
+			delete valueStore_[i].pop();
 		}
+
 	}
 
 }

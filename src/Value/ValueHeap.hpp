@@ -8,11 +8,12 @@
 #ifndef VALUEHEAP_HPP_
 #define VALUEHEAP_HPP_
 #include <Value/Value.hpp>
+#include <Stack/Stack.hpp>
 #include <stack>
 
 class ValueHeap {
 private:
-	std::stack<Value*>* valueStore_;
+	Stack<Value*>* valueStore_;
 	const static unsigned int ValueStackMax = 50;
 
 public:
