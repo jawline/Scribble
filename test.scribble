@@ -6,6 +6,9 @@ import("random")
 import("variables")
 import("functions")
 
+func fibs(n : int) : int {
+}
+
 // The main function in this test situation
 //
 // No Arguments
@@ -14,7 +17,7 @@ import("functions")
 //
 // Runs some simple tests
 
-func main() : void {
+func main(): void {
 
 	sys.Write("-- Scribble test program --\n")
 

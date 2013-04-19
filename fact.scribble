@@ -31,7 +31,7 @@ func Test() : bool {
 
 	sys.Write("Recursive factorial test ")
 	
-	for auto i := 0; i < 10; i++ {
+	for var i := 0; i < 10; i++ {
 		sys.Write(sys.String(Fact(i)) + " ")
 	}
 	

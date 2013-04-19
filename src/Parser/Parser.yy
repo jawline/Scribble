@@ -143,7 +143,7 @@ Variable:  VARIABLE WORD COLON Type {
 	}
 ;
 
-AutoVariable: AUTO WORD ASSIGN Statement {
+AutoVariable: VARIABLE WORD ASSIGN Statement {
 
 		auto it = Variables.find(*$2);
 				
@@ -154,7 +154,7 @@ AutoVariable: AUTO WORD ASSIGN Statement {
 		
 			SafeStatement sp = $4;
 		
-			Variable* nVar = new Variable(TypeUnresolved, 0, 0);
+			Variable* nVar = new Variable(TypeUnresolved, 0, nullptr);
 			Variables[*$2] = nVar;
 			
 			Reference r;

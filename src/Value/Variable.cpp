@@ -5,7 +5,11 @@ Variable::Variable(ValueType type, int position, Value* value) :
 }
 
 Variable::~Variable() {
-	delete value_;
+
+	if (value_ != nullptr) {
+		delete value_;
+	}
+
 }
 
 Value* Variable::getValue() {
