@@ -16,7 +16,7 @@ import("functions")
 
 func main() : void {
 
-	sys.Write("-- Scribble test program --\n")
+	sys.Write("-- Scribble test program --\n" + "\n")
 
 	if (variables.Test() = false) {
 		sys.Write("Variables test failed.\n")
