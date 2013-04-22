@@ -9,7 +9,7 @@
 #include <Value/Int.hpp>
 
 IncrementStatement::IncrementStatement(int line, std::string sym,
-		Variable* variable, IncrementType op, bool post) :
+		SP<Variable> variable, IncrementType op, bool post) :
 		Statement(line, sym), variable_(variable), operator_(op), post_(post) {
 	oneVal_ = new IntValue(1);
 }

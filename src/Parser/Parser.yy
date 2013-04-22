@@ -37,7 +37,7 @@ void yyerror(const char* s);
 
 bool ParsingError;
 std::vector<std::string> ImportList;
-std::map<std::string, Variable*> Variables;
+std::map<std::string, SP<Variable>> Variables;
 
 std::map<std::string, NamespaceType> Namespace;
 NamespaceType Functions;
@@ -64,7 +64,7 @@ extern char *yytext;	// defined and maintained in lex.c
 	std::vector<SmartPointer<Variable>>* variables;
 	Statement* statement;
 	Function* function;
-	Variable* variable;
+	SP<Variable>* variable;
 	float real;
 	int integer;
 	ValueType type;
@@ -135,10 +135,11 @@ Variable:  VARIABLE WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			Variable* nVar = new Variable($4, 0, ValueUtil::generateValue($4));
-			Variables[*$2] = nVar;
+			SP<Variable>* nVar = new SP<Variable>(new Variable($4, 0, ValueUtil::generateValue($4)));
+			Variables[*$2] = *nVar;
 			$$ = nVar;
 		}
+		
 		delete $2;
 	}
 ;
@@ -182,8 +183,8 @@ ArgumentDefinition: WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			Variable* nVar = new Variable($3, 0, ValueUtil::generateValue($3));
-			Variables[*$1] = nVar;
+			SP<Variable>* nVar = new SP<Variable>(new Variable($3, 0, ValueUtil::generateValue($3)));
+			Variables[*$1] = *nVar;
 			$$ = nVar;
 		}
 		
@@ -193,10 +194,12 @@ ArgumentDefinition: WORD COLON Type {
 
 ArgumentDefinitions: ArgumentDefinition {
 		$$ = new std::vector<SP<Variable>>();
-		$$->push_back($1);
+		$$->push_back(*$1);
+		delete $1;
 	} | ArgumentDefinitions COMMA ArgumentDefinition {
 		$$ = $1;
-		$$->push_back($3);
+		$$->push_back(*$3);
+		delete $3;
 	}
 ;
 
@@ -381,9 +384,11 @@ Statement: TRUE {
 		delete $1;
 		
 	} | Variable {
-		$$ = new GetVariableStatement(yylineno, yytext, $1);
+		$$ = new GetVariableStatement(yylineno, yytext, *$1);
+		delete $1;
 	} | Variable ASSIGN Statement {
-		$$ = new AssignVariableStatement(yylineno, yytext, $1, $3);
+		$$ = new AssignVariableStatement(yylineno, yytext, *$1, $3);
+		delete $1;
 	} | AutoVariable {
 		$$ = $1;
 	} | WORD {

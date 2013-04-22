@@ -3,7 +3,7 @@
 #include <sstream>
 
 AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym,
-		Variable* var, SafeStatement exp) :
+		SP<Variable> var, SafeStatement exp) :
 		Statement(lineNo, sym), exp_(exp), var_(var) {
 }
 

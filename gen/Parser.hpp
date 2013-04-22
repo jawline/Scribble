@@ -96,7 +96,7 @@ typedef union YYSTYPE
 	std::vector<SmartPointer<Variable>>* variables;
 	Statement* statement;
 	Function* function;
-	Variable* variable;
+	SP<Variable>* variable;
 	float real;
 	int integer;
 	ValueType type;

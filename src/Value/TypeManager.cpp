@@ -19,7 +19,7 @@ Type* TypeManager::tFind(ValueType sType, Type* sSubType) {
 
 	}
 
-	return 0;
+	return nullptr;
 }
 
 TypeManager::TypeManager() {
@@ -36,14 +36,14 @@ TypeManager::~TypeManager() {
 }
 
 Type* TypeManager::getType(ValueType base) {
-	return getType(base, 0);
+	return getType(base, nullptr);
 }
 
 Type* TypeManager::getType(ValueType base, Type* subType) {
 
 	Type* found = tFind(base, subType);
 
-	if (found != 0) {
+	if (found != nullptr) {
 		printf("Found existing type\n");
 		return found;
 	}

@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <cputime.hpp>
 
 int main(int argc, char** argv) {
 	srand(time(0));
@@ -25,16 +26,6 @@ int main(int argc, char** argv) {
 	if (argc != 2) {
 		printf("Expected usage %s filename\n", argv[0]);
 		return -1;
-	}
-
-	TypeManager testTypeManager;
-
-	if (testTypeManager.getType(Array, testTypeManager.getType(Int)) != 0) {
-		printf("Found type");
-	}
-
-	if (testTypeManager.getType(Array, testTypeManager.getType(Int)) != 0) {
-		printf("Found type");
 	}
 
 	NamespaceType builtinFunctions;
@@ -57,16 +48,11 @@ int main(int argc, char** argv) {
 	SP<Function> entry = Parser::compile(argv[1], builtinNamespaces)[0];
 
 	if (!entry.Null()) {
-		clock_t startClocks = 0;
-		clock_t endClocks = 0;
-
-		startClocks = clock();
+		double start = getCPUTime();
 		delete entry->execute(std::vector<Value*>());
-		endClocks = clock();
+		double end = getCPUTime();
 
-		printf("%ld clocks to execute. %f seconds to execute.\n",
-				(endClocks - startClocks),
-				((float) (endClocks - startClocks)) / CLOCKS_PER_SEC);
+		printf("%f seconds to execute.\n", end - start);
 	} else {
 		printf(
 				"It appears that the main function was not declared within the scope");

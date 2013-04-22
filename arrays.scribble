@@ -3,7 +3,6 @@ import ("sys")
 func Test() : bool {
 	sys.Write("Arrays test not implemented\n")
 	
-	var j : array(int)
 	
 	return true
 }

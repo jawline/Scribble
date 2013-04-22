@@ -7,10 +7,10 @@
 class AssignVariableStatement: public Statement {
 private:
 	SafeStatement exp_;
-	Variable* var_;
+	SP<Variable> var_;
 
 public:
-	AssignVariableStatement(int lineNo, std::string sym, Variable* var, SafeStatement exp);
+	AssignVariableStatement(int lineNo, std::string sym, SP<Variable> var, SafeStatement exp);
 	~AssignVariableStatement();
 	Value* execute(std::vector<Value*> const& variables);
 

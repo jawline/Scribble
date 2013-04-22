@@ -5,10 +5,10 @@
 
 class GetVariableStatement: public Statement {
 private:
-	Variable* var_;
+	SP<Variable> var_;
 
 public:
-	GetVariableStatement(int lineNo, std::string sym, Variable* var);
+	GetVariableStatement(int lineNo, std::string sym, SP<Variable> var);
 	~GetVariableStatement();
 	Value* execute(std::vector<Value*> const& variables);
 
