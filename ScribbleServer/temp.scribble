@@ -1,5 +1,0 @@
-import("sys")
-
-func main() : void {
- sys.Write("Hello World. You cool brah?\n")
-}

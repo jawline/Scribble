@@ -424,6 +424,7 @@ Statement: TRUE {
 		$$ = new OperateStatement(yylineno, yytext, Divide, $1, $3);
 	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
 		$$ = new ForStatement(yylineno, yytext, $2, $4, $6, *$8);
+		delete $8;
 	} | WHILE Statement LBRACKET Statements RBRACKET {
 		$$ = new WhileStatement(yylineno, yytext, $2, *$4);
 		delete $4;

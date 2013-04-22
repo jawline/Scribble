@@ -564,8 +564,8 @@ static const yytype_uint16 yyrline[] =
      147,   173,   195,   199,   206,   244,   280,   283,   289,   291,
      294,   300,   321,   334,   356,   373,   375,   377,   379,   386,
      389,   392,   394,   408,   410,   413,   417,   419,   421,   423,
-     425,   427,   430,   432,   434,   436,   438,   440,   453,   465,
-     476,   487
+     425,   428,   431,   433,   435,   437,   439,   441,   454,   466,
+     477,   488
 };
 #endif
 
@@ -2243,13 +2243,14 @@ yyreduce:
 #line 425 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new ForStatement(yylineno, yytext, (yyvsp[(2) - (9)].statement), (yyvsp[(4) - (9)].statement), (yyvsp[(6) - (9)].statement), *(yyvsp[(8) - (9)].statements));
+		delete (yyvsp[(8) - (9)].statements);
 	}
     break;
 
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 427 "./src/Parser/Parser.yy"
+#line 428 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new WhileStatement(yylineno, yytext, (yyvsp[(2) - (5)].statement), *(yyvsp[(4) - (5)].statements));
 		delete (yyvsp[(4) - (5)].statements);
@@ -2259,7 +2260,7 @@ yyreduce:
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 430 "./src/Parser/Parser.yy"
+#line 431 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestEquals, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2268,7 +2269,7 @@ yyreduce:
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 432 "./src/Parser/Parser.yy"
+#line 433 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestNotEquals, (yyvsp[(1) - (4)].statement), (yyvsp[(4) - (4)].statement));
 	}
@@ -2277,7 +2278,7 @@ yyreduce:
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 434 "./src/Parser/Parser.yy"
+#line 435 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestGreater, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2286,7 +2287,7 @@ yyreduce:
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 436 "./src/Parser/Parser.yy"
+#line 437 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestLess, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2295,7 +2296,7 @@ yyreduce:
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 438 "./src/Parser/Parser.yy"
+#line 439 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(2) - (3)].statement);
 	}
@@ -2304,7 +2305,7 @@ yyreduce:
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 440 "./src/Parser/Parser.yy"
+#line 441 "./src/Parser/Parser.yy"
     {
 		
 		auto it = Variables.find(*(yyvsp[(1) - (3)].string));
@@ -2324,7 +2325,7 @@ yyreduce:
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 453 "./src/Parser/Parser.yy"
+#line 454 "./src/Parser/Parser.yy"
     {
 	
 		auto it = Variables.find(*(yyvsp[(1) - (2)].string));
@@ -2343,7 +2344,7 @@ yyreduce:
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 465 "./src/Parser/Parser.yy"
+#line 466 "./src/Parser/Parser.yy"
     {
 		auto it = Variables.find(*(yyvsp[(2) - (2)].string));
 		if (it == Variables.end()) {
@@ -2361,7 +2362,7 @@ yyreduce:
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 476 "./src/Parser/Parser.yy"
+#line 477 "./src/Parser/Parser.yy"
     {
 		auto it = Variables.find(*(yyvsp[(1) - (2)].string));
 		if (it == Variables.end()) {
@@ -2379,7 +2380,7 @@ yyreduce:
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 487 "./src/Parser/Parser.yy"
+#line 488 "./src/Parser/Parser.yy"
     {
 		auto it = Variables.find(*(yyvsp[(2) - (2)].string));
 		if (it == Variables.end()) {
@@ -2396,7 +2397,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 2400 "./gen/Parser.cpp"
+#line 2401 "./gen/Parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2634,7 +2635,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 500 "./src/Parser/Parser.yy"
+#line 501 "./src/Parser/Parser.yy"
 
 
 void yyerror(std::string s)
