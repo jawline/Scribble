@@ -10,6 +10,7 @@
 #include <Statement/Heap.hpp>
 #include <Parser/Parser.hpp>
 #include <version_info.hpp>
+#include <Value/TypeManager.hpp>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +25,16 @@ int main(int argc, char** argv) {
 	if (argc != 2) {
 		printf("Expected usage %s filename\n", argv[0]);
 		return -1;
+	}
+
+	TypeManager testTypeManager;
+
+	if (testTypeManager.getType(Array, testTypeManager.getType(Int)) != 0) {
+		printf("Found type");
+	}
+
+	if (testTypeManager.getType(Array, testTypeManager.getType(Int)) != 0) {
+		printf("Found type");
 	}
 
 	NamespaceType builtinFunctions;

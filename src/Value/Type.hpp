@@ -13,11 +13,19 @@
 class Type {
 private:
 	ValueType rawType_;
-	SP<Type> subType_;
+	Type* subType_;
 
 public:
-	Type(ValueType rawType, SP<Type> subType);
+	Type(ValueType rawType, Type* subType);
 	virtual ~Type();
+
+	ValueType getType() {
+		return rawType_;
+	}
+
+	Type* getSubtype() {
+		return subType_;
+	}
 };
 
 #endif /* TYPE_HPP_ */

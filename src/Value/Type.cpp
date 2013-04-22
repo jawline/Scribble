@@ -7,7 +7,7 @@
 
 #include "Type.hpp"
 
-Type::Type(ValueType rawType, SP<Type> subType) :
+Type::Type(ValueType rawType, Type* subType) :
 		rawType_(rawType), subType_(subType) {
 
 }
