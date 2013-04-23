@@ -14,7 +14,7 @@
 
 typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, FunctionSet> NamespaceType;
-typedef std::pair<Variable*, SafeStatement> AutoVariablePair;
+typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;
 
 struct Reference {
 	SmartPointer<FunctionReference> fRef;

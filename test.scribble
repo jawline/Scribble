@@ -14,33 +14,7 @@ import("functions")
 //
 // Runs some simple tests
 
-func main(): void {
-
-	sys.Write("-- Scribble test program --\n")
-
-	if (variables.Test() = false) {
-		sys.Write("Variables test failed.\n")
-	}
-
-	if (arrays.Test() = false) {
-		sys.Write("Arrays test failed.\n")
-	}
-	
-	if (functions.Test() = false) {
-		sys.Write("Functions test failed.\n")
-	}
-
-	if (random.Test() = false) {
-		sys.Write("Random test failed.\n")
-	}
-	
-	if (fibs.Test() = false) {
-		sys.Write("Fibonacci test failed.\n")
-	}
-	
-	if (fact.Test() = false) {
-		sys.Write("Factorial test failed.\n")
-	}
-
-	sys.Write("-- End of scribble test program --\n")
+func main() : void {
+ sys.Write("[WORLD]\n")
+ sys.Write("[HELLO]\n")
 }

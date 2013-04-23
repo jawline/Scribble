@@ -155,7 +155,7 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 		
 			SafeStatement sp = $4;
 		
-			Variable* nVar = new Variable(TypeUnresolved, 0, nullptr);
+			SP<Variable> nVar = SP<Variable>(new Variable(TypeUnresolved, 0, nullptr));
 			Variables[*$2] = nVar;
 			
 			Reference r;

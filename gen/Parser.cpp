@@ -1785,7 +1785,7 @@ yyreduce:
 		
 			SafeStatement sp = (yyvsp[(4) - (4)].statement);
 		
-			Variable* nVar = new Variable(TypeUnresolved, 0, nullptr);
+			SP<Variable> nVar = SP<Variable>(new Variable(TypeUnresolved, 0, nullptr));
 			Variables[*(yyvsp[(2) - (4)].string)] = nVar;
 			
 			Reference r;
