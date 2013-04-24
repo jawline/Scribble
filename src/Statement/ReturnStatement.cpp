@@ -6,8 +6,9 @@
  */
 
 #include "ReturnStatement.hpp"
+#include "Heap.hpp"
 
-ReturnStatement::ReturnStatement(int lineNo, std::string sym, Statement* stm) :
+ReturnStatement::ReturnStatement(int lineNo, std::string sym, SafeStatement stm) :
 		Statement(lineNo, sym) {
 	stm_ = stm;
 }
@@ -17,15 +18,31 @@ ReturnStatement::~ReturnStatement() {
 }
 
 void ReturnStatement::checkTree(Type* functionType) {
-	stm_->checkTree(functionType);
 
-	if (!functionType->Equals(stm_->type())) {
-		throw StatementException(this,
-				"Return type differs from function type");
+	if (stm_.Null()) {
+
+		if (!functionType->Equals(getVoidType())) {
+			throw StatementException(this, "expected return argument");
+		}
+
+	} else {
+
+		stm_->checkTree(functionType);
+
+		if (!functionType->Equals(stm_->type())) {
+			throw StatementException(this,
+					"Return type differs from function type");
+		}
 	}
 }
 
 Value* ReturnStatement::execute(std::vector<Value*> const& variables) {
-	Return r(stm_->execute(variables));
-	throw r;
+
+	if (stm_.Null()) {
+		Return j(valueHeap.make(getVoidType()));
+		throw j;
+	} else {
+		Return r(stm_->execute(variables));
+		throw r;
+	}
 }

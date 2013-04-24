@@ -1,19 +1,18 @@
 import ("sys")
 
 func Test() : bool {
-	sys.Write("Arrays test not implemented\n")
 	var j : array(int)
 	var r : array(string)
 	var k : array(bool)
 	
-	r := [20]string
+	r := [5]string
 	r[0] := "Hello"
 	r[1] := "World"
 	r[2] := "How"
 	r[3] := "Are"
 	r[4] := "You"
 	
-	for var i := 0; i < 20; i++ {
+	for var i := 0; i < 5; i++ {
 		sys.Write(r[i] + "\n")
 	}
 	

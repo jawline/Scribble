@@ -21,10 +21,10 @@ public:
 
 class ReturnStatement: public Statement {
 private:
-	Statement* stm_;
+	SafeStatement stm_;
 
 public:
-	ReturnStatement(int lineno, std::string symb, Statement* stm);
+	ReturnStatement(int lineno, std::string symb, SafeStatement stm);
 	virtual ~ReturnStatement();
 
 	virtual void checkTree(Type* functionType);

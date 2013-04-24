@@ -300,6 +300,9 @@ Statements: {
 	} | Statements RETURN Statement {
 		$$ = $1;
 		$$->push_back(new ReturnStatement(yylineno, yytext, $3));
+	} | Statements RETURN {
+		$$ = $1;
+		$$->push_back(new ReturnStatement(yylineno, yytext, nullptr));
 	}
 ;
 

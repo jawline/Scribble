@@ -52,6 +52,31 @@ func FibsIterative(n : int) : int {
 	return c
 }
 
+func FibsSequence(n : int, r : array(int)) : void {
+
+	if n < 0 {
+		sys.Write("Fibs is only valid on n > 0\n")
+		return
+	}
+	
+	r[0] := 0
+	
+	if n != 0 {
+
+		var l1 := 0
+		var l2 := 1
+		var c := 1
+	
+		for var i := 1; i < n; i++ {
+			c := l1 + l2
+			l2 := l1
+			l1 := c
+			r[i] := c
+		}
+		
+	}
+}
+
 func Test() : bool {
 	
 	sys.Write("Fibonacci test. ")
@@ -70,6 +95,14 @@ func Test() : bool {
 		
 	}
 	
+	sys.Write("\n")
+	
+	var fibs := [10]int
+	FibsSequence(10, fibs)
+	
+	for i := 0; i < 10; i++ {
+		sys.Write(sys.String(fibs[i]) + " ")
+	}
 	sys.Write("\n")
 	
 	return true
