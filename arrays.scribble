@@ -2,7 +2,5 @@ import ("sys")
 
 func Test() : bool {
 	sys.Write("Arrays test not implemented\n")
-	
-	
 	return true
 }

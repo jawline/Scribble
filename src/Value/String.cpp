@@ -1,5 +1,6 @@
 #include "String.hpp"
 #include <Statement/StatementException.hpp>
+#include "TypeManager.hpp"
 
 StringValue::StringValue(std::string const value) {
 	value_ = std::string(value);
@@ -34,12 +35,12 @@ void StringValue::setValue(std::string const& ref) {
 	value_ = ref;
 }
 
-ValueType StringValue::type() {
-	return String;
+Type* StringValue::type() {
+	return getStringType();
 }
 
 Value* StringValue::clone() {
-	StringValue* gen = (StringValue*) valueHeap.make(String);
+	StringValue* gen = (StringValue*) valueHeap.make(getStringType());
 	gen->setValue(value_);
 	return gen;
 }

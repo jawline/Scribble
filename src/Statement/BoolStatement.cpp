@@ -8,8 +8,10 @@
 #include "BoolStatement.hpp"
 #include <Value/Bool.hpp>
 #include <Statement/Heap.hpp>
+#include <Value/TypeManager.hpp>
 
-BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) : Statement(lineNo, sym) {
+BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) :
+		Statement(lineNo, sym) {
 	value_ = value;
 }
 
@@ -17,14 +19,14 @@ BoolStatement::~BoolStatement() {
 }
 
 Value* BoolStatement::execute(std::vector<Value*> const& variables) {
-	BoolValue* gen = (BoolValue*) valueHeap.make(Boolean);
+	BoolValue* gen = (BoolValue*) valueHeap.make(getBooleanType());
 	gen->setValue(value_);
 	return gen;
 }
 
-ValueType BoolStatement::type() {
-	return Boolean;
+Type* BoolStatement::type() {
+	return getTypeManager().getType(Boolean);
 }
 
-void BoolStatement::checkTree(ValueType functionType) {
+void BoolStatement::checkTree(Type* functionType) {
 }

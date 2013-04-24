@@ -9,6 +9,7 @@
 #include <Value/Util.hpp>
 #include <Value/Bool.hpp>
 #include <Value/Int.hpp>
+#include <Value/TypeManager.hpp>
 
 ValueHeap::ValueHeap() {
 
@@ -21,34 +22,38 @@ ValueHeap::~ValueHeap() {
 	delete[] valueStore_;
 }
 
-Value* ValueHeap::make(ValueType type) {
+Value* ValueHeap::make(Type* type) {
 
-	if (valueStore_[type].size() > 0) {
-		return valueStore_[type].pop();
+	//If it is a complex type we don't store it so ignore it
+	if (type->getSubtype() == nullptr) {
+		if (valueStore_[type->getType()].size() > 0) {
+			return valueStore_[type->getType()].pop();
+		}
 	}
 
 	return ValueUtil::generateValue(type);
 }
 
 Value* ValueHeap::make(bool value) {
-	Value* val = make(Boolean);
+	Value* val = make(getBooleanType());
 	((BoolValue*) val)->setValue(value);
 	return val;
 }
 
 Value* ValueHeap::make(int value) {
-	Value* val = make(Int);
+	Value* val = make(getIntType());
 	((IntValue*) val)->setValue(value);
 	return val;
 }
 
 void ValueHeap::free(Value* v) {
 
-	if (valueStore_[v->type()].size() < ValueStackMax) {
-		valueStore_[v->type()].push(v);
+	if (valueStore_[v->type()->getType()].size() < ValueStackMax) {
+		valueStore_[v->type()->getType()].push(v);
 	} else {
 		delete v;
 	}
+
 }
 
 void ValueHeap::freeAll() {

@@ -15,7 +15,7 @@ public:
 	virtual ~VoidValue();
 
 	virtual void applyOperator(ValueOperator, Value* other);
-	virtual ValueType type();
+	virtual Type* type();
 	virtual Value* clone();
 };
 

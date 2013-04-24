@@ -9,6 +9,7 @@
 #include <Value/Bool.hpp>
 #include <Value/Void.hpp>
 #include <Statement/Heap.hpp>
+#include <Value/TypeManager.hpp>
 
 ForStatement::ForStatement(int lineNo, std::string sym, SafeStatement initial,
 		SafeStatement condition, SafeStatement step,
@@ -42,14 +43,14 @@ Value* ForStatement::execute(std::vector<Value*> const& variables) {
 
 	valueHeap.free(condition);
 
-	return valueHeap.make(Void);
+	return valueHeap.make(getVoidType());
 }
 
-ValueType ForStatement::type() {
-	return Void;
+Type* ForStatement::type() {
+	return getTypeManager().getType(Void);
 }
 
-void ForStatement::checkTree(ValueType functionType) {
+void ForStatement::checkTree(Type* functionType) {
 	initial_->checkTree(functionType);
 	condition_->checkTree(functionType);
 	step_->checkTree(functionType);
@@ -58,7 +59,7 @@ void ForStatement::checkTree(ValueType functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (condition_->type() != Boolean) {
+	if (condition_->type()->getType() != Boolean) {
 		throw StatementException(this,
 				"For second paramater must evaluate to a boolean");
 	}

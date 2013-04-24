@@ -15,3 +15,16 @@ Type::Type(ValueType rawType, Type* subType) :
 Type::~Type() {
 }
 
+bool Type::Equals(Type const* other) {
+
+	if (other->rawType_ != rawType_) {
+		return false;
+	}
+
+	if (subType_ != nullptr) {
+		return subType_->Equals(other->subType_);
+	}
+
+	return true;
+}
+

@@ -1,5 +1,6 @@
 #include "Int.hpp"
 #include <Statement/StatementException.hpp>
+#include "TypeManager.hpp"
 
 void IntValue::applyOperator(ValueOperator v, Value* r) {
 	IntValue* other = (IntValue*) r;
@@ -28,8 +29,8 @@ void IntValue::applyOperator(ValueOperator v, Value* r) {
 	}
 }
 
-ValueType IntValue::type() {
-	return Int;
+Type* IntValue::type() {
+	return getIntType();
 }
 
 int IntValue::value() {
@@ -41,7 +42,5 @@ void IntValue::setValue(int v) {
 }
 
 Value* IntValue::clone() {
-	IntValue* gen = (IntValue*) valueHeap.make(Int);
-	gen->setValue(value_);
-	return gen;
+	return valueHeap.make(value_);
 }

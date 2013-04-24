@@ -20,7 +20,7 @@ public:
 	ValueHeap();
 	virtual ~ValueHeap();
 
-	Value* make(ValueType type);
+	Value* make(Type* type);
 	Value* make(bool value);
 	Value* make(int value);
 	void free(Value* value);

@@ -8,6 +8,7 @@
 #include "WhileStatement.hpp"
 #include <Value/Void.hpp>
 #include <Value/Bool.hpp>
+#include <Value/TypeManager.hpp>
 
 WhileStatement::WhileStatement(int lineNo, std::string sym,
 		SafeStatement condition, std::vector<SafeStatement> statements) :
@@ -17,7 +18,7 @@ WhileStatement::WhileStatement(int lineNo, std::string sym,
 WhileStatement::~WhileStatement() {
 }
 
-void WhileStatement::checkTree(ValueType functionType) {
+void WhileStatement::checkTree(Type* functionType) {
 
 	condition_->checkTree(functionType);
 
@@ -25,7 +26,7 @@ void WhileStatement::checkTree(ValueType functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (condition_->type() != Boolean) {
+	if (condition_->type()->getType() != Boolean) {
 		throw StatementException(this,
 				"While condition must evaluate to a boolean");
 	}
@@ -46,9 +47,9 @@ Value* WhileStatement::execute(std::vector<Value*> const& variables) {
 	}
 
 	valueHeap.free(conditionResult);
-	return valueHeap.make(Void);
+	return valueHeap.make(getVoidType());
 }
 
-ValueType WhileStatement::type() {
-	return Void;
+Type* WhileStatement::type() {
+	return getTypeManager().getType(Void);
 }

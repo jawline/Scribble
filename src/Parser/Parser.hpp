@@ -47,7 +47,7 @@ public:
 			std::vector<int> argumentTypes);
 
 	//Get the return type of a function set
-	static ValueType functionSetType(FunctionSet const& functionSet);
+	static Type* functionSetType(FunctionSet const& functionSet);
 
 	static bool listContains(std::string target,
 			std::vector<std::string> const& list);

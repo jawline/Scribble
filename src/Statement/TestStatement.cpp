@@ -11,6 +11,7 @@
 #include <Value/Bool.hpp>
 #include <Value/String.hpp>
 #include <Statement/Heap.hpp>
+#include <Value/TypeManager.hpp>
 
 TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
 		Statement* leftHandSide, Statement* rightHandSide) :
@@ -30,7 +31,7 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 	Value* rhRes = rhs_->execute(variables);
 	Value* result = 0;
 
-	switch (lhRes->type()) {
+	switch (lhRes->type()->getType()) {
 
 	case Boolean: {
 		BoolValue* bl = (BoolValue*) lhRes;
@@ -110,15 +111,15 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 	return result;
 }
 
-ValueType TestStatement::type() {
-	return Boolean;
+Type* TestStatement::type() {
+	return getTypeManager().getType(Boolean);
 }
 
-void TestStatement::checkTree(ValueType functionType) {
+void TestStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (lhs_->type() != rhs_->type()) {
+	if (!lhs_->type()->Equals(rhs_->type())) {
 		throw StatementException(this,
 				"Left hand side type should be the same as right hand side type");
 	}

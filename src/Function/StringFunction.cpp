@@ -11,6 +11,7 @@
 #include <Value/Bool.hpp>
 #include <Value/String.hpp>
 #include <sstream>
+#include <Value/TypeManager.hpp>
 
 IntToStringFunction::IntToStringFunction() {
 	// TODO Auto-generated constructor stub
@@ -30,21 +31,21 @@ Value* IntToStringFunction::execute(std::vector<Value*> arguments) {
 	return new StringValue(st.str());
 }
 
-ValueType const IntToStringFunction::getType() {
-	return String;
+Type* IntToStringFunction::getType() {
+	return getTypeManager().getType(String);
 }
 
 unsigned int const IntToStringFunction::numArgs() {
 	return 1;
 }
 
-ValueType const IntToStringFunction::argType(unsigned int arg) {
+Type* IntToStringFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
-		return Int;
+		return getTypeManager().getType(Int);
 	}
 
-	return TypeUnresolved;
+	return getTypeManager().getType(TypeUnresolved);
 }
 
 BoolToStringFunction::BoolToStringFunction() {
@@ -69,19 +70,19 @@ Value* BoolToStringFunction::execute(std::vector<Value*> arguments) {
 	return new StringValue(st.str());
 }
 
-ValueType const BoolToStringFunction::getType() {
-	return String;
+Type* BoolToStringFunction::getType() {
+	return getTypeManager().getType(String);
 }
 
 unsigned int const BoolToStringFunction::numArgs() {
 	return 1;
 }
 
-ValueType const BoolToStringFunction::argType(unsigned int arg) {
+Type* BoolToStringFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
-		return Boolean;
+		return getTypeManager().getType(Boolean);
 	}
 
-	return TypeUnresolved;
+	return getTypeManager().getType(TypeUnresolved);
 }

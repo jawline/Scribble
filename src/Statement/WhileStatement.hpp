@@ -20,9 +20,9 @@ public:
 			std::vector<SafeStatement> statements);
 	virtual ~WhileStatement();
 
-	void checkTree(ValueType functionType);
+	void checkTree(Type* functionType);
 	Value* execute(std::vector<Value*> const& variables);
-	ValueType type();
+	Type* type();
 };
 
 #endif /* WHILESTATEMENT_HPP_ */

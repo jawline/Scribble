@@ -43,13 +43,13 @@ Value* IfStatement::execute(std::vector<Value*> const& variables) {
 
 	}
 
-	return valueHeap.make(Void);
+	return valueHeap.make(getVoidType());
 }
 
-void IfStatement::checkTree(ValueType functionType) {
+void IfStatement::checkTree(Type* functionType) {
 	condition_->checkTree(functionType);
 
-	if (condition_->type() != Boolean) {
+	if (condition_->type()->getType() != Boolean) {
 		throw StatementException(this, "If statement needs boolean condition");
 	}
 

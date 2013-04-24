@@ -10,6 +10,7 @@
 #include "Statement.hpp"
 #include <Pointers/SmartPointer.hpp>
 #include <vector>
+#include <Value/TypeManager.hpp>
 
 class IfStatement: public Statement {
 private:
@@ -25,11 +26,11 @@ public:
 
 	Value* execute(std::vector<Value*> const& variables);
 
-	ValueType type() {
-		return Void;
+	Type* type() {
+		return getTypeManager().getType(Void);
 	}
 
-	void checkTree(ValueType functionType);
+	void checkTree(Type* functionType);
 };
 
 #endif /* IFSTATEMENT_HPP_ */

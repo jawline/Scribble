@@ -8,17 +8,15 @@ class Variable {
 private:
 	Value* value_;
 	int position_;
-	ValueType type_;
 
 public:
 
-	Variable(ValueType t, int position, Value* value);
+	Variable(int position, Value* value);
 	~Variable();
 
-	void setType(ValueType newType);
 	void setValue(Value* v);
 	Value* getValue();
-	ValueType getType();
+	Type* getType();
 	void setPosition(int pos);
 	int getPosition();
 

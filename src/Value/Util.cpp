@@ -34,9 +34,9 @@ ValueUtil::~ValueUtil() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* ValueUtil::generateValue(ValueType type) {
+Value* ValueUtil::generateValue(Type* type) {
 
-	switch (type) {
+	switch (type->getType()) {
 
 	case Int:
 		return new IntValue(0);

@@ -23,8 +23,8 @@ public:
 	virtual ~ForStatement();
 
 	Value* execute(std::vector<Value*> const& variables);
-	ValueType type();
-	void checkTree(ValueType functionType);
+	Type* type();
+	void checkTree(Type* functionType);
 };
 
 #endif /* FORSTATEMENT_HPP_ */

@@ -12,9 +12,9 @@ public:
 	~GetVariableStatement();
 	Value* execute(std::vector<Value*> const& variables);
 
-	ValueType type();
+	Type* type();
 
-	void checkTree(ValueType functionType);
+	void checkTree(Type* functionType);
 };
 
 #endif //_GET_VARIABLE_DEF_H_

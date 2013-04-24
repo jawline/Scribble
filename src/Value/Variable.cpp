@@ -1,7 +1,8 @@
 #include "Variable.hpp"
+#include <Value/TypeManager.hpp>
 
-Variable::Variable(ValueType type, int position, Value* value) :
-		value_(value), position_(position), type_(type) {
+Variable::Variable(int position, Value* value) :
+		value_(value), position_(position) {
 }
 
 Variable::~Variable() {
@@ -16,8 +17,13 @@ Value* Variable::getValue() {
 	return value_;
 }
 
-ValueType Variable::getType() {
-	return type_;
+Type* Variable::getType() {
+
+	if (getValue()) {
+		return getValue()->type();
+	}
+
+	return getTypeManager().getType(TypeUnresolved);
 }
 
 void Variable::setPosition(int pos) {
@@ -26,10 +32,6 @@ void Variable::setPosition(int pos) {
 
 int Variable::getPosition() {
 	return position_;
-}
-
-void Variable::setType(ValueType newType) {
-	type_ = newType;
 }
 
 void Variable::setValue(Value* v) {

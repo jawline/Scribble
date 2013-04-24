@@ -92,6 +92,7 @@
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
 #include <Function/WriteFunction.hpp>
+#include <Value/TypeManager.hpp>
 #include <Value/Util.hpp>
 #include <Parser/Parser.hpp>
 
@@ -125,7 +126,7 @@ extern char *yytext;	// defined and maintained in lex.c
 
 
 /* Line 268 of yacc.c  */
-#line 129 "./gen/Parser.cpp"
+#line 130 "./gen/Parser.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -204,7 +205,7 @@ typedef union YYSTYPE
 {
 
 /* Line 293 of yacc.c  */
-#line 61 "./src/Parser/Parser.yy"
+#line 62 "./src/Parser/Parser.yy"
 
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
@@ -214,12 +215,12 @@ typedef union YYSTYPE
 	SP<Variable>* variable;
 	float real;
 	int integer;
-	ValueType type;
+	Type* type;
 
 
 
 /* Line 293 of yacc.c  */
-#line 223 "./gen/Parser.cpp"
+#line 224 "./gen/Parser.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -244,7 +245,7 @@ typedef struct YYLTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 248 "./gen/Parser.cpp"
+#line 249 "./gen/Parser.cpp"
 
 #ifdef short
 # undef short
@@ -560,12 +561,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   102,   102,   105,   109,   114,   116,   118,   120,   125,
-     147,   173,   195,   199,   206,   244,   280,   283,   289,   291,
-     294,   300,   321,   334,   356,   373,   375,   377,   379,   386,
-     389,   392,   394,   408,   410,   413,   417,   419,   421,   423,
-     425,   428,   431,   433,   435,   437,   439,   441,   454,   466,
-     477,   488
+       0,   103,   103,   106,   110,   115,   117,   119,   121,   126,
+     148,   174,   196,   200,   207,   245,   281,   284,   290,   292,
+     295,   301,   322,   335,   357,   374,   376,   378,   380,   387,
+     390,   393,   395,   409,   411,   414,   418,   420,   422,   424,
+     426,   429,   432,   434,   436,   438,   440,   442,   455,   467,
+     478,   489
 };
 #endif
 
@@ -1681,7 +1682,7 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 102 "./src/Parser/Parser.yy"
+#line 103 "./src/Parser/Parser.yy"
     {
 		Variables.clear();
 		(yyval.statements) = 0;
@@ -1691,7 +1692,7 @@ yyreduce:
   case 3:
 
 /* Line 1806 of yacc.c  */
-#line 105 "./src/Parser/Parser.yy"
+#line 106 "./src/Parser/Parser.yy"
     {
 		ImportList.push_back(*(yyvsp[(4) - (5)].string));
 		delete (yyvsp[(4) - (5)].string);
@@ -1702,7 +1703,7 @@ yyreduce:
   case 4:
 
 /* Line 1806 of yacc.c  */
-#line 109 "./src/Parser/Parser.yy"
+#line 110 "./src/Parser/Parser.yy"
     {
 		(yyval.statements) = 0;
 	}
@@ -1711,46 +1712,46 @@ yyreduce:
   case 5:
 
 /* Line 1806 of yacc.c  */
-#line 114 "./src/Parser/Parser.yy"
+#line 115 "./src/Parser/Parser.yy"
     {
-		(yyval.type) = Int;
+		(yyval.type) = getTypeManager().getType(Int);
 	}
     break;
 
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 116 "./src/Parser/Parser.yy"
+#line 117 "./src/Parser/Parser.yy"
     {
-		(yyval.type) = String;
+		(yyval.type) = getTypeManager().getType(String);
 	}
     break;
 
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 118 "./src/Parser/Parser.yy"
+#line 119 "./src/Parser/Parser.yy"
     {
-		(yyval.type) = Boolean;
+		(yyval.type) = getTypeManager().getType(Boolean);
 	}
     break;
 
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 120 "./src/Parser/Parser.yy"
+#line 121 "./src/Parser/Parser.yy"
     {
-		(yyval.type) = Void;
+		(yyval.type) = getTypeManager().getType(Void);
 	}
     break;
 
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 125 "./src/Parser/Parser.yy"
+#line 126 "./src/Parser/Parser.yy"
     {
 
-		if (((ValueType)(yyvsp[(4) - (4)].type)) == TYPE_VOID) {
+		if (((yyvsp[(4) - (4)].type))->getType() == Void) {
 			yyerror("Cannot declare a variable as a void.");
 			return -1;
 		}
@@ -1761,7 +1762,7 @@ yyreduce:
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable((yyvsp[(4) - (4)].type), 0, ValueUtil::generateValue((yyvsp[(4) - (4)].type))));
+			SP<Variable>* nVar = new SP<Variable>(new Variable(0, ValueUtil::generateValue((yyvsp[(4) - (4)].type))));
 			Variables[*(yyvsp[(2) - (4)].string)] = *nVar;
 			(yyval.variable) = nVar;
 		}
@@ -1773,7 +1774,7 @@ yyreduce:
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 147 "./src/Parser/Parser.yy"
+#line 148 "./src/Parser/Parser.yy"
     {
 
 		auto it = Variables.find(*(yyvsp[(2) - (4)].string));
@@ -1785,7 +1786,7 @@ yyreduce:
 		
 			SafeStatement sp = (yyvsp[(4) - (4)].statement);
 		
-			SP<Variable> nVar = SP<Variable>(new Variable(TypeUnresolved, 0, nullptr));
+			SP<Variable> nVar = SP<Variable>(new Variable(0, nullptr));
 			Variables[*(yyvsp[(2) - (4)].string)] = nVar;
 			
 			Reference r;
@@ -1803,10 +1804,10 @@ yyreduce:
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 173 "./src/Parser/Parser.yy"
+#line 174 "./src/Parser/Parser.yy"
     {
 
-		if (((ValueType)(yyvsp[(3) - (3)].type)) == TYPE_VOID) {
+		if (((yyvsp[(3) - (3)].type))->getType() == Void) {
 			yyerror("Cannot declare a variable as a void.");
 			return -1;
 		}
@@ -1817,7 +1818,7 @@ yyreduce:
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable((yyvsp[(3) - (3)].type), 0, ValueUtil::generateValue((yyvsp[(3) - (3)].type))));
+			SP<Variable>* nVar = new SP<Variable>(new Variable(0, ValueUtil::generateValue((yyvsp[(3) - (3)].type))));
 			Variables[*(yyvsp[(1) - (3)].string)] = *nVar;
 			(yyval.variable) = nVar;
 		}
@@ -1829,7 +1830,7 @@ yyreduce:
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 195 "./src/Parser/Parser.yy"
+#line 196 "./src/Parser/Parser.yy"
     {
 		(yyval.variables) = new std::vector<SP<Variable>>();
 		(yyval.variables)->push_back(*(yyvsp[(1) - (1)].variable));
@@ -1840,7 +1841,7 @@ yyreduce:
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 199 "./src/Parser/Parser.yy"
+#line 200 "./src/Parser/Parser.yy"
     {
 		(yyval.variables) = (yyvsp[(1) - (3)].variables);
 		(yyval.variables)->push_back(*(yyvsp[(3) - (3)].variable));
@@ -1851,7 +1852,7 @@ yyreduce:
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 206 "./src/Parser/Parser.yy"
+#line 207 "./src/Parser/Parser.yy"
     {
 		std::vector<SP<Variable>> values;
 
@@ -1866,7 +1867,7 @@ yyreduce:
 		
 		if ( Functions[*(yyvsp[(2) - (10)].string)].size() > 0) {
 		
-			if (Parser::functionSetType(Functions[*(yyvsp[(2) - (10)].string)]) != (yyvsp[(7) - (10)].type)) {
+			if (!(Parser::functionSetType(Functions[*(yyvsp[(2) - (10)].string)])->Equals((yyvsp[(7) - (10)].type)))) {
 				yyerror("Function differs from predefined function type");
 				return -1;
 			}
@@ -1896,7 +1897,7 @@ yyreduce:
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 244 "./src/Parser/Parser.yy"
+#line 245 "./src/Parser/Parser.yy"
     {
 		
 		std::vector<SP<Variable>> values;
@@ -1936,7 +1937,7 @@ yyreduce:
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 280 "./src/Parser/Parser.yy"
+#line 281 "./src/Parser/Parser.yy"
     {
 		(yyval.statements) = new std::vector<SmartPointer<Statement>>();
 		(yyval.statements)->push_back((yyvsp[(1) - (1)].statement));
@@ -1946,7 +1947,7 @@ yyreduce:
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 283 "./src/Parser/Parser.yy"
+#line 284 "./src/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(1) - (3)].statements);
 		(yyval.statements)->push_back((yyvsp[(3) - (3)].statement));
@@ -1956,7 +1957,7 @@ yyreduce:
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 289 "./src/Parser/Parser.yy"
+#line 290 "./src/Parser/Parser.yy"
     {
 		(yyval.statements) = new std::vector<SmartPointer<Statement>>();
 	}
@@ -1965,7 +1966,7 @@ yyreduce:
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 291 "./src/Parser/Parser.yy"
+#line 292 "./src/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(1) - (2)].statements);
 		(yyval.statements)->push_back((yyvsp[(2) - (2)].statement));
@@ -1975,7 +1976,7 @@ yyreduce:
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 294 "./src/Parser/Parser.yy"
+#line 295 "./src/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(1) - (3)].statements);
 		(yyval.statements)->push_back(new ReturnStatement(yylineno, yytext, (yyvsp[(3) - (3)].statement)));
@@ -1985,7 +1986,7 @@ yyreduce:
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 300 "./src/Parser/Parser.yy"
+#line 301 "./src/Parser/Parser.yy"
     {
 	
 		std::vector<SmartPointer<Statement>> args;
@@ -2013,7 +2014,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 321 "./src/Parser/Parser.yy"
+#line 322 "./src/Parser/Parser.yy"
     {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *(yyvsp[(1) - (3)].string), args, 0));
@@ -2033,7 +2034,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 334 "./src/Parser/Parser.yy"
+#line 335 "./src/Parser/Parser.yy"
     {
 	
 		std::vector<SmartPointer<Statement>> args;
@@ -2062,7 +2063,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 356 "./src/Parser/Parser.yy"
+#line 357 "./src/Parser/Parser.yy"
     {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*(yyvsp[(1) - (5)].string), *(yyvsp[(3) - (5)].string), args, 0));
@@ -2083,7 +2084,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 373 "./src/Parser/Parser.yy"
+#line 374 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new BoolStatement(yylineno, yytext, true);
 	}
@@ -2092,7 +2093,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 375 "./src/Parser/Parser.yy"
+#line 376 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new BoolStatement(yylineno, yytext, false);
 	}
@@ -2101,7 +2102,7 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 377 "./src/Parser/Parser.yy"
+#line 378 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new IntStatement(yylineno, yytext, (yyvsp[(1) - (1)].integer));
 	}
@@ -2110,7 +2111,7 @@ yyreduce:
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 379 "./src/Parser/Parser.yy"
+#line 380 "./src/Parser/Parser.yy"
     {
 		
 		(yyval.statement) = new StringStatement(yylineno, yytext, *(yyvsp[(1) - (1)].string));
@@ -2124,7 +2125,7 @@ yyreduce:
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 386 "./src/Parser/Parser.yy"
+#line 387 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new GetVariableStatement(yylineno, yytext, *(yyvsp[(1) - (1)].variable));
 		delete (yyvsp[(1) - (1)].variable);
@@ -2134,7 +2135,7 @@ yyreduce:
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 389 "./src/Parser/Parser.yy"
+#line 390 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new AssignVariableStatement(yylineno, yytext, *(yyvsp[(1) - (3)].variable), (yyvsp[(3) - (3)].statement));
 		delete (yyvsp[(1) - (3)].variable);
@@ -2144,7 +2145,7 @@ yyreduce:
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 392 "./src/Parser/Parser.yy"
+#line 393 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(1) - (1)].statement);
 	}
@@ -2153,7 +2154,7 @@ yyreduce:
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 394 "./src/Parser/Parser.yy"
+#line 395 "./src/Parser/Parser.yy"
     {
 
 		auto it = Variables.find(*(yyvsp[(1) - (1)].string));
@@ -2174,7 +2175,7 @@ yyreduce:
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 408 "./src/Parser/Parser.yy"
+#line 409 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(1) - (1)].statement);
 	}
@@ -2183,7 +2184,7 @@ yyreduce:
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 410 "./src/Parser/Parser.yy"
+#line 411 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new IfStatement(yylineno, yytext, (yyvsp[(2) - (5)].statement), *(yyvsp[(4) - (5)].statements), std::vector<SP<Statement>>());
 		delete (yyvsp[(4) - (5)].statements);
@@ -2193,7 +2194,7 @@ yyreduce:
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 413 "./src/Parser/Parser.yy"
+#line 414 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new IfStatement(yylineno, yytext, (yyvsp[(2) - (9)].statement), *(yyvsp[(4) - (9)].statements), *(yyvsp[(8) - (9)].statements));
 		delete (yyvsp[(4) - (9)].statements);
@@ -2204,7 +2205,7 @@ yyreduce:
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 417 "./src/Parser/Parser.yy"
+#line 418 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(yylineno, yytext, Add, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2213,7 +2214,7 @@ yyreduce:
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 419 "./src/Parser/Parser.yy"
+#line 420 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(yylineno, yytext, Subtract, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2222,7 +2223,7 @@ yyreduce:
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 421 "./src/Parser/Parser.yy"
+#line 422 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(yylineno, yytext, Multiply, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2231,7 +2232,7 @@ yyreduce:
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 423 "./src/Parser/Parser.yy"
+#line 424 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(yylineno, yytext, Divide, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2240,7 +2241,7 @@ yyreduce:
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 425 "./src/Parser/Parser.yy"
+#line 426 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new ForStatement(yylineno, yytext, (yyvsp[(2) - (9)].statement), (yyvsp[(4) - (9)].statement), (yyvsp[(6) - (9)].statement), *(yyvsp[(8) - (9)].statements));
 		delete (yyvsp[(8) - (9)].statements);
@@ -2250,7 +2251,7 @@ yyreduce:
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 428 "./src/Parser/Parser.yy"
+#line 429 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new WhileStatement(yylineno, yytext, (yyvsp[(2) - (5)].statement), *(yyvsp[(4) - (5)].statements));
 		delete (yyvsp[(4) - (5)].statements);
@@ -2260,7 +2261,7 @@ yyreduce:
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 431 "./src/Parser/Parser.yy"
+#line 432 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestEquals, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2269,7 +2270,7 @@ yyreduce:
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 433 "./src/Parser/Parser.yy"
+#line 434 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestNotEquals, (yyvsp[(1) - (4)].statement), (yyvsp[(4) - (4)].statement));
 	}
@@ -2278,7 +2279,7 @@ yyreduce:
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 435 "./src/Parser/Parser.yy"
+#line 436 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestGreater, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2287,7 +2288,7 @@ yyreduce:
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 437 "./src/Parser/Parser.yy"
+#line 438 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(yylineno, yytext, TestLess, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2296,7 +2297,7 @@ yyreduce:
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 439 "./src/Parser/Parser.yy"
+#line 440 "./src/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(2) - (3)].statement);
 	}
@@ -2305,7 +2306,7 @@ yyreduce:
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 441 "./src/Parser/Parser.yy"
+#line 442 "./src/Parser/Parser.yy"
     {
 		
 		auto it = Variables.find(*(yyvsp[(1) - (3)].string));
@@ -2325,7 +2326,7 @@ yyreduce:
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 454 "./src/Parser/Parser.yy"
+#line 455 "./src/Parser/Parser.yy"
     {
 	
 		auto it = Variables.find(*(yyvsp[(1) - (2)].string));
@@ -2344,7 +2345,7 @@ yyreduce:
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 466 "./src/Parser/Parser.yy"
+#line 467 "./src/Parser/Parser.yy"
     {
 		auto it = Variables.find(*(yyvsp[(2) - (2)].string));
 		if (it == Variables.end()) {
@@ -2362,7 +2363,7 @@ yyreduce:
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 477 "./src/Parser/Parser.yy"
+#line 478 "./src/Parser/Parser.yy"
     {
 		auto it = Variables.find(*(yyvsp[(1) - (2)].string));
 		if (it == Variables.end()) {
@@ -2380,7 +2381,7 @@ yyreduce:
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 488 "./src/Parser/Parser.yy"
+#line 489 "./src/Parser/Parser.yy"
     {
 		auto it = Variables.find(*(yyvsp[(2) - (2)].string));
 		if (it == Variables.end()) {
@@ -2397,7 +2398,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 2401 "./gen/Parser.cpp"
+#line 2402 "./gen/Parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2635,7 +2636,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 501 "./src/Parser/Parser.yy"
+#line 502 "./src/Parser/Parser.yy"
 
 
 void yyerror(std::string s)

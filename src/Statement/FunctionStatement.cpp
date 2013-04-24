@@ -1,6 +1,7 @@
 #include "FunctionStatement.hpp"
+#include <Value/TypeManager.hpp>
 
-void FunctionStatement::checkTree(ValueType functionType) {
+void FunctionStatement::checkTree(Type* functionType) {
 
 	if (func_->getFunction().Get() == 0) {
 
@@ -29,7 +30,7 @@ void FunctionStatement::checkTree(ValueType functionType) {
 		SafeStatement arg = func_->getArgs()[i];
 		arg->checkTree(functionType);
 
-		if (func_->getFunction()->argType(i) != arg->type()) {
+		if (!(func_->getFunction()->argType(i)->Equals(arg->type()))) {
 			throw StatementException(this,
 					"Argument type does not match function type");
 		}
@@ -56,10 +57,10 @@ Value* FunctionStatement::execute(std::vector<Value*> const& variables) {
 	return res;
 }
 
-ValueType FunctionStatement::type() {
+Type* FunctionStatement::type() {
 
 	if (func_->getFunction().Null()) {
-		return TypeUnresolved;
+		getTypeManager().getType(TypeUnresolved);
 	}
 
 	return func_->getFunction()->getType();

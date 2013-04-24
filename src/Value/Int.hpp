@@ -12,7 +12,7 @@ public:
 		value_ = value;
 	}
 
-	ValueType type();
+	Type* type();
 
 	int value();
 

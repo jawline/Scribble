@@ -20,9 +20,9 @@ public:
 	}
 
 	virtual Value* execute(std::vector<Value*> const& variables);
-	ValueType type();
+	Type* type();
 
-	void checkTree(ValueType functionType);
+	void checkTree(Type* functionType);
 };
 
 #endif //_FUNCTION_STATEMENT_H

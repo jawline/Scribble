@@ -48,6 +48,8 @@ int main(int argc, char** argv) {
 	SP<Function> entry = Parser::compile(argv[1], builtinNamespaces)[0];
 
 	if (!entry.Null()) {
+
+		printf("Beginning execution\n");
 		double start = getCPUTime();
 		delete entry->execute(std::vector<Value*>());
 		double end = getCPUTime();

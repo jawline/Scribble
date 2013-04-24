@@ -164,7 +164,7 @@ unsigned int Parser::functionSetNumArguments(FunctionSet const& set) {
 	return fn->numArgs();
 }
 
-ValueType Parser::functionSetType(FunctionSet const& functionSet) {
+Type* Parser::functionSetType(FunctionSet const& functionSet) {
 	SP<Function> fn = functionSet[0];
 	return fn->getType();
 }
@@ -267,7 +267,6 @@ NamespaceType Parser::include(std::string const& filename) {
 
 			AutoVariablePair p = references[i].avRef;
 
-			p.first->setType(p.second->type());
 			p.first->setValue(ValueUtil::generateValue(p.second->type()));
 
 		}

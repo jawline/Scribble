@@ -18,9 +18,9 @@ public:
 	virtual ~BoolStatement();
 
 	Value* execute(std::vector<Value*> const& variables);
-	ValueType type();
+	Type* type();
 
-	void checkTree(ValueType functionType);
+	void checkTree(Type* functionType);
 };
 
 #endif /* BOOLSTATEMENT_HPP_ */

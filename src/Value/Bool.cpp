@@ -7,6 +7,7 @@
 
 #include "Bool.hpp"
 #include <Statement/StatementException.hpp>
+#include "TypeManager.hpp"
 
 BoolValue::BoolValue(bool value) {
 	value_ = value;
@@ -34,13 +35,11 @@ void BoolValue::applyOperator(ValueOperator v, Value* r) {
 }
 
 Value* BoolValue::clone() {
-	BoolValue* gen = (BoolValue*) valueHeap.make(Boolean);
-	gen->setValue(value_);
-	return gen;
+	return valueHeap.make(value_);
 }
 
-ValueType BoolValue::type() {
-	return Boolean;
+Type* BoolValue::type() {
+	return getBooleanType();
 }
 
 bool BoolValue::value() {

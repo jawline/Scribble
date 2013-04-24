@@ -8,6 +8,7 @@
 #ifndef RETURNSTATEMENT_HPP_
 #define RETURNSTATEMENT_HPP_
 #include "Statement.hpp"
+#include <Value/TypeManager.hpp>
 
 class Return {
 public:
@@ -26,10 +27,10 @@ public:
 	ReturnStatement(int lineno, std::string symb, Statement* stm);
 	virtual ~ReturnStatement();
 
-	virtual void checkTree(ValueType functionType);
+	virtual void checkTree(Type* functionType);
 	virtual Value* execute(std::vector<Value*> const& variables);
-	virtual ValueType type() {
-		return Void;
+	virtual Type* type() {
+		return getTypeManager().getType(Void);
 	}
 };
 

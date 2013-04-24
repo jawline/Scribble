@@ -20,8 +20,8 @@ public:
 	virtual ~OperateStatement();
 
 	Value* execute(std::vector<Value*> const& variables);
-	ValueType type();
-	void checkTree(ValueType functionType);
+	Type* type();
+	void checkTree(Type* functionType);
 };
 
 #endif /* OPERATESTATEMENT_HPP_ */

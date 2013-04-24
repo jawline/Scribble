@@ -14,11 +14,11 @@ public:
 	~AssignVariableStatement();
 	Value* execute(std::vector<Value*> const& variables);
 
-	ValueType type() {
+	Type* type() {
 		return exp_->type();
 	}
 
-	void checkTree(ValueType functionType);
+	void checkTree(Type* functionType);
 };
 
 #endif //_ASSIGN_VARIABLE_DEF_H_

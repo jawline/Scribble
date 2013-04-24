@@ -53,3 +53,34 @@ Type* TypeManager::getType(ValueType base, Type* subType) {
 	types_.push_back(found);
 	return found;
 }
+
+TypeManager typeInstance;
+
+TypeManager& getTypeManager() {
+	return typeInstance;
+}
+
+Type* stringType = getTypeManager().getType(String);
+
+Type* getStringType() {
+	return stringType;
+}
+
+Type* intType = getTypeManager().getType(Int);
+
+Type* getIntType() {
+	return intType;
+}
+
+Type* boolType = getTypeManager().getType(Boolean);
+
+Type* getBooleanType() {
+	return boolType;
+}
+
+Type* voidType = getTypeManager().getType(Void);
+
+Type* getVoidType() {
+	return voidType;
+}
+

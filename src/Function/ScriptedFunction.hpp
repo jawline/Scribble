@@ -15,7 +15,7 @@
 class ScriptedFunction: public Function {
 private:
 
-	ValueType fType_;
+	Type* fType_;
 	SP<Value> templateReturn_;
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variableTemplates_;
@@ -23,7 +23,7 @@ private:
 
 public:
 
-	ScriptedFunction(ValueType functionType,
+	ScriptedFunction(Type* functionType,
 			SP<Value> templateReturn,
 			std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variableTemplates,
@@ -33,10 +33,10 @@ public:
 
 	Value* execute(std::vector<Value*> arguments);
 
-	const ValueType getType();
+	Type* getType();
 
 	const unsigned int numArgs();
-	const ValueType argType(unsigned int arg);
+	Type* argType(unsigned int arg);
 	void check();
 };
 

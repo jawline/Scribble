@@ -1,10 +1,4 @@
 import("sys")
-import("fibs")
-import("fact")
-import("arrays")
-import("random")
-import("variables")
-import("functions")
 
 // The main function in this test situation
 //
@@ -15,6 +9,8 @@ import("functions")
 // Runs some simple tests
 
 func main() : void {
- sys.Write("[WORLD]\n")
- sys.Write("[HELLO]\n")
+	var j := 23
+	j := 9
+	while j = 4 {
+	}
 }

@@ -1,16 +1,6 @@
 #ifndef _VALUE_H_
 #define _VALUE_H_
-
-// Enum defining variable types (Integer, Boolean, Etcetera)
-enum ValueType {
-	TypeUnresolved = -1,
-	String = 0,
-	Boolean = 1,
-	Int = 2,
-	Void = 3,
-	Array = 4,
-	ValueTypeMax = 5
-};
+#include "Type.hpp"
 
 // Enum defining all value operators (Add, Divide, Assign, Subtract, Mod etc)
 enum ValueOperator {
@@ -31,7 +21,7 @@ public:
 	virtual void applyOperator(ValueOperator, Value* other) = 0;
 
 	//Get the ValueType of the value
-	virtual ValueType type() = 0;
+	virtual Type* type() = 0;
 
 	//Create an identical copy of the value
 	virtual Value* clone() = 0;

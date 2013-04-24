@@ -31,9 +31,9 @@ public:
 		return stream.str();
 	}
 
-	virtual void checkTree(ValueType functionType) = 0;
+	virtual void checkTree(Type* functionType) = 0;
 	virtual Value* execute(std::vector<Value*> const& variables) = 0;
-	virtual ValueType type() = 0;
+	virtual Type* type() = 0;
 };
 
 typedef SP<Statement> SafeStatement;

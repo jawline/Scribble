@@ -27,9 +27,9 @@ public:
 			IncrementType op, bool post);
 	virtual ~IncrementStatement();
 
-	virtual void checkTree(ValueType functionType);
+	virtual void checkTree(Type* functionType);
 	virtual Value* execute(std::vector<Value*> const& variables);
-	virtual ValueType type();
+	virtual Type* type();
 };
 
 #endif /* INCREMENTSTATEMENT_HPP_ */

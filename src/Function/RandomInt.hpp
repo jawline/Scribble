@@ -18,9 +18,9 @@ public:
 	virtual ~RandomInt();
 
 	Value* execute(std::vector<Value*> arguments);
-	const ValueType getType();
+	Type* getType();
 	const unsigned int numArgs();
-	const ValueType argType(unsigned int arg);
+	Type* argType(unsigned int arg);
 	void check();
 };
 

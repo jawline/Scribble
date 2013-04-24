@@ -8,7 +8,7 @@
 #include "ScriptedFunction.hpp"
 #include <Statement/ReturnStatement.hpp>
 
-ScriptedFunction::ScriptedFunction(ValueType fType, SP<Value> templateReturn,
+ScriptedFunction::ScriptedFunction(Type* fType, SP<Value> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
@@ -64,7 +64,7 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 	return returnVal;
 }
 
-const ValueType ScriptedFunction::getType() {
+Type* ScriptedFunction::getType() {
 	return fType_;
 }
 
@@ -76,10 +76,10 @@ void ScriptedFunction::check() {
 
 }
 
-const ValueType ScriptedFunction::argType(unsigned int arg) {
+Type* ScriptedFunction::argType(unsigned int arg) {
 
 	if (numArgs() <= arg) {
-		return TypeUnresolved;
+		return getTypeManager().getType(TypeUnresolved);
 	}
 
 	return arguments_[arg]->getType();

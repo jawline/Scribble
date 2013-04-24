@@ -26,6 +26,7 @@
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
 #include <Function/WriteFunction.hpp>
+#include <Value/TypeManager.hpp>
 #include <Value/Util.hpp>
 #include <Parser/Parser.hpp>
 
@@ -67,7 +68,7 @@ extern char *yytext;	// defined and maintained in lex.c
 	SP<Variable>* variable;
 	float real;
 	int integer;
-	ValueType type;
+	Type* type;
 }
 
 %token <string> WORD STRING
@@ -112,19 +113,19 @@ Program: {
 ;
 
 Type: TYPE_INT {
-		$$ = Int;
+		$$ = getTypeManager().getType(Int);
 	} | TYPE_STRING {
-		$$ = String;
+		$$ = getTypeManager().getType(String);
 	} | TYPE_BOOL {
-		$$ = Boolean;
+		$$ = getTypeManager().getType(Boolean);
 	} | TYPE_VOID {
-		$$ = Void;
+		$$ = getTypeManager().getType(Void);
 	}
 ;
 
 Variable:  VARIABLE WORD COLON Type {
 
-		if (((ValueType)$4) == TYPE_VOID) {
+		if (($4)->getType() == Void) {
 			yyerror("Cannot declare a variable as a void.");
 			return -1;
 		}
@@ -135,7 +136,7 @@ Variable:  VARIABLE WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable($4, 0, ValueUtil::generateValue($4)));
+			SP<Variable>* nVar = new SP<Variable>(new Variable(0, ValueUtil::generateValue($4)));
 			Variables[*$2] = *nVar;
 			$$ = nVar;
 		}
@@ -155,7 +156,7 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 		
 			SafeStatement sp = $4;
 		
-			SP<Variable> nVar = SP<Variable>(new Variable(TypeUnresolved, 0, nullptr));
+			SP<Variable> nVar = SP<Variable>(new Variable(0, nullptr));
 			Variables[*$2] = nVar;
 			
 			Reference r;
@@ -172,7 +173,7 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 
 ArgumentDefinition: WORD COLON Type {
 
-		if (((ValueType)$3) == TYPE_VOID) {
+		if (($3)->getType() == Void) {
 			yyerror("Cannot declare a variable as a void.");
 			return -1;
 		}
@@ -183,7 +184,7 @@ ArgumentDefinition: WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable($3, 0, ValueUtil::generateValue($3)));
+			SP<Variable>* nVar = new SP<Variable>(new Variable(0, ValueUtil::generateValue($3)));
 			Variables[*$1] = *nVar;
 			$$ = nVar;
 		}
@@ -217,7 +218,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		
 		if ( Functions[*$2].size() > 0) {
 		
-			if (Parser::functionSetType(Functions[*$2]) != $7) {
+			if (!(Parser::functionSetType(Functions[*$2])->Equals($7))) {
 				yyerror("Function differs from predefined function type");
 				return -1;
 			}

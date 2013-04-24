@@ -8,6 +8,7 @@
 #include "RandomInt.hpp"
 #include <Value/Int.hpp>
 #include <stdlib.h>     /* srand, rand */
+#include <Value/TypeManager.hpp>
 
 RandomInt::RandomInt() {
 }
@@ -20,16 +21,16 @@ Value* RandomInt::execute(std::vector<Value*> arguments) {
 	return new IntValue(rand() % (((IntValue*) arguments[0])->value() + 1));
 }
 
-const ValueType RandomInt::getType() {
-	return Int;
+Type* RandomInt::getType() {
+	return getTypeManager().getType(Int);
 }
 
 const unsigned int RandomInt::numArgs() {
 	return 1;
 }
 
-const ValueType RandomInt::argType(unsigned int arg) {
-	return Int;
+Type* RandomInt::argType(unsigned int arg) {
+	return getTypeManager().getType(Int);
 }
 
 void RandomInt::check() {

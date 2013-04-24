@@ -11,7 +11,7 @@ private:
 public:
 
 	StringValue(std::string const value);
-	ValueType type();
+	Type* type();
 	Value* clone();
 
 	void applyOperator(ValueOperator v, Value* r);

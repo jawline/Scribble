@@ -7,6 +7,7 @@
 
 #include "IncrementStatement.hpp"
 #include <Value/Int.hpp>
+#include <Value/TypeManager.hpp>
 
 IncrementStatement::IncrementStatement(int line, std::string sym,
 		SP<Variable> variable, IncrementType op, bool post) :
@@ -17,9 +18,9 @@ IncrementStatement::IncrementStatement(int line, std::string sym,
 IncrementStatement::~IncrementStatement() {
 }
 
-void IncrementStatement::checkTree(ValueType functionType) {
+void IncrementStatement::checkTree(Type* functionType) {
 
-	if (variable_->getType() != Int) {
+	if (variable_->getType()->getType() != Int) {
 		throw StatementException(this,
 				"Increment invalid on types other than int");
 	}
@@ -69,6 +70,6 @@ Value* IncrementStatement::execute(std::vector<Value*> const& variables) {
 	return 0;
 }
 
-ValueType IncrementStatement::type() {
-	return Int;
+Type* IncrementStatement::type() {
+	return getTypeManager().getType(Int);
 }

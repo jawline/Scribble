@@ -8,6 +8,7 @@
 #include "Void.hpp"
 #include <Statement/StatementException.hpp>
 #include <Statement/Heap.hpp>
+#include "TypeManager.hpp"
 
 VoidValue::VoidValue() {
 	// TODO Auto-generated constructor stub
@@ -22,10 +23,10 @@ void VoidValue::applyOperator(ValueOperator, Value* other) {
 	throw StatementException(0, "Not Supported");
 }
 
-ValueType VoidValue::type() {
-	return Void;
+Type* VoidValue::type() {
+	return getVoidType();
 }
 
 Value* VoidValue::clone() {
-	return valueHeap.make(Void);
+	return valueHeap.make(getVoidType());
 }

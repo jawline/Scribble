@@ -22,7 +22,7 @@ public:
 
 	void setValue(bool v);
 
-	ValueType type();
+	Type* type();
 
 	Value* clone();
 

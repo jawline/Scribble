@@ -16,10 +16,10 @@ Value* AssignVariableStatement::execute(std::vector<Value*> const& variables) {
 	return ex;
 }
 
-void AssignVariableStatement::checkTree(ValueType functionType) {
+void AssignVariableStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	if (var_->getType() != exp_->type()) {
+	if (!var_->getType()->Equals(exp_->type())) {
 
 		throw StatementException(this,
 				"Cannot assign statement to a variable of a different type");

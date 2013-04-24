@@ -8,6 +8,7 @@
 #ifndef STRINGFUNCTION_HPP_
 #define STRINGFUNCTION_HPP_
 #include "Function.hpp"
+#include <Value/TypeManager.hpp>
 
 class IntToStringFunction: public Function {
 public:
@@ -16,14 +17,13 @@ public:
 
 	Value* execute(std::vector<Value*> arguments);
 
-	ValueType const getType();
+	Type* getType();
 	const unsigned int numArgs();
-	const ValueType argType(unsigned int arg);
+	Type* argType(unsigned int arg);
 
 	virtual void check() {
 	}
 };
-
 
 class BoolToStringFunction: public Function {
 public:
@@ -32,13 +32,12 @@ public:
 
 	Value* execute(std::vector<Value*> arguments);
 
-	ValueType const getType();
+	 Type* getType();
 	const unsigned int numArgs();
-	const ValueType argType(unsigned int arg);
+	Type* argType(unsigned int arg);
 
 	virtual void check() {
 	}
 };
-
 
 #endif /* STRINGFUNCTION_HPP_ */

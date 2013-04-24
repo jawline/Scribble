@@ -3,25 +3,26 @@
 #include <Statement/StatementException.hpp>
 #include <Value/String.hpp>
 #include <Value/Void.hpp>
+#include <Value/TypeManager.hpp>
 
 Value* WriteFunction::execute(std::vector<Value*> arguments) {
 	printf("%s", ((StringValue*) arguments[0])->getValue().c_str());
-	return new VoidValue();
+	return valueHeap.make(getVoidType());
 }
 
-const ValueType WriteFunction::argType(unsigned int arg) {
+Type* WriteFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
-		return String;
+		return getTypeManager().getType(String);
 	}
 
-	return Void;
+	return getTypeManager().getType(TypeUnresolved);
 }
 
 const unsigned int WriteFunction::numArgs() {
 	return 1;
 }
 
-const ValueType WriteFunction::getType() {
-	return Void;
+Type* WriteFunction::getType() {
+	return getTypeManager().getType(Void);
 }

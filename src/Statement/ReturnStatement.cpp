@@ -16,10 +16,10 @@ ReturnStatement::~ReturnStatement() {
 	// TODO Auto-generated destructor stub
 }
 
-void ReturnStatement::checkTree(ValueType functionType) {
+void ReturnStatement::checkTree(Type* functionType) {
 	stm_->checkTree(functionType);
 
-	if (functionType != stm_->type()) {
+	if (!functionType->Equals(stm_->type())) {
 		throw StatementException(this,
 				"Return type differs from function type");
 	}

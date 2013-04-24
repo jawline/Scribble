@@ -89,7 +89,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 61 "./src/Parser/Parser.yy"
+#line 62 "./src/Parser/Parser.yy"
 
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
@@ -99,7 +99,7 @@ typedef union YYSTYPE
 	SP<Variable>* variable;
 	float real;
 	int integer;
-	ValueType type;
+	Type* type;
 
 
 

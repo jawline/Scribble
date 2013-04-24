@@ -24,4 +24,10 @@ public:
 	Type* getType(ValueType base, Type* subType);
 };
 
+TypeManager& getTypeManager();
+Type* getStringType();
+Type* getIntType();
+Type* getBooleanType();
+Type* getVoidType();
+
 #endif /* TYPEMANAGER_HPP_ */

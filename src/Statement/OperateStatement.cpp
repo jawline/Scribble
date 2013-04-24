@@ -7,9 +7,10 @@
 
 #include "OperateStatement.hpp"
 #include <Statement/Heap.hpp>
+#include <Value/TypeManager.hpp>
 
-OperateStatement::OperateStatement(int lineNo, std::string sym, ValueOperator op, SafeStatement lhs,
-		SafeStatement rhs) :
+OperateStatement::OperateStatement(int lineNo, std::string sym,
+		ValueOperator op, SafeStatement lhs, SafeStatement rhs) :
 		Statement(lineNo, sym) {
 	op_ = op;
 	lhs_ = lhs;
@@ -28,15 +29,16 @@ Value* OperateStatement::execute(std::vector<Value*> const& variables) {
 	return lhR;
 }
 
-ValueType OperateStatement::type() {
+Type* OperateStatement::type() {
 	return lhs_->type();
 }
 
-void OperateStatement::checkTree(ValueType type) {
+void OperateStatement::checkTree(Type* type) {
 	lhs_->checkTree(type);
 	rhs_->checkTree(type);
 
-	if (lhs_->type() != rhs_->type()) {
-		throw new StatementException(this, "Cannot add variables of different types");
+	if (!(lhs_->type()->Equals(rhs_->type()))) {
+		throw new StatementException(this,
+				"Cannot add variables of different types");
 	}
 }

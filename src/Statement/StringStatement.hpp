@@ -2,6 +2,7 @@
 #define _STR_STATEMENT_DEF_H_
 #include "Statement.hpp"
 #include <Value/Value.hpp>
+#include <Value/TypeManager.hpp>
 
 class StringStatement : public Statement {
 private:
@@ -11,11 +12,11 @@ public:
 	StringStatement(int lineNo, std::string sym, std::string stringValue);
 	Value* execute(std::vector<Value*> const& variables);
 
-	ValueType type() {
-		return String;
+	Type* type() {
+		return getTypeManager().getType(String);
 	}
 
-	void checkTree(ValueType functionType);
+	void checkTree(Type* functionType);
 };
 
 #endif //_STR_STATEMENT_DEF_H_

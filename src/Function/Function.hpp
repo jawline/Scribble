@@ -20,9 +20,9 @@ public:
 	/**
 	 * Get the return type of the function.
 	 */
-	virtual const ValueType getType() = 0;
+	virtual Type* getType() = 0;
 	virtual const unsigned int numArgs() = 0;
-	virtual const ValueType argType(unsigned int arg) = 0;
+	virtual Type* argType(unsigned int arg) = 0;
 	virtual void check() = 0;
 };
 
