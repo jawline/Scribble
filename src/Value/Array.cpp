@@ -30,5 +30,12 @@ Value* ArrayValue::clone() {
 }
 
 void ArrayValue::applyOperator(ValueOperator v, Value* r) {
+
+	if (v == Assign) {
+
+		data_ = ((ArrayValue*) r)->data_;
+		return;
+	}
+
 	throw StatementException(nullptr, "Invalid operator");
 }

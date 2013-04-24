@@ -22,6 +22,9 @@
 #include <Statement/ReturnStatement.hpp>
 #include <Statement/WhileStatement.hpp>
 #include <Statement/IncrementStatement.hpp>
+#include <Statement/ArrayStatement.hpp>
+#include <Statement/AssignArrayStatement.hpp>
+#include <Statement/GetArrayStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -77,7 +80,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO
 %token <token> FUNCTION VARIABLE CONST STRUCT
-%token <token> TYPE_INT TYPE_STRING COLON
+%token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET
 %token <token> END
 
 %left PLUS MINUS
@@ -385,7 +388,13 @@ Statement: TRUE {
 		
 		//Free string pointer
 		delete $1;
-		
+
+	} | LSQBRACKET INT RSQBRACKET Type {
+		$$ = new ArrayStatement(yylineno, yytext, getTypeManager().getType(Array, $4), $2);
+	} | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement{
+		$$ = new AssignArrayStatement(yylineno, yytext, $1, $6, $3); 
+	} | Statement LSQBRACKET Statement RSQBRACKET {
+		$$ = new GetArrayStatement(yylineno, yytext, $1, $3); 
 	} | Variable {
 		$$ = new GetVariableStatement(yylineno, yytext, *$1);
 		delete $1;

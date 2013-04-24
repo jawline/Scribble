@@ -7,12 +7,19 @@
 
 #include "ArrayData.hpp"
 
-ArrayData::ArrayData() {
-	// TODO Auto-generated constructor stub
-
+ArrayData::ArrayData(unsigned int length, Value** initial) :
+		length_(length), data_(initial) {
 }
 
 ArrayData::~ArrayData() {
-	// TODO Auto-generated destructor stub
+
+	if (data_ != nullptr) {
+		for (unsigned int i = 0; i < length_; i++) {
+			delete data_[i];
+		}
+
+		delete[] data_;
+	}
+
 }
 

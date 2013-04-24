@@ -82,6 +82,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "auto" return AUTO;
 "." return LINK;
 "array" return TYPE_ARRAY;
+"[" return LSQBRACKET;
+"]" return RSQBRACKET;
 
 {integer} { SAVE_INT;
  return INT;

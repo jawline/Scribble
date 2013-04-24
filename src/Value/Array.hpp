@@ -10,7 +10,7 @@
 #include "Value.hpp"
 #include "ArrayData.hpp"
 
-class ArrayValue : public Value {
+class ArrayValue: public Value {
 private:
 	Type* type_;SP<ArrayData> data_;
 
@@ -21,6 +21,13 @@ public:
 	Type* type();
 	Value* clone();
 	void applyOperator(ValueOperator v, Value* r);
+	void setArrayData(SP<ArrayData> d) {
+		data_ = d;
+	}
+
+	SP<ArrayData> getArrayData() {
+		return data_;
+	}
 };
 
 #endif /* ARRAY_SYS_HPP_ */

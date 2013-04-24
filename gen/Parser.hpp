@@ -78,8 +78,10 @@
      TYPE_INT = 296,
      TYPE_STRING = 297,
      COLON = 298,
-     END = 299,
-     NEG = 300
+     LSQBRACKET = 299,
+     RSQBRACKET = 300,
+     END = 301,
+     NEG = 302
    };
 #endif
 
@@ -90,7 +92,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 62 "./src/Parser/Parser.yy"
+#line 65 "./src/Parser/Parser.yy"
 
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
@@ -105,7 +107,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 109 "./gen/Parser.hpp"
+#line 111 "./gen/Parser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
