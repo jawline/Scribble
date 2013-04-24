@@ -10,6 +10,7 @@
 #include "String.hpp"
 #include "Void.hpp"
 #include "Bool.hpp"
+#include "Array.hpp"
 #include <exception>
 
 UtilException::UtilException(std::string const& reason) throw () :
@@ -38,17 +39,17 @@ Value* ValueUtil::generateValue(Type* type) {
 
 	switch (type->getType()) {
 
+	case Array:
+		return new ArrayValue(type);
+
 	case Int:
 		return new IntValue(0);
-		break;
 
 	case String:
 		return new StringValue("");
-		break;
 
 	case Void:
 		return new VoidValue();
-		break;
 
 	case Boolean:
 		return new BoolValue(false);

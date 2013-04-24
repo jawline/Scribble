@@ -74,7 +74,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_VOID RETURN WHILE NOT IMPORT LINK
+%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO
 %token <token> FUNCTION VARIABLE CONST STRUCT
 %token <token> TYPE_INT TYPE_STRING COLON
@@ -120,6 +120,8 @@ Type: TYPE_INT {
 		$$ = getTypeManager().getType(Boolean);
 	} | TYPE_VOID {
 		$$ = getTypeManager().getType(Void);
+	} | TYPE_ARRAY LPAREN Type RPAREN {
+		$$ = getTypeManager().getType(Array, $3);
 	}
 ;
 

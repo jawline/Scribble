@@ -44,11 +44,9 @@ Type* TypeManager::getType(ValueType base, Type* subType) {
 	Type* found = tFind(base, subType);
 
 	if (found != nullptr) {
-		printf("Found existing type\n");
 		return found;
 	}
 
-	printf("Generating new type\n");
 	found = new Type(base, subType);
 	types_.push_back(found);
 	return found;

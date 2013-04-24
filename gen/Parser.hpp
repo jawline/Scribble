@@ -53,32 +53,33 @@
      GREATER = 271,
      LESSER = 272,
      FOR = 273,
-     TYPE_VOID = 274,
-     RETURN = 275,
-     WHILE = 276,
-     NOT = 277,
-     IMPORT = 278,
-     LINK = 279,
-     LPAREN = 280,
-     RPAREN = 281,
-     LBRACKET = 282,
-     RBRACKET = 283,
-     COMMA = 284,
-     TWOMINUS = 285,
-     TWOPLUS = 286,
-     TYPE_BOOL = 287,
-     TRUE = 288,
-     FALSE = 289,
-     AUTO = 290,
-     FUNCTION = 291,
-     VARIABLE = 292,
-     CONST = 293,
-     STRUCT = 294,
-     TYPE_INT = 295,
-     TYPE_STRING = 296,
-     COLON = 297,
-     END = 298,
-     NEG = 299
+     TYPE_ARRAY = 274,
+     TYPE_VOID = 275,
+     RETURN = 276,
+     WHILE = 277,
+     NOT = 278,
+     IMPORT = 279,
+     LINK = 280,
+     LPAREN = 281,
+     RPAREN = 282,
+     LBRACKET = 283,
+     RBRACKET = 284,
+     COMMA = 285,
+     TWOMINUS = 286,
+     TWOPLUS = 287,
+     TYPE_BOOL = 288,
+     TRUE = 289,
+     FALSE = 290,
+     AUTO = 291,
+     FUNCTION = 292,
+     VARIABLE = 293,
+     CONST = 294,
+     STRUCT = 295,
+     TYPE_INT = 296,
+     TYPE_STRING = 297,
+     COLON = 298,
+     END = 299,
+     NEG = 300
    };
 #endif
 
@@ -104,7 +105,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 108 "./gen/Parser.hpp"
+#line 109 "./gen/Parser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

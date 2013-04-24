@@ -81,6 +81,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "false" return FALSE;
 "auto" return AUTO;
 "." return LINK;
+"array" return TYPE_ARRAY;
 
 {integer} { SAVE_INT;
  return INT;

@@ -5,15 +5,14 @@
 #include <exception>
 #include <stdexcept>
 
-class StackEmptyException : public std::exception {
-  virtual const char* what() const throw()
-  {
-    return "Pop called on empty stack";
-  }
+class StackEmptyException: public std::exception {
+	virtual const char* what() const throw () {
+		return "Pop called on empty stack";
+	}
 
 };
 
-template <class s_Type>
+template<class s_Type>
 class Stack {
 private:
 	s_Type* data_;
@@ -23,12 +22,11 @@ private:
 	static const int cDefaultSize = 64;
 	static const int cExpandChunkSize = 64;
 
-
 	void expand() {
 
 		s_Type* newData = new s_Type[max_ + cExpandChunkSize];
 
-		for (int i = 0; i < max_; ++i) {
+		for (unsigned int i = 0; i < max_; ++i) {
 			newData[i] = data_[i];
 		}
 
@@ -48,7 +46,7 @@ public:
 	}
 
 	~Stack() {
-		
+
 		if (data_ != nullptr) {
 			delete[] data_;
 			current_ = 0;
