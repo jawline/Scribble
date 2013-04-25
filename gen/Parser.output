@@ -69,7 +69,7 @@ Grammar
    27          | FALSE
    28          | INT
    29          | STRING
-   30          | LSQBRACKET INT RSQBRACKET Type
+   30          | LSQBRACKET Statement RSQBRACKET Type
    31          | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement
    32          | Statement LSQBRACKET Statement RSQBRACKET
    33          | Variable
@@ -104,7 +104,7 @@ error (256)
 WORD (258) 9 10 11 14 15 22 23 24 25 36 51 52 53 54 55
 STRING (259) 2 29
 REAL (260)
-INT (261) 28 30
+INT (261) 28
 PLUS (262) 40
 MINUS (263) 41
 TIMES (264) 42
@@ -174,8 +174,8 @@ FunctionCall (58)
     on left: 22 23 24 25, on right: 37
 Statement (59)
     on left: 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43
-    44 45 46 47 48 49 50 51 52 53 54 55, on right: 10 16 17 19 20 31
-    32 34 38 39 40 41 42 43 44 45 46 47 48 49 50 51
+    44 45 46 47 48 49 50 51 52 53 54 55, on right: 10 16 17 19 20 30
+    31 32 34 38 39 40 41 42 43 44 45 46 47 48 49 50 51
 
 
 state 0
@@ -711,9 +711,26 @@ state 48
 
 state 49
 
-   30 Statement: LSQBRACKET . INT RSQBRACKET Type
+   30 Statement: LSQBRACKET . Statement RSQBRACKET Type
 
-    INT  shift, and go to state 68
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    IF          shift, and go to state 38
+    FOR         shift, and go to state 39
+    WHILE       shift, and go to state 41
+    LPAREN      shift, and go to state 42
+    TWOMINUS    shift, and go to state 44
+    TWOPLUS     shift, and go to state 45
+    TRUE        shift, and go to state 46
+    FALSE       shift, and go to state 47
+    VARIABLE    shift, and go to state 48
+    LSQBRACKET  shift, and go to state 49
+
+    Variable      go to state 50
+    AutoVariable  go to state 51
+    FunctionCall  go to state 52
+    Statement     go to state 68
 
 
 state 50
@@ -1028,8 +1045,27 @@ state 67
 
 state 68
 
-   30 Statement: LSQBRACKET INT . RSQBRACKET Type
+   30 Statement: LSQBRACKET Statement . RSQBRACKET Type
+   31          | Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   32          | Statement . LSQBRACKET Statement RSQBRACKET
+   40          | Statement . PLUS Statement
+   41          | Statement . MINUS Statement
+   42          | Statement . TIMES Statement
+   43          | Statement . DIVIDE Statement
+   46          | Statement . EQUALS Statement
+   47          | Statement . NOT EQUALS Statement
+   48          | Statement . GREATER Statement
+   49          | Statement . LESSER Statement
 
+    PLUS        shift, and go to state 70
+    MINUS       shift, and go to state 71
+    TIMES       shift, and go to state 72
+    DIVIDE      shift, and go to state 73
+    EQUALS      shift, and go to state 74
+    GREATER     shift, and go to state 75
+    LESSER      shift, and go to state 76
+    NOT         shift, and go to state 77
+    LSQBRACKET  shift, and go to state 78
     RSQBRACKET  shift, and go to state 91
 
 
@@ -1440,7 +1476,7 @@ state 90
 
 state 91
 
-   30 Statement: LSQBRACKET INT RSQBRACKET . Type
+   30 Statement: LSQBRACKET Statement RSQBRACKET . Type
 
     TYPE_ARRAY   shift, and go to state 19
     TYPE_VOID    shift, and go to state 20
@@ -1950,7 +1986,7 @@ state 109
 
 state 110
 
-   30 Statement: LSQBRACKET INT RSQBRACKET Type .
+   30 Statement: LSQBRACKET Statement RSQBRACKET Type .
 
     $default  reduce using rule 30 (Statement)
 

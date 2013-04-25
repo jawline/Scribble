@@ -8,8 +8,10 @@
 #include "ArrayStatement.hpp"
 #include <Value/Array.hpp>
 #include <Value/Util.hpp>
+#include <Value/Int.hpp>
+#include "Heap.hpp"
 
-ArrayStatement::ArrayStatement(int line, std::string text, Type* type, unsigned int length) : Statement(line, text),
+ArrayStatement::ArrayStatement(int line, std::string text, Type* type, SafeStatement length) : Statement(line, text),
 		type_(type), length_(length) {
 }
 
@@ -19,13 +21,17 @@ ArrayStatement::~ArrayStatement() {
 
 Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
 
-	Value** initial = new Value*[length_];
+	IntValue* l = (IntValue*)length_->execute(variables);
+	int length = l->value();
+	valueHeap.free(l);
 
-	for (unsigned int i = 0; i < length_; i++) {
+	Value** initial = new Value*[length];
+
+	for (unsigned int i = 0; i < length; i++) {
 		initial[i] = ValueUtil::generateValue(type_->getSubtype());
 	}
 
-	SP<ArrayData> data = SP<ArrayData>(new ArrayData(length_, initial));
+	SP<ArrayData> data = SP<ArrayData>(new ArrayData(length, initial));
 	ArrayValue* arr = (ArrayValue*) ValueUtil::generateValue(type_);
 	arr->setArrayData(data);
 	return arr;
@@ -36,5 +42,9 @@ Type* ArrayStatement::type() {
 }
 
 void ArrayStatement::checkTree(Type* functionType) {
+	length_->checkTree(functionType);
 
+	if (length_->type()->getType() != Int) {
+		throw new StatementException(this, "Error expected int for array size");
+	}
 }

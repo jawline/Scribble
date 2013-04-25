@@ -392,7 +392,7 @@ Statement: TRUE {
 		//Free string pointer
 		delete $1;
 
-	} | LSQBRACKET INT RSQBRACKET Type {
+	} | LSQBRACKET Statement RSQBRACKET Type {
 		$$ = new ArrayStatement(yylineno, yytext, getTypeManager().getType(Array, $4), $2);
 	} | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement{
 		$$ = new AssignArrayStatement(yylineno, yytext, $1, $6, $3); 

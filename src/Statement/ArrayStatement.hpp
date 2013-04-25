@@ -12,10 +12,10 @@
 class ArrayStatement: public Statement {
 private:
 	Type* type_;
-	unsigned int length_;
+	SafeStatement length_;
 
 public:
-	ArrayStatement(int line, std::string text, Type* type, unsigned int length);
+	ArrayStatement(int line, std::string text, Type* type, SafeStatement length);
 	virtual ~ArrayStatement();
 
 	Value* execute(std::vector<Value*> const& variables);

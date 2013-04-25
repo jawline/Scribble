@@ -16,6 +16,9 @@ func Test() : bool {
 		sys.Write(r[i] + "\n")
 	}
 	
+	var jSize := 6
+	j := [jSize]int
+	
 	var arrayArray := [5]array(array(array(string)))
 	
 	return true
