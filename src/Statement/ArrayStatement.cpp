@@ -27,7 +27,7 @@ Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
 
 	Value** initial = new Value*[length];
 
-	for (unsigned int i = 0; i < length; i++) {
+	for (int i = 0; i < length; i++) {
 		initial[i] = ValueUtil::generateValue(type_->getSubtype());
 	}
 

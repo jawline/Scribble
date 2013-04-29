@@ -23,7 +23,7 @@ Value* GetArrayStatement::execute(std::vector<Value*> const& variables) {
 	IntValue* index = (IntValue*) index_->execute(variables);
 	ArrayValue* array = (ArrayValue*) array_->execute(variables);
 
-	if (index->value() < 0 || index->value() >= array->getArrayData()->length()) {
+	if (index->value() < 0 || ((unsigned int)index->value()) >= array->getArrayData()->length()) {
 		throw StatementException(this, "Index out of bounds");
 	}
 

@@ -17,6 +17,12 @@ import("functions")
 func main() : void {
 
 	sys.Write("-- Scribble test program --\n")
+	
+	var i := 2
+	
+	if ((i > 0) & (i < 30)) {
+		sys.Write("Hi")
+	}
 
 	if (variables.Test() = false) {
 		sys.Write("Variables test failed.\n")

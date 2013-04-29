@@ -22,11 +22,12 @@ AssignArrayStatement::~AssignArrayStatement() {
 
 Value* AssignArrayStatement::execute(std::vector<Value*> const& variables) {
 
-	ArrayValue* lhs = (ArrayValue*)array_->execute(variables);
-	IntValue* pos = (IntValue*)position_->execute(variables);
+	ArrayValue* lhs = (ArrayValue*) array_->execute(variables);
+	IntValue* pos = (IntValue*) position_->execute(variables);
 	Value* rhs = toAssign_->execute(variables);
 
-	if (pos->value() >= 0 && pos->value() < lhs->getArrayData()->length()) {
+	if (pos->value() >= 0
+			&& pos->value() < ((int) lhs->getArrayData()->length())) {
 		lhs->getArrayData()->index(pos->value())->applyOperator(Assign, rhs);
 	} else {
 		throw StatementException(this, "Index out of bounds");

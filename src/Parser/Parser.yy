@@ -15,6 +15,7 @@
 #include <Statement/AssignVariable.hpp>
 #include <Statement/GetVariableStatement.hpp>
 #include <Statement/FunctionStatement.hpp>
+#include <Statement/AndStatement.hpp>
 #include <Statement/ForStatement.hpp>
 #include <Statement/TestStatement.hpp>
 #include <Statement/IfStatement.hpp>
@@ -25,6 +26,7 @@
 #include <Statement/ArrayStatement.hpp>
 #include <Statement/AssignArrayStatement.hpp>
 #include <Statement/GetArrayStatement.hpp>
+#include <Statement/ArrayLengthStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -78,8 +80,8 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <real> REAL
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO
-%token <token> FUNCTION VARIABLE CONST STRUCT
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND
+%token <token> FUNCTION VARIABLE CONST STRUCT LENGTH
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET
 %token <token> END
 
@@ -184,7 +186,7 @@ ArgumentDefinition: WORD COLON Type {
 		}
 
 		auto it = Variables.find(*$1);
-			
+
 		if (it != Variables.end()) {
 			yyerror("Variable already defined.");
 			return -1;
@@ -392,6 +394,8 @@ Statement: TRUE {
 		//Free string pointer
 		delete $1;
 
+	} | LENGTH LPAREN Statement RPAREN {
+		$$ = new ArrayLengthStatement(yylineno, yytext, $3);
 	} | LSQBRACKET Statement RSQBRACKET Type {
 		$$ = new ArrayStatement(yylineno, yytext, getTypeManager().getType(Array, $4), $2);
 	} | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement{
@@ -510,6 +514,8 @@ Statement: TRUE {
 		
 		//Free name pointer
 		delete $2;
+	} | Statement AND Statement {
+		$$ = new AndStatement(yylineno, yytext, $1, $3);
 	}
 ;
 
