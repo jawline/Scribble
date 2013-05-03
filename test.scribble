@@ -21,7 +21,7 @@ func main() : void {
 	var i := 2
 	
 	if ((i > 0) & (i < 30)) {
-		sys.Write("Hi")
+		sys.Write("Hi\n")
 	}
 
 	if (variables.Test() = false) {

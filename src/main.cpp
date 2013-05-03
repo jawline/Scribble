@@ -9,6 +9,7 @@
 #include <Function/RandomInt.hpp>
 #include <Statement/Heap.hpp>
 #include <Parser/Parser.hpp>
+#include <Parser/ParserException.hpp>
 #include <version_info.hpp>
 #include <Value/TypeManager.hpp>
 #include <string.h>
@@ -45,7 +46,14 @@ int main(int argc, char** argv) {
 	std::map<std::string, NamespaceType> builtinNamespaces;
 	builtinNamespaces["sys"] = builtinFunctions;
 
-	SP<Function> entry = Parser::compile(argv[1], builtinNamespaces)[0];
+	SP<Function> entry;
+
+	try {
+		entry = Parser::compile(argv[1], builtinNamespaces)[0];
+	} catch (ParserException& e) {
+		printf("Unfortunately a parser error occurred because %s.\n", e.what());
+		return -1;
+	}
 
 	if (!entry.Null()) {
 
@@ -61,4 +69,5 @@ int main(int argc, char** argv) {
 	}
 
 	valueHeap.freeAll();
+	return 0;
 }

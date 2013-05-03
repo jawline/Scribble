@@ -12,10 +12,7 @@ func Test() : bool {
 	r[3] := "Are"
 	r[4] := "You"
 	
-	var rLen := len(r)
-	sys.Write("Length of r:"+sys.String(rLen)+"\n")
-	
-	for var i := 0; i < 5; i++ {
+	for var i := 0; i < len(r); i++ {
 		sys.Write(r[i] + "\n")
 	}
 	

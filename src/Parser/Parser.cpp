@@ -100,6 +100,10 @@ std::string Parser::bufferText(std::string const& filePath) {
 	//Free the buffers
 	delete[] buffer;
 
+	if (f_size == 0) {
+		throw ParserException(filePath, "Empty file");
+	}
+
 	return inputSource;
 }
 

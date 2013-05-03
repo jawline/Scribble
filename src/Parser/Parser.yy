@@ -27,6 +27,7 @@
 #include <Statement/AssignArrayStatement.hpp>
 #include <Statement/GetArrayStatement.hpp>
 #include <Statement/ArrayLengthStatement.hpp>
+#include <Statement/NegativeStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -387,6 +388,8 @@ Statement: TRUE {
 		$$ = new BoolStatement(yylineno, yytext, false);
 	} | INT {
 		$$ = new IntStatement(yylineno, yytext, $1);
+	} | MINUS Statement {
+		$$ = new NegativeStatement(yylineno, yytext, $2);
 	} | STRING {
 		
 		$$ = new StringStatement(yylineno, yytext, *$1);

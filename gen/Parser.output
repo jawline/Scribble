@@ -9,22 +9,23 @@ Terminals unused in grammar
 
 
 State 35 conflicts: 3 shift/reduce
-State 40 conflicts: 14 shift/reduce
-State 54 conflicts: 1 shift/reduce
-State 63 conflicts: 1 shift/reduce
-State 83 conflicts: 10 shift/reduce
-State 96 conflicts: 10 shift/reduce
-State 97 conflicts: 6 shift/reduce
-State 98 conflicts: 6 shift/reduce
+State 41 conflicts: 15 shift/reduce
+State 55 conflicts: 2 shift/reduce
+State 62 conflicts: 6 shift/reduce
+State 65 conflicts: 2 shift/reduce
+State 85 conflicts: 10 shift/reduce
+State 98 conflicts: 10 shift/reduce
 State 99 conflicts: 6 shift/reduce
 State 100 conflicts: 6 shift/reduce
-State 101 conflicts: 10 shift/reduce
-State 102 conflicts: 10 shift/reduce
+State 101 conflicts: 6 shift/reduce
+State 102 conflicts: 6 shift/reduce
 State 103 conflicts: 10 shift/reduce
+State 104 conflicts: 10 shift/reduce
 State 105 conflicts: 10 shift/reduce
-State 113 conflicts: 10 shift/reduce
-State 117 conflicts: 10 shift/reduce
-State 129 conflicts: 10 shift/reduce
+State 107 conflicts: 10 shift/reduce
+State 115 conflicts: 10 shift/reduce
+State 119 conflicts: 10 shift/reduce
+State 131 conflicts: 10 shift/reduce
 
 
 Grammar
@@ -69,87 +70,88 @@ Grammar
    26 Statement: TRUE
    27          | FALSE
    28          | INT
-   29          | STRING
-   30          | LENGTH LPAREN Statement RPAREN
-   31          | LSQBRACKET Statement RSQBRACKET Type
-   32          | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement LSQBRACKET Statement RSQBRACKET
-   34          | Variable
-   35          | Variable ASSIGN Statement
-   36          | AutoVariable
-   37          | WORD
-   38          | FunctionCall
-   39          | IF Statement LBRACKET Statements RBRACKET
-   40          | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
-   41          | Statement PLUS Statement
-   42          | Statement MINUS Statement
-   43          | Statement TIMES Statement
-   44          | Statement DIVIDE Statement
-   45          | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET
-   46          | WHILE Statement LBRACKET Statements RBRACKET
-   47          | Statement EQUALS Statement
-   48          | Statement NOT EQUALS Statement
-   49          | Statement GREATER Statement
-   50          | Statement LESSER Statement
-   51          | LPAREN Statement RPAREN
-   52          | WORD ASSIGN Statement
-   53          | WORD TWOPLUS
-   54          | TWOPLUS WORD
-   55          | WORD TWOMINUS
-   56          | TWOMINUS WORD
-   57          | Statement AND Statement
+   29          | MINUS Statement
+   30          | STRING
+   31          | LENGTH LPAREN Statement RPAREN
+   32          | LSQBRACKET Statement RSQBRACKET Type
+   33          | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement LSQBRACKET Statement RSQBRACKET
+   35          | Variable
+   36          | Variable ASSIGN Statement
+   37          | AutoVariable
+   38          | WORD
+   39          | FunctionCall
+   40          | IF Statement LBRACKET Statements RBRACKET
+   41          | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
+   42          | Statement PLUS Statement
+   43          | Statement MINUS Statement
+   44          | Statement TIMES Statement
+   45          | Statement DIVIDE Statement
+   46          | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET
+   47          | WHILE Statement LBRACKET Statements RBRACKET
+   48          | Statement EQUALS Statement
+   49          | Statement NOT EQUALS Statement
+   50          | Statement GREATER Statement
+   51          | Statement LESSER Statement
+   52          | LPAREN Statement RPAREN
+   53          | WORD ASSIGN Statement
+   54          | WORD TWOPLUS
+   55          | TWOPLUS WORD
+   56          | WORD TWOMINUS
+   57          | TWOMINUS WORD
+   58          | Statement AND Statement
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-WORD (258) 9 10 11 14 15 22 23 24 25 37 52 53 54 55 56
-STRING (259) 2 29
+WORD (258) 9 10 11 14 15 22 23 24 25 38 53 54 55 56 57
+STRING (259) 2 30
 REAL (260)
 INT (261) 28
-PLUS (262) 41
-MINUS (263) 42
-TIMES (264) 43
-DIVIDE (265) 44
+PLUS (262) 42
+MINUS (263) 29 43
+TIMES (264) 44
+DIVIDE (265) 45
 POWER (266)
-EQUALS (267) 47 48
-ASSIGN (268) 10 32 35 52
-IF (269) 39 40
-ELSE (270) 40
-GREATER (271) 49
-LESSER (272) 50
-FOR (273) 45
+EQUALS (267) 48 49
+ASSIGN (268) 10 33 36 53
+IF (269) 40 41
+ELSE (270) 41
+GREATER (271) 50
+LESSER (272) 51
+FOR (273) 46
 TYPE_ARRAY (274) 8
 TYPE_VOID (275) 7
 RETURN (276) 20 21
-WHILE (277) 46
-NOT (278) 48
+WHILE (277) 47
+NOT (278) 49
 IMPORT (279) 2
 LINK (280) 24 25
-LPAREN (281) 2 8 14 15 22 23 24 25 30 51
-RPAREN (282) 2 8 14 15 22 23 24 25 30 51
-LBRACKET (283) 14 15 39 40 45 46
-RBRACKET (284) 14 15 39 40 45 46
+LPAREN (281) 2 8 14 15 22 23 24 25 31 52
+RPAREN (282) 2 8 14 15 22 23 24 25 31 52
+LBRACKET (283) 14 15 40 41 46 47
+RBRACKET (284) 14 15 40 41 46 47
 COMMA (285) 13 17
-TWOMINUS (286) 55 56
-TWOPLUS (287) 53 54
+TWOMINUS (286) 56 57
+TWOPLUS (287) 54 55
 TYPE_BOOL (288) 6
 TRUE (289) 26
 FALSE (290) 27
 AUTO (291)
-AND (292) 57
+AND (292) 58
 FUNCTION (293) 14 15
 VARIABLE (294) 9 10
 CONST (295)
 STRUCT (296)
-LENGTH (297) 30
+LENGTH (297) 31
 TYPE_INT (298) 4
 TYPE_STRING (299) 5
 COLON (300) 9 11 14 15
-LSQBRACKET (301) 31 32 33
-RSQBRACKET (302) 31 32 33
-END (303) 45
+LSQBRACKET (301) 32 33 34
+RSQBRACKET (302) 32 33 34
+END (303) 46
 NEG (304)
 
 
@@ -160,11 +162,11 @@ $accept (50)
 Program (51)
     on left: 1 2 3, on right: 0 2 3
 Type (52)
-    on left: 4 5 6 7 8, on right: 8 9 11 14 15 31
+    on left: 4 5 6 7 8, on right: 8 9 11 14 15 32
 Variable (53)
-    on left: 9, on right: 34 35
+    on left: 9, on right: 35 36
 AutoVariable (54)
-    on left: 10, on right: 36
+    on left: 10, on right: 37
 ArgumentDefinition (55)
     on left: 11, on right: 12 13
 ArgumentDefinitions (56)
@@ -174,13 +176,14 @@ Function (57)
 Arguments (58)
     on left: 16 17, on right: 17 22 24
 Statements (59)
-    on left: 18 19 20 21, on right: 14 15 19 20 21 39 40 45 46
+    on left: 18 19 20 21, on right: 14 15 19 20 21 40 41 46 47
 FunctionCall (60)
-    on left: 22 23 24 25, on right: 38
+    on left: 22 23 24 25, on right: 39
 Statement (61)
     on left: 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43
-    44 45 46 47 48 49 50 51 52 53 54 55 56 57, on right: 10 16 17 19
-    20 30 31 32 33 35 39 40 41 42 43 44 45 46 47 48 49 50 51 52 57
+    44 45 46 47 48 49 50 51 52 53 54 55 56 57 58, on right: 10 16 17
+    19 20 29 31 32 33 34 36 40 41 42 43 44 45 46 47 48 49 50 51 52
+    53 58
 
 
 state 0
@@ -462,24 +465,25 @@ state 32
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    RETURN      shift, and go to state 40
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RBRACKET    shift, and go to state 43
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    RETURN      shift, and go to state 41
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RBRACKET    shift, and go to state 44
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 54
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 55
 
 
 state 33
@@ -488,7 +492,7 @@ state 33
 
     $default  reduce using rule 18 (Statements)
 
-    Statements  go to state 55
+    Statements  go to state 56
 
 
 state 34
@@ -504,28 +508,28 @@ state 35
    23             | WORD . LPAREN RPAREN
    24             | WORD . LINK WORD LPAREN Arguments RPAREN
    25             | WORD . LINK WORD LPAREN RPAREN
-   37 Statement: WORD .
-   52          | WORD . ASSIGN Statement
-   53          | WORD . TWOPLUS
-   55          | WORD . TWOMINUS
+   38 Statement: WORD .
+   53          | WORD . ASSIGN Statement
+   54          | WORD . TWOPLUS
+   56          | WORD . TWOMINUS
 
-    ASSIGN    shift, and go to state 56
-    LINK      shift, and go to state 57
-    LPAREN    shift, and go to state 58
-    TWOMINUS  shift, and go to state 59
-    TWOPLUS   shift, and go to state 60
+    ASSIGN    shift, and go to state 57
+    LINK      shift, and go to state 58
+    LPAREN    shift, and go to state 59
+    TWOMINUS  shift, and go to state 60
+    TWOPLUS   shift, and go to state 61
 
-    LPAREN    [reduce using rule 37 (Statement)]
-    TWOMINUS  [reduce using rule 37 (Statement)]
-    TWOPLUS   [reduce using rule 37 (Statement)]
-    $default  reduce using rule 37 (Statement)
+    LPAREN    [reduce using rule 38 (Statement)]
+    TWOMINUS  [reduce using rule 38 (Statement)]
+    TWOPLUS   [reduce using rule 38 (Statement)]
+    $default  reduce using rule 38 (Statement)
 
 
 state 36
 
-   29 Statement: STRING .
+   30 Statement: STRING .
 
-    $default  reduce using rule 29 (Statement)
+    $default  reduce using rule 30 (Statement)
 
 
 state 37
@@ -537,56 +541,84 @@ state 37
 
 state 38
 
-   39 Statement: IF . Statement LBRACKET Statements RBRACKET
-   40          | IF . Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
+   29 Statement: MINUS . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 61
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 62
 
 
 state 39
 
-   45 Statement: FOR . Statement END Statement END Statement LBRACKET Statements RBRACKET
+   40 Statement: IF . Statement LBRACKET Statements RBRACKET
+   41          | IF . Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 62
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 63
 
 
 state 40
+
+   46 Statement: FOR . Statement END Statement END Statement LBRACKET Statements RBRACKET
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 64
+
+
+state 41
 
    20 Statements: Statements RETURN . Statement
    21           | Statements RETURN .
@@ -594,21 +626,23 @@ state 40
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
     WORD        [reduce using rule 21 (Statements)]
     STRING      [reduce using rule 21 (Statements)]
     INT         [reduce using rule 21 (Statements)]
+    MINUS       [reduce using rule 21 (Statements)]
     IF          [reduce using rule 21 (Statements)]
     FOR         [reduce using rule 21 (Statements)]
     WHILE       [reduce using rule 21 (Statements)]
@@ -622,192 +656,196 @@ state 40
     LSQBRACKET  [reduce using rule 21 (Statements)]
     $default    reduce using rule 21 (Statements)
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 63
-
-
-state 41
-
-   46 Statement: WHILE . Statement LBRACKET Statements RBRACKET
-
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 64
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 65
 
 
 state 42
 
-   51 Statement: LPAREN . Statement RPAREN
+   47 Statement: WHILE . Statement LBRACKET Statements RBRACKET
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 65
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 66
 
 
 state 43
+
+   52 Statement: LPAREN . Statement RPAREN
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 67
+
+
+state 44
 
    15 Function: FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET .
 
     $default  reduce using rule 15 (Function)
 
 
-state 44
-
-   56 Statement: TWOMINUS . WORD
-
-    WORD  shift, and go to state 66
-
-
 state 45
 
-   54 Statement: TWOPLUS . WORD
+   57 Statement: TWOMINUS . WORD
 
-    WORD  shift, and go to state 67
+    WORD  shift, and go to state 68
 
 
 state 46
+
+   55 Statement: TWOPLUS . WORD
+
+    WORD  shift, and go to state 69
+
+
+state 47
 
    26 Statement: TRUE .
 
     $default  reduce using rule 26 (Statement)
 
 
-state 47
+state 48
 
    27 Statement: FALSE .
 
     $default  reduce using rule 27 (Statement)
 
 
-state 48
+state 49
 
     9 Variable: VARIABLE . WORD COLON Type
    10 AutoVariable: VARIABLE . WORD ASSIGN Statement
 
-    WORD  shift, and go to state 68
-
-
-state 49
-
-   30 Statement: LENGTH . LPAREN Statement RPAREN
-
-    LPAREN  shift, and go to state 69
+    WORD  shift, and go to state 70
 
 
 state 50
 
-   31 Statement: LSQBRACKET . Statement RSQBRACKET Type
+   31 Statement: LENGTH . LPAREN Statement RPAREN
 
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 70
+    LPAREN  shift, and go to state 71
 
 
 state 51
 
-   34 Statement: Variable .
-   35          | Variable . ASSIGN Statement
+   32 Statement: LSQBRACKET . Statement RSQBRACKET Type
 
-    ASSIGN  shift, and go to state 71
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    $default  reduce using rule 34 (Statement)
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 72
 
 
 state 52
 
-   36 Statement: AutoVariable .
+   35 Statement: Variable .
+   36          | Variable . ASSIGN Statement
 
-    $default  reduce using rule 36 (Statement)
+    ASSIGN  shift, and go to state 73
+
+    $default  reduce using rule 35 (Statement)
 
 
 state 53
 
-   38 Statement: FunctionCall .
+   37 Statement: AutoVariable .
 
-    $default  reduce using rule 38 (Statement)
+    $default  reduce using rule 37 (Statement)
 
 
 state 54
 
+   39 Statement: FunctionCall .
+
+    $default  reduce using rule 39 (Statement)
+
+
+state 55
+
    19 Statements: Statements Statement .
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
+    MINUS       [reduce using rule 19 (Statements)]
     LSQBRACKET  [reduce using rule 19 (Statements)]
     $default    reduce using rule 19 (Statements)
 
 
-state 55
+state 56
 
    14 Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET Statements . RBRACKET
    19 Statements: Statements . Statement
@@ -817,60 +855,62 @@ state 55
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    RETURN      shift, and go to state 40
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RBRACKET    shift, and go to state 82
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    RETURN      shift, and go to state 41
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RBRACKET    shift, and go to state 84
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 54
-
-
-state 56
-
-   52 Statement: WORD ASSIGN . Statement
-
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 83
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 55
 
 
 state 57
 
-   24 FunctionCall: WORD LINK . WORD LPAREN Arguments RPAREN
-   25             | WORD LINK . WORD LPAREN RPAREN
+   53 Statement: WORD ASSIGN . Statement
 
-    WORD  shift, and go to state 84
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 85
 
 
 state 58
+
+   24 FunctionCall: WORD LINK . WORD LPAREN Arguments RPAREN
+   25             | WORD LINK . WORD LPAREN RPAREN
+
+    WORD  shift, and go to state 86
+
+
+state 59
 
    22 FunctionCall: WORD LPAREN . Arguments RPAREN
    23             | WORD LPAREN . RPAREN
@@ -878,654 +918,666 @@ state 58
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RPAREN      shift, and go to state 85
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RPAREN      shift, and go to state 87
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    Arguments     go to state 86
-    FunctionCall  go to state 53
-    Statement     go to state 87
-
-
-state 59
-
-   55 Statement: WORD TWOMINUS .
-
-    $default  reduce using rule 55 (Statement)
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    Arguments     go to state 88
+    FunctionCall  go to state 54
+    Statement     go to state 89
 
 
 state 60
 
-   53 Statement: WORD TWOPLUS .
-
-    $default  reduce using rule 53 (Statement)
-
-
-state 61
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   39          | IF Statement . LBRACKET Statements RBRACKET
-   40          | IF Statement . LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    LBRACKET    shift, and go to state 88
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-
-state 62
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   45          | FOR Statement . END Statement END Statement LBRACKET Statements RBRACKET
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-    END         shift, and go to state 89
-
-
-state 63
-
-   20 Statements: Statements RETURN Statement .
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    LSQBRACKET  [reduce using rule 20 (Statements)]
-    $default    reduce using rule 20 (Statements)
-
-
-state 64
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   46          | WHILE Statement . LBRACKET Statements RBRACKET
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    LBRACKET    shift, and go to state 90
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-
-state 65
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   51          | LPAREN Statement . RPAREN
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    RPAREN      shift, and go to state 91
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-
-state 66
-
-   56 Statement: TWOMINUS WORD .
+   56 Statement: WORD TWOMINUS .
 
     $default  reduce using rule 56 (Statement)
 
 
-state 67
+state 61
 
-   54 Statement: TWOPLUS WORD .
+   54 Statement: WORD TWOPLUS .
 
     $default  reduce using rule 54 (Statement)
 
 
+state 62
+
+   29 Statement: MINUS Statement .
+   33          | Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    EQUALS      [reduce using rule 29 (Statement)]
+    GREATER     [reduce using rule 29 (Statement)]
+    LESSER      [reduce using rule 29 (Statement)]
+    NOT         [reduce using rule 29 (Statement)]
+    AND         [reduce using rule 29 (Statement)]
+    LSQBRACKET  [reduce using rule 29 (Statement)]
+    $default    reduce using rule 29 (Statement)
+
+
+state 63
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   40          | IF Statement . LBRACKET Statements RBRACKET
+   41          | IF Statement . LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    LBRACKET    shift, and go to state 90
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+
+state 64
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   46          | FOR Statement . END Statement END Statement LBRACKET Statements RBRACKET
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+    END         shift, and go to state 91
+
+
+state 65
+
+   20 Statements: Statements RETURN Statement .
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    MINUS       [reduce using rule 20 (Statements)]
+    LSQBRACKET  [reduce using rule 20 (Statements)]
+    $default    reduce using rule 20 (Statements)
+
+
+state 66
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   47          | WHILE Statement . LBRACKET Statements RBRACKET
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    LBRACKET    shift, and go to state 92
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+
+state 67
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   52          | LPAREN Statement . RPAREN
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    RPAREN      shift, and go to state 93
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+
 state 68
 
-    9 Variable: VARIABLE WORD . COLON Type
-   10 AutoVariable: VARIABLE WORD . ASSIGN Statement
+   57 Statement: TWOMINUS WORD .
 
-    ASSIGN  shift, and go to state 92
-    COLON   shift, and go to state 93
+    $default  reduce using rule 57 (Statement)
 
 
 state 69
 
-   30 Statement: LENGTH LPAREN . Statement RPAREN
+   55 Statement: TWOPLUS WORD .
 
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 94
+    $default  reduce using rule 55 (Statement)
 
 
 state 70
 
-   31 Statement: LSQBRACKET Statement . RSQBRACKET Type
-   32          | Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+    9 Variable: VARIABLE WORD . COLON Type
+   10 AutoVariable: VARIABLE WORD . ASSIGN Statement
 
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-    RSQBRACKET  shift, and go to state 95
+    ASSIGN  shift, and go to state 94
+    COLON   shift, and go to state 95
 
 
 state 71
 
-   35 Statement: Variable ASSIGN . Statement
+   31 Statement: LENGTH LPAREN . Statement RPAREN
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 96
 
 
 state 72
 
-   41 Statement: Statement PLUS . Statement
+   32 Statement: LSQBRACKET Statement . RSQBRACKET Type
+   33          | Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 97
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+    RSQBRACKET  shift, and go to state 97
 
 
 state 73
 
-   42 Statement: Statement MINUS . Statement
+   36 Statement: Variable ASSIGN . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 98
 
 
 state 74
 
-   43 Statement: Statement TIMES . Statement
+   42 Statement: Statement PLUS . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 99
 
 
 state 75
 
-   44 Statement: Statement DIVIDE . Statement
+   43 Statement: Statement MINUS . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 100
 
 
 state 76
 
-   47 Statement: Statement EQUALS . Statement
+   44 Statement: Statement TIMES . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 101
 
 
 state 77
 
-   49 Statement: Statement GREATER . Statement
+   45 Statement: Statement DIVIDE . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 102
 
 
 state 78
 
-   50 Statement: Statement LESSER . Statement
+   48 Statement: Statement EQUALS . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 103
 
 
 state 79
 
-   48 Statement: Statement NOT . EQUALS Statement
-
-    EQUALS  shift, and go to state 104
-
-
-state 80
-
-   57 Statement: Statement AND . Statement
+   50 Statement: Statement GREATER . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 104
+
+
+state 80
+
+   51 Statement: Statement LESSER . Statement
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
     Statement     go to state 105
 
 
 state 81
 
-   32 Statement: Statement LSQBRACKET . Statement RSQBRACKET ASSIGN Statement
-   33          | Statement LSQBRACKET . Statement RSQBRACKET
+   49 Statement: Statement NOT . EQUALS Statement
+
+    EQUALS  shift, and go to state 106
+
+
+state 82
+
+   58 Statement: Statement AND . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 106
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 107
 
 
-state 82
+state 83
+
+   33 Statement: Statement LSQBRACKET . Statement RSQBRACKET ASSIGN Statement
+   34          | Statement LSQBRACKET . Statement RSQBRACKET
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 108
+
+
+state 84
 
    14 Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET Statements RBRACKET .
 
     $default  reduce using rule 14 (Function)
 
 
-state 83
+state 85
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   52          | WORD ASSIGN Statement .
-   57          | Statement . AND Statement
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   53          | WORD ASSIGN Statement .
+   58          | Statement . AND Statement
 
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
-    PLUS        [reduce using rule 52 (Statement)]
-    MINUS       [reduce using rule 52 (Statement)]
-    TIMES       [reduce using rule 52 (Statement)]
-    DIVIDE      [reduce using rule 52 (Statement)]
-    EQUALS      [reduce using rule 52 (Statement)]
-    GREATER     [reduce using rule 52 (Statement)]
-    LESSER      [reduce using rule 52 (Statement)]
-    NOT         [reduce using rule 52 (Statement)]
-    AND         [reduce using rule 52 (Statement)]
-    LSQBRACKET  [reduce using rule 52 (Statement)]
-    $default    reduce using rule 52 (Statement)
+    PLUS        [reduce using rule 53 (Statement)]
+    MINUS       [reduce using rule 53 (Statement)]
+    TIMES       [reduce using rule 53 (Statement)]
+    DIVIDE      [reduce using rule 53 (Statement)]
+    EQUALS      [reduce using rule 53 (Statement)]
+    GREATER     [reduce using rule 53 (Statement)]
+    LESSER      [reduce using rule 53 (Statement)]
+    NOT         [reduce using rule 53 (Statement)]
+    AND         [reduce using rule 53 (Statement)]
+    LSQBRACKET  [reduce using rule 53 (Statement)]
+    $default    reduce using rule 53 (Statement)
 
 
-state 84
+state 86
 
    24 FunctionCall: WORD LINK WORD . LPAREN Arguments RPAREN
    25             | WORD LINK WORD . LPAREN RPAREN
 
-    LPAREN  shift, and go to state 107
+    LPAREN  shift, and go to state 109
 
 
-state 85
+state 87
 
    23 FunctionCall: WORD LPAREN RPAREN .
 
     $default  reduce using rule 23 (FunctionCall)
 
 
-state 86
+state 88
 
    17 Arguments: Arguments . COMMA Statement
    22 FunctionCall: WORD LPAREN Arguments . RPAREN
 
-    RPAREN  shift, and go to state 108
-    COMMA   shift, and go to state 109
-
-
-state 87
-
-   16 Arguments: Statement .
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    $default  reduce using rule 16 (Arguments)
-
-
-state 88
-
-   39 Statement: IF Statement LBRACKET . Statements RBRACKET
-   40          | IF Statement LBRACKET . Statements RBRACKET ELSE LBRACKET Statements RBRACKET
-
-    $default  reduce using rule 18 (Statements)
-
-    Statements  go to state 110
+    RPAREN  shift, and go to state 110
+    COMMA   shift, and go to state 111
 
 
 state 89
 
-   45 Statement: FOR Statement END . Statement END Statement LBRACKET Statements RBRACKET
+   16 Arguments: Statement .
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 111
+    $default  reduce using rule 16 (Arguments)
 
 
 state 90
 
-   46 Statement: WHILE Statement LBRACKET . Statements RBRACKET
+   40 Statement: IF Statement LBRACKET . Statements RBRACKET
+   41          | IF Statement LBRACKET . Statements RBRACKET ELSE LBRACKET Statements RBRACKET
 
     $default  reduce using rule 18 (Statements)
 
@@ -1534,80 +1586,75 @@ state 90
 
 state 91
 
-   51 Statement: LPAREN Statement RPAREN .
+   46 Statement: FOR Statement END . Statement END Statement LBRACKET Statements RBRACKET
 
-    $default  reduce using rule 51 (Statement)
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 113
 
 
 state 92
+
+   47 Statement: WHILE Statement LBRACKET . Statements RBRACKET
+
+    $default  reduce using rule 18 (Statements)
+
+    Statements  go to state 114
+
+
+state 93
+
+   52 Statement: LPAREN Statement RPAREN .
+
+    $default  reduce using rule 52 (Statement)
+
+
+state 94
 
    10 AutoVariable: VARIABLE WORD ASSIGN . Statement
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 113
-
-
-state 93
-
-    9 Variable: VARIABLE WORD COLON . Type
-
-    TYPE_ARRAY   shift, and go to state 19
-    TYPE_VOID    shift, and go to state 20
-    TYPE_BOOL    shift, and go to state 21
-    TYPE_INT     shift, and go to state 22
-    TYPE_STRING  shift, and go to state 23
-
-    Type  go to state 114
-
-
-state 94
-
-   30 Statement: LENGTH LPAREN Statement . RPAREN
-   32          | Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    RPAREN      shift, and go to state 115
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 115
 
 
 state 95
 
-   31 Statement: LSQBRACKET Statement RSQBRACKET . Type
+    9 Variable: VARIABLE WORD COLON . Type
 
     TYPE_ARRAY   shift, and go to state 19
     TYPE_VOID    shift, and go to state 20
@@ -1620,99 +1667,107 @@ state 95
 
 state 96
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   35          | Variable ASSIGN Statement .
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   31 Statement: LENGTH LPAREN Statement . RPAREN
+   33          | Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    PLUS        [reduce using rule 35 (Statement)]
-    MINUS       [reduce using rule 35 (Statement)]
-    TIMES       [reduce using rule 35 (Statement)]
-    DIVIDE      [reduce using rule 35 (Statement)]
-    EQUALS      [reduce using rule 35 (Statement)]
-    GREATER     [reduce using rule 35 (Statement)]
-    LESSER      [reduce using rule 35 (Statement)]
-    NOT         [reduce using rule 35 (Statement)]
-    AND         [reduce using rule 35 (Statement)]
-    LSQBRACKET  [reduce using rule 35 (Statement)]
-    $default    reduce using rule 35 (Statement)
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    RPAREN      shift, and go to state 117
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
 
 state 97
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   41          | Statement PLUS Statement .
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   32 Statement: LSQBRACKET Statement RSQBRACKET . Type
 
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    TYPE_ARRAY   shift, and go to state 19
+    TYPE_VOID    shift, and go to state 20
+    TYPE_BOOL    shift, and go to state 21
+    TYPE_INT     shift, and go to state 22
+    TYPE_STRING  shift, and go to state 23
 
-    EQUALS      [reduce using rule 41 (Statement)]
-    GREATER     [reduce using rule 41 (Statement)]
-    LESSER      [reduce using rule 41 (Statement)]
-    NOT         [reduce using rule 41 (Statement)]
-    AND         [reduce using rule 41 (Statement)]
-    LSQBRACKET  [reduce using rule 41 (Statement)]
-    $default    reduce using rule 41 (Statement)
+    Type  go to state 118
 
 
 state 98
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   42          | Statement MINUS Statement .
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   36          | Variable ASSIGN Statement .
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    PLUS        [reduce using rule 36 (Statement)]
+    MINUS       [reduce using rule 36 (Statement)]
+    TIMES       [reduce using rule 36 (Statement)]
+    DIVIDE      [reduce using rule 36 (Statement)]
+    EQUALS      [reduce using rule 36 (Statement)]
+    GREATER     [reduce using rule 36 (Statement)]
+    LESSER      [reduce using rule 36 (Statement)]
+    NOT         [reduce using rule 36 (Statement)]
+    AND         [reduce using rule 36 (Statement)]
+    LSQBRACKET  [reduce using rule 36 (Statement)]
+    $default    reduce using rule 36 (Statement)
+
+
+state 99
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   42          | Statement PLUS Statement .
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
     EQUALS      [reduce using rule 42 (Statement)]
     GREATER     [reduce using rule 42 (Statement)]
@@ -1723,27 +1778,29 @@ state 98
     $default    reduce using rule 42 (Statement)
 
 
-state 99
+state 100
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   43          | Statement TIMES Statement .
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   43          | Statement MINUS Statement .
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
     EQUALS      [reduce using rule 43 (Statement)]
     GREATER     [reduce using rule 43 (Statement)]
@@ -1754,27 +1811,27 @@ state 99
     $default    reduce using rule 43 (Statement)
 
 
-state 100
+state 101
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   44          | Statement DIVIDE Statement .
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   44          | Statement TIMES Statement .
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
     EQUALS      [reduce using rule 44 (Statement)]
     GREATER     [reduce using rule 44 (Statement)]
@@ -1785,450 +1842,62 @@ state 100
     $default    reduce using rule 44 (Statement)
 
 
-state 101
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   47          | Statement EQUALS Statement .
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    PLUS        [reduce using rule 47 (Statement)]
-    MINUS       [reduce using rule 47 (Statement)]
-    TIMES       [reduce using rule 47 (Statement)]
-    DIVIDE      [reduce using rule 47 (Statement)]
-    EQUALS      [reduce using rule 47 (Statement)]
-    GREATER     [reduce using rule 47 (Statement)]
-    LESSER      [reduce using rule 47 (Statement)]
-    NOT         [reduce using rule 47 (Statement)]
-    AND         [reduce using rule 47 (Statement)]
-    LSQBRACKET  [reduce using rule 47 (Statement)]
-    $default    reduce using rule 47 (Statement)
-
-
 state 102
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   49          | Statement GREATER Statement .
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   45          | Statement DIVIDE Statement .
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
-    PLUS        [reduce using rule 49 (Statement)]
-    MINUS       [reduce using rule 49 (Statement)]
-    TIMES       [reduce using rule 49 (Statement)]
-    DIVIDE      [reduce using rule 49 (Statement)]
-    EQUALS      [reduce using rule 49 (Statement)]
-    GREATER     [reduce using rule 49 (Statement)]
-    LESSER      [reduce using rule 49 (Statement)]
-    NOT         [reduce using rule 49 (Statement)]
-    AND         [reduce using rule 49 (Statement)]
-    LSQBRACKET  [reduce using rule 49 (Statement)]
-    $default    reduce using rule 49 (Statement)
+    EQUALS      [reduce using rule 45 (Statement)]
+    GREATER     [reduce using rule 45 (Statement)]
+    LESSER      [reduce using rule 45 (Statement)]
+    NOT         [reduce using rule 45 (Statement)]
+    AND         [reduce using rule 45 (Statement)]
+    LSQBRACKET  [reduce using rule 45 (Statement)]
+    $default    reduce using rule 45 (Statement)
 
 
 state 103
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   50          | Statement LESSER Statement .
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    PLUS        [reduce using rule 50 (Statement)]
-    MINUS       [reduce using rule 50 (Statement)]
-    TIMES       [reduce using rule 50 (Statement)]
-    DIVIDE      [reduce using rule 50 (Statement)]
-    EQUALS      [reduce using rule 50 (Statement)]
-    GREATER     [reduce using rule 50 (Statement)]
-    LESSER      [reduce using rule 50 (Statement)]
-    NOT         [reduce using rule 50 (Statement)]
-    AND         [reduce using rule 50 (Statement)]
-    LSQBRACKET  [reduce using rule 50 (Statement)]
-    $default    reduce using rule 50 (Statement)
-
-
-state 104
-
-   48 Statement: Statement NOT EQUALS . Statement
-
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 117
-
-
-state 105
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-   57          | Statement AND Statement .
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    PLUS        [reduce using rule 57 (Statement)]
-    MINUS       [reduce using rule 57 (Statement)]
-    TIMES       [reduce using rule 57 (Statement)]
-    DIVIDE      [reduce using rule 57 (Statement)]
-    EQUALS      [reduce using rule 57 (Statement)]
-    GREATER     [reduce using rule 57 (Statement)]
-    LESSER      [reduce using rule 57 (Statement)]
-    NOT         [reduce using rule 57 (Statement)]
-    AND         [reduce using rule 57 (Statement)]
-    LSQBRACKET  [reduce using rule 57 (Statement)]
-    $default    reduce using rule 57 (Statement)
-
-
-state 106
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   32          | Statement LSQBRACKET Statement . RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   33          | Statement LSQBRACKET Statement . RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-    RSQBRACKET  shift, and go to state 118
-
-
-state 107
-
-   24 FunctionCall: WORD LINK WORD LPAREN . Arguments RPAREN
-   25             | WORD LINK WORD LPAREN . RPAREN
-
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RPAREN      shift, and go to state 119
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    Arguments     go to state 120
-    FunctionCall  go to state 53
-    Statement     go to state 87
-
-
-state 108
-
-   22 FunctionCall: WORD LPAREN Arguments RPAREN .
-
-    $default  reduce using rule 22 (FunctionCall)
-
-
-state 109
-
-   17 Arguments: Arguments COMMA . Statement
-
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 121
-
-
-state 110
-
-   19 Statements: Statements . Statement
-   20           | Statements . RETURN Statement
-   21           | Statements . RETURN
-   39 Statement: IF Statement LBRACKET Statements . RBRACKET
-   40          | IF Statement LBRACKET Statements . RBRACKET ELSE LBRACKET Statements RBRACKET
-
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    RETURN      shift, and go to state 40
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RBRACKET    shift, and go to state 122
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 54
-
-
-state 111
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   45          | FOR Statement END Statement . END Statement LBRACKET Statements RBRACKET
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-    END         shift, and go to state 123
-
-
-state 112
-
-   19 Statements: Statements . Statement
-   20           | Statements . RETURN Statement
-   21           | Statements . RETURN
-   46 Statement: WHILE Statement LBRACKET Statements . RBRACKET
-
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    RETURN      shift, and go to state 40
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RBRACKET    shift, and go to state 124
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
-
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 54
-
-
-state 113
-
-   10 AutoVariable: VARIABLE WORD ASSIGN Statement .
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    PLUS        [reduce using rule 10 (AutoVariable)]
-    MINUS       [reduce using rule 10 (AutoVariable)]
-    TIMES       [reduce using rule 10 (AutoVariable)]
-    DIVIDE      [reduce using rule 10 (AutoVariable)]
-    EQUALS      [reduce using rule 10 (AutoVariable)]
-    GREATER     [reduce using rule 10 (AutoVariable)]
-    LESSER      [reduce using rule 10 (AutoVariable)]
-    NOT         [reduce using rule 10 (AutoVariable)]
-    AND         [reduce using rule 10 (AutoVariable)]
-    LSQBRACKET  [reduce using rule 10 (AutoVariable)]
-    $default    reduce using rule 10 (AutoVariable)
-
-
-state 114
-
-    9 Variable: VARIABLE WORD COLON Type .
-
-    $default  reduce using rule 9 (Variable)
-
-
-state 115
-
-   30 Statement: LENGTH LPAREN Statement RPAREN .
-
-    $default  reduce using rule 30 (Statement)
-
-
-state 116
-
-   31 Statement: LSQBRACKET Statement RSQBRACKET Type .
-
-    $default  reduce using rule 31 (Statement)
-
-
-state 117
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   48          | Statement NOT EQUALS Statement .
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   48          | Statement EQUALS Statement .
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
     PLUS        [reduce using rule 48 (Statement)]
     MINUS       [reduce using rule 48 (Statement)]
@@ -2243,296 +1912,724 @@ state 117
     $default    reduce using rule 48 (Statement)
 
 
+state 104
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   50          | Statement GREATER Statement .
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    PLUS        [reduce using rule 50 (Statement)]
+    MINUS       [reduce using rule 50 (Statement)]
+    TIMES       [reduce using rule 50 (Statement)]
+    DIVIDE      [reduce using rule 50 (Statement)]
+    EQUALS      [reduce using rule 50 (Statement)]
+    GREATER     [reduce using rule 50 (Statement)]
+    LESSER      [reduce using rule 50 (Statement)]
+    NOT         [reduce using rule 50 (Statement)]
+    AND         [reduce using rule 50 (Statement)]
+    LSQBRACKET  [reduce using rule 50 (Statement)]
+    $default    reduce using rule 50 (Statement)
+
+
+state 105
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   51          | Statement LESSER Statement .
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    PLUS        [reduce using rule 51 (Statement)]
+    MINUS       [reduce using rule 51 (Statement)]
+    TIMES       [reduce using rule 51 (Statement)]
+    DIVIDE      [reduce using rule 51 (Statement)]
+    EQUALS      [reduce using rule 51 (Statement)]
+    GREATER     [reduce using rule 51 (Statement)]
+    LESSER      [reduce using rule 51 (Statement)]
+    NOT         [reduce using rule 51 (Statement)]
+    AND         [reduce using rule 51 (Statement)]
+    LSQBRACKET  [reduce using rule 51 (Statement)]
+    $default    reduce using rule 51 (Statement)
+
+
+state 106
+
+   49 Statement: Statement NOT EQUALS . Statement
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 119
+
+
+state 107
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+   58          | Statement AND Statement .
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    PLUS        [reduce using rule 58 (Statement)]
+    MINUS       [reduce using rule 58 (Statement)]
+    TIMES       [reduce using rule 58 (Statement)]
+    DIVIDE      [reduce using rule 58 (Statement)]
+    EQUALS      [reduce using rule 58 (Statement)]
+    GREATER     [reduce using rule 58 (Statement)]
+    LESSER      [reduce using rule 58 (Statement)]
+    NOT         [reduce using rule 58 (Statement)]
+    AND         [reduce using rule 58 (Statement)]
+    LSQBRACKET  [reduce using rule 58 (Statement)]
+    $default    reduce using rule 58 (Statement)
+
+
+state 108
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   33          | Statement LSQBRACKET Statement . RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   34          | Statement LSQBRACKET Statement . RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+    RSQBRACKET  shift, and go to state 120
+
+
+state 109
+
+   24 FunctionCall: WORD LINK WORD LPAREN . Arguments RPAREN
+   25             | WORD LINK WORD LPAREN . RPAREN
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RPAREN      shift, and go to state 121
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    Arguments     go to state 122
+    FunctionCall  go to state 54
+    Statement     go to state 89
+
+
+state 110
+
+   22 FunctionCall: WORD LPAREN Arguments RPAREN .
+
+    $default  reduce using rule 22 (FunctionCall)
+
+
+state 111
+
+   17 Arguments: Arguments COMMA . Statement
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 123
+
+
+state 112
+
+   19 Statements: Statements . Statement
+   20           | Statements . RETURN Statement
+   21           | Statements . RETURN
+   40 Statement: IF Statement LBRACKET Statements . RBRACKET
+   41          | IF Statement LBRACKET Statements . RBRACKET ELSE LBRACKET Statements RBRACKET
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    RETURN      shift, and go to state 41
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RBRACKET    shift, and go to state 124
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 55
+
+
+state 113
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   46          | FOR Statement END Statement . END Statement LBRACKET Statements RBRACKET
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+    END         shift, and go to state 125
+
+
+state 114
+
+   19 Statements: Statements . Statement
+   20           | Statements . RETURN Statement
+   21           | Statements . RETURN
+   47 Statement: WHILE Statement LBRACKET Statements . RBRACKET
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    RETURN      shift, and go to state 41
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RBRACKET    shift, and go to state 126
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 55
+
+
+state 115
+
+   10 AutoVariable: VARIABLE WORD ASSIGN Statement .
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    PLUS        [reduce using rule 10 (AutoVariable)]
+    MINUS       [reduce using rule 10 (AutoVariable)]
+    TIMES       [reduce using rule 10 (AutoVariable)]
+    DIVIDE      [reduce using rule 10 (AutoVariable)]
+    EQUALS      [reduce using rule 10 (AutoVariable)]
+    GREATER     [reduce using rule 10 (AutoVariable)]
+    LESSER      [reduce using rule 10 (AutoVariable)]
+    NOT         [reduce using rule 10 (AutoVariable)]
+    AND         [reduce using rule 10 (AutoVariable)]
+    LSQBRACKET  [reduce using rule 10 (AutoVariable)]
+    $default    reduce using rule 10 (AutoVariable)
+
+
+state 116
+
+    9 Variable: VARIABLE WORD COLON Type .
+
+    $default  reduce using rule 9 (Variable)
+
+
+state 117
+
+   31 Statement: LENGTH LPAREN Statement RPAREN .
+
+    $default  reduce using rule 31 (Statement)
+
+
 state 118
 
-   32 Statement: Statement LSQBRACKET Statement RSQBRACKET . ASSIGN Statement
-   33          | Statement LSQBRACKET Statement RSQBRACKET .
+   32 Statement: LSQBRACKET Statement RSQBRACKET Type .
 
-    ASSIGN  shift, and go to state 125
-
-    $default  reduce using rule 33 (Statement)
+    $default  reduce using rule 32 (Statement)
 
 
 state 119
+
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   49          | Statement NOT EQUALS Statement .
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
+
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
+
+    PLUS        [reduce using rule 49 (Statement)]
+    MINUS       [reduce using rule 49 (Statement)]
+    TIMES       [reduce using rule 49 (Statement)]
+    DIVIDE      [reduce using rule 49 (Statement)]
+    EQUALS      [reduce using rule 49 (Statement)]
+    GREATER     [reduce using rule 49 (Statement)]
+    LESSER      [reduce using rule 49 (Statement)]
+    NOT         [reduce using rule 49 (Statement)]
+    AND         [reduce using rule 49 (Statement)]
+    LSQBRACKET  [reduce using rule 49 (Statement)]
+    $default    reduce using rule 49 (Statement)
+
+
+state 120
+
+   33 Statement: Statement LSQBRACKET Statement RSQBRACKET . ASSIGN Statement
+   34          | Statement LSQBRACKET Statement RSQBRACKET .
+
+    ASSIGN  shift, and go to state 127
+
+    $default  reduce using rule 34 (Statement)
+
+
+state 121
 
    25 FunctionCall: WORD LINK WORD LPAREN RPAREN .
 
     $default  reduce using rule 25 (FunctionCall)
 
 
-state 120
+state 122
 
    17 Arguments: Arguments . COMMA Statement
    24 FunctionCall: WORD LINK WORD LPAREN Arguments . RPAREN
 
-    RPAREN  shift, and go to state 126
-    COMMA   shift, and go to state 109
-
-
-state 121
-
-   17 Arguments: Arguments COMMA Statement .
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    $default  reduce using rule 17 (Arguments)
-
-
-state 122
-
-   39 Statement: IF Statement LBRACKET Statements RBRACKET .
-   40          | IF Statement LBRACKET Statements RBRACKET . ELSE LBRACKET Statements RBRACKET
-
-    ELSE  shift, and go to state 127
-
-    $default  reduce using rule 39 (Statement)
+    RPAREN  shift, and go to state 128
+    COMMA   shift, and go to state 111
 
 
 state 123
 
-   45 Statement: FOR Statement END Statement END . Statement LBRACKET Statements RBRACKET
+   17 Arguments: Arguments COMMA Statement .
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 128
+    $default  reduce using rule 17 (Arguments)
 
 
 state 124
 
-   46 Statement: WHILE Statement LBRACKET Statements RBRACKET .
+   40 Statement: IF Statement LBRACKET Statements RBRACKET .
+   41          | IF Statement LBRACKET Statements RBRACKET . ELSE LBRACKET Statements RBRACKET
 
-    $default  reduce using rule 46 (Statement)
+    ELSE  shift, and go to state 129
+
+    $default  reduce using rule 40 (Statement)
 
 
 state 125
 
-   32 Statement: Statement LSQBRACKET Statement RSQBRACKET ASSIGN . Statement
+   46 Statement: FOR Statement END Statement END . Statement LBRACKET Statements RBRACKET
 
     WORD        shift, and go to state 35
     STRING      shift, and go to state 36
     INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 129
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 130
 
 
 state 126
+
+   47 Statement: WHILE Statement LBRACKET Statements RBRACKET .
+
+    $default  reduce using rule 47 (Statement)
+
+
+state 127
+
+   33 Statement: Statement LSQBRACKET Statement RSQBRACKET ASSIGN . Statement
+
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 131
+
+
+state 128
 
    24 FunctionCall: WORD LINK WORD LPAREN Arguments RPAREN .
 
     $default  reduce using rule 24 (FunctionCall)
 
 
-state 127
-
-   40 Statement: IF Statement LBRACKET Statements RBRACKET ELSE . LBRACKET Statements RBRACKET
-
-    LBRACKET  shift, and go to state 130
-
-
-state 128
-
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   45          | FOR Statement END Statement END Statement . LBRACKET Statements RBRACKET
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
-
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    LBRACKET    shift, and go to state 131
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-
 state 129
 
-   32 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
-   32          | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement .
-   33          | Statement . LSQBRACKET Statement RSQBRACKET
-   41          | Statement . PLUS Statement
-   42          | Statement . MINUS Statement
-   43          | Statement . TIMES Statement
-   44          | Statement . DIVIDE Statement
-   47          | Statement . EQUALS Statement
-   48          | Statement . NOT EQUALS Statement
-   49          | Statement . GREATER Statement
-   50          | Statement . LESSER Statement
-   57          | Statement . AND Statement
+   41 Statement: IF Statement LBRACKET Statements RBRACKET ELSE . LBRACKET Statements RBRACKET
 
-    PLUS        shift, and go to state 72
-    MINUS       shift, and go to state 73
-    TIMES       shift, and go to state 74
-    DIVIDE      shift, and go to state 75
-    EQUALS      shift, and go to state 76
-    GREATER     shift, and go to state 77
-    LESSER      shift, and go to state 78
-    NOT         shift, and go to state 79
-    AND         shift, and go to state 80
-    LSQBRACKET  shift, and go to state 81
-
-    PLUS        [reduce using rule 32 (Statement)]
-    MINUS       [reduce using rule 32 (Statement)]
-    TIMES       [reduce using rule 32 (Statement)]
-    DIVIDE      [reduce using rule 32 (Statement)]
-    EQUALS      [reduce using rule 32 (Statement)]
-    GREATER     [reduce using rule 32 (Statement)]
-    LESSER      [reduce using rule 32 (Statement)]
-    NOT         [reduce using rule 32 (Statement)]
-    AND         [reduce using rule 32 (Statement)]
-    LSQBRACKET  [reduce using rule 32 (Statement)]
-    $default    reduce using rule 32 (Statement)
+    LBRACKET  shift, and go to state 132
 
 
 state 130
 
-   40 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET . Statements RBRACKET
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   46          | FOR Statement END Statement END Statement . LBRACKET Statements RBRACKET
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    $default  reduce using rule 18 (Statements)
-
-    Statements  go to state 132
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    LBRACKET    shift, and go to state 133
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
 
 state 131
 
-   45 Statement: FOR Statement END Statement END Statement LBRACKET . Statements RBRACKET
+   33 Statement: Statement . LSQBRACKET Statement RSQBRACKET ASSIGN Statement
+   33          | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement .
+   34          | Statement . LSQBRACKET Statement RSQBRACKET
+   42          | Statement . PLUS Statement
+   43          | Statement . MINUS Statement
+   44          | Statement . TIMES Statement
+   45          | Statement . DIVIDE Statement
+   48          | Statement . EQUALS Statement
+   49          | Statement . NOT EQUALS Statement
+   50          | Statement . GREATER Statement
+   51          | Statement . LESSER Statement
+   58          | Statement . AND Statement
 
-    $default  reduce using rule 18 (Statements)
+    PLUS        shift, and go to state 74
+    MINUS       shift, and go to state 75
+    TIMES       shift, and go to state 76
+    DIVIDE      shift, and go to state 77
+    EQUALS      shift, and go to state 78
+    GREATER     shift, and go to state 79
+    LESSER      shift, and go to state 80
+    NOT         shift, and go to state 81
+    AND         shift, and go to state 82
+    LSQBRACKET  shift, and go to state 83
 
-    Statements  go to state 133
+    PLUS        [reduce using rule 33 (Statement)]
+    MINUS       [reduce using rule 33 (Statement)]
+    TIMES       [reduce using rule 33 (Statement)]
+    DIVIDE      [reduce using rule 33 (Statement)]
+    EQUALS      [reduce using rule 33 (Statement)]
+    GREATER     [reduce using rule 33 (Statement)]
+    LESSER      [reduce using rule 33 (Statement)]
+    NOT         [reduce using rule 33 (Statement)]
+    AND         [reduce using rule 33 (Statement)]
+    LSQBRACKET  [reduce using rule 33 (Statement)]
+    $default    reduce using rule 33 (Statement)
 
 
 state 132
 
-   19 Statements: Statements . Statement
-   20           | Statements . RETURN Statement
-   21           | Statements . RETURN
-   40 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements . RBRACKET
+   41 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET . Statements RBRACKET
 
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    RETURN      shift, and go to state 40
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RBRACKET    shift, and go to state 134
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    $default  reduce using rule 18 (Statements)
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 54
+    Statements  go to state 134
 
 
 state 133
 
-   19 Statements: Statements . Statement
-   20           | Statements . RETURN Statement
-   21           | Statements . RETURN
-   45 Statement: FOR Statement END Statement END Statement LBRACKET Statements . RBRACKET
+   46 Statement: FOR Statement END Statement END Statement LBRACKET . Statements RBRACKET
 
-    WORD        shift, and go to state 35
-    STRING      shift, and go to state 36
-    INT         shift, and go to state 37
-    IF          shift, and go to state 38
-    FOR         shift, and go to state 39
-    RETURN      shift, and go to state 40
-    WHILE       shift, and go to state 41
-    LPAREN      shift, and go to state 42
-    RBRACKET    shift, and go to state 135
-    TWOMINUS    shift, and go to state 44
-    TWOPLUS     shift, and go to state 45
-    TRUE        shift, and go to state 46
-    FALSE       shift, and go to state 47
-    VARIABLE    shift, and go to state 48
-    LENGTH      shift, and go to state 49
-    LSQBRACKET  shift, and go to state 50
+    $default  reduce using rule 18 (Statements)
 
-    Variable      go to state 51
-    AutoVariable  go to state 52
-    FunctionCall  go to state 53
-    Statement     go to state 54
+    Statements  go to state 135
 
 
 state 134
 
-   40 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET .
+   19 Statements: Statements . Statement
+   20           | Statements . RETURN Statement
+   21           | Statements . RETURN
+   41 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements . RBRACKET
 
-    $default  reduce using rule 40 (Statement)
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    RETURN      shift, and go to state 41
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RBRACKET    shift, and go to state 136
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 55
 
 
 state 135
 
-   45 Statement: FOR Statement END Statement END Statement LBRACKET Statements RBRACKET .
+   19 Statements: Statements . Statement
+   20           | Statements . RETURN Statement
+   21           | Statements . RETURN
+   46 Statement: FOR Statement END Statement END Statement LBRACKET Statements . RBRACKET
 
-    $default  reduce using rule 45 (Statement)
+    WORD        shift, and go to state 35
+    STRING      shift, and go to state 36
+    INT         shift, and go to state 37
+    MINUS       shift, and go to state 38
+    IF          shift, and go to state 39
+    FOR         shift, and go to state 40
+    RETURN      shift, and go to state 41
+    WHILE       shift, and go to state 42
+    LPAREN      shift, and go to state 43
+    RBRACKET    shift, and go to state 137
+    TWOMINUS    shift, and go to state 45
+    TWOPLUS     shift, and go to state 46
+    TRUE        shift, and go to state 47
+    FALSE       shift, and go to state 48
+    VARIABLE    shift, and go to state 49
+    LENGTH      shift, and go to state 50
+    LSQBRACKET  shift, and go to state 51
+
+    Variable      go to state 52
+    AutoVariable  go to state 53
+    FunctionCall  go to state 54
+    Statement     go to state 55
+
+
+state 136
+
+   41 Statement: IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET .
+
+    $default  reduce using rule 41 (Statement)
+
+
+state 137
+
+   46 Statement: FOR Statement END Statement END Statement LBRACKET Statements RBRACKET .
+
+    $default  reduce using rule 46 (Statement)
