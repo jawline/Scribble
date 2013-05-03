@@ -57,12 +57,11 @@ int main(int argc, char** argv) {
 
 	if (!entry.Null()) {
 
-		printf("Beginning execution\n");
 		double start = getCPUTime();
 		delete entry->execute(std::vector<Value*>());
 		double end = getCPUTime();
 
-		printf("%f seconds to execute.\n", end - start);
+		printf("\n-----------------------------------\n%f seconds to execute.\n", end - start);
 	} else {
 		printf(
 				"It appears that the main function was not declared within the scope");

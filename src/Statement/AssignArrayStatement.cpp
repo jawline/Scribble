@@ -26,9 +26,9 @@ Value* AssignArrayStatement::execute(std::vector<Value*> const& variables) {
 	IntValue* pos = (IntValue*) position_->execute(variables);
 	Value* rhs = toAssign_->execute(variables);
 
-	if (pos->value() >= 0
-			&& pos->value() < ((int) lhs->getArrayData()->length())) {
-		lhs->getArrayData()->index(pos->value())->applyOperator(Assign, rhs);
+	if (pos->value() >= 0 && pos->value() < lhs->getLength()) {
+		lhs->getArrayData()->index(lhs->getStart() + pos->value())->applyOperator(
+				Assign, rhs);
 	} else {
 		throw StatementException(this, "Index out of bounds");
 	}

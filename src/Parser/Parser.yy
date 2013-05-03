@@ -24,6 +24,7 @@
 #include <Statement/WhileStatement.hpp>
 #include <Statement/IncrementStatement.hpp>
 #include <Statement/ArrayStatement.hpp>
+#include <Statement/ArraySliceStatement.hpp>
 #include <Statement/AssignArrayStatement.hpp>
 #include <Statement/GetArrayStatement.hpp>
 #include <Statement/ArrayLengthStatement.hpp>
@@ -405,6 +406,8 @@ Statement: TRUE {
 		$$ = new AssignArrayStatement(yylineno, yytext, $1, $6, $3); 
 	} | Statement LSQBRACKET Statement RSQBRACKET {
 		$$ = new GetArrayStatement(yylineno, yytext, $1, $3); 
+	} | Statement LSQBRACKET Statement COLON Statement RSQBRACKET {
+		$$ = new ArraySliceStatement(yylineno, yytext, $1, $3, $5);
 	} | Variable {
 		$$ = new GetVariableStatement(yylineno, yytext, *$1);
 		delete $1;
@@ -458,6 +461,10 @@ Statement: TRUE {
 		$$ = new TestStatement(yylineno, yytext, TestGreater, $1, $3);
 	} | Statement LESSER Statement {
 		$$ = new TestStatement(yylineno, yytext, TestLess, $1, $3);
+	} | Statement LESSER EQUALS Statement {
+		$$ = new TestStatement(yylineno, yytext, TestLessOrEqual, $1, $4);
+	} | Statement GREATER EQUALS Statement {
+		$$ = new TestStatement(yylineno, yytext, TestGreaterOrEqual, $1, $4);
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Statement {

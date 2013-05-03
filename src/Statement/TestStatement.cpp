@@ -69,8 +69,17 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 		case TestLess:
 			result = valueHeap.make((il->value() < rl->value()));
 			break;
+
 		case TestGreater:
 			result = valueHeap.make((il->value() > rl->value()));
+			break;
+
+		case TestLessOrEqual:
+			result = valueHeap.make((il->value() <= rl->value()));
+			break;
+
+		case TestGreaterOrEqual:
+			result = valueHeap.make((il->value() >= rl->value()));
 			break;
 		}
 
@@ -102,7 +111,7 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 	}
 
 	default:
-		throw StatementException(this, "Not implemented yet");
+		throw StatementException(this, "Type: Not implemented yet");
 	}
 
 	valueHeap.free(lhRes);

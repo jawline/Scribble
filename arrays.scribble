@@ -12,6 +12,8 @@ func Test() : bool {
 	r[3] := "Are"
 	r[4] := "You"
 	
+	sys.String(len(r))
+	
 	for var i := 0; i < len(r); i++ {
 		sys.Write(r[i] + "\n")
 	}

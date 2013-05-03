@@ -10,7 +10,7 @@
 #include "Statement.hpp"
 
 enum TestType {
-	TestEquals, TestNotEquals, TestGreater, TestLess
+	TestEquals, TestNotEquals, TestGreater, TestLess, TestLessOrEqual, TestGreaterOrEqual
 };
 
 class TestStatement: public Statement {

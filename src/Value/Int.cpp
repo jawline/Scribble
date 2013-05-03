@@ -23,6 +23,10 @@ void IntValue::applyOperator(ValueOperator v, Value* r) {
 		value_ *= other->value();
 		break;
 
+	case Divide:
+		value_ /= other->value();
+		break;
+
 	default:
 		throw StatementException(0, "Not implemented yet");
 		break;

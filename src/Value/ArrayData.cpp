@@ -14,6 +14,7 @@ ArrayData::ArrayData(unsigned int length, Value** initial) :
 ArrayData::~ArrayData() {
 
 	if (data_ != nullptr) {
+
 		for (unsigned int i = 0; i < length_; i++) {
 			delete data_[i];
 		}

@@ -35,7 +35,7 @@ Value* ArrayLengthStatement::execute(std::vector<Value*> const& variables) {
 	int l = 0;
 
 	if (!v->getArrayData().Null()) {
-		l = (int) v->getArrayData()->length();
+		l = v->getLength();
 	}
 
 	valueHeap.free(v);

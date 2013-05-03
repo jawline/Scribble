@@ -11,8 +11,9 @@
 #include <Value/Int.hpp>
 #include "Heap.hpp"
 
-ArrayStatement::ArrayStatement(int line, std::string text, Type* type, SafeStatement length) : Statement(line, text),
-		type_(type), length_(length) {
+ArrayStatement::ArrayStatement(int line, std::string text, Type* type,
+		SafeStatement length) :
+		Statement(line, text), type_(type), length_(length) {
 }
 
 ArrayStatement::~ArrayStatement() {
@@ -21,7 +22,7 @@ ArrayStatement::~ArrayStatement() {
 
 Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
 
-	IntValue* l = (IntValue*)length_->execute(variables);
+	IntValue* l = (IntValue*) length_->execute(variables);
 	int length = l->value();
 	valueHeap.free(l);
 
@@ -32,8 +33,9 @@ Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
 	}
 
 	SP<ArrayData> data = SP<ArrayData>(new ArrayData(length, initial));
+
 	ArrayValue* arr = (ArrayValue*) ValueUtil::generateValue(type_);
-	arr->setArrayData(data);
+	arr->setArrayData(data, 0, data->dataLength());
 	return arr;
 }
 

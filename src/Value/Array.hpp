@@ -9,10 +9,14 @@
 #define ARRAY_SYS_HPP_
 #include "Value.hpp"
 #include "ArrayData.hpp"
+#include <stdio.h>
 
 class ArrayValue: public Value {
 private:
-	Type* type_;SP<ArrayData> data_;
+	int start_;
+	int length_;
+	Type* type_;
+	SmartPointer<ArrayData> data_;
 
 public:
 	ArrayValue(Type* type);
@@ -20,14 +24,16 @@ public:
 
 	Type* type();
 	Value* clone();
+
 	void applyOperator(ValueOperator v, Value* r);
-	void setArrayData(SP<ArrayData> d) {
-		data_ = d;
-	}
 
 	SP<ArrayData> getArrayData() {
 		return data_;
 	}
+
+	int getStart();
+	int getLength();
+	void setArrayData(SP<ArrayData> d, int start, int l);
 };
 
 #endif /* ARRAY_SYS_HPP_ */

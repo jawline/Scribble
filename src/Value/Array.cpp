@@ -11,8 +11,7 @@
 
 ArrayValue::ArrayValue(Type* type) :
 		type_(type), data_(nullptr) {
-	// TODO Auto-generated constructor stub
-
+	length_ = 0;
 }
 
 ArrayValue::~ArrayValue() {
@@ -25,17 +24,32 @@ Type* ArrayValue::type() {
 
 Value* ArrayValue::clone() {
 	ArrayValue* r = (ArrayValue*) valueHeap.make(type());
-	r->data_ = data_;
+	r->setArrayData(getArrayData(), getStart(), getLength());
 	return r;
 }
 
 void ArrayValue::applyOperator(ValueOperator v, Value* r) {
 
 	if (v == Assign) {
-
-		data_ = ((ArrayValue*) r)->data_;
+		ArrayValue* other = (ArrayValue*) r;
+		setArrayData(other->getArrayData(), other->getStart(),
+				other->getLength());
 		return;
 	}
 
 	throw StatementException(nullptr, "Invalid operator");
+}
+
+void ArrayValue::setArrayData(SP<ArrayData> d, int start, int length) {
+	data_ = d;
+	start_ = start;
+	length_ = length;
+}
+
+int ArrayValue::getStart() {
+	return start_;
+}
+
+int ArrayValue::getLength() {
+	return length_;
 }

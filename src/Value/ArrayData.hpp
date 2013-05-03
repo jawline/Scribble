@@ -18,7 +18,7 @@ public:
 	ArrayData(unsigned int length, Value** initial);
 	virtual ~ArrayData();
 
-	unsigned int length() {
+	unsigned int dataLength() {
 		return length_;
 	}
 
