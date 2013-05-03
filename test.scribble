@@ -1,4 +1,4 @@
-import("sys")
+
 import("fibs")
 import("fact")
 import("arrays")
@@ -8,94 +8,63 @@ import("functions")
 
 import("sys")
 
-func part(n:array(int), left:int, right:int) : int {
+func insertion(n:array(int)):array(int) {
 
-var i := left
-var j := right
-var pivot := n[(i+j)/2]
-var temp := 0
+ for var i := 1; i < len(n); i++ {
 
-while i <= j {
+  var toInsert := n[i]
+  var j := i
 
-while n[i] < pivot {
-i++
+  while (j > 0) & (toInsert < n[j-1]) {
+   n[j] := n[j-1]
+   j--
+  }
+
+  n[j] := toInsert
+ }
+
+ return n
 }
 
-while n[j] > pivot {
-j--
+func print(n:array(int)) : void {
+ 
+ for var i := 0; i < len(n); i++ {
+  sys.Write(sys.String(n[i]) + " ")
+ }
+ 
+ sys.Write("\n")
 }
 
-if (i <= j) {
-temp := n[i]
-n[i] := n[j]
-n[j] := temp
-i++
-j--
-}
+func sorted(n:array(int)):bool {
 
-}
+ for var i := 1; i < len(n); i++ {
 
-sys.Write("Pivot("+sys.String(pivot)+") i("+sys.String(i)+") ")
-for var iter := 0; iter < len(n); iter++ {
-sys.Write(sys.String(n[iter]) + " ")
-}
-sys.Write("\n")
+  if n[i] < n[i-1] {
+   return false
+  }
 
-return i
-}
+ }
 
-func quick(n : array(int), left : int, right : int) : array(int) {
-var i := part(n, left, right)
-var j := i-1
-
-if left < j {
-quick(n, left, j)
-}
-
-if i < right {
-quick(n, i, right)
-}
-}
-
-func quickSlice(n : array(int)) : array(int) {
-
-var left := 0
-var right := len(n)-1
-
-var i := part(n, left, right)
-
-var j := i-1
-
-if j > 0 {
-quickSlice(n[0:i])
-}
-
-if i < right {
-quickSlice(n[i:len(n)])
-}
-
-return n
+ return true
 }
 
 func main() : void {
-var j := [20]int
-sys.Write( sys.String( len(j[1:3])) + "\n")
 
-for var i := 0; i < len(j); i++ {
-j[i] := sys.RandomInt(100)
-}
+ var arr := [150]int
 
-for i := 0; i < len(j); i++ {
-sys.Write(sys.String(j[i]) + " ")
-}
-sys.Write("\n")
+ for var i := 0; i < len(arr); i++ {
+  arr[i] := sys.RandomInt(150)
+ }
 
-quickSlice(j)
+ sys.Write("Original: ")
+ print(arr)
+ sys.Write("\n")
 
-for i := 0; i < len(j); i++ {
-sys.Write(sys.String(j[i]) + " ")
-}
-sys.Write("\n")
+ arr := insertion(arr)
+
+ sys.Write("Sorted ("+sys.String(sorted(arr))+"): ")
+ print(arr)
+
 }
 
 // The main function in this test situation

@@ -38,7 +38,7 @@ void OperateStatement::checkTree(Type* type) {
 	rhs_->checkTree(type);
 
 	if (!(lhs_->type()->Equals(rhs_->type()))) {
-		throw new StatementException(this,
+		throw StatementException(this,
 				"Cannot add variables of different types");
 	}
 }

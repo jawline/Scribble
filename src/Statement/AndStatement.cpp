@@ -21,12 +21,16 @@ AndStatement::~AndStatement() {
 
 Value* AndStatement::execute(std::vector<Value*> const& variables) {
 	BoolValue* lhs = (BoolValue*) lhs_->execute(variables);
-	BoolValue* rhs = (BoolValue*) rhs_->execute(variables);
 
-	bool result = lhs->value() & rhs->value();
+	bool result = false;
+
+	if (lhs->value()) {
+		BoolValue* rhs = (BoolValue*) rhs_->execute(variables);
+		result = lhs->value() && rhs->value();
+		valueHeap.free(rhs);
+	}
 
 	valueHeap.free(lhs);
-	valueHeap.free(rhs);
 
 	return valueHeap.make(result);
 }
