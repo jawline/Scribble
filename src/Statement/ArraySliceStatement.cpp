@@ -44,7 +44,7 @@ Value* ArraySliceStatement::execute(std::vector<Value*> const& variables) {
 	int startVal = array->getStart() + start->value();
 	int lengthVal = end->value() - start->value();
 
-	if (start->value() < 0 || end->value()) {
+	if (start->value() < 0 || end->value() < 0) {
 		throw StatementException(this, "Array index cannot be < 0");
 	}
 

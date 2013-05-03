@@ -6,54 +6,96 @@ import("random")
 import("variables")
 import("functions")
 
-func partition(n : array(int), i : int, j : int) : int {
-	var tmp : int
-	var pivot := n[(i+j)/2]
-	
-	sys.Write("Picked pivot " + sys.String(pivot) + "\n")
-	
-	while (i <= j) {
+import("sys")
 
-		sys.Write("I: " + sys.String(i) + " J: " + sys.String(j) + "\n")
+func part(n:array(int), left:int, right:int) : int {
 
-		while (n[i] < pivot) {
-			i++
-		}
+var i := left
+var j := right
+var pivot := n[(i+j)/2]
+var temp := 0
 
-		while (n[j] > pivot) {
-			j--
-		}
+while i <= j {
 
-		if (i <= j) {
-			sys.Write("Swapping " + sys.String(n[i]) + " for " + sys.String(n[j]) + "\n")
-			tmp := n[i]
-			n[i] := n[j]
-			n[j] := tmp
-			i++
-			j--
-		}
-		
-	}
-	
-	for var iter := 0; iter < len(n); iter++ {
-	 sys.Write(sys.String(n[iter]) + " ")
-	}
-	sys.Write("\n")
-	
-	return i
+while n[i] < pivot {
+i++
 }
 
-func quicksort(n : array(int), l : int, r : int) : array(int) {
-	
-	var index := partition(n, l, r)
-	
-	if l < index-1 {
-		quicksort(n, l, index-1)
-	}
-	
-	if index < len(n)-1 {
-		quicksort(n, index, r)
-	}
+while n[j] > pivot {
+j--
+}
+
+if (i <= j) {
+temp := n[i]
+n[i] := n[j]
+n[j] := temp
+i++
+j--
+}
+
+}
+
+sys.Write("Pivot("+sys.String(pivot)+") i("+sys.String(i)+") ")
+for var iter := 0; iter < len(n); iter++ {
+sys.Write(sys.String(n[iter]) + " ")
+}
+sys.Write("\n")
+
+return i
+}
+
+func quick(n : array(int), left : int, right : int) : array(int) {
+var i := part(n, left, right)
+var j := i-1
+
+if left < j {
+quick(n, left, j)
+}
+
+if i < right {
+quick(n, i, right)
+}
+}
+
+func quickSlice(n : array(int)) : array(int) {
+
+var left := 0
+var right := len(n)-1
+
+var i := part(n, left, right)
+
+var j := i-1
+
+if j > 0 {
+quickSlice(n[0:i])
+}
+
+if i < right {
+quickSlice(n[i:len(n)])
+}
+
+return n
+}
+
+func main() : void {
+var j := [20]int
+sys.Write( sys.String( len(j[1:3])) + "\n")
+
+for var i := 0; i < len(j); i++ {
+j[i] := sys.RandomInt(100)
+}
+
+for i := 0; i < len(j); i++ {
+sys.Write(sys.String(j[i]) + " ")
+}
+sys.Write("\n")
+
+quickSlice(j)
+
+for i := 0; i < len(j); i++ {
+sys.Write(sys.String(j[i]) + " ")
+}
+sys.Write("\n")
 }
 
 // The main function in this test situation
@@ -64,7 +106,7 @@ func quicksort(n : array(int), l : int, r : int) : array(int) {
 //
 // Runs some simple tests
 
-func main() : void {
+func main2() : void {
 
 	var j := [10]int
 	j[3] := 4
@@ -82,7 +124,7 @@ func main() : void {
 	
 	sys.Write("\n")
 	
-	quicksort(j, 0, 9)
+	//quicksort(j, 0, 9)
 	
 	for k := 0; k < len(j); k++ {
 		sys.Write(sys.String(j[k]) + " ")
