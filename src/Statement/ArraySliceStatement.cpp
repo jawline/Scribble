@@ -41,16 +41,18 @@ Value* ArraySliceStatement::execute(std::vector<Value*> const& variables) {
 	IntValue* start = (IntValue*) start_->execute(variables);
 	IntValue* end = (IntValue*) end_->execute(variables);
 
-	if (end->value() > (int)array->getArrayData()->dataLength()) {
-		throw StatementException(this, "Slice size cannot exceed array size");
-	}
+	int startVal = array->getStart() + start->value();
+	int lengthVal = end->value() - start->value();
 
 	if (start->value() >= end->value()) {
 		throw StatementException(this, "Start value should not be greater than or equal to end value when generating a slice");
 	}
 
+	if (startVal + lengthVal > (int)array->getArrayData()->dataLength()) {
+		throw StatementException(this, "Slice size cannot exceed array size");
+	}
 
-	array->setArrayData(array->getArrayData(), start->value(), end->value()-start->value());
+	array->setArrayData(array->getArrayData(), startVal, lengthVal);
 
 	valueHeap.free(start);
 	valueHeap.free(end);

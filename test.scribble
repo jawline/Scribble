@@ -6,45 +6,53 @@ import("random")
 import("variables")
 import("functions")
 
-func partition(n : array(int)) : int {
-	var i := 0
-	var j := len(n)-1
+func partition(n : array(int), i : int, j : int) : int {
 	var tmp : int
 	var pivot := n[(i+j)/2]
 	
-	while (i <= j) {
+	sys.Write("Picked pivot " + sys.String(pivot) + "\n")
 	
+	while (i <= j) {
+
+		sys.Write("I: " + sys.String(i) + " J: " + sys.String(j) + "\n")
+
 		while (n[i] < pivot) {
 			i++
 		}
-		
+
 		while (n[j] > pivot) {
 			j--
 		}
-		
+
 		if (i <= j) {
+			sys.Write("Swapping " + sys.String(n[i]) + " for " + sys.String(n[j]) + "\n")
 			tmp := n[i]
 			n[i] := n[j]
 			n[j] := tmp
 			i++
 			j--
 		}
-	
+		
 	}
+	
+	for var iter := 0; iter < len(n); iter++ {
+	 sys.Write(sys.String(n[iter]) + " ")
+	}
+	sys.Write("\n")
 	
 	return i
 }
 
-func quicksort(n : array(int)) : array(int) {
+func quicksort(n : array(int), l : int, r : int) : array(int) {
 	
-	var index := partition(n)
+	var index := partition(n, l, r)
 	
-	if index > 1 {
-		quicksort(n[0:index-1])
+	if l < index-1 {
+		quicksort(n, l, index-1)
 	}
 	
-	if index < len(n) {
-		quicksort(n[index:len(n)])
+	if index < len(n)-1 {
+		quicksort(n, index, r)
 	}
 }
 
@@ -58,15 +66,25 @@ func quicksort(n : array(int)) : array(int) {
 
 func main() : void {
 
-	var j := [5]int
+	var j := [10]int
 	j[3] := 4
 	j[4] := 10
 	j[2] := 8
 	j[1] := 2
 	j[0] := 9
-	quicksort(j)
+	j[5] := 100
+	j[6] := 32
+	j[7] := 4
 	
 	for var k := 0; k < len(j); k++ {
+		sys.Write(sys.String(j[k]) + " ")
+	}
+	
+	sys.Write("\n")
+	
+	quicksort(j, 0, 9)
+	
+	for k := 0; k < len(j); k++ {
 		sys.Write(sys.String(j[k]) + " ")
 	}
 	
