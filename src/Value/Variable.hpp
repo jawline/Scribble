@@ -4,6 +4,10 @@
 #include "Value.hpp"
 #include <map>
 
+/**
+ *
+ */
+
 class Variable {
 private:
 	Value* value_;
