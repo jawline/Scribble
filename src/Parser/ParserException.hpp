@@ -10,6 +10,12 @@
 #include <exception>
 #include <string>
 
+/**
+ * ParserException
+ * thrown whenever an exception occurs during the parsing of a program.
+ * Contains information about which file was currently being parser, what the details where and where it happened.
+ */
+
 class ParserException: public std::exception {
 private:
 	std::string file_;

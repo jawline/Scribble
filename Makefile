@@ -1,15 +1,12 @@
 CC=g++
-CFLAGS=-c -Wall -I src -I gen -std=c++0x -g -O0
-LDFLAGS=
+CFLAGS=-c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread
+LDFLAGS=-pthread -lpthread
 EXECUTABLE=./bin/scribble
 SOURCE_DIR=src
 SOURCES=gen/Lexer.cpp gen/Parser.cpp $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp)
 OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 
 all: preprocess $(SOURCES) $(EXECUTABLE)
-
-test: all
-	@$(EXECUTABLE) test.scribble
 
 clean:
 	rm -r ./obj/ $(EXECUTABLE) ./gen/

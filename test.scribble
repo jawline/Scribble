@@ -8,62 +8,90 @@ import("functions")
 
 import("sys")
 
-func insertion(n:array(int)):array(int) {
+func part(n:array(int)) : int {
+ 
+ //Take i to be 0.
+ var i := 0
 
- for var i := 1; i < len(n); i++ {
+ //Take the last element to be length of n - 1
+ var j := len(n)-1
 
-  var toInsert := n[i]
-  var j := i
+ //Take the pivot value to be the value in the middle
+ var pivot := n[(i+j)/2]
 
-  while (j > 0) & (toInsert < n[j-1]) {
-   n[j] := n[j-1]
+ while i <= j {
+
+  while n[i] < pivot {
+   i++
+  }
+
+  while n[j] > pivot {
    j--
   }
 
-  n[j] := toInsert
+  // As long as i <= j swap n[i] and n[j] and increment them both
+  if (i <= j) {
+   var temp := n[i]
+   n[i] := n[j]
+   n[j] := temp
+   i++
+   j--
+  }
+
+ }
+
+ //Return i, the value in the middle
+ return i
+}
+
+func quickSlice(n : array(int)) : array(int) {
+
+ var i := part(n)
+ var finished := [1]bool
+	 if (i-1) > 0 {
+			quickSlice(n[0:i])
+	 }
+	 
+	 finished[0] := true
+
+ if i < len(n)-1 {
+  		quickSlice(n[i:len(n)])
+ }
+ 
+ while finished[0] = false {
  }
 
  return n
 }
 
-func print(n:array(int)) : void {
+func print(n : array(int)) : void {
  
  for var i := 0; i < len(n); i++ {
   sys.Write(sys.String(n[i]) + " ")
  }
- 
+
  sys.Write("\n")
+
 }
 
-func sorted(n:array(int)):bool {
+func r() : void {
+ var j := 0
 
- for var i := 1; i < len(n); i++ {
-
-  if n[i] < n[i-1] {
-   return false
-  }
-
+ thread {
+  j := 1
+  sys.Write("Hello World\n")
  }
 
- return true
+ sys.Write("Hello world 2\n")
 }
 
 func main() : void {
-
- var arr := [150]int
-
- for var i := 0; i < len(arr); i++ {
-  arr[i] := sys.RandomInt(150)
+ r()
+ 
+ sys.Write("Returned\n")
+ 
+ while true {
  }
-
- sys.Write("Original: ")
- print(arr)
- sys.Write("\n")
-
- arr := insertion(arr)
-
- sys.Write("Sorted ("+sys.String(sorted(arr))+"): ")
- print(arr)
 
 }
 

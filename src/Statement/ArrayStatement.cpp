@@ -26,16 +26,21 @@ Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
 	int length = l->value();
 	valueHeap.free(l);
 
-	Value** initial = new Value*[length];
+	SP<ArrayData> data = SP<ArrayData>(nullptr);
 
-	for (int i = 0; i < length; i++) {
-		initial[i] = ValueUtil::generateValue(type_->getSubtype());
+	if (length > 0) {
+
+		Value** initial = new Value*[length];
+
+		for (int i = 0; i < length; i++) {
+			initial[i] = ValueUtil::generateValue(type_->getSubtype());
+		}
+
+		data = SP<ArrayData>(new ArrayData(length, initial));
 	}
 
-	SP<ArrayData> data = SP<ArrayData>(new ArrayData(length, initial));
-
 	ArrayValue* arr = (ArrayValue*) ValueUtil::generateValue(type_);
-	arr->setArrayData(data, 0, data->dataLength());
+	arr->setArrayData(data, 0, length);
 	return arr;
 }
 

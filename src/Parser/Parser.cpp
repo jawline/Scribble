@@ -297,7 +297,7 @@ NamespaceType Parser::include(std::string const& filename) {
 	return Functions;
 }
 
-FunctionSet Parser::compile(std::string const& file,
+NamespaceType Parser::compile(std::string const& file,
 		std::map<std::string, NamespaceType> builtinNamespace) {
 	parser_free_all();
 
@@ -306,5 +306,5 @@ FunctionSet Parser::compile(std::string const& file,
 
 	parser_free_all();
 
-	return ns["main"];
+	return ns;
 }

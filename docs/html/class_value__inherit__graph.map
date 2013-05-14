@@ -1,0 +1,7 @@
+<map id="Value" name="Value">
+<area shape="rect" id="node3" href="$class_array_value.html" title="ArrayValue" alt="" coords="5,83,91,112"/>
+<area shape="rect" id="node5" href="$class_bool_value.html" title="BoolValue" alt="" coords="115,83,195,112"/>
+<area shape="rect" id="node7" href="$class_int_value.html" title="IntValue" alt="" coords="219,83,288,112"/>
+<area shape="rect" id="node9" href="$class_string_value.html" title="StringValue" alt="" coords="312,83,400,112"/>
+<area shape="rect" id="node11" href="$class_void_value.html" title="VoidValue" alt="" coords="424,83,504,112"/>
+</map>

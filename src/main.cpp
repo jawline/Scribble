@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
 	SP<Function> entry;
 
 	try {
-		entry = Parser::compile(argv[1], builtinNamespaces)[0];
+		entry = Parser::compile(argv[1], builtinNamespaces)["main"][0];
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());
 		return -1;
@@ -57,11 +57,24 @@ int main(int argc, char** argv) {
 
 	if (!entry.Null()) {
 
-		double start = getCPUTime();
-		delete entry->execute(std::vector<Value*>());
-		double end = getCPUTime();
+		try {
 
-		printf("\n-----------------------------------\n%f seconds to execute.\n", end - start);
+			double start = getCPUTime();
+			delete entry->execute(std::vector<Value*>());
+			double end = getCPUTime();
+
+			printf(
+					"\n-----------------------------------\n%f seconds to execute.\n",
+					end - start);
+
+		} catch (StatementException& c) {
+
+			printf(
+					"Unfortunately an error occured during execution because %s.\n",
+					c.what());
+
+		}
+
 	} else {
 		printf(
 				"It appears that the main function was not declared within the scope");

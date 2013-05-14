@@ -10,6 +10,10 @@
 #include "Type.hpp"
 #include <vector>
 
+/**
+ * Class used to ensure that only one of every type is created
+ * ( And therefore the pointers will alyways be to that type and unique to that type).
+ */
 class TypeManager {
 private:
 	std::vector<Type*> types_;
@@ -20,7 +24,14 @@ public:
 	TypeManager();
 	virtual ~TypeManager();
 
+	/**
+	 * Get a given primitive type (Int, Bool, etc)
+	 */
 	Type* getType(ValueType base);
+
+	/**
+	 * Get a given complex type. (Array, Reference)
+	 */
 	Type* getType(ValueType base, Type* subType);
 };
 

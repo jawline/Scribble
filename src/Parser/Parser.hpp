@@ -1,5 +1,6 @@
 #ifndef _PARSER_DEF_H_
 #define _PARSER_DEF_H_
+
 #include <Pointers/SmartPointer.hpp>
 #include <string>
 #include <vector>
@@ -7,11 +8,9 @@
 #include <sstream>
 #include <map>
 #include <Statement/Statement.hpp>
-#include <Function/Function.hpp>
-#include <Function/FunctionReference.hpp>
-#include <Value/Variable.hpp>
-
-
+#include <Function/Function.hpp> // Function class
+#include <Function/FunctionReference.hpp> // Function ref class
+#include <Value/Variable.hpp> // Variable class
 typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, FunctionSet> NamespaceType;
 typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;
@@ -33,26 +32,44 @@ private:
 
 public:
 
-	//Check the number of arguments a function must have in this set
+	/**
+	 * Check the number of arguments a function must have in this set
+	 */
 	static unsigned int functionSetNumArguments(FunctionSet const& functionSet);
 
-	//Check whether the set already contains an equivalent function
+	/**
+	 * Check whether the set already contains an equivalent function
+	 */
+
 	static bool functionSetAlreadyContainsEquivilent(SP<Function> function,
 			FunctionSet const& functionSet);
 
+	/**
+	 * Attempt to find a function that meets the criteria of a reference within a function set.
+	 */
 	static SP<Function> findFunctionInSet(SP<FunctionReference> toFind,
 			FunctionSet const& set);
 
+	/**
+	 *
+	 */
 	static SP<Function> functionSetSearch(FunctionSet const& functionSet,
 			std::vector<int> argumentTypes);
 
-	//Get the return type of a function set
+	/**
+	 * Get the return type of a function set
+	 */
 	static Type* functionSetType(FunctionSet const& functionSet);
 
 	static bool listContains(std::string target,
 			std::vector<std::string> const& list);
 
-	static FunctionSet compile(std::string const& file, std::map<std::string, NamespaceType> builtinNamespace);
+	/**
+	 * Static function which will return the resulting namespace of the parsing of a given file.
+	 */
+
+	static NamespaceType compile(std::string const& file,
+			std::map<std::string, NamespaceType> builtinNamespace);
 };
 
 #endif //_PARSER_DEF_H_

@@ -1,18 +1,27 @@
 #ifndef _SMART_POINTER_DEF_H_
 #define _SMART_POINTER_DEF_H_
 #include "ReferenceCounter.hpp"
+#include <mutex>
 
 template < typename T > class SmartPointer {
 private:
 	T* pointerData;
 	ReferenceCounter* counter;
+	std::mutex lock;
 
 	void Release() {
+
+		lock.lock();
 
 		if (counter->Release() < 1) {
 			delete pointerData;
 			delete counter;
+
+			pointerData = nullptr;
+			counter = nullptr;
 		}
+
+		lock.unlock();
 
 	}
 

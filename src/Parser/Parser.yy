@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <Statement/ThreadStatement.hpp>
 #include <Statement/BoolStatement.hpp>
 #include <Statement/IntStatement.hpp>
 #include <Statement/OperateStatement.hpp>
@@ -21,6 +22,7 @@
 #include <Statement/IfStatement.hpp>
 #include <Statement/OperateStatement.hpp>
 #include <Statement/ReturnStatement.hpp>
+#include <Statement/TestNilStatement.hpp>
 #include <Statement/WhileStatement.hpp>
 #include <Statement/IncrementStatement.hpp>
 #include <Statement/ArrayStatement.hpp>
@@ -82,8 +84,8 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <real> REAL
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND
-%token <token> FUNCTION VARIABLE CONST STRUCT LENGTH
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND NIL
+%token <token> FUNCTION VARIABLE CONST STRUCT LENGTH THREAD
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET
 %token <token> END
 
@@ -408,6 +410,9 @@ Statement: TRUE {
 		$$ = new GetArrayStatement(yylineno, yytext, $1, $3); 
 	} | Statement LSQBRACKET Statement COLON Statement RSQBRACKET {
 		$$ = new ArraySliceStatement(yylineno, yytext, $1, $3, $5);
+	} | THREAD LBRACKET Statements RBRACKET {
+		$$ = new ThreadStatement(yylineno, yytext, *$3);
+		delete $3;
 	} | Variable {
 		$$ = new GetVariableStatement(yylineno, yytext, *$1);
 		delete $1;
@@ -453,6 +458,10 @@ Statement: TRUE {
 	} | WHILE Statement LBRACKET Statements RBRACKET {
 		$$ = new WhileStatement(yylineno, yytext, $2, *$4);
 		delete $4;
+	} | NIL EQUALS Statement {
+		$$ = new TestNilStatement(yylineno, yytext, $3);
+	} | Statement EQUALS NIL {
+		$$ = new TestNilStatement(yylineno, yytext, $1);
 	} | Statement EQUALS Statement {
 		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
 	} | Statement NOT EQUALS Statement {

@@ -73,6 +73,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "const" return CONST;
 "int" return TYPE_INT;
 "bool" return TYPE_BOOL;
+"nil" return NIL;
 "string" return TYPE_STRING;
 "void" return TYPE_VOID;
 "return" return RETURN;
@@ -84,6 +85,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "." return LINK;
 "array" return TYPE_ARRAY;
 "len" return LENGTH;
+"thread" return THREAD;
 "[" return LSQBRACKET;
 "]" return RSQBRACKET;
 

@@ -17,13 +17,19 @@ public:
 	virtual ~Value() {
 	}
 
-	//Apply the specified operator to the given value.
+	/**
+	 * Apply the specified operator to the given value.
+	 */
 	virtual void applyOperator(ValueOperator, Value* other) = 0;
 
-	//Get the ValueType of the value
+	/**
+	 * Get the ValueType of the value
+	 */
 	virtual Type* type() = 0;
 
-	//Create an identical copy of the value
+	/**
+	 * Create an identical copy of the value
+	 */
 	virtual Value* clone() = 0;
 
 };

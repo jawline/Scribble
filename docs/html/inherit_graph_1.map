@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_function.html" title="Function" alt="" coords="5,112,77,141"/>
+<area shape="rect" id="node3" href="$class_bool_to_string_function.html" title="BoolToStringFunction" alt="" coords="125,5,272,35"/>
+<area shape="rect" id="node5" href="$class_int_to_string_function.html" title="IntToStringFunction" alt="" coords="131,59,267,88"/>
+<area shape="rect" id="node7" href="$class_random_int.html" title="RandomInt" alt="" coords="156,112,241,141"/>
+<area shape="rect" id="node9" href="$class_scripted_function.html" title="ScriptedFunction" alt="" coords="139,165,259,195"/>
+<area shape="rect" id="node11" href="$class_write_function.html" title="WriteFunction" alt="" coords="148,219,249,248"/>
+</map>

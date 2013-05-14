@@ -24,14 +24,26 @@ ValueHeap::~ValueHeap() {
 
 Value* ValueHeap::make(Type* type) {
 
+	lock_.lock();
+
+	Value* generated = nullptr;
+
 	//If it is a complex type we don't store it so ignore it
 	if (type->getSubtype() == nullptr) {
+
 		if (valueStore_[type->getType()].size() > 0) {
-			return valueStore_[type->getType()].pop();
+			generated = valueStore_[type->getType()].pop();
 		}
+
 	}
 
-	return ValueUtil::generateValue(type);
+	if (generated == nullptr) {
+		generated = ValueUtil::generateValue(type);
+	}
+
+	lock_.unlock();
+
+	return generated;
 }
 
 Value* ValueHeap::make(bool value) {
@@ -48,11 +60,15 @@ Value* ValueHeap::make(int value) {
 
 void ValueHeap::free(Value* v) {
 
+	lock_.lock();
+
 	if (valueStore_[v->type()->getType()].size() < ValueStackMax) {
 		valueStore_[v->type()->getType()].push(v);
 	} else {
 		delete v;
 	}
+
+	lock_.unlock();
 
 }
 

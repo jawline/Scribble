@@ -1,0 +1,7 @@
+<map id="Function" name="Function">
+<area shape="rect" id="node3" href="$class_bool_to_string_function.html" title="BoolToStringFunction" alt="" coords="5,83,152,112"/>
+<area shape="rect" id="node5" href="$class_int_to_string_function.html" title="IntToStringFunction" alt="" coords="176,83,312,112"/>
+<area shape="rect" id="node7" href="$class_random_int.html" title="RandomInt" alt="" coords="336,83,421,112"/>
+<area shape="rect" id="node9" href="$class_scripted_function.html" title="ScriptedFunction" alt="" coords="445,83,565,112"/>
+<area shape="rect" id="node11" href="$class_write_function.html" title="WriteFunction" alt="" coords="589,83,691,112"/>
+</map>
