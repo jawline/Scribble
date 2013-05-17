@@ -28,7 +28,9 @@ class Parser {
 private:
 	static std::string bufferText(std::string const& filePath);
 
-	static NamespaceType include(std::string const& inputSource);
+	static NamespaceType include(std::string const& inputSource, std::string const& path);
+	static void printNamespace(NamespaceType const& ns);
+	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
 
 public:
 

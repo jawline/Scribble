@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 		try {
 
 			double start = getCPUTime();
-			delete entry->execute(std::vector<Value*>());
+			valueHeap.free(entry->execute(std::vector<Value*>()));
 			double end = getCPUTime();
 
 			printf(

@@ -5,6 +5,8 @@
 #include "ParserException.hpp"
 #include <string.h>
 
+#include <iostream>
+#include <string>
 extern std::map<std::string, NamespaceType> Namespace;
 extern NamespaceType Functions;
 
@@ -64,6 +66,24 @@ SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 	}
 
 	return 0;
+}
+
+void Parser::printNamespace(NamespaceType const& ns) {
+
+	for (auto iter = ns.begin(); iter != ns.end(); iter++) {
+		printf("%s\n", iter->first.c_str());
+	}
+
+}
+
+void Parser::printAllSpaces(std::map<std::string, NamespaceType> const& ns) {
+
+	for (auto iter = ns.begin(); iter != ns.end(); iter++) {
+		printf("--%s--\n", iter->first.c_str());
+		printNamespace(iter->second);
+		printf("--END--\n");
+	}
+
 }
 
 std::string Parser::bufferText(std::string const& filePath) {
@@ -173,22 +193,26 @@ Type* Parser::functionSetType(FunctionSet const& functionSet) {
 	return fn->getType();
 }
 
-NamespaceType Parser::include(std::string const& filename) {
+NamespaceType Parser::include(std::string const& filename,
+		std::string const& path) {
 
-//Create the inputSource from the buffer
-	std::string inputSource = bufferText(filename + ".scribble");
+	printf("Path: %s\n", path.c_str());
+	printf("Filename: %s\n", filename.c_str());
 
-//Clear and previous errors
+	//Create the inputSource from the buffer
+	std::string inputSource = bufferText(path + filename + ".scribble");
+
+	//Clear and previous errors
 	ParsingError = false;
 
-//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
+	//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
 	char* a = strdup(inputSource.c_str());
 
 	yy_scan_string(a);
 	yyparse();
 	yylex_destroy();
 
-//Free the bison buffer
+	//Free the bison buffer
 	delete[] a;
 
 	if (ParsingError) {
@@ -209,8 +233,21 @@ NamespaceType Parser::include(std::string const& filename) {
 
 		//If not already loaded attempt to load the file.
 		if (Namespace.find(imports[i]) == Namespace.end()) {
-			include(imports[i]);
+
+			//Calculate the new path if it is any different ( For example sorts/quick is recalculated to quick with path += sorts/ )
+			auto pathEnd = imports[i].find_last_of("/");
+			std::string toImportPath = "";
+			std::string importFile = imports[i];
+
+			if (pathEnd != std::string::npos) {
+				toImportPath = importFile.substr(0, pathEnd + 1);
+				importFile = importFile.substr(pathEnd + 1, importFile.size());
+			}
+
+			include(importFile, path + toImportPath);
 			Functions = NamespaceType();
+
+			imports[i] = importFile;
 		}
 
 	}
@@ -278,6 +315,7 @@ NamespaceType Parser::include(std::string const& filename) {
 	}
 
 	try {
+
 		//Run the check function on all functions which will throw StatementExceptions if there is an issue.
 		if (Functions.size() > 0) {
 
@@ -290,6 +328,7 @@ NamespaceType Parser::include(std::string const& filename) {
 			}
 
 		}
+
 	} catch (StatementException& e) {
 		throw ParserException(filename, e.what());
 	}
@@ -301,8 +340,20 @@ NamespaceType Parser::compile(std::string const& file,
 		std::map<std::string, NamespaceType> builtinNamespace) {
 	parser_free_all();
 
+	//For calculate the path to the file
+	auto pathEnd = file.find_last_of("/");
+	std::string path = "";
+	std::string filename = file;
+
+	if (pathEnd != std::string::npos) {
+		path = filename.substr(0, pathEnd + 1);
+		filename = file.substr(pathEnd + 1, file.size());
+	}
+
 	Namespace = builtinNamespace;
-	NamespaceType ns = include(file);
+	NamespaceType ns = include(filename, path);
+
+	//printAllSpaces(Namespace);
 
 	parser_free_all();
 
