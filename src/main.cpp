@@ -6,6 +6,7 @@
 #include <Statement/Statement.hpp>
 #include <Function/WriteFunction.hpp>
 #include <Function/StringFunction.hpp>
+#include <Function/Modulo.hpp>
 #include <Function/RandomInt.hpp>
 #include <Statement/Heap.hpp>
 #include <Parser/Parser.hpp>
@@ -39,6 +40,9 @@ int main(int argc, char** argv) {
 
 	builtinFunctions["String"].push_back(
 			SmartPointer<Function>(new BoolToStringFunction()));
+
+	builtinFunctions["Mod"].push_back(
+			SmartPointer<Function>(new Modulo()));
 
 	builtinFunctions["RandomInt"].push_back(
 			SmartPointer<Function>(new RandomInt()));

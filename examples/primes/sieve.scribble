@@ -1,0 +1,39 @@
+import("sys")
+
+func Sieve(n:int) : array(bool) {
+
+ var results := [n]bool
+ 
+ for var i := 2; i < n; i++ {
+  results[i] := true 
+ }
+ 
+ 
+ for i := 2; i < n; i++ {
+ 
+  if results[i] {  
+   for var j := i*i; j < n; j := j + i {
+    results[j] := false
+   }
+  }
+ 
+ }
+
+ return results
+}
+
+func Test() : bool {
+
+ var j := Sieve(100)
+ 
+ for var i := 0; i < len(j); i++ {
+ 
+  if j[i] {
+   sys.Write(sys.String(i) + " ")
+  }
+ 
+ }
+ 
+ sys.Write("\n")
+
+}

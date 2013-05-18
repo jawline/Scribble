@@ -60,6 +60,14 @@ Value* ValueHeap::make(int value) {
 
 void ValueHeap::free(Value* v) {
 
+	//If it is a complex type just delete it.
+	if (v->type()->getSubtype() != nullptr) {
+		delete v;
+		return;
+	}
+
+	//Otherwise lock the heap and then add it on
+
 	lock_.lock();
 
 	if (valueStore_[v->type()->getType()].size() < ValueStackMax) {
