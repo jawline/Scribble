@@ -7,9 +7,9 @@ func part(n:array(int)) : int {
 
  //Take the last element to be length of n - 1
  var j := len(n)-1
-
+ 
  //Take the pivot value to be the value in the middle
- var pivot := n[(len(n))/2]
+ var pivot := n[(len(n) - 1) / 2]
 
  while i <= j {
 
@@ -37,6 +37,10 @@ func part(n:array(int)) : int {
 }
 
 func sort(n : array(int)) : array(int) {
+
+ if len(n) = 1 {
+  return n
+ }
 
  var i := part(n)
 

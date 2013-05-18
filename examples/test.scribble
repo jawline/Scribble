@@ -1,7 +1,17 @@
 import("sorts/quick")
+import("tests/arrays")
 import("sys")
 
 func main() : void {
+
+ sys.Write("Executing some tests\n")
+ 
+ sys.Write("Running some arrays tests\n")
+ arrays.Test()
+ 
+ sys.Write("Running a quicksort test\n")
+ 
  var t := [5]int
  quick.Test()
+
 }

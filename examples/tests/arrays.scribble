@@ -20,6 +20,10 @@ func Test() : bool {
 	
 	var jSize := 6
 	j := [jSize]int
+
+	if (len(j) != jSize) {
+		return false
+	}
 	
 	var arrayArray := [5]array(array(array(string)))
 	
