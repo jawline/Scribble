@@ -1,12 +1,12 @@
 #include "Parser.hpp"
+#include "ParserException.hpp"
 #include <Function/ScriptedFunction.hpp>
 #include <Function/FunctionReference.hpp>
 #include <Value/Util.hpp>
-#include "ParserException.hpp"
 #include <string.h>
-
 #include <iostream>
 #include <string>
+
 extern std::map<std::string, NamespaceType> Namespace;
 extern NamespaceType Functions;
 
@@ -120,6 +120,8 @@ std::string Parser::bufferText(std::string const& filePath) {
 	//Free the buffers
 	delete[] buffer;
 
+	//Check if the file size is zero.
+	//if it is throw an empty file issue.
 	if (f_size == 0) {
 		throw ParserException(filePath, "Empty file");
 	}
@@ -148,7 +150,6 @@ bool Parser::functionSetAlreadyContainsEquivilent(SP<Function> function,
 	bool duplicate = false;
 
 	//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
-
 	for (unsigned int i = 0; i < functionSet.size(); ++i) {
 
 		auto compared = functionSet[i];
@@ -196,9 +197,6 @@ Type* Parser::functionSetType(FunctionSet const& functionSet) {
 NamespaceType Parser::include(std::string const& filename,
 		std::string const& path) {
 
-	printf("Path: %s\n", path.c_str());
-	printf("Filename: %s\n", filename.c_str());
-
 	//Create the inputSource from the buffer
 	std::string inputSource = bufferText(path + filename + ".scribble");
 
@@ -208,6 +206,7 @@ NamespaceType Parser::include(std::string const& filename,
 	//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
 	char* a = strdup(inputSource.c_str());
 
+	//Pass the data to the parser.
 	yy_scan_string(a);
 	yyparse();
 	yylex_destroy();
@@ -215,6 +214,7 @@ NamespaceType Parser::include(std::string const& filename,
 	//Free the bison buffer
 	delete[] a;
 
+	//Check to see if any errors occured
 	if (ParsingError) {
 		throw ParserException(filename, "Parser error occurred");
 	}
@@ -236,9 +236,12 @@ NamespaceType Parser::include(std::string const& filename,
 
 			//Calculate the new path if it is any different ( For example sorts/quick is recalculated to quick with path += sorts/ )
 			auto pathEnd = imports[i].find_last_of("/");
+
+			//Set the import path to be empty and the importFile to be imports[i]
 			std::string toImportPath = "";
 			std::string importFile = imports[i];
 
+			//If the imported file is in another directory then update its path ( So ./examples/ will become ./examples/sorts/)
 			if (pathEnd != std::string::npos) {
 				toImportPath = importFile.substr(0, pathEnd + 1);
 				importFile = importFile.substr(pathEnd + 1, importFile.size());

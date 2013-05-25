@@ -60,7 +60,7 @@ Value* FunctionStatement::execute(std::vector<Value*> const& variables) {
 Type* FunctionStatement::type() {
 
 	if (func_->getFunction().Null()) {
-		getTypeManager().getType(TypeUnresolved);
+		return getTypeManager().getType(TypeUnresolved);
 	}
 
 	return func_->getFunction()->getType();

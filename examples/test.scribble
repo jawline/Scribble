@@ -1,23 +1,16 @@
 import("sorts/quick")
 import("tests/arrays")
 import("primes/sieve")
+import("sorts/bubble")
+import("sorts/insert")
 import("sys")
 
 func main() : void {
 
  sieve.Test()
-
- var tr := sys.Mod(5,3)
- sys.Write(sys.String(tr) + "\n")
-
- sys.Write("Executing some tests\n")	
- 
- sys.Write("Running some arrays tests\n")
  arrays.Test()
- 
- sys.Write("Running a quicksort test\n")
- 
- var t := [5]int
  quick.Test()
+ bubble.Test()
+ insert.Test()
 
 }

@@ -1,0 +1,40 @@
+import ("sys")
+
+func Sort( n : array(int) ) : array(int) {
+
+ for var i := len(n)-1; i > 0; i-- {
+ 
+  for var j := 0; j < i; j++ {
+  
+   if n[j] > n[j+1] {
+    var t := n[j]
+    n[j] := n[j+1]
+    n[j+1] := t
+   }  
+  
+  }
+ 
+ } 
+
+ return n
+}
+
+func Test() : bool {
+
+ sys.Write("Testing bubble sort\n")
+ 
+ var list := [100]int
+ 
+ for var i := 0; i < len(list); i++ {
+  list[i] := sys.RandomInt(1000)
+ }
+ 
+ Sort(list)
+ 
+ for i := 0; i < len(list); i++ {
+  sys.Write(sys.String(list[i]) + " ")
+ }
+ 
+ sys.Write("\n")
+
+}

@@ -63,7 +63,7 @@ public:
 
 	inline bool Null() {
 
-		if (pointerData == 0) {
+		if (pointerData == nullptr) {
 			return true;
 		}
 

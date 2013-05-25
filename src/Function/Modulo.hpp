@@ -9,6 +9,10 @@
 #define MODULO_HPP_
 #include "Function.hpp"
 
+/**
+ * Built in function which provides modulo functionality (The remainder of division) so Mod(5,3) = 2
+ */
+
 class Modulo: public Function {
 public:
 	Modulo();
@@ -36,7 +40,7 @@ public:
 	 * Get the arg type for a given argument ( Both Integer)
 	 */
 
-	virtual Type* argType(unsigned int arg) ;
+	virtual Type* argType(unsigned int arg);
 
 	/**
 	 * Check (Do nothing)
