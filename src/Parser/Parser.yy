@@ -84,7 +84,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <real> REAL
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND NIL
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND NIL TYPE
 %token <token> FUNCTION VARIABLE CONST STRUCT LENGTH THREAD
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET
 %token <token> END
@@ -118,6 +118,9 @@ Program: {
 		$$ = 0;
 	} | Program Function {
 		$$ = 0;
+	} | Program TYPE WORD ASSIGN Type {
+		Functions[*$3] = NamespaceEntry($5);
+		delete $3;
 	}
 ;
 
@@ -131,6 +134,18 @@ Type: TYPE_INT {
 		$$ = getTypeManager().getType(Void);
 	} | TYPE_ARRAY LPAREN Type RPAREN {
 		$$ = getTypeManager().getType(Array, $3);
+	} | WORD {
+		
+		if (Functions[*$1].type() != TypeEntry) {
+			char err[256];
+			sprintf(err, "%s is not a type\n", $1->c_str());
+			yyerror(err);
+			return -1;
+		}
+		
+		$$ = Functions[*$1].getType();
+		
+		delete $1;
 	}
 ;
 

@@ -1,8 +1,11 @@
 import("sys")
 
+type Number := int
+type String := string
+
 func main() : void {
 
- for var i := 0; i < 100; i++ {
+ for var i : Number := 0; i < 100; i++ {
   sys.Write("BOOM\n")
  }
 

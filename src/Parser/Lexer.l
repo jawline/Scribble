@@ -81,7 +81,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "import" return IMPORT;
 "true" return TRUE;
 "false" return FALSE;
-"auto" return AUTO;
+"type" return TYPE;
 "." return LINK;
 "array" return TYPE_ARRAY;
 "len" return LENGTH;
