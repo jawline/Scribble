@@ -33,6 +33,7 @@
 #include <Statement/NegativeStatement.hpp>
 #include <Statement/StructureStatement.hpp>
 #include <Statement/GetStructureElementStatement.hpp>
+#include <Statement/StructureAssignElement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -441,6 +442,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		
 		Reference r;
 		r.functionReference = reference;
+
 		References.push_back(r);
 		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
@@ -618,8 +620,20 @@ Statement: TRUE {
 		
 		Reference r;
 		r.structureElementType = (GetStructureElementStatement*) $$;
+		r.assignElementType = nullptr;
+		
 		References.push_back(r);
 		
+		delete $3;
+	} | Statement POINT WORD ASSIGN Statement {
+	
+		$$ = new StructureAssignElement(yylineno, yytext, $1, $5, *$3);
+		
+		Reference r;
+		r.assignElementType = (StructureAssignElement*) $$;
+		r.structureElementType = nullptr;
+		References.push_back(r);
+	
 		delete $3;
 	}
 ;

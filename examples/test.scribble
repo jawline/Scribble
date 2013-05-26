@@ -21,5 +21,8 @@ func PrintPerson(p : Person) : void {
 
 func main() : void {
 	var p := Person { "blake", Point { 50, 40 } }
+	p->Name := "bob"
+	p->Position := Point { 10, 10 }
+	p->Position->x := p->Position->x + 35
 	PrintPerson( p )
 }

@@ -328,6 +328,8 @@ NamespaceType Parser::include(std::string const& filename,
 
 		} else if (references[i].structureElementType != nullptr) {
 			references[i].structureElementType->fix();
+		} else if (references[i].assignElementType != nullptr) {
+			references[i].assignElementType->fix();
 		} else {
 
 			AutoVariablePair p = references[i].autoVariableType;
