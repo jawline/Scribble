@@ -261,11 +261,9 @@ NamespaceType Parser::include(std::string const& filename,
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
 		//Check whether we are looking at a function or a auto variable type.
-		if (!references[i].fRef.Null()) {
+		if (!references[i].functionReference.Null()) {
 
-			printf("References\n");
-
-			SP<FunctionReference> ref = references[i].fRef;
+			SP<FunctionReference> ref = references[i].functionReference;
 
 			NamespaceType selectedNamespace = Functions;
 
@@ -314,10 +312,13 @@ NamespaceType Parser::include(std::string const& filename,
 
 					} else {
 
-						ref->setResolveIssue(
-								std::string("the function ")
-										+ ref->getDebugName()
-										+ " is defined but does not have any versions which take the specified argument types.");
+						char errorText[256];
+
+						sprintf(errorText,
+								"the function %s is defined but does not have any versions which take the specified argument types.",
+								ref->getDebugName().c_str());
+
+						ref->setResolveIssue(errorText);
 
 					}
 
@@ -325,9 +326,11 @@ NamespaceType Parser::include(std::string const& filename,
 
 			}
 
+		} else if (references[i].structureElementType != nullptr) {
+			references[i].structureElementType->fix();
 		} else {
 
-			AutoVariablePair p = references[i].avRef;
+			AutoVariablePair p = references[i].autoVariableType;
 			p.first->setValue(ValueUtil::generateValue(p.second->type()));
 
 		}
@@ -364,7 +367,7 @@ NamespaceType Parser::compile(std::string const& file,
 		std::map<std::string, NamespaceType> builtinNamespace) {
 	parser_free_all();
 
-	//For calculate the path to the file
+//For calculate the path to the file
 	auto pathEnd = file.find_last_of("/");
 	std::string path = "";
 	std::string filename = file;
@@ -377,7 +380,7 @@ NamespaceType Parser::compile(std::string const& file,
 	Namespace = builtinNamespace;
 	NamespaceType ns = include(filename, path);
 
-	//printAllSpaces(Namespace);
+//printAllSpaces(Namespace);
 
 	parser_free_all();
 

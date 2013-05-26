@@ -27,6 +27,7 @@ public:
 	virtual void checkTree(Type* functionType);
 	virtual Value* execute(std::vector<Value*> const& variables);
 	virtual Type* type();
+	virtual void fix();
 };
 
 #endif /* GETSTRUCTUREELEMENTSTATEMENT_HPP_ */

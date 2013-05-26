@@ -23,8 +23,20 @@ GetStructureElementStatement::~GetStructureElementStatement() {
 void GetStructureElementStatement::checkTree(Type* functionType) {
 	statement_->checkTree(functionType);
 
-	if (!statement_->type()->getType() != StructureType) {
-		throw StatementException(this, "Not a structure");
+	if (statement_->type()->getType() != StructureType) {
+
+		char errorText[256];
+		sprintf(errorText, "type %i is not a structure",
+				statement_->type()->getType());
+
+		throw StatementException(this, errorText);
+	}
+}
+
+void GetStructureElementStatement::fix() {
+
+	if (statement_->type()->getType() != StructureType) {
+		return;
 	}
 
 	StructureInfo* type = (StructureInfo*) statement_->type();
@@ -36,14 +48,16 @@ void GetStructureElementStatement::checkTree(Type* functionType) {
 	}
 
 	elementType_ = type->getIndex(elementIndex_).second;
+
 }
 
-Value* GetStructureElementStatement::execute(std::vector<Value*> const& variables) {
+Value* GetStructureElementStatement::execute(
+		std::vector<Value*> const& variables) {
 
 	Structure* gen = (Structure*) statement_->execute(variables);
 
 	if (gen->data().Null()) {
-		throw StatementException(this, "Nil exception on structure");
+		throw StatementException(this, "nil pointer. gen->data is null");
 	}
 
 	Value* e = gen->data()->get(elementIndex_)->clone();

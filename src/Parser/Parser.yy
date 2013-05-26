@@ -32,6 +32,7 @@
 #include <Statement/ArrayLengthStatement.hpp>
 #include <Statement/NegativeStatement.hpp>
 #include <Statement/StructureStatement.hpp>
+#include <Statement/GetStructureElementStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -88,7 +89,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND NIL TYPE
-%token <token> FUNCTION VARIABLE CONST STRUCT LENGTH THREAD
+%token <token> FUNCTION VARIABLE CONST STRUCT LENGTH THREAD POINT
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET
 %token <token> END
 
@@ -201,8 +202,8 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 			Variables[*$2] = nVar;
 			
 			Reference r;
-			r.fRef = 0;
-			r.avRef = AutoVariablePair(nVar, sp);
+			r.functionReference = 0;
+			r.autoVariableType = AutoVariablePair(nVar, sp);
 			References.push_back(r);			
 
 			$$ = new AssignVariableStatement(yylineno, yytext, nVar, sp);
@@ -390,7 +391,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
 		Reference r;
-		r.fRef = reference;
+		r.functionReference = reference;
 		References.push_back(r);
 		
 		
@@ -404,7 +405,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
 		
 		Reference r;
-		r.fRef = reference;
+		r.functionReference = reference;
 		References.push_back(r);
 		
 		
@@ -425,7 +426,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
 	
 		Reference r;
-		r.fRef = reference;
+		r.functionReference = reference;
 		References.push_back(r);
 		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
@@ -439,7 +440,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
 		
 		Reference r;
-		r.fRef = reference;
+		r.functionReference = reference;
 		References.push_back(r);
 		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
@@ -611,6 +612,15 @@ Statement: TRUE {
 		delete $2;
 	} | Statement AND Statement {
 		$$ = new AndStatement(yylineno, yytext, $1, $3);
+	} | Statement POINT WORD {
+		
+		$$ = new GetStructureElementStatement(yylineno, yytext, $1, *$3);
+		
+		Reference r;
+		r.structureElementType = (GetStructureElementStatement*) $$;
+		References.push_back(r);
+		
+		delete $3;
 	}
 ;
 
