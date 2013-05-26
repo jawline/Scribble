@@ -11,6 +11,7 @@
 #include "Void.hpp"
 #include "Bool.hpp"
 #include "Array.hpp"
+#include <sstream>
 #include <exception>
 
 UtilException::UtilException(std::string const& reason) throw () :
@@ -58,7 +59,11 @@ Value* ValueUtil::generateValue(Type* type) {
 		break;
 	}
 
-	throw UtilException("Type generation not valid/unimplemented");
+	std::stringstream s;
+	s << "Type ";
+	s << type->getType();
+	s << " generation not valid/implemented";
+	throw UtilException(s.str());
 }
 
 bool ValueUtil::sameType(Value* a, Value* b) {

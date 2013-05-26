@@ -260,7 +260,10 @@ NamespaceType Parser::include(std::string const& filename,
 	//Loop through all of the references and resolve them.
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
+		//Check whether we are looking at a function or a auto variable type.
 		if (!references[i].fRef.Null()) {
+
+			printf("References\n");
 
 			SP<FunctionReference> ref = references[i].fRef;
 
@@ -270,12 +273,17 @@ NamespaceType Parser::include(std::string const& filename,
 
 				//Check the namespace has been loaded. If not then do not resolve the reference.
 				if (Parser::listContains(ref->getNamespace(), imports)) {
+
 					selectedNamespace = Namespace[ref->getNamespace()];
+
 				} else {
+
 					ref->setResolveIssue(
 							std::string("Namespace ") + ref->getNamespace()
 									+ " has not been imported.");
+
 				}
+
 			}
 
 			//Search for function in namespace.
@@ -290,18 +298,28 @@ NamespaceType Parser::include(std::string const& filename,
 
 			} else {
 
-				SP<Function> searchResult = Parser::findFunctionInSet(ref,
-						it->second);
+				if (it->second.type() != FunctionSetEntry) {
 
-				if (!searchResult.Null()) {
-
-					ref->setFunction(searchResult);
+					ref->setResolveIssue(
+							ref->getDebugName() + " is not a function");
 
 				} else {
 
-					ref->setResolveIssue(
-							std::string("the function ") + ref->getDebugName()
-									+ " is defined but does not have any versions which take the specified argument types.");
+					SP<Function> searchResult = Parser::findFunctionInSet(ref,
+							it->second.getFunctionSet());
+
+					if (!searchResult.Null()) {
+
+						ref->setFunction(searchResult);
+
+					} else {
+
+						ref->setResolveIssue(
+								std::string("the function ")
+										+ ref->getDebugName()
+										+ " is defined but does not have any versions which take the specified argument types.");
+
+					}
 
 				}
 
@@ -310,7 +328,6 @@ NamespaceType Parser::include(std::string const& filename,
 		} else {
 
 			AutoVariablePair p = references[i].avRef;
-
 			p.first->setValue(ValueUtil::generateValue(p.second->type()));
 
 		}
@@ -324,8 +341,12 @@ NamespaceType Parser::include(std::string const& filename,
 
 			for (auto it = Functions.begin(); it != Functions.end(); it++) {
 
-				for (unsigned int i = 0; i < it->second.size(); ++i) {
-					it->second[i]->check();
+				if (it->second.type() == FunctionSetEntry) {
+					std::vector<SafeFunction> set = it->second.getFunctionSet();
+
+					for (unsigned int i = 0; i < set.size(); ++i) {
+						set[i]->check();
+					}
 				}
 
 			}

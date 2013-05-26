@@ -7,7 +7,7 @@
 
 #include "StructureInfo.hpp"
 
-StructureInfo::StructureInfo() {
+StructureInfo::StructureInfo() : Type(StructureInfoType, nullptr) {
 }
 
 StructureInfo::~StructureInfo() {

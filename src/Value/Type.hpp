@@ -45,9 +45,19 @@ enum ValueType {
 	Array = 4,
 
 	/**
+	 * Structure type. Subtype will be StructureInfo
+	 */
+	StructureType = 5,
+
+	/**
+	 * Structure info. Contains all information about a structures type indexs (Number of indexs, name and the type they map to)
+	 */
+	StructureInfoType = 6,
+
+	/**
 	 * Max hint used so that heaps can allocate arrays of the correct number of buckets.
 	 */
-	ValueTypeMax = 5
+	ValueTypeMax = 7
 };
 
 /**

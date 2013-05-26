@@ -227,20 +227,38 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 		SP<Function> fn = new ScriptedFunction($7, ValueUtil::generateValue($7), *$9, values, *$4);
 		
-		if ( Functions[*$2].size() > 0) {
+		if (Functions[*$2].type() == EmptyEntry) {
 		
-			if (!(Parser::functionSetType(Functions[*$2])->Equals($7))) {
-				yyerror("Function differs from predefined function type");
+			std::vector<SafeFunction> newSet;
+			newSet.push_back(fn);
+
+			Functions[*$2] = NamespaceEntry(newSet);
+		
+		} else {
+		
+			if ( Functions[*$2].type() != FunctionSetEntry) {
+				yyerror("Not a function type");
 				return -1;
 			}
 			
-			if (Parser::functionSetAlreadyContainsEquivilent(fn, Functions[*$2]) == true) {
-				yyerror("Identical function already defined");
-				return -1;
+			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
+			
+			if ( functions.size() > 0) {
+			
+				if (!(Parser::functionSetType(functions)->Equals($7))) {
+					yyerror("Function differs from predefined function type");
+					return -1;
+				}
+				
+				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
+					yyerror("Identical function already defined");
+					return -1;
+				}
 			}
-		}
+			
+			Functions[*$2].addFunctionToSet(fn);
 		
-		Functions[*$2].push_back(fn);
+		}
 		
 		Variables.clear();
 		
@@ -266,21 +284,39 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 	
 		SP<Function> fn = SP<Function>(new ScriptedFunction($6, ValueUtil::generateValue($6), *$8, values, std::vector<SP<Variable>>()));
 
-		if ( Functions[*$2].size() > 0) {
-
-			if (Parser::functionSetType(Functions[*$2]) != $6) {
-				yyerror("Function differs from predefined function type");
-				return -1;
-			}
-
-			if (Parser::functionSetAlreadyContainsEquivilent(fn, Functions[*$2]) == true) {
-				yyerror("Identical function already defined");
-				return -1;
-			}
-
-		}
 		
-		Functions[*$2].push_back(fn);
+		if (Functions[*$2].type() == EmptyEntry) {
+		
+			std::vector<SafeFunction> newSet;
+			newSet.push_back(fn);
+
+			Functions[*$2] = NamespaceEntry(newSet);
+		
+		} else {
+		
+			if ( Functions[*$2].type() != FunctionSetEntry) {
+				yyerror("Not a function type");
+				return -1;
+			}
+			
+			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
+			
+			if ( functions.size() > 0) {
+			
+				if (!(Parser::functionSetType(functions)->Equals($6))) {
+					yyerror("Function differs from predefined function type");
+					return -1;
+				}
+				
+				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
+					yyerror("Identical function already defined");
+					return -1;
+				}
+			}
+			
+			Functions[*$2].addFunctionToSet(fn);
+		
+		}
 	
 		Variables.clear();
 

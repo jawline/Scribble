@@ -1,16 +1,9 @@
-import("sorts/quick")
-import("tests/arrays")
-import("primes/sieve")
-import("sorts/bubble")
-import("sorts/insert")
 import("sys")
 
 func main() : void {
 
- sieve.Test()
- arrays.Test()
- quick.Test()
- bubble.Test()
- insert.Test()
+ for var i := 0; i < 100; i++ {
+  sys.Write("BOOM\n")
+ }
 
 }

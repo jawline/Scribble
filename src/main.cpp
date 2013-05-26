@@ -32,20 +32,22 @@ int main(int argc, char** argv) {
 
 	NamespaceType builtinFunctions;
 
-	builtinFunctions["Write"].push_back(
-			SmartPointer<Function>(new WriteFunction()));
+	std::vector<SafeFunction> write;
+	write.push_back(SmartPointer<Function>(new WriteFunction()));
+	builtinFunctions["Write"] = NamespaceEntry(write);
 
-	builtinFunctions["String"].push_back(
-			SmartPointer<Function>(new IntToStringFunction()));
+	std::vector<SafeFunction> string;
+	string.push_back(SmartPointer<Function>(new IntToStringFunction()));
+	string.push_back(SmartPointer<Function>(new BoolToStringFunction()));
+	builtinFunctions["String"] = NamespaceEntry(string);
 
-	builtinFunctions["String"].push_back(
-			SmartPointer<Function>(new BoolToStringFunction()));
+	std::vector<SafeFunction> mod;
+	mod.push_back(new Modulo());
+	builtinFunctions["Mod"] = NamespaceEntry(mod);
 
-	builtinFunctions["Mod"].push_back(
-			SmartPointer<Function>(new Modulo()));
-
-	builtinFunctions["RandomInt"].push_back(
-			SmartPointer<Function>(new RandomInt()));
+	std::vector<SafeFunction> randomInt;
+	randomInt.push_back(SmartPointer<Function>(new RandomInt()));
+	builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
 
 	std::map<std::string, NamespaceType> builtinNamespaces;
 	builtinNamespaces["sys"] = builtinFunctions;
@@ -53,7 +55,7 @@ int main(int argc, char** argv) {
 	SP<Function> entry;
 
 	try {
-		entry = Parser::compile(argv[1], builtinNamespaces)["main"][0];
+		entry = Parser::compile(argv[1], builtinNamespaces)["main"].getFunctionSet()[0];
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());
 		return -1;

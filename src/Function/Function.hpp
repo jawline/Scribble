@@ -1,5 +1,6 @@
 #ifndef _FUNCTION_H_
 #define _FUNCTION_H_
+#include <Pointers/SmartPointer.hpp>
 #include <Value/Value.hpp>
 #include <vector>
 
@@ -25,5 +26,7 @@ public:
 	virtual Type* argType(unsigned int arg) = 0;
 	virtual void check() = 0;
 };
+
+typedef SmartPointer<Function> SafeFunction;
 
 #endif //_FUNCTION_H_

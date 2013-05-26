@@ -11,7 +11,7 @@
 #include <map>
 #include "Type.hpp"
 
-class StructureInfo {
+class StructureInfo : public Type {
 private:
 	std::map<std::string, Type*> dataIndexs_;
 
