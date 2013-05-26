@@ -3,10 +3,30 @@ import("sys")
 type Number := int
 type String := string
 
+type Hello := struct {
+	a : Number
+	b : Number
+	c : Number
+}
+
+type HelloString := struct {
+	a : String
+	b : String
+	c : String
+}
+
+type Point := struct {
+	x : Number
+	y : Number
+}
+
 func main() : void {
 
- for var i : Number := 0; i < 100; i++ {
-  sys.Write("BOOM\n")
- }
+ var l : Number
+ 
+ var a := Hello { 0, 0, 0 }
+ var b := Hello { 1, 2, 3 }
+ var c := HelloString { "one", "two", "three" }
+ var d := Point { 50, 50 }
 
 }

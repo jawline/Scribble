@@ -29,7 +29,7 @@ Value* ValueHeap::make(Type* type) {
 	Value* generated = nullptr;
 
 	//If it is a complex type we don't store it so ignore it
-	if (type->getSubtype() == nullptr) {
+	if (type->getType() != StructureType && type->getSubtype() == nullptr) {
 
 		if (valueStore_[type->getType()].size() > 0) {
 			generated = valueStore_[type->getType()].pop();
@@ -61,7 +61,7 @@ Value* ValueHeap::make(int value) {
 void ValueHeap::free(Value* v) {
 
 	//If it is a complex type just delete it.
-	if (v->type()->getSubtype() != nullptr) {
+	if (v->type()->getType() == StructureType || v->type()->getSubtype() != nullptr) {
 		delete v;
 		return;
 	}

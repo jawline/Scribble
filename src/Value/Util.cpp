@@ -11,6 +11,7 @@
 #include "Void.hpp"
 #include "Bool.hpp"
 #include "Array.hpp"
+#include "Structure.hpp"
 #include <sstream>
 #include <exception>
 
@@ -54,6 +55,9 @@ Value* ValueUtil::generateValue(Type* type) {
 
 	case Boolean:
 		return new BoolValue(false);
+
+	case StructureType:
+		return new Structure(type);
 
 	default:
 		break;

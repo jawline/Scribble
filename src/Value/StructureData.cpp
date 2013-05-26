@@ -7,12 +7,22 @@
 
 #include "StructureData.hpp"
 
-StructureData::StructureData() {
-	// TODO Auto-generated constructor stub
-
+StructureData::StructureData(unsigned int numElements, Value** initial) {
+	numElements_ = numElements;
+	values_ = initial;
 }
 
 StructureData::~StructureData() {
-	// TODO Auto-generated destructor stub
+
+	for (unsigned int i = 0; i < numElements_; i++) {
+
+		if (values_[i] != nullptr) {
+			delete values_[i];
+		}
+
+	}
+
+	delete[] values_;
+
 }
 

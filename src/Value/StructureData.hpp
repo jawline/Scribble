@@ -7,11 +7,23 @@
 
 #ifndef STRUCTUREDATA_HPP_
 #define STRUCTUREDATA_HPP_
+#include <Pointers/SmartPointer.hpp>
+#include <Value/Value.hpp>
 
 class StructureData {
+private:
+	unsigned int numElements_;
+	Value** values_;
+
 public:
-	StructureData();
+	StructureData(unsigned int size, Value** data);
 	virtual ~StructureData();
+
+	Value* get(unsigned int index) {
+		return values_[index];
+	}
 };
+
+typedef SmartPointer<StructureData> SafeStructureData;
 
 #endif /* STRUCTUREDATA_HPP_ */

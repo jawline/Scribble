@@ -31,6 +31,7 @@
 #include <Statement/GetArrayStatement.hpp>
 #include <Statement/ArrayLengthStatement.hpp>
 #include <Statement/NegativeStatement.hpp>
+#include <Statement/StructureStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -38,6 +39,7 @@
 #include <Value/TypeManager.hpp>
 #include <Value/Util.hpp>
 #include <Parser/Parser.hpp>
+#include <Value/StructureInfo.hpp>
 
 #include <Value/Variable.hpp>
 #include <Value/String.hpp>
@@ -72,6 +74,7 @@ extern char *yytext;	// defined and maintained in lex.c
 	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
 	std::vector<SmartPointer<Variable>>* variables;
+	StructureInfo* structureinfo;
 	Statement* statement;
 	Function* function;
 	SP<Variable>* variable;
@@ -104,7 +107,8 @@ extern char *yytext;	// defined and maintained in lex.c
 %type <variables> ArgumentDefinitions;
 %type <statement> AutoVariable;
 %type <type> Type;
-%type <statement> FunctionCall
+%type <statement> FunctionCall;
+%type <structureinfo> BaseStructureInfo;
 
 %start Program
 %%
@@ -121,6 +125,17 @@ Program: {
 	} | Program TYPE WORD ASSIGN Type {
 		Functions[*$3] = NamespaceEntry($5);
 		delete $3;
+	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
+		Functions[*$3] = NamespaceEntry($7);
+		delete $3;
+	}
+;
+
+BaseStructureInfo: {
+		$$ = new StructureInfo();
+	} | BaseStructureInfo WORD COLON Type {
+		$1->addInfo(*$2, $4);
+		delete $2;
 	}
 ;
 
@@ -451,6 +466,16 @@ Statement: TRUE {
 		//Free string pointer
 		delete $1;
 
+	} | WORD LBRACKET Arguments RBRACKET {
+	
+		if (Functions[*$1].type() != TypeEntry) {
+			yyerror("Not a type");
+			return -1;
+		}
+	
+		$$ = new StructureStatement(yylineno, yytext, Functions[*$1].getType(), *$3);
+		delete $3;
+		
 	} | LENGTH LPAREN Statement RPAREN {
 		$$ = new ArrayLengthStatement(yylineno, yytext, $3);
 	} | LSQBRACKET Statement RSQBRACKET Type {
