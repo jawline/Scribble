@@ -19,9 +19,12 @@ Version 0.6 should include
 	Support for user defined structures
 
 Version 0.7 should include
+	A conversion from tree based execution to a bytecode VM.
+
+Version 0.8 should include
 	Compiled dynamic library linking support.
 	For example a .so or .dll file could be distributed with a binary which would
 	provide the runtime sys namespace.
 
-Version 0.8
+Version 0.9
 	Better debugging information for the programmer.

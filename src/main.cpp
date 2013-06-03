@@ -13,6 +13,7 @@
 #include <Parser/ParserException.hpp>
 #include <version_info.hpp>
 #include <Value/TypeManager.hpp>
+#include <VM/VirtualMachine.hpp>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +25,19 @@ int main(int argc, char** argv) {
 
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
+
+	/**
+	 std::vector<VM::Instruction> inst;
+
+	 inst.push_back(VM::Instruction(VM::OpPush, valueHeap.make(10)));
+	 inst.push_back(VM::Instruction(VM::OpPush, valueHeap.make(10)));
+	 inst.push_back(VM::Instruction(VM::OpAdd, nullptr));
+	 inst.push_back(VM::Instruction(VM::OpPop, nullptr));
+	 inst.push_back(VM::Instruction(VM::OpJump, valueHeap.make(0)));
+
+	 VM::VirtualMachine vm;
+	 vm.execute(0, inst);
+	 */
 
 	if (argc != 2) {
 		printf("Expected usage %s filename\n", argv[0]);
@@ -55,7 +69,8 @@ int main(int argc, char** argv) {
 	SP<Function> entry;
 
 	try {
-		entry = Parser::compile(argv[1], builtinNamespaces)["main"].getFunctionSet()[0];
+		entry =
+				Parser::compile(argv[1], builtinNamespaces)["main"].getFunctionSet()[0];
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());
 		return -1;
@@ -87,5 +102,6 @@ int main(int argc, char** argv) {
 	}
 
 	valueHeap.freeAll();
+
 	return 0;
 }

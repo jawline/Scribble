@@ -12,10 +12,8 @@
 #include <Value/StructureData.hpp>
 
 StructureStatement::StructureStatement(int lineno, std::string token,
-		Type* type, std::vector<SafeStatement> statements) :
-		Statement(lineno, token), type_(type) {
-
-	statements_ = statements;
+		TypeReference type, std::vector<SafeStatement> statements) :
+		Statement(lineno, token), type_(type), statements_(statements) {
 
 }
 
@@ -29,7 +27,7 @@ void StructureStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (type_->getType() != StructureType) {
+	if (type()->getType() != StructureType) {
 		throw StatementException(this, "Expected type to be structure.");
 	}
 
@@ -41,7 +39,7 @@ void StructureStatement::checkTree(Type* functionType) {
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
-		if (!statements_[i]->type()->Equals(info->getIndex(i).second)) {
+		if (!statements_[i]->type()->Equals(info->getIndex(i).second->type)) {
 			throw StatementException(this, "Invalid argument type");
 		}
 
@@ -67,5 +65,5 @@ Value* StructureStatement::execute(std::vector<Value*> const& variables) {
 }
 
 Type* StructureStatement::type() {
-	return type_;
+	return type_->type;
 }

@@ -17,7 +17,43 @@ typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
 typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;
 
-struct Reference {
+enum ParserReferenceType {
+	FunctionEvaluation,
+	StructureElementTypeEvaluation,
+	AssignElementTypeEvaluation,
+	VariableTypeEvaluation
+};
+
+class ParserReference {
+private:
+	ParserReferenceType type_;
+
+public:
+
+	ParserReference(SP<FunctionReference> reference) {
+		type_ = FunctionEvaluation;
+		functionReference = reference;
+	}
+
+	ParserReference(GetStructureElementStatement* elementType) {
+		type_ = StructureElementTypeEvaluation;
+		structureElementType = elementType;
+	}
+
+	ParserReference(StructureAssignElement* assign) {
+		type_ = AssignElementTypeEvaluation;
+		assignElementType = assign;
+	}
+
+	ParserReference(AutoVariablePair pair) {
+		type_ = VariableTypeEvaluation;
+		autoVariableType = pair;
+	}
+
+	ParserReferenceType type() {
+		return type_;
+	}
+
 	SmartPointer<FunctionReference> functionReference;
 	GetStructureElementStatement* structureElementType;
 	StructureAssignElement* assignElementType;
@@ -32,9 +68,11 @@ class Parser {
 private:
 	static std::string bufferText(std::string const& filePath);
 
-	static NamespaceType include(std::string const& inputSource, std::string const& path);
+	static NamespaceType include(std::string const& inputSource,
+			std::string const& path);
 	static void printNamespace(NamespaceType const& ns);
 	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
+	static void resolve(TypeReference reference, NamespaceType ns);
 
 public:
 

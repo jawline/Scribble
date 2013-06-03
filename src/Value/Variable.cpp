@@ -1,8 +1,8 @@
 #include "Variable.hpp"
 #include <Value/TypeManager.hpp>
 
-Variable::Variable(int position, Value* value) :
-		value_(value), position_(position) {
+Variable::Variable(int position, TypeReference type, Value* value) :
+		value_(value), type_(type), position_(position) {
 }
 
 Variable::~Variable() {
@@ -19,9 +19,14 @@ Value* Variable::getValue() {
 
 Type* Variable::getType() {
 
+	if (!type_.Null() && type_->type != nullptr) {
+		return type_->type;
+	}
+
+	/**
 	if (getValue()) {
 		return getValue()->type();
-	}
+	}*/
 
 	return getTypeManager().getType(TypeUnresolved);
 }

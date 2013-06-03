@@ -8,14 +8,15 @@
 #ifndef STRUCTURESTATEMENT_HPP_
 #define STRUCTURESTATEMENT_HPP_
 #include "Statement.hpp"
+#include <Parser/TypeReference.hpp>
 
 class StructureStatement: public Statement {
 private:
-	Type* type_;
+	TypeReference type_;
 	std::vector<SafeStatement> statements_;
 
 public:
-	StructureStatement(int lineno, std::string token, Type* type, std::vector<SafeStatement> initials);
+	StructureStatement(int lineno, std::string token, TypeReference type, std::vector<SafeStatement> initials);
 	virtual ~StructureStatement();
 
 	virtual void checkTree(Type* functionType);

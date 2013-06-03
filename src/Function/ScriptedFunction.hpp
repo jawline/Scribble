@@ -11,20 +11,21 @@
 #include <Statement/Statement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Value/Variable.hpp>
+#include <Parser/TypeReference.hpp>
 
 class ScriptedFunction: public Function {
 private:
 
-	Type* fType_;
-	SP<Value> templateReturn_;
+	TypeReference fType_;
+	SP<Variable> templateReturn_;
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variableTemplates_;
 	std::vector<SmartPointer<Variable>> arguments_;
 
 public:
 
-	ScriptedFunction(Type* functionType,
-			SP<Value> templateReturn,
+	ScriptedFunction(TypeReference functionType,
+			SP<Variable> templateReturn,
 			std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variableTemplates,
 			std::vector<SmartPointer<Variable>> variables);

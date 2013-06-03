@@ -8,7 +8,7 @@
 #include "ScriptedFunction.hpp"
 #include <Statement/ReturnStatement.hpp>
 
-ScriptedFunction::ScriptedFunction(Type* fType, SP<Value> templateReturn,
+ScriptedFunction::ScriptedFunction(TypeReference fType, SP<Variable> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
@@ -58,14 +58,14 @@ Value* ScriptedFunction::execute(std::vector<Value*> arguments) {
 
 	//If no memory has been returned fill it with the function template
 	if (returnVal == 0) {
-		returnVal = templateReturn_->clone();
+		returnVal = templateReturn_->getValue()->clone();
 	}
 
 	return returnVal;
 }
 
 Type* ScriptedFunction::getType() {
-	return fType_;
+	return fType_->type;
 }
 
 void ScriptedFunction::check() {

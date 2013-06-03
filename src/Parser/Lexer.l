@@ -12,6 +12,7 @@
 #include <Pointers/SmartPointer.hpp>
 #include <Value/Variable.hpp>
 #include <Value/StructureInfo.hpp>
+#include <Parser/TypeReference.hpp>
 #include "Parser.hpp"
 
 #define SAVE_INT yylval.integer = atoi(yytext);

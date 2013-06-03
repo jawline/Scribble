@@ -34,6 +34,7 @@
 #include <Statement/StructureStatement.hpp>
 #include <Statement/GetStructureElementStatement.hpp>
 #include <Statement/StructureAssignElement.hpp>
+#include <Parser/TypeReference.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Function/Function.hpp>
 #include <Function/ScriptedFunction.hpp>
@@ -56,14 +57,16 @@ std::map<std::string, SP<Variable>> Variables;
 std::map<std::string, NamespaceType> Namespace;
 NamespaceType Functions;
 
-std::vector<Reference> References;
+std::vector<TypeReference> TypeReferences;
+std::vector<SP<Variable>> VariableReferences;
+std::vector<ParserReference> StatementReferences;
 
 void parser_free_all() {
 	ImportList.clear();
 	Variables.clear();
 	Namespace.clear();
 	Functions.clear();
-	References.clear();
+	StatementReferences.clear();
 	ParsingError = false;
 }
 
@@ -82,7 +85,7 @@ extern char *yytext;	// defined and maintained in lex.c
 	SP<Variable>* variable;
 	float real;
 	int integer;
-	Type* type;
+	TypeReference* type;
 }
 
 %token <string> WORD STRING
@@ -125,10 +128,11 @@ Program: {
 	} | Program Function {
 		$$ = 0;
 	} | Program TYPE WORD ASSIGN Type {
-		Functions[*$3] = NamespaceEntry($5);
+		Functions[*$3] = NamespaceEntry(*$5);
 		delete $3;
+		delete $5;
 	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
-		Functions[*$3] = NamespaceEntry($7);
+		Functions[*$3] = NamespaceEntry(TypeReference(new TypeReferenceCore(*$3, $7)));
 		delete $3;
 	}
 ;
@@ -136,31 +140,35 @@ Program: {
 BaseStructureInfo: {
 		$$ = new StructureInfo();
 	} | BaseStructureInfo WORD COLON Type {
-		$1->addInfo(*$2, $4);
+		$1->addInfo(*$2, *$4);
 		delete $2;
+		delete $4;
 	}
 ;
 
 Type: TYPE_INT {
-		$$ = getTypeManager().getType(Int);
+		$$ = new TypeReference( new TypeReferenceCore ( "", getTypeManager().getType(Int) ) );
 	} | TYPE_STRING {
-		$$ = getTypeManager().getType(String);
+		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(String) ) );
 	} | TYPE_BOOL {
-		$$ = getTypeManager().getType(Boolean);
+		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Boolean) ) );
 	} | TYPE_VOID {
-		$$ = getTypeManager().getType(Void);
+		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Void) ) );
 	} | TYPE_ARRAY LPAREN Type RPAREN {
-		$$ = getTypeManager().getType(Array, $3);
+		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Array, *$3) ) );
+		delete $3;
 	} | WORD {
 		
+		/**
 		if (Functions[*$1].type() != TypeEntry) {
 			char err[256];
 			sprintf(err, "%s is not a type\n", $1->c_str());
 			yyerror(err);
 			return -1;
-		}
+		}*/
 		
-		$$ = Functions[*$1].getType();
+		$$ = new TypeReference( new TypeReferenceCore ( *$1, nullptr ) );
+		TypeReferences.push_back(*$$);
 		
 		delete $1;
 	}
@@ -168,10 +176,7 @@ Type: TYPE_INT {
 
 Variable:  VARIABLE WORD COLON Type {
 
-		if (($4)->getType() == Void) {
-			yyerror("Cannot declare a variable as a void.");
-			return -1;
-		}
+		printf("TODO: Check no variable is declared as void\n");
 
 		auto it = Variables.find(*$2);
 			
@@ -179,12 +184,14 @@ Variable:  VARIABLE WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable(0, ValueUtil::generateValue($4)));
+			SP<Variable>* nVar = new SP<Variable>(new Variable(0, *$4, nullptr));
+			VariableReferences.push_back(*nVar);
 			Variables[*$2] = *nVar;
 			$$ = nVar;
 		}
 		
 		delete $2;
+		delete $4;
 	}
 ;
 
@@ -199,13 +206,11 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 		
 			SafeStatement sp = $4;
 		
-			SP<Variable> nVar = SP<Variable>(new Variable(0, nullptr));
+			SP<Variable> nVar = SP<Variable>(new Variable(0, nullptr, nullptr));
 			Variables[*$2] = nVar;
 			
-			Reference r;
-			r.functionReference = 0;
-			r.autoVariableType = AutoVariablePair(nVar, sp);
-			References.push_back(r);			
+			ParserReference r(AutoVariablePair(nVar, sp));
+			StatementReferences.push_back(r);			
 
 			$$ = new AssignVariableStatement(yylineno, yytext, nVar, sp);
 		}
@@ -215,11 +220,8 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 ;
 
 ArgumentDefinition: WORD COLON Type {
-
-		if (($3)->getType() == Void) {
-			yyerror("Cannot declare a variable as a void.");
-			return -1;
-		}
+		
+		printf("TODO: Stop void argument declaration\n");
 
 		auto it = Variables.find(*$1);
 
@@ -227,12 +229,14 @@ ArgumentDefinition: WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable(0, ValueUtil::generateValue($3)));
+			SP<Variable>* nVar = new SP<Variable>(new Variable(0, *$3, nullptr));
+			VariableReferences.push_back(*nVar);
 			Variables[*$1] = *nVar;
 			$$ = nVar;
 		}
 		
 		delete $1;
+		delete $3;
 	}
 ;
 
@@ -257,7 +261,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			pos++;
 		}
 
-		SP<Function> fn = new ScriptedFunction($7, ValueUtil::generateValue($7), *$9, values, *$4);
+
+		SP<Variable> returnTemplate = new Variable(0, *$7, nullptr);
+		VariableReferences.push_back(returnTemplate);
+		SP<Function> fn = new ScriptedFunction(*$7, returnTemplate, *$9, values, *$4);
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -276,11 +283,8 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
 			
 			if ( functions.size() > 0) {
-			
-				if (!(Parser::functionSetType(functions)->Equals($7))) {
-					yyerror("Function differs from predefined function type");
-					return -1;
-				}
+				
+				printf("TODO: Function return type.\n");
 				
 				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
 					yyerror("Identical function already defined");
@@ -302,6 +306,8 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		
 		//Delete variables vector
 		delete $4;
+		
+		delete $7;
 
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
 		
@@ -314,8 +320,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			pos++;
 		}
 	
-		SP<Function> fn = SP<Function>(new ScriptedFunction($6, ValueUtil::generateValue($6), *$8, values, std::vector<SP<Variable>>()));
-
+	
+		SP<Variable> returnTemplate = new Variable(0, *$6, nullptr);
+		VariableReferences.push_back(returnTemplate);
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$6, returnTemplate, *$8, values, std::vector<SP<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -335,10 +343,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			
 			if ( functions.size() > 0) {
 			
-				if (!(Parser::functionSetType(functions)->Equals($6))) {
-					yyerror("Function differs from predefined function type");
-					return -1;
-				}
+				printf("TODO: Function return type.\n");
 				
 				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
 					yyerror("Identical function already defined");
@@ -354,6 +359,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 		delete $2;
 		delete $8;
+		delete $6;
 	}
 ;
 
@@ -391,9 +397,8 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		delete $3;
 		
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
-		Reference r;
-		r.functionReference = reference;
-		References.push_back(r);
+		ParserReference r(reference);
+		StatementReferences.push_back(r);
 		
 		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
@@ -403,11 +408,11 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		
 	} | WORD LPAREN RPAREN {
 		std::vector<SmartPointer<Statement>> args;
+		
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
 		
-		Reference r;
-		r.functionReference = reference;
-		References.push_back(r);
+		ParserReference r(reference);
+		StatementReferences.push_back(r);
 		
 		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
@@ -426,9 +431,8 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 	
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
 	
-		Reference r;
-		r.functionReference = reference;
-		References.push_back(r);
+		ParserReference r(reference);
+		StatementReferences.push_back(r);
 		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
 	
@@ -440,10 +444,8 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
 		
-		Reference r;
-		r.functionReference = reference;
-
-		References.push_back(r);
+		ParserReference r(reference);
+		StatementReferences.push_back(r);
 		
 		$$ = new FunctionStatement(yylineno, yytext, reference);
 		
@@ -469,20 +471,17 @@ Statement: TRUE {
 		//Free string pointer
 		delete $1;
 
-	} | WORD LBRACKET Arguments RBRACKET {
+	} | Type LBRACKET Arguments RBRACKET {
 	
-		if (Functions[*$1].type() != TypeEntry) {
-			yyerror("Not a type");
-			return -1;
-		}
-	
-		$$ = new StructureStatement(yylineno, yytext, Functions[*$1].getType(), *$3);
+		$$ = new StructureStatement(yylineno, yytext, *$1, *$3);
 		delete $3;
+		delete $1;
 		
 	} | LENGTH LPAREN Statement RPAREN {
 		$$ = new ArrayLengthStatement(yylineno, yytext, $3);
 	} | LSQBRACKET Statement RSQBRACKET Type {
-		$$ = new ArrayStatement(yylineno, yytext, getTypeManager().getType(Array, $4), $2);
+		$$ = new ArrayStatement(yylineno, yytext, getTypeManager().getType(Array, *$4), $2);
+		delete $4;
 	} | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement{
 		$$ = new AssignArrayStatement(yylineno, yytext, $1, $6, $3); 
 	} | Statement LSQBRACKET Statement RSQBRACKET {
@@ -618,21 +617,16 @@ Statement: TRUE {
 		
 		$$ = new GetStructureElementStatement(yylineno, yytext, $1, *$3);
 		
-		Reference r;
-		r.structureElementType = (GetStructureElementStatement*) $$;
-		r.assignElementType = nullptr;
-		
-		References.push_back(r);
+		ParserReference r((GetStructureElementStatement*) $$);
+		StatementReferences.push_back(r);
 		
 		delete $3;
 	} | Statement POINT WORD ASSIGN Statement {
 	
 		$$ = new StructureAssignElement(yylineno, yytext, $1, $5, *$3);
 		
-		Reference r;
-		r.assignElementType = (StructureAssignElement*) $$;
-		r.structureElementType = nullptr;
-		References.push_back(r);
+		ParserReference r((StructureAssignElement*) $$);
+		StatementReferences.push_back(r);
 	
 		delete $3;
 	}

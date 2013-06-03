@@ -14,8 +14,8 @@ StructureInfo::StructureInfo() :
 StructureInfo::~StructureInfo() {
 }
 
-void StructureInfo::addInfo(std::string name, Type* t) {
-	dataIndexs_.push_back(std::pair<std::string, Type*>(name, t));
+void StructureInfo::addInfo(std::string name, TypeReference t) {
+	dataIndexs_.push_back(std::pair<std::string, TypeReference>(name, t));
 }
 
 int StructureInfo::getNumIndexs() {
@@ -38,12 +38,12 @@ int StructureInfo::getIndex(std::string name) {
 Type* StructureInfo::getType(std::string name) {
 
 	if (getIndex(name) != -1) {
-		return dataIndexs_[getIndex(name)].second;
+		return dataIndexs_[getIndex(name)].second->type;
 	}
 
 	return nullptr;
 }
 
-std::pair<std::string, Type*> StructureInfo::getIndex(int index) {
+std::pair<std::string, TypeReference> StructureInfo::getIndex(int index) {
 	return dataIndexs_[index];
 }

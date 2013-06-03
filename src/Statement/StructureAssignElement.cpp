@@ -33,7 +33,7 @@ void StructureAssignElement::fix() {
 		throw StatementException(this, "Does not exist in structure");
 	}
 
-	elementType_ = type->getIndex(elementIndex_).second;
+	elementType_ = type->getIndex(elementIndex_).second->type;
 
 }
 

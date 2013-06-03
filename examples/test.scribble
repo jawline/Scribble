@@ -1,28 +1,27 @@
 import("sys")
 
-type Point := struct {
-	x : int
-	y : int
-}
-
-type Person := struct {
-	Name : string
-	Position : Point
-}
-
-func PrintPoint(p : Point) : void {
-	sys.Write( sys.String(p->x) + " " + sys.String(p->y))
-}
-
-func PrintPerson(p : Person) : void {
-	sys.Write( p->Name + "\n")
-	PrintPoint( p->Position )
-}
-
 func main() : void {
-	var p := Person { "blake", Point { 50, 40 } }
-	p->Name := "bob"
-	p->Position := Point { 10, 10 }
-	p->Position->x := p->Position->x + 35
-	PrintPerson( p )
+
+	var b : A
+	b := D{"Hello", "World", "Tora", Point { 0, 0 } }
+
+	sys.Write("Hello world " + b->Are  + "\n")
+	sys.Write("Hello world " + b->You + "\n")
+	sys.Write("Hello world " + b->Serius + "\n")
+}
+
+type D := A
+
+type A := struct {
+	Are : string
+	You : string
+	Serius : string
+	A : P
+}
+
+type P := Point
+
+type Point := struct {
+	X : int
+	Y : int
 }

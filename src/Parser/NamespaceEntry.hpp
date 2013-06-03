@@ -8,7 +8,7 @@
 #ifndef NAMESPACEENTRY_HPP_
 #define NAMESPACEENTRY_HPP_
 #include <Function/Function.hpp>
-#include <Value/Type.hpp>
+#include <Parser/TypeReference.hpp>
 
 enum EntryType {
 	EmptyEntry,
@@ -19,19 +19,19 @@ enum EntryType {
 class NamespaceEntry {
 private:
 	EntryType type_;
-	Type* typeInfo_;
+	TypeReference typeInfo_;
 	std::vector<SafeFunction> functionSet_;
 
 public:
 	NamespaceEntry();
-	NamespaceEntry(Type* t);
+	NamespaceEntry(TypeReference t);
 	NamespaceEntry(std::vector<SafeFunction> set);
 	virtual ~NamespaceEntry();
 
 	EntryType type();
 	std::vector<SafeFunction> getFunctionSet();
 	void addFunctionToSet(SafeFunction f);
-	Type* getType();
+	TypeReference getType();
 };
 
 #endif /* NAMESPACEENTRY_HPP_ */

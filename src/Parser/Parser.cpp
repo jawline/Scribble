@@ -11,7 +11,10 @@ extern std::map<std::string, NamespaceType> Namespace;
 extern NamespaceType Functions;
 
 extern std::vector<std::string> ImportList;
-extern std::vector<Reference> References;
+
+extern std::vector<ParserReference> StatementReferences;
+extern std::vector<SP<Variable>> VariableReferences;
+extern std::vector<TypeReference> TypeReferences;
 
 extern bool ParsingError;
 
@@ -194,6 +197,22 @@ Type* Parser::functionSetType(FunctionSet const& functionSet) {
 	return fn->getType();
 }
 
+void Parser::resolve(TypeReference reference, NamespaceType ns) {
+
+	if (reference->type != nullptr) {
+		return;
+	}
+
+	if (ns[reference->name].type() != TypeEntry) {
+		throw StatementException(nullptr, "Not a type");
+	}
+
+	TypeReference ref = ns[reference->name].getType();
+	resolve(ref, ns);
+
+	reference->type = ref->type;
+}
+
 NamespaceType Parser::include(std::string const& filename,
 		std::string const& path) {
 
@@ -225,8 +244,11 @@ NamespaceType Parser::include(std::string const& filename,
 	std::vector<std::string> imports = ImportList;
 	ImportList.clear();
 
-	std::vector<Reference> references = References;
-	References = std::vector<Reference>();
+	std::vector<ParserReference> references = StatementReferences;
+	std::vector<TypeReference> typeReferences = TypeReferences;
+	std::vector<SP<Variable>> variableReferences = VariableReferences;
+
+	StatementReferences = std::vector<ParserReference>();
 
 	//Look at the list of requested imports and attempt to resolve them.
 	for (unsigned int i = 0; i < imports.size(); ++i) {
@@ -257,11 +279,27 @@ NamespaceType Parser::include(std::string const& filename,
 
 	Functions = Namespace[filename];
 
+	for (unsigned int i = 0; i < typeReferences.size(); ++i) {
+
+		resolve(typeReferences[i], Functions);
+		printf("Resolved %s\n", typeReferences[i]->name.c_str());
+	}
+
+	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
+
+		variableReferences[i]->setValue(
+				ValueUtil::generateValue(variableReferences[i]->getType()));
+
+		printf("TODO: Variable decl\n");
+
+	}
+
 	//Loop through all of the references and resolve them.
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
-		//Check whether we are looking at a function or a auto variable type.
-		if (!references[i].functionReference.Null()) {
+		switch (references[i].type()) {
+
+		case FunctionEvaluation: {
 
 			SP<FunctionReference> ref = references[i].functionReference;
 
@@ -326,14 +364,24 @@ NamespaceType Parser::include(std::string const& filename,
 
 			}
 
-		} else if (references[i].structureElementType != nullptr) {
-			references[i].structureElementType->fix();
-		} else if (references[i].assignElementType != nullptr) {
-			references[i].assignElementType->fix();
-		} else {
+			break;
+		}
 
+		case StructureElementTypeEvaluation: {
+			references[i].structureElementType->fix();
+			break;
+		}
+
+		case AssignElementTypeEvaluation: {
+			references[i].assignElementType->fix();
+			break;
+		}
+
+		case VariableTypeEvaluation: {
 			AutoVariablePair p = references[i].autoVariableType;
 			p.first->setValue(ValueUtil::generateValue(p.second->type()));
+			break;
+		}
 
 		}
 

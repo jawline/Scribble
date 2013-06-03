@@ -18,7 +18,7 @@ class TypeManager {
 private:
 	std::vector<Type*> types_;
 
-	Type* tFind(ValueType sType, Type* sSubType);
+	Type* tFind(Type* desired);
 
 public:
 	TypeManager();
@@ -32,7 +32,7 @@ public:
 	/**
 	 * Get a given complex type. (Array, Reference)
 	 */
-	Type* getType(ValueType base, Type* subType);
+	Type* getType(ValueType base, TypeReference subType);
 };
 
 TypeManager& getTypeManager();

@@ -9,6 +9,9 @@
 #define TYPE_HPP_
 #include <Pointers/SmartPointer.hpp>
 
+class TypeReferenceCore;
+typedef SP<TypeReferenceCore> TypeReference;
+
 /**
  *  Enum defining variable types (Integer, Boolean, Etcetera)
  */
@@ -72,7 +75,7 @@ private:
 	 * The sub type of this type. Only applicable to arrays & references.
 	 */
 
-	Type* subType_;
+	TypeReference subType_;
 
 public:
 
@@ -80,7 +83,7 @@ public:
 	 * Create a new type with a given primitive type and subtype (Subtype null if type has no subtype).
 	 */
 
-	Type(ValueType rawType, Type* subType);
+	Type(ValueType rawType, TypeReference subType);
 	virtual ~Type();
 
 	/**
@@ -95,14 +98,14 @@ public:
 	 * Get this types subtype.
 	 */
 
-	Type* getSubtype() {
-		return subType_;
-	}
+	Type* getSubtype();
 
 	/**
 	 * Test whether this type is equivalent to a given type.
 	 */
-	bool Equals(Type const* other);
+	bool Equals(Type* other);
+
+	TypeReference getSubtypeReference();
 };
 
 #endif /* TYPE_HPP_ */

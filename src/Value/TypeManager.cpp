@@ -6,14 +6,14 @@
  */
 
 #include "TypeManager.hpp"
+#include <Parser/TypeReference.hpp>
 #include <stdio.h>
 
-Type* TypeManager::tFind(ValueType sType, Type* sSubType) {
+Type* TypeManager::tFind(Type* desired) {
 
 	for (unsigned int i = 0; i < types_.size(); ++i) {
 
-		if (types_[i]->getType() == sType
-				&& types_[i]->getSubtype() == sSubType) {
+		if (types_[i]->Equals(desired)) {
 			return types_[i];
 		}
 
@@ -23,8 +23,6 @@ Type* TypeManager::tFind(ValueType sType, Type* sSubType) {
 }
 
 TypeManager::TypeManager() {
-	// TODO Auto-generated constructor stub
-
 }
 
 TypeManager::~TypeManager() {
@@ -36,20 +34,23 @@ TypeManager::~TypeManager() {
 }
 
 Type* TypeManager::getType(ValueType base) {
-	return getType(base, nullptr);
+	return getType(base, TypeReference( new TypeReferenceCore("", nullptr) ) );
 }
 
-Type* TypeManager::getType(ValueType base, Type* subType) {
+Type* TypeManager::getType(ValueType base, TypeReference subType) {
 
-	Type* found = tFind(base, subType);
+	Type* desired = new Type(base, subType);
+	Type* found = tFind(desired);
 
+	//If already exists
 	if (found != nullptr) {
+		delete desired;
 		return found;
 	}
 
-	found = new Type(base, subType);
-	types_.push_back(found);
-	return found;
+	//Else add
+	types_.push_back(desired);
+	return desired;
 }
 
 TypeManager typeInstance;

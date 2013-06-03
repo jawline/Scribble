@@ -11,7 +11,7 @@ NamespaceEntry::NamespaceEntry() {
 	type_ = EmptyEntry;
 }
 
-NamespaceEntry::NamespaceEntry(Type* t) {
+NamespaceEntry::NamespaceEntry(TypeReference t) {
 	type_ = TypeEntry;
 	typeInfo_ = t;
 }
@@ -33,7 +33,7 @@ std::vector<SafeFunction> NamespaceEntry::getFunctionSet() {
 	return functionSet_;
 }
 
-Type* NamespaceEntry::getType() {
+TypeReference NamespaceEntry::getType() {
 	return typeInfo_;
 }
 
