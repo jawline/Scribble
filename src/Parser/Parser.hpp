@@ -13,6 +13,7 @@
 #include <Statement/GetStructureElementStatement.hpp>
 #include <Statement/StructureAssignElement.hpp>
 #include <Value/Variable.hpp> // Variable class
+
 typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
 typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;

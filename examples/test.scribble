@@ -2,8 +2,7 @@ import("sys")
 
 func main() : void {
 
-	var b : A
-	b := D{"Hello", "World", "Tora", Point { 0, 0 } }
+	var b := D{"Hello", "World", "Tora", Point { 0, 0 } }
 
 	sys.Write("Hello world " + b->Are  + "\n")
 	sys.Write("Hello world " + b->You + "\n")

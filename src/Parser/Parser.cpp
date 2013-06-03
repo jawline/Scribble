@@ -379,6 +379,7 @@ NamespaceType Parser::include(std::string const& filename,
 
 		case VariableTypeEvaluation: {
 			AutoVariablePair p = references[i].autoVariableType;
+			p.first->setType(p.second->type());
 			p.first->setValue(ValueUtil::generateValue(p.second->type()));
 			break;
 		}

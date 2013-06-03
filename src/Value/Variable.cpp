@@ -31,6 +31,16 @@ Type* Variable::getType() {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
+void Variable::setType(Type* type) {
+
+	if (type_.Null()) {
+		type_ = TypeReference ( new TypeReferenceCore( "", type) );
+	} else {
+		type_->type = type;
+	}
+
+}
+
 void Variable::setPosition(int pos) {
 	position_ = pos;
 }

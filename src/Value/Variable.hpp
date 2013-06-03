@@ -22,7 +22,10 @@ public:
 
 	void setValue(Value* v);
 	Value* getValue();
+
 	Type* getType();
+	void setType(Type* type);
+
 	void setPosition(int pos);
 	int getPosition();
 
