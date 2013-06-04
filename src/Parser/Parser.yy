@@ -67,6 +67,8 @@ void parser_free_all() {
 	Namespace.clear();
 	Functions.clear();
 	StatementReferences.clear();
+	TypeReferences.clear();
+	VariableReferences.clear();
 	ParsingError = false;
 }
 
@@ -157,6 +159,13 @@ Type: TYPE_INT {
 	} | TYPE_ARRAY LPAREN Type RPAREN {
 		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Array, *$3) ) );
 		delete $3;
+	} | WORD LINK WORD {
+	
+		$$ = new TypeReference ( new TypeReferenceCore( *$1, *$3, nullptr) );
+		TypeReferences.push_back(*$$);
+		delete $1;
+		delete $3;
+		
 	} | WORD {
 		
 		/**

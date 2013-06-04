@@ -203,8 +203,13 @@ void Parser::resolve(TypeReference reference, NamespaceType ns) {
 		return;
 	}
 
+	if (reference->typeNamespace.size() != 0) {
+		ns = Namespace[reference->typeNamespace];
+	}
+
 	if (ns[reference->name].type() != TypeEntry) {
-		throw StatementException(nullptr, "Not a type");
+		std::string error = reference->name;
+		throw StatementException(nullptr, error + " is not a type");
 	}
 
 	TypeReference ref = ns[reference->name].getType();
@@ -248,7 +253,9 @@ NamespaceType Parser::include(std::string const& filename,
 	std::vector<TypeReference> typeReferences = TypeReferences;
 	std::vector<SP<Variable>> variableReferences = VariableReferences;
 
-	StatementReferences = std::vector<ParserReference>();
+	StatementReferences.clear();
+	TypeReferences.clear();
+	VariableReferences.clear();
 
 	//Look at the list of requested imports and attempt to resolve them.
 	for (unsigned int i = 0; i < imports.size(); ++i) {
@@ -282,7 +289,7 @@ NamespaceType Parser::include(std::string const& filename,
 	for (unsigned int i = 0; i < typeReferences.size(); ++i) {
 
 		resolve(typeReferences[i], Functions);
-		printf("Resolved %s\n", typeReferences[i]->name.c_str());
+		//printf("Resolved %s\n", typeReferences[i]->name.c_str());
 	}
 
 	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
@@ -290,7 +297,7 @@ NamespaceType Parser::include(std::string const& filename,
 		variableReferences[i]->setValue(
 				ValueUtil::generateValue(variableReferences[i]->getType()));
 
-		printf("TODO: Variable decl\n");
+		//printf("TODO: Variable decl\n");
 
 	}
 

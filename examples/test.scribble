@@ -1,26 +1,9 @@
 import("sys")
+import("person")
+import("point")
 
 func main() : void {
-
-	var b := D{"Hello", "World", "Tora", Point { 0, 0 } }
-
-	sys.Write("Hello world " + b->Are  + "\n")
-	sys.Write("Hello world " + b->You + "\n")
-	sys.Write("Hello world " + b->Serius + "\n")
-}
-
-type D := A
-
-type A := struct {
-	Are : string
-	You : string
-	Serius : string
-	A : P
-}
-
-type P := Point
-
-type Point := struct {
-	X : int
-	Y : int
+	
+	var d := person.Person { "Blake", point.Point { 50, 40 } }
+	person.PrintPerson(d)
 }

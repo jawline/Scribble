@@ -1,0 +1,10 @@
+import("sys")
+
+type Point := struct {
+	X : int
+	Y : int
+}
+
+func PrintPoint(p : Point) : void {
+	sys.Write( sys.String(p->X) + " " + sys.String(p->X))
+}

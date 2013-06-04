@@ -1,20 +1,12 @@
 import("sys")
-
-type Point := struct {
-	x : int
-	y : int
-}
+import("point")
 
 type Person := struct {
 	Name : string
-	Position : Point
-}
-
-func PrintPoint(p : Point) : void {
-	sys.Write( sys.String(p->x) + " " + sys.String(p->y))
+	Position : point.Point
 }
 
 func PrintPerson(p : Person) : void {
 	sys.Write( p->Name + "\n")
-	PrintPoint( p->Position )
+	point.PrintPoint( p->Position )
 }

@@ -14,10 +14,18 @@
 struct TypeReferenceCore {
 
 	TypeReferenceCore(std::string name, Type* type) {
+		this->typeNamespace = "";
 		this->name = name;
 		this->type = type;
 	}
 
+	TypeReferenceCore(std::string ns, std::string name, Type* type) {
+		this->typeNamespace = ns;
+		this->name = name;
+		this->type = type;
+	}
+
+	std::string typeNamespace;
 	std::string name;
 	Type* type;
 
