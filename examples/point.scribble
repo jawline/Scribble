@@ -5,6 +5,6 @@ type Point := struct {
 	Y : int
 }
 
-func PrintPoint(p : Point) : void {
+func PrintPoint(p : Point) {
 	sys.Write( sys.String(p->X) + " " + sys.String(p->X))
 }

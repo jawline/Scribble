@@ -369,6 +369,113 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		delete $2;
 		delete $8;
 		delete $6;
+	} | FUNCTION WORD LPAREN ArgumentDefinitions RPAREN LBRACKET Statements RBRACKET {
+		std::vector<SP<Variable>> values;
+
+		int pos = 0;
+		for (auto it = Variables.begin(); it != Variables.end(); it++) {
+			it->second->setPosition(pos);
+			values.push_back(it->second);
+			pos++;
+		}
+
+		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
+
+		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
+		SP<Function> fn = new ScriptedFunction(voidReference, returnTemplate, *$7, values, *$4);
+		
+		if (Functions[*$2].type() == EmptyEntry) {
+		
+			std::vector<SafeFunction> newSet;
+			newSet.push_back(fn);
+
+			Functions[*$2] = NamespaceEntry(newSet);
+		
+		} else {
+		
+			if ( Functions[*$2].type() != FunctionSetEntry) {
+				yyerror("Not a function type");
+				return -1;
+			}
+			
+			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
+			
+			if ( functions.size() > 0) {
+				
+				printf("TODO: Function return type.\n");
+				
+				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
+					yyerror("Identical function already defined");
+					return -1;
+				}
+			}
+			
+			Functions[*$2].addFunctionToSet(fn);
+		
+		}
+		
+		Variables.clear();
+		
+		//Delete name
+		delete $2;
+		
+		//Delete statements vector
+		delete $7;
+		
+		//Delete variables vector
+		delete $4;
+
+	} | FUNCTION WORD LPAREN RPAREN LBRACKET Statements RBRACKET {
+		
+		std::vector<SP<Variable>> values;
+
+		int pos = 0;
+		for (auto it = Variables.begin(); it != Variables.end(); it++) {
+			it->second->setPosition(pos);
+			values.push_back(it->second);
+			pos++;
+		}
+	
+	
+		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
+	
+		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
+		SP<Function> fn = SP<Function>(new ScriptedFunction(voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
+		
+		if (Functions[*$2].type() == EmptyEntry) {
+		
+			std::vector<SafeFunction> newSet;
+			newSet.push_back(fn);
+
+			Functions[*$2] = NamespaceEntry(newSet);
+		
+		} else {
+		
+			if ( Functions[*$2].type() != FunctionSetEntry) {
+				yyerror("Not a function type");
+				return -1;
+			}
+			
+			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
+			
+			if ( functions.size() > 0) {
+			
+				printf("TODO: Function return type.\n");
+				
+				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
+					yyerror("Identical function already defined");
+					return -1;
+				}
+			}
+			
+			Functions[*$2].addFunctionToSet(fn);
+		
+		}
+	
+		Variables.clear();
+
+		delete $2;
+		delete $6;
 	}
 ;
 

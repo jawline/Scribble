@@ -2,7 +2,7 @@ import("sys")
 import("person")
 import("point")
 
-func main() : void {
+func main() {
 	
 	var d := person.Person { "Blake", point.Point { 50, 40 } }
 	person.PrintPerson(d)

@@ -299,6 +299,10 @@ NamespaceType Parser::include(std::string const& filename,
 
 		//printf("TODO: Variable decl\n");
 
+		if (variableReferences[i]->getType()->getType() == Void) {
+			throw ParserException(filename, "cannot declare a variable as a void");
+		}
+
 	}
 
 	//Loop through all of the references and resolve them.

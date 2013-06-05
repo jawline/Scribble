@@ -6,7 +6,7 @@ type Person := struct {
 	Position : point.Point
 }
 
-func PrintPerson(p : Person) : void {
+func PrintPerson(p : Person) {
 	sys.Write( p->Name + "\n")
 	point.PrintPoint( p->Position )
 }
