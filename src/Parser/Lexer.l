@@ -65,7 +65,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 ">" return GREATER;
 "<" return LESSER;
 "!" return NOT;
-"\n" ;;
+"\n" ;
+"then" return THEN;
 "if" return IF;
 "else" return ELSE;
 "struct" return STRUCT;
@@ -90,7 +91,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "len" return LENGTH;
 "thread" return THREAD;
 "[" return LSQBRACKET;
-"]" return RSQBRACKET;
+"]" return RSQBRACKET;;
 
 {integer} { SAVE_INT;
  return INT;

@@ -1,9 +1,11 @@
-#ifndef _STACK_DEF_H_
-#define _STACK_DEF_H_
+#ifndef _VMSTACK_DEF_H_
+#define _VMSTACK_DEF_H_
 #include <stdio.h>
 #include <string.h>
 #include <exception>
 #include <stdexcept>
+
+namespace VM {
 
 class StackEmptyException: public std::exception {
 	virtual const char* what() const throw () {
@@ -12,10 +14,9 @@ class StackEmptyException: public std::exception {
 
 };
 
-template<class s_Type>
-class Stack {
+class VMStack {
 private:
-	s_Type* data_;
+	uint8_t* data_;
 	size_t current_;
 	size_t max_;
 
@@ -24,7 +25,7 @@ private:
 
 	void expand() {
 
-		s_Type* newData = new s_Type[max_ + cExpandChunkSize];
+		uint8_t* newData = new uint8_t[max_ + cExpandChunkSize];
 
 		for (unsigned int i = 0; i < max_; ++i) {
 			newData[i] = data_[i];
@@ -38,14 +39,14 @@ private:
 
 public:
 
-	Stack() {
+	VMStack() {
 
-		data_ = new s_Type[cDefaultSize];
+		data_ = new uint8_t[cDefaultSize];
 		current_ = 0;
 		max_ = cDefaultSize;
 	}
 
-	~Stack() {
+	~VMStack() {
 
 		if (data_ != nullptr) {
 			delete[] data_;
@@ -55,7 +56,7 @@ public:
 
 	}
 
-	void push(s_Type a) {
+	void pushByte(uint8_t a) {
 
 		if (current_ >= max_) {
 			expand();
@@ -65,7 +66,7 @@ public:
 		current_++;
 	}
 
-	s_Type pop() {
+	uint8_t popByte() {
 
 		if (current_ == 0) {
 			throw StackEmptyException();
@@ -75,8 +76,18 @@ public:
 		return data_[current_];
 	}
 
-	s_Type get(unsigned int i) {
+	uint8_t getByte(unsigned int i) {
 		return data_[i];
+	}
+
+	void pushLong(long i) {
+		*((long*) (data_+current_)) = i;
+		current_ += 8;
+	}
+
+	long popLong() {
+		current_ -= 8;
+		return *((long*)(data_+current_));
 	}
 
 	size_t size() {
@@ -88,4 +99,6 @@ public:
 	}
 };
 
-#endif //_STACK_DEF_H_
+}
+
+#endif //_VMSTACK_DEF_H_

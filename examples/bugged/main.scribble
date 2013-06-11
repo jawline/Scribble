@@ -1,0 +1,100 @@
+import ("sys")
+
+type Entry := struct {
+ ID : int
+ Desc : string
+ User : string
+ Status : int
+}
+
+type State := struct{
+ LastID : int
+ Bugs : array(Entry)
+}
+
+func AddElement(next : Entry, current : array(Entry)) : array(Entry) {
+	
+ if current = nil then {
+  var new := [1]Entry
+  new[0] := next
+  return new
+ }
+	
+ var result := [len(current)+1]Entry
+	
+ for var i := 0; i < len(current); i++ {
+  result[i] := current[i]
+ }
+	
+ result[len(current)] := next
+
+ return result
+}
+
+func PrintEntry( entry : Entry ) {
+ sys.Write("ID: " + sys.String(entry->ID) + " ")
+ sys.Write("Description: " + entry->Desc + " ")
+ sys.Write("User: " + entry->User + " ")
+ sys.Write("Status: " + sys.String(entry->Status) + "\n")
+}
+
+func PrintHeader() {
+ sys.Write("---------------------------------\n")
+}
+
+func PrintList( list : array(Entry) ) {
+
+ PrintHeader()
+
+ for var i := 0; i < len(list); i++ {
+  PrintEntry(list[i])
+ }
+
+ PrintHeader()
+}
+
+func NewBug(state : State) {
+
+  PrintHeader()
+		
+  sys.Write("Enter bug description: ")
+  var desc := sys.ReadLine()
+			
+  sys.Write("Enter username: ")
+  var name := sys.ReadLine()
+			
+  var newEntry := Entry { state->LastID, desc, name, 0 }
+  state->Bugs := AddElement( newEntry, state->Bugs)
+  state->LastID := state->LastID + 1
+  
+  PrintHeader()
+}
+
+func handleCommand(line : string, state : State) : bool {
+ var result := true
+
+ if line = "insert" then {
+  NewBug(state) 
+ } else if line = "list" then {
+  sys.Write("Listing all elements\n")
+  PrintList(state->Bugs)
+ } else if line = "quit" then {
+  sys.Write("Quitting.\n")
+  result := false
+ } else sys.Write(line + " is not a handled command")
+
+ return result
+}
+
+func main() {
+	
+ var state := State { 0, [0]Entry }
+ var continue := true
+	
+ while continue = true {	
+  sys.Write("Enter command: ")
+  var line := sys.ReadLine()
+  continue := handleCommand(line, state)
+ }
+
+}

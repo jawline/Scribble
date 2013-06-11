@@ -10,18 +10,21 @@
 
 namespace VM {
 
-	enum OpCodes {
-		NoOp = 0,
-		OpAdd,
-		OpSub,
-		OpMul,
-		OpDiv,
-		OpJump,
-		OpPush,
-		OpPop
-	};
-
+enum OpCodes {
+	OpLoadRegister = 0,
+	OpMoveRegister,
+	OpJumpRegister,
+	OpPushIntRegister,
+	OpPushLongRegister,
+	OpPopIntRegister,
+	OpPopLongRegister,
+	OpAddLong,
+	OpTestEqual,
+	OpTestNotEqual,
+	OpTestLongEqual,
+	OpTestLongNotEqual
 };
 
+}
 
 #endif /* OPCODES_HPP_ */

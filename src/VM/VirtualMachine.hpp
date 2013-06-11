@@ -7,21 +7,26 @@
 
 #ifndef VIRTUALMACHINE_HPP_
 #define VIRTUALMACHINE_HPP_
-#include "Instruction.hpp"
+#include "InstructionSet.hpp"
 #include <vector>
-#include <Stack/Stack.hpp>
+#include "Stack.hpp"
 
 namespace VM {
 
+const static unsigned int vmNumRegisters = 16;
+const static unsigned int vmProgramCounter = 0;
+
 class VirtualMachine {
 private:
-	Stack<Value*> stack_;
+	VMStack stack_;
+	long* registers_;
 
 public:
 	VirtualMachine();
 	virtual ~VirtualMachine();
 
-	virtual void execute(unsigned int start, std::vector<Instruction> instructions);
+	virtual void execute(InstructionSet& set);
+	virtual void printState();
 };
 
 } /* namespace VM */

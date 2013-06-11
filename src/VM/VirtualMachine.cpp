@@ -13,104 +13,156 @@
 namespace VM {
 
 VirtualMachine::VirtualMachine() {
-	// TODO Auto-generated constructor stub
+	registers_ = new long[vmNumRegisters];
 
+	for (unsigned int i = 0; i < vmNumRegisters; ++i) {
+		registers_[i] = 0;
+	}
 }
 
 VirtualMachine::~VirtualMachine() {
 	// TODO Auto-generated destructor stub
 }
 
-void VirtualMachine::execute(unsigned int start,
-		std::vector<Instruction> code) {
+void VirtualMachine::execute(InstructionSet& set) {
 
-	unsigned int current = start;
+	registers_[vmProgramCounter] = set.startInstruction();
+	long* current = &registers_[vmProgramCounter];
 
-	while (current < code.size()) {
+	while (*current < set.numInstructions()) {
 
-		switch (code[current].code) {
+		switch (set.getInst(*current)) {
 
-		case NoOp: {
-			printf("NoOp\n");
-			current++;
+		case OpAddLong: {
+
+			uint8_t left = set.getInst(*current + 1);
+			uint8_t right = set.getInst(*current + 2);
+
+			registers_[left] = registers_[left] + registers_[right];
+
+			*current += 3;
 			break;
 		}
 
-		case OpPush: {
-			stack_.push(code[current].data->clone());
-			current++;
+		case OpTestEqual: {
+
+			uint8_t target = set.getInst(*current + 1);
+			uint8_t left = set.getInst(*current + 2);
+			uint8_t right = set.getInst(*current + 3);
+
+			if (registers_[left] == registers_[right]) {
+				registers_[vmProgramCounter] = registers_[target];
+			} else {
+				*current += 4;
+			}
+
 			break;
 		}
 
-		case OpPop: {
-			valueHeap.free(stack_.pop());
-			current++;
+		case OpTestNotEqual: {
+
+			uint8_t target = set.getInst(*current + 1);
+			uint8_t left = set.getInst(*current + 2);
+			uint8_t right = set.getInst(*current + 3);
+
+			if (registers_[left] != registers_[right]) {
+				registers_[vmProgramCounter] = registers_[target];
+			} else {
+				*current += 4;
+			}
+
 			break;
 		}
 
-		case OpJump: {
-			current = ((IntValue*)code[current].data)->value();
+		case OpTestLongEqual: {
+
+			uint8_t target = set.getInst(*current + 1);
+			uint8_t left = set.getInst(*current + 2);
+			long testValue = set.getLong(*current + 3);
+
+			if (registers_[left] == testValue) {
+				registers_[vmProgramCounter] = registers_[target];
+			} else {
+				*current += 11;
+			}
+
 			break;
 		}
 
-		case OpAdd: {
+		case OpTestLongNotEqual: {
 
-			Value* rhs = stack_.pop();
-			Value* lhs = stack_.pop();
+			uint8_t target = set.getInst(*current + 1);
+			uint8_t left = set.getInst(*current + 2);
+			long testValue = set.getLong(*current + 3);
 
-			lhs->applyOperator(Add, rhs);
-			valueHeap.free(rhs);
+			if (registers_[left] != testValue) {
+				registers_[vmProgramCounter] = registers_[target];
+			} else {
+				*current += 11;
+			}
 
-			stack_.push(lhs);
-
-			current++;
 			break;
 		}
 
-		case OpSub: {
+		case OpLoadRegister: {
 
-			Value* rhs = stack_.pop();
-			Value* lhs = stack_.pop();
+			uint8_t reg = set.getInst(*current + 1);
+			long data = set.getLong(*current + 2);
 
-			lhs->applyOperator(Subtract, rhs);
-			valueHeap.free(rhs);
-
-			stack_.push(lhs);
-
-			current++;
+			registers_[reg] = data;
+			*current = *current + 10;
 			break;
 		}
 
-		case OpMul: {
-			Value* rhs = stack_.pop();
-			Value* lhs = stack_.pop();
+		case OpMoveRegister: {
 
-			lhs->applyOperator(Multiply, rhs);
-			valueHeap.free(rhs);
-
-			stack_.push(lhs);
-
-			current++;
+			uint8_t source = set.getInst(*current + 1);
+			uint8_t target = set.getInst(*current + 2);
+			registers_[target] = registers_[source];
+			*current = *current + 3;
 			break;
-
 		}
 
-		case OpDiv: {
-			Value* rhs = stack_.pop();
-			Value* lhs = stack_.pop();
-
-			lhs->applyOperator(Divide, rhs);
-			valueHeap.free(rhs);
-
-			stack_.push(lhs);
-
-			current++;
+		case OpJumpRegister: {
+			uint8_t reg = set.getInst(*current + 1);
+			registers_[vmProgramCounter] = registers_[reg];
 			break;
-
 		}
+
+		case OpPushLongRegister: {
+			uint8_t reg = set.getInst(*current + 1);
+			stack_.pushLong(registers_[reg]);
+			*current += 2;
+			break;
+		}
+
+		case OpPopLongRegister: {
+
+			uint8_t reg = set.getInst(*current + 1);
+
+			printf("Register %i\n", reg);
+
+			registers_[reg] = stack_.popLong();
+			*current += 2;
+			break;
+		}
+
+			/*
+			 case OpPop: {
+			 stack_.pop();
+			 *current = *current + 1;
+			 break;
+			 }
+
+			 case OpPopRegister: {
+			 registers_[code[*current].data] = stack_.pop();
+			 *current = *current + 1;
+			 break;
+			 }*/
 
 		default: {
-			printf("Invalid instruction.\n");
+			printf("Invalid instruction %li. %li\n", *current,
+					set.getInst(*current));
 			return;
 		}
 
@@ -118,6 +170,27 @@ void VirtualMachine::execute(unsigned int start,
 
 	}
 
+	printState();
+}
+
+void VirtualMachine::printState() {
+
+	printf("--VM STATE--\n");
+
+	for (unsigned int i = 0; i < stack_.size(); i++) {
+		printf("%x ", stack_.getByte(i));
+	}
+
+	printf("\n");
+
+	for (unsigned int i = 0; i < vmNumRegisters / 3; i++) {
+		printf("#%i:%li #%i:%li #%i:%li\n", i, registers_[i],
+				i + vmNumRegisters / 3, registers_[i + vmNumRegisters / 3],
+				i + (2 * vmNumRegisters / 3),
+				registers_[i + (2 * vmNumRegisters / 3)]);
+	}
+
+	printf("--VM STATE END--\n");
 }
 
 } /* namespace VM */

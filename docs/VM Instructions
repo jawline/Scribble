@@ -1,0 +1,38 @@
+loadl
+loadi
+loadb
+
+push
+
+pop
+
+move #rn, #rn
+move #r1 #r3
+addb #r3, 1
+move #rn, [#r3]
+
+add
+addi
+addl
+addb
+
+sub
+subi
+subl
+subb
+
+div
+divi
+divl
+divb
+
+mul
+muli
+mull
+mulb
+
+jumpne
+jumpeq
+
+jumplne
+jumpleq

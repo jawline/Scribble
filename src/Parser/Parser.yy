@@ -96,7 +96,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND NIL TYPE
 %token <token> FUNCTION VARIABLE CONST STRUCT LENGTH THREAD POINT
-%token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET
+%token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
 %token <token> END
 
 %left PLUS MINUS
@@ -116,6 +116,7 @@ extern char *yytext;	// defined and maintained in lex.c
 %type <type> Type;
 %type <statement> FunctionCall;
 %type <structureinfo> BaseStructureInfo;
+%type <statements> IfStatements
 
 %start Program
 %%
@@ -229,8 +230,6 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 ;
 
 ArgumentDefinition: WORD COLON Type {
-		
-		printf("TODO: Stop void argument declaration\n");
 
 		auto it = Variables.find(*$1);
 
@@ -572,6 +571,15 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 	}
 ;
 
+IfStatements: Statement {
+		std::vector<SafeStatement>* stmts = new std::vector<SafeStatement>();
+		stmts->push_back($1);
+		$$ = stmts;
+	} | LBRACKET Statements RBRACKET {
+		$$ = $2;
+	}
+;
+
 Statement: TRUE {
 		$$ = new BoolStatement(yylineno, yytext, true);
 	} | FALSE {
@@ -631,13 +639,13 @@ Statement: TRUE {
 		
 	} | FunctionCall {
 		$$ = $1;
-	} | IF Statement LBRACKET Statements RBRACKET {
+	} | IF Statement THEN IfStatements  {
 		$$ = new IfStatement(yylineno, yytext, $2, *$4, std::vector<SP<Statement>>());
 		delete $4;
-	} | IF Statement LBRACKET Statements RBRACKET ELSE LBRACKET Statements RBRACKET {
-		$$ = new IfStatement(yylineno, yytext, $2, *$4, *$8);
+	} | IF Statement THEN IfStatements ELSE IfStatements {
+		$$ = new IfStatement(yylineno, yytext, $2, *$4, *$6);
 		delete $4;
-		delete $8;
+		delete $6;
 	} | Statement PLUS Statement {
 		$$ = new OperateStatement(yylineno, yytext, Add, $1, $3);
 	} | Statement MINUS Statement {
