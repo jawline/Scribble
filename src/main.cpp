@@ -14,7 +14,7 @@
 #include <Parser/ParserException.hpp>
 #include <version_info.hpp>
 #include <Value/TypeManager.hpp>
-#include <VM/SAsm.hpp>
+#include <SASM/Parser.hpp>
 #include <VM/OpCodes.hpp>
 #include <VM/VirtualMachine.hpp>
 #include <string.h>
@@ -23,56 +23,19 @@
 #include <time.h>
 #include <cputime.hpp>
 
-void Set(uint8_t* inst, int& current, uint8_t val) {
-	inst[current++] = val;
-}
-
-void Set(uint8_t* inst, int& current, int val) {
-	((int*) inst)[current] = val;
-	current += 4;
-}
-
-void Set(uint8_t* inst, int& current, long lval) {
-	*((long*) (inst + current)) = lval;
-	current += sizeof(long);
-}
-
 int main(int argc, char** argv) {
 	srand(time(0));
 
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
 
-	uint8_t inst[100];
-	int current = 0;
-
-	SimpleASM::SAsm::parse("hello\nworld\ntest\ning");
-
-	Set(inst, current, (uint8_t) VM::OpLoadRegister);
-	Set(inst, current, (uint8_t) 15);
-	Set(inst, current, 1L);
-
-	Set(inst, current, (uint8_t) VM::OpLoadRegister);
-	Set(inst, current, (uint8_t) 1);
-	Set(inst, current, 0L);
-
-	long loopmarker = current;
-
-	Set(inst, current, (uint8_t) VM::OpLoadRegister);
-	Set(inst, current, (uint8_t) 14);
-	Set(inst, current, loopmarker + 10);
-
-	Set(inst, current, (uint8_t) VM::OpAddLong);
-	Set(inst, current, (uint8_t) 1);
-	Set(inst, current, (uint8_t) 15);
-
-	Set(inst, current, (uint8_t) VM::OpTestLongNotEqual);
-	Set(inst, current, (uint8_t) 14);
-	Set(inst, current, (uint8_t) 1);
-	Set(inst, current, 10000L);
+	auto instructions = SimpleASM::Parser::parse("load 0 $6\n"
+			"add $6 1 $6\n"
+			"tneq $6 10\n"
+			"jump 1\n"
+			"ret\n");
 
 	VM::VirtualMachine vm;
-	VM::InstructionSet instructions(inst, current, 0);
 	vm.execute(instructions);
 
 	/*

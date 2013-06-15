@@ -9,10 +9,10 @@
 
 namespace VM {
 
-InstructionSet::InstructionSet(uint8_t* instructions,
-		unsigned int numInstructions, unsigned int start) :
-		instructions_(instructions), numInstructions_(numInstructions), start_(
-				start) {
+InstructionSet::InstructionSet(uint8_t* instructions, size_t numInstructions,
+		uint8_t* constants, size_t numConstants, unsigned int start) :
+		instructions_(instructions), numInstructions_(numInstructions), constants_(
+				constants), numConstants_(numConstants), start_(start) {
 }
 
 InstructionSet::~InstructionSet() {

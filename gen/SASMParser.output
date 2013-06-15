@@ -1,0 +1,401 @@
+Terminals unused in grammar
+
+   WORD
+   STRING
+   REAL
+   PUSH
+   POP
+
+
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: /* empty */
+    2        | Program LOAD INT REG INT
+    3        | Program LOAD LONG REG INT
+    4        | Program MOVE REG INT REG INT
+    5        | Program ADD REG INT REG INT REG INT
+    6        | Program ADD REG INT INT REG INT
+    7        | Program ADD INT INT REG INT
+    8        | Program TEST_EQUAL REG INT REG INT
+    9        | Program TEST_EQUAL REG INT INT
+   10        | Program TEST_NOT_EQUAL REG INT REG INT
+   11        | Program TEST_NOT_EQUAL REG INT INT
+   12        | Program JUMP INT
+   13        | Program RETURN
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+WORD (258)
+STRING (259)
+REAL (260)
+INT (261) 2 3 4 5 6 7 8 9 10 11 12
+LONG (262) 3
+LOAD (263) 2 3
+REG (264) 2 3 4 5 6 7 8 9 10 11
+ADD (265) 5 6 7
+PUSH (266)
+POP (267)
+MOVE (268) 4
+TEST_EQUAL (269) 8 9
+TEST_NOT_EQUAL (270) 10 11
+JUMP (271) 12
+RETURN (272) 13
+
+
+Nonterminals, with rules where they appear
+
+$accept (18)
+    on left: 0
+Program (19)
+    on left: 1 2 3 4 5 6 7 8 9 10 11 12 13, on right: 0 2 3 4 5 6 7
+    8 9 10 11 12 13
+
+
+state 0
+
+    0 $accept: . Program $end
+
+    $default  reduce using rule 1 (Program)
+
+    Program  go to state 1
+
+
+state 1
+
+    0 $accept: Program . $end
+    2 Program: Program . LOAD INT REG INT
+    3        | Program . LOAD LONG REG INT
+    4        | Program . MOVE REG INT REG INT
+    5        | Program . ADD REG INT REG INT REG INT
+    6        | Program . ADD REG INT INT REG INT
+    7        | Program . ADD INT INT REG INT
+    8        | Program . TEST_EQUAL REG INT REG INT
+    9        | Program . TEST_EQUAL REG INT INT
+   10        | Program . TEST_NOT_EQUAL REG INT REG INT
+   11        | Program . TEST_NOT_EQUAL REG INT INT
+   12        | Program . JUMP INT
+   13        | Program . RETURN
+
+    $end            shift, and go to state 2
+    LOAD            shift, and go to state 3
+    ADD             shift, and go to state 4
+    MOVE            shift, and go to state 5
+    TEST_EQUAL      shift, and go to state 6
+    TEST_NOT_EQUAL  shift, and go to state 7
+    JUMP            shift, and go to state 8
+    RETURN          shift, and go to state 9
+
+
+state 2
+
+    0 $accept: Program $end .
+
+    $default  accept
+
+
+state 3
+
+    2 Program: Program LOAD . INT REG INT
+    3        | Program LOAD . LONG REG INT
+
+    INT   shift, and go to state 10
+    LONG  shift, and go to state 11
+
+
+state 4
+
+    5 Program: Program ADD . REG INT REG INT REG INT
+    6        | Program ADD . REG INT INT REG INT
+    7        | Program ADD . INT INT REG INT
+
+    INT  shift, and go to state 12
+    REG  shift, and go to state 13
+
+
+state 5
+
+    4 Program: Program MOVE . REG INT REG INT
+
+    REG  shift, and go to state 14
+
+
+state 6
+
+    8 Program: Program TEST_EQUAL . REG INT REG INT
+    9        | Program TEST_EQUAL . REG INT INT
+
+    REG  shift, and go to state 15
+
+
+state 7
+
+   10 Program: Program TEST_NOT_EQUAL . REG INT REG INT
+   11        | Program TEST_NOT_EQUAL . REG INT INT
+
+    REG  shift, and go to state 16
+
+
+state 8
+
+   12 Program: Program JUMP . INT
+
+    INT  shift, and go to state 17
+
+
+state 9
+
+   13 Program: Program RETURN .
+
+    $default  reduce using rule 13 (Program)
+
+
+state 10
+
+    2 Program: Program LOAD INT . REG INT
+
+    REG  shift, and go to state 18
+
+
+state 11
+
+    3 Program: Program LOAD LONG . REG INT
+
+    REG  shift, and go to state 19
+
+
+state 12
+
+    7 Program: Program ADD INT . INT REG INT
+
+    INT  shift, and go to state 20
+
+
+state 13
+
+    5 Program: Program ADD REG . INT REG INT REG INT
+    6        | Program ADD REG . INT INT REG INT
+
+    INT  shift, and go to state 21
+
+
+state 14
+
+    4 Program: Program MOVE REG . INT REG INT
+
+    INT  shift, and go to state 22
+
+
+state 15
+
+    8 Program: Program TEST_EQUAL REG . INT REG INT
+    9        | Program TEST_EQUAL REG . INT INT
+
+    INT  shift, and go to state 23
+
+
+state 16
+
+   10 Program: Program TEST_NOT_EQUAL REG . INT REG INT
+   11        | Program TEST_NOT_EQUAL REG . INT INT
+
+    INT  shift, and go to state 24
+
+
+state 17
+
+   12 Program: Program JUMP INT .
+
+    $default  reduce using rule 12 (Program)
+
+
+state 18
+
+    2 Program: Program LOAD INT REG . INT
+
+    INT  shift, and go to state 25
+
+
+state 19
+
+    3 Program: Program LOAD LONG REG . INT
+
+    INT  shift, and go to state 26
+
+
+state 20
+
+    7 Program: Program ADD INT INT . REG INT
+
+    REG  shift, and go to state 27
+
+
+state 21
+
+    5 Program: Program ADD REG INT . REG INT REG INT
+    6        | Program ADD REG INT . INT REG INT
+
+    INT  shift, and go to state 28
+    REG  shift, and go to state 29
+
+
+state 22
+
+    4 Program: Program MOVE REG INT . REG INT
+
+    REG  shift, and go to state 30
+
+
+state 23
+
+    8 Program: Program TEST_EQUAL REG INT . REG INT
+    9        | Program TEST_EQUAL REG INT . INT
+
+    INT  shift, and go to state 31
+    REG  shift, and go to state 32
+
+
+state 24
+
+   10 Program: Program TEST_NOT_EQUAL REG INT . REG INT
+   11        | Program TEST_NOT_EQUAL REG INT . INT
+
+    INT  shift, and go to state 33
+    REG  shift, and go to state 34
+
+
+state 25
+
+    2 Program: Program LOAD INT REG INT .
+
+    $default  reduce using rule 2 (Program)
+
+
+state 26
+
+    3 Program: Program LOAD LONG REG INT .
+
+    $default  reduce using rule 3 (Program)
+
+
+state 27
+
+    7 Program: Program ADD INT INT REG . INT
+
+    INT  shift, and go to state 35
+
+
+state 28
+
+    6 Program: Program ADD REG INT INT . REG INT
+
+    REG  shift, and go to state 36
+
+
+state 29
+
+    5 Program: Program ADD REG INT REG . INT REG INT
+
+    INT  shift, and go to state 37
+
+
+state 30
+
+    4 Program: Program MOVE REG INT REG . INT
+
+    INT  shift, and go to state 38
+
+
+state 31
+
+    9 Program: Program TEST_EQUAL REG INT INT .
+
+    $default  reduce using rule 9 (Program)
+
+
+state 32
+
+    8 Program: Program TEST_EQUAL REG INT REG . INT
+
+    INT  shift, and go to state 39
+
+
+state 33
+
+   11 Program: Program TEST_NOT_EQUAL REG INT INT .
+
+    $default  reduce using rule 11 (Program)
+
+
+state 34
+
+   10 Program: Program TEST_NOT_EQUAL REG INT REG . INT
+
+    INT  shift, and go to state 40
+
+
+state 35
+
+    7 Program: Program ADD INT INT REG INT .
+
+    $default  reduce using rule 7 (Program)
+
+
+state 36
+
+    6 Program: Program ADD REG INT INT REG . INT
+
+    INT  shift, and go to state 41
+
+
+state 37
+
+    5 Program: Program ADD REG INT REG INT . REG INT
+
+    REG  shift, and go to state 42
+
+
+state 38
+
+    4 Program: Program MOVE REG INT REG INT .
+
+    $default  reduce using rule 4 (Program)
+
+
+state 39
+
+    8 Program: Program TEST_EQUAL REG INT REG INT .
+
+    $default  reduce using rule 8 (Program)
+
+
+state 40
+
+   10 Program: Program TEST_NOT_EQUAL REG INT REG INT .
+
+    $default  reduce using rule 10 (Program)
+
+
+state 41
+
+    6 Program: Program ADD REG INT INT REG INT .
+
+    $default  reduce using rule 6 (Program)
+
+
+state 42
+
+    5 Program: Program ADD REG INT REG INT REG . INT
+
+    INT  shift, and go to state 43
+
+
+state 43
+
+    5 Program: Program ADD REG INT REG INT REG INT .
+
+    $default  reduce using rule 5 (Program)

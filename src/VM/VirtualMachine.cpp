@@ -6,8 +6,9 @@
  */
 
 #include "VirtualMachine.hpp"
-#include <Value/Int.hpp>
-#include <Statement/Heap.hpp>
+#include "OpCodes.hpp"
+#include "JumpTypes.hpp"
+#include "ConstantTypes.hpp"
 #include <stdio.h>
 
 namespace VM {
@@ -18,6 +19,8 @@ VirtualMachine::VirtualMachine() {
 	for (unsigned int i = 0; i < vmNumRegisters; ++i) {
 		registers_[i] = 0;
 	}
+
+	stack_ = new uint8_t[4086];
 }
 
 VirtualMachine::~VirtualMachine() {
@@ -28,137 +31,116 @@ void VirtualMachine::execute(InstructionSet& set) {
 
 	registers_[vmProgramCounter] = set.startInstruction();
 	long* current = &registers_[vmProgramCounter];
+	bool shouldReturn = false;
 
-	while (*current < set.numInstructions()) {
+	while (!shouldReturn && *current < set.numInstructions()) {
 
 		switch (set.getInst(*current)) {
 
-		case OpAddLong: {
+		case OpMove: {
+			uint8_t target = set.getInst(*current + 1);
+			uint8_t dest = set.getInst(*current + 2);
+			registers_[dest] = registers_[target];
+			*current += vmOpCodeSize;
+			break;
+		}
+
+		case OpReturn: {
+			shouldReturn = true;
+			break;
+		}
+
+		case OpJump: {
+
+			uint8_t mode = set.getInst(*current + 1);
+			int dest = set.getInt(*current + 2);
+
+			switch (mode) {
+
+			case DirectRelative:
+				*current += (dest * vmOpCodeSize);
+				break;
+
+			case DirectExact:
+				*current = (dest * vmOpCodeSize);
+				break;
+
+			case RegisterRelative:
+				*current += (registers_[dest] * vmOpCodeSize);
+				break;
+
+			case RegisterExact:
+				*current = (registers_[dest] * vmOpCodeSize);
+				break;
+
+			}
+
+			break;
+		}
+
+		case OpAdd: {
 
 			uint8_t left = set.getInst(*current + 1);
 			uint8_t right = set.getInst(*current + 2);
+			uint8_t dest = set.getInst(*current + 3);
 
-			registers_[left] = registers_[left] + registers_[right];
+			registers_[dest] = registers_[left] + registers_[right];
 
-			*current += 3;
+			*current += vmOpCodeSize;
 			break;
 		}
 
 		case OpTestEqual: {
-
-			uint8_t target = set.getInst(*current + 1);
-			uint8_t left = set.getInst(*current + 2);
-			uint8_t right = set.getInst(*current + 3);
+			uint8_t left = set.getInst(*current + 1);
+			uint8_t right = set.getInst(*current + 2);
 
 			if (registers_[left] == registers_[right]) {
-				registers_[vmProgramCounter] = registers_[target];
+				*current += vmOpCodeSize;
 			} else {
-				*current += 4;
+				*current += 2 * vmOpCodeSize;
 			}
 
 			break;
 		}
 
 		case OpTestNotEqual: {
-
-			uint8_t target = set.getInst(*current + 1);
-			uint8_t left = set.getInst(*current + 2);
-			uint8_t right = set.getInst(*current + 3);
+			uint8_t left = set.getInst(*current + 1);
+			uint8_t right = set.getInst(*current + 2);
 
 			if (registers_[left] != registers_[right]) {
-				registers_[vmProgramCounter] = registers_[target];
+				*current += vmOpCodeSize;
 			} else {
-				*current += 4;
+				*current += 2 * vmOpCodeSize;
 			}
 
 			break;
 		}
 
-		case OpTestLongEqual: {
 
-			uint8_t target = set.getInst(*current + 1);
-			uint8_t left = set.getInst(*current + 2);
-			long testValue = set.getLong(*current + 3);
+		case OpLoadConstant: {
 
-			if (registers_[left] == testValue) {
-				registers_[vmProgramCounter] = registers_[target];
-			} else {
-				*current += 11;
+			uint8_t reg = set.getInst(*current + 1);
+			int constant = set.getInt(*current + 2);
+
+			switch (set.getConstantByte(constant)) {
+
+			case CInt:
+				registers_[reg] = set.getConstantInt(constant + 1);
+				break;
+
+			case CLong:
+				registers_[reg] = set.getConstantLong(constant + 1);
+				break;
+
+			default:
+				printf("Unhandled load\n");
+				break;
+
 			}
 
+			*current += vmOpCodeSize;
 			break;
 		}
-
-		case OpTestLongNotEqual: {
-
-			uint8_t target = set.getInst(*current + 1);
-			uint8_t left = set.getInst(*current + 2);
-			long testValue = set.getLong(*current + 3);
-
-			if (registers_[left] != testValue) {
-				registers_[vmProgramCounter] = registers_[target];
-			} else {
-				*current += 11;
-			}
-
-			break;
-		}
-
-		case OpLoadRegister: {
-
-			uint8_t reg = set.getInst(*current + 1);
-			long data = set.getLong(*current + 2);
-
-			registers_[reg] = data;
-			*current = *current + 10;
-			break;
-		}
-
-		case OpMoveRegister: {
-
-			uint8_t source = set.getInst(*current + 1);
-			uint8_t target = set.getInst(*current + 2);
-			registers_[target] = registers_[source];
-			*current = *current + 3;
-			break;
-		}
-
-		case OpJumpRegister: {
-			uint8_t reg = set.getInst(*current + 1);
-			registers_[vmProgramCounter] = registers_[reg];
-			break;
-		}
-
-		case OpPushLongRegister: {
-			uint8_t reg = set.getInst(*current + 1);
-			stack_.pushLong(registers_[reg]);
-			*current += 2;
-			break;
-		}
-
-		case OpPopLongRegister: {
-
-			uint8_t reg = set.getInst(*current + 1);
-
-			printf("Register %i\n", reg);
-
-			registers_[reg] = stack_.popLong();
-			*current += 2;
-			break;
-		}
-
-			/*
-			 case OpPop: {
-			 stack_.pop();
-			 *current = *current + 1;
-			 break;
-			 }
-
-			 case OpPopRegister: {
-			 registers_[code[*current].data] = stack_.pop();
-			 *current = *current + 1;
-			 break;
-			 }*/
 
 		default: {
 			printf("Invalid instruction %li. %li\n", *current,
@@ -177,17 +159,27 @@ void VirtualMachine::printState() {
 
 	printf("--VM STATE--\n");
 
-	for (unsigned int i = 0; i < stack_.size(); i++) {
-		printf("%x ", stack_.getByte(i));
+	for (unsigned int i = 0; i < registers_[vmStackCurrentPointer]; i++) {
+		printf("%x ", stack_[i]);
 	}
 
 	printf("\n");
 
-	for (unsigned int i = 0; i < vmNumRegisters / 3; i++) {
-		printf("#%i:%li #%i:%li #%i:%li\n", i, registers_[i],
-				i + vmNumRegisters / 3, registers_[i + vmNumRegisters / 3],
-				i + (2 * vmNumRegisters / 3),
-				registers_[i + (2 * vmNumRegisters / 3)]);
+	for (unsigned int i = 0; i < vmNumRegisters; i += 3) {
+
+		if (i < vmNumRegisters) {
+			printf("#%i:%li ", i, registers_[i]);
+		}
+
+		if (i + 1 < vmNumRegisters) {
+			printf("#%i:%li ", i + 1, registers_[i + 1]);
+		}
+
+		if (i + 2 < vmNumRegisters) {
+			printf("#%i:%li", i + 2, registers_[i + 2]);
+		}
+
+		printf("\n");
 	}
 
 	printf("--VM STATE END--\n");

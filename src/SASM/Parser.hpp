@@ -7,15 +7,13 @@
 
 #ifndef SASM_HPP_
 #define SASM_HPP_
-#include "InstructionSet.hpp"
+#include <VM/InstructionSet.hpp>
 #include <string>
 
 namespace SimpleASM {
 
-class SAsm {
+class Parser {
 public:
-	SAsm();
-	virtual ~SAsm();
 
 	static VM::InstructionSet parse(std::string text);
 };

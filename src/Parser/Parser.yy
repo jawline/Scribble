@@ -78,13 +78,14 @@ extern char *yytext;	// defined and maintained in lex.c
 %}
 
 %union {
-	std::string* string;
 	std::vector<SmartPointer<Statement>>* statements;
 	std::vector<SmartPointer<Variable>>* variables;
 	StructureInfo* structureinfo;
 	Statement* statement;
 	Function* function;
 	SP<Variable>* variable;
+	std::string* string;
+	
 	float real;
 	int integer;
 	TypeReference* type;

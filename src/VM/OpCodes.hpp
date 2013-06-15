@@ -11,18 +11,13 @@
 namespace VM {
 
 enum OpCodes {
-	OpLoadRegister = 0,
-	OpMoveRegister,
-	OpJumpRegister,
-	OpPushIntRegister,
-	OpPushLongRegister,
-	OpPopIntRegister,
-	OpPopLongRegister,
-	OpAddLong,
+	OpLoadConstant = 0,
+	OpMove,
+	OpJump,
+	OpReturn,
+	OpAdd,
 	OpTestEqual,
 	OpTestNotEqual,
-	OpTestLongEqual,
-	OpTestLongNotEqual
 };
 
 }
