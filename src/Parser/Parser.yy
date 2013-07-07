@@ -1,5 +1,6 @@
 %error-verbose
 %locations
+%name-prefix "scribble_"
 
 %{
 #include <math.h>
@@ -47,8 +48,8 @@
 #include <Value/Variable.hpp>
 #include <Value/String.hpp>
 
-int yylex();
-void yyerror(const char* s);
+int scribble_lex();
+void scribble_error(const char* s);
 
 bool ParsingError;
 std::vector<std::string> ImportList;
@@ -72,8 +73,8 @@ void parser_free_all() {
 	ParsingError = false;
 }
 
-extern int yylineno;	// defined and maintained in lex.c
-extern char *yytext;	// defined and maintained in lex.c
+extern int scribble_lineno;	// defined and maintained in lex.c
+extern char *scribble_text;	// defined and maintained in lex.c
 
 %}
 
@@ -103,7 +104,8 @@ extern char *yytext;	// defined and maintained in lex.c
 %left PLUS MINUS
 %left TIMES DIVIDE
 %left NEG
-%right POWER
+%left TRUE FALSE EQUALS
+%right POWER ASSIGN RBRACKET LBRACKET
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -223,7 +225,7 @@ AutoVariable: VARIABLE WORD ASSIGN Statement {
 			ParserReference r(AutoVariablePair(nVar, sp));
 			StatementReferences.push_back(r);			
 
-			$$ = new AssignVariableStatement(yylineno, yytext, nVar, sp);
+			$$ = new AssignVariableStatement(scribble_lineno, scribble_text, nVar, sp);
 		}
 		
 		delete $2;
@@ -495,10 +497,10 @@ Statements: {
 		$$->push_back($2);
 	} | Statements RETURN Statement {
 		$$ = $1;
-		$$->push_back(new ReturnStatement(yylineno, yytext, $3));
+		$$->push_back(new ReturnStatement(scribble_lineno, scribble_text, $3));
 	} | Statements RETURN {
 		$$ = $1;
-		$$->push_back(new ReturnStatement(yylineno, yytext, nullptr));
+		$$->push_back(new ReturnStatement(scribble_lineno, scribble_text, nullptr));
 	}
 ;
 
@@ -517,7 +519,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		StatementReferences.push_back(r);
 		
 		
-		$$ = new FunctionStatement(yylineno, yytext, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
 		
 		//Free the name pointer
 		delete $1;
@@ -531,7 +533,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		StatementReferences.push_back(r);
 		
 		
-		$$ = new FunctionStatement(yylineno, yytext, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
 		
 		//Free the name pointer
 		delete $1;
@@ -550,7 +552,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		$$ = new FunctionStatement(yylineno, yytext, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
 	
 		//Free the name pointers
 		delete $1;
@@ -563,7 +565,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		$$ = new FunctionStatement(yylineno, yytext, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
 		
 		//Free the name pointers
 		delete $1;
@@ -582,45 +584,45 @@ IfStatements: Statement {
 ;
 
 Statement: TRUE {
-		$$ = new BoolStatement(yylineno, yytext, true);
+		$$ = new BoolStatement(scribble_lineno, scribble_text, true);
 	} | FALSE {
-		$$ = new BoolStatement(yylineno, yytext, false);
+		$$ = new BoolStatement(scribble_lineno, scribble_text, false);
 	} | INT {
-		$$ = new IntStatement(yylineno, yytext, $1);
+		$$ = new IntStatement(scribble_lineno, scribble_text, $1);
 	} | MINUS Statement {
-		$$ = new NegativeStatement(yylineno, yytext, $2);
+		$$ = new NegativeStatement(scribble_lineno, scribble_text, $2);
 	} | STRING {
 		
-		$$ = new StringStatement(yylineno, yytext, *$1);
+		$$ = new StringStatement(scribble_lineno, scribble_text, *$1);
 		
 		//Free string pointer
 		delete $1;
 
 	} | Type LBRACKET Arguments RBRACKET {
 	
-		$$ = new StructureStatement(yylineno, yytext, *$1, *$3);
+		$$ = new StructureStatement(scribble_lineno, scribble_text, *$1, *$3);
 		delete $3;
 		delete $1;
 		
 	} | LENGTH LPAREN Statement RPAREN {
-		$$ = new ArrayLengthStatement(yylineno, yytext, $3);
+		$$ = new ArrayLengthStatement(scribble_lineno, scribble_text, $3);
 	} | LSQBRACKET Statement RSQBRACKET Type {
-		$$ = new ArrayStatement(yylineno, yytext, getTypeManager().getType(Array, *$4), $2);
+		$$ = new ArrayStatement(scribble_lineno, scribble_text, getTypeManager().getType(Array, *$4), $2);
 		delete $4;
 	} | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement{
-		$$ = new AssignArrayStatement(yylineno, yytext, $1, $6, $3); 
+		$$ = new AssignArrayStatement(scribble_lineno, scribble_text, $1, $6, $3); 
 	} | Statement LSQBRACKET Statement RSQBRACKET {
-		$$ = new GetArrayStatement(yylineno, yytext, $1, $3); 
+		$$ = new GetArrayStatement(scribble_lineno, scribble_text, $1, $3); 
 	} | Statement LSQBRACKET Statement COLON Statement RSQBRACKET {
-		$$ = new ArraySliceStatement(yylineno, yytext, $1, $3, $5);
+		$$ = new ArraySliceStatement(scribble_lineno, scribble_text, $1, $3, $5);
 	} | THREAD LBRACKET Statements RBRACKET {
-		$$ = new ThreadStatement(yylineno, yytext, *$3);
+		$$ = new ThreadStatement(scribble_lineno, scribble_text, *$3);
 		delete $3;
 	} | Variable {
-		$$ = new GetVariableStatement(yylineno, yytext, *$1);
+		$$ = new GetVariableStatement(scribble_lineno, scribble_text, *$1);
 		delete $1;
 	} | Variable ASSIGN Statement {
-		$$ = new AssignVariableStatement(yylineno, yytext, *$1, $3);
+		$$ = new AssignVariableStatement(scribble_lineno, scribble_text, *$1, $3);
 		delete $1;
 	} | AutoVariable {
 		$$ = $1;
@@ -629,10 +631,10 @@ Statement: TRUE {
 		auto it = Variables.find(*$1);
 
 		if (it == Variables.end()) {
-			yyerror("Variable not defined");
+			scribble_error("Variable not defined");
 			return -1;
 		} else {
-			$$ = new GetVariableStatement(yylineno, yytext, it->second);
+			$$ = new GetVariableStatement(scribble_lineno, scribble_text, it->second);
 		}
 
 		//Free name pointer
@@ -641,42 +643,42 @@ Statement: TRUE {
 	} | FunctionCall {
 		$$ = $1;
 	} | IF Statement THEN IfStatements  {
-		$$ = new IfStatement(yylineno, yytext, $2, *$4, std::vector<SP<Statement>>());
+		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, std::vector<SP<Statement>>());
 		delete $4;
 	} | IF Statement THEN IfStatements ELSE IfStatements {
-		$$ = new IfStatement(yylineno, yytext, $2, *$4, *$6);
+		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, *$6);
 		delete $4;
 		delete $6;
 	} | Statement PLUS Statement {
-		$$ = new OperateStatement(yylineno, yytext, Add, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Add, $1, $3);
 	} | Statement MINUS Statement {
-		$$ = new OperateStatement(yylineno, yytext, Subtract, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Subtract, $1, $3);
 	} | Statement TIMES Statement {
-		$$ = new OperateStatement(yylineno, yytext, Multiply, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Multiply, $1, $3);
 	} | Statement DIVIDE Statement {
-		$$ = new OperateStatement(yylineno, yytext, Divide, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Divide, $1, $3);
 	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
-		$$ = new ForStatement(yylineno, yytext, $2, $4, $6, *$8);
+		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$8);
 		delete $8;
 	} | WHILE Statement LBRACKET Statements RBRACKET {
-		$$ = new WhileStatement(yylineno, yytext, $2, *$4);
+		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$4);
 		delete $4;
 	} | NIL EQUALS Statement {
-		$$ = new TestNilStatement(yylineno, yytext, $3);
+		$$ = new TestNilStatement(scribble_lineno, scribble_text, $3);
 	} | Statement EQUALS NIL {
-		$$ = new TestNilStatement(yylineno, yytext, $1);
+		$$ = new TestNilStatement(scribble_lineno, scribble_text, $1);
 	} | Statement EQUALS Statement {
-		$$ = new TestStatement(yylineno, yytext, TestEquals, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestEquals, $1, $3);
 	} | Statement NOT EQUALS Statement {
-		$$ = new TestStatement(yylineno, yytext, TestNotEquals, $1, $4);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestNotEquals, $1, $4);
 	} | Statement GREATER Statement {
-		$$ = new TestStatement(yylineno, yytext, TestGreater, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreater, $1, $3);
 	} | Statement LESSER Statement {
-		$$ = new TestStatement(yylineno, yytext, TestLess, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestLess, $1, $3);
 	} | Statement LESSER EQUALS Statement {
-		$$ = new TestStatement(yylineno, yytext, TestLessOrEqual, $1, $4);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestLessOrEqual, $1, $4);
 	} | Statement GREATER EQUALS Statement {
-		$$ = new TestStatement(yylineno, yytext, TestGreaterOrEqual, $1, $4);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreaterOrEqual, $1, $4);
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Statement {
@@ -684,9 +686,9 @@ Statement: TRUE {
 		auto it = Variables.find(*$1);
 
 		if (it == Variables.end()) {
-			yyerror("Variable not defined");
+			scribble_error("Variable not defined");
 		} else {
-			$$ = new AssignVariableStatement(yylineno, yytext, it->second, $3);
+			$$ = new AssignVariableStatement(scribble_lineno, scribble_text, it->second, $3);
 		}
 		
 		//Free up string pointer.
@@ -695,52 +697,59 @@ Statement: TRUE {
 	} | WORD TWOPLUS {
 	
 		auto it = Variables.find(*$1);
+		
 		if (it == Variables.end()) {
-			yyerror("Variable not defined");
+			scribble_error("Variable not defined");
 		} else {
-			$$ = new IncrementStatement(yylineno, yytext, it->second, Increment, false);
+			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Increment, false);
 		}
 		
 		//Free name pointer
 		delete $1;
 		
 	} | TWOPLUS WORD {
+		
 		auto it = Variables.find(*$2);
+		
 		if (it == Variables.end()) {
-			yyerror("Variable not defined");
+			scribble_error("Variable not defined");
 		} else {
-			$$ = new IncrementStatement(yylineno, yytext, it->second, Increment, true);
+			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Increment, true);
 		}
 		
 		//Free name pointer
 		delete $2;
 		
 	} | WORD TWOMINUS {
+		
 		auto it = Variables.find(*$1);
+		
 		if (it == Variables.end()) {
-			yyerror("Variable not defined");
+			scribble_error("Variable not defined");
 		} else {
-			$$ = new IncrementStatement(yylineno, yytext, it->second, Decrement, false);
+			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Decrement, false);
 		}
 		
 		//Free name pointer
 		delete $1;
 		
 	} | TWOMINUS WORD {
+		
 		auto it = Variables.find(*$2);
+		
 		if (it == Variables.end()) {
 			yyerror("Variable not defined");
 		} else {
-			$$ = new IncrementStatement(yylineno, yytext, it->second, Decrement, true);
+			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Decrement, true);
 		}
 		
 		//Free name pointer
 		delete $2;
 	} | Statement AND Statement {
-		$$ = new AndStatement(yylineno, yytext, $1, $3);
+		$$ = new AndStatement(scribble_lineno, scribble_text, $1, $3);
 	} | Statement POINT WORD {
 		
-		$$ = new GetStructureElementStatement(yylineno, yytext, $1, *$3);
+		$$ = new GetStructureElementStatement(scribble_lineno, scribble_text, $1, *$3);
 		
 		ParserReference r((GetStructureElementStatement*) $$);
 		StatementReferences.push_back(r);
@@ -748,7 +757,7 @@ Statement: TRUE {
 		delete $3;
 	} | Statement POINT WORD ASSIGN Statement {
 	
-		$$ = new StructureAssignElement(yylineno, yytext, $1, $5, *$3);
+		$$ = new StructureAssignElement(scribble_lineno, scribble_text, $1, $5, *$3);
 		
 		ParserReference r((StructureAssignElement*) $$);
 		StatementReferences.push_back(r);
@@ -759,14 +768,14 @@ Statement: TRUE {
 
 %%
 
-void yyerror(std::string s)
+void scribble_error(std::string s)
 {
 
-  printf("ERROR: %s at symbol %s on line %i\n", s.c_str(), yytext, yylineno);
+  printf("ERROR: %s at symbol %s on line %i\n", s.c_str(), scribble_text, scribble_lineno);
   ParsingError = true;
 }
 
-void yyerror(const char* s)
+void scribble_error(const char* s)
 {
-  yyerror(std::string(s));
+  scribble_error(std::string(s));
 }

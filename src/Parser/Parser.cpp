@@ -18,9 +18,9 @@ extern std::vector<TypeReference> TypeReferences;
 
 extern bool ParsingError;
 
-extern void yyparse();
-extern void yy_scan_string(char const*);
-extern void yylex_destroy();
+extern void scribble_parse();
+extern void scribble__scan_string(char const*);
+extern void scribble_lex_destroy();
 extern void parser_free_all();
 
 SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
@@ -44,6 +44,7 @@ SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 		} else {
 			return 0;
 		}
+
 	}
 
 	//Otherwise search through each function and do a thorough search.
@@ -231,9 +232,9 @@ NamespaceType Parser::include(std::string const& filename,
 	char* a = strdup(inputSource.c_str());
 
 	//Pass the data to the parser.
-	yy_scan_string(a);
-	yyparse();
-	yylex_destroy();
+	scribble__scan_string(a);
+	scribble_parse();
+	scribble_lex_destroy();
 
 	//Free the bison buffer
 	delete[] a;

@@ -1,6 +1,7 @@
 %option yylineno
 %option noyywrap
 %option nounput
+%option prefix="scribble_"
 
 %x C_COMMENT
 
@@ -15,9 +16,9 @@
 #include <Parser/TypeReference.hpp>
 #include "Parser.hpp"
 
-#define SAVE_INT yylval.integer = atoi(yytext);
-#define SAVE_REAL yylval.real = atof(yytext);
-#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng);
+#define SAVE_INT scribble_lval.integer = atoi(scribble_text);
+#define SAVE_REAL scribble_lval.real = atof(scribble_text);
+#define SAVE_TOKEN scribble_lval.string = new std::string(scribble_text, scribble_leng);
 
 void myReplace(std::string& str, const std::string& oldStr, const std::string& newStr)
 {
@@ -102,4 +103,4 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 }
 
 {word} { SAVE_TOKEN; return WORD; }
-{string} { std::string r(yytext, yyleng); myReplace(r, "\\n", "\n"); myReplace(r, "\"", ""); yylval.string = new std::string(r); return STRING; }
+{string} { std::string r(scribble_text, scribble_leng); myReplace(r, "\\n", "\n"); myReplace(r, "\"", ""); scribble_lval.string = new std::string(r); return STRING; }
