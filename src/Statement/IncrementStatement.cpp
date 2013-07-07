@@ -108,8 +108,22 @@ int IncrementStatement::generateCode(int resultRegister,
 
 		if (post_) {
 
+			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
+					<< variable_->getPosition() + 6 << "\n";
+
+			generated << "sub $" << variable_->getPosition() + 6 << " $"
+					<< resultRegister << "\n";
+
+			instrs += 3;
 		} else {
 
+			generated << "move $" << variable_->getPosition() + 6 << " $"
+					<< resultRegister << "\n";
+
+			generated << "sub $" << variable_->getPosition() + 6 << " 1 $"
+					<< variable_->getPosition() + 6 << "\n";
+
+			instrs += 3;
 		}
 
 		break;

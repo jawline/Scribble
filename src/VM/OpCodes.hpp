@@ -19,6 +19,7 @@ enum OpCodes {
 	OpEqual,
 	OpLessThan,
 	OpLessThanOrEqual,
+	OpAnd
 };
 
 }
