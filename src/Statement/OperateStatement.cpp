@@ -42,3 +42,30 @@ void OperateStatement::checkTree(Type* type) {
 				"Cannot add variables of different types");
 	}
 }
+
+int OperateStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	int instrs = lhs_->generateCode(3, generated);
+	instrs += rhs_->generateCode(4, generated);
+
+	switch (op_) {
+
+	case Assign: {
+		printf("UNIMPLEMENTED ARGH\n");
+		break;
+	}
+
+	case Add: {
+		generated << "add $3 $4 $5\n";
+		instrs += 1;
+
+		generated << "move $5 $" << resultRegister << "\n";
+		instrs += 1;
+		break;
+	}
+
+	}
+
+	return instrs;
+}

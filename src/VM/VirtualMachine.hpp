@@ -13,7 +13,8 @@
 
 namespace VM {
 
-const static unsigned int vmNumRegisters = 16;
+const static unsigned int vmNumRegisters = 32;
+const static unsigned int vmNumReservedRegisters = 6;
 const static unsigned int vmOpCodeSize = 6;
 const static unsigned int vmProgramCounter = 0;
 const static unsigned int vmStackBasePointer = 1;

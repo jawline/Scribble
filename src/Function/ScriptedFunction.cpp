@@ -8,7 +8,8 @@
 #include "ScriptedFunction.hpp"
 #include <Statement/ReturnStatement.hpp>
 
-ScriptedFunction::ScriptedFunction(TypeReference fType, SP<Variable> templateReturn,
+ScriptedFunction::ScriptedFunction(TypeReference fType,
+		SP<Variable> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
@@ -87,4 +88,15 @@ Type* ScriptedFunction::argType(unsigned int arg) {
 
 const unsigned int ScriptedFunction::numArgs() {
 	return arguments_.size();
+}
+
+std::string ScriptedFunction::debugCode() {
+
+	std::stringstream res;
+
+	for (unsigned int i = 0; i < statements_.size(); ++i) {
+		statements_[i]->generateCode(5, res);
+	}
+
+	return res.str();
 }

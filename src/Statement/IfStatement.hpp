@@ -31,6 +31,7 @@ public:
 	}
 
 	void checkTree(Type* functionType);
+	int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* IFSTATEMENT_HPP_ */

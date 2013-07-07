@@ -21,6 +21,7 @@ public:
 	Type* type();
 
 	void checkTree(Type* functionType);
+	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* BOOLSTATEMENT_HPP_ */

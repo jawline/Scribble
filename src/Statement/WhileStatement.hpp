@@ -23,6 +23,8 @@ public:
 	void checkTree(Type* functionType);
 	Value* execute(std::vector<Value*> const& variables);
 	Type* type();
+
+	int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* WHILESTATEMENT_HPP_ */

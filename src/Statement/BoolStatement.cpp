@@ -30,3 +30,14 @@ Type* BoolStatement::type() {
 
 void BoolStatement::checkTree(Type* functionType) {
 }
+
+int BoolStatement::generateCode(int resultRegister, std::stringstream& generated) {
+
+	if (value_) {
+		generated << "load 1 $" << resultRegister << "\n";
+	} else {
+		generated << "load 0 $" << resultRegister << "\n";
+	}
+
+	return 1;
+}

@@ -10,6 +10,7 @@
 #include "SASMParser.hpp"
 
 #define SAVE_INT sasm_lval.integer = atoi(sasm_text);
+#define SAVE_REG sasm_lval.integer = atoi(sasm_text+1);
 #define SAVE_REAL sasm_lval.real = atof(sasm_text);
 #define SAVE_TOKEN sasm_lval.string = new std::string(sasm_text, sasm_leng);
 
@@ -27,10 +28,10 @@ void replaceString(std::string& str, const std::string& oldStr, const std::strin
 
 white [ \t]+
 digit [0-9]
-integer {digit}+
+integer -?{digit}+
 long {integer}L
-exponent [eE][+-]?{integer}
 real {integer}("."{integer})
+register ${integer}
 string \"[^\"\n]*\"
 word [_|a-z|A-Z][a-z|A-Z|0-9]*
 
@@ -42,16 +43,25 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 {white} { }
 
 "\n" ;
-"$" return REG;
 "load" return LOAD;
 "add" return ADD;
 "move" return MOVE;
 "push" return PUSH;
 "pop" return POP;
-"tneq" return TEST_NOT_EQUAL;
-"teq" return TEST_EQUAL;
+"neq" return TEST_NOT_EQUAL;
+"eq" return TEST_EQUAL;
+"lt" return LESS_THAN;
+"le" return LESS_THAN_OR_EQUAL;
+"gt" return GREATER_THAN;
+"ge" return GREATER_THAN_OR_EQUAL;
 "ret" return RETURN;
-"jump" return JUMP;
+"jmp" return JUMP;
+"jmpr" return JUMP_RELATIVE;
+
+{register} {
+	SAVE_REG;
+	return REG;
+}
 
 {integer} { SAVE_INT;
  return INT;

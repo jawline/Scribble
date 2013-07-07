@@ -1,5 +1,6 @@
 #ifndef _INT_STATEMENT_DEF_H_
 #define _INT_STATEMENT_DEF_H_
+#include <sstream>
 #include "Statement.hpp"
 #include <Value/Int.hpp>
 #include <Value/TypeManager.hpp>
@@ -17,6 +18,8 @@ public:
 	}
 
 	void checkTree(Type* functionType);
+
+	int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif //_INT_STATEMENT_DEF_H_

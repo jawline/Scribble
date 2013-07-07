@@ -16,3 +16,12 @@ Value* IntStatement::execute(std::vector<Value*> const& variables) {
 void IntStatement::checkTree(Type* functionType) {
 
 }
+
+int IntStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	generated << "load " << intValue_ << " $" << resultRegister << " #"
+			<< resultRegister << "\n";
+
+	return 1;
+}

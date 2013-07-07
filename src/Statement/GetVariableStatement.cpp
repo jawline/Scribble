@@ -22,4 +22,10 @@ void GetVariableStatement::checkTree(Type* functionType) {
 	if (var_->getType()->getType() == TypeUnresolved) {
 		throw StatementException(this, "Variable type has not been resolved.");
 	}
+
+}
+
+int GetVariableStatement::generateCode(int resultRegister, std::stringstream& generated) {
+	generated << "move $" << (var_->getPosition() + 6) << " $" << resultRegister << "\n";
+	return 1;
 }

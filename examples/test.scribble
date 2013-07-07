@@ -1,6 +1,11 @@
 import("sys")
-import("bugged/main")
 
 func main() {
-	main.main()
+
+	var j := true
+	var r := false
+	
+	if (true = true) {
+	}
+
 }

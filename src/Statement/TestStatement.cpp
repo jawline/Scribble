@@ -133,3 +133,67 @@ void TestStatement::checkTree(Type* functionType) {
 				"Left hand side type should be the same as right hand side type");
 	}
 }
+
+int TestStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	int instrs = 0;
+
+	generated << "#Test statement\n";
+	instrs += lhs_->generateCode(3, generated);
+	instrs += rhs_->generateCode(4, generated);
+
+	//1
+	generated << "load 0 $5\n";
+
+	switch (tType_) {
+
+	case TestEquals:
+		//2
+		generated << "eq $3 $4 #test lhs rhs\n";
+		instrs += 1;
+		break;
+
+	case TestNotEquals:
+		generated << "neq $3 $4\n";
+		instrs += 2;
+		break;
+
+	case TestLess:
+		generated << "lt $3 $4 #test less than lhs rhs\n";
+		instrs += 1;
+		break;
+
+	case TestLessOrEqual:
+		generated << "le $3 $4 #tess less or equal lhs rhs\n";
+		instrs += 1;
+		break;
+
+	case TestGreater:
+		generated << "gt $3 $4 #test greater\n";
+		instrs += 2;
+		break;
+
+	case TestGreaterOrEqual:
+		generated << "ge $3 $4 #test greater or equal\n";
+		instrs += 2;
+		break;
+
+	default:
+		printf("UNIMPLEMENTED AAAH\n");
+		break;
+
+	}
+
+	//3
+	generated << "load 1 $5\n";
+
+	//4
+	generated << "move $5 $";
+	generated << resultRegister;
+	generated << "\n";
+
+	instrs += 4;
+
+	return instrs;
+}

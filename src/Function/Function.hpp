@@ -25,6 +25,10 @@ public:
 	virtual const unsigned int numArgs() = 0;
 	virtual Type* argType(unsigned int arg) = 0;
 	virtual void check() = 0;
+
+	virtual std::string debugCode() {
+		return "";
+	}
 };
 
 typedef SmartPointer<Function> SafeFunction;

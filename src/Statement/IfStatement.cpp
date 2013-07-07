@@ -61,3 +61,34 @@ void IfStatement::checkTree(Type* functionType) {
 		ifFalseStatements_[i]->checkTree(functionType);
 	}
 }
+
+int IfStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	int trueSize = 0;
+	std::stringstream trueBody;
+
+	for (unsigned int i = 0; i < ifTrueStatements_.size(); i++) {
+		trueSize += ifTrueStatements_[i]->generateCode(5, generated);
+	}
+
+	int falseSize = 0;
+	std::stringstream falseBody;
+
+	for (unsigned int i = 0; i < ifFalseStatements_.size(); ++i) {
+		falseSize += ifFalseStatements_[i]->generateCode(5, generated);
+	}
+
+	int instrs = 0;
+	generated << "#if statement test\n";
+	instrs += condition_->generateCode(5, generated);
+
+	generated << "#if statement body\n";
+
+	generated << trueBody.str();
+	instrs += trueSize;
+
+	generated << "#if statement false body\n";
+
+	return instrs;
+}

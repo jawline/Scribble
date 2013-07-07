@@ -26,6 +26,7 @@ public:
 	Type* type();
 
 	void checkTree(Type* functionType);
+
 };
 
 #endif /* ASSIGNARRAYSTATEMENT_HPP_ */

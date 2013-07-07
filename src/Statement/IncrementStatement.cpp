@@ -73,3 +73,48 @@ Value* IncrementStatement::execute(std::vector<Value*> const& variables) {
 Type* IncrementStatement::type() {
 	return getTypeManager().getType(Int);
 }
+
+int IncrementStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+	int instrs = 0;
+
+	switch (operator_) {
+
+	case Increment:
+
+		if (post_) {
+
+			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
+					<< variable_->getPosition() + 6 << "\n";
+
+			generated << "move $" << variable_->getPosition() + 6 << " $"
+					<< resultRegister << "\n";
+
+			instrs += 3;
+		} else {
+
+			generated << "move $" << variable_->getPosition() + 6 << " $"
+					<< resultRegister << "\n";
+
+			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
+					<< variable_->getPosition() + 6 << "\n";
+
+			instrs += 3;
+		}
+
+		break;
+
+	case Decrement:
+
+		if (post_) {
+
+		} else {
+
+		}
+
+		break;
+
+	}
+
+	return instrs;
+}

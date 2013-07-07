@@ -15,6 +15,7 @@ public:
 	Type* type();
 
 	void checkTree(Type* functionType);
+	int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif //_GET_VARIABLE_DEF_H_

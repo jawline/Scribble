@@ -57,20 +57,26 @@ void VirtualMachine::execute(InstructionSet& set) {
 
 			switch (mode) {
 
-			case DirectRelative:
-				*current += (dest * vmOpCodeSize);
+			case DirectRelative: {
+				long dOld = *current;
+				long dRest = ((long)dest) * ((long)vmOpCodeSize);
+//				printf("Direct relative from %li mod %li result ", dOld, dRest);
+				dOld = dOld + dRest;
+//				printf("%li\n", dOld);
+				*current = dOld;
 				break;
+			}
 
 			case DirectExact:
-				*current = (dest * vmOpCodeSize);
+				*current = (((long)dest) * ((long)vmOpCodeSize));
 				break;
 
 			case RegisterRelative:
-				*current += (registers_[dest] * vmOpCodeSize);
+				*current += (registers_[dest] * ((long)vmOpCodeSize));
 				break;
 
 			case RegisterExact:
-				*current = (registers_[dest] * vmOpCodeSize);
+				*current = (registers_[dest] * ((long)vmOpCodeSize));
 				break;
 
 			}
@@ -84,13 +90,16 @@ void VirtualMachine::execute(InstructionSet& set) {
 			uint8_t right = set.getInst(*current + 2);
 			uint8_t dest = set.getInst(*current + 3);
 
+			//printf("Executing Add on %li %li %li\n", registers_[left],
+			//		registers_[right], dest);
+
 			registers_[dest] = registers_[left] + registers_[right];
 
 			*current += vmOpCodeSize;
 			break;
 		}
 
-		case OpTestEqual: {
+		case OpEqual: {
 			uint8_t left = set.getInst(*current + 1);
 			uint8_t right = set.getInst(*current + 2);
 
@@ -103,11 +112,11 @@ void VirtualMachine::execute(InstructionSet& set) {
 			break;
 		}
 
-		case OpTestNotEqual: {
+		case OpLessThan: {
 			uint8_t left = set.getInst(*current + 1);
 			uint8_t right = set.getInst(*current + 2);
 
-			if (registers_[left] != registers_[right]) {
+			if (registers_[left] < registers_[right]) {
 				*current += vmOpCodeSize;
 			} else {
 				*current += 2 * vmOpCodeSize;
@@ -116,11 +125,25 @@ void VirtualMachine::execute(InstructionSet& set) {
 			break;
 		}
 
+		case OpLessThanOrEqual: {
+			uint8_t left = set.getInst(*current + 1);
+			uint8_t right = set.getInst(*current + 2);
+
+			if (registers_[left] <= registers_[right]) {
+				*current += vmOpCodeSize;
+			} else {
+				*current += 2 * vmOpCodeSize;
+			}
+
+			break;
+		}
 
 		case OpLoadConstant: {
 
-			uint8_t reg = set.getInst(*current + 1);
-			int constant = set.getInt(*current + 2);
+			int constant = set.getInt(*current + 1);
+			uint8_t reg = set.getInst(*current + 5);
+
+//			printf("Load constant %i to register slot %i (Type %i)\n", constant, reg, set.getConstantByte(constant));
 
 			switch (set.getConstantByte(constant)) {
 

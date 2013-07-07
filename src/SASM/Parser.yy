@@ -37,21 +37,21 @@ void Set(uint8_t* inst, int& current, long lval) {
 	current += sizeof(long);
 }
 
-void LoadInt(uint8_t reg, int val) {
+void LoadInt(int val, uint8_t dest) {
 
 	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
-	Set(buffer, current, (uint8_t) reg);
 	Set(buffer, current, (int) currentConstant);
+	Set(buffer, current, (uint8_t) dest);
 
 	Set(constant, currentConstant, (uint8_t) VM::CInt);
 	Set(constant, currentConstant, (int) val);
 }
 
-void LoadLong(uint8_t reg, long val) {
+void LoadLong(long val, uint8_t reg) {
 
 	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
-	Set(buffer, current, (uint8_t) reg);
 	Set(buffer, current, (int) currentConstant);
+	Set(buffer, current, (uint8_t) reg);
 
 	Set(constant, currentConstant, (uint8_t) VM::CLong);
 	Set(constant, currentConstant, (long) val);
@@ -80,18 +80,67 @@ void JumpDirect(int inst) {
 	Set(buffer, current, inst);
 }
 
+void JumpDirectRelative(int inst) {
+	Set(buffer, current, (uint8_t) VM::OpJump);
+	Set(buffer, current, (uint8_t) VM::DirectRelative);
+	Set(buffer, current, inst);
+}
+
+void JumpRegister(int reg) {
+	Set(buffer, current, (uint8_t) VM::OpJump);
+	Set(buffer, current, (uint8_t) VM::RegisterExact);
+	Set(buffer, current, reg);
+}
+
+void JumpRegisterRelative(int reg) {
+	Set(buffer, current, (uint8_t) VM::OpJump);
+	Set(buffer, current, (uint8_t) VM::RegisterRelative);
+	Set(buffer, current, reg);
+}
+
 void TestEqual(uint8_t left, uint8_t right) {
-	Set(buffer, current, (uint8_t) VM::OpTestEqual);
+	Set(buffer, current, (uint8_t) VM::OpEqual);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	current += 3;
 }
 
-void TestNotEqual(uint8_t left, uint8_t right) {
-	Set(buffer, current, (uint8_t) VM::OpTestNotEqual);
+void LessThan(uint8_t left, uint8_t right) {
+	Set(buffer, current, (uint8_t) VM::OpLessThan);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	current += 3;
+}
+
+void GreaterThan(uint8_t left, uint8_t right) {
+	Set(buffer, current, (uint8_t) VM::OpLessThanOrEqual);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	current += 3;
+	JumpDirectRelative(2);
+}
+
+void LessThanOrEqual(uint8_t left, uint8_t right) {
+	Set(buffer, current, (uint8_t) VM::OpLessThanOrEqual);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	current += 3;
+}
+
+void GreaterThanOrEqual(uint8_t left, uint8_t right) {
+	Set(buffer, current, (uint8_t) VM::OpLessThan);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	current += 3;
+	JumpDirectRelative(2);
+}
+
+void TestNotEqual(uint8_t left, uint8_t right) {
+	Set(buffer, current, (uint8_t) VM::OpEqual);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	current += 3;
+	JumpDirectRelative(2);
 }
 
 void Return() {
@@ -111,9 +160,9 @@ void Return() {
 
 %token <string> WORD STRING
 %token <real> REAL
-%token <integer> INT
+%token <integer> INT REG
 %token <lval> LONG
-%token LOAD REG ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN
+%token JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL GREATER_THAN GREATER_THAN_OR_EQUAL
 
 %type <int> Program
 
@@ -129,33 +178,60 @@ Program: {
 		buffer = new uint8_t[5000];
 		current = 0;
 		
-	} | Program LOAD INT REG INT {
-		LoadInt($5, $3);
-	} | Program LOAD LONG REG INT {
-		LoadLong($5, $3);
-	} | Program MOVE REG INT REG INT {
-		Move($4, $6);
-	} | Program ADD REG INT REG INT REG INT {
-		Add($4, $6, $8);
-	} | Program ADD REG INT INT REG INT {
-		LoadInt(VM::vmTempRegisterOne, $5);
-		Add($4, VM::vmTempRegisterOne, $7);
-	} | Program ADD INT INT REG INT {
-		LoadInt(VM::vmTempRegisterOne, $3);
-		LoadInt(VM::vmTempRegisterTwo, $4);
-		Add(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $6);
-	} | Program TEST_EQUAL REG INT REG INT {
-		TestEqual($4, $6);
-	} | Program TEST_EQUAL REG INT INT {
-		LoadInt(VM::vmTempRegisterOne, $5);
-		TestEqual($4, VM::vmTempRegisterOne);
-	} | Program TEST_NOT_EQUAL REG INT REG INT {
-		TestNotEqual($4, $6);
-	} | Program TEST_NOT_EQUAL REG INT INT {
-		LoadInt(VM::vmTempRegisterOne, $5);
-		TestNotEqual($4, VM::vmTempRegisterOne);
+	} | Program LOAD INT REG {
+		LoadInt($3, $4);
+	} | Program LOAD LONG REG {
+		LoadLong($3, $4);
+	} | Program MOVE REG REG {
+		Move($3, $4);
+	} | Program ADD REG REG REG {
+		Add($3, $4, $5);
+	} | Program ADD REG INT REG {
+		LoadInt($4, VM::vmTempRegisterOne);
+		Add($3, VM::vmTempRegisterOne, $5);
+	} | Program ADD INT INT REG {
+		LoadInt($3, VM::vmTempRegisterOne);
+		LoadInt($4, VM::vmTempRegisterTwo);
+		Add(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
+	} | Program TEST_EQUAL REG REG {
+		TestEqual($3, $4);
+	} | Program TEST_EQUAL REG INT {
+		LoadInt($4, VM::vmTempRegisterOne);
+		TestEqual($3, VM::vmTempRegisterOne);
+	} | Program TEST_NOT_EQUAL REG REG {
+		TestNotEqual($3, $4);
+	} | Program TEST_NOT_EQUAL REG INT {
+		LoadInt($4, VM::vmTempRegisterOne);
+		TestNotEqual($3, VM::vmTempRegisterOne);
+	} | Program LESS_THAN REG REG {
+		LessThan($3, $4);
+	} | Program LESS_THAN REG INT {
+		LoadInt($4, VM::vmTempRegisterOne);
+		LessThan($3, VM::vmTempRegisterOne);
+	} | Program GREATER_THAN REG REG {
+		GreaterThan($3, $4);
+	} | Program GREATER_THAN REG INT {
+		LoadInt($4, VM::vmTempRegisterOne);
+		GreaterThan($3, VM::vmTempRegisterOne);
+	} | Program LESS_THAN_OR_EQUAL REG REG {
+		LessThanOrEqual($3, $4);
+	} | Program LESS_THAN_OR_EQUAL REG INT {
+		LoadInt($4, VM::vmTempRegisterOne);
+		LessThanOrEqual($3, VM::vmTempRegisterOne);
+	} | Program GREATER_THAN_OR_EQUAL REG REG {
+		GreaterThanOrEqual($3, $4);
+	} | Program GREATER_THAN_OR_EQUAL REG INT {
+		LoadInt($4, VM::vmTempRegisterOne);
+		GreaterThanOrEqual($3, VM::vmTempRegisterOne);
 	} | Program JUMP INT {
 		JumpDirect($3);
+	} | Program JUMP_RELATIVE INT {
+		printf("%i\n", $3);
+		JumpDirectRelative($3);
+	} | Program JUMP REG {
+		JumpRegister($3);
+	} | Program JUMP_RELATIVE REG {
+		JumpRegisterRelative($3);
 	} | Program RETURN {
 		Return();
 	}

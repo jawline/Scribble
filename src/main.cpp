@@ -29,57 +29,80 @@ int main(int argc, char** argv) {
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
 
-	auto instructions = SimpleASM::Parser::parse("load 0 $6\n"
-			"add $6 1 $6\n"
-			"tneq $6 10\n"
-			"jump 1\n"
-			"ret\n");
+	/**
+	 auto instructions = SimpleASM::Parser::parse(
+	 "load 25 $6 #1\n"
+	 "load 100000 $7 #2\n"
+	 "load 0 $8 #3\n"
+	 "add $6 25 $6 #4\n"
+	 "add $6 150 $6 #5\n"
+	 "add $8 1 $8 #6\n"
+	 "lt $6 $7 #7\n"
+	 "jump 3 #8\n"
+	 "ret #9\n");
 
-	VM::VirtualMachine vm;
-	vm.execute(instructions);
+	 printf("Prepairing bytecode for execution\n");
 
-	/*
-	 if (argc != 2) {
-	 printf("Expected usage %s filename\n", argv[0]);
-	 return -1;
-	 }
+	 VM::VirtualMachine vm;
+	 vm.execute(instructions);*/
 
-	 NamespaceType builtinFunctions;
+	if (argc != 2) {
+		printf("Expected usage %s filename\n", argv[0]);
+		return -1;
+	}
 
-	 std::vector<SafeFunction> write;
-	 write.push_back(SmartPointer<Function>(new WriteFunction()));
-	 builtinFunctions["Write"] = NamespaceEntry(write);
+	NamespaceType builtinFunctions;
 
-	 std::vector<SafeFunction> string;
-	 string.push_back(SmartPointer<Function>(new IntToStringFunction()));
-	 string.push_back(SmartPointer<Function>(new BoolToStringFunction()));
-	 builtinFunctions["String"] = NamespaceEntry(string);
+	std::vector<SafeFunction> write;
+	write.push_back(SmartPointer<Function>(new WriteFunction()));
+	builtinFunctions["Write"] = NamespaceEntry(write);
 
-	 std::vector<SafeFunction> readLine;
-	 readLine.push_back(SP<Function>(new ReadLine()));
-	 builtinFunctions["ReadLine"] = readLine;
+	std::vector<SafeFunction> string;
+	string.push_back(SmartPointer<Function>(new IntToStringFunction()));
+	string.push_back(SmartPointer<Function>(new BoolToStringFunction()));
+	builtinFunctions["String"] = NamespaceEntry(string);
 
-	 std::vector<SafeFunction> mod;
-	 mod.push_back(new Modulo());
-	 builtinFunctions["Mod"] = NamespaceEntry(mod);
+	std::vector<SafeFunction> readLine;
+	readLine.push_back(SP<Function>(new ReadLine()));
+	builtinFunctions["ReadLine"] = readLine;
 
-	 std::vector<SafeFunction> randomInt;
-	 randomInt.push_back(SmartPointer<Function>(new RandomInt()));
-	 builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
+	std::vector<SafeFunction> mod;
+	mod.push_back(new Modulo());
+	builtinFunctions["Mod"] = NamespaceEntry(mod);
 
-	 std::map<std::string, NamespaceType> builtinNamespaces;
-	 builtinNamespaces["sys"] = builtinFunctions;
+	std::vector<SafeFunction> randomInt;
+	randomInt.push_back(SmartPointer<Function>(new RandomInt()));
+	builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
 
-	 SP<Function> entry;
+	std::map<std::string, NamespaceType> builtinNamespaces;
+	builtinNamespaces["sys"] = builtinFunctions;
 
-	 try {
-	 entry =
-	 Parser::compile(argv[1], builtinNamespaces)["main"].getFunctionSet()[0];
-	 } catch (ParserException& e) {
-	 printf("Unfortunately a parser error occurred because %s.\n", e.what());
-	 return -1;
-	 }
+	SP<Function> entry;
 
+	printf("Entry\n");
+
+	try {
+
+		entry =
+				Parser::compile(argv[1], builtinNamespaces)["main"].getFunctionSet()[0];
+
+		printf("Compiled %s\n", entry->debugCode().c_str());
+
+		auto instructions = SimpleASM::Parser::parse(entry->debugCode());
+
+		printf("Prepairing bytecode for execution\n");
+
+		VM::VirtualMachine vm;
+		vm.execute(instructions);
+
+	} catch (ParserException& e) {
+		printf("Unfortunately a parser error occurred because %s.\n", e.what());
+		return -1;
+	}
+
+	printf("Exit\n");
+
+	/**
 	 if (!entry.Null()) {
 
 	 try {
@@ -105,8 +128,7 @@ int main(int argc, char** argv) {
 	 "It appears that the main function was not declared within the scope");
 	 }
 
-	 valueHeap.freeAll();
-	 */
+	 valueHeap.freeAll(); */
 
 	return 0;
 }

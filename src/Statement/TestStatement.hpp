@@ -8,6 +8,7 @@
 #ifndef TESTSTATEMENT_HPP_
 #define TESTSTATEMENT_HPP_
 #include "Statement.hpp"
+#include <sstream>
 
 enum TestType {
 	TestEquals,
@@ -33,7 +34,7 @@ public:
 
 	Type* type();
 	void checkTree(Type* functionType);
-
+	int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* TESTSTATEMENT_HPP_ */

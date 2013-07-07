@@ -9,6 +9,7 @@
 #include <Value/Void.hpp>
 #include <Value/Bool.hpp>
 #include <Value/TypeManager.hpp>
+#include <sstream>
 
 WhileStatement::WhileStatement(int lineNo, std::string sym,
 		SafeStatement condition, std::vector<SafeStatement> statements) :
@@ -52,4 +53,37 @@ Value* WhileStatement::execute(std::vector<Value*> const& variables) {
 
 Type* WhileStatement::type() {
 	return getTypeManager().getType(Void);
+}
+
+int WhileStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	std::stringstream body;
+	int numInstr = 0;
+
+	body << "#while body\n";
+
+	for (unsigned int i = 0; i < statements_.size(); i++) {
+		numInstr += statements_[i]->generateCode(3, body);
+	}
+
+	int numBodyInstructions = numInstr;
+
+	generated << "#while conditions\n";
+	numInstr += condition_->generateCode(5, generated);
+
+	generated << "#while test condition result\n";
+	generated << "eq $5 0\n";
+	generated << "jmpr " << numBodyInstructions+2 << "\n";
+
+	numInstr += 2;
+
+	generated << body.str();
+
+	generated << "#return to sender\n";
+	generated << "jmpr -" << (numInstr + 1) << "\n";
+
+	numInstr++;
+
+	return numInstr;
 }

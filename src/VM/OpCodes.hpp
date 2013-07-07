@@ -16,8 +16,9 @@ enum OpCodes {
 	OpJump,
 	OpReturn,
 	OpAdd,
-	OpTestEqual,
-	OpTestNotEqual,
+	OpEqual,
+	OpLessThan,
+	OpLessThanOrEqual,
 };
 
 }

@@ -1,6 +1,7 @@
 #include "AssignVariable.hpp"
 #include "StatementException.hpp"
 #include <sstream>
+#include <VM/VirtualMachine.hpp>
 
 AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym,
 		SP<Variable> var, SafeStatement exp) :
@@ -25,4 +26,8 @@ void AssignVariableStatement::checkTree(Type* functionType) {
 				"Cannot assign statement to a variable of a different type");
 
 	}
+}
+
+int AssignVariableStatement::generateCode(int resultRegister, std::stringstream& generated) {
+	return exp_->generateCode(var_->getPosition() + VM::vmNumReservedRegisters, generated);
 }
