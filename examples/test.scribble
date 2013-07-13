@@ -2,10 +2,11 @@ import("sys")
 
 func main() {
 	
-	var d := 534
+	var d := 534;
+	var j := var r := 5;
 	
-	for var i := 200; i != 300; i++ {
-		d++
+	if true then {
+		j := 4;
 	}
 
 }

@@ -120,6 +120,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <statement> FunctionCall;
 %type <structureinfo> BaseStructureInfo;
 %type <statements> IfStatements
+%type <statement> Expression;
 
 %start Program
 %%
@@ -583,14 +584,31 @@ IfStatements: Statement {
 	}
 ;
 
-Statement: TRUE {
+Statement: Expression END {
+		$$ = $1;
+	} | Variable END {
+		$$ = new GetVariableStatement(scribble_lineno, scribble_text, *$1);
+		delete $1;
+	} | Variable ASSIGN Expression END {
+		$$ = new AssignVariableStatement(scribble_lineno, scribble_text, *$1, $3);
+		delete $1;
+	} | AutoVariable {
+		$$ = $1;
+	} | IF Expression THEN IfStatements  {
+		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, std::vector<SP<Statement>>());
+		delete $4;
+	} | IF Expression THEN IfStatements ELSE IfStatements {
+		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, *$6);
+		delete $4;
+		delete $6;
+	};
+
+Expression: TRUE {
 		$$ = new BoolStatement(scribble_lineno, scribble_text, true);
 	} | FALSE {
 		$$ = new BoolStatement(scribble_lineno, scribble_text, false);
 	} | INT {
 		$$ = new IntStatement(scribble_lineno, scribble_text, $1);
-	} | MINUS Statement {
-		$$ = new NegativeStatement(scribble_lineno, scribble_text, $2);
 	} | STRING {
 		
 		$$ = new StringStatement(scribble_lineno, scribble_text, *$1);
@@ -615,17 +633,6 @@ Statement: TRUE {
 		$$ = new GetArrayStatement(scribble_lineno, scribble_text, $1, $3); 
 	} | Statement LSQBRACKET Statement COLON Statement RSQBRACKET {
 		$$ = new ArraySliceStatement(scribble_lineno, scribble_text, $1, $3, $5);
-	} | THREAD LBRACKET Statements RBRACKET {
-		$$ = new ThreadStatement(scribble_lineno, scribble_text, *$3);
-		delete $3;
-	} | Variable {
-		$$ = new GetVariableStatement(scribble_lineno, scribble_text, *$1);
-		delete $1;
-	} | Variable ASSIGN Statement {
-		$$ = new AssignVariableStatement(scribble_lineno, scribble_text, *$1, $3);
-		delete $1;
-	} | AutoVariable {
-		$$ = $1;
 	} | WORD {
 
 		auto it = Variables.find(*$1);
@@ -642,13 +649,6 @@ Statement: TRUE {
 		
 	} | FunctionCall {
 		$$ = $1;
-	} | IF Statement THEN IfStatements  {
-		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, std::vector<SP<Statement>>());
-		delete $4;
-	} | IF Statement THEN IfStatements ELSE IfStatements {
-		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, *$6);
-		delete $4;
-		delete $6;
 	} | Statement PLUS Statement {
 		$$ = new OperateStatement(scribble_lineno, scribble_text, Add, $1, $3);
 	} | Statement MINUS Statement {
@@ -681,7 +681,7 @@ Statement: TRUE {
 		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreaterOrEqual, $1, $4);
 	} | LPAREN Statement RPAREN {
 		$$ = $2;
-	} | WORD ASSIGN Statement {
+	} | WORD ASSIGN Expression {
 		
 		auto it = Variables.find(*$1);
 
