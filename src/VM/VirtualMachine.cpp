@@ -64,6 +64,7 @@ void VirtualMachine::execute(InstructionSet& set) {
 				dOld = dOld + dRest;
 //				printf("%li\n", dOld);
 				*current = dOld;
+		//		printf("Jump direct relative to %li\n", ((long) dest));
 				break;
 			}
 

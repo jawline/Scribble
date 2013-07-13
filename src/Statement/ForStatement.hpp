@@ -25,6 +25,9 @@ public:
 	Value* execute(std::vector<Value*> const& variables);
 	Type* type();
 	void checkTree(Type* functionType);
+
+	virtual int generateBody(std::stringstream& generated);
+	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* FORSTATEMENT_HPP_ */

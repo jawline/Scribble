@@ -69,26 +69,37 @@ int IfStatement::generateCode(int resultRegister,
 	std::stringstream trueBody;
 
 	for (unsigned int i = 0; i < ifTrueStatements_.size(); i++) {
-		trueSize += ifTrueStatements_[i]->generateCode(5, generated);
+		trueSize += ifTrueStatements_[i]->generateCode(5, trueBody);
 	}
 
 	int falseSize = 0;
 	std::stringstream falseBody;
 
 	for (unsigned int i = 0; i < ifFalseStatements_.size(); ++i) {
-		falseSize += ifFalseStatements_[i]->generateCode(5, generated);
+		falseSize += ifFalseStatements_[i]->generateCode(5, falseBody);
 	}
 
 	int instrs = 0;
+
 	generated << "#if statement test\n";
 	instrs += condition_->generateCode(5, generated);
+
+	generated << "#if check test result\n";
+
+	generated << "neq $5 1\n";
+	generated << "jmpr " << (trueSize + 2) << "\n";
 
 	generated << "#if statement body\n";
 
 	generated << trueBody.str();
 	instrs += trueSize;
 
+	generated << "jmpr " << (falseSize + 1) << "\n";
+
 	generated << "#if statement false body\n";
+
+	generated << falseBody.str();
+	instrs += falseSize;
 
 	return instrs;
 }

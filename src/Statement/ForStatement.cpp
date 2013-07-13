@@ -64,3 +64,55 @@ void ForStatement::checkTree(Type* functionType) {
 				"For second paramater must evaluate to a boolean");
 	}
 }
+
+int ForStatement::generateBody(std::stringstream& generated) {
+
+	generated << "#FOR BODY\n";
+
+	int instrs = 0;
+
+	for (unsigned int i = 0; i < statements_.size(); ++i) {
+		instrs += statements_[i]->generateCode(5, generated);
+	}
+
+	//Add the final step to the body
+	generated << "#FOR STEP\n";
+	instrs += step_->generateCode(5, generated);
+
+	return instrs;
+}
+
+int ForStatement::generateCode(int resultRegister, std::stringstream& generated) {
+
+	//Generate the for setup (Run the initialising statement)
+	generated << "#FOR Setup\n";
+	int instrs = initial_->generateCode(5, generated);
+
+	//Store the number of instrs the setup has
+	int setupOffset = instrs;
+
+	//Generate the for test condition
+	generated << "#FOR CONDITION\n";
+	instrs += condition_->generateCode(5, generated);
+
+	//Generate the for body in a seperate stringstream
+	std::stringstream forbody;
+	int bodyInstrs = generateBody(forbody);
+
+	//Check whether that condition is true
+	generated << "#FOR CONTINUE TEST\n";
+	generated << "neq $5 1\n";
+	generated << "jmpr " << (bodyInstrs + 2) << "\n";
+	instrs += 3;
+
+	//Insert the body of the for into the code
+	instrs += bodyInstrs;
+
+	generated << forbody.str();
+
+	//Add the return jump
+	generated << "jmpr " << -((instrs - setupOffset)) << "\n";
+	instrs++;
+
+	return instrs;
+}

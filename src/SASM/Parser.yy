@@ -226,7 +226,6 @@ Program: {
 	} | Program JUMP INT {
 		JumpDirect($3);
 	} | Program JUMP_RELATIVE INT {
-		printf("%i\n", $3);
 		JumpDirectRelative($3);
 	} | Program JUMP REG {
 		JumpRegister($3);

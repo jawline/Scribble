@@ -1,13 +1,11 @@
 import("sys")
 
 func main() {
-
-	var j := true
-	var r := false
-	var result := 123
 	
-	if true = false then {
-		result := 345
-	} else result := 456
+	var d := 534
+	
+	for var i := 200; i != 300; i++ {
+		d++
+	}
 
 }
