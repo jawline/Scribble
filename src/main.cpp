@@ -92,8 +92,18 @@ int main(int argc, char** argv) {
 
 		printf("Prepairing bytecode for execution\n");
 
-		VM::VirtualMachine vm;
-		vm.execute(instructions);
+		 double treeStart = getCPUTime();
+		 valueHeap.free(entry->execute(std::vector<Value*>()));
+		 double treeEnd = getCPUTime();
+
+		 printf("Now in the VM\n");
+
+		 double vmStart = getCPUTime();
+		 VM::VirtualMachine vm;
+		 vm.execute(instructions);
+		 double vmEnd = getCPUTime();
+
+		 printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart, vmEnd - vmStart);
 
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());

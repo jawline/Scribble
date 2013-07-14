@@ -64,7 +64,7 @@ int WhileStatement::generateCode(int resultRegister,
 	body << "#while body\n";
 
 	for (unsigned int i = 0; i < statements_.size(); i++) {
-		numInstr += statements_[i]->generateCode(3, body);
+		numInstr += statements_[i]->generateCode(-1, body);
 	}
 
 	int numBodyInstructions = numInstr;

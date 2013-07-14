@@ -57,10 +57,25 @@ int OperateStatement::generateCode(int resultRegister,
 	}
 
 	case Add: {
-		generated << "add $3 $4 $5\n";
+		generated << "add $3 $4 $" << resultRegister << "\n";
 		instrs += 1;
+		break;
+	}
 
-		generated << "move $5 $" << resultRegister << "\n";
+	case Subtract: {
+		generated << "sub $3 $4 $" << resultRegister << "\n";
+		instrs += 1;
+		break;
+	}
+
+	case Multiply: {
+		generated << "mul $3 $4 $" << resultRegister << "\n";
+		instrs += 1;
+		break;
+	}
+
+	case Divide: {
+		generated << "div $3 $4 $" << resultRegister << "\n";
 		instrs += 1;
 		break;
 	}

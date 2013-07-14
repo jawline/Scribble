@@ -76,6 +76,7 @@ Type* IncrementStatement::type() {
 
 int IncrementStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
+
 	int instrs = 0;
 
 	switch (operator_) {
@@ -86,20 +87,26 @@ int IncrementStatement::generateCode(int resultRegister,
 
 			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
 					<< variable_->getPosition() + 6 << "\n";
+			instrs += 2;
 
-			generated << "move $" << variable_->getPosition() + 6 << " $"
-					<< resultRegister << "\n";
+			if (resultRegister != -1) {
+				generated << "move $" << variable_->getPosition() + 6 << " $"
+						<< resultRegister << "\n";
+				instrs += 1;
+			}
 
-			instrs += 3;
 		} else {
 
-			generated << "move $" << variable_->getPosition() + 6 << " $"
-					<< resultRegister << "\n";
+			if (resultRegister != -1) {
+				generated << "move $" << variable_->getPosition() + 6 << " $"
+						<< resultRegister << "\n";
+				instrs++;
+			}
 
 			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
 					<< variable_->getPosition() + 6 << "\n";
 
-			instrs += 3;
+			instrs += 2;
 		}
 
 		break;
@@ -108,22 +115,32 @@ int IncrementStatement::generateCode(int resultRegister,
 
 		if (post_) {
 
-			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
+			generated << "sub $" << variable_->getPosition() + 6 << " 1 $"
 					<< variable_->getPosition() + 6 << "\n";
 
-			generated << "sub $" << variable_->getPosition() + 6 << " $"
-					<< resultRegister << "\n";
+			instrs += 2;
 
-			instrs += 3;
+			if (resultRegister != -1) {
+				generated << "move $" << variable_->getPosition() + 6 << " $"
+						<< resultRegister << "\n";
+				instrs++;
+			}
+
 		} else {
 
-			generated << "move $" << variable_->getPosition() + 6 << " $"
-					<< resultRegister << "\n";
+			if (resultRegister != -1) {
+
+				generated << "move $" << variable_->getPosition() + 6 << " $"
+						<< resultRegister << "\n";
+
+				instrs++;
+
+			}
 
 			generated << "sub $" << variable_->getPosition() + 6 << " 1 $"
 					<< variable_->getPosition() + 6 << "\n";
 
-			instrs += 3;
+			instrs += 2;
 		}
 
 		break;

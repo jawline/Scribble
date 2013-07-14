@@ -20,8 +20,12 @@ void IntStatement::checkTree(Type* functionType) {
 int IntStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
-	generated << "load " << intValue_ << " $" << resultRegister << " #"
-			<< resultRegister << "\n";
+	if (resultRegister != -1) {
+
+		generated << "load " << intValue_ << " $" << resultRegister << " #"
+				<< resultRegister << "\n";
+
+	}
 
 	return 1;
 }

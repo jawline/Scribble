@@ -1,12 +1,15 @@
 import("sys")
 
 func main() {
+
+	var i : int;
+	var k : int;
 	
-	var d := 534;
-	var j := var r := 5;
+	for i := 0; i < 10000; i++ {
 	
-	if true then {
-		j := 4;
+		for k := 0; k < 2500; k++ {
+		}
+	
 	}
 
 }

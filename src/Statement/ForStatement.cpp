@@ -72,12 +72,12 @@ int ForStatement::generateBody(std::stringstream& generated) {
 	int instrs = 0;
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
-		instrs += statements_[i]->generateCode(5, generated);
+		instrs += statements_[i]->generateCode(-1, generated);
 	}
 
 	//Add the final step to the body
 	generated << "#FOR STEP\n";
-	instrs += step_->generateCode(5, generated);
+	instrs += step_->generateCode(-1, generated);
 
 	return instrs;
 }
@@ -86,7 +86,7 @@ int ForStatement::generateCode(int resultRegister, std::stringstream& generated)
 
 	//Generate the for setup (Run the initialising statement)
 	generated << "#FOR Setup\n";
-	int instrs = initial_->generateCode(5, generated);
+	int instrs = initial_->generateCode(-1, generated);
 
 	//Store the number of instrs the setup has
 	int setupOffset = instrs;

@@ -69,14 +69,14 @@ int IfStatement::generateCode(int resultRegister,
 	std::stringstream trueBody;
 
 	for (unsigned int i = 0; i < ifTrueStatements_.size(); i++) {
-		trueSize += ifTrueStatements_[i]->generateCode(5, trueBody);
+		trueSize += ifTrueStatements_[i]->generateCode(-1, trueBody);
 	}
 
 	int falseSize = 0;
 	std::stringstream falseBody;
 
 	for (unsigned int i = 0; i < ifFalseStatements_.size(); ++i) {
-		falseSize += ifFalseStatements_[i]->generateCode(5, falseBody);
+		falseSize += ifFalseStatements_[i]->generateCode(-1, falseBody);
 	}
 
 	int instrs = 0;

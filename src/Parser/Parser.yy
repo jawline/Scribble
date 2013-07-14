@@ -105,7 +105,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %left TIMES DIVIDE
 %left NEG
 %left TRUE FALSE EQUALS
-%right POWER ASSIGN RBRACKET LBRACKET
+%right POWER WORD
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -601,6 +601,12 @@ Statement: Expression END {
 		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, *$6);
 		delete $4;
 		delete $6;
+	} | FOR Expression END Expression END Expression LBRACKET Statements RBRACKET {
+		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$8);
+		delete $8;
+	} | WHILE Expression LBRACKET Statements RBRACKET {
+		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$4);
+		delete $4;
 	};
 
 Expression: TRUE {
@@ -622,16 +628,16 @@ Expression: TRUE {
 		delete $3;
 		delete $1;
 		
-	} | LENGTH LPAREN Statement RPAREN {
+	} | LENGTH LPAREN Expression RPAREN {
 		$$ = new ArrayLengthStatement(scribble_lineno, scribble_text, $3);
-	} | LSQBRACKET Statement RSQBRACKET Type {
+	} | LSQBRACKET Expression RSQBRACKET Type {
 		$$ = new ArrayStatement(scribble_lineno, scribble_text, getTypeManager().getType(Array, *$4), $2);
 		delete $4;
-	} | Statement LSQBRACKET Statement RSQBRACKET ASSIGN Statement{
+	} | Expression LSQBRACKET Expression RSQBRACKET ASSIGN Expression {
 		$$ = new AssignArrayStatement(scribble_lineno, scribble_text, $1, $6, $3); 
-	} | Statement LSQBRACKET Statement RSQBRACKET {
+	} | Expression LSQBRACKET Expression RSQBRACKET {
 		$$ = new GetArrayStatement(scribble_lineno, scribble_text, $1, $3); 
-	} | Statement LSQBRACKET Statement COLON Statement RSQBRACKET {
+	} | Expression LSQBRACKET Expression COLON Expression RSQBRACKET {
 		$$ = new ArraySliceStatement(scribble_lineno, scribble_text, $1, $3, $5);
 	} | WORD {
 
@@ -649,37 +655,31 @@ Expression: TRUE {
 		
 	} | FunctionCall {
 		$$ = $1;
-	} | Statement PLUS Statement {
+	} | Expression PLUS Expression {
 		$$ = new OperateStatement(scribble_lineno, scribble_text, Add, $1, $3);
-	} | Statement MINUS Statement {
+	} | Expression MINUS Expression {
 		$$ = new OperateStatement(scribble_lineno, scribble_text, Subtract, $1, $3);
-	} | Statement TIMES Statement {
+	} | Expression TIMES Expression {
 		$$ = new OperateStatement(scribble_lineno, scribble_text, Multiply, $1, $3);
-	} | Statement DIVIDE Statement {
+	} | Expression DIVIDE Expression {
 		$$ = new OperateStatement(scribble_lineno, scribble_text, Divide, $1, $3);
-	} | FOR Statement END Statement END Statement LBRACKET Statements RBRACKET {
-		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$8);
-		delete $8;
-	} | WHILE Statement LBRACKET Statements RBRACKET {
-		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$4);
-		delete $4;
-	} | NIL EQUALS Statement {
+	} | NIL EQUALS Expression {
 		$$ = new TestNilStatement(scribble_lineno, scribble_text, $3);
-	} | Statement EQUALS NIL {
+	} | Expression EQUALS NIL {
 		$$ = new TestNilStatement(scribble_lineno, scribble_text, $1);
-	} | Statement EQUALS Statement {
+	} | Expression EQUALS Expression {
 		$$ = new TestStatement(scribble_lineno, scribble_text, TestEquals, $1, $3);
-	} | Statement NOT EQUALS Statement {
+	} | Expression NOT EQUALS Expression {
 		$$ = new TestStatement(scribble_lineno, scribble_text, TestNotEquals, $1, $4);
-	} | Statement GREATER Statement {
+	} | Expression GREATER Expression {
 		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreater, $1, $3);
-	} | Statement LESSER Statement {
+	} | Expression LESSER Expression {
 		$$ = new TestStatement(scribble_lineno, scribble_text, TestLess, $1, $3);
-	} | Statement LESSER EQUALS Statement {
+	} | Expression LESSER EQUALS Expression {
 		$$ = new TestStatement(scribble_lineno, scribble_text, TestLessOrEqual, $1, $4);
-	} | Statement GREATER EQUALS Statement {
+	} | Expression GREATER EQUALS Expression {
 		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreaterOrEqual, $1, $4);
-	} | LPAREN Statement RPAREN {
+	} | LPAREN Expression RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Expression {
 		
@@ -745,9 +745,9 @@ Expression: TRUE {
 		
 		//Free name pointer
 		delete $2;
-	} | Statement AND Statement {
+	} | Expression AND Expression {
 		$$ = new AndStatement(scribble_lineno, scribble_text, $1, $3);
-	} | Statement POINT WORD {
+	} | Expression POINT WORD {
 		
 		$$ = new GetStructureElementStatement(scribble_lineno, scribble_text, $1, *$3);
 		
@@ -755,7 +755,7 @@ Expression: TRUE {
 		StatementReferences.push_back(r);
 		
 		delete $3;
-	} | Statement POINT WORD ASSIGN Statement {
+	} | Expression POINT WORD ASSIGN Expression {
 	
 		$$ = new StructureAssignElement(scribble_lineno, scribble_text, $1, $5, *$3);
 		
