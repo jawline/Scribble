@@ -17,8 +17,8 @@ enum ConstantType {
 	CInt,
 	CLong,
 	CFloat,
-	CDouble
-
+	CDouble,
+	CArray
 };
 
 }

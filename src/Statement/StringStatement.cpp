@@ -16,3 +16,8 @@ Value* StringStatement::execute(std::vector<Value*> const& variables) {
 void StringStatement::checkTree(Type* functionType) {
 
 }
+
+int StringStatement::generateCode(int resultRegister, std::stringstream& generated) {
+	generated << "load \"" << stringValue_ << "\" $" << resultRegister << "\n";
+	return 1;
+}

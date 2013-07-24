@@ -55,6 +55,10 @@ public:
 		return *(long*)(constants_ + index);
 	}
 
+	char* getConstantString(size_t index) {
+		return (char*)(constants_ + index);
+	}
+
 	uint8_t* instructions();
 	uint8_t* constants();
 };

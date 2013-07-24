@@ -45,6 +45,9 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "\n" ;
 "load" return LOAD;
 "add" return ADD;
+"sub" return SUBTRACT;
+"mul" return MULTIPLY;
+"div" return DIVIDE;
 "move" return MOVE;
 "push" return PUSH;
 "pop" return POP;
@@ -57,6 +60,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "ret" return RETURN;
 "jmp" return JUMP;
 "jmpr" return JUMP_RELATIVE;
+"newarray" return NEW_ARRAY;
 
 {register} {
 	SAVE_REG;

@@ -9,7 +9,9 @@
 #define VIRTUALMACHINE_HPP_
 #include "InstructionSet.hpp"
 #include <vector>
+#include <map>
 #include "Stack.hpp"
+#include "Heap.hpp"
 
 namespace VM {
 
@@ -27,6 +29,9 @@ class VirtualMachine {
 private:
 	uint8_t* stack_;
 	long* registers_;
+	bool* registerReference_;
+	Heap heap_;
+	std::map<std::string, SP<VMEntryType>> registeredTypes_;
 
 public:
 	VirtualMachine();
@@ -52,6 +57,8 @@ public:
 	}
 
 	virtual void execute(InstructionSet& set);
+	virtual void garbageCollection();
+
 	virtual void printState();
 };
 

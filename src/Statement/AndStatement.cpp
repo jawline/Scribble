@@ -13,7 +13,6 @@
 AndStatement::AndStatement(int lineNo, std::string sym,
 		SafeStatement leftHandSide, SafeStatement rightHandSide) :
 		Statement(lineNo, sym), lhs_(leftHandSide), rhs_(rightHandSide) {
-
 }
 
 AndStatement::~AndStatement() {

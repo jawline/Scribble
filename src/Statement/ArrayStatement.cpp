@@ -55,3 +55,6 @@ void ArrayStatement::checkTree(Type* functionType) {
 		throw new StatementException(this, "Error expected int for array size");
 	}
 }
+
+int ArrayStatement::generateCode(int resultRegister, std::stringstream& generated) {
+}

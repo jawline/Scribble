@@ -2,14 +2,17 @@ import("sys")
 
 func main() {
 
-	var i : int;
-	var k : int;
+	var j := [10]string;
 	
-	for i := 0; i < 10000; i++ {
+	j[0] := "Hello World";
+	j[1] := "Hello";
+	j[2] := "World";
+	j[3] := "DUn dun duuuun";
 	
-		for k := 0; k < 2500; k++ {
-		}
+	var n : int;
 	
+	for n := 4; n < 10; n++ {
+		j[n] := "Hello";
 	}
 
 }

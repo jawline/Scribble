@@ -37,6 +37,12 @@ void Set(uint8_t* inst, int& current, long lval) {
 	current += sizeof(long);
 }
 
+void Set(uint8_t* inst, int& current, char const* str) {
+	int size = strlen(str) + 1;
+	memcpy(inst + current, str, size);
+	current += size;
+}
+
 void LoadInt(int val, uint8_t dest) {
 
 	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
@@ -57,6 +63,31 @@ void LoadLong(long val, uint8_t reg) {
 	Set(constant, currentConstant, (long) val);
 }
 
+void Array(std::string type, int size, uint8_t reg) {
+
+	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
+	Set(buffer, current, (int) currentConstant);
+	Set(buffer, current, (uint8_t) reg);
+
+	Set(constant, currentConstant, (uint8_t) VM::CArray);
+	Set(constant, currentConstant, type.c_str());
+	Set(constant, currentConstant, size);
+	Set(constant, currentConstant, 0);
+}
+
+void LoadString(char const* str, uint8_t reg) {
+
+	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
+	Set(buffer, current, (int) currentConstant);
+	Set(buffer, current, (uint8_t) reg);
+
+	Set(constant, currentConstant, (uint8_t) VM::CArray);
+	Set(constant, currentConstant, "string");
+	Set(constant, currentConstant, (int)(strlen(str) + 1));
+	Set(constant, currentConstant, (int)(strlen(str) + 1));
+	Set(constant, currentConstant, str);
+}
+
 void Add(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, (uint8_t) VM::OpAdd);
 	Set(buffer, current, left);
@@ -64,6 +95,32 @@ void Add(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, dest);
 	current += 2;
 }
+
+void Subtract(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpSub);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 2;
+}
+
+void Multiply(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpMul);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 2;
+}
+
+
+void Divide(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpDiv);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 2;
+}
+
 
 void Move(uint8_t target, uint8_t dest) {
 
@@ -162,7 +219,7 @@ void Return() {
 %token <real> REAL
 %token <integer> INT REG
 %token <lval> LONG
-%token JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL GREATER_THAN GREATER_THAN_OR_EQUAL
+%token JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -178,10 +235,16 @@ Program: {
 		buffer = new uint8_t[5000];
 		current = 0;
 		
+	} | Program NEW_ARRAY STRING INT REG {
+		Array(*$3, $4, $5);
+		delete $3;
 	} | Program LOAD INT REG {
 		LoadInt($3, $4);
 	} | Program LOAD LONG REG {
 		LoadLong($3, $4);
+	} | Program LOAD STRING REG {
+		LoadString($3->c_str(), $4);
+		delete $3;
 	} | Program MOVE REG REG {
 		Move($3, $4);
 	} | Program ADD REG REG REG {
@@ -193,6 +256,33 @@ Program: {
 		LoadInt($3, VM::vmTempRegisterOne);
 		LoadInt($4, VM::vmTempRegisterTwo);
 		Add(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
+	} | Program SUBTRACT REG REG REG {
+		Subtract($3, $4, $5);
+	} | Program SUBTRACT REG INT REG {
+		LoadInt($4, VM::vmTempRegisterOne);
+		Subtract($3, VM::vmTempRegisterOne, $5);
+	} | Program SUBTRACT INT INT REG {
+		LoadInt($3, VM::vmTempRegisterOne);
+		LoadInt($4, VM::vmTempRegisterTwo);
+		Subtract(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
+	} | Program MULTIPLY REG REG REG {
+		Multiply($3, $4, $5);
+	} | Program MULTIPLY REG INT REG {
+		LoadInt($4, VM::vmTempRegisterOne);
+		Multiply($3, VM::vmTempRegisterOne, $5);
+	} | Program MULTIPLY INT INT REG {
+		LoadInt($3, VM::vmTempRegisterOne);
+		LoadInt($4, VM::vmTempRegisterTwo);
+		Multiply(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
+	} | Program DIVIDE REG REG REG {
+		Divide($3, $4, $5);
+	} | Program DIVIDE REG INT REG {
+		LoadInt($4, VM::vmTempRegisterOne);
+		Divide($3, VM::vmTempRegisterOne, $5);
+	} | Program DIVIDE INT INT REG {
+		LoadInt($3, VM::vmTempRegisterOne);
+		LoadInt($4, VM::vmTempRegisterTwo);
+		Divide(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
 	} | Program TEST_EQUAL REG REG {
 		TestEqual($3, $4);
 	} | Program TEST_EQUAL REG INT {
