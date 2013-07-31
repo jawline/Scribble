@@ -1,0 +1,28 @@
+#ifndef _FUNCTION_STATEMENT_H_
+#define _FUNCTION_STATEMENT_H_
+#include "Statement.hpp"
+#include <Scribble/Statement/Heap.hpp>
+#include <Pointers/SmartPointer.hpp>
+#include <Scribble/Function/Function.hpp>
+#include <Scribble/Function/FunctionReference.hpp>
+#include <stdio.h>
+#include <vector>
+
+class FunctionStatement: public Statement {
+private:
+	SmartPointer<FunctionReference> func_;
+
+public:
+	FunctionStatement(int lineNo, std::string sym,
+			SmartPointer<FunctionReference> function) :
+			Statement(lineNo, sym) {
+		func_ = function;
+	}
+
+	virtual Value* execute(std::vector<Value*> const& variables);
+	Type* type();
+
+	void checkTree(Type* functionType);
+};
+
+#endif //_FUNCTION_STATEMENT_H

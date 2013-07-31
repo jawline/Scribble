@@ -74,7 +74,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 268 of yacc.c  */
-#line 5 "./src/Parser/Parser.yy"
+#line 5 "./src/Scribble/Parser/Parser.yy"
 
 #include <math.h>
 #include <stdio.h>
@@ -82,44 +82,44 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Statement/ThreadStatement.hpp>
-#include <Statement/BoolStatement.hpp>
-#include <Statement/IntStatement.hpp>
-#include <Statement/OperateStatement.hpp>
-#include <Statement/StringStatement.hpp>
-#include <Statement/AssignVariable.hpp>
-#include <Statement/GetVariableStatement.hpp>
-#include <Statement/FunctionStatement.hpp>
-#include <Statement/AndStatement.hpp>
-#include <Statement/ForStatement.hpp>
-#include <Statement/TestStatement.hpp>
-#include <Statement/IfStatement.hpp>
-#include <Statement/OperateStatement.hpp>
-#include <Statement/ReturnStatement.hpp>
-#include <Statement/TestNilStatement.hpp>
-#include <Statement/WhileStatement.hpp>
-#include <Statement/IncrementStatement.hpp>
-#include <Statement/ArrayStatement.hpp>
-#include <Statement/ArraySliceStatement.hpp>
-#include <Statement/AssignArrayStatement.hpp>
-#include <Statement/GetArrayStatement.hpp>
-#include <Statement/ArrayLengthStatement.hpp>
-#include <Statement/NegativeStatement.hpp>
-#include <Statement/StructureStatement.hpp>
-#include <Statement/GetStructureElementStatement.hpp>
-#include <Statement/StructureAssignElement.hpp>
-#include <Parser/TypeReference.hpp>
+#include <Scribble/Statement/ThreadStatement.hpp>
+#include <Scribble/Statement/BoolStatement.hpp>
+#include <Scribble/Statement/IntStatement.hpp>
+#include <Scribble/Statement/OperateStatement.hpp>
+#include <Scribble/Statement/StringStatement.hpp>
+#include <Scribble/Statement/AssignVariable.hpp>
+#include <Scribble/Statement/GetVariableStatement.hpp>
+#include <Scribble/Statement/FunctionStatement.hpp>
+#include <Scribble/Statement/AndStatement.hpp>
+#include <Scribble/Statement/ForStatement.hpp>
+#include <Scribble/Statement/TestStatement.hpp>
+#include <Scribble/Statement/IfStatement.hpp>
+#include <Scribble/Statement/OperateStatement.hpp>
+#include <Scribble/Statement/ReturnStatement.hpp>
+#include <Scribble/Statement/TestNilStatement.hpp>
+#include <Scribble/Statement/WhileStatement.hpp>
+#include <Scribble/Statement/IncrementStatement.hpp>
+#include <Scribble/Statement/ArrayStatement.hpp>
+#include <Scribble/Statement/ArraySliceStatement.hpp>
+#include <Scribble/Statement/AssignArrayStatement.hpp>
+#include <Scribble/Statement/GetArrayStatement.hpp>
+#include <Scribble/Statement/ArrayLengthStatement.hpp>
+#include <Scribble/Statement/NegativeStatement.hpp>
+#include <Scribble/Statement/StructureStatement.hpp>
+#include <Scribble/Statement/GetStructureElementStatement.hpp>
+#include <Scribble/Statement/StructureAssignElement.hpp>
+#include <Scribble/Parser/TypeReference.hpp>
 #include <Pointers/SmartPointer.hpp>
-#include <Function/Function.hpp>
-#include <Function/ScriptedFunction.hpp>
-#include <Function/WriteFunction.hpp>
-#include <Value/TypeManager.hpp>
-#include <Value/Util.hpp>
-#include <Parser/Parser.hpp>
-#include <Value/StructureInfo.hpp>
+#include <Scribble/Function/Function.hpp>
+#include <Scribble/Function/ScriptedFunction.hpp>
+#include <Scribble/Function/WriteFunction.hpp>
+#include <Scribble/Value/TypeManager.hpp>
+#include <Scribble/Value/Util.hpp>
+#include <Scribble/Parser/Parser.hpp>
+#include <Scribble/Value/StructureInfo.hpp>
 
-#include <Value/Variable.hpp>
-#include <Value/String.hpp>
+#include <Scribble/Value/Variable.hpp>
+#include <Scribble/Value/String.hpp>
 
 int scribble_lex();
 void scribble_error(const char* s);
@@ -241,7 +241,7 @@ typedef union YYSTYPE
 {
 
 /* Line 293 of yacc.c  */
-#line 81 "./src/Parser/Parser.yy"
+#line 81 "./src/Scribble/Parser/Parser.yy"
 
 	std::vector<SmartPointer<Statement>>* statements;
 	std::vector<SmartPointer<Variable>>* variables;
@@ -1866,7 +1866,7 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 128 "./src/Parser/Parser.yy"
+#line 128 "./src/Scribble/Parser/Parser.yy"
     {
 		Variables.clear();
 		(yyval.statements) = 0;
@@ -1876,7 +1876,7 @@ yyreduce:
   case 3:
 
 /* Line 1806 of yacc.c  */
-#line 131 "./src/Parser/Parser.yy"
+#line 131 "./src/Scribble/Parser/Parser.yy"
     {
 		ImportList.push_back(*(yyvsp[(4) - (5)].string));
 		delete (yyvsp[(4) - (5)].string);
@@ -1887,7 +1887,7 @@ yyreduce:
   case 4:
 
 /* Line 1806 of yacc.c  */
-#line 135 "./src/Parser/Parser.yy"
+#line 135 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = 0;
 	}
@@ -1896,7 +1896,7 @@ yyreduce:
   case 5:
 
 /* Line 1806 of yacc.c  */
-#line 137 "./src/Parser/Parser.yy"
+#line 137 "./src/Scribble/Parser/Parser.yy"
     {
 		Functions[*(yyvsp[(3) - (5)].string)] = NamespaceEntry(*(yyvsp[(5) - (5)].type));
 		delete (yyvsp[(3) - (5)].string);
@@ -1907,7 +1907,7 @@ yyreduce:
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 141 "./src/Parser/Parser.yy"
+#line 141 "./src/Scribble/Parser/Parser.yy"
     {
 		Functions[*(yyvsp[(3) - (8)].string)] = NamespaceEntry(TypeReference(new TypeReferenceCore(*(yyvsp[(3) - (8)].string), (yyvsp[(7) - (8)].structureinfo))));
 		delete (yyvsp[(3) - (8)].string);
@@ -1917,7 +1917,7 @@ yyreduce:
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 147 "./src/Parser/Parser.yy"
+#line 147 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.structureinfo) = new StructureInfo();
 	}
@@ -1926,7 +1926,7 @@ yyreduce:
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 149 "./src/Parser/Parser.yy"
+#line 149 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyvsp[(1) - (4)].structureinfo)->addInfo(*(yyvsp[(2) - (4)].string), *(yyvsp[(4) - (4)].type));
 		delete (yyvsp[(2) - (4)].string);
@@ -1937,7 +1937,7 @@ yyreduce:
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 156 "./src/Parser/Parser.yy"
+#line 156 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.type) = new TypeReference( new TypeReferenceCore ( "", getTypeManager().getType(Int) ) );
 	}
@@ -1946,7 +1946,7 @@ yyreduce:
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 158 "./src/Parser/Parser.yy"
+#line 158 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.type) = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(String) ) );
 	}
@@ -1955,7 +1955,7 @@ yyreduce:
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 160 "./src/Parser/Parser.yy"
+#line 160 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.type) = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Boolean) ) );
 	}
@@ -1964,7 +1964,7 @@ yyreduce:
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 162 "./src/Parser/Parser.yy"
+#line 162 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.type) = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Void) ) );
 	}
@@ -1973,7 +1973,7 @@ yyreduce:
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 164 "./src/Parser/Parser.yy"
+#line 164 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.type) = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Array, *(yyvsp[(3) - (4)].type)) ) );
 		delete (yyvsp[(3) - (4)].type);
@@ -1983,7 +1983,7 @@ yyreduce:
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 167 "./src/Parser/Parser.yy"
+#line 167 "./src/Scribble/Parser/Parser.yy"
     {
 	
 		(yyval.type) = new TypeReference ( new TypeReferenceCore( *(yyvsp[(1) - (3)].string), *(yyvsp[(3) - (3)].string), nullptr) );
@@ -1997,7 +1997,7 @@ yyreduce:
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 174 "./src/Parser/Parser.yy"
+#line 174 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		/**
@@ -2018,7 +2018,7 @@ yyreduce:
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 191 "./src/Parser/Parser.yy"
+#line 191 "./src/Scribble/Parser/Parser.yy"
     {
 
 		printf("TODO: Check no variable is declared as void\n");
@@ -2043,7 +2043,7 @@ yyreduce:
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 212 "./src/Parser/Parser.yy"
+#line 212 "./src/Scribble/Parser/Parser.yy"
     {
 
 		auto it = Variables.find(*(yyvsp[(2) - (4)].string));
@@ -2071,7 +2071,7 @@ yyreduce:
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 236 "./src/Parser/Parser.yy"
+#line 236 "./src/Scribble/Parser/Parser.yy"
     {
 
 		auto it = Variables.find(*(yyvsp[(1) - (3)].string));
@@ -2094,7 +2094,7 @@ yyreduce:
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 255 "./src/Parser/Parser.yy"
+#line 255 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.variables) = new std::vector<SP<Variable>>();
 		(yyval.variables)->push_back(*(yyvsp[(1) - (1)].variable));
@@ -2105,7 +2105,7 @@ yyreduce:
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 259 "./src/Parser/Parser.yy"
+#line 259 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.variables) = (yyvsp[(1) - (3)].variables);
 		(yyval.variables)->push_back(*(yyvsp[(3) - (3)].variable));
@@ -2116,7 +2116,7 @@ yyreduce:
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 266 "./src/Parser/Parser.yy"
+#line 266 "./src/Scribble/Parser/Parser.yy"
     {
 		std::vector<SP<Variable>> values;
 
@@ -2181,7 +2181,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 324 "./src/Parser/Parser.yy"
+#line 324 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		std::vector<SP<Variable>> values;
@@ -2239,7 +2239,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 375 "./src/Parser/Parser.yy"
+#line 375 "./src/Scribble/Parser/Parser.yy"
     {
 		std::vector<SP<Variable>> values;
 
@@ -2302,7 +2302,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 431 "./src/Parser/Parser.yy"
+#line 431 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		std::vector<SP<Variable>> values;
@@ -2360,7 +2360,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 485 "./src/Parser/Parser.yy"
+#line 485 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = new std::vector<SmartPointer<Statement>>();
 		(yyval.statements)->push_back((yyvsp[(1) - (1)].statement));
@@ -2370,7 +2370,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 488 "./src/Parser/Parser.yy"
+#line 488 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(1) - (3)].statements);
 		(yyval.statements)->push_back((yyvsp[(3) - (3)].statement));
@@ -2380,7 +2380,7 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 494 "./src/Parser/Parser.yy"
+#line 494 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = new std::vector<SmartPointer<Statement>>();
 	}
@@ -2389,7 +2389,7 @@ yyreduce:
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 496 "./src/Parser/Parser.yy"
+#line 496 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(1) - (2)].statements);
 		(yyval.statements)->push_back((yyvsp[(2) - (2)].statement));
@@ -2399,7 +2399,7 @@ yyreduce:
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 499 "./src/Parser/Parser.yy"
+#line 499 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(1) - (3)].statements);
 		(yyval.statements)->push_back(new ReturnStatement(scribble_lineno, scribble_text, (yyvsp[(3) - (3)].statement)));
@@ -2409,7 +2409,7 @@ yyreduce:
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 502 "./src/Parser/Parser.yy"
+#line 502 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(1) - (2)].statements);
 		(yyval.statements)->push_back(new ReturnStatement(scribble_lineno, scribble_text, nullptr));
@@ -2419,7 +2419,7 @@ yyreduce:
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 508 "./src/Parser/Parser.yy"
+#line 508 "./src/Scribble/Parser/Parser.yy"
     {
 	
 		std::vector<SmartPointer<Statement>> args;
@@ -2446,7 +2446,7 @@ yyreduce:
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 528 "./src/Parser/Parser.yy"
+#line 528 "./src/Scribble/Parser/Parser.yy"
     {
 		std::vector<SmartPointer<Statement>> args;
 		
@@ -2466,7 +2466,7 @@ yyreduce:
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 541 "./src/Parser/Parser.yy"
+#line 541 "./src/Scribble/Parser/Parser.yy"
     {
 	
 		std::vector<SmartPointer<Statement>> args;
@@ -2494,7 +2494,7 @@ yyreduce:
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 562 "./src/Parser/Parser.yy"
+#line 562 "./src/Scribble/Parser/Parser.yy"
     {
 		std::vector<SmartPointer<Statement>> args;
 		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*(yyvsp[(1) - (5)].string), *(yyvsp[(3) - (5)].string), args, 0));
@@ -2514,7 +2514,7 @@ yyreduce:
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 578 "./src/Parser/Parser.yy"
+#line 578 "./src/Scribble/Parser/Parser.yy"
     {
 		std::vector<SafeStatement>* stmts = new std::vector<SafeStatement>();
 		stmts->push_back((yyvsp[(1) - (1)].statement));
@@ -2525,7 +2525,7 @@ yyreduce:
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 582 "./src/Parser/Parser.yy"
+#line 582 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statements) = (yyvsp[(2) - (3)].statements);
 	}
@@ -2534,7 +2534,7 @@ yyreduce:
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 587 "./src/Parser/Parser.yy"
+#line 587 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(1) - (2)].statement);
 	}
@@ -2543,7 +2543,7 @@ yyreduce:
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 589 "./src/Parser/Parser.yy"
+#line 589 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new GetVariableStatement(scribble_lineno, scribble_text, *(yyvsp[(1) - (2)].variable));
 		delete (yyvsp[(1) - (2)].variable);
@@ -2553,7 +2553,7 @@ yyreduce:
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 592 "./src/Parser/Parser.yy"
+#line 592 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new AssignVariableStatement(scribble_lineno, scribble_text, *(yyvsp[(1) - (4)].variable), (yyvsp[(3) - (4)].statement));
 		delete (yyvsp[(1) - (4)].variable);
@@ -2563,7 +2563,7 @@ yyreduce:
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 595 "./src/Parser/Parser.yy"
+#line 595 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(1) - (1)].statement);
 	}
@@ -2572,7 +2572,7 @@ yyreduce:
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 597 "./src/Parser/Parser.yy"
+#line 597 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new IfStatement(scribble_lineno, scribble_text, (yyvsp[(2) - (4)].statement), *(yyvsp[(4) - (4)].statements), std::vector<SP<Statement>>());
 		delete (yyvsp[(4) - (4)].statements);
@@ -2582,7 +2582,7 @@ yyreduce:
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 600 "./src/Parser/Parser.yy"
+#line 600 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new IfStatement(scribble_lineno, scribble_text, (yyvsp[(2) - (6)].statement), *(yyvsp[(4) - (6)].statements), *(yyvsp[(6) - (6)].statements));
 		delete (yyvsp[(4) - (6)].statements);
@@ -2593,7 +2593,7 @@ yyreduce:
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 604 "./src/Parser/Parser.yy"
+#line 604 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new ForStatement(scribble_lineno, scribble_text, (yyvsp[(2) - (9)].statement), (yyvsp[(4) - (9)].statement), (yyvsp[(6) - (9)].statement), *(yyvsp[(8) - (9)].statements));
 		delete (yyvsp[(8) - (9)].statements);
@@ -2603,7 +2603,7 @@ yyreduce:
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 607 "./src/Parser/Parser.yy"
+#line 607 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new WhileStatement(scribble_lineno, scribble_text, (yyvsp[(2) - (5)].statement), *(yyvsp[(4) - (5)].statements));
 		delete (yyvsp[(4) - (5)].statements);
@@ -2613,7 +2613,7 @@ yyreduce:
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 612 "./src/Parser/Parser.yy"
+#line 612 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new BoolStatement(scribble_lineno, scribble_text, true);
 	}
@@ -2622,7 +2622,7 @@ yyreduce:
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 614 "./src/Parser/Parser.yy"
+#line 614 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new BoolStatement(scribble_lineno, scribble_text, false);
 	}
@@ -2631,7 +2631,7 @@ yyreduce:
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 616 "./src/Parser/Parser.yy"
+#line 616 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new IntStatement(scribble_lineno, scribble_text, (yyvsp[(1) - (1)].integer));
 	}
@@ -2640,7 +2640,7 @@ yyreduce:
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 618 "./src/Parser/Parser.yy"
+#line 618 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		(yyval.statement) = new StringStatement(scribble_lineno, scribble_text, *(yyvsp[(1) - (1)].string));
@@ -2654,7 +2654,7 @@ yyreduce:
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 625 "./src/Parser/Parser.yy"
+#line 625 "./src/Scribble/Parser/Parser.yy"
     {
 	
 		(yyval.statement) = new StructureStatement(scribble_lineno, scribble_text, *(yyvsp[(1) - (4)].type), *(yyvsp[(3) - (4)].statements));
@@ -2667,7 +2667,7 @@ yyreduce:
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 631 "./src/Parser/Parser.yy"
+#line 631 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new ArrayLengthStatement(scribble_lineno, scribble_text, (yyvsp[(3) - (4)].statement));
 	}
@@ -2676,7 +2676,7 @@ yyreduce:
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 633 "./src/Parser/Parser.yy"
+#line 633 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new ArrayStatement(scribble_lineno, scribble_text, getTypeManager().getType(Array, *(yyvsp[(4) - (4)].type)), (yyvsp[(2) - (4)].statement));
 		delete (yyvsp[(4) - (4)].type);
@@ -2686,7 +2686,7 @@ yyreduce:
   case 52:
 
 /* Line 1806 of yacc.c  */
-#line 636 "./src/Parser/Parser.yy"
+#line 636 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new AssignArrayStatement(scribble_lineno, scribble_text, (yyvsp[(1) - (6)].statement), (yyvsp[(6) - (6)].statement), (yyvsp[(3) - (6)].statement)); 
 	}
@@ -2695,7 +2695,7 @@ yyreduce:
   case 53:
 
 /* Line 1806 of yacc.c  */
-#line 638 "./src/Parser/Parser.yy"
+#line 638 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new GetArrayStatement(scribble_lineno, scribble_text, (yyvsp[(1) - (4)].statement), (yyvsp[(3) - (4)].statement)); 
 	}
@@ -2704,7 +2704,7 @@ yyreduce:
   case 54:
 
 /* Line 1806 of yacc.c  */
-#line 640 "./src/Parser/Parser.yy"
+#line 640 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new ArraySliceStatement(scribble_lineno, scribble_text, (yyvsp[(1) - (6)].statement), (yyvsp[(3) - (6)].statement), (yyvsp[(5) - (6)].statement));
 	}
@@ -2713,7 +2713,7 @@ yyreduce:
   case 55:
 
 /* Line 1806 of yacc.c  */
-#line 642 "./src/Parser/Parser.yy"
+#line 642 "./src/Scribble/Parser/Parser.yy"
     {
 
 		auto it = Variables.find(*(yyvsp[(1) - (1)].string));
@@ -2734,7 +2734,7 @@ yyreduce:
   case 56:
 
 /* Line 1806 of yacc.c  */
-#line 656 "./src/Parser/Parser.yy"
+#line 656 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(1) - (1)].statement);
 	}
@@ -2743,7 +2743,7 @@ yyreduce:
   case 57:
 
 /* Line 1806 of yacc.c  */
-#line 658 "./src/Parser/Parser.yy"
+#line 658 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(scribble_lineno, scribble_text, Add, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2752,7 +2752,7 @@ yyreduce:
   case 58:
 
 /* Line 1806 of yacc.c  */
-#line 660 "./src/Parser/Parser.yy"
+#line 660 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(scribble_lineno, scribble_text, Subtract, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2761,7 +2761,7 @@ yyreduce:
   case 59:
 
 /* Line 1806 of yacc.c  */
-#line 662 "./src/Parser/Parser.yy"
+#line 662 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(scribble_lineno, scribble_text, Multiply, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2770,7 +2770,7 @@ yyreduce:
   case 60:
 
 /* Line 1806 of yacc.c  */
-#line 664 "./src/Parser/Parser.yy"
+#line 664 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new OperateStatement(scribble_lineno, scribble_text, Divide, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2779,7 +2779,7 @@ yyreduce:
   case 61:
 
 /* Line 1806 of yacc.c  */
-#line 666 "./src/Parser/Parser.yy"
+#line 666 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestNilStatement(scribble_lineno, scribble_text, (yyvsp[(3) - (3)].statement));
 	}
@@ -2788,7 +2788,7 @@ yyreduce:
   case 62:
 
 /* Line 1806 of yacc.c  */
-#line 668 "./src/Parser/Parser.yy"
+#line 668 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestNilStatement(scribble_lineno, scribble_text, (yyvsp[(1) - (3)].statement));
 	}
@@ -2797,7 +2797,7 @@ yyreduce:
   case 63:
 
 /* Line 1806 of yacc.c  */
-#line 670 "./src/Parser/Parser.yy"
+#line 670 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(scribble_lineno, scribble_text, TestEquals, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2806,7 +2806,7 @@ yyreduce:
   case 64:
 
 /* Line 1806 of yacc.c  */
-#line 672 "./src/Parser/Parser.yy"
+#line 672 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(scribble_lineno, scribble_text, TestNotEquals, (yyvsp[(1) - (4)].statement), (yyvsp[(4) - (4)].statement));
 	}
@@ -2815,7 +2815,7 @@ yyreduce:
   case 65:
 
 /* Line 1806 of yacc.c  */
-#line 674 "./src/Parser/Parser.yy"
+#line 674 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(scribble_lineno, scribble_text, TestGreater, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2824,7 +2824,7 @@ yyreduce:
   case 66:
 
 /* Line 1806 of yacc.c  */
-#line 676 "./src/Parser/Parser.yy"
+#line 676 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(scribble_lineno, scribble_text, TestLess, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2833,7 +2833,7 @@ yyreduce:
   case 67:
 
 /* Line 1806 of yacc.c  */
-#line 678 "./src/Parser/Parser.yy"
+#line 678 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(scribble_lineno, scribble_text, TestLessOrEqual, (yyvsp[(1) - (4)].statement), (yyvsp[(4) - (4)].statement));
 	}
@@ -2842,7 +2842,7 @@ yyreduce:
   case 68:
 
 /* Line 1806 of yacc.c  */
-#line 680 "./src/Parser/Parser.yy"
+#line 680 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new TestStatement(scribble_lineno, scribble_text, TestGreaterOrEqual, (yyvsp[(1) - (4)].statement), (yyvsp[(4) - (4)].statement));
 	}
@@ -2851,7 +2851,7 @@ yyreduce:
   case 69:
 
 /* Line 1806 of yacc.c  */
-#line 682 "./src/Parser/Parser.yy"
+#line 682 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = (yyvsp[(2) - (3)].statement);
 	}
@@ -2860,7 +2860,7 @@ yyreduce:
   case 70:
 
 /* Line 1806 of yacc.c  */
-#line 684 "./src/Parser/Parser.yy"
+#line 684 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		auto it = Variables.find(*(yyvsp[(1) - (3)].string));
@@ -2880,7 +2880,7 @@ yyreduce:
   case 71:
 
 /* Line 1806 of yacc.c  */
-#line 697 "./src/Parser/Parser.yy"
+#line 697 "./src/Scribble/Parser/Parser.yy"
     {
 	
 		auto it = Variables.find(*(yyvsp[(1) - (2)].string));
@@ -2900,7 +2900,7 @@ yyreduce:
   case 72:
 
 /* Line 1806 of yacc.c  */
-#line 710 "./src/Parser/Parser.yy"
+#line 710 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		auto it = Variables.find(*(yyvsp[(2) - (2)].string));
@@ -2920,7 +2920,7 @@ yyreduce:
   case 73:
 
 /* Line 1806 of yacc.c  */
-#line 723 "./src/Parser/Parser.yy"
+#line 723 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		auto it = Variables.find(*(yyvsp[(1) - (2)].string));
@@ -2940,7 +2940,7 @@ yyreduce:
   case 74:
 
 /* Line 1806 of yacc.c  */
-#line 736 "./src/Parser/Parser.yy"
+#line 736 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		auto it = Variables.find(*(yyvsp[(2) - (2)].string));
@@ -2959,7 +2959,7 @@ yyreduce:
   case 75:
 
 /* Line 1806 of yacc.c  */
-#line 748 "./src/Parser/Parser.yy"
+#line 748 "./src/Scribble/Parser/Parser.yy"
     {
 		(yyval.statement) = new AndStatement(scribble_lineno, scribble_text, (yyvsp[(1) - (3)].statement), (yyvsp[(3) - (3)].statement));
 	}
@@ -2968,7 +2968,7 @@ yyreduce:
   case 76:
 
 /* Line 1806 of yacc.c  */
-#line 750 "./src/Parser/Parser.yy"
+#line 750 "./src/Scribble/Parser/Parser.yy"
     {
 		
 		(yyval.statement) = new GetStructureElementStatement(scribble_lineno, scribble_text, (yyvsp[(1) - (3)].statement), *(yyvsp[(3) - (3)].string));
@@ -2983,7 +2983,7 @@ yyreduce:
   case 77:
 
 /* Line 1806 of yacc.c  */
-#line 758 "./src/Parser/Parser.yy"
+#line 758 "./src/Scribble/Parser/Parser.yy"
     {
 	
 		(yyval.statement) = new StructureAssignElement(scribble_lineno, scribble_text, (yyvsp[(1) - (5)].statement), (yyvsp[(5) - (5)].statement), *(yyvsp[(3) - (5)].string));
@@ -3236,7 +3236,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 769 "./src/Parser/Parser.yy"
+#line 769 "./src/Scribble/Parser/Parser.yy"
 
 
 void scribble_error(std::string s)

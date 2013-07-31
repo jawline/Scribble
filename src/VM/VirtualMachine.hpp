@@ -25,6 +25,8 @@ const static unsigned int vmTempRegisterOne = 3;
 const static unsigned int vmTempRegisterTwo = 4;
 const static unsigned int vmTempRegisterThree = 5;
 
+const static unsigned int GarbageCollectHitLimit = 100;
+
 class VirtualMachine {
 private:
 	uint8_t* stack_;
@@ -32,6 +34,8 @@ private:
 	bool* registerReference_;
 	Heap heap_;
 	std::map<std::string, SP<VMEntryType>> registeredTypes_;
+
+	unsigned int gcStat_;
 
 public:
 	VirtualMachine();

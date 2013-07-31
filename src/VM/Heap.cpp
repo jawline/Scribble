@@ -37,7 +37,7 @@ long Heap::allocate(SP<VMEntryType> type, int size, uint8_t* initial) {
 		memory[i] = initial[i];
 	}
 
-	VMEntry entry;
+	VMHeapEntry entry;
 
 	entry.type = type;
 	entry.pointer = memory;
@@ -95,7 +95,7 @@ void Heap::unflagAll() {
 
 int Heap::deleteUnflagged() {
 
-	std::vector<std::map<int, VMEntry>::iterator> remove;
+	std::vector<std::map<int, VMHeapEntry>::iterator> remove;
 
 	for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
 

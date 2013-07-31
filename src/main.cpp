@@ -3,17 +3,17 @@
  * @author Blake Loring
  */
 
-#include <Statement/Statement.hpp>
-#include <Function/WriteFunction.hpp>
-#include <Function/ReadLine.hpp>
-#include <Function/StringFunction.hpp>
-#include <Function/Modulo.hpp>
-#include <Function/RandomInt.hpp>
-#include <Statement/Heap.hpp>
-#include <Parser/Parser.hpp>
-#include <Parser/ParserException.hpp>
+#include <Scribble/Statement/Statement.hpp>
+#include <Scribble/Function/WriteFunction.hpp>
+#include <Scribble/Function/ReadLine.hpp>
+#include <Scribble/Function/StringFunction.hpp>
+#include <Scribble/Function/Modulo.hpp>
+#include <Scribble/Function/RandomInt.hpp>
+#include <Scribble/Statement/Heap.hpp>
+#include <Scribble/Parser/Parser.hpp>
+#include <Scribble/Parser/ParserException.hpp>
+#include <Scribble/Value/TypeManager.hpp>
 #include <version_info.hpp>
-#include <Value/TypeManager.hpp>
 #include <SASM/Parser.hpp>
 #include <VM/OpCodes.hpp>
 #include <VM/VirtualMachine.hpp>

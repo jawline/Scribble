@@ -75,7 +75,8 @@ void VirtualMachine::execute(InstructionSet& set) {
 			uint8_t dest = set.getInst(*current + 2);
 			registers_[dest] = registers_[target];
 			registerReference_[dest] = registerReference_[target];
-			VM_PRINTF_LOG("VM Move %i to %i %i to %i\n", target, dest, registerReference_[dest], registerReference_[target]);
+			VM_PRINTF_LOG("VM Move %i to %i %i to %i\n",
+					target, dest, registerReference_[dest], registerReference_[target]);
 			*current += vmOpCodeSize;
 			break;
 		}
@@ -232,7 +233,8 @@ void VirtualMachine::execute(InstructionSet& set) {
 			uint8_t index = set.getInst(*current + 3);
 
 			if (!registerReference_[tgtArray]) {
-				VM_PRINTF_FATAL("Target array register %i is not a reference\n", tgtArray);
+				VM_PRINTF_FATAL("Target array register %i is not a reference\n",
+						tgtArray);
 			}
 
 			SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
@@ -364,18 +366,19 @@ void VirtualMachine::execute(InstructionSet& set) {
 				VM_PRINTF_FATAL("Type %s not found\n", type.c_str());
 			}
 
+			//Check the type is an array
 			if (!typeSearch->second->isArray()) {
 				VM_PRINTF_FATAL("%s", "Cannot create valid array from type\n");
 			}
 
-
+			//Check that the length register is a number
 			if (registerReference_[lengthRegister]) {
 				VM_PRINTF_FATAL("%s",
 						"Length register should not be a reference\n");
 			}
 
-			long length = registers_[lengthRegister] * typeSearch->second->arraySubtype()->getElementSize();
-
+			long length = registers_[lengthRegister]
+					* typeSearch->second->arraySubtype()->getElementSize();
 
 			uint8_t* initial = new uint8_t[length];
 			memset(initial, 0, length);
@@ -454,6 +457,8 @@ void VirtualMachine::execute(InstructionSet& set) {
 				delete[] initial;
 
 				registerReference_[reg] = true;
+				gcStat_ = GarbageCollectHitLimit;
+
 				break;
 			}
 
@@ -475,9 +480,15 @@ void VirtualMachine::execute(InstructionSet& set) {
 
 		}
 
-		garbageCollection();
+		gcStat_++;
+		if (gcStat_ > GarbageCollectHitLimit) {
+			garbageCollection();
+			gcStat_ = 0;
+		}
+
 	}
 
+	garbageCollection();
 	printState();
 }
 

@@ -3,7 +3,7 @@ CFLAGS=-c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread
 LDFLAGS=-pthread -lpthread
 EXECUTABLE=./bin/scribble
 SOURCE_DIR=src
-SOURCES=gen/Lexer.cpp gen/Parser.cpp gen/SASMLexer.cpp gen/SASMParser.cpp $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp) $(wildcard $(SOURCE_DIR)/**/**/*.cpp)
+SOURCES=gen/Lexer.cpp gen/Parser.cpp gen/SASMLexer.cpp gen/SASMParser.cpp $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp)
 OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 
 all: preprocess $(SOURCES) $(EXECUTABLE)

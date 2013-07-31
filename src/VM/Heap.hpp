@@ -7,7 +7,7 @@
 
 #ifndef HEAP_HPP_
 #define HEAP_HPP_
-#include "VMEntry.hpp"
+#include "VMHeapEntry.hpp"
 #include <string>
 #include <stdint.h>
 #include <map>
@@ -18,7 +18,7 @@ namespace VM {
 
 class Heap {
 private:
-	std::map<int, VMEntry> heapMap_;
+	std::map<int, VMHeapEntry> heapMap_;
 	long lastIndex_;
 
 public:

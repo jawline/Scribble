@@ -581,17 +581,17 @@ int scribble__flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *scribble_text;
-#line 1 "./src/Parser/Lexer.l"
+#line 1 "./src/Scribble/Parser/Lexer.l"
 
-#line 9 "./src/Parser/Lexer.l"
-#include <Function/Function.hpp>
+#line 9 "./src/Scribble/Parser/Lexer.l"
+#include <Scribble/Function/Function.hpp>
 #include <string>
 #include <vector>
-#include <Statement/IntStatement.hpp>
+#include <Scribble/Statement/IntStatement.hpp>
 #include <Pointers/SmartPointer.hpp>
-#include <Value/Variable.hpp>
-#include <Value/StructureInfo.hpp>
-#include <Parser/TypeReference.hpp>
+#include <Scribble/Value/Variable.hpp>
+#include <Scribble/Value/StructureInfo.hpp>
+#include <Scribble/Parser/TypeReference.hpp>
 #include "Parser.hpp"
 
 #define SAVE_INT scribble_lval.integer = atoi(scribble_text);
@@ -794,7 +794,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 43 "./src/Parser/Lexer.l"
+#line 43 "./src/Scribble/Parser/Lexer.l"
 
 
 #line 801 "./gen/Lexer.cpp"
@@ -892,288 +892,288 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 45 "./src/Parser/Lexer.l"
+#line 45 "./src/Scribble/Parser/Lexer.l"
 { BEGIN(C_COMMENT); }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 46 "./src/Parser/Lexer.l"
+#line 46 "./src/Scribble/Parser/Lexer.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 47 "./src/Parser/Lexer.l"
+#line 47 "./src/Scribble/Parser/Lexer.l"
 { }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 48 "./src/Parser/Lexer.l"
+#line 48 "./src/Scribble/Parser/Lexer.l"
 { }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 49 "./src/Parser/Lexer.l"
+#line 49 "./src/Scribble/Parser/Lexer.l"
 return TWOPLUS;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 50 "./src/Parser/Lexer.l"
+#line 50 "./src/Scribble/Parser/Lexer.l"
 return PLUS;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 51 "./src/Parser/Lexer.l"
+#line 51 "./src/Scribble/Parser/Lexer.l"
 return TWOMINUS;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 52 "./src/Parser/Lexer.l"
+#line 52 "./src/Scribble/Parser/Lexer.l"
 return MINUS;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 53 "./src/Parser/Lexer.l"
+#line 53 "./src/Scribble/Parser/Lexer.l"
 return TIMES;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 54 "./src/Parser/Lexer.l"
+#line 54 "./src/Scribble/Parser/Lexer.l"
 return DIVIDE;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 55 "./src/Parser/Lexer.l"
+#line 55 "./src/Scribble/Parser/Lexer.l"
 return POWER;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 56 "./src/Parser/Lexer.l"
+#line 56 "./src/Scribble/Parser/Lexer.l"
 return EQUALS;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 57 "./src/Parser/Lexer.l"
+#line 57 "./src/Scribble/Parser/Lexer.l"
 return ASSIGN;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 58 "./src/Parser/Lexer.l"
+#line 58 "./src/Scribble/Parser/Lexer.l"
 return AND;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 59 "./src/Parser/Lexer.l"
+#line 59 "./src/Scribble/Parser/Lexer.l"
 return LPAREN;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 60 "./src/Parser/Lexer.l"
+#line 60 "./src/Scribble/Parser/Lexer.l"
 return RPAREN;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 61 "./src/Parser/Lexer.l"
+#line 61 "./src/Scribble/Parser/Lexer.l"
 return LBRACKET;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 62 "./src/Parser/Lexer.l"
+#line 62 "./src/Scribble/Parser/Lexer.l"
 return RBRACKET;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 63 "./src/Parser/Lexer.l"
+#line 63 "./src/Scribble/Parser/Lexer.l"
 return COMMA;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 64 "./src/Parser/Lexer.l"
+#line 64 "./src/Scribble/Parser/Lexer.l"
 return END;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 65 "./src/Parser/Lexer.l"
+#line 65 "./src/Scribble/Parser/Lexer.l"
 return COLON;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 66 "./src/Parser/Lexer.l"
+#line 66 "./src/Scribble/Parser/Lexer.l"
 return GREATER;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 67 "./src/Parser/Lexer.l"
+#line 67 "./src/Scribble/Parser/Lexer.l"
 return LESSER;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 68 "./src/Parser/Lexer.l"
+#line 68 "./src/Scribble/Parser/Lexer.l"
 return NOT;
 	YY_BREAK
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 69 "./src/Parser/Lexer.l"
+#line 69 "./src/Scribble/Parser/Lexer.l"
 ;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 70 "./src/Parser/Lexer.l"
+#line 70 "./src/Scribble/Parser/Lexer.l"
 return THEN;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 71 "./src/Parser/Lexer.l"
+#line 71 "./src/Scribble/Parser/Lexer.l"
 return IF;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 72 "./src/Parser/Lexer.l"
+#line 72 "./src/Scribble/Parser/Lexer.l"
 return ELSE;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 73 "./src/Parser/Lexer.l"
+#line 73 "./src/Scribble/Parser/Lexer.l"
 return STRUCT;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 74 "./src/Parser/Lexer.l"
+#line 74 "./src/Scribble/Parser/Lexer.l"
 return FUNCTION;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 75 "./src/Parser/Lexer.l"
+#line 75 "./src/Scribble/Parser/Lexer.l"
 return FOR;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 76 "./src/Parser/Lexer.l"
+#line 76 "./src/Scribble/Parser/Lexer.l"
 return VARIABLE;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 77 "./src/Parser/Lexer.l"
+#line 77 "./src/Scribble/Parser/Lexer.l"
 return CONST;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 78 "./src/Parser/Lexer.l"
+#line 78 "./src/Scribble/Parser/Lexer.l"
 return TYPE_INT;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 79 "./src/Parser/Lexer.l"
+#line 79 "./src/Scribble/Parser/Lexer.l"
 return TYPE_BOOL;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 80 "./src/Parser/Lexer.l"
+#line 80 "./src/Scribble/Parser/Lexer.l"
 return NIL;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 81 "./src/Parser/Lexer.l"
+#line 81 "./src/Scribble/Parser/Lexer.l"
 return TYPE_STRING;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 82 "./src/Parser/Lexer.l"
+#line 82 "./src/Scribble/Parser/Lexer.l"
 return TYPE_VOID;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 83 "./src/Parser/Lexer.l"
+#line 83 "./src/Scribble/Parser/Lexer.l"
 return RETURN;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 84 "./src/Parser/Lexer.l"
+#line 84 "./src/Scribble/Parser/Lexer.l"
 return WHILE;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 85 "./src/Parser/Lexer.l"
+#line 85 "./src/Scribble/Parser/Lexer.l"
 return IMPORT;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 86 "./src/Parser/Lexer.l"
+#line 86 "./src/Scribble/Parser/Lexer.l"
 return TRUE;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 87 "./src/Parser/Lexer.l"
+#line 87 "./src/Scribble/Parser/Lexer.l"
 return FALSE;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 88 "./src/Parser/Lexer.l"
+#line 88 "./src/Scribble/Parser/Lexer.l"
 return TYPE;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 89 "./src/Parser/Lexer.l"
+#line 89 "./src/Scribble/Parser/Lexer.l"
 return LINK;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 90 "./src/Parser/Lexer.l"
+#line 90 "./src/Scribble/Parser/Lexer.l"
 return POINT;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 91 "./src/Parser/Lexer.l"
+#line 91 "./src/Scribble/Parser/Lexer.l"
 return TYPE_ARRAY;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 92 "./src/Parser/Lexer.l"
+#line 92 "./src/Scribble/Parser/Lexer.l"
 return LENGTH;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 93 "./src/Parser/Lexer.l"
+#line 93 "./src/Scribble/Parser/Lexer.l"
 return THREAD;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 94 "./src/Parser/Lexer.l"
+#line 94 "./src/Scribble/Parser/Lexer.l"
 return LSQBRACKET;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 95 "./src/Parser/Lexer.l"
+#line 95 "./src/Scribble/Parser/Lexer.l"
 return RSQBRACKET;;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 97 "./src/Parser/Lexer.l"
+#line 97 "./src/Scribble/Parser/Lexer.l"
 { SAVE_INT;
  return INT;
 }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 101 "./src/Parser/Lexer.l"
+#line 101 "./src/Scribble/Parser/Lexer.l"
 { SAVE_REAL; 
  return REAL;
 }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 105 "./src/Parser/Lexer.l"
+#line 105 "./src/Scribble/Parser/Lexer.l"
 { SAVE_TOKEN; return WORD; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 106 "./src/Parser/Lexer.l"
+#line 106 "./src/Scribble/Parser/Lexer.l"
 { std::string r(scribble_text, scribble_leng); myReplace(r, "\\n", "\n"); myReplace(r, "\"", ""); scribble_lval.string = new std::string(r); return STRING; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 107 "./src/Parser/Lexer.l"
+#line 107 "./src/Scribble/Parser/Lexer.l"
 ECHO;
 	YY_BREAK
 #line 1180 "./gen/Lexer.cpp"
@@ -2146,4 +2146,4 @@ void scribble_free (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 107 "./src/Parser/Lexer.l"
+#line 107 "./src/Scribble/Parser/Lexer.l"
