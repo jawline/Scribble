@@ -1,18 +1,11 @@
 import("sys")
 
 func main() {
-
-	var j := [10]string;
-	
-	j[0] := "Hello World";
-	j[1] := "Hello";
-	j[2] := "World";
-	j[3] := "DUn dun duuuun";
-	
-	var n : int;
-	
-	for n := 4; n < 10; n++ {
-		j[n] := "Hello";
-	}
-
+	var j := [5]int;
+	j := [2]int;
+	j[0] := 5;
+	j[1] := 123;
+	var r := j[0];
+	var x := r;
+	x := j[1];
 }

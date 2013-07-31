@@ -3,12 +3,14 @@
  *
  *  Created on: 24 Apr 2013
  *      Author: blake
+ *
  */
 
 #include "ArrayStatement.hpp"
 #include <Value/Array.hpp>
 #include <Value/Util.hpp>
 #include <Value/Int.hpp>
+#include <VM/VirtualMachine.hpp>
 #include "Heap.hpp"
 
 ArrayStatement::ArrayStatement(int line, std::string text, Type* type,
@@ -57,4 +59,7 @@ void ArrayStatement::checkTree(Type* functionType) {
 }
 
 int ArrayStatement::generateCode(int resultRegister, std::stringstream& generated) {
+	int instrs = length_->generateCode(VM::vmTempRegisterOne, generated);
+	generated << "newarray \"array(int)\" $" << VM::vmTempRegisterOne << " $" << resultRegister << "\n";
+	return instrs + 1;
 }

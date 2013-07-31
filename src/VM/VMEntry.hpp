@@ -13,7 +13,7 @@ namespace VM {
 
 struct VMEntry {
 	SP<VMEntryType> type;
-	int size;
+	unsigned int sizeBytes;
 	uint8_t* pointer;
 	bool flagged;
 };

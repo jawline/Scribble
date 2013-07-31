@@ -16,6 +16,7 @@ class VMEntryType {
 private:
 
 	std::string name_;
+	unsigned int size_;
 	bool reference_;
 	bool array_;
 
@@ -23,12 +24,18 @@ private:
 	SP<VMEntryType> subtype_;
 
 public:
-	VMEntryType(std::string name, bool reference);
+	VMEntryType(std::string name, unsigned int size, bool reference);
 	VMEntryType(std::string name, SP<VMEntryType> subtype);
 
 	virtual ~VMEntryType();
 
 	std::string typeName();
+
+	/**
+	 * Returns the size of the element. Will be either 1, 2, 4, or 8
+	 */
+	unsigned int getElementSize();
+
 	bool isReference();
 
 	bool isArray();

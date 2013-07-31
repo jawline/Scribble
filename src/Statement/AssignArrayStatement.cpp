@@ -9,6 +9,7 @@
 #include "Heap.hpp"
 #include <Value/Array.hpp>
 #include <Value/Int.hpp>
+#include <VM/VirtualMachine.hpp>
 
 AssignArrayStatement::AssignArrayStatement(int lineno, std::string text,
 		SafeStatement array, SafeStatement assign, SafeStatement position) :
@@ -60,4 +61,15 @@ void AssignArrayStatement::checkTree(Type* functionType) {
 		throw StatementException(this,
 				"Cannot assign to array. Type is different to array type");
 	}
+}
+
+int AssignArrayStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	int instrs = toAssign_->generateCode(VM::vmTempRegisterOne, generated);
+	instrs += array_->generateCode(VM::vmTempRegisterTwo, generated);
+	instrs += position_->generateCode(VM::vmTempRegisterThree, generated);
+	generated << "aset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << VM::vmTempRegisterThree << "\n";
+
+	return instrs + 1;
 }

@@ -1,4 +1,5 @@
 #include "GetVariableStatement.hpp"
+#include <VM/VirtualMachine.hpp>
 
 GetVariableStatement::GetVariableStatement(int lineNo, std::string sym,
 		SP<Variable> var) :
@@ -26,6 +27,6 @@ void GetVariableStatement::checkTree(Type* functionType) {
 }
 
 int GetVariableStatement::generateCode(int resultRegister, std::stringstream& generated) {
-	generated << "move $" << (var_->getPosition() + 6) << " $" << resultRegister << "\n";
+	generated << "move $" << (var_->getPosition() + VM::vmNumReservedRegisters) << " $" << resultRegister << "\n";
 	return 1;
 }

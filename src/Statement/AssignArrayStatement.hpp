@@ -26,6 +26,7 @@ public:
 	Type* type();
 
 	void checkTree(Type* functionType);
+	int generateCode(int resultRegister, std::stringstream& generated);
 
 };
 

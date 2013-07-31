@@ -44,7 +44,12 @@ VirtualMachine::VirtualMachine() {
 		registerReference_[i] = false;
 	}
 
-	registeredTypes_["char"] = new VMEntryType("char", false);
+	registeredTypes_["char"] = new VMEntryType("char", 1, false);
+	registeredTypes_["int"] = new VMEntryType("int", 4, false);
+	registeredTypes_["long"] = new VMEntryType("int", 8, false);
+	registeredTypes_["array(int)"] = new VMEntryType("array(int)",
+			registeredTypes_["int"]);
+
 	registeredTypes_["string"] = new VMEntryType("string",
 			registeredTypes_["char"]);
 
@@ -70,7 +75,7 @@ void VirtualMachine::execute(InstructionSet& set) {
 			uint8_t dest = set.getInst(*current + 2);
 			registers_[dest] = registers_[target];
 			registerReference_[dest] = registerReference_[target];
-			VM_PRINTF_LOG("VM Move %i to %i\n", target, dest);
+			VM_PRINTF_LOG("VM Move %i to %i %i to %i\n", target, dest, registerReference_[dest], registerReference_[target]);
 			*current += vmOpCodeSize;
 			break;
 		}
@@ -220,6 +225,178 @@ void VirtualMachine::execute(InstructionSet& set) {
 			break;
 		}
 
+		case OpArraySet: {
+
+			uint8_t data = set.getInst(*current + 1);
+			uint8_t tgtArray = set.getInst(*current + 2);
+			uint8_t index = set.getInst(*current + 3);
+
+			if (!registerReference_[tgtArray]) {
+				VM_PRINTF_FATAL("Target array register %i is not a reference\n", tgtArray);
+			}
+
+			SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+
+			if (!arrayType->isArray()) {
+				VM_PRINTF_FATAL("%s",
+						"Target register is not a reference to an array\n");
+			}
+
+			int size = arrayType->arraySubtype()->getElementSize();
+
+			uint8_t* dataPtr =
+					heap_.getAddress(registers_[tgtArray])
+							+ (registers_[index]
+									* ((long) arrayType->arraySubtype()->getElementSize()));
+
+			uint8_t* max = heap_.getAddress(registers_[tgtArray])
+					+ heap_.getSize(registers_[tgtArray]);
+
+			if (dataPtr > max) {
+				VM_PRINTF_FATAL("%s", "VM Array out of bounds exception\n");
+			}
+
+			switch (size) {
+
+			case 1:
+				*dataPtr = registers_[data];
+				break;
+
+			case 2:
+				*(uint16_t*) (dataPtr) = registers_[data];
+				break;
+
+			case 4:
+				*(uint32_t*) (dataPtr) = registers_[data];
+				break;
+
+			case 8:
+				*(uint64_t*) (dataPtr) = registers_[data];
+				break;
+
+			default:
+				VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
+				break;
+			}
+
+			*current += vmOpCodeSize;
+			break;
+		}
+
+		case OpArrayGet: {
+
+			uint8_t tgtArray = set.getInst(*current + 1);
+			uint8_t index = set.getInst(*current + 2);
+			uint8_t dataRegister = set.getInst(*current + 3);
+
+			if (!registerReference_[tgtArray]) {
+				VM_PRINTF_FATAL("%s", "Register is not a reference\n");
+			}
+
+			SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+
+			if (!arrayType->isArray()) {
+
+				VM_PRINTF_FATAL("%s",
+						"Register is not a reference to an array\n");
+
+			}
+
+			int size = arrayType->arraySubtype()->getElementSize();
+
+			uint8_t* dataPtr =
+					heap_.getAddress(registers_[tgtArray])
+							+ (registers_[index]
+									* ((long) arrayType->arraySubtype()->getElementSize()));
+			uint8_t* max = heap_.getAddress(registers_[tgtArray])
+					+ heap_.getSize(registers_[tgtArray]);
+
+			if (dataPtr > max) {
+				VM_PRINTF_FATAL("%s", "VM Array out of bounds exception\n");
+			}
+
+			switch (size) {
+
+			case 1:
+				registers_[dataRegister] = *dataPtr;
+				break;
+
+			case 2:
+				registers_[dataRegister] = *(uint16_t*) (dataPtr);
+				break;
+
+			case 4:
+				registers_[dataRegister] = *(uint32_t*) (dataPtr);
+				break;
+
+			case 8:
+				registers_[dataRegister] = *(uint64_t*) (dataPtr);
+				break;
+
+			default:
+				VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
+				break;
+
+			}
+
+			registerReference_[dataRegister] =
+					arrayType->arraySubtype()->isReference();
+
+			*current += vmOpCodeSize;
+			break;
+		}
+
+		case OpNewArray: {
+
+			//Get the arguments
+			uint8_t lengthRegister = set.getInst(*current + 1);
+			uint8_t destinationRegister = set.getInst(*current + 2);
+			int constantLocation = set.getInst(*current + 3);
+
+			//Get the type
+			std::string type = (char const*) set.getConstantString(
+					constantLocation);
+
+			//Find the type.
+			auto typeSearch = registeredTypes_.find(type);
+
+			if (typeSearch == registeredTypes_.end()) {
+				VM_PRINTF_FATAL("Type %s not found\n", type.c_str());
+			}
+
+			if (!typeSearch->second->isArray()) {
+				VM_PRINTF_FATAL("%s", "Cannot create valid array from type\n");
+			}
+
+
+			if (registerReference_[lengthRegister]) {
+				VM_PRINTF_FATAL("%s",
+						"Length register should not be a reference\n");
+			}
+
+			long length = registers_[lengthRegister] * typeSearch->second->arraySubtype()->getElementSize();
+
+
+			uint8_t* initial = new uint8_t[length];
+			memset(initial, 0, length);
+
+			registers_[destinationRegister] = heap_.allocate(typeSearch->second,
+					length, initial);
+
+			registerReference_[destinationRegister] = true;
+
+			delete[] initial;
+
+			printf("DEST %i\n", destinationRegister);
+
+			VM_PRINTF_LOG("Allocated and created %li\n",
+					registers_[destinationRegister]);
+
+			*current += vmOpCodeSize;
+
+			break;
+		}
+
 		case OpLoadConstant: {
 
 			int constant = set.getInt(*current + 1);
@@ -330,7 +507,8 @@ void VirtualMachine::garbageCollection() {
 		long next = toInvestigate[i];
 
 		if (!heap_.validReference(next)) {
-			VM_PRINTF_FATAL("%s", "ERROR: Reference is not valid\n");
+			VM_PRINTF_FATAL("ERROR: Reference at register %i is not valid\n",
+					i);
 		}
 
 		SP<VMEntryType> nextType = heap_.getType(next);

@@ -51,6 +51,8 @@ void LoadInt(int val, uint8_t dest) {
 
 	Set(constant, currentConstant, (uint8_t) VM::CInt);
 	Set(constant, currentConstant, (int) val);
+	
+	current += 2;
 }
 
 void LoadLong(long val, uint8_t reg) {
@@ -61,18 +63,36 @@ void LoadLong(long val, uint8_t reg) {
 
 	Set(constant, currentConstant, (uint8_t) VM::CLong);
 	Set(constant, currentConstant, (long) val);
+	
+	current += 2;
 }
 
-void Array(std::string type, int size, uint8_t reg) {
+void ArraySet(uint8_t dataReg, uint8_t arrayReg, uint8_t indexReg) {
+	Set(buffer, current, (uint8_t) VM::OpArraySet);
+	Set(buffer, current, (uint8_t) dataReg);
+	Set(buffer, current, (uint8_t) arrayReg);
+	Set(buffer, current, (uint8_t) indexReg);
+	current += 4;
+}
 
-	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
-	Set(buffer, current, (int) currentConstant);
+void ArrayGet(uint8_t arrayReg, uint8_t indexReg, uint8_t dataReg) {
+	Set(buffer, current, (uint8_t) VM::OpArrayGet);
+	Set(buffer, current, (uint8_t) arrayReg);
+	Set(buffer, current, (uint8_t) indexReg);
+	Set(buffer, current, (uint8_t) dataReg);
+	current += 4;
+}
+
+void Array(std::string type, uint8_t sizereg, uint8_t reg) {
+
+	Set(buffer, current, (uint8_t) VM::OpNewArray);
+	Set(buffer, current, (uint8_t) sizereg);
 	Set(buffer, current, (uint8_t) reg);
+	Set(buffer, current, (int) currentConstant);
 
-	Set(constant, currentConstant, (uint8_t) VM::CArray);
 	Set(constant, currentConstant, type.c_str());
-	Set(constant, currentConstant, size);
-	Set(constant, currentConstant, 0);
+	
+	current += 1;
 }
 
 void LoadString(char const* str, uint8_t reg) {
@@ -86,6 +106,8 @@ void LoadString(char const* str, uint8_t reg) {
 	Set(constant, currentConstant, (int)(strlen(str) + 1));
 	Set(constant, currentConstant, (int)(strlen(str) + 1));
 	Set(constant, currentConstant, str);
+	
+	current += 2;
 }
 
 void Add(uint8_t left, uint8_t right, uint8_t dest) {
@@ -93,7 +115,7 @@ void Add(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	Set(buffer, current, dest);
-	current += 2;
+	current += 4;
 }
 
 void Subtract(uint8_t left, uint8_t right, uint8_t dest) {
@@ -101,7 +123,7 @@ void Subtract(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	Set(buffer, current, dest);
-	current += 2;
+	current += 4;
 }
 
 void Multiply(uint8_t left, uint8_t right, uint8_t dest) {
@@ -109,7 +131,7 @@ void Multiply(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	Set(buffer, current, dest);
-	current += 2;
+	current += 4;
 }
 
 
@@ -118,7 +140,7 @@ void Divide(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	Set(buffer, current, dest);
-	current += 2;
+	current += 4;
 }
 
 
@@ -127,53 +149,57 @@ void Move(uint8_t target, uint8_t dest) {
 	Set(buffer, current, (uint8_t) VM::OpMove);
 	Set(buffer, current, target);
 	Set(buffer, current, dest);
-	
-	current += 3;
+	current += 5;
 }
 
 void JumpDirect(int inst) {
 	Set(buffer, current, (uint8_t) VM::OpJump);
 	Set(buffer, current, (uint8_t) VM::DirectExact);
 	Set(buffer, current, inst);
+	
+	current += 2;
 }
 
 void JumpDirectRelative(int inst) {
 	Set(buffer, current, (uint8_t) VM::OpJump);
 	Set(buffer, current, (uint8_t) VM::DirectRelative);
 	Set(buffer, current, inst);
+	current += 2;
 }
 
 void JumpRegister(int reg) {
 	Set(buffer, current, (uint8_t) VM::OpJump);
 	Set(buffer, current, (uint8_t) VM::RegisterExact);
 	Set(buffer, current, reg);
+	current += 2;
 }
 
 void JumpRegisterRelative(int reg) {
 	Set(buffer, current, (uint8_t) VM::OpJump);
 	Set(buffer, current, (uint8_t) VM::RegisterRelative);
 	Set(buffer, current, reg);
+	current += 2;
 }
 
 void TestEqual(uint8_t left, uint8_t right) {
 	Set(buffer, current, (uint8_t) VM::OpEqual);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
-	current += 3;
+	current += 5;
 }
 
 void LessThan(uint8_t left, uint8_t right) {
 	Set(buffer, current, (uint8_t) VM::OpLessThan);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
-	current += 3;
+	current += 5;
 }
 
 void GreaterThan(uint8_t left, uint8_t right) {
 	Set(buffer, current, (uint8_t) VM::OpLessThanOrEqual);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
-	current += 3;
+	current += 5;
 	JumpDirectRelative(2);
 }
 
@@ -181,14 +207,14 @@ void LessThanOrEqual(uint8_t left, uint8_t right) {
 	Set(buffer, current, (uint8_t) VM::OpLessThanOrEqual);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
-	current += 3;
+	current += 5;
 }
 
 void GreaterThanOrEqual(uint8_t left, uint8_t right) {
 	Set(buffer, current, (uint8_t) VM::OpLessThan);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
-	current += 3;
+	current += 5;
 	JumpDirectRelative(2);
 }
 
@@ -196,13 +222,13 @@ void TestNotEqual(uint8_t left, uint8_t right) {
 	Set(buffer, current, (uint8_t) VM::OpEqual);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
-	current += 3;
+	current += 5;
 	JumpDirectRelative(2);
 }
 
 void Return() {
 	Set(buffer, current, (uint8_t) VM::OpReturn);
-	current += 5;
+	current += 7;
 }
 
 %}
@@ -219,7 +245,7 @@ void Return() {
 %token <real> REAL
 %token <integer> INT REG
 %token <lval> LONG
-%token JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -235,7 +261,15 @@ Program: {
 		buffer = new uint8_t[5000];
 		current = 0;
 		
+	} | Program ARRAY_SET REG REG REG {
+		ArraySet($3, $4, $5);
+	} | Program ARRAY_GET REG REG REG {
+		ArrayGet($3, $4, $5);
 	} | Program NEW_ARRAY STRING INT REG {
+		LoadInt($4, 3);
+		Array(*$3, 3, $5);
+		delete $3;
+	} | Program NEW_ARRAY STRING REG REG {
 		Array(*$3, $4, $5);
 		delete $3;
 	} | Program LOAD INT REG {

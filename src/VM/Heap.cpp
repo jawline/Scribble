@@ -41,7 +41,7 @@ long Heap::allocate(SP<VMEntryType> type, int size, uint8_t* initial) {
 
 	entry.type = type;
 	entry.pointer = memory;
-	entry.size = size;
+	entry.sizeBytes = size;
 
 	long index = lastIndex_++;
 
@@ -65,7 +65,7 @@ int Heap::getSize(long entry) {
 		return -1;
 	}
 
-	return heapMap_[entry].size;
+	return heapMap_[entry].sizeBytes;
 }
 
 SP<VMEntryType> Heap::getType(long entry) {

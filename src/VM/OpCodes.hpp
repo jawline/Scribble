@@ -22,7 +22,10 @@ enum OpCodes {
 	OpEqual,
 	OpLessThan,
 	OpLessThanOrEqual,
-	OpAnd
+	OpAnd,
+	OpNewArray,
+	OpArraySet,
+	OpArrayGet
 };
 
 }
