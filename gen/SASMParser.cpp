@@ -76,10 +76,12 @@
 /* Line 268 of yacc.c  */
 #line 5 "./src/SASM/Parser.yy"
 
+#include <stdio.h>
+#include <string.h>
 #include <string>
 #include <VM/OpCodes.hpp>
 #include <stdint.h>
-#include <VM/VirtualMachine.hpp>
+#include <VM/Constants.hpp>
 #include <VM/InstructionSet.hpp>
 #include <VM/ConstantTypes.hpp>
 #include <VM/JumpTypes.hpp>
@@ -307,7 +309,7 @@ void Return() {
 
 
 /* Line 268 of yacc.c  */
-#line 311 "./gen/SASMParser.cpp"
+#line 313 "./gen/SASMParser.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -370,7 +372,7 @@ typedef union YYSTYPE
 {
 
 /* Line 293 of yacc.c  */
-#line 237 "./src/SASM/Parser.yy"
+#line 239 "./src/SASM/Parser.yy"
 
 	std::string* string;	
 	float real;
@@ -380,7 +382,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 384 "./gen/SASMParser.cpp"
+#line 386 "./gen/SASMParser.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -405,7 +407,7 @@ typedef struct YYLTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 409 "./gen/SASMParser.cpp"
+#line 411 "./gen/SASMParser.cpp"
 
 #ifdef short
 # undef short
@@ -717,10 +719,10 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   256,   256,   264,   266,   268,   272,   275,   277,   279,
-     282,   284,   286,   289,   293,   295,   298,   302,   304,   307,
-     311,   313,   316,   320,   322,   325,   327,   330,   332,   335,
-     337,   340,   342,   345,   347,   350,   352,   354,   356,   358
+       0,   258,   258,   266,   268,   270,   274,   277,   279,   281,
+     284,   286,   288,   291,   295,   297,   300,   304,   306,   309,
+     313,   315,   318,   322,   324,   327,   329,   332,   334,   337,
+     339,   342,   344,   347,   349,   352,   354,   356,   358,   360
 };
 #endif
 
@@ -1745,7 +1747,7 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 256 "./src/SASM/Parser.yy"
+#line 258 "./src/SASM/Parser.yy"
     {
 		
 		constant = new uint8_t[4000];
@@ -1760,7 +1762,7 @@ yyreduce:
   case 3:
 
 /* Line 1806 of yacc.c  */
-#line 264 "./src/SASM/Parser.yy"
+#line 266 "./src/SASM/Parser.yy"
     {
 		ArraySet((yyvsp[(3) - (5)].integer), (yyvsp[(4) - (5)].integer), (yyvsp[(5) - (5)].integer));
 	}
@@ -1769,7 +1771,7 @@ yyreduce:
   case 4:
 
 /* Line 1806 of yacc.c  */
-#line 266 "./src/SASM/Parser.yy"
+#line 268 "./src/SASM/Parser.yy"
     {
 		ArrayGet((yyvsp[(3) - (5)].integer), (yyvsp[(4) - (5)].integer), (yyvsp[(5) - (5)].integer));
 	}
@@ -1778,7 +1780,7 @@ yyreduce:
   case 5:
 
 /* Line 1806 of yacc.c  */
-#line 268 "./src/SASM/Parser.yy"
+#line 270 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (5)].integer), 3);
 		Array(*(yyvsp[(3) - (5)].string), 3, (yyvsp[(5) - (5)].integer));
@@ -1789,7 +1791,7 @@ yyreduce:
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 272 "./src/SASM/Parser.yy"
+#line 274 "./src/SASM/Parser.yy"
     {
 		Array(*(yyvsp[(3) - (5)].string), (yyvsp[(4) - (5)].integer), (yyvsp[(5) - (5)].integer));
 		delete (yyvsp[(3) - (5)].string);
@@ -1799,7 +1801,7 @@ yyreduce:
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 275 "./src/SASM/Parser.yy"
+#line 277 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -1808,7 +1810,7 @@ yyreduce:
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 277 "./src/SASM/Parser.yy"
+#line 279 "./src/SASM/Parser.yy"
     {
 		LoadLong((yyvsp[(3) - (4)].lval), (yyvsp[(4) - (4)].integer));
 	}
@@ -1817,7 +1819,7 @@ yyreduce:
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 279 "./src/SASM/Parser.yy"
+#line 281 "./src/SASM/Parser.yy"
     {
 		LoadString((yyvsp[(3) - (4)].string)->c_str(), (yyvsp[(4) - (4)].integer));
 		delete (yyvsp[(3) - (4)].string);
@@ -1827,7 +1829,7 @@ yyreduce:
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 282 "./src/SASM/Parser.yy"
+#line 284 "./src/SASM/Parser.yy"
     {
 		Move((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -1836,7 +1838,7 @@ yyreduce:
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 284 "./src/SASM/Parser.yy"
+#line 286 "./src/SASM/Parser.yy"
     {
 		Add((yyvsp[(3) - (5)].integer), (yyvsp[(4) - (5)].integer), (yyvsp[(5) - (5)].integer));
 	}
@@ -1845,7 +1847,7 @@ yyreduce:
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 286 "./src/SASM/Parser.yy"
+#line 288 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterOne);
 		Add((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne, (yyvsp[(5) - (5)].integer));
@@ -1855,7 +1857,7 @@ yyreduce:
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 289 "./src/SASM/Parser.yy"
+#line 291 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne);
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterTwo);
@@ -1866,7 +1868,7 @@ yyreduce:
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 293 "./src/SASM/Parser.yy"
+#line 295 "./src/SASM/Parser.yy"
     {
 		Subtract((yyvsp[(3) - (5)].integer), (yyvsp[(4) - (5)].integer), (yyvsp[(5) - (5)].integer));
 	}
@@ -1875,7 +1877,7 @@ yyreduce:
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 295 "./src/SASM/Parser.yy"
+#line 297 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterOne);
 		Subtract((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne, (yyvsp[(5) - (5)].integer));
@@ -1885,7 +1887,7 @@ yyreduce:
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 298 "./src/SASM/Parser.yy"
+#line 300 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne);
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterTwo);
@@ -1896,7 +1898,7 @@ yyreduce:
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 302 "./src/SASM/Parser.yy"
+#line 304 "./src/SASM/Parser.yy"
     {
 		Multiply((yyvsp[(3) - (5)].integer), (yyvsp[(4) - (5)].integer), (yyvsp[(5) - (5)].integer));
 	}
@@ -1905,7 +1907,7 @@ yyreduce:
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 304 "./src/SASM/Parser.yy"
+#line 306 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterOne);
 		Multiply((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne, (yyvsp[(5) - (5)].integer));
@@ -1915,7 +1917,7 @@ yyreduce:
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 307 "./src/SASM/Parser.yy"
+#line 309 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne);
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterTwo);
@@ -1926,7 +1928,7 @@ yyreduce:
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 311 "./src/SASM/Parser.yy"
+#line 313 "./src/SASM/Parser.yy"
     {
 		Divide((yyvsp[(3) - (5)].integer), (yyvsp[(4) - (5)].integer), (yyvsp[(5) - (5)].integer));
 	}
@@ -1935,7 +1937,7 @@ yyreduce:
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 313 "./src/SASM/Parser.yy"
+#line 315 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterOne);
 		Divide((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne, (yyvsp[(5) - (5)].integer));
@@ -1945,7 +1947,7 @@ yyreduce:
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 316 "./src/SASM/Parser.yy"
+#line 318 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(3) - (5)].integer), VM::vmTempRegisterOne);
 		LoadInt((yyvsp[(4) - (5)].integer), VM::vmTempRegisterTwo);
@@ -1956,7 +1958,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 320 "./src/SASM/Parser.yy"
+#line 322 "./src/SASM/Parser.yy"
     {
 		TestEqual((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -1965,7 +1967,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 322 "./src/SASM/Parser.yy"
+#line 324 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (4)].integer), VM::vmTempRegisterOne);
 		TestEqual((yyvsp[(3) - (4)].integer), VM::vmTempRegisterOne);
@@ -1975,7 +1977,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 325 "./src/SASM/Parser.yy"
+#line 327 "./src/SASM/Parser.yy"
     {
 		TestNotEqual((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -1984,7 +1986,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 327 "./src/SASM/Parser.yy"
+#line 329 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (4)].integer), VM::vmTempRegisterOne);
 		TestNotEqual((yyvsp[(3) - (4)].integer), VM::vmTempRegisterOne);
@@ -1994,7 +1996,7 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 330 "./src/SASM/Parser.yy"
+#line 332 "./src/SASM/Parser.yy"
     {
 		LessThan((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -2003,7 +2005,7 @@ yyreduce:
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 332 "./src/SASM/Parser.yy"
+#line 334 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (4)].integer), VM::vmTempRegisterOne);
 		LessThan((yyvsp[(3) - (4)].integer), VM::vmTempRegisterOne);
@@ -2013,7 +2015,7 @@ yyreduce:
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 335 "./src/SASM/Parser.yy"
+#line 337 "./src/SASM/Parser.yy"
     {
 		GreaterThan((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -2022,7 +2024,7 @@ yyreduce:
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 337 "./src/SASM/Parser.yy"
+#line 339 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (4)].integer), VM::vmTempRegisterOne);
 		GreaterThan((yyvsp[(3) - (4)].integer), VM::vmTempRegisterOne);
@@ -2032,7 +2034,7 @@ yyreduce:
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 340 "./src/SASM/Parser.yy"
+#line 342 "./src/SASM/Parser.yy"
     {
 		LessThanOrEqual((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -2041,7 +2043,7 @@ yyreduce:
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 342 "./src/SASM/Parser.yy"
+#line 344 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (4)].integer), VM::vmTempRegisterOne);
 		LessThanOrEqual((yyvsp[(3) - (4)].integer), VM::vmTempRegisterOne);
@@ -2051,7 +2053,7 @@ yyreduce:
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 345 "./src/SASM/Parser.yy"
+#line 347 "./src/SASM/Parser.yy"
     {
 		GreaterThanOrEqual((yyvsp[(3) - (4)].integer), (yyvsp[(4) - (4)].integer));
 	}
@@ -2060,7 +2062,7 @@ yyreduce:
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 347 "./src/SASM/Parser.yy"
+#line 349 "./src/SASM/Parser.yy"
     {
 		LoadInt((yyvsp[(4) - (4)].integer), VM::vmTempRegisterOne);
 		GreaterThanOrEqual((yyvsp[(3) - (4)].integer), VM::vmTempRegisterOne);
@@ -2070,7 +2072,7 @@ yyreduce:
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 350 "./src/SASM/Parser.yy"
+#line 352 "./src/SASM/Parser.yy"
     {
 		JumpDirect((yyvsp[(3) - (3)].integer));
 	}
@@ -2079,7 +2081,7 @@ yyreduce:
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 352 "./src/SASM/Parser.yy"
+#line 354 "./src/SASM/Parser.yy"
     {
 		JumpDirectRelative((yyvsp[(3) - (3)].integer));
 	}
@@ -2088,7 +2090,7 @@ yyreduce:
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 354 "./src/SASM/Parser.yy"
+#line 356 "./src/SASM/Parser.yy"
     {
 		JumpRegister((yyvsp[(3) - (3)].integer));
 	}
@@ -2097,7 +2099,7 @@ yyreduce:
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 356 "./src/SASM/Parser.yy"
+#line 358 "./src/SASM/Parser.yy"
     {
 		JumpRegisterRelative((yyvsp[(3) - (3)].integer));
 	}
@@ -2106,7 +2108,7 @@ yyreduce:
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 358 "./src/SASM/Parser.yy"
+#line 360 "./src/SASM/Parser.yy"
     {
 		Return();
 	}
@@ -2115,7 +2117,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 2119 "./gen/SASMParser.cpp"
+#line 2121 "./gen/SASMParser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2353,7 +2355,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 363 "./src/SASM/Parser.yy"
+#line 365 "./src/SASM/Parser.yy"
 
 
 void sasm_error(std::string s) {

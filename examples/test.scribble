@@ -5,11 +5,8 @@ func main() {
 	j[0] := 100;
 	
 	var r := [j[0]]int;
-	
-	var i := 0;
 
-	for i; i < 100; i++ {
-		j := [5]int;
+	for var i := 0; i < 10000000; i++ {
 	}
 
 }

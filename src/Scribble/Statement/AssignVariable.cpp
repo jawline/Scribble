@@ -1,7 +1,7 @@
 #include "AssignVariable.hpp"
 #include "StatementException.hpp"
 #include <sstream>
-#include <VM/VirtualMachine.hpp>
+#include <VM/Constants.hpp>
 
 AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym,
 		SP<Variable> var, SafeStatement exp) :

@@ -8,7 +8,7 @@
 
 #include "ArrayStatement.hpp"
 #include "Heap.hpp"
-#include <VM/VirtualMachine.hpp>
+#include <VM/Constants.hpp>
 #include <Scribble/Value/Array.hpp>
 #include <Scribble/Value/Util.hpp>
 #include <Scribble/Value/Int.hpp>

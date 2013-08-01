@@ -1,5 +1,5 @@
 #include "GetVariableStatement.hpp"
-#include <VM/VirtualMachine.hpp>
+#include <VM/Constants.hpp>
 
 GetVariableStatement::GetVariableStatement(int lineNo, std::string sym,
 		SP<Variable> var) :

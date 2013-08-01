@@ -3,10 +3,12 @@
 %name-prefix "sasm_"
 
 %{
+#include <stdio.h>
+#include <string.h>
 #include <string>
 #include <VM/OpCodes.hpp>
 #include <stdint.h>
-#include <VM/VirtualMachine.hpp>
+#include <VM/Constants.hpp>
 #include <VM/InstructionSet.hpp>
 #include <VM/ConstantTypes.hpp>
 #include <VM/JumpTypes.hpp>

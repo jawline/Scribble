@@ -8,10 +8,10 @@
 #include "VirtualMachine.hpp"
 #include "OpCodes.hpp"
 #include "JumpTypes.hpp"
-#include "ConstantTypes.hpp"
+#include "Constants.hpp"
 #include <stdio.h>
 
-#define VM_DEBUG 3
+#define VM_DEBUG 0
 
 #define VM_PRINTF_FATAL(fmt, ...) printf(fmt, __VA_ARGS__); do { } while (1)
 
@@ -390,12 +390,12 @@ void VirtualMachine::execute(InstructionSet& set) {
 
 			delete[] initial;
 
-			printf("DEST %i\n", destinationRegister);
-
 			VM_PRINTF_LOG("Allocated and created %li\n",
 					registers_[destinationRegister]);
 
 			*current += vmOpCodeSize;
+
+			gcStat_++;
 
 			break;
 		}
@@ -457,7 +457,7 @@ void VirtualMachine::execute(InstructionSet& set) {
 				delete[] initial;
 
 				registerReference_[reg] = true;
-				gcStat_ = GarbageCollectHitLimit;
+				gcStat_++;
 
 				break;
 			}
@@ -480,7 +480,6 @@ void VirtualMachine::execute(InstructionSet& set) {
 
 		}
 
-		gcStat_++;
 		if (gcStat_ > GarbageCollectHitLimit) {
 			garbageCollection();
 			gcStat_ = 0;
@@ -494,8 +493,7 @@ void VirtualMachine::execute(InstructionSet& set) {
 
 void VirtualMachine::garbageCollection() {
 
-	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK STACK");
-	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK HEAP");
+	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK STACK"); VM_PRINTF_WARN("%s\n", "TODO: GC CHECK HEAP");
 
 	VM_PRINTF_LOG("%s\n", "Garbage collector running");
 
@@ -595,6 +593,25 @@ void VirtualMachine::printState() {
 	printf("%s\n", heap_.debugState().c_str());
 
 	printf("--VM STATE END--\n");
+}
+
+long VirtualMachine::stackLong(long pos) {
+	return *((long*) stack_ + pos);
+}
+
+void VirtualMachine::stackSetLong(long pos, long v) {
+	*((long*) stack_ + pos) = v;
+}
+
+long VirtualMachine::popStackLong() {
+	long top = stackLong(registers_[vmStackCurrentPointer] - 8);
+	registers_[vmStackCurrentPointer] -= 8;
+	return top;
+}
+
+void VirtualMachine::pushStackLong(long v) {
+	stackSetLong(registers_[vmStackCurrentPointer], v);
+	registers_[vmStackCurrentPointer] += 8;
 }
 
 } /* namespace VM */

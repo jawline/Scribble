@@ -209,7 +209,7 @@ Variable:  VARIABLE WORD COLON Type {
 	}
 ;
 
-AutoVariable: VARIABLE WORD ASSIGN Statement {
+AutoVariable: VARIABLE WORD ASSIGN Expression {
 
 		auto it = Variables.find(*$2);
 				
@@ -586,14 +586,6 @@ IfStatements: Statement {
 
 Statement: Expression END {
 		$$ = $1;
-	} | Variable END {
-		$$ = new GetVariableStatement(scribble_lineno, scribble_text, *$1);
-		delete $1;
-	} | Variable ASSIGN Expression END {
-		$$ = new AssignVariableStatement(scribble_lineno, scribble_text, *$1, $3);
-		delete $1;
-	} | AutoVariable {
-		$$ = $1;
 	} | IF Expression THEN IfStatements  {
 		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, std::vector<SP<Statement>>());
 		delete $4;
@@ -628,6 +620,14 @@ Expression: TRUE {
 		delete $3;
 		delete $1;
 		
+	} | Variable {
+		$$ = new GetVariableStatement(scribble_lineno, scribble_text, *$1);
+		delete $1;
+	} | Variable ASSIGN Expression {
+		$$ = new AssignVariableStatement(scribble_lineno, scribble_text, *$1, $3);
+		delete $1;
+	} | AutoVariable {
+		$$ = $1;
 	} | LENGTH LPAREN Expression RPAREN {
 		$$ = new ArrayLengthStatement(scribble_lineno, scribble_text, $3);
 	} | LSQBRACKET Expression RSQBRACKET Type {

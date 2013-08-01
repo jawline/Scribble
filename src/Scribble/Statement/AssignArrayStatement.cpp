@@ -9,7 +9,7 @@
 #include "Heap.hpp"
 #include <Scribble/Value/Array.hpp>
 #include <Scribble/Value/Int.hpp>
-#include <VM/VirtualMachine.hpp>
+#include <VM/Constants.hpp>
 
 AssignArrayStatement::AssignArrayStatement(int lineno, std::string text,
 		SafeStatement array, SafeStatement assign, SafeStatement position) :
