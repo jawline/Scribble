@@ -1,12 +1,24 @@
 import("sys")
 
-func main() {
-	var j := [1]int;
-	j[0] := 100;
-	
-	var r := [j[0]]int;
+func other() {
 
-	for var i := 0; i < 10000000; i++ {
+	var j := 100;
+	var k := 101;
+	var l := 102;
+
+	for var i := 0; i < 103; i++ {
+		other2();
 	}
 
+}
+
+func other2() {
+	var n := [1500]int;
+}
+
+func main() {
+	var j := 1;
+	var k := 2;
+	var l := 3;
+	other();
 }

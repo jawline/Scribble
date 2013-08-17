@@ -116,7 +116,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 120 "./gen/Parser.hpp"
+#line 120 "./gen/ScribbleParser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

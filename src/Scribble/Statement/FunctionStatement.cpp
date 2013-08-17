@@ -65,3 +65,11 @@ Type* FunctionStatement::type() {
 
 	return func_->getFunction()->getType();
 }
+
+int FunctionStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+	generated << "pushr $" << VM::vmNumReservedRegisters << " " << numDeclaredVariables_ << "\n";
+	int num = func_->getFunction()->debugCode(generated);
+	generated << "popr $" << VM::vmNumReservedRegisters << " " << numDeclaredVariables_ << "\n";
+	return num + 2;
+}

@@ -90,13 +90,12 @@ const unsigned int ScriptedFunction::numArgs() {
 	return arguments_.size();
 }
 
-std::string ScriptedFunction::debugCode() {
-
-	std::stringstream res;
+int ScriptedFunction::debugCode(std::stringstream& gen) {
+	int script = 0;
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
-		statements_[i]->generateCode(5, res);
+		script += statements_[i]->generateCode(5, gen);
 	}
 
-	return res.str();
+	return script;
 }

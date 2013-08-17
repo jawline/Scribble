@@ -152,7 +152,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 
 
 /* Line 268 of yacc.c  */
-#line 156 "./gen/Parser.cpp"
+#line 156 "./gen/ScribbleParser.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -258,7 +258,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 262 "./gen/Parser.cpp"
+#line 262 "./gen/ScribbleParser.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -283,7 +283,7 @@ typedef struct YYLTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 287 "./gen/Parser.cpp"
+#line 287 "./gen/ScribbleParser.cpp"
 
 #ifdef short
 # undef short
@@ -2435,7 +2435,7 @@ yyreduce:
 		StatementReferences.push_back(r);
 		
 		
-		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 		
 		//Free the name pointer
 		delete (yyvsp[(1) - (4)].string);
@@ -2456,7 +2456,7 @@ yyreduce:
 		StatementReferences.push_back(r);
 		
 		
-		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 		
 		//Free the name pointer
 		delete (yyvsp[(1) - (3)].string);
@@ -2482,7 +2482,7 @@ yyreduce:
 		ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 	
 		//Free the name pointers
 		delete (yyvsp[(1) - (6)].string);
@@ -2502,7 +2502,7 @@ yyreduce:
 		ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		(yyval.statement) = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 		
 		//Free the name pointers
 		delete (yyvsp[(1) - (5)].string);
@@ -2998,7 +2998,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 3002 "./gen/Parser.cpp"
+#line 3002 "./gen/ScribbleParser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

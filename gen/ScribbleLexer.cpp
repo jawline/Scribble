@@ -1,6 +1,6 @@
-#line 2 "./gen/Lexer.cpp"
+#line 2 "./gen/ScribbleLexer.cpp"
 
-#line 4 "./gen/Lexer.cpp"
+#line 4 "./gen/ScribbleLexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -592,7 +592,7 @@ char *scribble_text;
 #include <Scribble/Value/Variable.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
 #include <Scribble/Parser/TypeReference.hpp>
-#include "Parser.hpp"
+#include "ScribbleParser.hpp"
 
 #define SAVE_INT scribble_lval.integer = atoi(scribble_text);
 #define SAVE_REAL scribble_lval.real = atof(scribble_text);
@@ -608,7 +608,7 @@ void myReplace(std::string& str, const std::string& oldStr, const std::string& n
   }
 }
 
-#line 612 "./gen/Lexer.cpp"
+#line 612 "./gen/ScribbleLexer.cpp"
 
 #define INITIAL 0
 #define C_COMMENT 1
@@ -797,7 +797,7 @@ YY_DECL
 #line 43 "./src/Scribble/Parser/Lexer.l"
 
 
-#line 801 "./gen/Lexer.cpp"
+#line 801 "./gen/ScribbleLexer.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -1176,7 +1176,7 @@ YY_RULE_SETUP
 #line 107 "./src/Scribble/Parser/Lexer.l"
 ECHO;
 	YY_BREAK
-#line 1180 "./gen/Lexer.cpp"
+#line 1180 "./gen/ScribbleLexer.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(C_COMMENT):
 	yyterminate();

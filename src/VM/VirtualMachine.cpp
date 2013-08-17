@@ -60,7 +60,9 @@ VirtualMachine::~VirtualMachine() {
 	// TODO Auto-generated destructor stub
 }
 
-void VirtualMachine::execute(InstructionSet& set) {
+void VirtualMachine::execute(std::string function) {
+
+	InstructionSet set = registeredFunctions_[function].getInstructions();
 
 	registers_[vmProgramCounter] = set.startInstruction();
 	long* current = &registers_[vmProgramCounter];
@@ -69,6 +71,73 @@ void VirtualMachine::execute(InstructionSet& set) {
 	while (!shouldReturn && *current < set.numInstructions()) {
 
 		switch (set.getInst(*current)) {
+
+		case OpLoadConstant: {
+
+			int constantDataStart = set.getInt(*current + 1);
+			uint8_t destinationRegister = set.getInst(*current + 5);
+
+			switch (set.getConstantByte(constantDataStart)) {
+
+			case CInt:
+				registers_[destinationRegister] = set.getConstantInt(
+						constantDataStart + 1);
+				registerReference_[destinationRegister] = false;
+				break;
+
+			case CLong:
+				registers_[destinationRegister] = set.getConstantLong(
+						constantDataStart + 1);
+				registerReference_[destinationRegister] = false;
+				break;
+
+			case CArray: {
+
+				//Read in the type of array from the constant data with this instruction set.
+				std::string type = set.getConstantString(constantDataStart + 1);
+
+				//Essentially a pointer to the next constant bit to read
+				int next = constantDataStart + 2 + type.size();
+
+				//Get the size of the area to create
+				int sizeBytes = set.getConstantInt(next);
+				next += 4;
+
+				//Get the size stored. Will be filled from the start. Any remaining space will be zero'd
+				int sizeStored = set.getConstantInt(next);
+				next += 4;
+
+				uint8_t* initial = new uint8_t[sizeBytes];
+
+				//Cheap optimization. As you know that this data is about to be written don't wipe the array from the start but instead wipe it from the end of the area
+				memset(initial + sizeStored, 0, sizeBytes - sizeStored);
+
+				for (int i = 0; i < sizeStored; ++i) {
+					initial[i] = set.getConstantByte(next);
+					next++;
+				}
+
+				registers_[destinationRegister] = heap_.allocate(
+						registeredTypes_[type], sizeBytes, initial);
+
+				delete[] initial;
+
+				registerReference_[destinationRegister] = true;
+				gcStat_++;
+
+				break;
+			}
+
+			default:
+				printf("Unhandled load %i\n",
+						set.getConstantByte(constantDataStart));
+				break;
+
+			}
+
+			*current += vmOpCodeSize;
+			break;
+		}
 
 		case OpMove: {
 			uint8_t target = set.getInst(*current + 1);
@@ -210,6 +279,45 @@ void VirtualMachine::execute(InstructionSet& set) {
 				*current += 2 * vmOpCodeSize;
 			}
 
+			break;
+		}
+
+			/**
+			 * OpPushRegisters
+			 * Push registers, starting from the start register and pushing numregisters sequentially from it
+			 * StartRegister - Offset 1 - 1 byte
+			 * NumRegisters - Offset 2 - 1 byte
+			 */
+		case OpPushRegisters: {
+			uint8_t startRegister = set.getInst(*current + 1);
+			uint8_t numRegisters = set.getInst(*current + 2);
+
+			printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
+
+			for (uint8_t i = startRegister; i < startRegister + numRegisters;
+					i++) {
+				pushStackLong(registers_[i]);
+			}
+
+			*current += vmOpCodeSize;
+			break;
+		}
+
+			/**
+			 * Pop n registers starting from the start+nth register and the last pop acting on the start register
+			 */
+		case OpPopRegisters: {
+			uint8_t startRegister = set.getInst(*current + 1);
+			uint8_t numRegisters = set.getInst(*current + 2);
+
+			printf("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
+
+			for (uint8_t i = (startRegister + numRegisters) - 1;
+					i >= startRegister; i--) {
+				registers_[i] = popStackLong();
+			}
+
+			*current += vmOpCodeSize;
 			break;
 		}
 
@@ -400,78 +508,6 @@ void VirtualMachine::execute(InstructionSet& set) {
 			break;
 		}
 
-		case OpLoadConstant: {
-
-			int constant = set.getInt(*current + 1);
-			uint8_t reg = set.getInst(*current + 5);
-
-			switch (set.getConstantByte(constant)) {
-
-			case CInt:
-				registers_[reg] = set.getConstantInt(constant + 1);
-				registerReference_[reg] = false;
-				break;
-
-			case CLong:
-				registers_[reg] = set.getConstantLong(constant + 1);
-				registerReference_[reg] = false;
-				break;
-
-			case CArray: {
-
-				printf("ARRAY LOAD\n");
-
-				std::string type = set.getConstantString(constant + 1);
-
-				printf("Type %s\n", type.c_str());
-
-				int next = constant + 2 + type.size();
-
-				//Get the size of the area to create
-				int sizeBytes = set.getConstantInt(next);
-
-				next += 4;
-
-				int sizeStored = set.getConstantInt(next);
-
-				printf("Size: %i\n", sizeBytes);
-
-				next += 4;
-
-				printf("Data: ");
-
-				uint8_t* initial = new uint8_t[sizeBytes];
-				memset(initial, 0, sizeBytes);
-
-				for (int i = 0; i < sizeStored; ++i) {
-					initial[i] = set.getConstantByte(next);
-					next++;
-					printf("%c", initial[i]);
-				}
-
-				printf("\n");
-
-				registers_[reg] = heap_.allocate(registeredTypes_[type],
-						sizeBytes, initial);
-
-				delete[] initial;
-
-				registerReference_[reg] = true;
-				gcStat_++;
-
-				break;
-			}
-
-			default:
-				printf("Unhandled load %i\n", set.getConstantByte(constant));
-				break;
-
-			}
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
 		default: {
 			printf("Invalid instruction %li. %li\n", *current,
 					set.getInst(*current));
@@ -493,7 +529,7 @@ void VirtualMachine::execute(InstructionSet& set) {
 
 void VirtualMachine::garbageCollection() {
 
-	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK STACK"); VM_PRINTF_WARN("%s\n", "TODO: GC CHECK HEAP");
+	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK STACK");VM_PRINTF_WARN("%s\n", "TODO: GC CHECK HEAP");
 
 	VM_PRINTF_LOG("%s\n", "Garbage collector running");
 

@@ -8,6 +8,7 @@
 #ifndef VIRTUALMACHINE_HPP_
 #define VIRTUALMACHINE_HPP_
 #include "InstructionSet.hpp"
+#include "VMFunc.hpp"
 #include <vector>
 #include <map>
 #include "Stack.hpp"
@@ -21,6 +22,7 @@ private:
 	bool* registerReference_;
 	Heap heap_;
 	std::map<std::string, SP<VMEntryType>> registeredTypes_;
+	std::map<std::string, VMFunc> registeredFunctions_;
 
 	unsigned int gcStat_;
 
@@ -33,7 +35,15 @@ public:
 	virtual long popStackLong();
 	virtual void pushStackLong(long v);
 
-	virtual void execute(InstructionSet& set);
+	virtual void registerType(SP<VMEntryType> type) {
+		registeredTypes_[type->typeName()] = type;
+	}
+
+	virtual void registerFunction(VMFunc fn) {
+		registeredFunctions_[fn.getName()] = fn;
+	}
+
+	virtual void execute(std::string function);
 	virtual void garbageCollection();
 
 	virtual void printState();

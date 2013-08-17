@@ -25,7 +25,9 @@ enum OpCodes {
 	OpAnd,
 	OpNewArray,
 	OpArraySet,
-	OpArrayGet
+	OpArrayGet,
+	OpPushRegisters,
+	OpPopRegisters
 };
 
 }

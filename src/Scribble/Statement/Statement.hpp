@@ -3,6 +3,7 @@
 #include "StatementException.hpp"
 #include <Pointers/SmartPointer.hpp>
 #include <Scribble/Value/Value.hpp>
+#include <iostream>
 #include <vector>
 #include <string>
 #include <sstream>
@@ -36,7 +37,7 @@ public:
 	virtual Type* type() = 0;
 
 	virtual int generateCode(int resultRegister, std::stringstream& generated) {
-		printf("Unimplemented statement!!\n");
+		printf("Unimplemented statement %s!!\n", symbolName_.c_str());
 		generated << std::string("#") + symbolName_ + " UNIMP\n";
 		return 1;
 	}

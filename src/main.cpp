@@ -61,31 +61,38 @@ int main(int argc, char** argv) {
 	std::map<std::string, NamespaceType> builtinNamespaces;
 	builtinNamespaces["sys"] = builtinFunctions;
 
-	SP<Function> entry;
-
 	printf("Entry\n");
 
 	try {
 
-		entry =
-				Parser::compile(argv[1], builtinNamespaces)["main"].getFunctionSet()[0];
+		VM::VirtualMachine vm;
 
-		printf("Compiled %s\n", entry->debugCode().c_str());
+		auto names = Parser::compile(argv[1], builtinNamespaces);
 
-		auto instructions = SimpleASM::Parser::parse(entry->debugCode());
+		for (auto iterator = names.begin(); iterator != names.end(); iterator++) {
+			auto func = iterator->second.getFunctionSet()[0];
 
-		printf("Prepairing bytecode for execution\n");
+			std::stringstream r;
+			func->debugCode(r);
+			printf("Compiled %s\n", r.str().c_str());
+			auto instructions = SimpleASM::Parser::parse(r.str().c_str());
+
+			vm.registerFunction(VM::VMFunc(iterator->first, instructions));
+			printf("Registered %s\n", iterator->first.c_str());
+		}
+
+
+		printf("Done prepairing bytecode for execution\n");
 
 		double treeStart = getCPUTime();
-		valueHeap.free(entry->execute(std::vector<Value*>()));
+		valueHeap.free(names["main"].getFunctionSet()[0]->execute(std::vector<Value*>()));
 		double treeEnd = getCPUTime();
 
 		printf("Now in the VM\n");
 
 		double vmStart = getCPUTime();
 
-		VM::VirtualMachine vm;
-		vm.execute(instructions);
+		vm.execute("main");
 
 		double vmEnd = getCPUTime();
 

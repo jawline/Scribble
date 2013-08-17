@@ -3,7 +3,7 @@ CFLAGS=-c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread
 LDFLAGS=-pthread -lpthread
 EXECUTABLE=./bin/scribble
 SOURCE_DIR=src
-SOURCES=gen/Lexer.cpp gen/Parser.cpp gen/SASMLexer.cpp gen/SASMParser.cpp $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp) $(wildcard $(SOURCE_DIR)/**/**/*.cpp)
+SOURCES=gen/ScribbleLexer.cpp gen/ScribbleParser.cpp gen/SASMLexer.cpp gen/SASMParser.cpp $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp) $(wildcard $(SOURCE_DIR)/**/**/*.cpp)
 OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 
 all: preprocess $(SOURCES) $(EXECUTABLE)
@@ -15,15 +15,15 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 preprocess: gen bison sasm_bison
-	@sh build_number_increment.sh 
+	@sh scripts/build_number_increment.sh 
 
 gen:
 	@mkdir -p gen
 
 bison: flex
-	bison --verbose -d -o ./gen/Parser.cpp ./src/Scribble/Parser/Parser.yy
+	bison --verbose -d -o ./gen/ScribbleParser.cpp ./src/Scribble/Parser/Parser.yy
 flex:
-	flex -o ./gen/Lexer.cpp ./src/Scribble/Parser/Lexer.l
+	flex -o ./gen/ScribbleLexer.cpp ./src/Scribble/Parser/Lexer.l
 
 sasm_bison: sasm_flex
 	bison --verbose -d -o ./gen/SASMParser.cpp ./src/SASM/Parser.yy

@@ -14,7 +14,7 @@
 #include <Scribble/Value/Variable.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
 #include <Scribble/Parser/TypeReference.hpp>
-#include "Parser.hpp"
+#include "ScribbleParser.hpp"
 
 #define SAVE_INT scribble_lval.integer = atoi(scribble_text);
 #define SAVE_REAL scribble_lval.real = atof(scribble_text);

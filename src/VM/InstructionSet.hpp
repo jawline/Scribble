@@ -25,6 +25,7 @@ private:
 	unsigned int start_;
 
 public:
+	InstructionSet() : numInstructions_(0), numConstants_(0), start_(0)  { }
 	InstructionSet(uint8_t* instructions, size_t numInstructions, uint8_t* constants, size_t numConstants, unsigned int start);
 	virtual ~InstructionSet();
 
@@ -43,19 +44,19 @@ public:
 		return *(long*)(instructions_ + i);
 	}
 
-	uint8_t getConstantByte(size_t index) {
+	inline uint8_t getConstantByte(size_t index) {
 		return constants_[index];
 	}
 
-	int getConstantInt(size_t index) {
+	inline int getConstantInt(size_t index) {
 		return *(int*)(constants_ + index);
 	}
 
-	long getConstantLong(size_t index) {
+	inline long getConstantLong(size_t index) {
 		return *(long*)(constants_ + index);
 	}
 
-	char* getConstantString(size_t index) {
+	inline char* getConstantString(size_t index) {
 		return (char*)(constants_ + index);
 	}
 

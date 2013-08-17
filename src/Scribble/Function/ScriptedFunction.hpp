@@ -38,7 +38,7 @@ public:
 	Type* argType(unsigned int arg);
 	void check();
 
-	std::string debugCode();
+	int debugCode(std::stringstream& gen);
 };
 
 #endif /* SCRIPTEDFUNCTION_HPP_ */

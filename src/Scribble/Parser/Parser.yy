@@ -520,7 +520,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		StatementReferences.push_back(r);
 		
 		
-		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 		
 		//Free the name pointer
 		delete $1;
@@ -534,7 +534,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		StatementReferences.push_back(r);
 		
 		
-		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 		
 		//Free the name pointer
 		delete $1;
@@ -553,7 +553,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 	
 		//Free the name pointers
 		delete $1;
@@ -566,7 +566,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference);
+		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
 		
 		//Free the name pointers
 		delete $1;

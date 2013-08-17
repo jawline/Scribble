@@ -69,6 +69,20 @@ void LoadLong(long val, uint8_t reg) {
 	current += 2;
 }
 
+void PushRegisters(uint8_t start, uint8_t num) {
+	Set(buffer, current, (uint8_t) VM::OpPushRegisters);
+	Set(buffer, current, (uint8_t) start);
+	Set(buffer, current, (uint8_t) num);
+	current += 5;
+}
+
+void PopRegisters(uint8_t start, uint8_t num) {
+	Set(buffer, current, (uint8_t) VM::OpPopRegisters);
+	Set(buffer, current, start);
+	Set(buffer, current, num);
+	current += 5;
+}
+
 void ArraySet(uint8_t dataReg, uint8_t arrayReg, uint8_t indexReg) {
 	Set(buffer, current, (uint8_t) VM::OpArraySet);
 	Set(buffer, current, (uint8_t) dataReg);
@@ -247,7 +261,7 @@ void Return() {
 %token <real> REAL
 %token <integer> INT REG
 %token <lval> LONG
-%token JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token PUSH_REGISTERS POP_REGISTERS JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -271,6 +285,10 @@ Program: {
 		LoadInt($4, 3);
 		Array(*$3, 3, $5);
 		delete $3;
+	} | Program PUSH_REGISTERS REG INT {
+		PushRegisters($3, $4);
+	} | Program POP_REGISTERS REG INT {
+		PopRegisters($3, $4);
 	} | Program NEW_ARRAY STRING REG REG {
 		Array(*$3, $4, $5);
 		delete $3;

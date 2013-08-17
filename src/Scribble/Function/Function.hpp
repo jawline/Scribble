@@ -26,8 +26,8 @@ public:
 	virtual Type* argType(unsigned int arg) = 0;
 	virtual void check() = 0;
 
-	virtual std::string debugCode() {
-		return "";
+	virtual int debugCode(std::stringstream& gen) {
+		return 0;
 	}
 };
 
