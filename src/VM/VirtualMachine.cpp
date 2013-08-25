@@ -62,6 +62,10 @@ VirtualMachine::~VirtualMachine() {
 
 void VirtualMachine::execute(std::string function) {
 
+	if (registeredFunctions_.find(function) == registeredFunctions_.end()) {
+		VM_PRINTF_FATAL("%s is not a registered function\n", function.c_str());
+	}
+
 	InstructionSet set = registeredFunctions_[function].getInstructions();
 
 	registers_[vmProgramCounter] = set.startInstruction();
@@ -292,7 +296,7 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t startRegister = set.getInst(*current + 1);
 			uint8_t numRegisters = set.getInst(*current + 2);
 
-			printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
+			//printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
 
 			for (uint8_t i = startRegister; i < startRegister + numRegisters;
 					i++) {
@@ -310,7 +314,7 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t startRegister = set.getInst(*current + 1);
 			uint8_t numRegisters = set.getInst(*current + 2);
 
-			printf("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
+			//printf("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
 
 			for (uint8_t i = (startRegister + numRegisters) - 1;
 					i >= startRegister; i--) {

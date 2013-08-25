@@ -6,10 +6,13 @@ func other() {
 	var k := 101;
 	var l := 102;
 
-	for var i := 0; i < 103; i++ {
+	for var i := 0; i < 10003; i++ {
 		other2();
 	}
 
+}
+
+func other(i : int) {
 }
 
 func other2() {

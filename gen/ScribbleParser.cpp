@@ -1919,7 +1919,7 @@ yyreduce:
 /* Line 1806 of yacc.c  */
 #line 147 "./src/Scribble/Parser/Parser.yy"
     {
-		(yyval.structureinfo) = new StructureInfo();
+		(yyval.structureinfo) = new StructureInfo("INVALID");
 	}
     break;
 

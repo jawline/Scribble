@@ -23,17 +23,7 @@
 #include <time.h>
 #include <cputime.hpp>
 
-int main(int argc, char** argv) {
-
-	srand(time(0));
-
-	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
-			VERSION_BUILD_NUMBER);
-
-	if (argc != 2) {
-		printf("Expected usage %s filename\n", argv[0]);
-		return -1;
-	}
+void generateBuiltinNamespace(std::map<std::string, NamespaceType> builtin) {
 
 	NamespaceType builtinFunctions;
 
@@ -59,80 +49,94 @@ int main(int argc, char** argv) {
 	builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
 
 	std::map<std::string, NamespaceType> builtinNamespaces;
-	builtinNamespaces["sys"] = builtinFunctions;
+
+	builtin["sys"] = builtinFunctions;
+}
+
+void registerEntireNamespace(NamespaceType& names, VM::VirtualMachine& vm) {
+
+	for (auto iterator = names.begin(); iterator != names.end(); iterator++) {
+
+		if (iterator->second.type() == FunctionSetEntry) {
+
+			FunctionSet functionSet = iterator->second.getFunctionSet();
+
+			for (unsigned int i = 0; i < functionSet.size(); i++) {
+
+				SP<Function> function = functionSet[i];
+
+				std::stringstream code;
+				function->debugCode(code);
+				//printf("Compiled %s\n", code.str().c_str());
+
+				VM::InstructionSet instructions = SimpleASM::Parser::parse(
+						code.str().c_str());
+
+				std::stringstream name;
+				name << iterator->first << "#" << i;
+
+				vm.registerFunction(VM::VMFunc(name.str(), instructions));
+
+				printf("Registered function %s\n", name.str().c_str());
+			}
+
+		} else {
+			printf("Registering type %s\n", iterator->first.c_str());
+		}
+
+	}
+
+}
+
+int main(int argc, char** argv) {
+
+	srand(time(0));
+
+	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
+			VERSION_BUILD_NUMBER);
+
+	if (argc != 2) {
+		printf("Expected usage %s filename\n", argv[0]);
+		return -1;
+	}
+
+	std::map<std::string, NamespaceType> builtin;
+	generateBuiltinNamespace(builtin);
 
 	printf("Entry\n");
 
+	VM::VirtualMachine vm;
+
+	NamespaceType names;
+
 	try {
-
-		VM::VirtualMachine vm;
-
-		auto names = Parser::compile(argv[1], builtinNamespaces);
-
-		for (auto iterator = names.begin(); iterator != names.end(); iterator++) {
-			auto func = iterator->second.getFunctionSet()[0];
-
-			std::stringstream r;
-			func->debugCode(r);
-			printf("Compiled %s\n", r.str().c_str());
-			auto instructions = SimpleASM::Parser::parse(r.str().c_str());
-
-			vm.registerFunction(VM::VMFunc(iterator->first, instructions));
-			printf("Registered %s\n", iterator->first.c_str());
-		}
-
-
-		printf("Done prepairing bytecode for execution\n");
-
-		double treeStart = getCPUTime();
-		valueHeap.free(names["main"].getFunctionSet()[0]->execute(std::vector<Value*>()));
-		double treeEnd = getCPUTime();
-
-		printf("Now in the VM\n");
-
-		double vmStart = getCPUTime();
-
-		vm.execute("main");
-
-		double vmEnd = getCPUTime();
-
-		printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
-				vmEnd - vmStart);
-
+		names = Parser::compile(argv[1], builtin);
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());
 		return -1;
 	}
 
+	registerEntireNamespace(names, vm);
+
+	printf("Done prepairing bytecode for execution\n");
+
+	double treeStart = getCPUTime();
+	valueHeap.free(
+			names["main"].getFunctionSet()[0]->execute(std::vector<Value*>()));
+	double treeEnd = getCPUTime();
+
+	printf("Now in the VM\n");
+
+	double vmStart = getCPUTime();
+
+	vm.execute("main#0");
+
+	double vmEnd = getCPUTime();
+
+	printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
+			vmEnd - vmStart);
+
 	printf("Exit\n");
-
-	/**
-	 if (!entry.Null()) {
-
-	 try {
-
-	 double start = getCPUTime();
-	 valueHeap.free(entry->execute(std::vector<Value*>()));
-	 double end = getCPUTime();
-
-	 printf(
-	 "\n-----------------------------------\n%f seconds to execute.\n",
-	 end - start);
-
-	 } catch (StatementException& c) {
-
-	 printf(
-	 "Unfortunately an error occured during execution because %s.\n",
-	 c.what());
-
-	 }
-
-	 } else {
-	 printf(
-	 "It appears that the main function was not declared within the scope");
-	 }
-
-	 valueHeap.freeAll(); */
 
 	return 0;
 }

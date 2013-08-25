@@ -8,6 +8,7 @@
 #ifndef TYPE_HPP_
 #define TYPE_HPP_
 #include <Pointers/SmartPointer.hpp>
+#include <VM/VMEntryType.hpp>
 
 class TypeReferenceCore;
 typedef SP<TypeReferenceCore> TypeReference;
@@ -107,7 +108,7 @@ public:
 
 	TypeReference getSubtypeReference();
 
-	std::string getTypeName() {
+	virtual std::string getTypeName() {
 
 		switch (getType()) {
 		case Array:
@@ -120,11 +121,15 @@ public:
 			return "string";
 		case Void:
 			return "void";
+		case StructureType:
+		case ValueTypeMax:
 		case TypeUnresolved:
 			return "ERROR: Unresolved Illegal";
 		}
 
 	}
+
+
 };
 
 #endif /* TYPE_HPP_ */
