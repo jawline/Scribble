@@ -12,6 +12,14 @@ public:
 
 	virtual void check() {
 	}
+
+	virtual std::string getName() {
+		return "NativeWriteString";
+	}
+
+	virtual VM::VMFunc generateVMFunction() {
+		return VM::VMFunc(getName(), VM::InstructionSet());
+	}
 };
 
 #endif //_WRITE_FUNCTION_H_

@@ -1,8 +1,0 @@
-<map id="src/Statement/AndStatement.hpp" name="src/Statement/AndStatement.hpp">
-<area shape="rect" id="node3" href="$_statement_8hpp.html" title="Statement.hpp" alt="" coords="336,83,443,112"/>
-<area shape="rect" id="node5" href="$_statement_exception_8hpp.html" title="StatementException.hpp" alt="" coords="35,160,200,189"/>
-<area shape="rect" id="node11" href="$_smart_pointer_8hpp.html" title="Pointers/SmartPointer.hpp" alt="" coords="193,315,367,344"/>
-<area shape="rect" id="node15" href="$_value_8hpp.html" title="Value/Value.hpp" alt="" coords="275,160,392,189"/>
-<area shape="rect" id="node13" href="$_reference_counter_8hpp.html" title="ReferenceCounter.hpp" alt="" coords="204,392,356,421"/>
-<area shape="rect" id="node17" href="$_type_8hpp.html" title="Type.hpp" alt="" coords="285,237,360,267"/>
-</map>

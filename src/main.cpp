@@ -15,6 +15,7 @@
 #include <Scribble/Value/TypeManager.hpp>
 #include <version_info.hpp>
 #include <SASM/Parser.hpp>
+#include <VM/VMNamespace.hpp>
 #include <VM/OpCodes.hpp>
 #include <VM/VirtualMachine.hpp>
 #include <string.h>
@@ -23,7 +24,7 @@
 #include <time.h>
 #include <cputime.hpp>
 
-void generateBuiltinNamespace(std::map<std::string, NamespaceType> builtin) {
+void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 
 	NamespaceType builtinFunctions;
 
@@ -48,41 +49,40 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType> builtin) {
 	randomInt.push_back(SmartPointer<Function>(new RandomInt()));
 	builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
 
-	std::map<std::string, NamespaceType> builtinNamespaces;
-
 	builtin["sys"] = builtinFunctions;
 }
 
-void registerEntireNamespace(NamespaceType& names, VM::VirtualMachine& vm) {
+void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
+		VM::VirtualMachine& vm) {
 
-	for (auto iterator = names.begin(); iterator != names.end(); iterator++) {
+	for (auto selectedNamespaceIter = allNames.begin();
+			selectedNamespaceIter != allNames.end(); selectedNamespaceIter++) {
 
-		if (iterator->second.type() == FunctionSetEntry) {
+		VM::VMNamespace newSpace;
 
-			FunctionSet functionSet = iterator->second.getFunctionSet();
+		NamespaceType names = selectedNamespaceIter->second;
 
-			for (unsigned int i = 0; i < functionSet.size(); i++) {
+		for (auto iterator = names.begin(); iterator != names.end();
+				iterator++) {
 
-				SP<Function> function = functionSet[i];
+			if (iterator->second.type() == FunctionSetEntry) {
 
-				std::stringstream code;
-				function->debugCode(code);
-				//printf("Compiled %s\n", code.str().c_str());
+				FunctionSet functionSet = iterator->second.getFunctionSet();
 
-				VM::InstructionSet instructions = SimpleASM::Parser::parse(
-						code.str().c_str());
+				for (unsigned int i = 0; i < functionSet.size(); i++) {
+					SP<Function> function = functionSet[i];
+					newSpace[function->getName()] = VM::NamespaceEntry(function->generateVMFunction());
+					printf("Registered function %s\n", function->getName().c_str());
+				}
 
-				std::stringstream name;
-				name << iterator->first << "#" << i;
-
-				vm.registerFunction(VM::VMFunc(name.str(), instructions));
-
-				printf("Registered function %s\n", name.str().c_str());
+			} else {
+				printf("TODO: Register Type %s\n", iterator->first.c_str());
 			}
 
-		} else {
-			printf("Registering type %s\n", iterator->first.c_str());
 		}
+
+		printf("Registering namespace %s\n", selectedNamespaceIter->first.c_str());
+		vm.registerEntry(selectedNamespaceIter->first, VM::NamespaceEntry(newSpace));
 
 	}
 
@@ -100,17 +100,13 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
-	std::map<std::string, NamespaceType> builtin;
-	generateBuiltinNamespace(builtin);
-
-	printf("Entry\n");
+	std::map<std::string, NamespaceType> names;
+	generateBuiltinNamespace(names);
 
 	VM::VirtualMachine vm;
 
-	NamespaceType names;
-
 	try {
-		names = Parser::compile(argv[1], builtin);
+		names = Parser::compile(argv[1], names);
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());
 		return -1;
@@ -118,18 +114,29 @@ int main(int argc, char** argv) {
 
 	registerEntireNamespace(names, vm);
 
-	printf("Done prepairing bytecode for execution\n");
+	char* packageName = strrchr(argv[1], '/');
+
+	if (!packageName) {
+		packageName = argv[1];
+	} else {
+		packageName++;
+	}
+
+	printf("Tree execution of %s\n", packageName);
 
 	double treeStart = getCPUTime();
+
 	valueHeap.free(
-			names["main"].getFunctionSet()[0]->execute(std::vector<Value*>()));
+			names[packageName]["main"].getFunctionSet()[0]->execute(
+					std::vector<Value*>()));
+
 	double treeEnd = getCPUTime();
 
 	printf("Now in the VM\n");
 
 	double vmStart = getCPUTime();
 
-	vm.execute("main#0");
+	vm.execute(std::string(packageName) + ".main#0");
 
 	double vmEnd = getCPUTime();
 

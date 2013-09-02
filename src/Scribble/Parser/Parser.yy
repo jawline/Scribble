@@ -276,7 +276,8 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 		SP<Variable> returnTemplate = new Variable(0, *$7, nullptr);
 		VariableReferences.push_back(returnTemplate);
-		SP<Function> fn = new ScriptedFunction(*$7, returnTemplate, *$9, values, *$4);
+		printf("WARN: VERSIONS NOT DO\n");
+		SP<Function> fn = new ScriptedFunction(*$2, 0, *$7, returnTemplate, *$9, values, *$4);
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -335,7 +336,8 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 	
 		SP<Variable> returnTemplate = new Variable(0, *$6, nullptr);
 		VariableReferences.push_back(returnTemplate);
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$6, returnTemplate, *$8, values, std::vector<SP<Variable>>()));
+		printf("WARN: VERSIONS NOT DO\n");
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, *$6, returnTemplate, *$8, values, std::vector<SP<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -385,7 +387,9 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
 
 		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
-		SP<Function> fn = new ScriptedFunction(voidReference, returnTemplate, *$7, values, *$4);
+		
+		printf("WARN: VERSIONS NOT DO\n");
+		SP<Function> fn = new ScriptedFunction(*$2, 0, voidReference, returnTemplate, *$7, values, *$4);
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -443,7 +447,9 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
 	
 		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
-		SP<Function> fn = SP<Function>(new ScriptedFunction(voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
+		
+		printf("WARN: VERSIONS NOT DO\n");
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		

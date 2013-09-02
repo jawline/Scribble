@@ -23,6 +23,14 @@ public:
 
 	virtual void check() {
 	}
+
+	virtual std::string getName() {
+		return "NativeIntToString";
+	}
+
+	virtual VM::VMFunc generateVMFunction() {
+		return VM::VMFunc(getName(), VM::InstructionSet());
+	}
 };
 
 class BoolToStringFunction: public Function {
@@ -37,6 +45,14 @@ public:
 	Type* argType(unsigned int arg);
 
 	virtual void check() {
+	}
+
+	virtual std::string getName() {
+		return "NativeBoolToString";
+	}
+
+	virtual VM::VMFunc generateVMFunction() {
+		return VM::VMFunc(getName(), VM::InstructionSet());
 	}
 };
 

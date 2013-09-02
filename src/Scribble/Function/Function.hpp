@@ -3,6 +3,7 @@
 #include <Pointers/SmartPointer.hpp>
 #include <Scribble/Value/Value.hpp>
 #include <vector>
+#include <VM/VMFunc.hpp>
 
 /**
  * Virtual Function class implemented to create Scribble functions.
@@ -29,6 +30,9 @@ public:
 	virtual int debugCode(std::stringstream& gen) {
 		return 0;
 	}
+
+	virtual std::string getName() = 0;
+	virtual VM::VMFunc generateVMFunction() = 0;
 };
 
 typedef SmartPointer<Function> SafeFunction;

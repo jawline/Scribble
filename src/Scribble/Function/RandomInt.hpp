@@ -22,6 +22,14 @@ public:
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
 	void check();
+
+	virtual std::string getName() {
+		return "NativeRandomInt";
+	}
+
+	virtual VM::VMFunc generateVMFunction() {
+		return VM::VMFunc(getName(), VM::InstructionSet());
+	}
 };
 
 #endif /* RANDOMINT_HPP_ */

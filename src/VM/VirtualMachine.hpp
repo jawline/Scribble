@@ -13,16 +13,19 @@
 #include <map>
 #include "Stack.hpp"
 #include "Heap.hpp"
+#include "VMNamespace.hpp"
+#include "VMEntryType.hpp"
 
 namespace VM {
 class VirtualMachine {
 private:
 	uint8_t* stack_;
+	std::vector<long> stackReferences_;
+
 	long* registers_;
 	bool* registerReference_;
 	Heap heap_;
-	std::map<std::string, SP<VMEntryType>> registeredTypes_;
-	std::map<std::string, VMFunc> registeredFunctions_;
+	VMNamespace namespace_;
 
 	unsigned int gcStat_;
 
@@ -32,15 +35,14 @@ public:
 
 	virtual long stackLong(long pos);
 	virtual void stackSetLong(long pos, long v);
-	virtual long popStackLong();
+	virtual void popStackLong(long& val, bool& ref);
 	virtual void pushStackLong(long v);
+	virtual void markStackReference();
+	virtual void pushRegister(uint8_t reg);
+	virtual SP<VMEntryType> findType(std::string name);
 
-	virtual void registerType(SP<VMEntryType> type) {
-		registeredTypes_[type->typeName()] = type;
-	}
-
-	virtual void registerFunction(VMFunc fn) {
-		registeredFunctions_[fn.getName()] = fn;
+	virtual void registerEntry(std::string name, NamespaceEntry entry) {
+		namespace_[name] = entry;
 	}
 
 	virtual void execute(std::string function);

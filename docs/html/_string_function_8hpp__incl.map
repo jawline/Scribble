@@ -1,8 +1,0 @@
-<map id="src/Function/StringFunction.hpp" name="src/Function/StringFunction.hpp">
-<area shape="rect" id="node3" href="$_function_8hpp.html" title="Function.hpp" alt="" coords="28,83,124,112"/>
-<area shape="rect" id="node15" href="$_type_manager_8hpp.html" title="Value/TypeManager.hpp" alt="" coords="148,83,311,112"/>
-<area shape="rect" id="node5" href="$_value_8hpp.html" title="Value/Value.hpp" alt="" coords="5,160,123,189"/>
-<area shape="rect" id="node7" href="$_type_8hpp.html" title="Type.hpp" alt="" coords="116,237,191,267"/>
-<area shape="rect" id="node9" href="$_smart_pointer_8hpp.html" title="Pointers/SmartPointer.hpp" alt="" coords="67,315,240,344"/>
-<area shape="rect" id="node11" href="$_reference_counter_8hpp.html" title="ReferenceCounter.hpp" alt="" coords="77,392,229,421"/>
-</map>

@@ -47,6 +47,14 @@ public:
 	 */
 
 	virtual void check();
+
+	virtual std::string getName() {
+		return "NativeModulo";
+	}
+
+	virtual VM::VMFunc generateVMFunction() {
+		return VM::VMFunc(getName(), VM::InstructionSet());
+	}
 };
 
 #endif /* MODULO_HPP_ */

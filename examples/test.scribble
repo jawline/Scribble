@@ -2,26 +2,20 @@ import("sys")
 
 func other() {
 
-	var j := 100;
-	var k := 101;
-	var l := 102;
-
-	for var i := 0; i < 10003; i++ {
+	for var i := 0; i < 100000; i++ {
 		other2();
 	}
 
 }
 
-func other(i : int) {
+func other2() {
+	var x := [15]int;
+	
 }
 
-func other2() {
-	var n := [1500]int;
+func helloWorld(i : bool) {
 }
 
 func main() {
-	var j := 1;
-	var k := 2;
-	var l := 3;
 	other();
 }

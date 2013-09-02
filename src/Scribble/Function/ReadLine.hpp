@@ -49,6 +49,14 @@ public:
 	virtual void check() {
 
 	}
+
+	virtual std::string getName() {
+		return "NativeReadLine";
+	}
+
+	virtual VM::VMFunc generateVMFunction() {
+		return VM::VMFunc(getName(), VM::InstructionSet());
+	}
 };
 
 #endif /* READLINE_HPP_ */

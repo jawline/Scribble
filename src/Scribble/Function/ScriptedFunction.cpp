@@ -8,12 +8,12 @@
 #include "ScriptedFunction.hpp"
 #include <Scribble/Statement/ReturnStatement.hpp>
 
-ScriptedFunction::ScriptedFunction(TypeReference fType,
+ScriptedFunction::ScriptedFunction(std::string name, int version, TypeReference fType,
 		SP<Variable> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
-		fType_(fType), templateReturn_(templateReturn), statements_(statements), variableTemplates_(
+		name_(name), version_(version), fType_(fType), templateReturn_(templateReturn), statements_(statements), variableTemplates_(
 				templates), arguments_(arguments) {
 }
 

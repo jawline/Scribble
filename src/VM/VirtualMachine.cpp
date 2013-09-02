@@ -11,7 +11,7 @@
 #include "Constants.hpp"
 #include <stdio.h>
 
-#define VM_DEBUG 0
+#define VM_DEBUG 3
 
 #define VM_PRINTF_FATAL(fmt, ...) printf(fmt, __VA_ARGS__); do { } while (1)
 
@@ -44,14 +44,14 @@ VirtualMachine::VirtualMachine() {
 		registerReference_[i] = false;
 	}
 
-	registeredTypes_["char"] = new VMEntryType("char", 1, false);
-	registeredTypes_["int"] = new VMEntryType("int", 4, false);
-	registeredTypes_["long"] = new VMEntryType("int", 8, false);
-	registeredTypes_["array(int)"] = new VMEntryType("array(int)",
-			registeredTypes_["int"]);
+	registerEntry("char", NamespaceEntry(new VMEntryType("char", 1, false)));
+	registerEntry("int", NamespaceEntry(new VMEntryType("int", 4, false)));
+	registerEntry("long", NamespaceEntry(new VMEntryType("int", 8, false)));
 
-	registeredTypes_["string"] = new VMEntryType("string",
-			registeredTypes_["char"]);
+	registerEntry("string",
+			NamespaceEntry(
+					new VMEntryType("string",
+							namespace_["char"].getTypeReference())));
 
 	stack_ = new uint8_t[4086];
 }
@@ -60,13 +60,52 @@ VirtualMachine::~VirtualMachine() {
 	// TODO Auto-generated destructor stub
 }
 
+SP<VMEntryType> VirtualMachine::findType(std::string name) {
+
+	NamespaceEntry entry;
+
+	printf("Searching\n");
+	if (!searchNamespace(namespace_, name, entry)) {
+
+		char const* prefix = "array(";
+
+		if (strncmp(prefix, name.c_str(), strlen(prefix)) == 0) {
+
+			std::string subtypeName = name.substr(strlen(prefix), name.size() - strlen(prefix) - 1);
+			SP<VMEntryType> subtype = findType(subtypeName);
+
+			if (subtype.Null()) {
+				printf("Cannot create array of invalid subtype %s\n", subtypeName.c_str());
+				return nullptr;
+			}
+
+			SP<VMEntryType> entryType = new VMEntryType(name, subtype);
+			registerEntry(name, entryType);
+			printf("Generating new type %s\n", name.c_str());
+			return entryType;
+		}
+
+		return nullptr;
+	}
+
+	if (entry.getType() != Type) {
+		return nullptr;
+	}
+
+	printf("Returning\n");
+	return entry.getTypeReference();
+}
+
 void VirtualMachine::execute(std::string function) {
 
-	if (registeredFunctions_.find(function) == registeredFunctions_.end()) {
+	NamespaceEntry functionEntry;
+
+	if (!VM::searchNamespace(namespace_, function, functionEntry)
+			|| functionEntry.getType() != Function) {
 		VM_PRINTF_FATAL("%s is not a registered function\n", function.c_str());
 	}
 
-	InstructionSet set = registeredFunctions_[function].getInstructions();
+	InstructionSet set = functionEntry.getFunction().getInstructions();
 
 	registers_[vmProgramCounter] = set.startInstruction();
 	long* current = &registers_[vmProgramCounter];
@@ -100,6 +139,11 @@ void VirtualMachine::execute(std::string function) {
 				//Read in the type of array from the constant data with this instruction set.
 				std::string type = set.getConstantString(constantDataStart + 1);
 
+				//Check the type is valid
+				if (namespace_[type].getType() != Type) {
+					VM_PRINTF_FATAL("Invalid type %s\n", type.c_str());
+				}
+
 				//Essentially a pointer to the next constant bit to read
 				int next = constantDataStart + 2 + type.size();
 
@@ -122,7 +166,8 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				registers_[destinationRegister] = heap_.allocate(
-						registeredTypes_[type], sizeBytes, initial);
+						namespace_[type].getTypeReference(), sizeBytes,
+						initial);
 
 				delete[] initial;
 
@@ -300,7 +345,7 @@ void VirtualMachine::execute(std::string function) {
 
 			for (uint8_t i = startRegister; i < startRegister + numRegisters;
 					i++) {
-				pushStackLong(registers_[i]);
+				pushRegister(i);
 			}
 
 			*current += vmOpCodeSize;
@@ -318,7 +363,7 @@ void VirtualMachine::execute(std::string function) {
 
 			for (uint8_t i = (startRegister + numRegisters) - 1;
 					i >= startRegister; i--) {
-				registers_[i] = popStackLong();
+				popStackLong(registers_[i], registerReference_[i]);
 			}
 
 			*current += vmOpCodeSize;
@@ -472,14 +517,14 @@ void VirtualMachine::execute(std::string function) {
 					constantLocation);
 
 			//Find the type.
-			auto typeSearch = registeredTypes_.find(type);
+			auto typeSearch = findType(type);
 
-			if (typeSearch == registeredTypes_.end()) {
+			if (typeSearch.Null()) {
 				VM_PRINTF_FATAL("Type %s not found\n", type.c_str());
 			}
 
 			//Check the type is an array
-			if (!typeSearch->second->isArray()) {
+			if (!typeSearch->isArray()) {
 				VM_PRINTF_FATAL("%s", "Cannot create valid array from type\n");
 			}
 
@@ -489,14 +534,15 @@ void VirtualMachine::execute(std::string function) {
 						"Length register should not be a reference\n");
 			}
 
-			long length = registers_[lengthRegister]
-					* typeSearch->second->arraySubtype()->getElementSize();
+			long length =
+					registers_[lengthRegister]
+							* typeSearch->arraySubtype()->getElementSize();
 
 			uint8_t* initial = new uint8_t[length];
 			memset(initial, 0, length);
 
-			registers_[destinationRegister] = heap_.allocate(typeSearch->second,
-					length, initial);
+			registers_[destinationRegister] = heap_.allocate(
+					typeSearch, length, initial);
 
 			registerReference_[destinationRegister] = true;
 
@@ -531,9 +577,19 @@ void VirtualMachine::execute(std::string function) {
 	printState();
 }
 
+void VirtualMachine::pushRegister(uint8_t reg) {
+
+	if (registerReference_[reg]) {
+		markStackReference();
+	}
+
+	pushStackLong(registers_[reg]);
+}
+
 void VirtualMachine::garbageCollection() {
 
-	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK STACK");VM_PRINTF_WARN("%s\n", "TODO: GC CHECK HEAP");
+	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK STACK");
+	VM_PRINTF_WARN("%s\n", "TODO: GC CHECK HEAP");
 
 	VM_PRINTF_LOG("%s\n", "Garbage collector running");
 
@@ -583,9 +639,9 @@ void VirtualMachine::garbageCollection() {
 					if (*data != 0) {
 						heap_.flag(*data);
 						toInvestigate.push_back(*data);
-						data++;
 					}
 
+					data++;
 				}
 
 			}
@@ -643,15 +699,30 @@ void VirtualMachine::stackSetLong(long pos, long v) {
 	*((long*) stack_ + pos) = v;
 }
 
-long VirtualMachine::popStackLong() {
-	long top = stackLong(registers_[vmStackCurrentPointer] - 8);
+void VirtualMachine::popStackLong(long& val, bool& ref) {
+	val = stackLong(registers_[vmStackCurrentPointer] - 8);
 	registers_[vmStackCurrentPointer] -= 8;
-	return top;
+
+	ref = false;
+
+	if (stackReferences_.size() > 0
+			&& stackReferences_.back() >= registers_[vmStackCurrentPointer]) {
+		stackReferences_.pop_back();
+		ref = true;
+	}
+
 }
 
 void VirtualMachine::pushStackLong(long v) {
 	stackSetLong(registers_[vmStackCurrentPointer], v);
 	registers_[vmStackCurrentPointer] += 8;
+}
+
+/**
+ * Mark the next entry pushed to the stack as a reference
+ */
+void VirtualMachine::markStackReference() {
+	stackReferences_.push_back(registers_[vmStackCurrentPointer]);
 }
 
 } /* namespace VM */

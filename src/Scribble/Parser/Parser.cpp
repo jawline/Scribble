@@ -247,7 +247,7 @@ NamespaceType Parser::include(std::string const& filename,
 	Namespace[filename] = Functions;
 	Functions = NamespaceType();
 
-	std::vector<std::string> imports = ImportList;
+	std::vector < std::string > imports = ImportList;
 	ImportList.clear();
 
 	std::vector<ParserReference> references = StatementReferences;
@@ -301,7 +301,8 @@ NamespaceType Parser::include(std::string const& filename,
 		//printf("TODO: Variable decl\n");
 
 		if (variableReferences[i]->getType()->getType() == Void) {
-			throw ParserException(filename, "cannot declare a variable as a void");
+			throw ParserException(filename,
+					"cannot declare a variable as a void");
 		}
 
 	}
@@ -426,7 +427,7 @@ NamespaceType Parser::include(std::string const& filename,
 	return Functions;
 }
 
-NamespaceType Parser::compile(std::string const& file,
+std::map<std::string, NamespaceType> Parser::compile(std::string const& file,
 		std::map<std::string, NamespaceType> builtinNamespace) {
 	parser_free_all();
 
@@ -443,9 +444,11 @@ NamespaceType Parser::compile(std::string const& file,
 	Namespace = builtinNamespace;
 	NamespaceType ns = include(filename, path);
 
+	std::map<std::string, NamespaceType> result = Namespace;
+
 //printAllSpaces(Namespace);
 
 	parser_free_all();
 
-	return ns;
+	return result;
 }

@@ -1,8 +1,0 @@
-<map id="src/Value/Variable.cpp" name="src/Value/Variable.cpp">
-<area shape="rect" id="node3" href="$_variable_8hpp.html" title="Variable.hpp" alt="" coords="84,83,177,112"/>
-<area shape="rect" id="node16" href="$_type_manager_8hpp.html" title="Value/TypeManager.hpp" alt="" coords="201,83,364,112"/>
-<area shape="rect" id="node5" href="$_smart_pointer_8hpp.html" title="Pointers/SmartPointer.hpp" alt="" coords="5,315,179,344"/>
-<area shape="rect" id="node9" href="$_value_8hpp.html" title="Value.hpp" alt="" coords="91,160,171,189"/>
-<area shape="rect" id="node7" href="$_reference_counter_8hpp.html" title="ReferenceCounter.hpp" alt="" coords="16,392,168,421"/>
-<area shape="rect" id="node11" href="$_type_8hpp.html" title="Type.hpp" alt="" coords="93,237,168,267"/>
-</map>

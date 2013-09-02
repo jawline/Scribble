@@ -124,9 +124,10 @@ public:
 		case StructureType:
 		case ValueTypeMax:
 		case TypeUnresolved:
-			return "ERROR: Unresolved Illegal";
+			break;
 		}
 
+		return "ERROR: Unresolved/Illegal Type";
 	}
 
 
