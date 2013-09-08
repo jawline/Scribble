@@ -66,8 +66,8 @@ Grammar
    22         | FUNCTION WORD LPAREN ArgumentDefinitions RPAREN LBRACKET Statements RBRACKET
    23         | FUNCTION WORD LPAREN RPAREN LBRACKET Statements RBRACKET
 
-   24 Arguments: Statement
-   25          | Arguments COMMA Statement
+   24 Arguments: Expression
+   25          | Arguments COMMA Expression
 
    26 Statements: /* empty */
    27           | Statements Statement
@@ -214,12 +214,12 @@ FunctionCall (66)
 IfStatements (67)
     on left: 34 35, on right: 37 38
 Statement (68)
-    on left: 36 37 38 39 40, on right: 24 25 27 28 34
+    on left: 36 37 38 39 40, on right: 27 28 34
 Expression (69)
     on left: 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58
     59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76, on right:
-    16 36 37 38 39 40 47 49 50 51 52 53 56 57 58 59 60 61 62 63 64
-    65 66 67 68 69 74 75 76
+    16 24 25 36 37 38 39 40 47 49 50 51 52 53 56 57 58 59 60 61 62
+    63 64 65 66 67 68 69 74 75 76
 
 
 state 0
@@ -1142,11 +1142,8 @@ state 75
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
     INT          shift, and go to state 48
-    IF           shift, and go to state 49
-    FOR          shift, and go to state 50
     TYPE_ARRAY   shift, and go to state 15
     TYPE_VOID    shift, and go to state 16
-    WHILE        shift, and go to state 52
     LPAREN       shift, and go to state 53
     RPAREN       shift, and go to state 109
     TWOMINUS     shift, and go to state 55
@@ -1166,8 +1163,7 @@ state 75
     AutoVariable  go to state 65
     Arguments     go to state 110
     FunctionCall  go to state 66
-    Statement     go to state 111
-    Expression    go to state 68
+    Expression    go to state 111
 
 
 state 76
@@ -1455,11 +1451,8 @@ state 89
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
     INT          shift, and go to state 48
-    IF           shift, and go to state 49
-    FOR          shift, and go to state 50
     TYPE_ARRAY   shift, and go to state 15
     TYPE_VOID    shift, and go to state 16
-    WHILE        shift, and go to state 52
     LPAREN       shift, and go to state 53
     TWOMINUS     shift, and go to state 55
     TWOPLUS      shift, and go to state 56
@@ -1478,8 +1471,7 @@ state 89
     AutoVariable  go to state 65
     Arguments     go to state 121
     FunctionCall  go to state 66
-    Statement     go to state 111
-    Expression    go to state 68
+    Expression    go to state 111
 
 
 state 90
@@ -1929,7 +1921,7 @@ state 109
 
 state 110
 
-   25 Arguments: Arguments . COMMA Statement
+   25 Arguments: Arguments . COMMA Expression
    30 FunctionCall: WORD LPAREN Arguments . RPAREN
 
     RPAREN  shift, and go to state 140
@@ -1938,7 +1930,36 @@ state 110
 
 state 111
 
-   24 Arguments: Statement .
+   24 Arguments: Expression .
+   51 Expression: Expression . LSQBRACKET Expression RSQBRACKET ASSIGN Expression
+   52           | Expression . LSQBRACKET Expression RSQBRACKET
+   53           | Expression . LSQBRACKET Expression COLON Expression RSQBRACKET
+   56           | Expression . PLUS Expression
+   57           | Expression . MINUS Expression
+   58           | Expression . TIMES Expression
+   59           | Expression . DIVIDE Expression
+   61           | Expression . EQUALS NIL
+   62           | Expression . EQUALS Expression
+   63           | Expression . NOT EQUALS Expression
+   64           | Expression . GREATER Expression
+   65           | Expression . LESSER Expression
+   66           | Expression . LESSER EQUALS Expression
+   67           | Expression . GREATER EQUALS Expression
+   74           | Expression . AND Expression
+   75           | Expression . POINT WORD
+   76           | Expression . POINT WORD ASSIGN Expression
+
+    PLUS        shift, and go to state 91
+    MINUS       shift, and go to state 92
+    TIMES       shift, and go to state 93
+    DIVIDE      shift, and go to state 94
+    EQUALS      shift, and go to state 95
+    GREATER     shift, and go to state 96
+    LESSER      shift, and go to state 97
+    NOT         shift, and go to state 98
+    AND         shift, and go to state 99
+    POINT       shift, and go to state 100
+    LSQBRACKET  shift, and go to state 101
 
     $default  reduce using rule 24 (Arguments)
 
@@ -2155,7 +2176,7 @@ state 120
 
 state 121
 
-   25 Arguments: Arguments . COMMA Statement
+   25 Arguments: Arguments . COMMA Expression
    45 Expression: Type LBRACKET Arguments . RBRACKET
 
     RBRACKET  shift, and go to state 151
@@ -2742,11 +2763,8 @@ state 139
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
     INT          shift, and go to state 48
-    IF           shift, and go to state 49
-    FOR          shift, and go to state 50
     TYPE_ARRAY   shift, and go to state 15
     TYPE_VOID    shift, and go to state 16
-    WHILE        shift, and go to state 52
     LPAREN       shift, and go to state 53
     RPAREN       shift, and go to state 159
     TWOMINUS     shift, and go to state 55
@@ -2766,8 +2784,7 @@ state 139
     AutoVariable  go to state 65
     Arguments     go to state 160
     FunctionCall  go to state 66
-    Statement     go to state 111
-    Expression    go to state 68
+    Expression    go to state 111
 
 
 state 140
@@ -2779,16 +2796,13 @@ state 140
 
 state 141
 
-   25 Arguments: Arguments COMMA . Statement
+   25 Arguments: Arguments COMMA . Expression
 
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
     INT          shift, and go to state 48
-    IF           shift, and go to state 49
-    FOR          shift, and go to state 50
     TYPE_ARRAY   shift, and go to state 15
     TYPE_VOID    shift, and go to state 16
-    WHILE        shift, and go to state 52
     LPAREN       shift, and go to state 53
     TWOMINUS     shift, and go to state 55
     TWOPLUS      shift, and go to state 56
@@ -2806,8 +2820,7 @@ state 141
     Variable      go to state 64
     AutoVariable  go to state 65
     FunctionCall  go to state 66
-    Statement     go to state 161
-    Expression    go to state 68
+    Expression    go to state 161
 
 
 state 142
@@ -3180,7 +3193,7 @@ state 159
 
 state 160
 
-   25 Arguments: Arguments . COMMA Statement
+   25 Arguments: Arguments . COMMA Expression
    32 FunctionCall: WORD LINK WORD LPAREN Arguments . RPAREN
 
     RPAREN  shift, and go to state 169
@@ -3189,7 +3202,36 @@ state 160
 
 state 161
 
-   25 Arguments: Arguments COMMA Statement .
+   25 Arguments: Arguments COMMA Expression .
+   51 Expression: Expression . LSQBRACKET Expression RSQBRACKET ASSIGN Expression
+   52           | Expression . LSQBRACKET Expression RSQBRACKET
+   53           | Expression . LSQBRACKET Expression COLON Expression RSQBRACKET
+   56           | Expression . PLUS Expression
+   57           | Expression . MINUS Expression
+   58           | Expression . TIMES Expression
+   59           | Expression . DIVIDE Expression
+   61           | Expression . EQUALS NIL
+   62           | Expression . EQUALS Expression
+   63           | Expression . NOT EQUALS Expression
+   64           | Expression . GREATER Expression
+   65           | Expression . LESSER Expression
+   66           | Expression . LESSER EQUALS Expression
+   67           | Expression . GREATER EQUALS Expression
+   74           | Expression . AND Expression
+   75           | Expression . POINT WORD
+   76           | Expression . POINT WORD ASSIGN Expression
+
+    PLUS        shift, and go to state 91
+    MINUS       shift, and go to state 92
+    TIMES       shift, and go to state 93
+    DIVIDE      shift, and go to state 94
+    EQUALS      shift, and go to state 95
+    GREATER     shift, and go to state 96
+    LESSER      shift, and go to state 97
+    NOT         shift, and go to state 98
+    AND         shift, and go to state 99
+    POINT       shift, and go to state 100
+    LSQBRACKET  shift, and go to state 101
 
     $default  reduce using rule 25 (Arguments)
 

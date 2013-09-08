@@ -95,6 +95,20 @@ public:
 		return rawType_;
 	}
 
+	bool isPrimitive() {
+
+		switch (rawType_) {
+		case String:
+		case Array:
+		case StructureType:
+			return false;
+
+		default:
+			return true;
+		}
+
+	}
+
 	/**
 	 * Get this types subtype.
 	 */

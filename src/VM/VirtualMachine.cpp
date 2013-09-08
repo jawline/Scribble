@@ -11,7 +11,7 @@
 #include "Constants.hpp"
 #include <stdio.h>
 
-#define VM_DEBUG 0
+#define VM_DEBUG 3
 
 #define VM_PRINTF_FATAL(fmt, ...) printf(fmt, __VA_ARGS__); do { } while (1)
 

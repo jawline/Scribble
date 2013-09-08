@@ -41,6 +41,10 @@ void OperateStatement::checkTree(Type* type) {
 		throw StatementException(this,
 				"Cannot add variables of different types");
 	}
+
+	if (!(lhs_->type()->isPrimitive())) {
+		throw StatementException(this, "Cannot add non primitives");
+	}
 }
 
 int OperateStatement::generateCode(int resultRegister,

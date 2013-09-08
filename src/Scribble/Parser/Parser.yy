@@ -489,10 +489,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 	}
 ;
 
-Arguments: Statement {
+Arguments: Expression {
 		$$ = new std::vector<SmartPointer<Statement>>();
 		$$->push_back($1);
-	} | Arguments COMMA Statement {
+	} | Arguments COMMA Expression {
 		$$ = $1;
 		$$->push_back($3);
 	}

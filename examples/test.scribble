@@ -12,19 +12,16 @@ func y() : int {
 	return r() + 123;
 }
 
-func other2() {
-}
-
-func helloWorld(i : bool) {
-}
-
 func main() {
+
+	var test := "Hello";
 
 	for var i := 0; i < 1000; i++ {
 	
 		var y := r();
 		var j := y();
 	
+		sys.Write(sys.String(y) + "\n");
 	}
 	
 }
