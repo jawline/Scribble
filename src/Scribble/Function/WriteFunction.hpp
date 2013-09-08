@@ -4,6 +4,10 @@
 
 class WriteFunction: public Function {
 public:
+	WriteFunction(std::string ns) : Function("Write", ns) {
+
+	}
+
 	Value* execute(std::vector<Value*> arguments);
 
 	Type* getType();

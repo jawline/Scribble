@@ -16,7 +16,7 @@
 
 class ReadLine : public Function {
 public:
-	ReadLine();
+	ReadLine(std::string ns);
 	virtual ~ReadLine();
 
 	/**
@@ -50,9 +50,6 @@ public:
 
 	}
 
-	virtual std::string getName() {
-		return "NativeReadLine";
-	}
 
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());

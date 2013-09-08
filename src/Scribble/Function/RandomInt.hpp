@@ -13,8 +13,9 @@
  * Random integer implementation. Returns a random integer between zero and n
  */
 class RandomInt: public Function {
+private:
 public:
-	RandomInt();
+	RandomInt(std::string ns);
 	virtual ~RandomInt();
 
 	Value* execute(std::vector<Value*> arguments);
@@ -23,13 +24,10 @@ public:
 	Type* argType(unsigned int arg);
 	void check();
 
-	virtual std::string getName() {
-		return "NativeRandomInt";
-	}
-
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());
 	}
+
 };
 
 #endif /* RANDOMINT_HPP_ */

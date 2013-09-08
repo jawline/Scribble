@@ -14,8 +14,11 @@
  */
 
 class Modulo: public Function {
+private:
+	std::string namespace_;
+
 public:
-	Modulo();
+	Modulo(std::string namesp);
 	virtual ~Modulo();
 
 	/**
@@ -48,9 +51,6 @@ public:
 
 	virtual void check();
 
-	virtual std::string getName() {
-		return "NativeModulo";
-	}
 
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());

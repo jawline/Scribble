@@ -1,21 +1,30 @@
 import("sys")
 
-func other() {
+func j() : int {
+	return 3;
+}
 
-	for var i := 0; i < 100000; i++ {
-		other2();
-	}
+func r() : int {
+	return j() + 4;
+}
 
+func y() : int {
+	return r() + 123;
 }
 
 func other2() {
-	var x := [15]int;
-	
 }
 
 func helloWorld(i : bool) {
 }
 
 func main() {
-	other();
+
+	for var i := 0; i < 1000; i++ {
+	
+		var y := r();
+		var j := y();
+	
+	}
+	
 }

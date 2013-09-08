@@ -32,6 +32,8 @@ public:
 	virtual Type* type() {
 		return getTypeManager().getType(Void);
 	}
+
+	int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* RETURNSTATEMENT_HPP_ */

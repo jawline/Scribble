@@ -10,7 +10,7 @@
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Statement/Heap.hpp>
 
-Modulo::Modulo() {
+Modulo::Modulo(std::string names) : Function("NativeModulo", names) {
 	// TODO Auto-generated constructor stub
 
 }

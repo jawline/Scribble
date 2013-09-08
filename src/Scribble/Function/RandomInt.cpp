@@ -10,7 +10,7 @@
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
-RandomInt::RandomInt() {
+RandomInt::RandomInt(std::string ns) : Function("RandomInt", ns) {
 }
 
 RandomInt::~RandomInt() {

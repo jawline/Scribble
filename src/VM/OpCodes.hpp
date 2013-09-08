@@ -14,7 +14,6 @@ enum OpCodes {
 	OpLoadConstant = 0,
 	OpMove,
 	OpJump,
-	OpReturn,
 	OpAdd,
 	OpSub,
 	OpMul,
@@ -27,7 +26,10 @@ enum OpCodes {
 	OpArraySet,
 	OpArrayGet,
 	OpPushRegisters,
-	OpPopRegisters
+	OpPopNil,
+	OpPopRegisters,
+	OpCallFn,
+	OpReturn
 };
 
 }

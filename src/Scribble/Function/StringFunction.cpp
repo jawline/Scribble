@@ -13,7 +13,7 @@
 #include <Scribble/Value/TypeManager.hpp>
 #include <sstream>
 
-IntToStringFunction::IntToStringFunction() {
+IntToStringFunction::IntToStringFunction(std::string ns) : Function("IntToString", ns) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -48,7 +48,7 @@ Type* IntToStringFunction::argType(unsigned int arg) {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
-BoolToStringFunction::BoolToStringFunction() {
+BoolToStringFunction::BoolToStringFunction(std::string ns) : Function("BoolToString", ns) {
 	// TODO Auto-generated constructor stub
 
 }

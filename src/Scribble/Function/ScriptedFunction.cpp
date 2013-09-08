@@ -7,14 +7,23 @@
 
 #include "ScriptedFunction.hpp"
 #include <Scribble/Statement/ReturnStatement.hpp>
+#include <sstream>
 
-ScriptedFunction::ScriptedFunction(std::string name, int version, TypeReference fType,
+std::string makeName(std::string name, int version) {
+
+	std::stringstream funcName;
+	funcName << name << "#" << version;
+	return funcName.str();
+}
+
+ScriptedFunction::ScriptedFunction(std::string name, int version, std::string names, TypeReference fType,
 		SP<Variable> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
-		name_(name), version_(version), fType_(fType), templateReturn_(templateReturn), statements_(statements), variableTemplates_(
+		Function(makeName(name, version), names), fType_(fType), templateReturn_(templateReturn), statements_(statements), variableTemplates_(
 				templates), arguments_(arguments) {
+
 }
 
 ScriptedFunction::~ScriptedFunction() {

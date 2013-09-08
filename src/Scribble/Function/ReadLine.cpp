@@ -7,7 +7,7 @@
 
 #include "ReadLine.hpp"
 
-ReadLine::ReadLine() {
+ReadLine::ReadLine(std::string ns) : Function("ReadLine", ns) {
 	// TODO Auto-generated constructor stub
 
 }

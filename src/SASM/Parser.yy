@@ -57,6 +57,13 @@ void LoadInt(int val, uint8_t dest) {
 	current += 2;
 }
 
+void PopNil() {
+
+	Set(buffer, current, (uint8_t) VM::OpPopNil);
+
+	current += 7;
+}
+
 void LoadLong(long val, uint8_t reg) {
 
 	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
@@ -67,6 +74,21 @@ void LoadLong(long val, uint8_t reg) {
 	Set(constant, currentConstant, (long) val);
 	
 	current += 2;
+}
+
+void CallFunction(char const* name) {
+	Set(buffer, current, (uint8_t) VM::OpCallFn);
+	Set(buffer, current, (uint8_t) VM::Constant);
+	Set(buffer, current, (int) currentConstant);
+	
+	Set(constant, currentConstant, name);
+	
+	current += 2;
+}
+
+void Return() {
+	Set(buffer, current, (uint8_t) VM::OpReturn);
+	current += 7;
 }
 
 void PushRegisters(uint8_t start, uint8_t num) {
@@ -242,11 +264,6 @@ void TestNotEqual(uint8_t left, uint8_t right) {
 	JumpDirectRelative(2);
 }
 
-void Return() {
-	Set(buffer, current, (uint8_t) VM::OpReturn);
-	current += 7;
-}
-
 %}
 
 
@@ -261,7 +278,7 @@ void Return() {
 %token <real> REAL
 %token <integer> INT REG
 %token <lval> LONG
-%token PUSH_REGISTERS POP_REGISTERS JUMP_RELATIVE LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token PUSH_REGISTERS POP_REGISTERS POP_NIL RETURN JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -277,6 +294,11 @@ Program: {
 		buffer = new uint8_t[5000];
 		current = 0;
 		
+	} | Program CALL_FN STRING {
+		CallFunction($3->c_str());
+		delete $3;
+	} | Program RETURN {
+		Return();
 	} | Program ARRAY_SET REG REG REG {
 		ArraySet($3, $4, $5);
 	} | Program ARRAY_GET REG REG REG {
@@ -289,6 +311,8 @@ Program: {
 		PushRegisters($3, $4);
 	} | Program POP_REGISTERS REG INT {
 		PopRegisters($3, $4);
+	} | Program POP_NIL {
+		PopNil();
 	} | Program NEW_ARRAY STRING REG REG {
 		Array(*$3, $4, $5);
 		delete $3;

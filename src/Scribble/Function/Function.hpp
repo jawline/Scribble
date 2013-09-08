@@ -10,7 +10,16 @@
  * @author Blake Loring
  */
 class Function {
+private:
+	std::string name_;
+	std::string namespace_;
+
 public:
+
+	Function(std::string name, std::string ns) : name_(name), namespace_(ns) {
+
+	}
+
 	virtual ~Function() {
 	}
 
@@ -31,7 +40,14 @@ public:
 		return 0;
 	}
 
-	virtual std::string getName() = 0;
+	virtual std::string getNamespace() {
+		return namespace_;
+	}
+
+	virtual std::string getName() {
+		return name_;
+	}
+
 	virtual VM::VMFunc generateVMFunction() = 0;
 };
 

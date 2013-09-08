@@ -12,7 +12,7 @@
 
 class IntToStringFunction: public Function {
 public:
-	IntToStringFunction();
+	IntToStringFunction(std::string ns);
 	virtual ~IntToStringFunction();
 
 	Value* execute(std::vector<Value*> arguments);
@@ -24,18 +24,15 @@ public:
 	virtual void check() {
 	}
 
-	virtual std::string getName() {
-		return "NativeIntToString";
-	}
-
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());
 	}
+
 };
 
 class BoolToStringFunction: public Function {
 public:
-	BoolToStringFunction();
+	BoolToStringFunction(std::string ns);
 	virtual ~BoolToStringFunction();
 
 	Value* execute(std::vector<Value*> arguments);
@@ -47,9 +44,6 @@ public:
 	virtual void check() {
 	}
 
-	virtual std::string getName() {
-		return "NativeBoolToString";
-	}
 
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());

@@ -11,6 +11,7 @@ const static unsigned int vmStackCurrentPointer = 2;
 const static unsigned int vmTempRegisterOne = 3;
 const static unsigned int vmTempRegisterTwo = 4;
 const static unsigned int vmTempRegisterThree = 5;
+const static unsigned int vmReturnResultRegister = vmTempRegisterOne;
 
 }
 

@@ -55,6 +55,7 @@ bool ParsingError;
 std::vector<std::string> ImportList;
 std::map<std::string, SP<Variable>> Variables;
 
+std::string currentNamespaceName;
 std::map<std::string, NamespaceType> Namespace;
 NamespaceType Functions;
 
@@ -277,7 +278,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		SP<Variable> returnTemplate = new Variable(0, *$7, nullptr);
 		VariableReferences.push_back(returnTemplate);
 		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = new ScriptedFunction(*$2, 0, *$7, returnTemplate, *$9, values, *$4);
+		SP<Function> fn = new ScriptedFunction(*$2, 0, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4);
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -337,7 +338,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		SP<Variable> returnTemplate = new Variable(0, *$6, nullptr);
 		VariableReferences.push_back(returnTemplate);
 		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, *$6, returnTemplate, *$8, values, std::vector<SP<Variable>>()));
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, currentNamespaceName, *$6, returnTemplate, *$8, values, std::vector<SP<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -389,7 +390,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
 		
 		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = new ScriptedFunction(*$2, 0, voidReference, returnTemplate, *$7, values, *$4);
+		SP<Function> fn = new ScriptedFunction(*$2, 0, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4);
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -449,7 +450,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
 		
 		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, currentNamespaceName, voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		

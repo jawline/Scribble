@@ -16,9 +16,6 @@
 
 class ScriptedFunction: public Function {
 private:
-	std::string name_;
-	int version_;
-
 	TypeReference fType_;SP<Variable> templateReturn_;
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variableTemplates_;
@@ -26,7 +23,7 @@ private:
 
 public:
 
-	ScriptedFunction(std::string name, int version, TypeReference functionType,
+	ScriptedFunction(std::string name, int version, std::string names, TypeReference functionType,
 			SP<Variable> templateReturn,
 			std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variableTemplates,
@@ -43,12 +40,6 @@ public:
 	void check();
 
 	int debugCode(std::stringstream& gen);
-
-	std::string getName() {
-		std::stringstream name;
-		name << name_ << "#" << version_;
-		return name.str();
-	}
 
 	virtual VM::VMFunc generateVMFunction() {
 

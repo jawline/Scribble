@@ -11,7 +11,7 @@
 #include "Constants.hpp"
 #include <stdio.h>
 
-#define VM_DEBUG 3
+#define VM_DEBUG 0
 
 #define VM_PRINTF_FATAL(fmt, ...) printf(fmt, __VA_ARGS__); do { } while (1)
 
@@ -64,24 +64,25 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 
 	NamespaceEntry entry;
 
-	printf("Searching\n");
 	if (!searchNamespace(namespace_, name, entry)) {
 
 		char const* prefix = "array(";
 
 		if (strncmp(prefix, name.c_str(), strlen(prefix)) == 0) {
 
-			std::string subtypeName = name.substr(strlen(prefix), name.size() - strlen(prefix) - 1);
+			std::string subtypeName = name.substr(strlen(prefix),
+					name.size() - strlen(prefix) - 1);
 			SP<VMEntryType> subtype = findType(subtypeName);
 
 			if (subtype.Null()) {
-				printf("Cannot create array of invalid subtype %s\n", subtypeName.c_str());
+				printf("Cannot create array of invalid subtype %s\n",
+						subtypeName.c_str());
 				return nullptr;
 			}
 
 			SP<VMEntryType> entryType = new VMEntryType(name, subtype);
 			registerEntry(name, entryType);
-			printf("Generating new type %s\n", name.c_str());
+			VM_PRINTF_LOG("Generating new type %s\n", name.c_str());
 			return entryType;
 		}
 
@@ -92,7 +93,6 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 		return nullptr;
 	}
 
-	printf("Returning\n");
 	return entry.getTypeReference();
 }
 
@@ -196,12 +196,6 @@ void VirtualMachine::execute(std::string function) {
 			VM_PRINTF_LOG("VM Move %i to %i %i to %i\n",
 					target, dest, registerReference_[dest], registerReference_[target]);
 			*current += vmOpCodeSize;
-			break;
-		}
-
-		case OpReturn: {
-			VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
-			shouldReturn = true;
 			break;
 		}
 
@@ -365,6 +359,17 @@ void VirtualMachine::execute(std::string function) {
 					i >= startRegister; i--) {
 				popStackLong(registers_[i], registerReference_[i]);
 			}
+
+			*current += vmOpCodeSize;
+			break;
+		}
+
+		case OpPopNil: {
+
+			long t;
+			bool r;
+
+			popStackLong(t, r);
 
 			*current += vmOpCodeSize;
 			break;
@@ -534,15 +539,14 @@ void VirtualMachine::execute(std::string function) {
 						"Length register should not be a reference\n");
 			}
 
-			long length =
-					registers_[lengthRegister]
-							* typeSearch->arraySubtype()->getElementSize();
+			long length = registers_[lengthRegister]
+					* typeSearch->arraySubtype()->getElementSize();
 
 			uint8_t* initial = new uint8_t[length];
 			memset(initial, 0, length);
 
-			registers_[destinationRegister] = heap_.allocate(
-					typeSearch, length, initial);
+			registers_[destinationRegister] = heap_.allocate(typeSearch, length,
+					initial);
 
 			registerReference_[destinationRegister] = true;
 
@@ -555,6 +559,44 @@ void VirtualMachine::execute(std::string function) {
 
 			gcStat_++;
 
+			break;
+		}
+
+		case OpCallFn: {
+			uint8_t modeRegister = set.getInst(*current + 1);
+			char* name = 0;
+
+			if (modeRegister == Constant) {
+
+				name = set.getConstantString(set.getInt(*current + 2));
+
+			} else {
+
+				uint8_t reg = set.getConstantByte(*current + 2);
+				long heapEntry = registers_[reg];
+
+				if (!heap_.validReference(heapEntry)) {
+					VM_PRINTF_FATAL(
+							"Entry %li is not a valid heap entry for function call\n",
+							heapEntry);
+				}
+
+				name = (char*) heap_.getAddress(heapEntry);
+			}
+
+			VM_PRINTF_LOG("Calling function %s\n", name);
+
+			long currentBack = *current;
+			execute(name);
+			*current = currentBack;
+
+			*current += vmOpCodeSize;
+			break;
+		}
+
+		case OpReturn: {
+			VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
+			shouldReturn = true;
 			break;
 		}
 
@@ -573,7 +615,6 @@ void VirtualMachine::execute(std::string function) {
 
 	}
 
-	garbageCollection();
 	printState();
 }
 
@@ -661,34 +702,34 @@ void VirtualMachine::garbageCollection() {
 
 void VirtualMachine::printState() {
 
-	printf("--VM STATE--\n");
+	VM_PRINTF_LOG("%s", "--VM STATE--\n");
 
 	for (unsigned int i = 0; i < registers_[vmStackCurrentPointer]; i++) {
-		printf("%x ", stack_[i]);
+		VM_PRINTF_LOG("%x ", stack_[i]);
 	}
 
-	printf("\n");
+	VM_PRINTF_LOG("%s", "\n");
 
 	for (unsigned int i = 0; i < vmNumRegisters; i += 3) {
 
 		if (i < vmNumRegisters) {
-			printf("#%i:%li ", i, registers_[i]);
+			VM_PRINTF_LOG("#%i:%li ", i, registers_[i]);
 		}
 
 		if (i + 1 < vmNumRegisters) {
-			printf("#%i:%li ", i + 1, registers_[i + 1]);
+			VM_PRINTF_LOG("#%i:%li ", i + 1, registers_[i + 1]);
 		}
 
 		if (i + 2 < vmNumRegisters) {
-			printf("#%i:%li", i + 2, registers_[i + 2]);
+			VM_PRINTF_LOG("#%i:%li", i + 2, registers_[i + 2]);
 		}
 
-		printf("\n");
+		VM_PRINTF_LOG("%s", "\n");
 	}
 
-	printf("%s\n", heap_.debugState().c_str());
+	VM_PRINTF_LOG("%s\n", heap_.debugState().c_str());
 
-	printf("--VM STATE END--\n");
+	VM_PRINTF_LOG("%s", "--VM STATE END--\n");
 }
 
 long VirtualMachine::stackLong(long pos) {

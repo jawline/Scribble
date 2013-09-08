@@ -48,9 +48,11 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "sub" return SUBTRACT;
 "mul" return MULTIPLY;
 "div" return DIVIDE;
+"call" return CALL_FN;
 "move" return MOVE;
 "push" return PUSH;
 "pop" return POP;
+"popn" return POP_NIL;
 "neq" return TEST_NOT_EQUAL;
 "eq" return TEST_EQUAL;
 "lt" return LESS_THAN;

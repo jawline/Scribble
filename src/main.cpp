@@ -29,24 +29,24 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 	NamespaceType builtinFunctions;
 
 	std::vector<SafeFunction> write;
-	write.push_back(SmartPointer<Function>(new WriteFunction()));
+	write.push_back(SmartPointer<Function>(new WriteFunction("sys")));
 	builtinFunctions["Write"] = NamespaceEntry(write);
 
 	std::vector<SafeFunction> string;
-	string.push_back(SmartPointer<Function>(new IntToStringFunction()));
-	string.push_back(SmartPointer<Function>(new BoolToStringFunction()));
+	string.push_back(SmartPointer<Function>(new IntToStringFunction("sys")));
+	string.push_back(SmartPointer<Function>(new BoolToStringFunction("sys")));
 	builtinFunctions["String"] = NamespaceEntry(string);
 
 	std::vector<SafeFunction> readLine;
-	readLine.push_back(SP<Function>(new ReadLine()));
+	readLine.push_back(SP<Function>(new ReadLine("sys")));
 	builtinFunctions["ReadLine"] = readLine;
 
 	std::vector<SafeFunction> mod;
-	mod.push_back(new Modulo());
+	mod.push_back(new Modulo("sys"));
 	builtinFunctions["Mod"] = NamespaceEntry(mod);
 
 	std::vector<SafeFunction> randomInt;
-	randomInt.push_back(SmartPointer<Function>(new RandomInt()));
+	randomInt.push_back(SmartPointer<Function>(new RandomInt("sys")));
 	builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
 
 	builtin["sys"] = builtinFunctions;
@@ -71,8 +71,10 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 				for (unsigned int i = 0; i < functionSet.size(); i++) {
 					SP<Function> function = functionSet[i];
-					newSpace[function->getName()] = VM::NamespaceEntry(function->generateVMFunction());
-					printf("Registered function %s\n", function->getName().c_str());
+					newSpace[function->getName()] = VM::NamespaceEntry(
+							function->generateVMFunction());
+					printf("Registered function %s\n",
+							function->getName().c_str());
 				}
 
 			} else {
@@ -81,8 +83,10 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 		}
 
-		printf("Registering namespace %s\n", selectedNamespaceIter->first.c_str());
-		vm.registerEntry(selectedNamespaceIter->first, VM::NamespaceEntry(newSpace));
+		printf("Registering namespace %s\n",
+				selectedNamespaceIter->first.c_str());
+		vm.registerEntry(selectedNamespaceIter->first,
+				VM::NamespaceEntry(newSpace));
 
 	}
 

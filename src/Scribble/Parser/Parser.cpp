@@ -9,6 +9,7 @@
 
 extern std::map<std::string, NamespaceType> Namespace;
 extern NamespaceType Functions;
+extern std::string currentNamespaceName;
 
 extern std::vector<std::string> ImportList;
 
@@ -222,6 +223,8 @@ void Parser::resolve(TypeReference reference, NamespaceType ns) {
 NamespaceType Parser::include(std::string const& filename,
 		std::string const& path) {
 
+	currentNamespaceName = filename;
+
 	//Create the inputSource from the buffer
 	std::string inputSource = bufferText(path + filename + ".scribble");
 
@@ -278,6 +281,8 @@ NamespaceType Parser::include(std::string const& filename,
 			}
 
 			include(importFile, path + toImportPath);
+			currentNamespaceName = filename;
+
 			Functions = NamespaceType();
 
 			imports[i] = importFile;

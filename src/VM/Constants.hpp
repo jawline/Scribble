@@ -3,6 +3,7 @@
 
 #include "ConstantRegisters.hpp"
 #include "ConstantTypes.hpp"
+#include "CallTypes.hpp"
 
 namespace VM {
 
