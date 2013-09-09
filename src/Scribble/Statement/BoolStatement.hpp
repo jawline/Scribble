@@ -9,15 +9,35 @@
 #define BOOLSTATEMENT_HPP_
 #include "Statement.hpp"
 
+/**
+ * Returns a boolean value.
+ */
+
 class BoolStatement: public Statement {
 private:
+
+	/**
+	 * The value to generate.
+	 */
+
 	bool value_;
 
 public:
+
+	/**
+	 * Create a Bool statement
+	 * @param value The value to set the boolean to.
+	 */
+
 	BoolStatement(int lineNo, std::string sym, bool value);
 	virtual ~BoolStatement();
 
 	Value* execute(std::vector<Value*> const& variables);
+
+	/**
+	 * Returns a boolean
+	 * @return Boolean
+	 */
 	Type* type();
 
 	void checkTree(Type* functionType);
