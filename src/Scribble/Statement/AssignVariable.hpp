@@ -4,15 +4,44 @@
 #include <Scribble/Value/Variable.hpp>
 #include <vector>
 
+/**
+ * Set the value of a given variable to the result of the given statement and also return it. ( So sys.Write(A := "Hello"); is valid )
+ */
+
 class AssignVariableStatement: public Statement {
 private:
-	SafeStatement exp_;SP<Variable> var_;
+
+	/**
+	 * The expression which the variable is set to the result of.
+	 */
+	SafeStatement exp_;
+
+	/**
+	 * The variable which is modified.
+	 */
+
+	SP<Variable> var_;
 
 public:
+
+	/**
+	 * Construct a AssignVariableStatement.
+	 * @param lineNo the line number which this occurs on.
+	 * @param sym The symbol this was constructed from.
+	 * @param var The variable to modify
+	 * @param exp The expression which the variable is set to the result of.
+	 */
+
 	AssignVariableStatement(int lineNo, std::string sym, SP<Variable> var,
 			SafeStatement exp);
 	~AssignVariableStatement();
+
 	Value* execute(std::vector<Value*> const& variables);
+
+	/**
+	 * Returns the type of the variable.
+	 * @return The type of the variable/expression.
+	 */
 
 	Type* type() {
 		return exp_->type();
