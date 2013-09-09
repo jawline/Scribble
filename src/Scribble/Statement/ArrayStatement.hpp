@@ -9,16 +9,45 @@
 #define ARRAYSTATEMENT_HPP_
 #include "Statement.hpp"
 
+/**
+ * ArrayStatement which returns a new Array of length returned by the supplied statement.
+ */
+
 class ArrayStatement: public Statement {
 private:
+
+	/**
+	 * The type of array being generated.
+	 */
+
 	Type* type_;
+
+	/**
+	 * Statement which returns the length of the new array.
+	 */
+
 	SafeStatement length_;
 
 public:
+
+	/**
+	 * Construct array statement.
+	 * @param line The line number.
+	 * @param text The symbol it occurs at.
+	 * @param type The type of array to be generated.
+	 * @param length The statement which returns the length.
+	 */
+
 	ArrayStatement(int line, std::string text, Type* type, SafeStatement length);
 	virtual ~ArrayStatement();
 
 	Value* execute(std::vector<Value*> const& variables);
+
+	/**
+	 * Returns Array type.
+	 * @return Array.
+	 */
+
 	Type* type();
 
 	void checkTree(Type* functionType);
