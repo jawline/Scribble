@@ -22,7 +22,6 @@ public:
 	Type* getType();
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
-	void check();
 
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());

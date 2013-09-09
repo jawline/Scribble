@@ -40,7 +40,3 @@ const unsigned int Modulo::numArgs() {
 Type* Modulo::argType(unsigned int arg) {
 	return getIntType();
 }
-
-void Modulo::check() {
-
-}

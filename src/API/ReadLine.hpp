@@ -46,11 +46,6 @@ public:
 		return nullptr;
 	}
 
-	virtual void check() {
-
-	}
-
-
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());
 	}

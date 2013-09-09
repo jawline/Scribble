@@ -99,7 +99,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 82 "./src/Scribble/Parser/Parser.yy"
+#line 80 "./src/Scribble/Parser/Parser.yy"
 
 	std::vector<SmartPointer<Statement>>* statements;
 	std::vector<SmartPointer<Variable>>* variables;

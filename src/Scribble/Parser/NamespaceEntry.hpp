@@ -7,7 +7,7 @@
 
 #ifndef NAMESPACEENTRY_HPP_
 #define NAMESPACEENTRY_HPP_
-#include <Scribble/Function/Function.hpp>
+#include <API/Function.hpp>
 #include <Scribble/Parser/TypeReference.hpp>
 
 enum EntryType {

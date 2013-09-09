@@ -9,6 +9,7 @@
  * Virtual Function class implemented to create Scribble functions.
  * @author Blake Loring
  */
+
 class Function {
 private:
 	std::string name_;
@@ -16,7 +17,8 @@ private:
 
 public:
 
-	Function(std::string name, std::string ns) : name_(name), namespace_(ns) {
+	Function(std::string name, std::string ns) :
+			name_(name), namespace_(ns) {
 
 	}
 
@@ -34,7 +36,6 @@ public:
 	virtual Type* getType() = 0;
 	virtual const unsigned int numArgs() = 0;
 	virtual Type* argType(unsigned int arg) = 0;
-	virtual void check() = 0;
 
 	virtual int debugCode(std::stringstream& gen) {
 		return 0;

@@ -45,11 +45,6 @@ public:
 
 	virtual Type* argType(unsigned int arg);
 
-	/**
-	 * Check (Do nothing)
-	 */
-
-	virtual void check();
 
 
 	virtual VM::VMFunc generateVMFunction() {

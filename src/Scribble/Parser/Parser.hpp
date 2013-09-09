@@ -8,11 +8,12 @@
 #include <sstream>
 #include <map>
 #include <Scribble/Statement/Statement.hpp>
-#include <Scribble/Function/Function.hpp> // Function class
+#include <API/Function.hpp> // Function class
 #include <Scribble/Function/FunctionReference.hpp> // Function ref class
 #include <Scribble/Statement/GetStructureElementStatement.hpp>
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Value/Variable.hpp> // Variable class
+
 typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
 typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;

@@ -21,7 +21,7 @@ func main() {
 		var y := r();
 		var j := y();
 	
-		sys.Write(sys.String(y) + "\n");
+		sys.Write(sys.String(y));
 	}
 	
 }

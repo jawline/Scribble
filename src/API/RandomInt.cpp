@@ -32,6 +32,3 @@ const unsigned int RandomInt::numArgs() {
 Type* RandomInt::argType(unsigned int arg) {
 	return getTypeManager().getType(Int);
 }
-
-void RandomInt::check() {
-}

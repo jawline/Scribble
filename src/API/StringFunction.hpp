@@ -21,9 +21,6 @@ public:
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
 
-	virtual void check() {
-	}
-
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());
 	}
@@ -40,10 +37,6 @@ public:
 	 Type* getType();
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
-
-	virtual void check() {
-	}
-
 
 	virtual VM::VMFunc generateVMFunction() {
 		return VM::VMFunc(getName(), VM::InstructionSet());

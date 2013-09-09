@@ -3,7 +3,7 @@
 #include "Statement.hpp"
 #include <Scribble/Statement/Heap.hpp>
 #include <Pointers/SmartPointer.hpp>
-#include <Scribble/Function/Function.hpp>
+#include <API/Function.hpp>
 #include <Scribble/Function/FunctionReference.hpp>
 #include <VM/Constants.hpp>
 #include <stdio.h>

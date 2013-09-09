@@ -14,9 +14,6 @@ public:
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
 
-	virtual void check() {
-	}
-
 	virtual std::string getName() {
 		return "NativeWriteString";
 	}

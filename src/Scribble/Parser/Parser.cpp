@@ -3,7 +3,7 @@
 #include <string.h>
 #include <iostream>
 #include <string>
-#include <Scribble/Function/ScriptedFunction.hpp>
+#include <API/ScriptedFunction.hpp>
 #include <Scribble/Function/FunctionReference.hpp>
 #include <Scribble/Value/Util.hpp>
 
@@ -417,7 +417,7 @@ NamespaceType Parser::include(std::string const& filename,
 					std::vector<SafeFunction> set = it->second.getFunctionSet();
 
 					for (unsigned int i = 0; i < set.size(); ++i) {
-						set[i]->check();
+						((ScriptedFunction *)set[i].Get())->check();
 					}
 				}
 

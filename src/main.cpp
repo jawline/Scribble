@@ -4,11 +4,11 @@
  */
 
 #include <Scribble/Statement/Statement.hpp>
-#include <Scribble/Function/WriteFunction.hpp>
-#include <Scribble/Function/ReadLine.hpp>
-#include <Scribble/Function/StringFunction.hpp>
-#include <Scribble/Function/Modulo.hpp>
-#include <Scribble/Function/RandomInt.hpp>
+#include <API/WriteFunction.hpp>
+#include <API/ReadLine.hpp>
+#include <API/StringFunction.hpp>
+#include <API/Modulo.hpp>
+#include <API/RandomInt.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Parser/Parser.hpp>
 #include <Scribble/Parser/ParserException.hpp>

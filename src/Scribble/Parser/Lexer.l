@@ -6,7 +6,7 @@
 %x C_COMMENT
 
 %{
-#include <Scribble/Function/Function.hpp>
+#include <API/Function.hpp>
 #include <string>
 #include <vector>
 #include <Scribble/Statement/IntStatement.hpp>

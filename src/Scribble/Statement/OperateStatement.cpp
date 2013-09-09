@@ -43,7 +43,7 @@ void OperateStatement::checkTree(Type* type) {
 	}
 
 	if (!(lhs_->type()->isPrimitive())) {
-		throw StatementException(this, "Cannot add non primitives");
+		throw StatementException(this, "Cannot perform on non primitives");
 	}
 }
 

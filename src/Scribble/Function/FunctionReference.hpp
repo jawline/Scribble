@@ -9,7 +9,7 @@
 #define FUNCTIONREFERENCE_HPP_
 #include <Pointers/SmartPointer.hpp>
 #include <Scribble/Statement/Statement.hpp>
-#include "Function.hpp"
+#include <API/Function.hpp>
 #include <string>
 
 /**
