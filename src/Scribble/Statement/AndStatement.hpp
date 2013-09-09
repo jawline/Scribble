@@ -23,6 +23,15 @@ private:
 	SafeStatement lhs_, rhs_;
 
 public:
+
+	/**
+	 * Construct an And statement.
+	 * @param lineNo the line on which it occurs.
+	 * @param sym The symbol in which it occurs.
+	 * @param leftHandSide One of the two statements.
+	 * @param rightHandSide the other statement.
+	 */
+
 	AndStatement(int lineNo, std::string sym, SafeStatement leftHandSide,
 			SafeStatement rightHandSide);
 	virtual ~AndStatement();
@@ -31,6 +40,7 @@ public:
 
 	/**
 	 * The type will be a boolean.
+	 * @return The boolean type
 	 */
 
 	Type* type();
