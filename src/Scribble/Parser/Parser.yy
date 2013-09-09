@@ -27,7 +27,6 @@
 #include <Scribble/Statement/WhileStatement.hpp>
 #include <Scribble/Statement/IncrementStatement.hpp>
 #include <Scribble/Statement/ArrayStatement.hpp>
-#include <Scribble/Statement/ArraySliceStatement.hpp>
 #include <Scribble/Statement/AssignArrayStatement.hpp>
 #include <Scribble/Statement/GetArrayStatement.hpp>
 #include <Scribble/Statement/ArrayLengthStatement.hpp>
@@ -642,8 +641,6 @@ Expression: TRUE {
 		$$ = new AssignArrayStatement(scribble_lineno, scribble_text, $1, $6, $3); 
 	} | Expression LSQBRACKET Expression RSQBRACKET {
 		$$ = new GetArrayStatement(scribble_lineno, scribble_text, $1, $3); 
-	} | Expression LSQBRACKET Expression COLON Expression RSQBRACKET {
-		$$ = new ArraySliceStatement(scribble_lineno, scribble_text, $1, $3, $5);
 	} | WORD {
 
 		auto it = Variables.find(*$1);
