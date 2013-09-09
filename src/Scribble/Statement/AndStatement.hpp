@@ -9,8 +9,17 @@
 #define ANDSTATEMENT_HPP_
 #include "Statement.hpp"
 
-class AndStatement : public Statement{
+/**
+ * The and statement returns the & of the result of a left hand and right hand statement. If Left = Right then true otherwise false.
+ */
+
+class AndStatement: public Statement {
 private:
+
+	/**
+	 * The left hand and right hand statements.
+	 */
+
 	SafeStatement lhs_, rhs_;
 
 public:
@@ -19,7 +28,13 @@ public:
 	virtual ~AndStatement();
 
 	Value* execute(std::vector<Value*> const& variables);
+
+	/**
+	 * The type will be a boolean.
+	 */
+
 	Type* type();
+
 	void checkTree(Type* functionType);
 };
 
