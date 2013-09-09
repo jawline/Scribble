@@ -9,13 +9,36 @@
 #define ASSIGNARRAYSTATEMENT_HPP_
 #include "Statement.hpp"
 
+/**
+ * Assigns element assign at the specified position in the given array.
+ */
+
 class AssignArrayStatement: public Statement {
 private:
+
+	/**
+	 * The array.
+	 */
+
 	SafeStatement array_;
+
+	/**
+	 * What to assign to the array.
+	 */
+
 	SafeStatement toAssign_;
+
+	/**
+	 * The position in the array to change.
+	 */
+
 	SafeStatement position_;
 
 public:
+
+	/**
+	 * Set the array at position to the value of assign.
+	 */
 
 	AssignArrayStatement(int lineno, std::string text, SafeStatement array,
 			SafeStatement assign, SafeStatement position);
@@ -23,6 +46,12 @@ public:
 	virtual ~AssignArrayStatement();
 
 	Value* execute(std::vector<Value*> const& variables);
+
+	/**
+	 * Returns the type of array.
+	 * @return array_'s type.
+	 */
+
 	Type* type();
 
 	void checkTree(Type* functionType);
