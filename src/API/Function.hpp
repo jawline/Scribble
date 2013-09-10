@@ -4,6 +4,7 @@
 #include <Scribble/Value/Value.hpp>
 #include <vector>
 #include <VM/VMFunc.hpp>
+#include <VM/VirtualMachine.hpp>
 
 /**
  * Virtual Function class implemented to create Scribble functions.
@@ -28,7 +29,11 @@ public:
 	/**
 	 * Execute the function and return the result value.
 	 */
+
 	virtual Value* execute(std::vector<Value*> arguments) = 0;
+	virtual void execute(VM::VirtualMachine virt) {
+
+	}
 
 	/**
 	 * Get the return type of the function.
