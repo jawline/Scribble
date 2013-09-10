@@ -399,8 +399,6 @@ Program: {
 		JumpRegister($3);
 	} | Program JUMP_RELATIVE REG {
 		JumpRegisterRelative($3);
-	} | Program RETURN {
-		Return();
 	}
 ;
 

@@ -31,8 +31,8 @@ public:
 	 */
 
 	virtual Value* execute(std::vector<Value*> arguments) = 0;
-	virtual void execute(VM::VirtualMachine virt) {
-
+	virtual void execute(VM::VirtualMachine const* virt) {
+		printf("VM Function Call\n");
 	}
 
 	/**

@@ -9,6 +9,7 @@
 #include "OpCodes.hpp"
 #include "JumpTypes.hpp"
 #include "Constants.hpp"
+#include <API/Function.hpp>
 #include <stdio.h>
 
 #define VM_DEBUG 3
@@ -103,6 +104,13 @@ void VirtualMachine::execute(std::string function) {
 	if (!VM::searchNamespace(namespace_, function, functionEntry)
 			|| functionEntry.getType() != Function) {
 		VM_PRINTF_FATAL("%s is not a registered function\n", function.c_str());
+	}
+
+	if (functionEntry.getFunction().isNative()) {
+		functionEntry.getFunction().getFunction()->execute(this);
+		return;
+	} else {
+		printf("NOT A NATIVE CALL\n");
 	}
 
 	InstructionSet set = functionEntry.getFunction().getInstructions();

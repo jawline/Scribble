@@ -48,7 +48,7 @@ public:
 
 
 	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), VM::InstructionSet());
+		return VM::VMFunc(getName(), (Modulo*) this);
 	}
 };
 
