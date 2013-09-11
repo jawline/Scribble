@@ -23,10 +23,6 @@ public:
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
 
-	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), this);
-	}
-
 };
 
 #endif /* RANDOMINT_HPP_ */

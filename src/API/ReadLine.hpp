@@ -46,9 +46,6 @@ public:
 		return nullptr;
 	}
 
-	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), this);
-	}
 };
 
 #endif /* READLINE_HPP_ */

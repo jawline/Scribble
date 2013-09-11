@@ -39,6 +39,15 @@ public:
 	virtual void pushStackLong(long v);
 	virtual void markStackReference();
 	virtual void pushRegister(uint8_t reg);
+
+	virtual long getRegister(uint8_t reg) {
+		return registers_[reg];
+	}
+
+	virtual Heap& getHeap() {
+		return heap_;
+	}
+
 	virtual SP<VMEntryType> findType(std::string name);
 
 	virtual void registerEntry(std::string name, NamespaceEntry entry) {

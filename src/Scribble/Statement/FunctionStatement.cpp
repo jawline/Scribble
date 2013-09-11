@@ -70,6 +70,16 @@ int FunctionStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
 	generated << "pushr $" << VM::vmReturnResultRegister << " " << VM::vmNumReservedRegisters + numDeclaredVariables_ - VM::vmReturnResultRegister << "\n";
+
+	int n = 0;
+
+	for (int i = 0; i < func_->getArgs().size(); i++) {
+		SafeStatement arg = func_->getArgs()[i];
+		n += arg->generateCode(VM::vmTempRegisterOne, generated);
+		generated << "pushr $" << VM::vmTempRegisterOne << " " << 1 << "\n";
+		n++;
+	}
+
 	generated << "call \"" + func_->getFunction()->getNamespace() + "." + func_->getFunction()->getName() + "\"";
 	generated << "popr $" << VM::vmReturnResultRegister + 1 << " " << VM::vmNumReservedRegisters + numDeclaredVariables_ - VM::vmReturnResultRegister - 1 << "\n";
 	generated << "move $" << VM::vmReturnResultRegister << " $" << resultRegister << "\n";
@@ -80,5 +90,5 @@ int FunctionStatement::generateCode(int resultRegister,
 		generated << "popn\n";
 	}
 
-	return 5;
+	return n + 5;
 }

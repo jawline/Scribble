@@ -3,7 +3,7 @@
 #include <string.h>
 #include <iostream>
 #include <string>
-#include <API/ScriptedFunction.hpp>
+#include <Scribble/Function/ScriptedFunction.hpp>
 #include <Scribble/Function/FunctionReference.hpp>
 #include <Scribble/Value/Util.hpp>
 

@@ -21,10 +21,6 @@ public:
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
 
-	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), this);
-	}
-
 };
 
 class BoolToStringFunction: public Function {
@@ -38,9 +34,6 @@ public:
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
 
-	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), this);
-	}
 };
 
 #endif /* STRINGFUNCTION_HPP_ */

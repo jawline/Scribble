@@ -7,7 +7,7 @@
 
 #ifndef SCRIPTEDFUNCTION_HPP_
 #define SCRIPTEDFUNCTION_HPP_
-#include "Function.hpp"
+#include <API/Function.hpp>
 #include <Scribble/Statement/Statement.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Scribble/Value/Variable.hpp>

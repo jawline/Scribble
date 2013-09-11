@@ -4,8 +4,15 @@
 
 class WriteFunction: public Function {
 public:
-	WriteFunction(std::string ns) : Function("Write", ns) {
 
+	WriteFunction(std::string ns) :
+			Function("Write", ns) {
+
+	}
+
+	virtual void execute(API::APIValue* values,
+			VM::VirtualMachine* virt) {
+		printf("%s", (char*) values[0].getReferencePointer());
 	}
 
 	Value* execute(std::vector<Value*> arguments);
@@ -18,9 +25,6 @@ public:
 		return "NativeWriteString";
 	}
 
-	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), this);
-	}
 };
 
 #endif //_WRITE_FUNCTION_H_

@@ -13,15 +13,5 @@ func y() : int {
 }
 
 func main() {
-
-	var test := "Hello";
-
-	for var i := 0; i < 1000; i++ {
-	
-		var y := r();
-		var j := y();
-	
-		sys.Write(sys.String(y));
-	}
-	
+	sys.Write("Hello world");
 }

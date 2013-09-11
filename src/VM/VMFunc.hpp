@@ -11,7 +11,11 @@
 #include <Pointers/SmartPointer.hpp>
 #include "InstructionSet.hpp"
 
+namespace API {
 class Function;
+}
+
+using namespace API;
 
 namespace VM {
 

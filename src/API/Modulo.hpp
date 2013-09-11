@@ -45,11 +45,6 @@ public:
 
 	virtual Type* argType(unsigned int arg);
 
-
-
-	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), (Modulo*) this);
-	}
 };
 
 #endif /* MODULO_HPP_ */

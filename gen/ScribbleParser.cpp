@@ -109,7 +109,7 @@
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Parser/TypeReference.hpp>
 #include <Pointers/SmartPointer.hpp>
-#include <API/ScriptedFunction.hpp>
+#include <Scribble/Function/ScriptedFunction.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <Scribble/Value/Util.hpp>
 #include <Scribble/Parser/Parser.hpp>
