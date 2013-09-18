@@ -90,8 +90,11 @@ int FunctionStatement::generateCode(int resultRegister,
 			<< VM::vmNumReservedRegisters + numDeclaredVariables_
 					- VM::vmReturnResultRegister - 1 << "\n";
 
-	generated << "move $" << VM::vmReturnResultRegister << " $"
-			<< resultRegister << "\n";
+	//If resultRegister is -1 then the result should not be stored in a register.
+	if (resultRegister != -1) {
+		generated << "move $" << VM::vmReturnResultRegister << " $"
+				<< resultRegister << "\n";
+	}
 
 	if (VM::vmReturnResultRegister == resultRegister) {
 		generated << "popn\n";

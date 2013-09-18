@@ -9,6 +9,7 @@
 #include <Scribble/Value/Bool.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+#include <VM/Constants.hpp>
 
 BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) :
 		Statement(lineNo, sym) {
@@ -34,12 +35,13 @@ void BoolStatement::checkTree(Type* functionType) {
 int BoolStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
+
 	if (resultRegister != -1) {
 
 		if (value_) {
-			generated << "load 1 $" << resultRegister << "\n";
+			generated << "load " << VM::vmTrue << " $" << resultRegister << "\n";
 		} else {
-			generated << "load 0 $" << resultRegister << "\n";
+			generated << "load " << VM::vmFalse << " $" << resultRegister << "\n";
 		}
 
 	}

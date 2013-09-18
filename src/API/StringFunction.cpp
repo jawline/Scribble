@@ -101,5 +101,14 @@ Type* BoolToStringFunction::argType(unsigned int arg) {
 
 API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
-	//if (values[0].getValue() == )
+
+	long heapEntry = -1;
+
+	if (values[0].getValue() == VM::vmTrue) {
+		heapEntry = virt->getHeap().allocate(virt->findType("string"), strlen("true") + 1, (uint8_t*) "true");
+	} else {
+		heapEntry = virt->getHeap().allocate(virt->findType("string"), strlen("false") + 1, (uint8_t*) "false");
+	}
+
+	return API::APIValue(virt->findType("string"), virt->getHeap().getAddress(heapEntry), heapEntry);
 }
