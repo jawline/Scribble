@@ -19,6 +19,10 @@ Modulo::~Modulo() {
 	// TODO Auto-generated destructor stub
 }
 
+APIValue Modulo::execute(API::APIValue* values, VM::VirtualMachine* virt) {
+	return API::APIValue(values[0].getValue() % values[1].getValue());
+}
+
 Value* Modulo::execute(std::vector<Value*> arguments) {
 
 	 IntValue* lhs = (IntValue*) arguments[0];

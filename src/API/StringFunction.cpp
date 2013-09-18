@@ -48,6 +48,17 @@ Type* IntToStringFunction::argType(unsigned int arg) {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
+
+API::APIValue IntToStringFunction::execute(API::APIValue* values,
+		VM::VirtualMachine* virt) {
+	int toConv = values[0].getValue();
+	std::stringstream res;
+	res << toConv;
+	std::string resultString = res.str();
+	long heapEntry = virt->getHeap().allocate(virt->findType("string"), resultString.length() + 1, (uint8_t*) resultString.c_str());
+	return API::APIValue(virt->findType("string"), virt->getHeap().getAddress(heapEntry), heapEntry);
+}
+
 BoolToStringFunction::BoolToStringFunction(std::string ns) : Function("BoolToString", ns) {
 	// TODO Auto-generated constructor stub
 
