@@ -12,4 +12,7 @@
 *.la
 *.a
 
+#Backup files
+*~
+
 bin/*

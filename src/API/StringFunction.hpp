@@ -33,6 +33,9 @@ public:
 
 	Value* execute(std::vector<Value*> arguments);
 
+	virtual API::APIValue execute(API::APIValue* values,
+			VM::VirtualMachine* virt);
+
 	 Type* getType();
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);

@@ -97,3 +97,9 @@ Type* BoolToStringFunction::argType(unsigned int arg) {
 
 	return getTypeManager().getType(TypeUnresolved);
 }
+
+
+API::APIValue BoolToStringFunction::execute(API::APIValue* values,
+		VM::VirtualMachine* virt) {
+	//if (values[0].getValue() == )
+}
