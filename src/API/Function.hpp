@@ -3,6 +3,7 @@
 #include <Pointers/SmartPointer.hpp>
 #include <Scribble/Value/Value.hpp>
 #include <vector>
+#include <VM/Constants.hpp>
 #include <VM/VMFunc.hpp>
 #include <VM/VirtualMachine.hpp>
 #include <API/Value/APIValue.hpp>
@@ -34,7 +35,18 @@ public:
 	 */
 
 	virtual Value* execute(std::vector<Value*> arguments) = 0;
-	virtual void execute(API::APIValue* values, VM::VirtualMachine* virt) {}
+
+	/**
+	 * This function executes the given API::Function and returns it's result. It called by the more complex execute(VM::VirtualMachine*) after that function has converted all arguments into API values.
+	 * @param args The arguments passed to the function
+	 * @param virt The virtual machine this function is being run in the context of.
+	 * @return The resulting API value
+	 */
+
+	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt) {
+		return API::APIValue(0);
+	}
+
 	virtual void execute(VM::VirtualMachine* virt) {
 
 		APIValue* vals = new APIValue[numArgs()];
@@ -55,7 +67,16 @@ public:
 
 		}
 
-		execute(vals, virt);
+		APIValue returnVal = execute(vals, virt);
+
+		if (returnVal.isReference()) {
+			virt->hitGc();
+			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue(),
+					true);
+		} else {
+			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue(),
+					false);
+		}
 	}
 
 	/**

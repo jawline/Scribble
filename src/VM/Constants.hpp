@@ -8,7 +8,7 @@
 namespace VM {
 
 const static unsigned int vmOpCodeSize = 8;
-const static unsigned int GarbageCollectHitLimit = 100;
+const static unsigned int GarbageCollectHitLimit = 20;
 
 }
 

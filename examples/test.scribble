@@ -13,5 +13,10 @@ func y() : int {
 }
 
 func main() {
-	sys.Write("Hello world");
+
+	for var i := 0; i < 1000; i++ {
+		var testValue := y();
+		sys.Write( sys.String( testValue ) );
+	}
+
 }

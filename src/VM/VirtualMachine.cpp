@@ -623,7 +623,6 @@ void VirtualMachine::execute(std::string function) {
 
 	}
 
-	printState();
 }
 
 void VirtualMachine::pushRegister(uint8_t reg) {

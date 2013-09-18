@@ -10,9 +10,10 @@ public:
 
 	}
 
-	virtual void execute(API::APIValue* values,
+	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt) {
 		printf("%s", (char*) values[0].getReferencePointer());
+		return API::APIValue(0);
 	}
 
 	Value* execute(std::vector<Value*> arguments);

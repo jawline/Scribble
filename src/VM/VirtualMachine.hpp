@@ -44,6 +44,11 @@ public:
 		return registers_[reg];
 	}
 
+	virtual void setRegister(uint8_t reg, long val, bool ref) {
+		registers_[reg] = val;
+		registerReference_[reg] = ref;
+	}
+
 	virtual Heap& getHeap() {
 		return heap_;
 	}
@@ -58,6 +63,9 @@ public:
 	virtual void garbageCollection();
 
 	virtual void printState();
+	virtual void hitGc() {
+		gcStat_++;
+	}
 };
 
 } /* namespace VM */

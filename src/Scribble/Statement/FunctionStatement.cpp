@@ -69,7 +69,9 @@ Type* FunctionStatement::type() {
 int FunctionStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
-	generated << "pushr $" << VM::vmReturnResultRegister << " " << VM::vmNumReservedRegisters + numDeclaredVariables_ - VM::vmReturnResultRegister << "\n";
+	generated << "pushr $" << VM::vmReturnResultRegister << " "
+			<< VM::vmNumReservedRegisters + numDeclaredVariables_
+					- VM::vmReturnResultRegister << "\n";
 
 	int n = 0;
 
@@ -80,14 +82,21 @@ int FunctionStatement::generateCode(int resultRegister,
 		n++;
 	}
 
-	generated << "call \"" + func_->getFunction()->getNamespace() + "." + func_->getFunction()->getName() + "\"";
-	generated << "popr $" << VM::vmReturnResultRegister + 1 << " " << VM::vmNumReservedRegisters + numDeclaredVariables_ - VM::vmReturnResultRegister - 1 << "\n";
-	generated << "move $" << VM::vmReturnResultRegister << " $" << resultRegister << "\n";
+	generated
+			<< "call \"" + func_->getFunction()->getNamespace() + "."
+					+ func_->getFunction()->getName() + "\"";
 
-	if (resultRegister != VM::vmReturnResultRegister) {
-		generated << "popr $" << VM::vmReturnResultRegister << " " << 1 << "\n";
-	} else {
+	generated << "popr $" << VM::vmReturnResultRegister + 1 << " "
+			<< VM::vmNumReservedRegisters + numDeclaredVariables_
+					- VM::vmReturnResultRegister - 1 << "\n";
+
+	generated << "move $" << VM::vmReturnResultRegister << " $"
+			<< resultRegister << "\n";
+
+	if (VM::vmReturnResultRegister == resultRegister) {
 		generated << "popn\n";
+	} else {
+		generated << "popr $" << VM::vmReturnResultRegister << " " << 1 << "\n";
 	}
 
 	return n + 5;

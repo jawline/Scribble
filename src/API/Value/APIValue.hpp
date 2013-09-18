@@ -18,7 +18,7 @@ private:
 	long val_;
 
 public:
-	APIValue() {}
+	APIValue() { val_ = 0; type_ = nullptr; data_ = nullptr;}
 	APIValue(long val);
 	APIValue(SP<VM::VMEntryType> type, uint8_t* data, long val);
 	virtual ~APIValue();
@@ -33,6 +33,13 @@ public:
 
 	uint8_t* getReferencePointer() {
 		return data_;
+	}
+
+	bool isReference() {
+		if (type_.Null()) {
+			return false;
+		}
+		return true;
 	}
 };
 

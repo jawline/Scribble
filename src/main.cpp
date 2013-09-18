@@ -144,6 +144,8 @@ int main(int argc, char** argv) {
 
 	double vmEnd = getCPUTime();
 
+	vm.printState();
+
 	printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
 			vmEnd - vmStart);
 
