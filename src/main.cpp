@@ -71,6 +71,11 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 				for (unsigned int i = 0; i < functionSet.size(); i++) {
 					SP<Function> function = functionSet[i];
+
+					std::stringstream code;
+					function->debugCode(code);
+					printf("Function debug code %s\n", code.str().c_str());
+
 					newSpace[function->getName()] = VM::NamespaceEntry(
 							function->generateVMFunction());
 					printf("Registered function %s\n",
