@@ -32,7 +32,7 @@ integer -?{digit}+
 long {integer}L
 real {integer}("."{integer})
 register ${integer}
-string \"[^\"\n]*\"
+string \"[^\"]*\"
 word [_|a-z|A-Z][a-z|A-Z|0-9]*
 
 %%

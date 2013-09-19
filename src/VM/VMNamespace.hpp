@@ -69,7 +69,8 @@ public:
 
 };
 
-bool searchNamespace(VM::VMNamespace space, std::string target, NamespaceEntry& entry);
+bool searchNamespace(VM::VMNamespace space, std::string target,
+		NamespaceEntry& entry);
 
 }
 

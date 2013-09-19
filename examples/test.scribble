@@ -15,11 +15,8 @@ func y() : int {
 func main() {
 
 	for var i := 0; i < 10; i++ {
-		var testValue := y();
-		sys.Write( sys.String( testValue ) );
-		sys.Write("\n");
-		sys.Write( sys.String ( sys.Mod( 10, 9 ) ) );
-		sys.Write("\n");
+		sys.Write( sys.String ( y() ) );
+		sys.Write( "\n" );
 	}
 
 }

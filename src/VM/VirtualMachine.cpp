@@ -14,19 +14,22 @@
 
 #define VM_DEBUG 3
 
-#define VM_PRINTF_FATAL(fmt, ...) printf(fmt, __VA_ARGS__); do { } while (1)
+#define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); do { } while (1)
 
 #if VM_DEBUG == 3
-#define VM_PRINTF_DBG(fmt, ...) printf(fmt, __VA_ARGS__)
-#define VM_PRINTF_WARN(fmt, ...) printf(fmt, __VA_ARGS__)
-#define VM_PRINTF_LOG(fmt, ...) printf(fmt, __VA_ARGS__)
+FILE* flog = fopen("VMLogFile", "w");
+#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
+#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
+#define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
 #elif VM_DEBUG == 2
-#define VM_PRINTF_DBG(fmt, ...) printf(fmt, __VA_ARGS__)
-#define VM_PRINTF_WARN(fmt, ...) printf(fmt, __VA_ARGS__)
+FILE* flog = fopen("VMLogFile", "w");
+#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
+#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
 #define VM_PRINTF_LOG(fmt, ...)
 #elif VM_DEBUG == 1
+FILE* flog = fopen("VMLogFile", "w");
 #define VM_PRINTF_DBG(fmt, ...)
-#define VM_PRINTF_WARN(fmt, ...) printf(fmt, __VA_ARGS__)
+#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
 #define VM_PRINTF_LOG(fmt, ...)
 #else
 #define VM_PRINTF_WARN(fmt, ...)
@@ -45,7 +48,9 @@ VirtualMachine::VirtualMachine() {
 		registerReference_[i] = false;
 	}
 
+	//Register all the primitive types
 	registerEntry("char", NamespaceEntry(new VMEntryType("char", 1, false)));
+	registerEntry("short", NamespaceEntry( new VMEntryType("short", 2, false)));
 	registerEntry("int", NamespaceEntry(new VMEntryType("int", 4, false)));
 	registerEntry("long", NamespaceEntry(new VMEntryType("int", 8, false)));
 
@@ -109,8 +114,6 @@ void VirtualMachine::execute(std::string function) {
 	if (functionEntry.getFunction().isNative()) {
 		functionEntry.getFunction().getFunction()->execute(this);
 		return;
-	} else {
-		printf("NOT A NATIVE CALL\n");
 	}
 
 	InstructionSet set = functionEntry.getFunction().getInstructions();
