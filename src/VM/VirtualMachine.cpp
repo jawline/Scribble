@@ -14,22 +14,22 @@
 
 #define VM_DEBUG 3
 
-#define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); do { } while (1)
+#define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); this->printState(); do { } while (1)
 
 #if VM_DEBUG == 3
 FILE* flog = fopen("VMLogFile", "w");
-#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
-#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
-#define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
+#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
+#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
+#define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
 #elif VM_DEBUG == 2
 FILE* flog = fopen("VMLogFile", "w");
-#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
-#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
+#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
+#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
 #define VM_PRINTF_LOG(fmt, ...)
 #elif VM_DEBUG == 1
 FILE* flog = fopen("VMLogFile", "w");
 #define VM_PRINTF_DBG(fmt, ...)
-#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__)
+#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__) fflush(flog);
 #define VM_PRINTF_LOG(fmt, ...)
 #else
 #define VM_PRINTF_WARN(fmt, ...)
@@ -51,7 +51,7 @@ VirtualMachine::VirtualMachine() {
 	//Register all the primitive types
 	registerEntry("char", NamespaceEntry(new VMEntryType("char", 1, false)));
 	registerEntry("bool", NamespaceEntry(new VMEntryType("bool", 1, false)));
-	registerEntry("short", NamespaceEntry( new VMEntryType("short", 2, false)));
+	registerEntry("short", NamespaceEntry(new VMEntryType("short", 2, false)));
 	registerEntry("int", NamespaceEntry(new VMEntryType("int", 4, false)));
 	registerEntry("long", NamespaceEntry(new VMEntryType("int", 8, false)));
 
@@ -68,7 +68,6 @@ VirtualMachine::~VirtualMachine() {
 }
 
 SP<VMEntryType> VirtualMachine::findType(std::string name) {
-
 
 	NamespaceEntry entry;
 
@@ -133,9 +132,7 @@ void VirtualMachine::execute(std::string function) {
 			int constantDataStart = set.getInt(*current + 1);
 			uint8_t destinationRegister = set.getInst(*current + 5);
 
-
 			VM_PRINTF_LOG("Loading constant into %i\n", destinationRegister);
-
 
 			switch (set.getConstantByte(constantDataStart)) {
 
@@ -471,29 +468,34 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t dataRegister = set.getInst(*current + 3);
 
 			if (!registerReference_[tgtArray]) {
-				VM_PRINTF_FATAL("%s", "Register is not a reference\n");
+				this->printState();
+				VM_PRINTF_FATAL("Register %i is not a reference\n", tgtArray);
 			}
 
 			SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
 
 			if (!arrayType->isArray()) {
 
-				VM_PRINTF_FATAL("%s",
-						"Register is not a reference to an array\n");
+				VM_PRINTF_FATAL( "Register %i is not a reference to an array\n",
+						tgtArray);
 
 			}
 
 			int size = arrayType->arraySubtype()->getElementSize();
 
-			uint8_t* dataPtr =
-					heap_.getAddress(registers_[tgtArray])
-							+ (registers_[index]
-									* ((long) arrayType->arraySubtype()->getElementSize()));
+			long offsetBytes = registers_[index]
+					* arrayType->arraySubtype()->getElementSize();
+
+			uint8_t* dataPtr = heap_.getAddress(registers_[tgtArray])
+					+ offsetBytes;
+
 			uint8_t* max = heap_.getAddress(registers_[tgtArray])
 					+ heap_.getSize(registers_[tgtArray]);
 
-			if (dataPtr > max) {
-				VM_PRINTF_FATAL("%s", "VM Array out of bounds exception\n");
+			if (dataPtr >= max) {
+				VM_PRINTF_FATAL(
+						"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
+						registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]), dataPtr, max);
 			}
 
 			switch (size) {
@@ -556,6 +558,10 @@ void VirtualMachine::execute(std::string function) {
 						"Length register should not be a reference\n");
 			}
 
+			if (registers_[lengthRegister] < 1) {
+				VM_PRINTF_FATAL("%s", "Cannot allocate array of length < 1");
+			}
+
 			long length = registers_[lengthRegister]
 					* typeSearch->arraySubtype()->getElementSize();
 
@@ -569,8 +575,8 @@ void VirtualMachine::execute(std::string function) {
 
 			delete[] initial;
 
-			VM_PRINTF_LOG("Allocated and created %li\n",
-					registers_[destinationRegister]);
+			VM_PRINTF_LOG("Allocated and created new array %li of size %li\n",
+					registers_[destinationRegister], registers_[lengthRegister]);
 
 			*current += vmOpCodeSize;
 

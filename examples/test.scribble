@@ -24,4 +24,12 @@ func main() {
 	j := j + i;
 	
 	var primesSieve := sieve.Sieve(100);
+	
+	for i := 0; i < 100; i++; {
+		sys.Write( sys.String(i) );
+		sys.Write(" ");
+		sys.Write( sys.String ( primesSieve[i] ) );
+		sys.Write( "\n" );
+	}
+	
 }

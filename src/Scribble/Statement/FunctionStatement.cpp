@@ -95,13 +95,15 @@ int FunctionStatement::generateCode(int resultRegister,
 	n += 2;
 
 	//If resultRegister is -1 then the result should not be stored in a register.
-	if (resultRegister == -1) {
+	if (resultRegister != -1) {
 		generated << "move $" << VM::vmReturnResultRegister << " $"
 				<< resultRegister << "\n";
 		n += 1;
+	} else {
+		printf("Result for %s call discounted because result register %i is %i", (func_->getFunction()->getName()).c_str(), resultRegister, -1);
 	}
 
-	if (VM::vmReturnResultRegister == resultRegister) {
+	if ( (int) VM::vmReturnResultRegister == resultRegister) {
 		generated << "popn\n";
 	} else {
 		generated << "popr $" << VM::vmReturnResultRegister << " " << 1 << "\n";

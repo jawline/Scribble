@@ -16,12 +16,13 @@ std::string makeName(std::string name, int version) {
 	return funcName.str();
 }
 
-ScriptedFunction::ScriptedFunction(std::string name, int version, std::string names, TypeReference fType,
-		SP<Variable> templateReturn,
+ScriptedFunction::ScriptedFunction(std::string name, int version,
+		std::string names, TypeReference fType, SP<Variable> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
-		Function(makeName(name, version), names), fType_(fType), templateReturn_(templateReturn), statements_(statements), variableTemplates_(
+		Function(makeName(name, version), names), fType_(fType), templateReturn_(
+				templateReturn), statements_(statements), variableTemplates_(
 				templates), arguments_(arguments) {
 
 }
@@ -101,6 +102,13 @@ const unsigned int ScriptedFunction::numArgs() {
 
 int ScriptedFunction::debugCode(std::stringstream& gen) {
 	int script = 0;
+
+	for (int i = arguments_.size() - 1; i >= 0; i--) {
+		gen << "popr $"
+				<< VM::vmNumReservedRegisters + arguments_[i]->getPosition()
+				<< " 1\n";
+		script += 1;
+	}
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 		script += statements_[i]->generateCode(5, gen);
