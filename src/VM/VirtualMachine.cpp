@@ -69,7 +69,6 @@ VirtualMachine::~VirtualMachine() {
 
 SP<VMEntryType> VirtualMachine::findType(std::string name) {
 
-	printf("Finding type %s\n", name.c_str());
 
 	NamespaceEntry entry;
 
@@ -133,6 +132,10 @@ void VirtualMachine::execute(std::string function) {
 
 			int constantDataStart = set.getInt(*current + 1);
 			uint8_t destinationRegister = set.getInst(*current + 5);
+
+
+			VM_PRINTF_LOG("Loading constant into %i\n", destinationRegister);
+
 
 			switch (set.getConstantByte(constantDataStart)) {
 

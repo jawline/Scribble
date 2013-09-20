@@ -89,12 +89,15 @@ int IfStatement::generateCode(int resultRegister,
 	generated << "neq $5 1\n";
 	generated << "jmpr " << (trueSize + 2) << "\n";
 
+	instrs += 4;
+
 	generated << "#if statement body\n";
 
 	generated << trueBody.str();
 	instrs += trueSize;
 
 	generated << "jmpr " << (falseSize + 1) << "\n";
+	instrs += 1;
 
 	generated << "#if statement false body\n";
 

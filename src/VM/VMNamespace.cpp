@@ -9,8 +9,6 @@
 
 bool VM::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& entry) {
 
-	printf("Seaching for target %s\n", target.c_str());
-
 	size_t pos = target.find(".");
 
 	if (pos == std::string::npos) {
