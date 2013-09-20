@@ -65,6 +65,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "newarray" return NEW_ARRAY;
 "aset" return ARRAY_SET;
 "aget" return ARRAY_GET;
+"alen" return ARRAY_LENGTH;
 "pushr" return PUSH_REGISTERS;
 "popr" return POP_REGISTERS;
 

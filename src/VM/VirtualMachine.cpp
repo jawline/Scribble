@@ -585,6 +585,30 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+		case OpArrayLength: {
+
+			uint8_t arrayLengthReg = set.getInst(*current + 1);
+			uint8_t dest = set.getInst(*current + 2);
+
+			if (!registerReference_[arrayLengthReg]) {
+				VM_PRINTF_FATAL(
+						"Register %i not not a reference (OpArrayLength)",
+						arrayLengthReg);
+			}
+
+			if (!heap_.getType(registers_[arrayLengthReg])->isArray()) {
+				VM_PRINTF_FATAL("%s",
+						"OpArrayLong Reference is not an array\n");
+			}
+
+			registers_[dest] =
+					(heap_.getSize(registers_[arrayLengthReg])
+							/ heap_.getType(registers_[arrayLengthReg])->arraySubtype()->getElementSize());
+
+			*current += vmOpCodeSize;
+			break;
+		}
+
 		case OpCallFn: {
 			uint8_t modeRegister = set.getInst(*current + 1);
 			char* name = 0;

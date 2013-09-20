@@ -64,6 +64,13 @@ void PopNil() {
 	current += 7;
 }
 
+void ArrayLength(uint8_t reg, uint8_t dst) {
+	Set(buffer, current, (uint8_t) VM::OpArrayLength);
+	Set(buffer, current, (uint8_t) reg);
+	Set(buffer, current, (uint8_t) dst);
+	current += 5;
+}
+
 void LoadLong(long val, uint8_t reg) {
 
 	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
@@ -278,7 +285,7 @@ void TestNotEqual(uint8_t left, uint8_t right) {
 %token <real> REAL
 %token <integer> INT REG
 %token <lval> LONG
-%token PUSH_REGISTERS POP_REGISTERS POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token PUSH_REGISTERS POP_REGISTERS POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -303,6 +310,8 @@ Program: {
 		ArraySet($3, $4, $5);
 	} | Program ARRAY_GET REG REG REG {
 		ArrayGet($3, $4, $5);
+	} | Program ARRAY_LENGTH REG REG {
+		ArrayLength($3, $4);
 	} | Program NEW_ARRAY STRING INT REG {
 		LoadInt($4, 3);
 		Array(*$3, 3, $5);

@@ -9,6 +9,7 @@
 #include "Heap.hpp"
 #include <Scribble/Value/Array.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+#include <VM/Constants.hpp>
 
 ArrayLengthStatement::ArrayLengthStatement(int line, std::string text,
 		SafeStatement exp) :
@@ -44,4 +45,18 @@ Value* ArrayLengthStatement::execute(std::vector<Value*> const& variables) {
 
 Type* ArrayLengthStatement::type() {
 	return getIntType();
+}
+
+int ArrayLengthStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	if (resultRegister != -1) {
+		int numArr = exp_->generateCode(VM::vmTempRegisterThree,
+				generated);
+		generated << "alen $" << VM::vmTempRegisterThree << " $"
+				<< resultRegister << "\n";
+		return numArr + 1;
+	}
+
+	return 0;
 }

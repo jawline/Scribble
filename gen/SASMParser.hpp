@@ -54,19 +54,20 @@
      POP = 272,
      MOVE = 273,
      TEST_EQUAL = 274,
-     TEST_NOT_EQUAL = 275,
-     JUMP = 276,
-     RETURN = 277,
-     LESS_THAN = 278,
-     LESS_THAN_OR_EQUAL = 279,
-     ARRAY_SET = 280,
-     ARRAY_GET = 281,
-     GREATER_THAN = 282,
-     GREATER_THAN_OR_EQUAL = 283,
-     SUBTRACT = 284,
-     MULTIPLY = 285,
-     DIVIDE = 286,
-     NEW_ARRAY = 287
+     ARRAY_LENGTH = 275,
+     TEST_NOT_EQUAL = 276,
+     JUMP = 277,
+     RETURN = 278,
+     LESS_THAN = 279,
+     LESS_THAN_OR_EQUAL = 280,
+     ARRAY_SET = 281,
+     ARRAY_GET = 282,
+     GREATER_THAN = 283,
+     GREATER_THAN_OR_EQUAL = 284,
+     SUBTRACT = 285,
+     MULTIPLY = 286,
+     DIVIDE = 287,
+     NEW_ARRAY = 288
    };
 #endif
 
@@ -77,7 +78,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 270 "./src/SASM/Parser.yy"
+#line 277 "./src/SASM/Parser.yy"
 
 	std::string* string;	
 	float real;
@@ -87,7 +88,7 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 91 "./gen/SASMParser.hpp"
+#line 92 "./gen/SASMParser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
