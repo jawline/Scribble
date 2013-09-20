@@ -9,13 +9,15 @@
 
 bool VM::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& entry) {
 
+	printf("Seaching for target %s\n", target.c_str());
+
 	size_t pos = target.find(".");
 
 	if (pos == std::string::npos) {
 
 		auto spaceSearch = space.find(target);
 		if (spaceSearch == space.end()) {
-			printf("Could not find %s\n", target.c_str());
+			//printf("Could not find %s\n", target.c_str());
 			return false;
 		}
 
@@ -27,7 +29,7 @@ bool VM::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& 
 		std::string spaceAfter = target.substr(pos+1);
 
 		if (space[nextSpace].getType() != Namespace) {
-			printf("Could not find %s\n", nextSpace.c_str());
+			//printf("Could not find %s\n", nextSpace.c_str());
 			return false;
 		}
 

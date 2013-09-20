@@ -1,4 +1,5 @@
 import("sys")
+import("primes/sieve")
 
 func j() : int {
 	return 3;
@@ -14,9 +15,13 @@ func y() : int {
 
 func main() {
 
-	for var i := 0; i < 10; i++ {
+	for var i := 0; i < 10; i++; {
 		sys.Write( sys.String ( y() ) );
 		sys.Write( "\n" );
 	}
-
+	
+	var j := 0;
+	j := j + i;
+	
+	var primesSieve := sieve.Sieve(100);
 }

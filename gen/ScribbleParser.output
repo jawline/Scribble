@@ -85,7 +85,7 @@ Grammar
    36 Statement: Expression END
    37          | IF Expression THEN IfStatements
    38          | IF Expression THEN IfStatements ELSE IfStatements
-   39          | FOR Expression END Expression END Expression LBRACKET Statements RBRACKET
+   39          | FOR Expression END Expression END Expression END LBRACKET Statements RBRACKET
    40          | WHILE Expression LBRACKET Statements RBRACKET
 
    41 Expression: TRUE
@@ -727,7 +727,7 @@ state 49
 
 state 50
 
-   39 Statement: FOR . Expression END Expression END Expression LBRACKET Statements RBRACKET
+   39 Statement: FOR . Expression END Expression END Expression END LBRACKET Statements RBRACKET
 
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
@@ -1215,7 +1215,7 @@ state 78
 
 state 79
 
-   39 Statement: FOR Expression . END Expression END Expression LBRACKET Statements RBRACKET
+   39 Statement: FOR Expression . END Expression END Expression END LBRACKET Statements RBRACKET
    51 Expression: Expression . LSQBRACKET Expression RSQBRACKET ASSIGN Expression
    52           | Expression . LSQBRACKET Expression RSQBRACKET
    55           | Expression . PLUS Expression
@@ -1992,7 +1992,7 @@ state 112
 
 state 113
 
-   39 Statement: FOR Expression END . Expression END Expression LBRACKET Statements RBRACKET
+   39 Statement: FOR Expression END . Expression END Expression END LBRACKET Statements RBRACKET
 
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
@@ -2828,7 +2828,7 @@ state 144
 
 state 145
 
-   39 Statement: FOR Expression END Expression . END Expression LBRACKET Statements RBRACKET
+   39 Statement: FOR Expression END Expression . END Expression END LBRACKET Statements RBRACKET
    51 Expression: Expression . LSQBRACKET Expression RSQBRACKET ASSIGN Expression
    52           | Expression . LSQBRACKET Expression RSQBRACKET
    55           | Expression . PLUS Expression
@@ -3252,7 +3252,7 @@ state 162
 
 state 163
 
-   39 Statement: FOR Expression END Expression END . Expression LBRACKET Statements RBRACKET
+   39 Statement: FOR Expression END Expression END . Expression END LBRACKET Statements RBRACKET
 
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
@@ -3384,7 +3384,7 @@ state 169
 
 state 170
 
-   39 Statement: FOR Expression END Expression END Expression . LBRACKET Statements RBRACKET
+   39 Statement: FOR Expression END Expression END Expression . END LBRACKET Statements RBRACKET
    51 Expression: Expression . LSQBRACKET Expression RSQBRACKET ASSIGN Expression
    52           | Expression . LSQBRACKET Expression RSQBRACKET
    55           | Expression . PLUS Expression
@@ -3410,10 +3410,10 @@ state 170
     GREATER     shift, and go to state 96
     LESSER      shift, and go to state 97
     NOT         shift, and go to state 98
-    LBRACKET    shift, and go to state 172
     AND         shift, and go to state 99
     POINT       shift, and go to state 100
     LSQBRACKET  shift, and go to state 101
+    END         shift, and go to state 172
 
 
 state 171
@@ -3464,19 +3464,26 @@ state 171
 
 state 172
 
-   39 Statement: FOR Expression END Expression END Expression LBRACKET . Statements RBRACKET
+   39 Statement: FOR Expression END Expression END Expression END . LBRACKET Statements RBRACKET
 
-    $default  reduce using rule 26 (Statements)
-
-    Statements  go to state 173
+    LBRACKET  shift, and go to state 173
 
 
 state 173
 
+   39 Statement: FOR Expression END Expression END Expression END LBRACKET . Statements RBRACKET
+
+    $default  reduce using rule 26 (Statements)
+
+    Statements  go to state 174
+
+
+state 174
+
    27 Statements: Statements . Statement
    28           | Statements . RETURN Statement
    29           | Statements . RETURN
-   39 Statement: FOR Expression END Expression END Expression LBRACKET Statements . RBRACKET
+   39 Statement: FOR Expression END Expression END Expression END LBRACKET Statements . RBRACKET
 
     WORD         shift, and go to state 46
     STRING       shift, and go to state 47
@@ -3488,7 +3495,7 @@ state 173
     RETURN       shift, and go to state 51
     WHILE        shift, and go to state 52
     LPAREN       shift, and go to state 53
-    RBRACKET     shift, and go to state 174
+    RBRACKET     shift, and go to state 175
     TWOMINUS     shift, and go to state 55
     TWOPLUS      shift, and go to state 56
     TYPE_BOOL    shift, and go to state 17
@@ -3509,8 +3516,8 @@ state 173
     Expression    go to state 68
 
 
-state 174
+state 175
 
-   39 Statement: FOR Expression END Expression END Expression LBRACKET Statements RBRACKET .
+   39 Statement: FOR Expression END Expression END Expression END LBRACKET Statements RBRACKET .
 
     $default  reduce using rule 39 (Statement)

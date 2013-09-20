@@ -50,6 +50,7 @@ VirtualMachine::VirtualMachine() {
 
 	//Register all the primitive types
 	registerEntry("char", NamespaceEntry(new VMEntryType("char", 1, false)));
+	registerEntry("bool", NamespaceEntry(new VMEntryType("bool", 1, false)));
 	registerEntry("short", NamespaceEntry( new VMEntryType("short", 2, false)));
 	registerEntry("int", NamespaceEntry(new VMEntryType("int", 4, false)));
 	registerEntry("long", NamespaceEntry(new VMEntryType("int", 8, false)));
@@ -68,6 +69,8 @@ VirtualMachine::~VirtualMachine() {
 
 SP<VMEntryType> VirtualMachine::findType(std::string name) {
 
+	printf("Finding type %s\n", name.c_str());
+
 	NamespaceEntry entry;
 
 	if (!searchNamespace(namespace_, name, entry)) {
@@ -81,7 +84,7 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 			SP<VMEntryType> subtype = findType(subtypeName);
 
 			if (subtype.Null()) {
-				printf("Cannot create array of invalid subtype %s\n",
+				VM_PRINTF_FATAL("Cannot create array of invalid subtype %s\n",
 						subtypeName.c_str());
 				return nullptr;
 			}
