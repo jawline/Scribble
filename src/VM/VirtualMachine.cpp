@@ -541,7 +541,7 @@ void VirtualMachine::execute(std::string function) {
 			//Get the arguments
 			uint8_t lengthRegister = set.getInst(*current + 1);
 			uint8_t destinationRegister = set.getInst(*current + 2);
-			int constantLocation = set.getInst(*current + 3);
+			int constantLocation = set.getInt(*current + 3);
 
 			//Get the type
 			std::string type = (char const*) set.getConstantString(
@@ -551,7 +551,7 @@ void VirtualMachine::execute(std::string function) {
 			auto typeSearch = findType(type);
 
 			if (typeSearch.Null()) {
-				VM_PRINTF_FATAL("Type %s not found\n", type.c_str());
+				VM_PRINTF_FATAL("Type %s is not registered\n", type.c_str());
 			}
 
 			//Check the type is an array

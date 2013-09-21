@@ -135,7 +135,8 @@ void Array(std::string type, uint8_t sizereg, uint8_t reg) {
 	Set(buffer, current, (uint8_t) reg);
 	Set(buffer, current, (int) currentConstant);
 
-	Set(constant, currentConstant, type.c_str());
+	const char* typeCstr = type.c_str();
+	Set(constant, currentConstant, typeCstr);
 	
 	current += 1;
 }

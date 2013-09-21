@@ -29,6 +29,10 @@ func main() {
 		sys.Write( sys.Concat( sys.String(i), " is under 100\n" ) );
 	}
 	
-	var j := 0;
-	j := j + i;	
+	var lotsOfMemory := [1000] int;
+	
+	//for i := 0; i < 1000; i++ do {
+	//	lotsOfMemory[i] := [1000]int;
+	//}
+	
 }
