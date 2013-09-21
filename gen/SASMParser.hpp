@@ -78,7 +78,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 282 "./src/SASM/Parser.yy"
+#line 278 "./src/SASM/Parser.yy"
 
 	std::string* string;	
 	float real;

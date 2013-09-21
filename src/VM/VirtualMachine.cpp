@@ -214,8 +214,6 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t dest = set.getInst(*current + 2);
 			registers_[dest] = registers_[target];
 			registerReference_[dest] = registerReference_[target];
-			VM_PRINTF_LOG("VM Move %i to %i %i to %i\n",
-					target, dest, registerReference_[dest], registerReference_[target]);
 			*current += vmOpCodeSize;
 			break;
 		}
@@ -232,7 +230,7 @@ void VirtualMachine::execute(std::string function) {
 				long dRest = ((long) dest) * ((long) vmOpCodeSize);
 				dOld = dOld + dRest;
 				*current = dOld;
-				VM_PRINTF_LOG("Jump direct relative to %li\n", ((long) dest));
+				//VM_PRINTF_LOG("Jump direct relative to %li\n", ((long) dest));
 				break;
 			}
 
@@ -259,8 +257,8 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t right = set.getInst(*current + 2);
 			uint8_t dest = set.getInst(*current + 3);
 
-			VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
-					left, right, dest);
+		//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
+		//			left, right, dest);
 
 			registers_[dest] = registers_[left] + registers_[right];
 			registerReference_[dest] = false;
@@ -275,9 +273,9 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t right = set.getInst(*current + 2);
 			uint8_t dest = set.getInst(*current + 3);
 
-			VM_PRINTF_LOG(
-					"Subtracted registers %i and %i. Placing result in %i\n",
-					left, right, dest);
+			//VM_PRINTF_LOG(
+				//	"Subtracted registers %i and %i. Placing result in %i\n",
+					//left, right, dest);
 
 			registers_[dest] = registers_[left] - registers_[right];
 			registerReference_[dest] = false;
@@ -292,9 +290,9 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t right = set.getInst(*current + 2);
 			uint8_t dest = set.getInst(*current + 3);
 
-			VM_PRINTF_LOG(
-					"Multiplied registers %i and %i. Placing result in %i\n",
-					left, right, dest);
+			//VM_PRINTF_LOG(
+			//		"Multiplied registers %i and %i. Placing result in %i\n",
+			//		left, right, dest);
 
 			registers_[dest] = registers_[left] * registers_[right];
 			registerReference_[dest] = false;
@@ -309,8 +307,8 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t right = set.getInst(*current + 2);
 			uint8_t dest = set.getInst(*current + 3);
 
-			VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
-					left, right, dest);
+			//VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
+			//		left, right, dest);
 
 			registers_[dest] = registers_[left] / registers_[right];
 			registerReference_[dest] = false;
