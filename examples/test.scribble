@@ -23,24 +23,13 @@ func fibs(n : int) : int {
 	return fibs(n-1) + fibs(n-2);
 }
 
+func recurse(n : int) : int {
+	if n = 0 then return 0;
+	return n + recurse(n-1);
+}
+
 func main() {
 
-	sys.Write( sys.Concat( sys.String( fibs(7) ), "\n") );
-
-	for var i := 1; i < 10000; i := i + i do {
-		sys.Write( sys.Concat( sys.Concat("Hello World ",  sys.String(i) ), "\n") );
-	}
-		
-	if i > 100 then {
-		sys.Write( sys.Concat( sys.String(i), " is over 100\n" ) );
-	} else {
-		sys.Write( sys.Concat( sys.String(i), " is under 100\n" ) );
-	}
-	
-	var lotsOfMemory := [10000] array(int);
-	
-	for i := 0; i < len(lotsOfMemory); i++ do {
-		lotsOfMemory[i] := [1000]int;
-	}
-	
+//	sys.Write( sys.Concat( sys.String( fibs(700) ), "\n") );
+	sys.Write ( sys.String ( recurse(100) ) );
 }

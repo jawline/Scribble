@@ -64,7 +64,7 @@ VirtualMachine::VirtualMachine() {
 							namespace_["char"].getTypeReference())));
 
 	//Allocate the stack
-	stack_ = new uint8_t[4086];
+	stack_ = new uint8_t[1024 * 32];
 
 	//Initialize garbage collection variables.
 	gcStat_ = 0;
