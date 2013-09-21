@@ -17,7 +17,15 @@ func y() : int {
 	return r() + 123;
 }
 
+func fibs(n : int) : int {
+	if n = 0 then return 0;
+	if n = 1 then return 1;
+	return fibs(n-1) + fibs(n-2);
+}
+
 func main() {
+
+	sys.Write( sys.Concat( sys.String( fibs(7) ), "\n") );
 
 	for var i := 1; i < 10000; i := i + i do {
 		sys.Write( sys.Concat( sys.Concat("Hello World ",  sys.String(i) ), "\n") );

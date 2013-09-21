@@ -500,9 +500,6 @@ Statements: {
 	} | Statements Statement {
 		$$ = $1;
 		$$->push_back($2);
-	} | Statements RETURN Statement {
-		$$ = $1;
-		$$->push_back(new ReturnStatement(scribble_lineno, scribble_text, $3));
 	} | Statements RETURN {
 		$$ = $1;
 		$$->push_back(new ReturnStatement(scribble_lineno, scribble_text, nullptr));
@@ -603,7 +600,10 @@ Statement: Expression END {
 	} | WHILE Expression LBRACKET Statements RBRACKET {
 		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$4);
 		delete $4;
-	};
+	} | RETURN Expression END {	
+		$$ = new ReturnStatement(scribble_lineno, scribble_text, $2);	
+	}
+;
 
 Expression: TRUE {
 		$$ = new BoolStatement(scribble_lineno, scribble_text, true);
