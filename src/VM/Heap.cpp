@@ -13,6 +13,7 @@ namespace VM {
 
 Heap::Heap() {
 	lastIndex_ = 1;
+	lastFlagState_ = false;
 }
 
 Heap::~Heap() {
@@ -42,6 +43,7 @@ long Heap::allocate(SP<VMEntryType> type, int size, uint8_t* initial) {
 	entry.type = type;
 	entry.pointer = memory;
 	entry.sizeBytes = size;
+	entry.flagged = lastFlagState_;
 
 	long index = lastIndex_++;
 
@@ -80,26 +82,21 @@ SP<VMEntryType> Heap::getType(long entry) {
 void Heap::flag(long i) {
 
 	if (validReference(i)) {
-		heapMap_[i].flagged = true;
+
+		//Flag it ensuring it won't be deleted the next time processUnflagged is called.
+		heapMap_[i].flagged = !lastFlagState_;
+
 	}
 
 }
 
-void Heap::unflagAll() {
+int Heap::processUnflagged() {
 
-	for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
-		iter->second.flagged = false;
-	}
-
-}
-
-int Heap::deleteUnflagged() {
-
-	std::vector<std::map<int, VMHeapEntry>::iterator> remove;
+	std::vector < std::map<int, VMHeapEntry>::iterator > remove;
 
 	for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
 
-		if (!iter->second.flagged) {
+		if (iter->second.flagged == lastFlagState_) {
 			delete[] iter->second.pointer;
 			remove.push_back(iter);
 		}
@@ -108,6 +105,9 @@ int Heap::deleteUnflagged() {
 	for (unsigned int i = 0; i < remove.size(); i++) {
 		heapMap_.erase(remove[i]);
 	}
+
+	//Flip last flag state. This allows us to monitor which heap variables are used without constantly cycling through every garbage collected element each time this is run.
+	lastFlagState_ = !lastFlagState_;
 
 	return remove.size();
 }

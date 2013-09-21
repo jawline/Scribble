@@ -40,9 +40,12 @@ FILE* flog = fopen("VMLogFile", "w");
 namespace VM {
 
 VirtualMachine::VirtualMachine() {
+
+	//Allocate memory for registers
 	registers_ = new long[vmNumRegisters];
 	registerReference_ = new bool[vmNumRegisters];
 
+	//Initialize all the registers
 	for (unsigned int i = 0; i < vmNumRegisters; ++i) {
 		registers_[i] = 0;
 		registerReference_[i] = false;
@@ -60,7 +63,11 @@ VirtualMachine::VirtualMachine() {
 					new VMEntryType("string",
 							namespace_["char"].getTypeReference())));
 
+	//Allocate the stack
 	stack_ = new uint8_t[4086];
+
+	//Initialize garbage collection variables.
+	gcStat_ = 0;
 }
 
 VirtualMachine::~VirtualMachine() {
@@ -683,9 +690,6 @@ void VirtualMachine::garbageCollection() {
 	std::vector<long> toInvestigate;
 	toInvestigate.clear();
 
-	//First unflag everything flagged in previous run
-	heap_.unflagAll();
-
 	//Loop through all registers flagging any references found and adding them to a list of references to explore
 	for (unsigned int i = 0; i < vmNumRegisters; ++i) {
 
@@ -752,7 +756,7 @@ void VirtualMachine::garbageCollection() {
 	}
 
 	//After everything delete what remains
-	int numDeleted = heap_.deleteUnflagged();
+	int numDeleted = heap_.processUnflagged();
 
 	VM_PRINTF_LOG("Garbage collector done deleting %i elements\n", numDeleted);
 }

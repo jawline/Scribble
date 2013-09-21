@@ -40,6 +40,7 @@ Value* Concat::execute(std::vector<Value*> arguments) {
 }
 
 API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {
+
 	char* lhs = (char*) values[0].getReferencePointer();
 	char* rhs = (char*) values[1].getReferencePointer();
 
