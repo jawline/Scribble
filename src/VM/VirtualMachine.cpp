@@ -683,8 +683,10 @@ void VirtualMachine::garbageCollection() {
 	std::vector<long> toInvestigate;
 	toInvestigate.clear();
 
+	//First unflag everything flagged in previous run
 	heap_.unflagAll();
 
+	//Loop through all registers flagging any references found and adding them to a list of references to explore
 	for (unsigned int i = 0; i < vmNumRegisters; ++i) {
 
 		if (registerReference_[i] && heap_.validReference(registers_[i])) {
@@ -694,11 +696,13 @@ void VirtualMachine::garbageCollection() {
 
 	}
 
+	//Flag every reference on the stack and add it to the list of objects to investigate.
 	for (unsigned int i = 0; i < stackReferences_.size(); i++) {
 		heap_.flag(stackLong(stackReferences_[i]));
 		toInvestigate.push_back(stackLong(stackReferences_[i]));
 	}
 
+	//Investigate every flagged object. Flagging anything that they may reference
 	for (unsigned int i = 0; i < toInvestigate.size(); ++i) {
 
 		long next = toInvestigate[i];
@@ -747,7 +751,9 @@ void VirtualMachine::garbageCollection() {
 
 	}
 
+	//After everything delete what remains
 	int numDeleted = heap_.deleteUnflagged();
+
 	VM_PRINTF_LOG("Garbage collector done deleting %i elements\n", numDeleted);
 }
 
