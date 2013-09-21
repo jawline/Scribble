@@ -1,5 +1,10 @@
 import("sys")
 
+type A := struct {
+	Name : string
+	Age : int
+}
+
 func j() : int {
 	return 3;
 }
@@ -25,6 +30,5 @@ func main() {
 	}
 	
 	var j := 0;
-	j := j + i;
-	
+	j := j + i;	
 }

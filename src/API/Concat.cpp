@@ -34,7 +34,9 @@ Type* Concat::argType(unsigned int arg) {
 }
 
 Value* Concat::execute(std::vector<Value*> arguments) {
-	return new StringValue("Hello world");
+	return new StringValue(
+			((StringValue*) arguments[0])->getValue()
+					+ ((StringValue*) arguments[1])->getValue());
 }
 
 API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {
@@ -43,8 +45,9 @@ API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 
 	if (lhs == nullptr || rhs == nullptr) {
 		virt->printState();
-		printf("AAHH AERROR\n");
-		for (;;) {}
+		printf("Concat FCall Error\n");
+		for (;;) {
+		}
 	}
 
 	char* result = new char[strlen(lhs) + strlen(rhs) + 1];
