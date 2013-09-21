@@ -97,7 +97,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA TWOMINUS TWOPLUS TYPE_BOOL TRUE FALSE AUTO AND NIL TYPE
 %token <token> FUNCTION VARIABLE CONST STRUCT LENGTH THREAD POINT
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
-%token <token> END
+%token <token> END DO
 
 %left PLUS MINUS
 %left TIMES DIVIDE
@@ -597,9 +597,9 @@ Statement: Expression END {
 		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, *$6);
 		delete $4;
 		delete $6;
-	} | FOR Expression END Expression END Expression END LBRACKET Statements RBRACKET {
-		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$9);
-		delete $9;
+	} | FOR Expression END Expression END Expression DO IfStatements {
+		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$8);
+		delete $8;
 	} | WHILE Expression LBRACKET Statements RBRACKET {
 		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$4);
 		delete $4;

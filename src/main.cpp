@@ -9,6 +9,7 @@
 #include <API/StringFunction.hpp>
 #include <API/Modulo.hpp>
 #include <API/RandomInt.hpp>
+#include <API/Concat.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Parser/Parser.hpp>
 #include <Scribble/Parser/ParserException.hpp>
@@ -31,6 +32,10 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 	std::vector<SafeFunction> write;
 	write.push_back(SmartPointer<Function>(new WriteFunction("sys")));
 	builtinFunctions["Write"] = NamespaceEntry(write);
+
+	std::vector<SafeFunction> concat;
+	concat.push_back(SmartPointer<Function>(new Concat("sys")));
+	builtinFunctions["Concat"] = NamespaceEntry(concat);
 
 	std::vector<SafeFunction> string;
 	string.push_back(SmartPointer<Function>(new IntToStringFunction("sys")));

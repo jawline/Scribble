@@ -70,9 +70,9 @@ public:
 		APIValue returnVal = execute(vals, virt);
 
 		if (returnVal.isReference()) {
-			virt->hitGc();
 			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue(),
 					true);
+			virt->hitGc();
 		} else {
 			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue(),
 					false);
@@ -80,10 +80,21 @@ public:
 	}
 
 	/**
-	 * Get the return type of the function.
+	 * Get the return type of the function
 	 */
+
 	virtual Type* getType() = 0;
+
+	/**
+	 * Return the number of arguments the function takes
+	 */
+
 	virtual const unsigned int numArgs() = 0;
+
+	/**
+	 * Get the expected type of the specified argument
+	 */
+
 	virtual Type* argType(unsigned int arg) = 0;
 
 	virtual int debugCode(std::stringstream& gen) {

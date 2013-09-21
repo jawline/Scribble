@@ -694,6 +694,11 @@ void VirtualMachine::garbageCollection() {
 
 	}
 
+	for (unsigned int i = 0; i < stackReferences_.size(); i++) {
+		heap_.flag(stackLong(stackReferences_[i]));
+		toInvestigate.push_back(stackLong(stackReferences_[i]));
+	}
+
 	for (unsigned int i = 0; i < toInvestigate.size(); ++i) {
 
 		long next = toInvestigate[i];

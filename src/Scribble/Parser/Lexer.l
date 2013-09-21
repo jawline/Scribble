@@ -86,6 +86,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "true" return TRUE;
 "false" return FALSE;
 "type" return TYPE;
+"do" return DO;
 "." return LINK;
 "->" return POINT;
 "array" return TYPE_ARRAY;
