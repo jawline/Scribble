@@ -20,6 +20,7 @@ namespace VM {
 class VirtualMachine {
 private:
 	uint8_t* stack_;
+	long currentStackHeight_;
 	std::vector<long> stackReferences_;
 
 	long* registers_;
@@ -37,6 +38,7 @@ public:
 	virtual void stackSetLong(long pos, long v);
 	virtual void popStackLong(long& val, bool& ref);
 	virtual void pushStackLong(long v);
+	virtual void expandStack();
 	virtual void markStackReference();
 	virtual void pushRegister(uint8_t reg);
 

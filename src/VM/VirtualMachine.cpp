@@ -64,7 +64,10 @@ VirtualMachine::VirtualMachine() {
 							namespace_["char"].getTypeReference())));
 
 	//Allocate the stack
-	stack_ = new uint8_t[1024 * 32];
+	stack_ = new uint8_t[vmStackIncrease];
+
+	//Initialize the stack height
+	currentStackHeight_ = vmStackIncrease;
 
 	//Initialize garbage collection variables.
 	gcStat_ = 0;
@@ -139,7 +142,7 @@ void VirtualMachine::execute(std::string function) {
 			int constantDataStart = set.getInt(*current + 1);
 			uint8_t destinationRegister = set.getInst(*current + 5);
 
-			VM_PRINTF_LOG("Loading constant into %i\n", destinationRegister);
+//			VM_PRINTF_LOG("Loading constant into %i\n", destinationRegister);
 
 			switch (set.getConstantByte(constantDataStart)) {
 
@@ -257,8 +260,8 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t right = set.getInst(*current + 2);
 			uint8_t dest = set.getInst(*current + 3);
 
-		//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
-		//			left, right, dest);
+			//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
+			//			left, right, dest);
 
 			registers_[dest] = registers_[left] + registers_[right];
 			registerReference_[dest] = false;
@@ -274,8 +277,8 @@ void VirtualMachine::execute(std::string function) {
 			uint8_t dest = set.getInst(*current + 3);
 
 			//VM_PRINTF_LOG(
-				//	"Subtracted registers %i and %i. Placing result in %i\n",
-					//left, right, dest);
+			//	"Subtracted registers %i and %i. Placing result in %i\n",
+			//left, right, dest);
 
 			registers_[dest] = registers_[left] - registers_[right];
 			registerReference_[dest] = false;
@@ -813,7 +816,29 @@ void VirtualMachine::popStackLong(long& val, bool& ref) {
 
 }
 
+void VirtualMachine::expandStack() {
+
+	VM_PRINTF_LOG("Increased stack size by %i blocks to %li", vmStackIncrement, currentStackHeight_);
+
+	//Allocate memory for a larger stack
+	uint8_t* newStack = new uint8_t[currentStackHeight_ + vmStackIncrease];
+
+	//Copy over and then free up the existing stack
+	memcpy(newStack, stack_, currentStackHeight_);
+	delete[] stack_;
+
+	//Change the stack to the new stack
+	stack_ = newStack;
+	currentStackHeight_ += vmStackIncrease;
+
+}
+
 void VirtualMachine::pushStackLong(long v) {
+
+	while (registers_[vmStackCurrentPointer] >= currentStackHeight_) {
+		expandStack();
+	}
+
 	stackSetLong(registers_[vmStackCurrentPointer], v);
 	registers_[vmStackCurrentPointer] += 8;
 }

@@ -12,6 +12,23 @@ const static unsigned int GarbageCollectHitLimit = 50;
 const static unsigned int vmTrue = 1;
 const static unsigned int vmFalse = 0;
 
+/**
+ * The size of each stack block in bytes
+ */
+
+const static unsigned int vmStackBlockSize = 1024;
+
+/**
+ * The amount to increment the stack by if it is expanded in stack blocks
+ */
+const static unsigned int vmStackIncrement = 32;
+
+/**
+ * The size in bytes of a stack increase
+ */
+
+const static unsigned int vmStackIncrease = vmStackBlockSize * vmStackIncrement;
+
 }
 
 #endif //_VM_CONSTANTS_DEF_H_
