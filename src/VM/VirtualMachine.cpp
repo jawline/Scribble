@@ -642,17 +642,35 @@ void VirtualMachine::execute(std::string function) {
 
 			VM_PRINTF_LOG("Calling function %s\n", name);
 
-			long currentBack = *current;
-			execute(name);
-			*current = currentBack;
+			NamespaceEntry entry;
+			VM_LOAD_FUNC(std::string(name), entry);
 
-			*current += vmOpCodeSize;
+			//If it is native then the load will have already executed and the PC just needs incrementing
+			if (entry.getFunction().isNative()) {
+				*current += vmOpCodeSize;
+			} else {
+				//Otherwise push the VM state and then setup the new function. Set the return PC to be the current PC plus vmOpCodeSize
+				currentVmState_.push(VMState(set, *current + vmOpCodeSize));
+				set = entry.getFunction().getInstructions();
+				*current = set.startInstruction();
+			}
+
 			break;
 		}
 
 		case OpReturn: {
+
 			VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
-			shouldReturn = true;
+
+			if (currentVmState_.size() > 0) {
+				VMState top = currentVmState_.top();
+				currentVmState_.pop();
+				set = top.set_;
+				*current = top.pc_;
+			} else {
+				shouldReturn = true;
+			}
+
 			break;
 		}
 

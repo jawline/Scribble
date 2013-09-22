@@ -11,6 +11,7 @@
 #include "VMFunc.hpp"
 #include <vector>
 #include <map>
+#include <stack>
 #include "Stack.hpp"
 #include "Heap.hpp"
 #include "VMNamespace.hpp"
@@ -20,12 +21,14 @@ namespace VM {
 
 class VMState {
 public:
-	InstructionSet set;
-	long storedPc;
+	InstructionSet set_;
+	long pc_;
 
 	VMState() :
-			storedPc(0) {
+			pc_(0) {
 	}
+
+	VMState(InstructionSet set, long pc) : set_(set), pc_(pc) {}
 };
 
 class VirtualMachine {
@@ -38,7 +41,7 @@ private:
 	 * The virtual machine state stack is pushed every time a function call is made with the new instruction set and popped on return. The storedPc is used to store the value of the PC register on a function call so on return it can be restored.
 	 */
 
-	//std::stack<VMState> currentVmState_;
+	std::stack<VMState> currentVmState_;
 
 	long* registers_;
 	bool* registerReference_;
