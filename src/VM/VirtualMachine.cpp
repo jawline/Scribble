@@ -16,6 +16,11 @@
 
 #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); this->printState(); do { } while (1)
 
+/**
+ * Loads a given function into entry and executes if native. NOTE: DO NOT USE OUTSIDE OF VM::execute
+ */
+#define VM_LOAD_FUNC(fn, entry) 	if (!VM::searchNamespace(namespace_, fn, entry) || entry.getType() != Function) { VM_PRINTF_FATAL("%s is not a registered function\n", fn.c_str()); } if (entry.getFunction().isNative()) { entry.getFunction().getFunction()->execute(this); }
+
 #if VM_DEBUG == 3
 FILE* flog = fopen("VMLogFile", "w");
 #define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
@@ -117,13 +122,9 @@ void VirtualMachine::execute(std::string function) {
 
 	NamespaceEntry functionEntry;
 
-	if (!VM::searchNamespace(namespace_, function, functionEntry)
-			|| functionEntry.getType() != Function) {
-		VM_PRINTF_FATAL("%s is not a registered function\n", function.c_str());
-	}
+	VM_LOAD_FUNC(function, functionEntry);
 
 	if (functionEntry.getFunction().isNative()) {
-		functionEntry.getFunction().getFunction()->execute(this);
 		return;
 	}
 
@@ -818,7 +819,8 @@ void VirtualMachine::popStackLong(long& val, bool& ref) {
 
 void VirtualMachine::expandStack() {
 
-	VM_PRINTF_LOG("Increased stack size by %i blocks to %li", vmStackIncrement, currentStackHeight_);
+	VM_PRINTF_LOG("Increased stack size by %i blocks to %li",
+			vmStackIncrement, currentStackHeight_);
 
 	//Allocate memory for a larger stack
 	uint8_t* newStack = new uint8_t[currentStackHeight_ + vmStackIncrease];

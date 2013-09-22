@@ -31,6 +31,6 @@ func recurse(n : int) : int {
 func main() {
 
 //	sys.Write( sys.Concat( sys.String( fibs(700) ), "\n") );
-	var hello := recurse( 200 );
+	var hello := recurse( 100 );
 	sys.Write ( sys.String ( recurse(200) ) );
 }
