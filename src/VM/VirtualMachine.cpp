@@ -128,41 +128,48 @@ void VirtualMachine::execute(std::string function) {
 		return;
 	}
 
-	InstructionSet set = functionEntry.getFunction().getInstructions();
+	InstructionSet instructionSet =
+			functionEntry.getFunction().getInstructions();
 
-	registers_[vmProgramCounter] = set.startInstruction();
+	registers_[vmProgramCounter] = instructionSet.startInstruction();
 	long* current = &registers_[vmProgramCounter];
 	bool shouldReturn = false;
 
-	while (!shouldReturn && *current < set.numInstructions()) {
+	while (!shouldReturn && *current < instructionSet.numInstructions()) {
 
-		switch (set.getInst(*current)) {
+		switch (instructionSet.getInst(*current)) {
+
+		/**
+		 *  Loads the constant data at the specified constant index into the given register.
+		 *  Capable of loading elements into the heap and assigning their reference if their initial data is already known ( Such as pushing strings ).
+		 */
 
 		case OpLoadConstant: {
 
-			int constantDataStart = set.getInt(*current + 1);
-			uint8_t destinationRegister = set.getInst(*current + 5);
+			int constantDataStart = instructionSet.getInt(*current + 1);
+			uint8_t destinationRegister = instructionSet.getInst(*current + 5);
 
 //			VM_PRINTF_LOG("Loading constant into %i\n", destinationRegister);
 
-			switch (set.getConstantByte(constantDataStart)) {
+			switch (instructionSet.getConstantByte(constantDataStart)) {
 
 			case CInt:
-				registers_[destinationRegister] = set.getConstantInt(
+				registers_[destinationRegister] = instructionSet.getConstantInt(
 						constantDataStart + 1);
 				registerReference_[destinationRegister] = false;
 				break;
 
 			case CLong:
-				registers_[destinationRegister] = set.getConstantLong(
-						constantDataStart + 1);
+				registers_[destinationRegister] =
+						instructionSet.getConstantLong(constantDataStart + 1);
 				registerReference_[destinationRegister] = false;
 				break;
 
 			case CArray: {
 
 				//Read in the type of array from the constant data with this instruction set.
-				std::string type = set.getConstantString(constantDataStart + 1);
+				std::string type = instructionSet.getConstantString(
+						constantDataStart + 1);
 
 				//Check the type is valid
 				if (namespace_[type].getType() != Type) {
@@ -173,11 +180,11 @@ void VirtualMachine::execute(std::string function) {
 				int next = constantDataStart + 2 + type.size();
 
 				//Get the size of the area to create
-				int sizeBytes = set.getConstantInt(next);
+				int sizeBytes = instructionSet.getConstantInt(next);
 				next += 4;
 
 				//Get the size stored. Will be filled from the start. Any remaining space will be zero'd
-				int sizeStored = set.getConstantInt(next);
+				int sizeStored = instructionSet.getConstantInt(next);
 				next += 4;
 
 				uint8_t* initial = new uint8_t[sizeBytes];
@@ -186,7 +193,7 @@ void VirtualMachine::execute(std::string function) {
 				memset(initial + sizeStored, 0, sizeBytes - sizeStored);
 
 				for (int i = 0; i < sizeStored; ++i) {
-					initial[i] = set.getConstantByte(next);
+					initial[i] = instructionSet.getConstantByte(next);
 					next++;
 				}
 
@@ -204,7 +211,7 @@ void VirtualMachine::execute(std::string function) {
 
 			default:
 				printf("Unhandled load %i\n",
-						set.getConstantByte(constantDataStart));
+						instructionSet.getConstantByte(constantDataStart));
 				break;
 
 			}
@@ -213,19 +220,27 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Copy whatever is in the target register into the destination register copying over whether it is a reference or not.
+			 */
+
 		case OpMove: {
-			uint8_t target = set.getInst(*current + 1);
-			uint8_t dest = set.getInst(*current + 2);
+			uint8_t target = instructionSet.getInst(*current + 1);
+			uint8_t dest = instructionSet.getInst(*current + 2);
 			registers_[dest] = registers_[target];
 			registerReference_[dest] = registerReference_[target];
 			*current += vmOpCodeSize;
 			break;
 		}
 
+			/**
+			 * Jump to a different instruction
+			 */
+
 		case OpJump: {
 
-			uint8_t mode = set.getInst(*current + 1);
-			int dest = set.getInt(*current + 2);
+			uint8_t mode = instructionSet.getInst(*current + 1);
+			int dest = instructionSet.getInt(*current + 2);
 
 			switch (mode) {
 
@@ -255,11 +270,15 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Add the left and right registers and place the result in the dest register.
+			 */
+
 		case OpAdd: {
 
-			uint8_t left = set.getInst(*current + 1);
-			uint8_t right = set.getInst(*current + 2);
-			uint8_t dest = set.getInst(*current + 3);
+			uint8_t left = instructionSet.getInst(*current + 1);
+			uint8_t right = instructionSet.getInst(*current + 2);
+			uint8_t dest = instructionSet.getInst(*current + 3);
 
 			//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
 			//			left, right, dest);
@@ -271,11 +290,15 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Subtract the left and right registers and place the result in the dest register.
+			 */
+
 		case OpSub: {
 
-			uint8_t left = set.getInst(*current + 1);
-			uint8_t right = set.getInst(*current + 2);
-			uint8_t dest = set.getInst(*current + 3);
+			uint8_t left = instructionSet.getInst(*current + 1);
+			uint8_t right = instructionSet.getInst(*current + 2);
+			uint8_t dest = instructionSet.getInst(*current + 3);
 
 			//VM_PRINTF_LOG(
 			//	"Subtracted registers %i and %i. Placing result in %i\n",
@@ -288,11 +311,15 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Multiply the left and right registers and place the result in the dest register.
+			 */
+
 		case OpMul: {
 
-			uint8_t left = set.getInst(*current + 1);
-			uint8_t right = set.getInst(*current + 2);
-			uint8_t dest = set.getInst(*current + 3);
+			uint8_t left = instructionSet.getInst(*current + 1);
+			uint8_t right = instructionSet.getInst(*current + 2);
+			uint8_t dest = instructionSet.getInst(*current + 3);
 
 			//VM_PRINTF_LOG(
 			//		"Multiplied registers %i and %i. Placing result in %i\n",
@@ -305,11 +332,15 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Divide the left and right registers and place the result in the dest register.
+			 */
+
 		case OpDiv: {
 
-			uint8_t left = set.getInst(*current + 1);
-			uint8_t right = set.getInst(*current + 2);
-			uint8_t dest = set.getInst(*current + 3);
+			uint8_t left = instructionSet.getInst(*current + 1);
+			uint8_t right = instructionSet.getInst(*current + 2);
+			uint8_t dest = instructionSet.getInst(*current + 3);
 
 			//VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
 			//		left, right, dest);
@@ -321,10 +352,14 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Test if two registers are equal. If true then execute the next instruction else skip it.
+			 */
+
 		case OpEqual: {
 
-			uint8_t left = set.getInst(*current + 1);
-			uint8_t right = set.getInst(*current + 2);
+			uint8_t left = instructionSet.getInst(*current + 1);
+			uint8_t right = instructionSet.getInst(*current + 2);
 
 			if (registers_[left] == registers_[right]) {
 				*current += vmOpCodeSize;
@@ -336,8 +371,8 @@ void VirtualMachine::execute(std::string function) {
 		}
 
 		case OpLessThan: {
-			uint8_t left = set.getInst(*current + 1);
-			uint8_t right = set.getInst(*current + 2);
+			uint8_t left = instructionSet.getInst(*current + 1);
+			uint8_t right = instructionSet.getInst(*current + 2);
 
 			if (registers_[left] < registers_[right]) {
 				*current += vmOpCodeSize;
@@ -355,8 +390,8 @@ void VirtualMachine::execute(std::string function) {
 			 * NumRegisters - Offset 2 - 1 byte
 			 */
 		case OpPushRegisters: {
-			uint8_t startRegister = set.getInst(*current + 1);
-			uint8_t numRegisters = set.getInst(*current + 2);
+			uint8_t startRegister = instructionSet.getInst(*current + 1);
+			uint8_t numRegisters = instructionSet.getInst(*current + 2);
 
 			//printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
 
@@ -373,8 +408,8 @@ void VirtualMachine::execute(std::string function) {
 			 * Pop n registers starting from the start+nth register and the last pop acting on the start register
 			 */
 		case OpPopRegisters: {
-			uint8_t startRegister = set.getInst(*current + 1);
-			uint8_t numRegisters = set.getInst(*current + 2);
+			uint8_t startRegister = instructionSet.getInst(*current + 1);
+			uint8_t numRegisters = instructionSet.getInst(*current + 2);
 
 			//printf("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
 
@@ -399,8 +434,8 @@ void VirtualMachine::execute(std::string function) {
 		}
 
 		case OpLessThanOrEqual: {
-			uint8_t left = set.getInst(*current + 1);
-			uint8_t right = set.getInst(*current + 2);
+			uint8_t left = instructionSet.getInst(*current + 1);
+			uint8_t right = instructionSet.getInst(*current + 2);
 
 			if (registers_[left] <= registers_[right]) {
 				*current += vmOpCodeSize;
@@ -413,9 +448,9 @@ void VirtualMachine::execute(std::string function) {
 
 		case OpArraySet: {
 
-			uint8_t data = set.getInst(*current + 1);
-			uint8_t tgtArray = set.getInst(*current + 2);
-			uint8_t index = set.getInst(*current + 3);
+			uint8_t data = instructionSet.getInst(*current + 1);
+			uint8_t tgtArray = instructionSet.getInst(*current + 2);
+			uint8_t index = instructionSet.getInst(*current + 3);
 
 			if (!registerReference_[tgtArray]) {
 				VM_PRINTF_FATAL("Target array register %i is not a reference\n",
@@ -472,9 +507,9 @@ void VirtualMachine::execute(std::string function) {
 
 		case OpArrayGet: {
 
-			uint8_t tgtArray = set.getInst(*current + 1);
-			uint8_t index = set.getInst(*current + 2);
-			uint8_t dataRegister = set.getInst(*current + 3);
+			uint8_t tgtArray = instructionSet.getInst(*current + 1);
+			uint8_t index = instructionSet.getInst(*current + 2);
+			uint8_t dataRegister = instructionSet.getInst(*current + 3);
 
 			if (!registerReference_[tgtArray]) {
 				this->printState();
@@ -541,12 +576,12 @@ void VirtualMachine::execute(std::string function) {
 		case OpNewArray: {
 
 			//Get the arguments
-			uint8_t lengthRegister = set.getInst(*current + 1);
-			uint8_t destinationRegister = set.getInst(*current + 2);
-			int constantLocation = set.getInt(*current + 3);
+			uint8_t lengthRegister = instructionSet.getInst(*current + 1);
+			uint8_t destinationRegister = instructionSet.getInst(*current + 2);
+			int constantLocation = instructionSet.getInt(*current + 3);
 
 			//Get the type
-			std::string type = (char const*) set.getConstantString(
+			std::string type = (char const*) instructionSet.getConstantString(
 					constantLocation);
 
 			//Find the type.
@@ -596,8 +631,8 @@ void VirtualMachine::execute(std::string function) {
 
 		case OpArrayLength: {
 
-			uint8_t arrayLengthReg = set.getInst(*current + 1);
-			uint8_t dest = set.getInst(*current + 2);
+			uint8_t arrayLengthReg = instructionSet.getInst(*current + 1);
+			uint8_t dest = instructionSet.getInst(*current + 2);
 
 			if (!registerReference_[arrayLengthReg]) {
 				VM_PRINTF_FATAL(
@@ -619,16 +654,17 @@ void VirtualMachine::execute(std::string function) {
 		}
 
 		case OpCallFn: {
-			uint8_t modeRegister = set.getInst(*current + 1);
+			uint8_t modeRegister = instructionSet.getInst(*current + 1);
 			char* name = 0;
 
 			if (modeRegister == Constant) {
 
-				name = set.getConstantString(set.getInt(*current + 2));
+				name = instructionSet.getConstantString(
+						instructionSet.getInt(*current + 2));
 
 			} else {
 
-				uint8_t reg = set.getConstantByte(*current + 2);
+				uint8_t reg = instructionSet.getConstantByte(*current + 2);
 				long heapEntry = registers_[reg];
 
 				if (!heap_.validReference(heapEntry)) {
@@ -650,9 +686,10 @@ void VirtualMachine::execute(std::string function) {
 				*current += vmOpCodeSize;
 			} else {
 				//Otherwise push the VM state and then setup the new function. Set the return PC to be the current PC plus vmOpCodeSize
-				currentVmState_.push(VMState(set, *current + vmOpCodeSize));
-				set = entry.getFunction().getInstructions();
-				*current = set.startInstruction();
+				currentVmState_.push(
+						VMState(instructionSet, (*current) + vmOpCodeSize));
+				instructionSet = entry.getFunction().getInstructions();
+				*current = instructionSet.startInstruction();
 			}
 
 			break;
@@ -665,7 +702,7 @@ void VirtualMachine::execute(std::string function) {
 			if (currentVmState_.size() > 0) {
 				VMState top = currentVmState_.top();
 				currentVmState_.pop();
-				set = top.set_;
+				instructionSet = top.set_;
 				*current = top.pc_;
 			} else {
 				shouldReturn = true;
@@ -676,7 +713,7 @@ void VirtualMachine::execute(std::string function) {
 
 		default: {
 			printf("Invalid instruction %li. %li\n", *current,
-					set.getInst(*current));
+					instructionSet.getInst(*current));
 			return;
 		}
 

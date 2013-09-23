@@ -2,39 +2,39 @@ import ("sys")
 
 func Sort( n : array(int) ) : array(int) {
 
- for var i := len(n)-1; i > 0; i-- {
+ for var i := len(n) - 1; i > 0; i-- do {
  
-  for var j := 0; j < i; j++ {
+  for var j := 0; j < i; j++ do {
   
-   if n[j] > n[j+1] {
-    var t := n[j]
-    n[j] := n[j+1]
-    n[j+1] := t
-   }  
-  
+   if n[j] > n[j+1] then {
+    var temp := n[j];
+    n[j] := n[j+1];
+    n[j+1] := t;
+   }
+
   }
  
  } 
 
- return n
+ return n;
 }
 
 func Test() : bool {
 
- sys.Write("Testing bubble sort\n")
+ sys.Write("Testing bubble sort\n");
  
- var list := [100]int
+ var list := [100]int;
  
- for var i := 0; i < len(list); i++ {
-  list[i] := sys.RandomInt(1000)
+ for var i := 0; i < len(list); i++ do {
+  list[i] := sys.RandomInt(1000);
  }
  
- Sort(list)
+ Sort(list);
  
- for i := 0; i < len(list); i++ {
-  sys.Write(sys.String(list[i]) + " ")
+ for i := 0; i < len(list); i++; {
+  sys.Write(sys.String(list[i]));
+  sys.Write("\n");
  }
  
- sys.Write("\n")
-
+ return true;
 }

@@ -1,4 +1,5 @@
 import("sys")
+import("sorts/bubble")
 
 type A := struct {
 	Name : string
@@ -17,10 +18,10 @@ func y() : int {
 	return r() + 123;
 }
 
-func fibs(n : int) : int {
+func Fibs(n : int) : int {
 	if n = 0 then return 0;
 	if n = 1 then return 1;
-	return fibs(n-1) + fibs(n-2);
+	return Fibs(n-1) + Fibs(n-2);
 }
 
 func recurse(n : int) : int {
@@ -29,7 +30,7 @@ func recurse(n : int) : int {
 }
 
 func main() {
-	var fibsResult := recurse(150);
-//	sys.Write( sys.String ( fibsResult ) );
-//	sys.Write(" results\n");
+	var fibsResult := recurse(145);
+	sys.Write( sys.String ( fibsResult ) );
+	sys.Write(" results\n");
 }

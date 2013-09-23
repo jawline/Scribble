@@ -33,8 +33,23 @@ public:
 
 class VirtualMachine {
 private:
+
+	/**
+	 * Pointer to the actual stack memory
+	 */
+
 	uint8_t* stack_;
+
+	/**
+	 * Current max stack height
+	 */
+
 	long currentStackHeight_;
+
+	/**
+	 * A list of the location of each reference on the stack.
+	 */
+
 	std::vector<long> stackReferences_;
 
 	/**
@@ -43,9 +58,23 @@ private:
 
 	std::stack<VMState> currentVmState_;
 
+	/**
+	 * Pointer to registers and whether they are a reference.
+	 */
+
 	long* registers_;
 	bool* registerReference_;
+
+	/**
+	 * The VM heap.
+	 */
+
 	Heap heap_;
+
+	/**
+	 * The parent namespace node.
+	 */
+
 	VMNamespace namespace_;
 
 	unsigned int gcStat_;
