@@ -370,6 +370,10 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 *  Test if one register is less than another. If true execute next instruction otherwise skip it.
+			 */
+
 		case OpLessThan: {
 			uint8_t left = instructionSet.getInst(*current + 1);
 			uint8_t right = instructionSet.getInst(*current + 2);
@@ -422,6 +426,10 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Pop a long from the stack and ignore it ( Don't put it in any registers ).
+			 */
+
 		case OpPopNil: {
 
 			long t;
@@ -432,6 +440,12 @@ void VirtualMachine::execute(std::string function) {
 			*current += vmOpCodeSize;
 			break;
 		}
+
+			/**
+			 * Test whether the register left's value is <= than the register right.
+			 * If true execute the next instruction
+			 * Else skip the next function.
+			 */
 
 		case OpLessThanOrEqual: {
 			uint8_t left = instructionSet.getInst(*current + 1);
@@ -445,6 +459,10 @@ void VirtualMachine::execute(std::string function) {
 
 			break;
 		}
+
+			/**
+			 * Set the specified element in the target array to the given data value.
+			 */
 
 		case OpArraySet: {
 
@@ -504,6 +522,10 @@ void VirtualMachine::execute(std::string function) {
 			*current += vmOpCodeSize;
 			break;
 		}
+
+			/**
+			 * Set the dataRegisters value to be the value of the array at the specified index.
+			 */
 
 		case OpArrayGet: {
 
@@ -573,6 +595,10 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Create a new array of the specified type ( Stored in constants ) and length ( The value of lengthRegister ) and set its reference to the specified register.
+			 */
+
 		case OpNewArray: {
 
 			//Get the arguments
@@ -629,31 +655,47 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Set the value of dest register to be the length of the array pointed to by the value of the array length register.
+			 */
+
 		case OpArrayLength: {
 
-			uint8_t arrayLengthReg = instructionSet.getInst(*current + 1);
+			//Get the register which has the reference to the array.
+			uint8_t arrayRegister = instructionSet.getInst(*current + 1);
+
+			//Get the register in which the length should be put
 			uint8_t dest = instructionSet.getInst(*current + 2);
 
-			if (!registerReference_[arrayLengthReg]) {
+			//Check it's a valid reference
+			if (!registerReference_[arrayRegister]
+					|| !heap_.validReference(registers_[arrayRegister])) {
 				VM_PRINTF_FATAL(
 						"Register %i not not a reference (OpArrayLength)",
 						arrayLengthReg);
 			}
 
-			if (!heap_.getType(registers_[arrayLengthReg])->isArray()) {
+			//Check that it is an array
+			if (!heap_.getType(registers_[arrayRegister])->isArray()) {
 				VM_PRINTF_FATAL("%s",
 						"OpArrayLong Reference is not an array\n");
 			}
 
+			//Return the size in bytes divided by the element size of an index in the array to get the size of the array.
 			registers_[dest] =
-					(heap_.getSize(registers_[arrayLengthReg])
-							/ heap_.getType(registers_[arrayLengthReg])->arraySubtype()->getElementSize());
+					(heap_.getSize(registers_[arrayRegister])
+							/ heap_.getType(registers_[arrayRegister])->arraySubtype()->getElementSize());
 
 			*current += vmOpCodeSize;
 			break;
 		}
 
+			/**
+			 * Call the specified function. Two modes Constant or Heap. If Constant mode name of function is stored in constant instruction set zone otherwise name of function is pointed to by string in heap specified by register.
+			 */
+
 		case OpCallFn: {
+
 			uint8_t modeRegister = instructionSet.getInst(*current + 1);
 			char* name = 0;
 
@@ -695,6 +737,10 @@ void VirtualMachine::execute(std::string function) {
 			break;
 		}
 
+			/**
+			 * Return to the previous function that was running or exit.
+			 */
+
 		case OpReturn: {
 
 			VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
@@ -712,12 +758,15 @@ void VirtualMachine::execute(std::string function) {
 		}
 
 		default: {
-			printf("Invalid instruction %li. %li\n", *current,
-					instructionSet.getInst(*current));
+			VM_PRINTF_FATAL("Invalid instruction %li. %li\n",
+					*current, instructionSet.getInst(*current));
 			return;
 		}
 
 		}
+
+		//After each instruction check the gcStat and
+		//if it has hit the hit limit then run the garbage collector.
 
 		if (gcStat_ > GarbageCollectHitLimit) {
 			garbageCollection();
