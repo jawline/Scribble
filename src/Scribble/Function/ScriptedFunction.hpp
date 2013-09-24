@@ -46,6 +46,9 @@ public:
 		std::stringstream code;
 
 		debugCode(code);
+		code << "load 0 $" << VM::vmReturnResultRegister << "\n";
+		code << "ret\n";
+
 		VM::InstructionSet instructions = SimpleASM::Parser::parse(
 				code.str().c_str());
 

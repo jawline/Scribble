@@ -1,6 +1,6 @@
 import ("sys")
 
-func Sort( n : array(int) ) : array(int) {
+func Sort( n : array(int) ) {
 
  for var i := len(n) - 1; i > 0; i-- do {
  
@@ -9,29 +9,45 @@ func Sort( n : array(int) ) : array(int) {
    if n[j] > n[j+1] then {
     var temp := n[j];
     n[j] := n[j+1];
-    n[j+1] := t;
+    n[j+1] := temp;
    }
 
   }
  
- } 
+ }
 
- return n;
+}
+
+func Triy( n : array(int) ) {
+	
+	for var i := 0; i < len(n); i++ do {
+		n[i] := len(n) - i;
+	}
+	
 }
 
 func Test() : bool {
 
  sys.Write("Testing bubble sort\n");
  
- var list := [100]int;
- 
+ var list := [1000]int;
  for var i := 0; i < len(list); i++ do {
-  list[i] := sys.RandomInt(1000);
+ 	var tempStr := "hello World 1234 1234 1234";
  }
+ 
+ Triy(list);
+ Triy(list);
+ Triy(list);
+ 
+ sys.Write("Triy\n");
  
  Sort(list);
  
- for i := 0; i < len(list); i++; {
+ sys.Write("Sorted\n");
+ 
+ //Sort(list);
+ 
+ for i := 0; i < len(list); i++ do {
   sys.Write(sys.String(list[i]));
   sys.Write("\n");
  }

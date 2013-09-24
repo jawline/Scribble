@@ -30,7 +30,8 @@ func recurse(n : int) : int {
 }
 
 func main() {
-	var fibsResult := recurse(145);
+	var fibsResult := recurse(125);
 	sys.Write( sys.String ( fibsResult ) );
 	sys.Write(" results\n");
+	bubble.Test();
 }

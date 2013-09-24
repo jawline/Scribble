@@ -28,7 +28,9 @@ public:
 			pc_(0) {
 	}
 
-	VMState(InstructionSet set, long pc) : set_(set), pc_(pc) {}
+	VMState(InstructionSet set, long pc) :
+			set_(set), pc_(pc) {
+	}
 };
 
 class VirtualMachine {
@@ -78,6 +80,8 @@ private:
 	VMNamespace namespace_;
 
 	unsigned int gcStat_;
+
+	bool returnToPreviousFunction(InstructionSet& instructionSet);
 
 public:
 	VirtualMachine();

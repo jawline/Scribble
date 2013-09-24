@@ -118,6 +118,19 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 	return entry.getTypeReference();
 }
 
+bool VirtualMachine::returnToPreviousFunction(InstructionSet& instructionSet) {
+
+	if (currentVmState_.size() > 0) {
+		VMState top = currentVmState_.top();
+		currentVmState_.pop();
+		instructionSet = top.set_;
+		registers_[VM::vmProgramCounter] = top.pc_;
+		return true;
+	} else {
+		return false;
+	}
+}
+
 void VirtualMachine::execute(std::string function) {
 
 	NamespaceEntry functionEntry;
@@ -135,642 +148,660 @@ void VirtualMachine::execute(std::string function) {
 	long* current = &registers_[vmProgramCounter];
 	bool shouldReturn = false;
 
-	while (!shouldReturn && *current < instructionSet.numInstructions()) {
+	while (!shouldReturn) {
 
-		switch (instructionSet.getInst(*current)) {
+		if (*current >= instructionSet.numInstructions()) {
 
-		/**
-		 *  Loads the constant data at the specified constant index into the given register.
-		 *  Capable of loading elements into the heap and assigning their reference if their initial data is already known ( Such as pushing strings ).
-		 */
+			if (!returnToPreviousFunction(instructionSet)) {
+				shouldReturn = true;
+			}
 
-		case OpLoadConstant: {
+		} else {
 
-			int constantDataStart = instructionSet.getInt(*current + 1);
-			uint8_t destinationRegister = instructionSet.getInst(*current + 5);
+			switch (instructionSet.getInst(*current)) {
+
+			/**
+			 *  Loads the constant data at the specified constant index into the given register.
+			 *  Capable of loading elements into the heap and assigning their reference if their initial data is already known ( Such as pushing strings ).
+			 */
+
+			case OpLoadConstant: {
+
+				int constantDataStart = instructionSet.getInt(*current + 1);
+				uint8_t destinationRegister = instructionSet.getInst(
+						*current + 5);
 
 //			VM_PRINTF_LOG("Loading constant into %i\n", destinationRegister);
 
-			switch (instructionSet.getConstantByte(constantDataStart)) {
+				switch (instructionSet.getConstantByte(constantDataStart)) {
 
-			case CInt:
-				registers_[destinationRegister] = instructionSet.getConstantInt(
-						constantDataStart + 1);
-				registerReference_[destinationRegister] = false;
-				break;
+				case CInt:
+					registers_[destinationRegister] =
+							instructionSet.getConstantInt(
+									constantDataStart + 1);
+					registerReference_[destinationRegister] = false;
+					break;
 
-			case CLong:
-				registers_[destinationRegister] =
-						instructionSet.getConstantLong(constantDataStart + 1);
-				registerReference_[destinationRegister] = false;
-				break;
+				case CLong:
+					registers_[destinationRegister] =
+							instructionSet.getConstantLong(
+									constantDataStart + 1);
+					registerReference_[destinationRegister] = false;
+					break;
 
-			case CArray: {
+				case CArray: {
 
-				//Read in the type of array from the constant data with this instruction set.
-				std::string type = instructionSet.getConstantString(
-						constantDataStart + 1);
+					//Read in the type of array from the constant data with this instruction set.
+					std::string type = instructionSet.getConstantString(
+							constantDataStart + 1);
 
-				//Check the type is valid
-				if (namespace_[type].getType() != Type) {
-					VM_PRINTF_FATAL("Invalid type %s\n", type.c_str());
+					//Check the type is valid
+					if (namespace_[type].getType() != Type) {
+						VM_PRINTF_FATAL("Invalid type %s\n", type.c_str());
+					}
+
+					//Essentially a pointer to the next constant bit to read
+					int next = constantDataStart + 2 + type.size();
+
+					//Get the size of the area to create
+					int sizeBytes = instructionSet.getConstantInt(next);
+					next += 4;
+
+					//Get the size stored. Will be filled from the start. Any remaining space will be zero'd
+					int sizeStored = instructionSet.getConstantInt(next);
+					next += 4;
+
+					uint8_t* initial = new uint8_t[sizeBytes];
+
+					//Cheap optimization. As you know that this data is about to be written don't wipe the array from the start but instead wipe it from the end of the area
+					memset(initial + sizeStored, 0, sizeBytes - sizeStored);
+
+					for (int i = 0; i < sizeStored; ++i) {
+						initial[i] = instructionSet.getConstantByte(next);
+						next++;
+					}
+
+					registers_[destinationRegister] = heap_.allocate(
+							namespace_[type].getTypeReference(), sizeBytes,
+							initial);
+
+					delete[] initial;
+
+					registerReference_[destinationRegister] = true;
+					gcStat_++;
+
+					break;
 				}
 
-				//Essentially a pointer to the next constant bit to read
-				int next = constantDataStart + 2 + type.size();
+				default:
+					printf("Unhandled load %i\n",
+							instructionSet.getConstantByte(constantDataStart));
+					break;
 
-				//Get the size of the area to create
-				int sizeBytes = instructionSet.getConstantInt(next);
-				next += 4;
-
-				//Get the size stored. Will be filled from the start. Any remaining space will be zero'd
-				int sizeStored = instructionSet.getConstantInt(next);
-				next += 4;
-
-				uint8_t* initial = new uint8_t[sizeBytes];
-
-				//Cheap optimization. As you know that this data is about to be written don't wipe the array from the start but instead wipe it from the end of the area
-				memset(initial + sizeStored, 0, sizeBytes - sizeStored);
-
-				for (int i = 0; i < sizeStored; ++i) {
-					initial[i] = instructionSet.getConstantByte(next);
-					next++;
 				}
 
-				registers_[destinationRegister] = heap_.allocate(
-						namespace_[type].getTypeReference(), sizeBytes,
-						initial);
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Copy whatever is in the target register into the destination register copying over whether it is a reference or not.
+				 */
+
+			case OpMove: {
+				uint8_t target = instructionSet.getInst(*current + 1);
+				uint8_t dest = instructionSet.getInst(*current + 2);
+				registers_[dest] = registers_[target];
+				registerReference_[dest] = registerReference_[target];
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Jump to a different instruction
+				 */
+
+			case OpJump: {
+
+				uint8_t mode = instructionSet.getInst(*current + 1);
+				int dest = instructionSet.getInt(*current + 2);
+
+				switch (mode) {
+
+				case DirectRelative: {
+					long dOld = *current;
+					long dRest = ((long) dest) * ((long) vmOpCodeSize);
+					dOld = dOld + dRest;
+					*current = dOld;
+					//VM_PRINTF_LOG("Jump direct relative to %li\n", ((long) dest));
+					break;
+				}
+
+				case DirectExact:
+					*current = (((long) dest) * ((long) vmOpCodeSize));
+					break;
+
+				case RegisterRelative:
+					*current += (registers_[dest] * ((long) vmOpCodeSize));
+					break;
+
+				case RegisterExact:
+					*current = (registers_[dest] * ((long) vmOpCodeSize));
+					break;
+
+				}
+
+				break;
+			}
+
+				/**
+				 * Add the left and right registers and place the result in the dest register.
+				 */
+
+			case OpAdd: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
+				//			left, right, dest);
+
+				registers_[dest] = registers_[left] + registers_[right];
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Subtract the left and right registers and place the result in the dest register.
+				 */
+
+			case OpSub: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//VM_PRINTF_LOG(
+				//	"Subtracted registers %i and %i. Placing result in %i\n",
+				//left, right, dest);
+
+				registers_[dest] = registers_[left] - registers_[right];
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Multiply the left and right registers and place the result in the dest register.
+				 */
+
+			case OpMul: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//VM_PRINTF_LOG(
+				//		"Multiplied registers %i and %i. Placing result in %i\n",
+				//		left, right, dest);
+
+				registers_[dest] = registers_[left] * registers_[right];
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Divide the left and right registers and place the result in the dest register.
+				 */
+
+			case OpDiv: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
+				//		left, right, dest);
+
+				registers_[dest] = registers_[left] / registers_[right];
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Test if two registers are equal. If true then execute the next instruction else skip it.
+				 */
+
+			case OpEqual: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+
+				if (registers_[left] == registers_[right]) {
+					*current += vmOpCodeSize;
+				} else {
+					*current += 2 * vmOpCodeSize;
+				}
+
+				break;
+			}
+
+				/**
+				 *  Test if one register is less than another. If true execute next instruction otherwise skip it.
+				 */
+
+			case OpLessThan: {
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+
+				if (registers_[left] < registers_[right]) {
+					*current += vmOpCodeSize;
+				} else {
+					*current += 2 * vmOpCodeSize;
+				}
+
+				break;
+			}
+
+				/**
+				 * OpPushRegisters
+				 * Push registers, starting from the start register and pushing numregisters sequentially from it
+				 * StartRegister - Offset 1 - 1 byte
+				 * NumRegisters - Offset 2 - 1 byte
+				 */
+			case OpPushRegisters: {
+				uint8_t startRegister = instructionSet.getInst(*current + 1);
+				uint8_t numRegisters = instructionSet.getInst(*current + 2);
+
+				//printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
+
+				for (uint8_t i = startRegister;
+						i < startRegister + numRegisters; i++) {
+					pushRegister(i);
+				}
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Pop n registers starting from the start+nth register and the last pop acting on the start register
+				 */
+			case OpPopRegisters: {
+				uint8_t startRegister = instructionSet.getInst(*current + 1);
+				uint8_t numRegisters = instructionSet.getInst(*current + 2);
+
+				//printf("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
+
+				for (uint8_t i = (startRegister + numRegisters) - 1;
+						i >= startRegister; i--) {
+					popStackLong(registers_[i], registerReference_[i]);
+				}
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Pop a long from the stack and ignore it ( Don't put it in any registers ).
+				 */
+
+			case OpPopNil: {
+
+				long t;
+				bool r;
+
+				popStackLong(t, r);
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Test whether the register left's value is <= than the register right.
+				 * If true execute the next instruction
+				 * Else skip the next function.
+				 */
+
+			case OpLessThanOrEqual: {
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+
+				if (registers_[left] <= registers_[right]) {
+					*current += vmOpCodeSize;
+				} else {
+					*current += 2 * vmOpCodeSize;
+				}
+
+				break;
+			}
+
+				/**
+				 * Set the specified element in the target array to the given data value.
+				 */
+
+			case OpArraySet: {
+
+				uint8_t data = instructionSet.getInst(*current + 1);
+				uint8_t tgtArray = instructionSet.getInst(*current + 2);
+				uint8_t index = instructionSet.getInst(*current + 3);
+
+				if (!registerReference_[tgtArray]) {
+					VM_PRINTF_FATAL(
+							"Target array register %i is not a reference\n",
+							tgtArray);
+				}
+
+				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+
+				if (!arrayType->isArray()) {
+					VM_PRINTF_FATAL("%s",
+							"Target register is not a reference to an array\n");
+				}
+
+				int size = arrayType->arraySubtype()->getElementSize();
+
+				uint8_t* dataPtr =
+						heap_.getAddress(registers_[tgtArray])
+								+ (registers_[index]
+										* ((long) arrayType->arraySubtype()->getElementSize()));
+
+				uint8_t* max = heap_.getAddress(registers_[tgtArray])
+						+ heap_.getSize(registers_[tgtArray]);
+
+				if (dataPtr > max) {
+					VM_PRINTF_FATAL("%s", "VM Array out of bounds exception\n");
+				}
+
+				switch (size) {
+
+				case 1:
+					*dataPtr = registers_[data];
+					break;
+
+				case 2:
+					*(uint16_t*) (dataPtr) = registers_[data];
+					break;
+
+				case 4:
+					*(uint32_t*) (dataPtr) = registers_[data];
+					break;
+
+				case 8:
+					*(uint64_t*) (dataPtr) = registers_[data];
+					break;
+
+				default:
+					VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
+					break;
+				}
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Set the dataRegisters value to be the value of the array at the specified index.
+				 */
+
+			case OpArrayGet: {
+
+				uint8_t tgtArray = instructionSet.getInst(*current + 1);
+				uint8_t index = instructionSet.getInst(*current + 2);
+				uint8_t dataRegister = instructionSet.getInst(*current + 3);
+
+				if (!registerReference_[tgtArray]) {
+					this->printState();
+					VM_PRINTF_FATAL("Register %i is not a reference\n",
+							tgtArray);
+				}
+
+				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+
+				if (!arrayType->isArray()) {
+
+					VM_PRINTF_FATAL(
+							"Register %i is not a reference to an array\n",
+							tgtArray);
+
+				}
+
+				int size = arrayType->arraySubtype()->getElementSize();
+
+				long offsetBytes = registers_[index]
+						* arrayType->arraySubtype()->getElementSize();
+
+				uint8_t* dataPtr = heap_.getAddress(registers_[tgtArray])
+						+ offsetBytes;
+
+				uint8_t* max = heap_.getAddress(registers_[tgtArray])
+						+ heap_.getSize(registers_[tgtArray]);
+
+				if (dataPtr >= max) {
+					VM_PRINTF_FATAL(
+							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
+							registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]), dataPtr, max);
+				}
+
+				switch (size) {
+
+				case 1:
+					registers_[dataRegister] = *dataPtr;
+					break;
+
+				case 2:
+					registers_[dataRegister] = *(uint16_t*) (dataPtr);
+					break;
+
+				case 4:
+					registers_[dataRegister] = *(uint32_t*) (dataPtr);
+					break;
+
+				case 8:
+					registers_[dataRegister] = *(uint64_t*) (dataPtr);
+					break;
+
+				default:
+					VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
+					break;
+
+				}
+
+				registerReference_[dataRegister] =
+						arrayType->arraySubtype()->isReference();
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+				/**
+				 * Create a new array of the specified type ( Stored in constants ) and length ( The value of lengthRegister ) and set its reference to the specified register.
+				 */
+
+			case OpNewArray: {
+
+				//Get the arguments
+				uint8_t lengthRegister = instructionSet.getInst(*current + 1);
+				uint8_t destinationRegister = instructionSet.getInst(
+						*current + 2);
+				int constantLocation = instructionSet.getInt(*current + 3);
+
+				//Get the type
+				std::string type =
+						(char const*) instructionSet.getConstantString(
+								constantLocation);
+
+				//Find the type.
+				auto typeSearch = findType(type);
+
+				if (typeSearch.Null()) {
+					VM_PRINTF_FATAL("Type %s is not registered\n",
+							type.c_str());
+				}
+
+				//Check the type is an array
+				if (!typeSearch->isArray()) {
+					VM_PRINTF_FATAL("%s",
+							"Cannot create valid array from type\n");
+				}
+
+				//Check that the length register is a number
+				if (registerReference_[lengthRegister]) {
+					VM_PRINTF_FATAL("%s",
+							"Length register should not be a reference\n");
+				}
+
+				//Check that the desired length is valid
+				if (registers_[lengthRegister] < 1) {
+					VM_PRINTF_FATAL("%s",
+							"Cannot allocate array of length < 1");
+				}
+
+				long length = registers_[lengthRegister]
+						* typeSearch->arraySubtype()->getElementSize();
+
+				uint8_t* initial = new uint8_t[length];
+				memset(initial, 0, length);
+
+				registers_[destinationRegister] = heap_.allocate(typeSearch,
+						length, initial);
+
+				registerReference_[destinationRegister] = true;
 
 				delete[] initial;
 
-				registerReference_[destinationRegister] = true;
+				VM_PRINTF_LOG(
+						"Allocated and created new array %li of size %li\n",
+						registers_[destinationRegister], registers_[lengthRegister]);
+
+				*current += vmOpCodeSize;
+
 				gcStat_++;
 
 				break;
 			}
 
-			default:
-				printf("Unhandled load %i\n",
-						instructionSet.getConstantByte(constantDataStart));
-				break;
+				/**
+				 * Set the value of dest register to be the length of the array pointed to by the value of the array length register.
+				 */
 
-			}
+			case OpArrayLength: {
 
-			*current += vmOpCodeSize;
-			break;
-		}
+				//Get the register which has the reference to the array.
+				uint8_t arrayRegister = instructionSet.getInst(*current + 1);
 
-			/**
-			 * Copy whatever is in the target register into the destination register copying over whether it is a reference or not.
-			 */
+				//Get the register in which the length should be put
+				uint8_t dest = instructionSet.getInst(*current + 2);
 
-		case OpMove: {
-			uint8_t target = instructionSet.getInst(*current + 1);
-			uint8_t dest = instructionSet.getInst(*current + 2);
-			registers_[dest] = registers_[target];
-			registerReference_[dest] = registerReference_[target];
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Jump to a different instruction
-			 */
-
-		case OpJump: {
-
-			uint8_t mode = instructionSet.getInst(*current + 1);
-			int dest = instructionSet.getInt(*current + 2);
-
-			switch (mode) {
-
-			case DirectRelative: {
-				long dOld = *current;
-				long dRest = ((long) dest) * ((long) vmOpCodeSize);
-				dOld = dOld + dRest;
-				*current = dOld;
-				//VM_PRINTF_LOG("Jump direct relative to %li\n", ((long) dest));
-				break;
-			}
-
-			case DirectExact:
-				*current = (((long) dest) * ((long) vmOpCodeSize));
-				break;
-
-			case RegisterRelative:
-				*current += (registers_[dest] * ((long) vmOpCodeSize));
-				break;
-
-			case RegisterExact:
-				*current = (registers_[dest] * ((long) vmOpCodeSize));
-				break;
-
-			}
-
-			break;
-		}
-
-			/**
-			 * Add the left and right registers and place the result in the dest register.
-			 */
-
-		case OpAdd: {
-
-			uint8_t left = instructionSet.getInst(*current + 1);
-			uint8_t right = instructionSet.getInst(*current + 2);
-			uint8_t dest = instructionSet.getInst(*current + 3);
-
-			//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
-			//			left, right, dest);
-
-			registers_[dest] = registers_[left] + registers_[right];
-			registerReference_[dest] = false;
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Subtract the left and right registers and place the result in the dest register.
-			 */
-
-		case OpSub: {
-
-			uint8_t left = instructionSet.getInst(*current + 1);
-			uint8_t right = instructionSet.getInst(*current + 2);
-			uint8_t dest = instructionSet.getInst(*current + 3);
-
-			//VM_PRINTF_LOG(
-			//	"Subtracted registers %i and %i. Placing result in %i\n",
-			//left, right, dest);
-
-			registers_[dest] = registers_[left] - registers_[right];
-			registerReference_[dest] = false;
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Multiply the left and right registers and place the result in the dest register.
-			 */
-
-		case OpMul: {
-
-			uint8_t left = instructionSet.getInst(*current + 1);
-			uint8_t right = instructionSet.getInst(*current + 2);
-			uint8_t dest = instructionSet.getInst(*current + 3);
-
-			//VM_PRINTF_LOG(
-			//		"Multiplied registers %i and %i. Placing result in %i\n",
-			//		left, right, dest);
-
-			registers_[dest] = registers_[left] * registers_[right];
-			registerReference_[dest] = false;
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Divide the left and right registers and place the result in the dest register.
-			 */
-
-		case OpDiv: {
-
-			uint8_t left = instructionSet.getInst(*current + 1);
-			uint8_t right = instructionSet.getInst(*current + 2);
-			uint8_t dest = instructionSet.getInst(*current + 3);
-
-			//VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
-			//		left, right, dest);
-
-			registers_[dest] = registers_[left] / registers_[right];
-			registerReference_[dest] = false;
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Test if two registers are equal. If true then execute the next instruction else skip it.
-			 */
-
-		case OpEqual: {
-
-			uint8_t left = instructionSet.getInst(*current + 1);
-			uint8_t right = instructionSet.getInst(*current + 2);
-
-			if (registers_[left] == registers_[right]) {
-				*current += vmOpCodeSize;
-			} else {
-				*current += 2 * vmOpCodeSize;
-			}
-
-			break;
-		}
-
-			/**
-			 *  Test if one register is less than another. If true execute next instruction otherwise skip it.
-			 */
-
-		case OpLessThan: {
-			uint8_t left = instructionSet.getInst(*current + 1);
-			uint8_t right = instructionSet.getInst(*current + 2);
-
-			if (registers_[left] < registers_[right]) {
-				*current += vmOpCodeSize;
-			} else {
-				*current += 2 * vmOpCodeSize;
-			}
-
-			break;
-		}
-
-			/**
-			 * OpPushRegisters
-			 * Push registers, starting from the start register and pushing numregisters sequentially from it
-			 * StartRegister - Offset 1 - 1 byte
-			 * NumRegisters - Offset 2 - 1 byte
-			 */
-		case OpPushRegisters: {
-			uint8_t startRegister = instructionSet.getInst(*current + 1);
-			uint8_t numRegisters = instructionSet.getInst(*current + 2);
-
-			//printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
-
-			for (uint8_t i = startRegister; i < startRegister + numRegisters;
-					i++) {
-				pushRegister(i);
-			}
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Pop n registers starting from the start+nth register and the last pop acting on the start register
-			 */
-		case OpPopRegisters: {
-			uint8_t startRegister = instructionSet.getInst(*current + 1);
-			uint8_t numRegisters = instructionSet.getInst(*current + 2);
-
-			//printf("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
-
-			for (uint8_t i = (startRegister + numRegisters) - 1;
-					i >= startRegister; i--) {
-				popStackLong(registers_[i], registerReference_[i]);
-			}
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Pop a long from the stack and ignore it ( Don't put it in any registers ).
-			 */
-
-		case OpPopNil: {
-
-			long t;
-			bool r;
-
-			popStackLong(t, r);
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Test whether the register left's value is <= than the register right.
-			 * If true execute the next instruction
-			 * Else skip the next function.
-			 */
-
-		case OpLessThanOrEqual: {
-			uint8_t left = instructionSet.getInst(*current + 1);
-			uint8_t right = instructionSet.getInst(*current + 2);
-
-			if (registers_[left] <= registers_[right]) {
-				*current += vmOpCodeSize;
-			} else {
-				*current += 2 * vmOpCodeSize;
-			}
-
-			break;
-		}
-
-			/**
-			 * Set the specified element in the target array to the given data value.
-			 */
-
-		case OpArraySet: {
-
-			uint8_t data = instructionSet.getInst(*current + 1);
-			uint8_t tgtArray = instructionSet.getInst(*current + 2);
-			uint8_t index = instructionSet.getInst(*current + 3);
-
-			if (!registerReference_[tgtArray]) {
-				VM_PRINTF_FATAL("Target array register %i is not a reference\n",
-						tgtArray);
-			}
-
-			SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
-
-			if (!arrayType->isArray()) {
-				VM_PRINTF_FATAL("%s",
-						"Target register is not a reference to an array\n");
-			}
-
-			int size = arrayType->arraySubtype()->getElementSize();
-
-			uint8_t* dataPtr =
-					heap_.getAddress(registers_[tgtArray])
-							+ (registers_[index]
-									* ((long) arrayType->arraySubtype()->getElementSize()));
-
-			uint8_t* max = heap_.getAddress(registers_[tgtArray])
-					+ heap_.getSize(registers_[tgtArray]);
-
-			if (dataPtr > max) {
-				VM_PRINTF_FATAL("%s", "VM Array out of bounds exception\n");
-			}
-
-			switch (size) {
-
-			case 1:
-				*dataPtr = registers_[data];
-				break;
-
-			case 2:
-				*(uint16_t*) (dataPtr) = registers_[data];
-				break;
-
-			case 4:
-				*(uint32_t*) (dataPtr) = registers_[data];
-				break;
-
-			case 8:
-				*(uint64_t*) (dataPtr) = registers_[data];
-				break;
-
-			default:
-				VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
-				break;
-			}
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Set the dataRegisters value to be the value of the array at the specified index.
-			 */
-
-		case OpArrayGet: {
-
-			uint8_t tgtArray = instructionSet.getInst(*current + 1);
-			uint8_t index = instructionSet.getInst(*current + 2);
-			uint8_t dataRegister = instructionSet.getInst(*current + 3);
-
-			if (!registerReference_[tgtArray]) {
-				this->printState();
-				VM_PRINTF_FATAL("Register %i is not a reference\n", tgtArray);
-			}
-
-			SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
-
-			if (!arrayType->isArray()) {
-
-				VM_PRINTF_FATAL( "Register %i is not a reference to an array\n",
-						tgtArray);
-
-			}
-
-			int size = arrayType->arraySubtype()->getElementSize();
-
-			long offsetBytes = registers_[index]
-					* arrayType->arraySubtype()->getElementSize();
-
-			uint8_t* dataPtr = heap_.getAddress(registers_[tgtArray])
-					+ offsetBytes;
-
-			uint8_t* max = heap_.getAddress(registers_[tgtArray])
-					+ heap_.getSize(registers_[tgtArray]);
-
-			if (dataPtr >= max) {
-				VM_PRINTF_FATAL(
-						"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
-						registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]), dataPtr, max);
-			}
-
-			switch (size) {
-
-			case 1:
-				registers_[dataRegister] = *dataPtr;
-				break;
-
-			case 2:
-				registers_[dataRegister] = *(uint16_t*) (dataPtr);
-				break;
-
-			case 4:
-				registers_[dataRegister] = *(uint32_t*) (dataPtr);
-				break;
-
-			case 8:
-				registers_[dataRegister] = *(uint64_t*) (dataPtr);
-				break;
-
-			default:
-				VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
-				break;
-
-			}
-
-			registerReference_[dataRegister] =
-					arrayType->arraySubtype()->isReference();
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Create a new array of the specified type ( Stored in constants ) and length ( The value of lengthRegister ) and set its reference to the specified register.
-			 */
-
-		case OpNewArray: {
-
-			//Get the arguments
-			uint8_t lengthRegister = instructionSet.getInst(*current + 1);
-			uint8_t destinationRegister = instructionSet.getInst(*current + 2);
-			int constantLocation = instructionSet.getInt(*current + 3);
-
-			//Get the type
-			std::string type = (char const*) instructionSet.getConstantString(
-					constantLocation);
-
-			//Find the type.
-			auto typeSearch = findType(type);
-
-			if (typeSearch.Null()) {
-				VM_PRINTF_FATAL("Type %s is not registered\n", type.c_str());
-			}
-
-			//Check the type is an array
-			if (!typeSearch->isArray()) {
-				VM_PRINTF_FATAL("%s", "Cannot create valid array from type\n");
-			}
-
-			//Check that the length register is a number
-			if (registerReference_[lengthRegister]) {
-				VM_PRINTF_FATAL("%s",
-						"Length register should not be a reference\n");
-			}
-
-			if (registers_[lengthRegister] < 1) {
-				VM_PRINTF_FATAL("%s", "Cannot allocate array of length < 1");
-			}
-
-			long length = registers_[lengthRegister]
-					* typeSearch->arraySubtype()->getElementSize();
-
-			uint8_t* initial = new uint8_t[length];
-			memset(initial, 0, length);
-
-			registers_[destinationRegister] = heap_.allocate(typeSearch, length,
-					initial);
-
-			registerReference_[destinationRegister] = true;
-
-			delete[] initial;
-
-			VM_PRINTF_LOG("Allocated and created new array %li of size %li\n",
-					registers_[destinationRegister], registers_[lengthRegister]);
-
-			*current += vmOpCodeSize;
-
-			gcStat_++;
-
-			break;
-		}
-
-			/**
-			 * Set the value of dest register to be the length of the array pointed to by the value of the array length register.
-			 */
-
-		case OpArrayLength: {
-
-			//Get the register which has the reference to the array.
-			uint8_t arrayRegister = instructionSet.getInst(*current + 1);
-
-			//Get the register in which the length should be put
-			uint8_t dest = instructionSet.getInst(*current + 2);
-
-			//Check it's a valid reference
-			if (!registerReference_[arrayRegister]
-					|| !heap_.validReference(registers_[arrayRegister])) {
-				VM_PRINTF_FATAL(
-						"Register %i not not a reference (OpArrayLength)",
-						arrayLengthReg);
-			}
-
-			//Check that it is an array
-			if (!heap_.getType(registers_[arrayRegister])->isArray()) {
-				VM_PRINTF_FATAL("%s",
-						"OpArrayLong Reference is not an array\n");
-			}
-
-			//Return the size in bytes divided by the element size of an index in the array to get the size of the array.
-			registers_[dest] =
-					(heap_.getSize(registers_[arrayRegister])
-							/ heap_.getType(registers_[arrayRegister])->arraySubtype()->getElementSize());
-
-			*current += vmOpCodeSize;
-			break;
-		}
-
-			/**
-			 * Call the specified function. Two modes Constant or Heap. If Constant mode name of function is stored in constant instruction set zone otherwise name of function is pointed to by string in heap specified by register.
-			 */
-
-		case OpCallFn: {
-
-			uint8_t modeRegister = instructionSet.getInst(*current + 1);
-			char* name = 0;
-
-			if (modeRegister == Constant) {
-
-				name = instructionSet.getConstantString(
-						instructionSet.getInt(*current + 2));
-
-			} else {
-
-				uint8_t reg = instructionSet.getConstantByte(*current + 2);
-				long heapEntry = registers_[reg];
-
-				if (!heap_.validReference(heapEntry)) {
+				//Check it's a valid reference
+				if (!registerReference_[arrayRegister]
+						|| !heap_.validReference(registers_[arrayRegister])) {
 					VM_PRINTF_FATAL(
-							"Entry %li is not a valid heap entry for function call\n",
-							heapEntry);
+							"Register %i not not a reference (OpArrayLength)",
+							arrayRegister);
 				}
 
-				name = (char*) heap_.getAddress(heapEntry);
-			}
+				//Check that it is an array
+				if (!heap_.getType(registers_[arrayRegister])->isArray()) {
+					VM_PRINTF_FATAL("%s",
+							"OpArrayLong Reference is not an array\n");
+				}
 
-			VM_PRINTF_LOG("Calling function %s\n", name);
+				//Return the size in bytes divided by the element size of an index in the array to get the size of the array.
+				registers_[dest] =
+						(heap_.getSize(registers_[arrayRegister])
+								/ heap_.getType(registers_[arrayRegister])->arraySubtype()->getElementSize());
 
-			NamespaceEntry entry;
-			VM_LOAD_FUNC(std::string(name), entry);
-
-			//If it is native then the load will have already executed and the PC just needs incrementing
-			if (entry.getFunction().isNative()) {
 				*current += vmOpCodeSize;
-			} else {
-				//Otherwise push the VM state and then setup the new function. Set the return PC to be the current PC plus vmOpCodeSize
-				currentVmState_.push(
-						VMState(instructionSet, (*current) + vmOpCodeSize));
-				instructionSet = entry.getFunction().getInstructions();
-				*current = instructionSet.startInstruction();
+				break;
 			}
 
-			break;
-		}
+				/**
+				 * Call the specified function. Two modes Constant or Heap. If Constant mode name of function is stored in constant instruction set zone otherwise name of function is pointed to by string in heap specified by register.
+				 */
 
-			/**
-			 * Return to the previous function that was running or exit.
-			 */
+			case OpCallFn: {
 
-		case OpReturn: {
+				uint8_t modeRegister = instructionSet.getInst(*current + 1);
+				char* name = 0;
 
-			VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
+				if (modeRegister == Constant) {
 
-			if (currentVmState_.size() > 0) {
-				VMState top = currentVmState_.top();
-				currentVmState_.pop();
-				instructionSet = top.set_;
-				*current = top.pc_;
-			} else {
-				shouldReturn = true;
+					name = instructionSet.getConstantString(
+							instructionSet.getInt(*current + 2));
+
+				} else {
+
+					uint8_t reg = instructionSet.getConstantByte(*current + 2);
+					long heapEntry = registers_[reg];
+
+					if (!heap_.validReference(heapEntry)) {
+						VM_PRINTF_FATAL(
+								"Entry %li is not a valid heap entry for function call\n",
+								heapEntry);
+					}
+
+					name = (char*) heap_.getAddress(heapEntry);
+				}
+
+				VM_PRINTF_LOG("Calling function %s\n", name);
+
+				NamespaceEntry entry;
+				VM_LOAD_FUNC(std::string(name), entry);
+
+				//If it is native then the load will have already executed and the PC just needs incrementing
+				if (entry.getFunction().isNative()) {
+					*current += vmOpCodeSize;
+				} else {
+					//Otherwise push the VM state and then setup the new function. Set the return PC to be the current PC plus vmOpCodeSize
+					currentVmState_.push(
+							VMState(instructionSet, (*current) + vmOpCodeSize));
+					instructionSet = entry.getFunction().getInstructions();
+					*current = instructionSet.startInstruction();
+				}
+
+				break;
 			}
 
-			break;
-		}
+				/**
+				 * Return to the previous function that was running or exit.
+				 */
 
-		default: {
-			VM_PRINTF_FATAL("Invalid instruction %li. %li\n",
-					*current, instructionSet.getInst(*current));
-			return;
-		}
+			case OpReturn: {
 
-		}
+				VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
 
-		//After each instruction check the gcStat and
-		//if it has hit the hit limit then run the garbage collector.
+				if (!returnToPreviousFunction(instructionSet)) {
+					shouldReturn = true;
+				}
 
-		if (gcStat_ > GarbageCollectHitLimit) {
-			garbageCollection();
-			gcStat_ = 0;
+				break;
+			}
+
+			default: {
+				VM_PRINTF_FATAL("Invalid instruction %li. %li\n",
+						*current, instructionSet.getInst(*current));
+				return;
+			}
+
+			}
+
+			//After each instruction check the gcStat and
+			//if it has hit the hit limit then run the garbage collector.
+
+			if (gcStat_ > GarbageCollectHitLimit) {
+				garbageCollection();
+				gcStat_ = 0;
+			}
+
 		}
 
 	}
