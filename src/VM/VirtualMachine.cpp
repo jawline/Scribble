@@ -150,6 +150,7 @@ void VirtualMachine::execute(std::string function) {
 
 	while (!shouldReturn) {
 
+		//If the current PC is above the number of instructions in this function then attempt to return. Else execute the instruction at the PC.
 		if (*current >= instructionSet.numInstructions()) {
 
 			if (!returnToPreviousFunction(instructionSet)) {

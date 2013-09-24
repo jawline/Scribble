@@ -57,11 +57,24 @@ void GetArrayStatement::checkTree(Type* functionType) {
 int GetArrayStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
-	int instrs = array_->generateCode(VM::vmTempRegisterOne, generated);
-	instrs += index_->generateCode(VM::vmTempRegisterTwo, generated);
+	if (resultRegister != -1) {
 
-	generated << "aget $" << VM::vmTempRegisterOne << " $"
-			<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+		int instrs = array_->generateCode(VM::vmTempRegisterOne, generated);
 
-	return instrs + 1;
+		generated << "push $" << VM::vmTempRegisterOne << " 1\n";
+		instrs++;
+
+		instrs += index_->generateCode(VM::vmTempRegisterTwo, generated);
+
+		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+		instrs++;
+
+		generated << "aget $" << VM::vmTempRegisterOne << " $"
+				<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+
+		return instrs + 1;
+
+	} else {
+		return 0;
+	}
 }

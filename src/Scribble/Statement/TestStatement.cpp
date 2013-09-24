@@ -6,6 +6,7 @@
  */
 
 #include "TestStatement.hpp"
+#include <VM/Constants.hpp>
 #include <Scribble/Statement/StatementException.hpp>
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/Bool.hpp>
@@ -142,8 +143,16 @@ int TestStatement::generateCode(int resultRegister,
 	if (resultRegister != -1) {
 
 		generated << "#Test statement\n";
-		instrs += lhs_->generateCode(3, generated);
-		instrs += rhs_->generateCode(4, generated);
+
+		instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
+
+		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+		instrs += 1;
+
+		instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
+
+		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+     	instrs += 1;
 
 		//1
 		generated << "load 0 $5\n";
