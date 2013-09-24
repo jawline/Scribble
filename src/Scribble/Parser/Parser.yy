@@ -17,7 +17,6 @@
 #include <Scribble/Statement/AssignVariable.hpp>
 #include <Scribble/Statement/GetVariableStatement.hpp>
 #include <Scribble/Statement/FunctionStatement.hpp>
-#include <Scribble/Statement/AndStatement.hpp>
 #include <Scribble/Statement/ForStatement.hpp>
 #include <Scribble/Statement/TestStatement.hpp>
 #include <Scribble/Statement/IfStatement.hpp>
@@ -748,7 +747,7 @@ Expression: TRUE {
 		//Free name pointer
 		delete $2;
 	} | Expression AND Expression {
-		$$ = new AndStatement(scribble_lineno, scribble_text, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestEquals, $1, $3);
 	} | Expression POINT WORD {
 		
 		$$ = new GetStructureElementStatement(scribble_lineno, scribble_text, $1, *$3);
