@@ -8,6 +8,7 @@
 #include "OperateStatement.hpp"
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+#include <VM/Constants.hpp>
 
 OperateStatement::OperateStatement(int lineNo, std::string sym,
 		ValueOperator op, SafeStatement lhs, SafeStatement rhs) :
@@ -50,8 +51,15 @@ void OperateStatement::checkTree(Type* type) {
 int OperateStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
-	int instrs = lhs_->generateCode(3, generated);
-	instrs += rhs_->generateCode(4, generated);
+	int instrs = lhs_->generateCode(VM::vmTempRegisterOne, generated);
+
+	generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs++;
+
+	instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
+
+	generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs++;
 
 	switch (op_) {
 
@@ -61,25 +69,25 @@ int OperateStatement::generateCode(int resultRegister,
 	}
 
 	case Add: {
-		generated << "add $3 $4 $" << resultRegister << "\n";
+		generated << "add $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
 		instrs += 1;
 		break;
 	}
 
 	case Subtract: {
-		generated << "sub $3 $4 $" << resultRegister << "\n";
+		generated << "sub$" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
 		instrs += 1;
 		break;
 	}
 
 	case Multiply: {
-		generated << "mul $3 $4 $" << resultRegister << "\n";
+		generated << "mul $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
 		instrs += 1;
 		break;
 	}
 
 	case Divide: {
-		generated << "div $3 $4 $" << resultRegister << "\n";
+		generated << "div $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
 		instrs += 1;
 		break;
 	}

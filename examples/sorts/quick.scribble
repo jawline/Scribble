@@ -3,13 +3,13 @@ import ("sys")
 func part(n:array(int)) : int {
  
  //Take i to be 0.
- var i := 0
+ var i := 0;
 
  //Take the last element to be length of n - 1
- var j := len(n)-1
+ var j := len(n) - 1;
  
  //Take the pivot value to be the value in the middle
- var pivot := n[(len(n) - 1) / 2]
+ var pivot := n[(len(n) - 1) / 2];
 
  while i <= j {
 

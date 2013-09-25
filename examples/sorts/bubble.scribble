@@ -7,9 +7,12 @@ func Sort( n : array(int) ) {
   for var j := 0; j < i; j++ do {
   
    if (n[j]) > (n[j+1]) then {
+    
     var temp := n[j];
+    
     n[j] := n[j+1];
     n[j+1] := temp;
+    
    }
 
   }
@@ -30,13 +33,11 @@ func Test() : bool {
 
  sys.Write("Testing bubble sort\n");
  
- var list := [1000]int;
+ var list := [100]int;
  for var i := 0; i < len(list); i++ do {
  	var tempStr := "hello World 1234 1234 1234";
  }
  
- Triy(list);
- Triy(list);
  Triy(list);
  
  sys.Write("Triy\n");

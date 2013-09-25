@@ -1,5 +1,5 @@
 import("sys")
-import("sorts/bubble")
+import("sorts/heap")
 
 type A := struct {
 	Name : string
@@ -30,8 +30,8 @@ func recurse(n : int) : int {
 }
 
 func main() {
-	var fibsResult := recurse(125);
-	sys.Write( sys.String ( fibsResult ) );
-	sys.Write(" results\n");
-	bubble.Test();
+	//var fibsResult := recurse(125);
+	//sys.Write( sys.String ( fibsResult ) );
+	//sys.Write(" results\n");
+	heap.Test();
 }
