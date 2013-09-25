@@ -67,9 +67,23 @@ int AssignArrayStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
 	int instrs = toAssign_->generateCode(VM::vmTempRegisterOne, generated);
-	instrs += array_->generateCode(VM::vmTempRegisterTwo, generated);
-	instrs += position_->generateCode(VM::vmTempRegisterThree, generated);
-	generated << "aset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << VM::vmTempRegisterThree << "\n";
 
-	return instrs + 1;
+	generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs++;
+
+	instrs += array_->generateCode(VM::vmTempRegisterTwo, generated);
+
+	generated << "pushr $" << VM::vmTempRegisterTwo << " 1\n";
+	instrs++;
+
+	instrs += position_->generateCode(VM::vmTempRegisterThree, generated);
+
+	generated << "popr $" << VM::vmTempRegisterTwo << " 1\n";
+	generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs += 2;
+
+	generated << "aset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << VM::vmTempRegisterThree << "\n";
+	instrs++;
+
+	return instrs;
 }
