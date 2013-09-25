@@ -99,8 +99,6 @@ int FunctionStatement::generateCode(int resultRegister,
 		generated << "move $" << VM::vmReturnResultRegister << " $"
 				<< resultRegister << "\n";
 		n += 1;
-	} else {
-		printf("Result for %s call discounted because result register %i is %i", (func_->getFunction()->getName()).c_str(), resultRegister, -1);
 	}
 
 	if ( (int) VM::vmReturnResultRegister == resultRegister) {

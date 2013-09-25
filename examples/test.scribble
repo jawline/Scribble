@@ -1,14 +1,8 @@
 import("sys")
+import("sorts/bubble")
+import("sorts/heap")
 
 func main() {
-	//var fibsResult := recurse(125);
-	//sys.Write( sys.String ( fibsResult ) );
-	//sys.Write(" results\n");
-	//heap.Test();
-	//bubble.Test();
-	
-	var arr := [100] int;
-	
-	for var i := 0; i < 100; i++ do {
-	}
+	heap.Test();
+	bubble.Test();
 }
