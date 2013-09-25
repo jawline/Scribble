@@ -10,6 +10,7 @@
 #include <Scribble/Value/Void.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+#include <VM/Constants.hpp>
 
 ForStatement::ForStatement(int lineNo, std::string sym, SafeStatement initial,
 		SafeStatement condition, SafeStatement step,
@@ -103,12 +104,11 @@ int ForStatement::generateCode(int resultRegister, std::stringstream& generated)
 	generated << "#FOR CONTINUE TEST\n";
 	generated << "neq $" << VM::vmTempRegisterThree << " 1\n";
 	generated << "jmpr " << (bodyInstrs + 2) << "\n";
-	instrs += 3;
+	instrs += 4;
 
 	//Insert the body of the for into the code
-	instrs += bodyInstrs;
-
 	generated << forbody.str();
+	instrs += bodyInstrs;
 
 	//Add the return jump
 	generated << "jmpr " << -((instrs - setupOffset)) << "\n";

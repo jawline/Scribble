@@ -402,8 +402,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 37
-#define YY_END_OF_BUFFER 38
+#define YY_NUM_RULES 35
+#define YY_END_OF_BUFFER 36
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -413,16 +413,16 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[93] =
     {   0,
-        0,    0,    0,    0,   38,   37,    4,    5,   37,    1,
-       37,   37,   32,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,    3,    2,    4,    0,
-       36,    0,   31,   32,    0,   34,   35,   35,   35,   35,
-       35,   35,   35,   17,   21,   20,   35,   19,   35,   18,
-       35,   35,   35,   35,   35,   35,   35,    0,   33,    7,
-       35,   35,   35,   35,   10,   23,   35,   35,    9,   16,
-       35,   14,   35,   22,    8,   27,   28,   26,   11,   24,
-        6,   12,   35,   15,   30,   13,   35,   29,   35,   35,
-       25,    0
+        0,    0,    0,    0,   36,   35,    4,    5,   35,    1,
+       35,   35,   30,   33,   33,   33,   33,   33,   33,   33,
+       33,   33,   33,   33,   33,   33,    3,    2,    4,    0,
+       34,    0,   29,   30,    0,   32,   33,   33,   33,   33,
+       33,   33,   33,   15,   19,   18,   33,   17,   33,   16,
+       33,   33,   33,   33,   33,   33,   33,    0,   31,    7,
+       33,   33,   33,   33,   10,   21,   33,   33,    9,   14,
+       33,   33,   33,   20,    8,   25,   26,   24,   11,   22,
+        6,   12,   33,   13,   28,   33,   33,   27,   33,   33,
+       23,    0
 
     } ;
 
@@ -537,10 +537,10 @@ static yyconst flex_int16_t yy_chk[149] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static yyconst flex_int32_t yy_rule_can_match_eol[38] =
+static yyconst flex_int32_t yy_rule_can_match_eol[36] =
     {   0,
 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -924,137 +924,127 @@ return MOVE;
 case 13:
 YY_RULE_SETUP
 #line 53 "./src/SASM/Lexer.l"
-return PUSH;
+return POP_NIL;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 54 "./src/SASM/Lexer.l"
-return POP;
+return TEST_NOT_EQUAL;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 55 "./src/SASM/Lexer.l"
-return POP_NIL;
+return TEST_EQUAL;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 56 "./src/SASM/Lexer.l"
-return TEST_NOT_EQUAL;
+return LESS_THAN;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 57 "./src/SASM/Lexer.l"
-return TEST_EQUAL;
+return LESS_THAN_OR_EQUAL;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 58 "./src/SASM/Lexer.l"
-return LESS_THAN;
+return GREATER_THAN;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 59 "./src/SASM/Lexer.l"
-return LESS_THAN_OR_EQUAL;
+return GREATER_THAN_OR_EQUAL;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 60 "./src/SASM/Lexer.l"
-return GREATER_THAN;
+return RETURN;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 61 "./src/SASM/Lexer.l"
-return GREATER_THAN_OR_EQUAL;
+return JUMP;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 62 "./src/SASM/Lexer.l"
-return RETURN;
+return JUMP_RELATIVE;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 63 "./src/SASM/Lexer.l"
-return JUMP;
+return NEW_ARRAY;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 64 "./src/SASM/Lexer.l"
-return JUMP_RELATIVE;
+return ARRAY_SET;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 65 "./src/SASM/Lexer.l"
-return NEW_ARRAY;
+return ARRAY_GET;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 66 "./src/SASM/Lexer.l"
-return ARRAY_SET;
+return ARRAY_LENGTH;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 67 "./src/SASM/Lexer.l"
-return ARRAY_GET;
+return PUSH_REGISTERS;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 68 "./src/SASM/Lexer.l"
-return ARRAY_LENGTH;
+return POP_REGISTERS;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 69 "./src/SASM/Lexer.l"
-return PUSH_REGISTERS;
-	YY_BREAK
-case 30:
-YY_RULE_SETUP
 #line 70 "./src/SASM/Lexer.l"
-return POP_REGISTERS;
-	YY_BREAK
-case 31:
-YY_RULE_SETUP
-#line 72 "./src/SASM/Lexer.l"
 {
 	SAVE_REG;
 	return REG;
 }
 	YY_BREAK
-case 32:
+case 30:
 YY_RULE_SETUP
-#line 77 "./src/SASM/Lexer.l"
+#line 75 "./src/SASM/Lexer.l"
 { SAVE_INT;
  return INT;
 }
 	YY_BREAK
-case 33:
+case 31:
 YY_RULE_SETUP
-#line 81 "./src/SASM/Lexer.l"
+#line 79 "./src/SASM/Lexer.l"
 { SAVE_REAL; 
  return REAL;
 }
 	YY_BREAK
-case 34:
+case 32:
+YY_RULE_SETUP
+#line 83 "./src/SASM/Lexer.l"
+{ sasm_lval.lval = atoi(sasm_text); return LONG; }
+	YY_BREAK
+case 33:
 YY_RULE_SETUP
 #line 85 "./src/SASM/Lexer.l"
-{ sasm_lval.lval = atoi(sasm_text); return LONG; }
+{ SAVE_TOKEN; return WORD; }
+	YY_BREAK
+case 34:
+/* rule 34 can match eol */
+YY_RULE_SETUP
+#line 86 "./src/SASM/Lexer.l"
+{ std::string r(sasm_text, sasm_leng); replaceString(r, "\\n", "\n"); replaceString(r, "\"", ""); sasm_lval.string = new std::string(r); return STRING; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 87 "./src/SASM/Lexer.l"
-{ SAVE_TOKEN; return WORD; }
-	YY_BREAK
-case 36:
-/* rule 36 can match eol */
-YY_RULE_SETUP
-#line 88 "./src/SASM/Lexer.l"
-{ std::string r(sasm_text, sasm_leng); replaceString(r, "\\n", "\n"); replaceString(r, "\"", ""); sasm_lval.string = new std::string(r); return STRING; }
-	YY_BREAK
-case 37:
-YY_RULE_SETUP
-#line 89 "./src/SASM/Lexer.l"
 ECHO;
 	YY_BREAK
-#line 1058 "./gen/SASMLexer.cpp"
+#line 1048 "./gen/SASMLexer.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(C_COMMENT):
 	yyterminate();
@@ -2024,4 +2014,4 @@ void sasm_free (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 89 "./src/SASM/Lexer.l"
+#line 87 "./src/SASM/Lexer.l"

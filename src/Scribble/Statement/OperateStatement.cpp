@@ -75,7 +75,7 @@ int OperateStatement::generateCode(int resultRegister,
 	}
 
 	case Subtract: {
-		generated << "sub$" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+		generated << "sub $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
 		instrs += 1;
 		break;
 	}

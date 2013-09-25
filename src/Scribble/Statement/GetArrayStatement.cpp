@@ -61,7 +61,7 @@ int GetArrayStatement::generateCode(int resultRegister,
 
 		int instrs = array_->generateCode(VM::vmTempRegisterOne, generated);
 
-		generated << "push $" << VM::vmTempRegisterOne << " 1\n";
+		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
 		instrs++;
 
 		instrs += index_->generateCode(VM::vmTempRegisterTwo, generated);
@@ -71,8 +71,9 @@ int GetArrayStatement::generateCode(int resultRegister,
 
 		generated << "aget $" << VM::vmTempRegisterOne << " $"
 				<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+		instrs++;
 
-		return instrs + 1;
+		return instrs;
 
 	} else {
 		return 0;

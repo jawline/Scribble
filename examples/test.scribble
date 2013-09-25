@@ -1,37 +1,14 @@
 import("sys")
-import("sorts/heap")
-
-type A := struct {
-	Name : string
-	Age : int
-}
-
-func j() : int {
-	return 3;
-}
-
-func r() : int {
-	return j() + 4;
-}
-
-func y() : int {
-	return r() + 123;
-}
-
-func Fibs(n : int) : int {
-	if n = 0 then return 0;
-	if n = 1 then return 1;
-	return Fibs(n-1) + Fibs(n-2);
-}
-
-func recurse(n : int) : int {
-	if n = 0 then return 0;
-	return n + recurse(n-1);
-}
 
 func main() {
 	//var fibsResult := recurse(125);
 	//sys.Write( sys.String ( fibsResult ) );
 	//sys.Write(" results\n");
-	heap.Test();
+	//heap.Test();
+	//bubble.Test();
+	
+	var arr := [100] int;
+	
+	for var i := 0; i < 100; i++ do {
+	}
 }

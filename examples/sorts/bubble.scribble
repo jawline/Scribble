@@ -33,10 +33,7 @@ func Test() : bool {
 
  sys.Write("Testing bubble sort\n");
  
- var list := [100]int;
- for var i := 0; i < len(list); i++ do {
- 	var tempStr := "hello World 1234 1234 1234";
- }
+ var list := [100] int;
  
  Triy(list);
  
@@ -48,7 +45,7 @@ func Test() : bool {
  
  //Sort(list);
  
- for i := 0; i < len(list); i++ do {
+ for var i := 0; i < len(list); i++ do {
   sys.Write(sys.String(list[i]));
   sys.Write("\n");
  }

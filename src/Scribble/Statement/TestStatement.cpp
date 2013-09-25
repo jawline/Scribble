@@ -140,73 +140,75 @@ int TestStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	if (resultRegister != -1) {
+	generated << "#Test statement\n";
 
-		generated << "#Test statement\n";
+	instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
 
-		instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
+	generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs += 1;
 
-		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
+
+	generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs++;
+
+	//1
+	generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
+	instrs++;
+
+	switch (tType_) {
+
+	case TestEquals:
+		//2
+		generated << "eq $3 $4 #test lhs rhs\n";
 		instrs += 1;
+		break;
 
-		instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
+	case TestNotEquals:
+		generated << "neq $3 $4\n";
+		instrs += 2;
+		break;
 
-		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
-     	instrs += 1;
+	case TestLess:
+		generated << "lt $3 $4 #test less than lhs rhs\n";
+		instrs += 1;
+		break;
 
-		//1
-		generated << "load 0 $5\n";
+	case TestLessOrEqual:
+		generated << "le $3 $4 #tess less or equal lhs rhs\n";
+		instrs += 1;
+		break;
 
-		switch (tType_) {
+	case TestGreater:
+		generated << "gt $3 $4 #test greater\n";
+		instrs += 2;
+		break;
 
-		case TestEquals:
-			//2
-			generated << "eq $3 $4 #test lhs rhs\n";
-			instrs += 1;
-			break;
+	case TestGreaterOrEqual:
+		generated << "ge $3 $4 #test greater or equal\n";
+		instrs += 2;
+		break;
 
-		case TestNotEquals:
-			generated << "neq $3 $4\n";
-			instrs += 2;
-			break;
+	default:
+		printf("UNIMPLEMENTED AAAH\n");
+		break;
 
-		case TestLess:
-			generated << "lt $3 $4 #test less than lhs rhs\n";
-			instrs += 1;
-			break;
+	}
 
-		case TestLessOrEqual:
-			generated << "le $3 $4 #tess less or equal lhs rhs\n";
-			instrs += 1;
-			break;
+	//3
+	generated << "load 1 $" << VM::vmTempRegisterThree << "\n";
+	instrs++;
 
-		case TestGreater:
-			generated << "gt $3 $4 #test greater\n";
-			instrs += 2;
-			break;
-
-		case TestGreaterOrEqual:
-			generated << "ge $3 $4 #test greater or equal\n";
-			instrs += 2;
-			break;
-
-		default:
-			printf("UNIMPLEMENTED AAAH\n");
-			break;
-
-		}
-
-		//3
-		generated << "load 1 $5\n";
-
+	if (VM::vmTempRegisterThree != resultRegister) {
 		//4
-		generated << "move $5 $";
+		generated << "move $" << VM::vmTempRegisterThree << " $";
 		generated << resultRegister;
 		generated << "\n";
 
-		instrs += 4;
-
+		instrs++;
 	}
+
+	generated << "#Test statement end. " << instrs << " instructions\n";
 
 	return instrs;
 }

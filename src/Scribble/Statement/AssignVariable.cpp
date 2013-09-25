@@ -28,6 +28,11 @@ void AssignVariableStatement::checkTree(Type* functionType) {
 	}
 }
 
-int AssignVariableStatement::generateCode(int resultRegister, std::stringstream& generated) {
-	return exp_->generateCode(var_->getPosition() + VM::vmNumReservedRegisters, generated);
+int AssignVariableStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+	//Assigning a variable in the VM is as simply as moving the result of the statement into the variables assigned slot in the registers.
+	return exp_->generateCode(var_->getPosition() + VM::vmNumReservedRegisters,
+			generated);
+
 }
