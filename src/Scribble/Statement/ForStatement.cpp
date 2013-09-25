@@ -93,7 +93,7 @@ int ForStatement::generateCode(int resultRegister, std::stringstream& generated)
 
 	//Generate the for test condition
 	generated << "#FOR CONDITION\n";
-	instrs += condition_->generateCode(5, generated);
+	instrs += condition_->generateCode(VM::vmTempRegisterThree, generated);
 
 	//Generate the for body in a seperate stringstream
 	std::stringstream forbody;
@@ -101,7 +101,7 @@ int ForStatement::generateCode(int resultRegister, std::stringstream& generated)
 
 	//Check whether that condition is true
 	generated << "#FOR CONTINUE TEST\n";
-	generated << "neq $5 1\n";
+	generated << "neq $" << VM::vmTempRegisterThree << " 1\n";
 	generated << "jmpr " << (bodyInstrs + 2) << "\n";
 	instrs += 3;
 
