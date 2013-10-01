@@ -199,6 +199,7 @@ int TestStatement::generateCode(int resultRegister,
 	generated << "load 1 $" << VM::vmTempRegisterThree << "\n";
 	instrs++;
 
+	//Move the temp register result to the result register if they aren't the same register ( For example for will temp 3 to store its condition )
 	if (VM::vmTempRegisterThree != resultRegister) {
 		//4
 		generated << "move $" << VM::vmTempRegisterThree << " $";

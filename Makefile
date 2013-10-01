@@ -9,7 +9,7 @@ OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 all: preprocess $(SOURCES) $(EXECUTABLE)
 
 clean:
-	rm -r ./obj/ $(EXECUTABLE) ./gen/
+	@rm -r ./obj/ $(EXECUTABLE) ./gen/
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@

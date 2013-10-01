@@ -16,4 +16,5 @@
 *~
 
 bin/*
+gen/*
 VMLogFile

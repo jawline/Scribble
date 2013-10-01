@@ -53,6 +53,7 @@ int ArrayLengthStatement::generateCode(int resultRegister,
 	if (resultRegister != -1) {
 		int numArr = exp_->generateCode(VM::vmTempRegisterThree,
 				generated);
+
 		generated << "alen $" << VM::vmTempRegisterThree << " $"
 				<< resultRegister << "\n";
 		return numArr + 1;

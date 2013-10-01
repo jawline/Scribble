@@ -611,18 +611,15 @@ Expression: TRUE {
 	} | INT {
 		$$ = new IntStatement(scribble_lineno, scribble_text, $1);
 	} | STRING {
-		
 		$$ = new StringStatement(scribble_lineno, scribble_text, *$1);
 		
 		//Free string pointer
 		delete $1;
 
 	} | Type LBRACKET Arguments RBRACKET {
-	
 		$$ = new StructureStatement(scribble_lineno, scribble_text, *$1, *$3);
 		delete $3;
 		delete $1;
-		
 	} | Variable {
 		$$ = new GetVariableStatement(scribble_lineno, scribble_text, *$1);
 		delete $1;

@@ -83,7 +83,8 @@ int ForStatement::generateBody(std::stringstream& generated) {
 	return instrs;
 }
 
-int ForStatement::generateCode(int resultRegister, std::stringstream& generated) {
+int ForStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
 
 	//Generate the for setup (Run the initialising statement)
 	generated << "#FOR Setup\n";
@@ -109,10 +110,13 @@ int ForStatement::generateCode(int resultRegister, std::stringstream& generated)
 	//Insert the body of the for into the code
 	generated << forbody.str();
 	instrs += bodyInstrs;
+	generated << "#body " << bodyInstrs << " instructions\n";
 
 	//Add the return jump
 	generated << "jmpr " << -((instrs - setupOffset)) << "\n";
 	instrs++;
+
+	generated << "#generated for statement " << instrs << " instructions\n";
 
 	return instrs;
 }
