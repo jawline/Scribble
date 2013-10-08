@@ -34,21 +34,10 @@ func Sort( n : array(int) ) {
 }
 
 func Test() {
-
- sys.Write("Testing bubble sort\n");
  
- var list := [100] int;
- 
- Triy(list);
- 
- sys.Write("Triy\n");
+ var list := [100]int;
  
  Sort(list);
- 
- sys.Write("Sorted\n");
- 
- sys.Write( sys.String(list[0]) );
- len(list);
  
  for var i := 0; i < len(list); i++ do {
   //sys.Write(sys.String(list[i]));

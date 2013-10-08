@@ -98,7 +98,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "len" return LENGTH;
 "thread" return THREAD;
 "[" return LSQBRACKET;
-"]" return RSQBRACKET;;
+"]" return RSQBRACKET;
 
 {integer} { SAVE_INT;
  return INT;
@@ -109,4 +109,5 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 }
 
 {word} { SAVE_TOKEN; return WORD; }
-{string} {std::string r(scribble_text, scribble_leng); stringReplace(r, "\\n", "\n"); stringReplace(r, "\"", ""); scribble_lval.string = new std::string(r); return STRING; }
+{string} { std::string r(scribble_text, scribble_leng); stringReplace(r, "\\n", "\n"); stringReplace(r, "\"", ""); 
+		   scribble_lval.string = new std::string(r); return STRING; }

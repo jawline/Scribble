@@ -72,8 +72,7 @@ int FunctionStatement::generateCode(int resultRegister,
 	int n = 0;
 
 	generated << "pushr $" << VM::vmReturnResultRegister << " "
-			<< VM::vmNumReservedRegisters + numDeclaredVariables_
-					- VM::vmReturnResultRegister << "\n";
+			<< VM::vmNumReservedRegisters + numDeclaredVariables_ << "\n";
 
 	n++;
 
@@ -89,8 +88,7 @@ int FunctionStatement::generateCode(int resultRegister,
 					+ func_->getFunction()->getName() + "\"\n";
 
 	generated << "popr $" << VM::vmReturnResultRegister + 1 << " "
-			<< VM::vmNumReservedRegisters + numDeclaredVariables_
-					- VM::vmReturnResultRegister - 1 << "\n";
+			<< VM::vmNumReservedRegisters + numDeclaredVariables_ - 1 << "\n";
 
 	n += 2;
 

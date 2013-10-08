@@ -51,11 +51,12 @@ int ArrayLengthStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
 	if (resultRegister != -1) {
-		int numArr = exp_->generateCode(VM::vmTempRegisterThree,
-				generated);
 
-		generated << "alen $" << VM::vmTempRegisterThree << " $"
-				<< resultRegister << "\n";
+		int numArr = exp_->generateCode(VM::vmTempRegisterOne, generated);
+
+		generated << "alen $" << VM::vmTempRegisterOne << " $" << resultRegister
+				<< "\n";
+
 		return numArr + 1;
 	}
 

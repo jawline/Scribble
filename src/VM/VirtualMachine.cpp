@@ -706,14 +706,14 @@ void VirtualMachine::execute(std::string function) {
 				if (!registerReference_[arrayRegister]
 						|| !heap_.validReference(registers_[arrayRegister])) {
 					VM_PRINTF_FATAL(
-							"Register %i not not a reference (OpArrayLength)",
+							"Register %i not not a reference (OpArrayLength)\n",
 							arrayRegister);
 				}
 
 				//Check that it is an array
 				if (!heap_.getType(registers_[arrayRegister])->isArray()) {
 					VM_PRINTF_FATAL("%s",
-							"OpArrayLong Reference is not an array\n");
+							"Reference is not an array (OpArrayLength)\n");
 				}
 
 				//Return the size in bytes divided by the element size of an index in the array to get the size of the array.
