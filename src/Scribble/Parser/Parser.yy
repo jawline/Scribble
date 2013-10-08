@@ -692,7 +692,7 @@ Expression: TRUE {
 		//Free up string pointer.
 		delete $1;
 		
-	} | WORD TWOPLUS {
+	} | WORD INCREMENT {
 	
 		auto it = Variables.find(*$1);
 		
@@ -705,7 +705,7 @@ Expression: TRUE {
 		//Free name pointer
 		delete $1;
 		
-	} | TWOPLUS WORD {
+	} | INCREMENT WORD {
 		
 		auto it = Variables.find(*$2);
 		
@@ -718,7 +718,7 @@ Expression: TRUE {
 		//Free name pointer
 		delete $2;
 		
-	} | WORD TWOMINUS {
+	} | WORD DECREMENT {
 		
 		auto it = Variables.find(*$1);
 		
@@ -731,7 +731,7 @@ Expression: TRUE {
 		//Free name pointer
 		delete $1;
 		
-	} | TWOMINUS WORD {
+	} | DECREMENT WORD {
 		
 		auto it = Variables.find(*$2);
 		

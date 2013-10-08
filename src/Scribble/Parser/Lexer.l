@@ -20,7 +20,7 @@
 #define SAVE_REAL scribble_lval.real = atof(scribble_text);
 #define SAVE_TOKEN scribble_lval.string = new std::string(scribble_text, scribble_leng);
 
-void myReplace(std::string& str, const std::string& oldStr, const std::string& newStr)
+void replaceString(std::string& str, const std::string& oldStr, const std::string& newStr)
 {
   size_t pos = 0;
   while((pos = str.find(oldStr, pos)) != std::string::npos)
@@ -45,16 +45,21 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "//"            { BEGIN(C_COMMENT); }
 <C_COMMENT>"\n" { BEGIN(INITIAL); }
 <C_COMMENT>.    { }
+
 {white} { }
-"++" return TWOPLUS;
+
+"++" return INCREMENT;
+"--" return DECREMENT;
+
 "+" return PLUS;
-"--" return TWOMINUS;
 "-" return MINUS;
 "*" return TIMES;
 "/" return DIVIDE;
 "^" return POWER;
-"=" return EQUALS;
+
 ":=" return ASSIGN;
+"=" return EQUALS;
+
 "&" return AND;
 "(" return LPAREN;
 ")" return RPAREN;
@@ -104,4 +109,4 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 }
 
 {word} { SAVE_TOKEN; return WORD; }
-{string} { std::string r(scribble_text, scribble_leng); myReplace(r, "\\n", "\n"); myReplace(r, "\"", ""); scribble_lval.string = new std::string(r); return STRING; }
+{string} {std::string r(scribble_text, scribble_leng); replaceString(r, "\\n", "\n"); replaceString(r, "\"", ""); scribble_lval.string = new std::string(r); return STRING; }
