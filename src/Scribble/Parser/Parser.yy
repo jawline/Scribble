@@ -596,7 +596,7 @@ Statement: Expression END {
 	} | FOR Expression END Expression END Expression DO IfStatements {
 		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$8);
 		delete $8;
-	} | WHILE Expression LBRACKET Statements RBRACKET {
+	} | WHILE Expression DO LBRACKET Statements RBRACKET {
 		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$4);
 		delete $4;
 	} | RETURN Expression END {	

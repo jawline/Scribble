@@ -1,12 +1,6 @@
 import ("sys")
+import ("populate")
 
-func Triy( n : array(int) ) {
-
-	for var i := 0; i < len(n); i++ do {
-		n[i] := len(n) - i;
-	}
-
-}
 
 func Sort( n : array(int) ) {
  
@@ -17,31 +11,29 @@ func Sort( n : array(int) ) {
  	swapped := false;
  
  	for var j := 0; j < i; j++ do {
+ 	
   		if (n[j]) > (n[j+1]) then {
-    
-    var temp := n[j];
-    
-    n[j] := n[j+1];
-    n[j+1] := temp;
-    swapped := true;
-    
-   }
-
-  }
- 
+		    var temp := n[j];
+		    n[j] := n[j+1];
+		    n[j+1] := temp;
+		    swapped := true;
+   		}
+	}
  }
-
 }
 
 func Test() {
  
  var list := [100]int;
  
+ populate.PopulateWorstCase(list);
  Sort(list);
  
  for var i := 0; i < len(list); i++ do {
-  //sys.Write(sys.String(list[i]));
-  //sys.Write("\n");
+  sys.Write(sys.String(list[i]));
+  sys.Write(" ");
  }
+ 
+ sys.Write("\n");
  
 }

@@ -69,18 +69,20 @@ Type* FunctionStatement::type() {
 int FunctionStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
-	int n = 0;
+	int numInstructions = 0;
 
 	generated << "pushr $" << VM::vmReturnResultRegister << " "
 			<< VM::vmNumReservedRegisters + numDeclaredVariables_ << "\n";
-
-	n++;
+	numInstructions++;
 
 	for (unsigned int i = 0; i < func_->getArgs().size(); i++) {
+
 		SafeStatement arg = func_->getArgs()[i];
-		n += arg->generateCode(VM::vmTempRegisterOne, generated);
+
+		numInstructions += arg->generateCode(VM::vmTempRegisterOne, generated);
+
 		generated << "pushr $" << VM::vmTempRegisterOne << " " << 1 << "\n";
-		n += 1;
+		numInstructions += 1;
 	}
 
 	generated
@@ -90,22 +92,25 @@ int FunctionStatement::generateCode(int resultRegister,
 	generated << "popr $" << VM::vmReturnResultRegister + 1 << " "
 			<< VM::vmNumReservedRegisters + numDeclaredVariables_ - 1 << "\n";
 
-	n += 2;
+	numInstructions += 2;
 
-	//If resultRegister is -1 then the result should not be stored in a register.
-	if (resultRegister != -1) {
+	//If resultRegister is -1 then the result should not be stored in a register. If it is already the result register then there is no need to move it.
+	//Otherwise move the value to the desired result register
+
+	if (resultRegister != -1 || VM::vmReturnResultRegister == resultRegister) {
 		generated << "move $" << VM::vmReturnResultRegister << " $"
 				<< resultRegister << "\n";
-		n += 1;
+		numInstructions += 1;
 	}
 
-	if ( (int) VM::vmReturnResultRegister == resultRegister) {
+	//If the result register is the return register then pop the previous value of that register. If it is not then restore its value
+	if ((int) VM::vmReturnResultRegister == resultRegister) {
 		generated << "popn\n";
 	} else {
 		generated << "popr $" << VM::vmReturnResultRegister << " " << 1 << "\n";
 	}
 
-	n += 1;
+	numInstructions += 1;
 
-	return n;
+	return numInstructions;
 }

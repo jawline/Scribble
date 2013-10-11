@@ -3,16 +3,9 @@ import("sorts/bubble")
 
 func main() {
 
-//	var arr := [1000]int;
-//	Triy(arr);
-//	Sort(arr);
+	var testValue := true;	
+	if testValue then sys.Write("hello"); 
+	else if testValue then sys.Write("world");
 	
-//	for var i := 0; i < len(arr); i++ do {
-//		sys.Write( sys.Concat ( sys.String( arr[i] ), " " ) );
-//	}
-	
-//	sys.Write( "\n" );
-
-//	heap.Test();
 	bubble.Test();
 }

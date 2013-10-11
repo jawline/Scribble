@@ -1,0 +1,15 @@
+func PopulateWorstCase( list : array(int)) {
+
+	for var i := 0; i < len(list); i++ do {
+		list[i] := len(list) - i;
+	}
+
+}
+
+func PopulateBestCase( list : array(int) ) {
+
+	for var i := 0; i < len(list); i++ do {
+		list[i] := i;
+	}
+
+}

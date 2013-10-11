@@ -14,11 +14,11 @@ func part(n:array(int)) : int {
  while i <= j {
 
   while n[i] < pivot {
-   i++
+   i++;
   }
 
   while n[j] > pivot {
-   j--
+   j--;
   }
 
   // As long as i <= j swap n[i] and n[j] and increment them both

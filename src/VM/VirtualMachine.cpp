@@ -753,7 +753,7 @@ void VirtualMachine::execute(std::string function) {
 					name = (char*) heap_.getAddress(heapEntry);
 				}
 
-				VM_PRINTF_LOG("Calling function %s\n", name);
+				//VM_PRINTF_LOG("Calling function %s\n", name);
 
 				NamespaceEntry entry;
 				VM_LOAD_FUNC(std::string(name), entry);
