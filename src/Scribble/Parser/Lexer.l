@@ -55,7 +55,6 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "-" return MINUS;
 "*" return TIMES;
 "/" return DIVIDE;
-"^" return POWER;
 
 ":=" return ASSIGN;
 "=" return EQUALS;
@@ -79,7 +78,6 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "func" return FUNCTION;
 "for" return FOR;
 "var" return VARIABLE;
-"const" return CONST;
 "int" return TYPE_INT;
 "bool" return TYPE_BOOL;
 "nil" return NIL;
@@ -96,7 +94,6 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "->" return POINT;
 "array" return TYPE_ARRAY;
 "len" return LENGTH;
-"thread" return THREAD;
 "[" return LSQBRACKET;
 "]" return RSQBRACKET;
 

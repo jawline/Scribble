@@ -9,7 +9,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Scribble/Statement/ThreadStatement.hpp>
 #include <Scribble/Statement/BoolStatement.hpp>
 #include <Scribble/Statement/IntStatement.hpp>
 #include <Scribble/Statement/OperateStatement.hpp>
@@ -92,17 +91,15 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <string> WORD STRING
 %token <real> REAL
 %token <integer> INT
-%token <token> PLUS MINUS TIMES DIVIDE POWER EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AUTO AND NIL TYPE
-%token <token> FUNCTION VARIABLE CONST STRUCT LENGTH THREAD POINT
+%token <token> PLUS MINUS TIMES DIVIDE EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
+%token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
 %token <token> END DO
 
 %left PLUS MINUS
 %left TIMES DIVIDE
-%left NEG
-%left TRUE FALSE EQUALS
-%right POWER WORD
+%left TRUE FALSE EQUALS 
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -123,6 +120,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %%
 
 Program: {
+		//
 		Variables.clear();
 		$$ = 0;
 	} | Program IMPORT LPAREN STRING RPAREN {
@@ -156,39 +154,31 @@ Type: TYPE_INT {
 		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(String) ) );
 	} | TYPE_BOOL {
 		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Boolean) ) );
-	} | TYPE_VOID {
-		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Void) ) );
 	} | TYPE_ARRAY LPAREN Type RPAREN {
 		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Array, *$3) ) );
 		delete $3;
-	} | WORD LINK WORD {
-	
-		$$ = new TypeReference ( new TypeReferenceCore( *$1, *$3, nullptr) );
-		TypeReferences.push_back(*$$);
-		delete $1;
-		delete $3;
-		
 	} | WORD {
 		
-		/**
-		if (Functions[*$1].type() != TypeEntry) {
-			char err[256];
-			sprintf(err, "%s is not a type\n", $1->c_str());
-			yyerror(err);
-			return -1;
-		}*/
+		//Set the result to be a new type reference.
+		//The type of a type reference will be found after all source files have been parsed and the all types are thus declared.
 		
 		$$ = new TypeReference( new TypeReferenceCore ( *$1, nullptr ) );
 		TypeReferences.push_back(*$$);
 		
 		delete $1;
+	} | WORD LINK WORD {
+	
+		//Same as the above except targets a type in a seperate namespace
+		$$ = new TypeReference ( new TypeReferenceCore( *$1, *$3, nullptr) );
+		TypeReferences.push_back(*$$);
+		
+		delete $1;
+		delete $3;
+		
 	}
 ;
 
 Variable:  VARIABLE WORD COLON Type {
-
-		printf("TODO: Check no variable is declared as void\n");
-
 		auto it = Variables.find(*$2);
 			
 		if (it != Variables.end()) {
@@ -597,8 +587,8 @@ Statement: Expression END {
 		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$8);
 		delete $8;
 	} | WHILE Expression DO LBRACKET Statements RBRACKET {
-		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$4);
-		delete $4;
+		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$5);
+		delete $5;
 	} | RETURN Expression END {	
 		$$ = new ReturnStatement(scribble_lineno, scribble_text, $2);	
 	}
