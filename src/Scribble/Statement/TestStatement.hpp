@@ -12,6 +12,7 @@
 
 enum TestType {
 	TestEquals,
+	TestAnd,
 	TestNotEquals,
 	TestGreater,
 	TestLess,

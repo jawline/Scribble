@@ -18,6 +18,7 @@ extern std::vector<SP<Variable>> VariableReferences;
 extern std::vector<TypeReference> TypeReferences;
 
 extern bool ParsingError;
+extern int lastuid;
 
 extern void scribble_parse();
 extern void scribble__scan_string(char const*);

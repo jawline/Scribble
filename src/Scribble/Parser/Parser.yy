@@ -58,6 +58,8 @@ std::vector<TypeReference> TypeReferences;
 std::vector<SP<Variable>> VariableReferences;
 std::vector<ParserReference> StatementReferences;
 
+int lastuid;
+
 void parser_free_all() {
 	ImportList.clear();
 	Variables.clear();
@@ -67,6 +69,7 @@ void parser_free_all() {
 	TypeReferences.clear();
 	VariableReferences.clear();
 	ParsingError = false;
+	lastuid = 0;
 }
 
 extern int scribble_lineno;	// defined and maintained in lex.c
@@ -121,6 +124,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 
 Program: {
 		//
+		lastuid = 0;
 		Variables.clear();
 		$$ = 0;
 	} | Program IMPORT LPAREN STRING RPAREN {
@@ -179,6 +183,9 @@ Type: TYPE_INT {
 ;
 
 Variable:  VARIABLE WORD COLON Type {
+
+		//Check if the variable is already defined. If it isn't then create a new one and add a reference to the list of variables so any extra data can be resolved.
+		
 		auto it = Variables.find(*$2);
 			
 		if (it != Variables.end()) {
@@ -263,8 +270,8 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 		SP<Variable> returnTemplate = new Variable(0, *$7, nullptr);
 		VariableReferences.push_back(returnTemplate);
-		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = new ScriptedFunction(*$2, 0, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4);
+		
+		SP<Function> fn = new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4);
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -734,7 +741,7 @@ Expression: TRUE {
 		//Free name pointer
 		delete $2;
 	} | Expression AND Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestEquals, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestAnd, $1, $3);
 	} | Expression POINT WORD {
 		
 		$$ = new GetStructureElementStatement(scribble_lineno, scribble_text, $1, *$3);

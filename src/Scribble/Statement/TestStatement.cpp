@@ -39,6 +39,11 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 		BoolValue* br = (BoolValue*) rhRes;
 
 		switch (tType_) {
+
+		case TestAnd:
+			result = valueHeap.make(bl->value() && br->value());
+			break;
+
 		case TestEquals:
 			result = valueHeap.make(bl->value() == br->value());
 			break;
@@ -61,6 +66,11 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 		case TestEquals:
 			//Result is a bool test of truth
 			result = valueHeap.make((il->value() == rl->value()));
+			break;
+
+
+		case TestAnd:
+			result = valueHeap.make((il->value() && rl->value()));
 			break;
 
 		case TestNotEquals:
@@ -190,7 +200,7 @@ int TestStatement::generateCode(int resultRegister,
 		break;
 
 	default:
-		printf("UNIMPLEMENTED AAAH\n");
+		printf("Test statement unimplemented.\n");
 		break;
 
 	}
