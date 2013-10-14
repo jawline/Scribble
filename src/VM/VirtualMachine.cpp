@@ -395,6 +395,18 @@ void VirtualMachine::execute(std::string function) {
 				break;
 			}
 
+			case OpEqualZero: {
+				uint8_t tReg = instructionSet.getInst(*current + 1);
+
+				if (registers_[tReg] == 0) {
+					*current += vmOpCodeSize;
+				} else {
+					*current += vmOpCodeSize * 2;
+				}
+
+				break;
+			}
+
 				/**
 				 *  Test if one register is less than another. If true execute next instruction otherwise skip it.
 				 */

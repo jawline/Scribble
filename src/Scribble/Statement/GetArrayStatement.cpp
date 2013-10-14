@@ -57,18 +57,25 @@ void GetArrayStatement::checkTree(Type* functionType) {
 int GetArrayStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
+	//If the result is not going anywhere ( Like the expression a[0]; )
+	//then optimize it out by not generating the aget statement.
 	if (resultRegister != -1) {
 
+		//Place a reference to the array in register slot 1
 		int instrs = array_->generateCode(VM::vmTempRegisterOne, generated);
 
+		//Push it to the stack incase getting the index uses that register
 		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
 		instrs++;
 
+		//Put the index value in register two
 		instrs += index_->generateCode(VM::vmTempRegisterTwo, generated);
 
+		//Pop back the reference to the array
 		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
 		instrs++;
 
+		//Place the value of the array at the index in the result operator
 		generated << "aget $" << VM::vmTempRegisterOne << " $"
 				<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
 		instrs++;

@@ -53,6 +53,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "popn" return POP_NIL;
 "neq" return TEST_NOT_EQUAL;
 "eq" return TEST_EQUAL;
+"eqz" return TEST_EQUAL_NIL;
 "lt" return LESS_THAN;
 "le" return LESS_THAN_OR_EQUAL;
 "gt" return GREATER_THAN;

@@ -87,11 +87,14 @@ int IncrementStatement::generateCode(int resultRegister,
 
 			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
 					<< variable_->getPosition() + 6 << "\n";
+
 			instrs += 2;
 
 			if (resultRegister != -1) {
+
 				generated << "move $" << variable_->getPosition() + 6 << " $"
 						<< resultRegister << "\n";
+
 				instrs += 1;
 			}
 
@@ -121,8 +124,10 @@ int IncrementStatement::generateCode(int resultRegister,
 			instrs += 2;
 
 			if (resultRegister != -1) {
+
 				generated << "move $" << variable_->getPosition() + 6 << " $"
 						<< resultRegister << "\n";
+
 				instrs++;
 			}
 

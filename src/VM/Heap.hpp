@@ -26,6 +26,10 @@ public:
 	Heap();
 	virtual ~Heap();
 
+	/**
+	 * Returns a value > 0 which acts as a reference to an element on the heap.
+	 */
+
 	long allocate(SP<VMEntryType> type, int size, uint8_t* initial);
 
 	bool validReference(long entry);SP<VMEntryType> getType(long entry);

@@ -1,11 +1,14 @@
 import("sys")
-import("sorts/bubble")
 
 func main() {
-
-	var testValue := true;	
-	if testValue then sys.Write("hello"); 
-	else if testValue then sys.Write("world");
+	var j := true;
+	var r := false;
 	
-	bubble.Test();
+	if j & r then {
+		sys.Write("J And R\n");
+	}
+	
+	if j & j then {
+		sys.Write("J and J\n");
+	}
 }

@@ -20,6 +20,8 @@ public:
 	void checkTree(Type* functionType);
 	Value* execute(std::vector<Value*> const& variables);
 	Type* type();
+
+	int generateCode(int result, std::stringstream& code);
 };
 
 #endif /* TESTNILSTATEMNT_HPP_ */

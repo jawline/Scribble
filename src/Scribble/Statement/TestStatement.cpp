@@ -150,6 +150,32 @@ int TestStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
+	if (tType_ == TestAnd) {
+		generated << "#And test\n";
+
+		std::stringstream firstStatement;
+		int firstInstrs = lhs_->generateCode(resultRegister, firstStatement);
+
+		std::stringstream secondStatement;
+		int secondInstrs = rhs_->generateCode(resultRegister, secondStatement);
+
+		generated << firstStatement.str();
+		instrs += firstInstrs;
+
+		generated << "eqz $" << resultRegister << "\n";
+		instrs++;
+
+		generated << "jmpr " << 1 + secondInstrs << "\n";
+		instrs++;
+
+		generated << secondStatement.str();
+		instrs += secondInstrs;
+
+		//TODO: Needs to be verified
+
+		generated << "#End of and test\n";
+	} else {
+
 	generated << "#Test statement\n";
 
 	instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
@@ -220,6 +246,8 @@ int TestStatement::generateCode(int resultRegister,
 	}
 
 	generated << "#Test statement end. " << instrs << " instructions\n";
+
+	}
 
 	return instrs;
 }

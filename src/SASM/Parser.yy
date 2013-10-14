@@ -272,6 +272,12 @@ void TestNotEqual(uint8_t left, uint8_t right) {
 	JumpDirectRelative(2);
 }
 
+void TestEqualNil(uint8_t left) {
+	Set(buffer, current, (uint8_t) VM::OpEqualZero);
+	Set(buffer, current, left);
+	current += 6;
+}
+
 %}
 
 
@@ -286,7 +292,7 @@ void TestNotEqual(uint8_t left, uint8_t right) {
 %token <real> REAL
 %token <integer> INT REG
 %token <lval> LONG
-%token PUSH_REGISTERS POP_REGISTERS POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -371,6 +377,8 @@ Program: {
 		LoadInt($3, VM::vmTempRegisterOne);
 		LoadInt($4, VM::vmTempRegisterTwo);
 		Divide(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
+	} | Program TEST_EQUAL_NIL REG {
+		TestEqualNil($3);
 	} | Program TEST_EQUAL REG REG {
 		TestEqual($3, $4);
 	} | Program TEST_EQUAL REG INT {
