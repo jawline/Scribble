@@ -47,7 +47,7 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 	builtinFunctions["ReadLine"] = readLine;
 
 	std::vector<SafeFunction> mod;
-	mod.push_back(new Modulo("sys"));
+	mod.push_back( SP<Function> ( new Modulo("sys") ));
 	builtinFunctions["Mod"] = NamespaceEntry(mod);
 
 	std::vector<SafeFunction> randomInt;
@@ -81,8 +81,8 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 					function->debugCode(code);
 					printf("Function debug code %s\n", code.str().c_str());
 
-					newSpace[function->getName()] = VM::NamespaceEntry(
-							function->generateVMFunction());
+					newSpace[function->getName()] = VM::NamespaceEntry(function->generateVMFunction());
+
 					printf("Registered function %s\n",
 							function->getName().c_str());
 				}

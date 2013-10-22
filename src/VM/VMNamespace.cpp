@@ -23,15 +23,15 @@ bool VM::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& 
 		return true;
 	} else {
 
-		std::string nextSpace = target.substr(0, pos);
-		std::string spaceAfter = target.substr(pos+1);
+		std::string prefix = target.substr(0, pos);
+		target = target.substr(pos+1);
 
-		if (space[nextSpace].getType() != Namespace) {
+		if (space[prefix].getType() != Namespace) {
 			//printf("Could not find %s\n", nextSpace.c_str());
 			return false;
 		}
 
-		return searchNamespace(space[nextSpace].getNamespace(), spaceAfter, entry);
+		return searchNamespace(space[prefix].getNamespace(), target, entry);
 	}
 
 }

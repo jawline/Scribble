@@ -212,7 +212,7 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 			return -1;
 		} else {
 		
-			SafeStatement sp = $4;
+			SafeStatement sp = SafeStatement($4);
 		
 			SP<Variable> nVar = SP<Variable>(new Variable(0, nullptr, nullptr));
 			Variables[*$2] = nVar;
@@ -268,10 +268,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		}
 
 
-		SP<Variable> returnTemplate = new Variable(0, *$7, nullptr);
+		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, *$7, nullptr));
 		VariableReferences.push_back(returnTemplate);
 		
-		SP<Function> fn = new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4);
+		SP<Function> fn = SP<Function>( new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -328,7 +328,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		}
 	
 	
-		SP<Variable> returnTemplate = new Variable(0, *$6, nullptr);
+		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, *$6, nullptr));
 		VariableReferences.push_back(returnTemplate);
 		printf("WARN: VERSIONS NOT DO\n");
 		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, currentNamespaceName, *$6, returnTemplate, *$8, values, std::vector<SP<Variable>>()));
@@ -380,10 +380,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
 
-		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
+		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
 		
 		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = new ScriptedFunction(*$2, 0, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4);
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -440,7 +440,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 	
 		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
 	
-		SP<Variable> returnTemplate = new Variable(0, voidReference, ValueUtil::generateValue(getVoidType()));
+		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
 		
 		printf("WARN: VERSIONS NOT DO\n");
 		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, currentNamespaceName, voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
@@ -484,10 +484,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 Arguments: Expression {
 		$$ = new std::vector<SmartPointer<Statement>>();
-		$$->push_back($1);
+		$$->push_back(SafeStatement($1));
 	} | Arguments COMMA Expression {
 		$$ = $1;
-		$$->push_back($3);
+		$$->push_back(SafeStatement($3));
 	}
 ;
 
@@ -495,10 +495,10 @@ Statements: {
 		$$ = new std::vector<SmartPointer<Statement>>();
 	} | Statements Statement {
 		$$ = $1;
-		$$->push_back($2);
+		$$->push_back(SafeStatement($2));
 	} | Statements RETURN {
 		$$ = $1;
-		$$->push_back(new ReturnStatement(scribble_lineno, scribble_text, nullptr));
+		$$->push_back( SafeStatement( new ReturnStatement(scribble_lineno, scribble_text, nullptr)));
 	}
 ;
 
@@ -574,7 +574,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 
 IfStatements: Statement {
 		std::vector<SafeStatement>* stmts = new std::vector<SafeStatement>();
-		stmts->push_back($1);
+		stmts->push_back(SafeStatement($1));
 		$$ = stmts;
 	} | LBRACKET Statements RBRACKET {
 		$$ = $2;
@@ -584,20 +584,20 @@ IfStatements: Statement {
 Statement: Expression END {
 		$$ = $1;
 	} | IF Expression THEN IfStatements  {
-		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, std::vector<SP<Statement>>());
+		$$ = new IfStatement(scribble_lineno, scribble_text, SafeStatement($2), *$4, std::vector<SP<Statement>>());
 		delete $4;
 	} | IF Expression THEN IfStatements ELSE IfStatements {
-		$$ = new IfStatement(scribble_lineno, scribble_text, $2, *$4, *$6);
+		$$ = new IfStatement(scribble_lineno, scribble_text, SafeStatement($2), *$4, *$6);
 		delete $4;
 		delete $6;
 	} | FOR Expression END Expression END Expression DO IfStatements {
-		$$ = new ForStatement(scribble_lineno, scribble_text, $2, $4, $6, *$8);
+		$$ = new ForStatement(scribble_lineno, scribble_text, SafeStatement($2), SafeStatement($4), SafeStatement($6), *$8);
 		delete $8;
 	} | WHILE Expression DO LBRACKET Statements RBRACKET {
-		$$ = new WhileStatement(scribble_lineno, scribble_text, $2, *$5);
+		$$ = new WhileStatement(scribble_lineno, scribble_text, SafeStatement($2), *$5);
 		delete $5;
 	} | RETURN Expression END {	
-		$$ = new ReturnStatement(scribble_lineno, scribble_text, $2);	
+		$$ = new ReturnStatement(scribble_lineno, scribble_text, SafeStatement($2));	
 	}
 ;
 
@@ -621,19 +621,19 @@ Expression: TRUE {
 		$$ = new GetVariableStatement(scribble_lineno, scribble_text, *$1);
 		delete $1;
 	} | Variable ASSIGN Expression {
-		$$ = new AssignVariableStatement(scribble_lineno, scribble_text, *$1, $3);
+		$$ = new AssignVariableStatement(scribble_lineno, scribble_text, *$1, SafeStatement($3));
 		delete $1;
 	} | AutoVariable {
 		$$ = $1;
 	} | LENGTH LPAREN Expression RPAREN {
-		$$ = new ArrayLengthStatement(scribble_lineno, scribble_text, $3);
+		$$ = new ArrayLengthStatement(scribble_lineno, scribble_text, SafeStatement($3));
 	} | LSQBRACKET Expression RSQBRACKET Type {
-		$$ = new ArrayStatement(scribble_lineno, scribble_text, getTypeManager().getType(Array, *$4), $2);
+		$$ = new ArrayStatement(scribble_lineno, scribble_text, getTypeManager().getType(Array, *$4), SafeStatement($2));
 		delete $4;
 	} | Expression LSQBRACKET Expression RSQBRACKET ASSIGN Expression {
-		$$ = new AssignArrayStatement(scribble_lineno, scribble_text, $1, $6, $3); 
+		$$ = new AssignArrayStatement(scribble_lineno, scribble_text, SafeStatement($1), SafeStatement($6), SafeStatement($3));
 	} | Expression LSQBRACKET Expression RSQBRACKET {
-		$$ = new GetArrayStatement(scribble_lineno, scribble_text, $1, $3); 
+		$$ = new GetArrayStatement(scribble_lineno, scribble_text, SafeStatement($1), SafeStatement($3)); 
 	} | WORD {
 
 		auto it = Variables.find(*$1);
@@ -651,29 +651,29 @@ Expression: TRUE {
 	} | FunctionCall {
 		$$ = $1;
 	} | Expression PLUS Expression {
-		$$ = new OperateStatement(scribble_lineno, scribble_text, Add, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Add, SafeStatement($1), SafeStatement($3));
 	} | Expression MINUS Expression {
-		$$ = new OperateStatement(scribble_lineno, scribble_text, Subtract, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Subtract, SafeStatement($1), SafeStatement($3));
 	} | Expression TIMES Expression {
-		$$ = new OperateStatement(scribble_lineno, scribble_text, Multiply, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Multiply, SafeStatement($1), SafeStatement($3));
 	} | Expression DIVIDE Expression {
-		$$ = new OperateStatement(scribble_lineno, scribble_text, Divide, $1, $3);
+		$$ = new OperateStatement(scribble_lineno, scribble_text, Divide, SafeStatement($1), SafeStatement($3));
 	} | NIL EQUALS Expression {
-		$$ = new TestNilStatement(scribble_lineno, scribble_text, $3);
+		$$ = new TestNilStatement(scribble_lineno, scribble_text, SafeStatement($3));
 	} | Expression EQUALS NIL {
-		$$ = new TestNilStatement(scribble_lineno, scribble_text, $1);
+		$$ = new TestNilStatement(scribble_lineno, scribble_text, SafeStatement($1));
 	} | Expression EQUALS Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestEquals, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestEquals, SafeStatement($1), SafeStatement($3));
 	} | Expression NOT EQUALS Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestNotEquals, $1, $4);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestNotEquals, SafeStatement($1), SafeStatement($4));
 	} | Expression GREATER Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreater, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreater, SafeStatement($1), SafeStatement($3));
 	} | Expression LESSER Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestLess, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestLess, SafeStatement($1), SafeStatement($3));
 	} | Expression LESSER EQUALS Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestLessOrEqual, $1, $4);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestLessOrEqual, SafeStatement($1), SafeStatement($4));
 	} | Expression GREATER EQUALS Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreaterOrEqual, $1, $4);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestGreaterOrEqual, SafeStatement($1), SafeStatement($4));
 	} | LPAREN Expression RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Expression {
@@ -683,7 +683,7 @@ Expression: TRUE {
 		if (it == Variables.end()) {
 			scribble_error("Variable not defined");
 		} else {
-			$$ = new AssignVariableStatement(scribble_lineno, scribble_text, it->second, $3);
+			$$ = new AssignVariableStatement(scribble_lineno, scribble_text, it->second, SafeStatement($3));
 		}
 		
 		//Free up string pointer.
@@ -741,10 +741,10 @@ Expression: TRUE {
 		//Free name pointer
 		delete $2;
 	} | Expression AND Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestAnd, $1, $3);
+		$$ = new TestStatement(scribble_lineno, scribble_text, TestAnd, SafeStatement($1), SafeStatement($3));
 	} | Expression POINT WORD {
 		
-		$$ = new GetStructureElementStatement(scribble_lineno, scribble_text, $1, *$3);
+		$$ = new GetStructureElementStatement(scribble_lineno, scribble_text, SafeStatement($1), *$3);
 		
 		ParserReference r((GetStructureElementStatement*) $$);
 		StatementReferences.push_back(r);
@@ -752,7 +752,7 @@ Expression: TRUE {
 		delete $3;
 	} | Expression POINT WORD ASSIGN Expression {
 	
-		$$ = new StructureAssignElement(scribble_lineno, scribble_text, $1, $5, *$3);
+		$$ = new StructureAssignElement(scribble_lineno, scribble_text, SafeStatement($1), SafeStatement($5), *$3);
 		
 		ParserReference r((StructureAssignElement*) $$);
 		StatementReferences.push_back(r);

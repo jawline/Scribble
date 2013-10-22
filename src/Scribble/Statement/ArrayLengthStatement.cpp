@@ -35,7 +35,7 @@ Value* ArrayLengthStatement::execute(std::vector<Value*> const& variables) {
 	ArrayValue* v = (ArrayValue*) exp_->execute(variables);
 	int l = 0;
 
-	if (!v->getArrayData().Null()) {
+	if (v->getArrayData().get() != nullptr) {
 		l = v->getLength();
 	}
 

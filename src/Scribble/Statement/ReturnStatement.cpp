@@ -20,7 +20,7 @@ ReturnStatement::~ReturnStatement() {
 
 void ReturnStatement::checkTree(Type* functionType) {
 
-	if (stm_.Null()) {
+	if (stm_.get() == nullptr) {
 
 		if (!functionType->Equals(getVoidType())) {
 			throw StatementException(this, "expected return argument");
@@ -39,7 +39,7 @@ void ReturnStatement::checkTree(Type* functionType) {
 
 Value* ReturnStatement::execute(std::vector<Value*> const& variables) {
 
-	if (stm_.Null()) {
+	if (stm_.get() == nullptr) {
 		Return j(valueHeap.make(getVoidType()));
 		throw j;
 	} else {

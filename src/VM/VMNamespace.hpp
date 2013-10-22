@@ -27,7 +27,8 @@ class NamespaceEntry {
 private:
 
 	NamespaceEntryType type_;
-	VMFunc funcRef_;SP<VMEntryType> typeRef_;
+	SmartPointer<VMFunc> funcRef_;
+	SmartPointer<VMEntryType> typeRef_;
 	VMNamespace namespace_;
 
 public:
@@ -41,7 +42,7 @@ public:
 		namespace_ = names;
 	}
 
-	NamespaceEntry(VMFunc func) {
+	NamespaceEntry(SP<VMFunc> func) {
 		type_ = Function;
 		funcRef_ = func;
 	}
@@ -59,7 +60,7 @@ public:
 		return typeRef_;
 	}
 
-	VMFunc getFunction() {
+	SP<VMFunc> getFunction() {
 		return funcRef_;
 	}
 

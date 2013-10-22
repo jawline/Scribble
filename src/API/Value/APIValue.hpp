@@ -36,7 +36,7 @@ public:
 	}
 
 	bool isReference() {
-		if (type_.Null()) {
+		if (type_.get() == nullptr) {
 			return false;
 		}
 		return true;

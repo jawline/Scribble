@@ -14,8 +14,7 @@
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
-TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
-		Statement* leftHandSide, Statement* rightHandSide) :
+TestStatement::TestStatement(int lineNo, std::string sym, TestType testType, SafeStatement leftHandSide, SafeStatement rightHandSide) :
 		Statement(lineNo, sym) {
 	tType_ = testType;
 	lhs_ = leftHandSide;
@@ -67,7 +66,6 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 			//Result is a bool test of truth
 			result = valueHeap.make((il->value() == rl->value()));
 			break;
-
 
 		case TestAnd:
 			result = valueHeap.make((il->value() && rl->value()));
@@ -176,76 +174,75 @@ int TestStatement::generateCode(int resultRegister,
 		generated << "#End of and test\n";
 	} else {
 
-	generated << "#Test statement\n";
+		generated << "#Test statement\n";
 
-	instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
+		instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
 
-	generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
-	instrs += 1;
-
-	instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
-
-	generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
-	instrs++;
-
-	//1
-	generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
-	instrs++;
-
-	switch (tType_) {
-
-	case TestEquals:
-		//2
-		generated << "eq $3 $4 #test lhs rhs\n";
+		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
 		instrs += 1;
-		break;
 
-	case TestNotEquals:
-		generated << "neq $3 $4\n";
-		instrs += 2;
-		break;
+		instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
 
-	case TestLess:
-		generated << "lt $3 $4 #test less than lhs rhs\n";
-		instrs += 1;
-		break;
-
-	case TestLessOrEqual:
-		generated << "le $3 $4 #tess less or equal lhs rhs\n";
-		instrs += 1;
-		break;
-
-	case TestGreater:
-		generated << "gt $3 $4 #test greater\n";
-		instrs += 2;
-		break;
-
-	case TestGreaterOrEqual:
-		generated << "ge $3 $4 #test greater or equal\n";
-		instrs += 2;
-		break;
-
-	default:
-		printf("Test statement unimplemented.\n");
-		break;
-
-	}
-
-	//3
-	generated << "load 1 $" << VM::vmTempRegisterThree << "\n";
-	instrs++;
-
-	//Move the temp register result to the result register if they aren't the same register ( For example for will temp 3 to store its condition )
-	if (VM::vmTempRegisterThree != resultRegister) {
-		//4
-		generated << "move $" << VM::vmTempRegisterThree << " $";
-		generated << resultRegister;
-		generated << "\n";
-
+		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
 		instrs++;
-	}
 
-	generated << "#Test statement end. " << instrs << " instructions\n";
+		//1
+		generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
+		instrs++;
+
+		switch (tType_) {
+
+		case TestEquals:
+			//2
+			generated << "eq $3 $4 #test lhs rhs\n";
+			instrs += 1;
+			break;
+
+		case TestNotEquals:
+			generated << "neq $3 $4\n";
+			instrs += 2;
+			break;
+
+		case TestLess:
+			generated << "lt $3 $4 #test less than lhs rhs\n";
+			instrs += 1;
+			break;
+
+		case TestLessOrEqual:
+			generated << "le $3 $4 #tess less or equal lhs rhs\n";
+			instrs += 1;
+			break;
+
+		case TestGreater:
+			generated << "gt $3 $4 #test greater\n";
+			instrs += 2;
+			break;
+
+		case TestGreaterOrEqual:
+			generated << "ge $3 $4 #test greater or equal\n";
+			instrs += 2;
+			break;
+
+		default:
+			printf("Test statement unimplemented.\n");
+			break;
+		}
+
+		//3
+		generated << "load 1 $" << VM::vmTempRegisterThree << "\n";
+		instrs++;
+
+		//Move the temp register result to the result register if they aren't the same register ( For example for will temp 3 to store its condition )
+		if (VM::vmTempRegisterThree != resultRegister) {
+			//4
+			generated << "move $" << VM::vmTempRegisterThree << " $";
+			generated << resultRegister;
+			generated << "\n";
+
+			instrs++;
+		}
+
+		generated << "#Test statement end. " << instrs << " instructions\n";
 
 	}
 

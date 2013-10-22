@@ -74,7 +74,7 @@ int WhileStatement::generateCode(int resultRegister,
 
 	generated << "#while test condition result\n";
 	generated << "eq $5 0\n";
-	generated << "jmpr " << numBodyInstructions+2 << "\n";
+	generated << "jmpr " << numBodyInstructions + 2 << "\n";
 
 	numInstr += 2;
 

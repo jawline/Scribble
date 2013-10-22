@@ -24,9 +24,9 @@ bool Type::Equals(Type* other) {
 
 	//TODO: Probably needs cleaning up. Sleepy
 
-	if (!subType_.Null()) {
+	if (subType_.get() != nullptr) {
 
-		if (other->subType_.Null()) {
+		if (other->subType_.get() == nullptr) {
 			return false;
 		}
 

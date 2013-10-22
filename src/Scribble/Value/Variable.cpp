@@ -19,7 +19,7 @@ Value* Variable::getValue() {
 
 Type* Variable::getType() {
 
-	if (!type_.Null() && type_->type != nullptr) {
+	if (type_.get() != nullptr && type_->type != nullptr) {
 		return type_->type;
 	}
 
@@ -33,7 +33,7 @@ Type* Variable::getType() {
 
 void Variable::setType(Type* type) {
 
-	if (type_.Null()) {
+	if (type_.get() == nullptr) {
 		type_ = TypeReference ( new TypeReferenceCore( "", type) );
 	} else {
 		type_->type = type;

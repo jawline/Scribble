@@ -56,7 +56,7 @@ Value* GetStructureElementStatement::execute(
 
 	Structure* gen = (Structure*) statement_->execute(variables);
 
-	if (gen->data().Null()) {
+	if (gen->data().get() == nullptr) {
 		throw StatementException(this, "nil pointer. gen->data is null");
 	}
 

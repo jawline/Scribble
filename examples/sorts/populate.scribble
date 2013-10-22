@@ -1,3 +1,5 @@
+import("sys")
+
 func PopulateWorstCase( list : array(int)) {
 
 	for var i := 0; i < len(list); i++ do {
@@ -6,10 +8,20 @@ func PopulateWorstCase( list : array(int)) {
 
 }
 
-func PopulateBestCase( list : array(int) ) {
+func PopulateBestCase(list : array(int)) {
 
 	for var i := 0; i < len(list); i++ do {
 		list[i] := i;
 	}
 
+}
+
+func PrintList(list : array(int)) {
+
+	for var i := 0; i < len(list); i++ do {
+		sys.Write( sys.String(list[i]) );
+		sys.Write(" ");
+	}
+	
+	sys.Write("\n");
 }

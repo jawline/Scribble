@@ -41,7 +41,7 @@ public:
 
 	int debugCode(std::stringstream& gen);
 
-	virtual VM::VMFunc generateVMFunction() {
+	virtual SP<VM::VMFunc> generateVMFunction() {
 
 		std::stringstream code;
 
@@ -52,7 +52,7 @@ public:
 		VM::InstructionSet instructions = SimpleASM::Parser::parse(
 				code.str().c_str());
 
-		return VM::VMFunc(getName(), instructions);
+		return SP<VM::VMFunc>( new VM::VMFunc(getName(), instructions) );
 	}
 };
 

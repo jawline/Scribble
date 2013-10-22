@@ -151,44 +151,44 @@ bool Parser::listContains(std::string target,
 }
 
 bool Parser::functionSetAlreadyContainsEquivilent(SP<Function> function,
-		FunctionSet const& functionSet) {
+FunctionSet const& functionSet) {
 
 	bool duplicate = false;
 
 	//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
-	for (unsigned int i = 0; i < functionSet.size(); ++i) {
+		for (unsigned int i = 0; i < functionSet.size(); ++i) {
 
-		auto compared = functionSet[i];
+			auto compared = functionSet[i];
 
-		if (compared.Get() == function.Get()) {
-			return true;
-		} else {
+			if (compared.get() == function.get()) {
+				return true;
+			} else {
 
-			if (function->numArgs() != compared->numArgs()) {
-				return false;
-			}
+				if (function->numArgs() != compared->numArgs()) {
+					return false;
+				}
 
-			duplicate = true;
+				duplicate = true;
 
-			for (unsigned int j = 0; j < function->numArgs(); ++j) {
+				for (unsigned int j = 0; j < function->numArgs(); ++j) {
 
-				if (function->argType(j) != compared->argType(j)) {
-					duplicate = false;
-					break;
+					if (function->argType(j) != compared->argType(j)) {
+						duplicate = false;
+						break;
+					}
+
+				}
+
+				if (duplicate) {
+					return true;
 				}
 
 			}
 
-			if (duplicate) {
-				return true;
-			}
-
 		}
 
+		return false;
 	}
-
-	return false;
-}
 
 unsigned int Parser::functionSetNumArguments(FunctionSet const& set) {
 	SP<Function> fn = set[0];
@@ -256,7 +256,7 @@ NamespaceType Parser::include(std::string const& filename,
 
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
-	std::vector<SP<Variable>> variableReferences = VariableReferences;
+	std::vector < SP < Variable >> variableReferences = VariableReferences;
 
 	StatementReferences.clear();
 	TypeReferences.clear();
@@ -335,7 +335,7 @@ NamespaceType Parser::include(std::string const& filename,
 
 					ref->setResolveIssue(
 							std::string("Namespace ") + ref->getNamespace()
-									+ " has not been imported.");
+							+ " has not been imported.");
 
 				}
 
@@ -349,7 +349,7 @@ NamespaceType Parser::include(std::string const& filename,
 
 				ref->setResolveIssue(
 						std::string("the function ") + ref->getDebugName()
-								+ " is not defined");
+						+ " is not defined");
 
 			} else {
 
@@ -363,7 +363,7 @@ NamespaceType Parser::include(std::string const& filename,
 					SP<Function> searchResult = Parser::findFunctionInSet(ref,
 							it->second.getFunctionSet());
 
-					if (!searchResult.Null()) {
+					if (searchResult.get() != nullptr) {
 
 						ref->setFunction(searchResult);
 
@@ -403,9 +403,9 @@ NamespaceType Parser::include(std::string const& filename,
 			break;
 		}
 
-		}
-
 	}
+
+}
 
 	try {
 
@@ -418,7 +418,7 @@ NamespaceType Parser::include(std::string const& filename,
 					std::vector<SafeFunction> set = it->second.getFunctionSet();
 
 					for (unsigned int i = 0; i < set.size(); ++i) {
-						((ScriptedFunction *)set[i].Get())->check();
+						((ScriptedFunction *) set[i].get())->check();
 					}
 				}
 

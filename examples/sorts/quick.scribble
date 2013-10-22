@@ -1,77 +1,36 @@
 import ("sys")
 
-func part(n:array(int)) : int {
- 
- //Take i to be 0.
- var i := 0;
+func qs( n:array(int), low : int, high : int) {
 
- //Take the last element to be length of n - 1
- var j := len(n) - 1;
- 
+ var i := low;
+ var j := high;
+
  //Take the pivot value to be the value in the middle
- var pivot := n[(len(n) - 1) / 2];
+ var pivot := n[i];
 
- while i <= j {
+ while i <= j do {
 
-  while n[i] < pivot {
+  for i; n[i] < pivot; i++ do {}
+  for j; n[j] > pivot; j-- do {}
+
+  // As long as i <= j swap n[i] and n[j] and increment them both
+  if i <= j then {
+  
+   var temp := n[i];
+   n[i] := n[j];
+   n[j] := temp;
+   
    i++;
-  }
-
-  while n[j] > pivot {
    j--;
   }
 
-  // As long as i <= j swap n[i] and n[j] and increment them both
-  if (i <= j) {
-   var temp := n[i]
-   n[i] := n[j]
-   n[j] := temp
-   i++
-   j--
-  }
-
  }
-
- //Return i, the value in the middle
- return i
+ 
+ if low < j then qs(n, low, j);
+ if i < high then qs(n, i, high);
 }
 
-func sort(n : array(int)) : array(int) {
-
- if len(n) = 1 {
-  return n
- }
-
- var i := part(n)
-
- if (i-1) > 0 {
-  sort(n[0:i])
- }
-
- if i < len(n)-1 {
-  sort(n[i:len(n)])
- }
-
- return n
-}
-
-func Test() : void {
- sys.Write("Quicksort test procedure\n")
- 
- 
- var list := [10]int
- 
- //Initialize the list
- for var i := 0; i < len(list); i++ {
-  list[i] := sys.RandomInt(100)
- }
- 
- sort(list)
- 
- for i := 0; i < len(list); i++ {
-  sys.Write(sys.String(list[i]) + " ")
- }
- 
- sys.Write("\n")
- 
+func Sort(n : array(int), start : int, end : int) : array(int) {
+	qs(n, 0, len(n) - 1);
+	return n;
 }

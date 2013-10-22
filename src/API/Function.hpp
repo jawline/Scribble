@@ -114,8 +114,8 @@ public:
 	 * By default returns a native VM func to this function. Overload if custom VMFunc is required ( Such as ScriptedFunction )
 	 */
 
-	virtual VM::VMFunc generateVMFunction() {
-		return VM::VMFunc(getName(), this);
+	virtual SmartPointer<VM::VMFunc> generateVMFunction() {
+		return SmartPointer<VM::VMFunc>(new VM::VMFunc(getName(), this));
 	}
 
 };

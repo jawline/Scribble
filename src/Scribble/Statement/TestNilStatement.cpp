@@ -34,7 +34,7 @@ Value* TestNilStatement::execute(std::vector<Value*> const& variables) {
 
 	ArrayValue* stmt = (ArrayValue*) statement_->execute(variables);
 
-	if (stmt->getArrayData().Null()) {
+	if (stmt->getArrayData().get() == nullptr) {
 		r = true;
 	}
 

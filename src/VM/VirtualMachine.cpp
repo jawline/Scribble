@@ -16,11 +16,6 @@
 
 #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); this->printState(); do { } while (1)
 
-/**
- * Loads a given function into entry and executes if native. NOTE: DO NOT USE OUTSIDE OF VM::execute
- */
-#define VM_LOAD_FUNC(fn, entry) 	if (!VM::searchNamespace(namespace_, fn, entry) || entry.getType() != Function) { VM_PRINTF_FATAL("%s is not a registered function\n", fn.c_str()); } if (entry.getFunction().isNative()) { entry.getFunction().getFunction()->execute(this); }
-
 #if VM_DEBUG == 3
 FILE* flog = fopen("VMLogFile", "w");
 #define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
@@ -57,16 +52,27 @@ VirtualMachine::VirtualMachine() {
 	}
 
 	//Register all the primitive types
-	registerEntry("char", NamespaceEntry(new VMEntryType("char", 1, false)));
-	registerEntry("bool", NamespaceEntry(new VMEntryType("bool", 1, false)));
-	registerEntry("short", NamespaceEntry(new VMEntryType("short", 2, false)));
-	registerEntry("int", NamespaceEntry(new VMEntryType("int", 4, false)));
-	registerEntry("long", NamespaceEntry(new VMEntryType("int", 8, false)));
+	registerEntry("char",
+			NamespaceEntry(
+					SP < VMEntryType > (new VMEntryType("char", 1, false))));
+	registerEntry("bool",
+			NamespaceEntry(
+					SP < VMEntryType > (new VMEntryType("bool", 1, false))));
+	registerEntry("short",
+			NamespaceEntry(
+					SP < VMEntryType > (new VMEntryType("short", 2, false))));
+	registerEntry("int",
+			NamespaceEntry(
+					SP < VMEntryType > (new VMEntryType("int", 4, false))));
+	registerEntry("long",
+			NamespaceEntry(
+					SP < VMEntryType > (new VMEntryType("int", 8, false))));
 
 	registerEntry("string",
 			NamespaceEntry(
-					new VMEntryType("string",
-							namespace_["char"].getTypeReference())));
+					SP < VMEntryType
+							> (new VMEntryType("string",
+									namespace_["char"].getTypeReference()))));
 
 	//Allocate the stack
 	stack_ = new uint8_t[vmStackIncrease];
@@ -96,13 +102,13 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 					name.size() - strlen(prefix) - 1);
 			SP<VMEntryType> subtype = findType(subtypeName);
 
-			if (subtype.Null()) {
+			if (subtype.get() == nullptr) {
 				VM_PRINTF_FATAL("Cannot create array of invalid subtype %s\n",
 						subtypeName.c_str());
 				return nullptr;
 			}
 
-			SP<VMEntryType> entryType = new VMEntryType(name, subtype);
+			SP<VMEntryType> entryType = SP<VMEntryType>(new VMEntryType(name, subtype));
 			registerEntry(name, entryType);
 			VM_PRINTF_LOG("Generating new type %s\n", name.c_str());
 			return entryType;
@@ -118,13 +124,17 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 	return entry.getTypeReference();
 }
 
-bool VirtualMachine::returnToPreviousFunction(InstructionSet& instructionSet) {
+bool VirtualMachine::returnToPreviousFunction(SmartPointer<VMFunc>& currentFunction, InstructionSet& set) {
 
 	if (currentVmState_.size() > 0) {
+
 		VMState top = currentVmState_.top();
 		currentVmState_.pop();
-		instructionSet = top.set_;
+
+		currentFunction = top.func_;
+		set = currentFunction->getInstructions();
 		registers_[VM::vmProgramCounter] = top.pc_;
+
 		return true;
 	} else {
 		return false;
@@ -134,15 +144,21 @@ bool VirtualMachine::returnToPreviousFunction(InstructionSet& instructionSet) {
 void VirtualMachine::execute(std::string function) {
 
 	NamespaceEntry functionEntry;
+	SmartPointer<VMFunc> currentFunction;
 
-	VM_LOAD_FUNC(function, functionEntry);
+	if (!VM::searchNamespace(namespace_, function, functionEntry)
+			|| functionEntry.getType() != Function) {
+		VM_PRINTF_FATAL("%s is not a registered function\n", function.c_str());
+	}
 
-	if (functionEntry.getFunction().isNative()) {
+	currentFunction = functionEntry.getFunction();
+
+	if (currentFunction->isNative()) {
+		currentFunction->getFunction()->execute(this);
 		return;
 	}
 
-	InstructionSet instructionSet =
-			functionEntry.getFunction().getInstructions();
+	InstructionSet instructionSet = currentFunction->getInstructions();
 
 	registers_[vmProgramCounter] = instructionSet.startInstruction();
 	long* current = &registers_[vmProgramCounter];
@@ -153,7 +169,7 @@ void VirtualMachine::execute(std::string function) {
 		//If the current PC is above the number of instructions in this function then attempt to return. Else execute the instruction at the PC.
 		if (*current >= instructionSet.numInstructions()) {
 
-			if (!returnToPreviousFunction(instructionSet)) {
+			if (!returnToPreviousFunction(currentFunction, instructionSet)) {
 				shouldReturn = true;
 			}
 
@@ -655,7 +671,7 @@ void VirtualMachine::execute(std::string function) {
 				//Find the type.
 				auto typeSearch = findType(type);
 
-				if (typeSearch.Null()) {
+				if (typeSearch.get() == nullptr) {
 					VM_PRINTF_FATAL("Type %s is not registered\n",
 							type.c_str());
 				}
@@ -744,7 +760,7 @@ void VirtualMachine::execute(std::string function) {
 			case OpCallFn: {
 
 				uint8_t modeRegister = instructionSet.getInst(*current + 1);
-				char* name = 0;
+				std::string name;
 
 				if (modeRegister == Constant) {
 
@@ -767,18 +783,29 @@ void VirtualMachine::execute(std::string function) {
 
 				//VM_PRINTF_LOG("Calling function %s\n", name);
 
-				NamespaceEntry entry;
-				VM_LOAD_FUNC(std::string(name), entry);
+				if (!VM::searchNamespace(namespace_, name, functionEntry)
+						|| functionEntry.getType() != Function) {
 
-				//If it is native then the load will have already executed and the PC just needs incrementing
-				if (entry.getFunction().isNative()) {
+					VM_PRINTF_FATAL("%s is not a registered function\n",
+							name.c_str());
+
+				}
+
+				if (functionEntry.getFunction()->isNative()) {
+					functionEntry.getFunction()->getFunction()->execute(this);
 					*current += vmOpCodeSize;
 				} else {
+
 					//Otherwise push the VM state and then setup the new function. Set the return PC to be the current PC plus vmOpCodeSize
 					currentVmState_.push(
-							VMState(instructionSet, (*current) + vmOpCodeSize));
-					instructionSet = entry.getFunction().getInstructions();
+							VMState(currentFunction,
+									(*current) + vmOpCodeSize));
+
+					currentFunction = functionEntry.getFunction();
+
+					instructionSet = currentFunction->getInstructions();
 					*current = instructionSet.startInstruction();
+
 				}
 
 				break;
@@ -792,7 +819,7 @@ void VirtualMachine::execute(std::string function) {
 
 				VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
 
-				if (!returnToPreviousFunction(instructionSet)) {
+				if (!returnToPreviousFunction(currentFunction, instructionSet)) {
 					shouldReturn = true;
 				}
 
@@ -868,7 +895,7 @@ void VirtualMachine::garbageCollection() {
 
 		SP<VMEntryType> nextType = heap_.getType(next);
 
-		if (nextType.Null()) {
+		if (nextType.get() == nullptr) {
 			VM_PRINTF_FATAL("%s", "ERROR: Heap type failure\n");
 		}
 
@@ -944,11 +971,11 @@ void VirtualMachine::printState() {
 }
 
 long VirtualMachine::stackLong(long pos) {
-	return *((long*) stack_ + pos);
+	return *((long*) (stack_ + pos));
 }
 
 void VirtualMachine::stackSetLong(long pos, long v) {
-	*((long*) stack_ + pos) = v;
+	*((long*) (stack_ + pos)) = v;
 }
 
 void VirtualMachine::popStackLong(long& val, bool& ref) {
@@ -985,7 +1012,10 @@ void VirtualMachine::expandStack() {
 
 void VirtualMachine::pushStackLong(long v) {
 
-	while (registers_[vmStackCurrentPointer] >= currentStackHeight_) {
+	long max = registers_[vmStackCurrentPointer] + 32;
+
+	while ( max >= currentStackHeight_) {
+		printf("STACK EXPANSION HAPPENING\n");
 		expandStack();
 	}
 

@@ -3,7 +3,7 @@
 
 void FunctionStatement::checkTree(Type* functionType) {
 
-	if (func_->getFunction().Get() == 0) {
+	if (func_->getFunction().get() == nullptr) {
 
 		std::string error = "";
 
@@ -59,7 +59,7 @@ Value* FunctionStatement::execute(std::vector<Value*> const& variables) {
 
 Type* FunctionStatement::type() {
 
-	if (func_->getFunction().Null()) {
+	if (func_->getFunction().get() == nullptr) {
 		return getTypeManager().getType(TypeUnresolved);
 	}
 

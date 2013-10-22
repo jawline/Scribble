@@ -21,6 +21,7 @@ const static unsigned int vmStackBlockSize = 1024;
 /**
  * The amount to increment the stack by if it is expanded in stack blocks
  */
+
 const static unsigned int vmStackIncrement = 32;
 
 /**

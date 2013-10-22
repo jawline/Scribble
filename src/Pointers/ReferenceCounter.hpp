@@ -3,16 +3,20 @@
 
 class ReferenceCounter {
 private:
-	int count;
+	int count_;
 
 public:
 
+	ReferenceCounter() {
+		count_ = 0;
+	}
+
 	void Attach() {
-		count++;
+		count_++;
 	}
 
 	int Release() {
-		return --count;
+		return --count_;
 	}
 
 };

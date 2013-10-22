@@ -1,14 +1,32 @@
+import("sorts/populate")
+import("sorts/quick")
 import("sys")
 
+
+func even(i : int) : bool {
+
+	if i = 0 then {
+		return true;
+	}
+	
+	return odd(i-1);
+
+}
+
+func odd(i : int) : bool {
+	
+	if i = 0 then {
+		return false;
+	}
+	
+	return even(i-1);
+}
+
+func r(a : int) : int {
+	if a = 0 then return 0;
+	return r(a-1) + 1;
+}
+
 func main() {
-	var j := true;
-	var r := false;
-	
-	if j & r then {
-		sys.Write("J And R\n");
-	}
-	
-	if j & j then {
-		sys.Write("J and J\n");
-	}
+	sys.Write( sys.String(r(9000)));
 }

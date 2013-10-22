@@ -2,89 +2,92 @@
 #define _SMART_POINTER_DEF_H_
 #include "ReferenceCounter.hpp"
 #include <mutex>
+#include <memory>
 
-template < typename T > class SmartPointer {
+/**
+template<typename T> class SmartPointer {
 private:
-	T* pointerData;
-	ReferenceCounter* counter;
-	std::mutex lock;
-
-	void Release() {
-
-		lock.lock();
-
-		if (counter->Release() < 1) {
-			delete pointerData;
-			delete counter;
-
-			pointerData = nullptr;
-			counter = nullptr;
-		}
-
-		lock.unlock();
-
-	}
+	T* data_;
+	ReferenceCounter* counter_;
 
 public:
 
-	SmartPointer() : pointerData(0), counter(0) {
+	SmartPointer() :
+			data_(nullptr), counter_(nullptr) {
 
 		//Create a new counter for the pointer
-		counter = new ReferenceCounter();
+		counter_ = new ReferenceCounter();
 
 		//Increment the counter
-		counter->Attach();
+		counter_->Attach();
 	}
 
-	SmartPointer(T* value) : pointerData(value), counter(0) {
-		counter = new ReferenceCounter();
-		counter->Attach();
+	SmartPointer(T* data) : data_(data), counter_(nullptr) {
+		counter_ = new ReferenceCounter();
+		counter_->Attach();
 	}
 
-	SmartPointer(SmartPointer<T> const& sp) : pointerData(sp.pointerData), counter(sp.counter) {
-		counter->Attach();
+	SmartPointer(SmartPointer<T> const& old) :
+			data_(old.data_), counter_(old.counter_) {
+		counter_->Attach();
 	}
 
 	~SmartPointer() {
-		Release();
+
+		if (counter_->Release() <= 0) {
+
+			if (data_ != nullptr) {
+				delete data_;
+			}
+
+			delete counter_;
+		}
+
 	}
 
-	T& operator* () {
-		return *pointerData;
+	T& operator*() {
+		return *data_;
 	}
 
-	T* operator-> () {
-		return pointerData;
+	T* operator->() {
+		return data_;
 	}
 
 	T* Get() {
-		return pointerData;
+		return data_;
 	}
 
 	inline bool Null() {
 
-		if (pointerData == nullptr) {
+		if (data_ == nullptr) {
 			return true;
 		}
 
 		return false;
 	}
 
-	SmartPointer<T>& operator= (SmartPointer<T> const& rhs) {
+	SmartPointer<T>& operator=(SmartPointer<T> const& other) {
 
-		if (this != &rhs) {
+		if (this != &other) {
 
-			Release();
+			if (counter_->Release() <= 0) {
 
-			pointerData = rhs.pointerData;
-			counter = rhs.counter;
-			counter->Attach();
+				if (data_ != nullptr) {
+					delete data_;
+				}
 
+				delete counter_;
+			}
+
+			data_ = other.data_;
+			counter_ = other.counter_;
+			counter_->Attach();
 		}
 
 		return *this;
 	}
-};
+};*/
 
+#define SmartPointer std::shared_ptr
 #define SP SmartPointer
 #endif //_SMART_POINTER_DEF_H_

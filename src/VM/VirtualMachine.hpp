@@ -21,15 +21,15 @@ namespace VM {
 
 class VMState {
 public:
-	InstructionSet set_;
+	SmartPointer<VMFunc> func_;
 	long pc_;
 
 	VMState() :
-			pc_(0) {
+	pc_(0) {
 	}
 
-	VMState(InstructionSet set, long pc) :
-			set_(set), pc_(pc) {
+	VMState(SmartPointer<VMFunc> func, long pc) :
+	func_(func), pc_(pc) {
 	}
 };
 
@@ -81,7 +81,7 @@ private:
 
 	unsigned int gcStat_;
 
-	bool returnToPreviousFunction(InstructionSet& instructionSet);
+	bool returnToPreviousFunction(SP<VMFunc>& fn, InstructionSet& set);
 
 public:
 	VirtualMachine();

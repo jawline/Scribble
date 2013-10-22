@@ -57,7 +57,7 @@ Value* StructureStatement::execute(std::vector<Value*> const& variables) {
 		initial[i] = statements_[i]->execute(variables);
 	}
 
-	SafeStructureData data = new StructureData(statements_.size(), initial);
+	SafeStructureData data = SafeStructureData(new StructureData(statements_.size(), initial));
 
 	gen->setData(data);
 
