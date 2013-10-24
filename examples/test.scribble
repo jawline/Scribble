@@ -2,31 +2,16 @@ import("sorts/populate")
 import("sorts/quick")
 import("sys")
 
-
-func even(i : int) : bool {
-
-	if i = 0 then {
-		return true;
-	}
-	
-	return odd(i-1);
-
-}
-
-func odd(i : int) : bool {
-	
-	if i = 0 then {
-		return false;
-	}
-	
-	return even(i-1);
-}
-
-func r(a : int) : int {
-	if a = 0 then return 0;
-	return r(a-1) + 1;
-}
-
 func main() {
-	sys.Write( sys.String(r(9000)));
+
+	var list := [100]int;
+
+	sys.Write("Before: ");	
+	populate.PopulateWorstCase(list);
+	populate.PrintList(list);
+	
+	quick.Sort(list);
+
+	sys.Write("After: ");	
+	populate.PrintList(list);
 }

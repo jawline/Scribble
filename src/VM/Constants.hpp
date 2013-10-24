@@ -5,6 +5,13 @@
 #include "ConstantTypes.hpp"
 #include "CallTypes.hpp"
 
+/**
+ * VM Debug level. Changes the amount of output produced by VMLogFile
+ * TODO: Document what it changes.
+ */
+
+#define VM_DEBUG 3
+
 namespace VM {
 
 const static unsigned int vmOpCodeSize = 8;

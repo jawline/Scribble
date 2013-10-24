@@ -9,33 +9,9 @@
 #include "OpCodes.hpp"
 #include "JumpTypes.hpp"
 #include "Constants.hpp"
+#include "VirtualMachine_Debug.hpp"
 #include <API/Function.hpp>
 #include <stdio.h>
-
-#define VM_DEBUG 3
-
-#define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); this->printState(); do { } while (1)
-
-#if VM_DEBUG == 3
-FILE* flog = fopen("VMLogFile", "w");
-#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-#define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-#elif VM_DEBUG == 2
-FILE* flog = fopen("VMLogFile", "w");
-#define VM_PRINTF_DBG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-#define VM_PRINTF_LOG(fmt, ...)
-#elif VM_DEBUG == 1
-FILE* flog = fopen("VMLogFile", "w");
-#define VM_PRINTF_DBG(fmt, ...)
-#define VM_PRINTF_WARN(fmt, ...) fprintf(flog, fmt, __VA_ARGS__) fflush(flog);
-#define VM_PRINTF_LOG(fmt, ...)
-#else
-#define VM_PRINTF_WARN(fmt, ...)
-#define VM_PRINTF_DBG(fmt, ...)
-#define VM_PRINTF_LOG(fmt, ...)
-#endif
 
 namespace VM {
 
@@ -92,8 +68,10 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 
 	NamespaceEntry entry;
 
+	//If the namespace entry is not found in the namespace
 	if (!searchNamespace(namespace_, name, entry)) {
 
+		//If it starts with 'array(' try to generate it from existing types
 		char const* prefix = "array(";
 
 		if (strncmp(prefix, name.c_str(), strlen(prefix)) == 0) {
@@ -114,9 +92,11 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 			return entryType;
 		}
 
+		//If it does not start with array then return NULL so that the VM error handler can catch it
 		return nullptr;
 	}
 
+	//If the entry in the namespace specified is not a type then return null
 	if (entry.getType() != Type) {
 		return nullptr;
 	}
@@ -124,22 +104,23 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 	return entry.getTypeReference();
 }
 
-bool VirtualMachine::returnToPreviousFunction(SmartPointer<VMFunc>& currentFunction, InstructionSet& set) {
+bool VirtualMachine::returnToPreviousFunction(
+		SmartPointer<VMFunc>& currentFunction, InstructionSet& set) {
 
-	if (currentVmState_.size() > 0) {
+			if (currentVmState_.size() > 0) {
 
-		VMState top = currentVmState_.top();
-		currentVmState_.pop();
+				VMState top = currentVmState_.top();
+				currentVmState_.pop();
 
-		currentFunction = top.func_;
-		set = currentFunction->getInstructions();
-		registers_[VM::vmProgramCounter] = top.pc_;
+				currentFunction = top.func_;
+				set = currentFunction->getInstructions();
+				registers_[VM::vmProgramCounter] = top.pc_;
 
-		return true;
-	} else {
-		return false;
-	}
-}
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 void VirtualMachine::execute(std::string function) {
 
@@ -819,7 +800,8 @@ void VirtualMachine::execute(std::string function) {
 
 				VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
 
-				if (!returnToPreviousFunction(currentFunction, instructionSet)) {
+				if (!returnToPreviousFunction(currentFunction,
+						instructionSet)) {
 					shouldReturn = true;
 				}
 
@@ -968,66 +950,6 @@ void VirtualMachine::printState() {
 	VM_PRINTF_LOG("%s\n", heap_.debugState().c_str());
 
 	VM_PRINTF_LOG("%s", "--VM STATE END--\n");
-}
-
-long VirtualMachine::stackLong(long pos) {
-	return *((long*) (stack_ + pos));
-}
-
-void VirtualMachine::stackSetLong(long pos, long v) {
-	*((long*) (stack_ + pos)) = v;
-}
-
-void VirtualMachine::popStackLong(long& val, bool& ref) {
-	val = stackLong(registers_[vmStackCurrentPointer] - 8);
-	registers_[vmStackCurrentPointer] -= 8;
-
-	ref = false;
-
-	if (stackReferences_.size() > 0
-			&& stackReferences_.back() >= registers_[vmStackCurrentPointer]) {
-		stackReferences_.pop_back();
-		ref = true;
-	}
-
-}
-
-void VirtualMachine::expandStack() {
-
-	VM_PRINTF_LOG("Increased stack size by %i blocks to %li",
-			vmStackIncrement, currentStackHeight_);
-
-	//Allocate memory for a larger stack
-	uint8_t* newStack = new uint8_t[currentStackHeight_ + vmStackIncrease];
-
-	//Copy over and then free up the existing stack
-	memcpy(newStack, stack_, currentStackHeight_);
-	delete[] stack_;
-
-	//Change the stack to the new stack
-	stack_ = newStack;
-	currentStackHeight_ += vmStackIncrease;
-
-}
-
-void VirtualMachine::pushStackLong(long v) {
-
-	long max = registers_[vmStackCurrentPointer] + 32;
-
-	while ( max >= currentStackHeight_) {
-		printf("STACK EXPANSION HAPPENING\n");
-		expandStack();
-	}
-
-	stackSetLong(registers_[vmStackCurrentPointer], v);
-	registers_[vmStackCurrentPointer] += 8;
-}
-
-/**
- * Mark the next entry pushed to the stack as a reference
- */
-void VirtualMachine::markStackReference() {
-	stackReferences_.push_back(registers_[vmStackCurrentPointer]);
 }
 
 } /* namespace VM */

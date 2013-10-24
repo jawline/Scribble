@@ -30,7 +30,7 @@ func qs( n:array(int), low : int, high : int) {
  if i < high then qs(n, i, high);
 }
 
-func Sort(n : array(int), start : int, end : int) : array(int) {
+func Sort(n : array(int)) : array(int) {
 	qs(n, 0, len(n) - 1);
 	return n;
 }
