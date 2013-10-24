@@ -519,16 +519,21 @@ void VirtualMachine::execute(std::string function) {
 
 				int size = arrayType->arraySubtype()->getElementSize();
 
-				uint8_t* dataPtr =
-						heap_.getAddress(registers_[tgtArray])
-								+ (registers_[index]
-										* ((long) arrayType->arraySubtype()->getElementSize()));
+				long offsetBytes = registers_[index]
+						* arrayType->arraySubtype()->getElementSize();
+
+				uint8_t* dataPtr = heap_.getAddress(registers_[tgtArray])
+						+ offsetBytes;
 
 				uint8_t* max = heap_.getAddress(registers_[tgtArray])
 						+ heap_.getSize(registers_[tgtArray]);
 
 				if (dataPtr > max) {
-					VM_PRINTF_FATAL("%s", "VM Array out of bounds exception\n");
+
+					VM_PRINTF_FATAL(
+							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
+							registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]), dataPtr, max);
+
 				}
 
 				switch (size) {
@@ -596,9 +601,11 @@ void VirtualMachine::execute(std::string function) {
 						+ heap_.getSize(registers_[tgtArray]);
 
 				if (dataPtr >= max) {
+
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
 							registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]), dataPtr, max);
+
 				}
 
 				switch (size) {

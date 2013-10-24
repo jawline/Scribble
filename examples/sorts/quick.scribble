@@ -10,8 +10,13 @@ func qs( n:array(int), low : int, high : int) {
 
  while i <= j do {
 
-  for i; n[i] < pivot; i++ do {}
-  for j; n[j] > pivot; j-- do {}
+  while n[i] < pivot do {
+  	i++;
+  }
+  
+  while n[j] > pivot do {
+  	j--;
+  }
 
   // As long as i <= j swap n[i] and n[j] and increment them both
   if i <= j then {

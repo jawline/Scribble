@@ -10,6 +10,7 @@
 #include <Scribble/Value/Void.hpp>
 #include <Scribble/Value/Bool.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+#include <VM/Constants.hpp>
 
 WhileStatement::WhileStatement(int lineNo, std::string sym,
 		SafeStatement condition, std::vector<SafeStatement> statements) :
@@ -60,28 +61,31 @@ int WhileStatement::generateCode(int resultRegister,
 
 	std::stringstream body;
 	int numInstr = 0;
+	int numBodyInstrs = 0;
 
 	body << "#while body\n";
 
 	for (unsigned int i = 0; i < statements_.size(); i++) {
-		numInstr += statements_[i]->generateCode(-1, body);
+		numBodyInstrs += statements_[i]->generateCode(-1, body);
 	}
 
-	int numBodyInstructions = numInstr;
 
 	generated << "#while conditions\n";
-	numInstr += condition_->generateCode(5, generated);
+	numInstr += condition_->generateCode(VM::vmTempRegisterThree, generated);
 
 	generated << "#while test condition result\n";
-	generated << "eq $5 0\n";
-	generated << "jmpr " << numBodyInstructions + 2 << "\n";
 
+	generated << "eq $" << VM::vmTempRegisterThree << " 0\n";
 	numInstr += 2;
 
+	generated << "jmpr " << numBodyInstrs + 2 << "\n";
+	numInstr += 1;
+
 	generated << body.str();
+	numInstr += numBodyInstrs;
 
 	generated << "#return to sender\n";
-	generated << "jmpr -" << (numInstr + 1) << "\n";
+	generated << "jmpr -" << (numInstr) << "\n";
 
 	numInstr++;
 
