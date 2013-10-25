@@ -1,31 +1,24 @@
-import ("sys")
+import("test");
 
-func Test() : bool {
-	var j : array(int)
-	var r : array(string)
-	var k : array(bool)
-	
-	r := [5]string
-	r[0] := "Hello"
-	r[1] := "World"
-	r[2] := "How"
-	r[3] := "Are"
-	r[4] := "You"
-	
-	sys.String(len(r))
-	
-	for var i := 0; i < len(r); i++ {
-		sys.Write(r[i] + "\n")
-	}
-	
-	var jSize := 6
-	j := [jSize]int
+func Test() {
 
-	if (len(j) != jSize) {
-		return false
+	var arr := [150]int;
+	
+	for var i := 0; i < len(arr); i++ do {
+		
+		arr[i] := i;
+		
+		if arr[i] != i then {
+			test.Fatal("arr[i] != i fail");
+		}
+		
 	}
-	
-	var arrayArray := [5]array(array(array(string)))
-	
-	return true
+
+	for i := 0; i < 150; i++ do {
+		
+		if arr[i] != i then {
+			test.Fatal("arr[i] != i fail");
+		}
+		
+	}
 }

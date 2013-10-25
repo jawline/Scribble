@@ -127,7 +127,7 @@ Program: {
 		lastuid = 0;
 		Variables.clear();
 		$$ = 0;
-	} | Program IMPORT LPAREN STRING RPAREN {
+	} | Program IMPORT LPAREN STRING RPAREN END {
 		ImportList.push_back(*$4);
 		delete $4;
 		$$ = 0;

@@ -1,0 +1,15 @@
+import("sys");
+import("tests/loops");
+import("tests/variables");
+import("tests/recursion");
+import("tests/arrays");
+
+func main() {
+
+	variables.Test();
+	loops.Test();
+	recursion.Test();
+	arrays.Test();
+	
+	sys.Write("All tests passed\n");
+}
