@@ -97,6 +97,7 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 		printf("Registering namespace %s\n",
 				selectedNamespaceIter->first.c_str());
+
 		vm.registerEntry(selectedNamespaceIter->first,
 				VM::NamespaceEntry(newSpace));
 

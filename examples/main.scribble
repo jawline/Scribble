@@ -3,6 +3,7 @@ import("tests/loops");
 import("tests/variables");
 import("tests/recursion");
 import("tests/arrays");
+import("tests/primes");
 
 func main() {
 
@@ -10,6 +11,7 @@ func main() {
 	loops.Test();
 	recursion.Test();
 	arrays.Test();
+	primes.Test();
 	
 	sys.Write("All tests passed\n");
 }

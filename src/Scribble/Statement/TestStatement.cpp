@@ -47,9 +47,13 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 			result = valueHeap.make(bl->value() == br->value());
 			break;
 
+		case TestNotEquals:
+			result = valueHeap.make(bl->value() != br->value());
+			break;
+
 		default:
 			throw StatementException(this,
-					"Boolean cannot be tested with anything other than assign");
+					"Boolean cannot be tested with anything other than equality and and");
 			break;
 		}
 
