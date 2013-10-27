@@ -39,6 +39,9 @@ public:
 	virtual int generateCode(int resultRegister, std::stringstream& generated) {
 		printf("Unimplemented statement %s!!\n", symbolName_.c_str());
 		generated << std::string("#") + symbolName_ + " UNIMP\n";
+
+		throw StatementException(this, "The statement is not implemented");
+
 		return 1;
 	}
 };

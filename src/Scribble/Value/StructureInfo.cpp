@@ -7,8 +7,8 @@
 
 #include "StructureInfo.hpp"
 
-StructureInfo::StructureInfo(std::string name) : name_(name),
-		Type(StructureType, nullptr) {
+StructureInfo::StructureInfo(std::string name) :
+		Type(StructureType, nullptr), name_(name) {
 }
 
 StructureInfo::~StructureInfo() {

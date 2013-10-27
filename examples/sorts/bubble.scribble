@@ -1,8 +1,8 @@
-import ("sys")
-import ("populate")
+import ("sys");
+import ("populate");
 
 
-func Sort( n : array(int) ) {
+func Sort( n : array(int) ) : array(int) {
  
  var swapped := true;
 
@@ -20,20 +20,6 @@ func Sort( n : array(int) ) {
    		}
 	}
  }
-}
-
-func Test() {
  
- var list := [100]int;
- 
- populate.PopulateWorstCase(list);
- Sort(list);
- 
- for var i := 0; i < len(list); i++ do {
-  sys.Write(sys.String(list[i]));
-  sys.Write(" ");
- }
- 
- sys.Write("\n");
- 
+ return n;
 }

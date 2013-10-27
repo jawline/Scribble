@@ -14,7 +14,8 @@
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
-TestStatement::TestStatement(int lineNo, std::string sym, TestType testType, SafeStatement leftHandSide, SafeStatement rightHandSide) :
+TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
+		SafeStatement leftHandSide, SafeStatement rightHandSide) :
 		Statement(lineNo, sym) {
 	tType_ = testType;
 	lhs_ = leftHandSide;
@@ -28,107 +29,124 @@ TestStatement::~TestStatement() {
 Value* TestStatement::execute(std::vector<Value*> const& variables) {
 
 	Value* lhRes = lhs_->execute(variables);
-	Value* rhRes = rhs_->execute(variables);
 	Value* result = 0;
 
-	switch (lhRes->type()->getType()) {
+	if (tType_ == TestAnd) {
 
-	case Boolean: {
-		BoolValue* bl = (BoolValue*) lhRes;
-		BoolValue* br = (BoolValue*) rhRes;
+		if (((BoolValue*)lhRes)->value()) {
 
-		switch (tType_) {
+			BoolValue* rhRes = (BoolValue*) rhs_->execute(variables);
 
-		case TestAnd:
-			result = valueHeap.make(bl->value() && br->value());
+			if (rhRes->value()) {
+				result = valueHeap.make(true);
+			} else {
+				result = valueHeap.make(false);
+			}
+
+			valueHeap.free(rhRes);
+
+		} else {
+			result = valueHeap.make(false);
+		}
+
+	} else {
+
+		Value* rhRes = rhs_->execute(variables);
+
+		switch (lhRes->type()->getType()) {
+
+		case Boolean: {
+			BoolValue* bl = (BoolValue*) lhRes;
+			BoolValue* br = (BoolValue*) rhRes;
+
+			switch (tType_) {
+
+			case TestEquals:
+				result = valueHeap.make(bl->value() == br->value());
+				break;
+
+			case TestNotEquals:
+				result = valueHeap.make(bl->value() != br->value());
+				break;
+
+			default:
+				throw StatementException(this,
+						"Boolean cannot be tested with anything other than equality and and");
+				break;
+			}
+
 			break;
+		}
 
-		case TestEquals:
-			result = valueHeap.make(bl->value() == br->value());
-			break;
+		case Int: {
 
-		case TestNotEquals:
-			result = valueHeap.make(bl->value() != br->value());
+			IntValue* il = (IntValue*) lhRes;
+			IntValue* rl = (IntValue*) rhRes;
+
+			switch (tType_) {
+			case TestEquals:
+				//Result is a bool test of truth
+				result = valueHeap.make((il->value() == rl->value()));
+				break;
+
+			case TestNotEquals:
+				result = valueHeap.make(!(il->value() == rl->value()));
+				break;
+
+			case TestLess:
+				result = valueHeap.make((il->value() < rl->value()));
+				break;
+
+			case TestGreater:
+				result = valueHeap.make((il->value() > rl->value()));
+				break;
+
+			case TestLessOrEqual:
+				result = valueHeap.make((il->value() <= rl->value()));
+				break;
+
+			case TestGreaterOrEqual:
+				result = valueHeap.make((il->value() >= rl->value()));
+				break;
+			}
+
 			break;
+		}
+
+		case String: {
+
+			StringValue* sl = (StringValue*) lhRes;
+			StringValue* sr = (StringValue*) rhRes;
+
+			switch (tType_) {
+
+			case TestEquals:
+				result = valueHeap.make(
+						sl->getValue().compare(sr->getValue()) == 0);
+				break;
+
+			case TestNotEquals:
+				result = valueHeap.make(
+						!(sl->getValue().compare(sr->getValue()) == 0));
+				break;
+
+			default:
+				throw StatementException(this, "Not implemented yet");
+			}
+
+			break;
+		}
 
 		default:
-			throw StatementException(this,
-					"Boolean cannot be tested with anything other than equality and and");
-			break;
+			throw StatementException(this, "Type: Not implemented yet");
 		}
 
-		break;
+		valueHeap.free(rhRes);
+
 	}
 
-	case Int: {
-
-		IntValue* il = (IntValue*) lhRes;
-		IntValue* rl = (IntValue*) rhRes;
-
-		switch (tType_) {
-		case TestEquals:
-			//Result is a bool test of truth
-			result = valueHeap.make((il->value() == rl->value()));
-			break;
-
-		case TestAnd:
-			result = valueHeap.make((il->value() && rl->value()));
-			break;
-
-		case TestNotEquals:
-			result = valueHeap.make(!(il->value() == rl->value()));
-			break;
-
-		case TestLess:
-			result = valueHeap.make((il->value() < rl->value()));
-			break;
-
-		case TestGreater:
-			result = valueHeap.make((il->value() > rl->value()));
-			break;
-
-		case TestLessOrEqual:
-			result = valueHeap.make((il->value() <= rl->value()));
-			break;
-
-		case TestGreaterOrEqual:
-			result = valueHeap.make((il->value() >= rl->value()));
-			break;
-		}
-
-		break;
-	}
-
-	case String: {
-
-		StringValue* sl = (StringValue*) lhRes;
-		StringValue* sr = (StringValue*) rhRes;
-
-		switch (tType_) {
-
-		case TestEquals:
-			result = valueHeap.make(
-					sl->getValue().compare(sr->getValue()) == 0);
-			break;
-
-		case TestNotEquals:
-			result = valueHeap.make(
-					!(sl->getValue().compare(sr->getValue()) == 0));
-			break;
-
-		default:
-			throw StatementException(this, "Not implemented yet");
-		}
-
-		break;
-	}
-
-	default:
-		throw StatementException(this, "Type: Not implemented yet");
-	}
 
 	valueHeap.free(lhRes);
-	valueHeap.free(rhRes);
 
 	return result;
 }
@@ -144,6 +162,15 @@ void TestStatement::checkTree(Type* functionType) {
 	if (!lhs_->type()->Equals(rhs_->type())) {
 		throw StatementException(this,
 				"Left hand side type should be the same as right hand side type");
+	}
+
+	if (tType_ == TestAnd) {
+
+		if (!lhs_->type()->Equals(getTypeManager().getType(Boolean))) {
+			throw StatementException(this,
+					"And test only works with boolean values");
+		}
+
 	}
 }
 

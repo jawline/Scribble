@@ -1,4 +1,4 @@
-import ("sys")
+import ("sys");
 
 func qs( n:array(int), low : int, high : int) {
 

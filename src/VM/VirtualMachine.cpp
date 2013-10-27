@@ -603,8 +603,8 @@ void VirtualMachine::execute(std::string function) {
 				if (dataPtr >= max) {
 
 					VM_PRINTF_FATAL(
-							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
-							registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]), dataPtr, max);
+							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i\n",
+							registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]));
 
 				}
 
@@ -816,7 +816,7 @@ void VirtualMachine::execute(std::string function) {
 			}
 
 			default: {
-				VM_PRINTF_FATAL("Invalid instruction %li. %li\n",
+				VM_PRINTF_FATAL("Invalid instruction %li. %ii\n",
 						*current, instructionSet.getInst(*current));
 				return;
 			}

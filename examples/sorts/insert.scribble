@@ -1,4 +1,4 @@
-import ("sys")
+import("sys");
 
 func Sort( n : array(int) ) : array(int) {
 
@@ -10,40 +10,19 @@ func Sort( n : array(int) ) : array(int) {
  //n[j] := temp
  //End loop
 
- for var i := 1; i < len(n); i++ {
+ var i : int;
+ var j : int;
+ var k : int;
  
- 	var temp := n[i]
+ for i := 1; i < len(n); i++ do {
+ 	k := n[i];
  	
- 	var j := i
- 	
- 	while (j > 0) & ( temp < n[j-1] ) {
- 		n[j] := n[j-1]
- 		j--
+ 	for j := i - 1; (j >= 0) & (k < n[j]); j-- do {
+ 		n[j+1] := n[j];
  	}
- 	
- 	n[j] := temp
  
+ 	n[j+1] := k;
  }
 
- return n
-}
-
-func Test() : bool {
-
- sys.Write("Testing insertion sort\n")
- 
- var list := [100]int
- 
- for var i := 0; i < len(list); i++ {
-  list[i] := sys.RandomInt(1000)
- }
- 
- Sort(list)
- 
- for i := 0; i < len(list); i++ {
-  sys.Write(sys.String(list[i]) + " ")
- }
- 
- sys.Write("\n")
-
+ return n;
 }

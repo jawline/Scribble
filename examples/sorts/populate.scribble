@@ -1,19 +1,21 @@
-import("sys")
+import("sys");
 
-func PopulateWorstCase( list : array(int)) {
+func PopulateWorstCase( list : array(int)) : array(int) {
 
 	for var i := 0; i < len(list); i++ do {
 		list[i] := len(list) - i;
 	}
 
+	return list;
 }
 
-func PopulateBestCase(list : array(int)) {
+func PopulateBestCase(list : array(int)) : array(int) {
 
 	for var i := 0; i < len(list); i++ do {
 		list[i] := i;
 	}
 
+	return list;
 }
 
 func PrintList(list : array(int)) {

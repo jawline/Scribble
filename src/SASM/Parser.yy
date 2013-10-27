@@ -12,6 +12,7 @@
 #include <VM/InstructionSet.hpp>
 #include <VM/ConstantTypes.hpp>
 #include <VM/JumpTypes.hpp>
+#include <SASM/SasmException.hpp>
 
 int sasm_lex();
 void sasm_error(const char* s);
@@ -424,6 +425,7 @@ Program: {
 
 void sasm_error(std::string s) {
   printf("ERROR: %s at symbol %s on line %i\n", s.c_str(), sasm_text, sasm_lineno);
+  throw SasmException(s);
 }
 
 void sasm_error(const char* s)

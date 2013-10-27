@@ -24,8 +24,11 @@ Value* GetArrayStatement::execute(std::vector<Value*> const& variables) {
 	IntValue* index = (IntValue*) index_->execute(variables);
 	ArrayValue* array = (ArrayValue*) array_->execute(variables);
 
+	std::stringstream err;
+	err << "Index " << index->value() << " out of bounds";
+
 	if (index->value() < 0 || index->value() >= array->getLength()) {
-		throw StatementException(this, "Index out of bounds");
+		throw StatementException(this, err.str());
 	}
 
 	Value* v =
