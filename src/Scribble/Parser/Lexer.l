@@ -59,7 +59,9 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 ":=" return ASSIGN;
 "=" return EQUALS;
 
-"&" return AND;
+"and" return AND;
+"or" return OR;
+
 "(" return LPAREN;
 ")" return RPAREN;
 "{" return LBRACKET;

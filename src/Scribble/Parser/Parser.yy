@@ -28,6 +28,8 @@
 #include <Scribble/Statement/AssignArrayStatement.hpp>
 #include <Scribble/Statement/GetArrayStatement.hpp>
 #include <Scribble/Statement/ArrayLengthStatement.hpp>
+#include <Scribble/Statement/AndStatement.hpp>
+#include <Scribble/Statement/OrStatement.hpp>
 #include <Scribble/Statement/NegativeStatement.hpp>
 #include <Scribble/Statement/StructureStatement.hpp>
 #include <Scribble/Statement/GetStructureElementStatement.hpp>
@@ -98,7 +100,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
-%token <token> END DO
+%token <token> END DO OR
 
 %left PLUS MINUS
 %left TIMES DIVIDE
@@ -741,7 +743,9 @@ Expression: TRUE {
 		//Free name pointer
 		delete $2;
 	} | Expression AND Expression {
-		$$ = new TestStatement(scribble_lineno, scribble_text, TestAnd, SafeStatement($1), SafeStatement($3));
+		$$ = new AndStatement(scribble_lineno, scribble_text, SafeStatement($1), SafeStatement($3));
+	} | Expression OR Expression {
+		$$ = new OrStatement(scribble_lineno, scribble_text, SafeStatement($1), SafeStatement($3));
 	} | Expression POINT WORD {
 		
 		$$ = new GetStructureElementStatement(scribble_lineno, scribble_text, SafeStatement($1), *$3);

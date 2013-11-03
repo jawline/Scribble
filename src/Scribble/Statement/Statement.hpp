@@ -40,7 +40,7 @@ public:
 		printf("Unimplemented statement %s!!\n", symbolName_.c_str());
 		generated << std::string("#") + symbolName_ + " UNIMP\n";
 
-		throw StatementException(this, "The statement is not implemented");
+		throw StatementException(this, "generate code is not implemented for this statement");
 
 		return 1;
 	}

@@ -31,121 +31,97 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 	Value* lhRes = lhs_->execute(variables);
 	Value* result = 0;
 
-	if (tType_ == TestAnd) {
+	Value* rhRes = rhs_->execute(variables);
 
-		if (((BoolValue*)lhRes)->value()) {
+	switch (lhRes->type()->getType()) {
 
-			BoolValue* rhRes = (BoolValue*) rhs_->execute(variables);
+	case Boolean: {
+		BoolValue* bl = (BoolValue*) lhRes;
+		BoolValue* br = (BoolValue*) rhRes;
 
-			if (rhRes->value()) {
-				result = valueHeap.make(true);
-			} else {
-				result = valueHeap.make(false);
-			}
+		switch (tType_) {
 
-			valueHeap.free(rhRes);
-
-		} else {
-			result = valueHeap.make(false);
-		}
-
-	} else {
-
-		Value* rhRes = rhs_->execute(variables);
-
-		switch (lhRes->type()->getType()) {
-
-		case Boolean: {
-			BoolValue* bl = (BoolValue*) lhRes;
-			BoolValue* br = (BoolValue*) rhRes;
-
-			switch (tType_) {
-
-			case TestEquals:
-				result = valueHeap.make(bl->value() == br->value());
-				break;
-
-			case TestNotEquals:
-				result = valueHeap.make(bl->value() != br->value());
-				break;
-
-			default:
-				throw StatementException(this,
-						"Boolean cannot be tested with anything other than equality and and");
-				break;
-			}
-
+		case TestEquals:
+			result = valueHeap.make(bl->value() == br->value());
 			break;
-		}
 
-		case Int: {
-
-			IntValue* il = (IntValue*) lhRes;
-			IntValue* rl = (IntValue*) rhRes;
-
-			switch (tType_) {
-			case TestEquals:
-				//Result is a bool test of truth
-				result = valueHeap.make((il->value() == rl->value()));
-				break;
-
-			case TestNotEquals:
-				result = valueHeap.make(!(il->value() == rl->value()));
-				break;
-
-			case TestLess:
-				result = valueHeap.make((il->value() < rl->value()));
-				break;
-
-			case TestGreater:
-				result = valueHeap.make((il->value() > rl->value()));
-				break;
-
-			case TestLessOrEqual:
-				result = valueHeap.make((il->value() <= rl->value()));
-				break;
-
-			case TestGreaterOrEqual:
-				result = valueHeap.make((il->value() >= rl->value()));
-				break;
-			}
-
+		case TestNotEquals:
+			result = valueHeap.make(bl->value() != br->value());
 			break;
-		}
-
-		case String: {
-
-			StringValue* sl = (StringValue*) lhRes;
-			StringValue* sr = (StringValue*) rhRes;
-
-			switch (tType_) {
-
-			case TestEquals:
-				result = valueHeap.make(
-						sl->getValue().compare(sr->getValue()) == 0);
-				break;
-
-			case TestNotEquals:
-				result = valueHeap.make(
-						!(sl->getValue().compare(sr->getValue()) == 0));
-				break;
-
-			default:
-				throw StatementException(this, "Not implemented yet");
-			}
-
-			break;
-		}
 
 		default:
-			throw StatementException(this, "Type: Not implemented yet");
+			throw StatementException(this,
+					"Boolean cannot be tested with anything other than equality and and");
+			break;
 		}
 
-		valueHeap.free(rhRes);
-
+		break;
 	}
 
+	case Int: {
 
+		IntValue* il = (IntValue*) lhRes;
+		IntValue* rl = (IntValue*) rhRes;
+
+		switch (tType_) {
+		case TestEquals:
+			//Result is a bool test of truth
+			result = valueHeap.make((il->value() == rl->value()));
+			break;
+
+		case TestNotEquals:
+			result = valueHeap.make(!(il->value() == rl->value()));
+			break;
+
+		case TestLess:
+			result = valueHeap.make((il->value() < rl->value()));
+			break;
+
+		case TestGreater:
+			result = valueHeap.make((il->value() > rl->value()));
+			break;
+
+		case TestLessOrEqual:
+			result = valueHeap.make((il->value() <= rl->value()));
+			break;
+
+		case TestGreaterOrEqual:
+			result = valueHeap.make((il->value() >= rl->value()));
+			break;
+		}
+
+		break;
+	}
+
+	case String: {
+
+		StringValue* sl = (StringValue*) lhRes;
+		StringValue* sr = (StringValue*) rhRes;
+
+		switch (tType_) {
+
+		case TestEquals:
+			result = valueHeap.make(
+					sl->getValue().compare(sr->getValue()) == 0);
+			break;
+
+		case TestNotEquals:
+			result = valueHeap.make(
+					!(sl->getValue().compare(sr->getValue()) == 0));
+			break;
+
+		default:
+			throw StatementException(this, "Not implemented yet");
+		}
+
+		break;
+	}
+
+	default:
+		throw StatementException(this, "Type: Not implemented yet");
+	}
+
+	valueHeap.free(rhRes);
 	valueHeap.free(lhRes);
 
 	return result;
@@ -164,14 +140,6 @@ void TestStatement::checkTree(Type* functionType) {
 				"Left hand side type should be the same as right hand side type");
 	}
 
-	if (tType_ == TestAnd) {
-
-		if (!lhs_->type()->Equals(getTypeManager().getType(Boolean))) {
-			throw StatementException(this,
-					"And test only works with boolean values");
-		}
-
-	}
 }
 
 int TestStatement::generateCode(int resultRegister,
@@ -179,103 +147,75 @@ int TestStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	if (tType_ == TestAnd) {
-		generated << "#And test\n";
+	generated << "#Test statement\n";
 
-		std::stringstream firstStatement;
-		int firstInstrs = lhs_->generateCode(resultRegister, firstStatement);
+	instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
 
-		std::stringstream secondStatement;
-		int secondInstrs = rhs_->generateCode(resultRegister, secondStatement);
+	generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs += 1;
 
-		generated << firstStatement.str();
-		instrs += firstInstrs;
+	instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
 
-		generated << "eqz $" << resultRegister << "\n";
-		instrs++;
+	generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs++;
 
-		generated << "jmpr " << 1 + secondInstrs << "\n";
-		instrs++;
+	//1
+	generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
+	instrs++;
 
-		generated << secondStatement.str();
-		instrs += secondInstrs;
+	switch (tType_) {
 
-		//TODO: Needs to be verified
-
-		generated << "#End of and test\n";
-	} else {
-
-		generated << "#Test statement\n";
-
-		instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
-
-		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+	case TestEquals:
+		//2
+		generated << "eq $3 $4 #test lhs rhs\n";
 		instrs += 1;
+		break;
 
-		instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
+	case TestNotEquals:
+		generated << "neq $3 $4\n";
+		instrs += 2;
+		break;
 
-		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
-		instrs++;
+	case TestLess:
+		generated << "lt $3 $4 #test less than lhs rhs\n";
+		instrs += 1;
+		break;
 
-		//1
-		generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
-		instrs++;
+	case TestLessOrEqual:
+		generated << "le $3 $4 #tess less or equal lhs rhs\n";
+		instrs += 1;
+		break;
 
-		switch (tType_) {
+	case TestGreater:
+		generated << "gt $3 $4 #test greater\n";
+		instrs += 2;
+		break;
 
-		case TestEquals:
-			//2
-			generated << "eq $3 $4 #test lhs rhs\n";
-			instrs += 1;
-			break;
+	case TestGreaterOrEqual:
+		generated << "ge $3 $4 #test greater or equal\n";
+		instrs += 2;
+		break;
 
-		case TestNotEquals:
-			generated << "neq $3 $4\n";
-			instrs += 2;
-			break;
-
-		case TestLess:
-			generated << "lt $3 $4 #test less than lhs rhs\n";
-			instrs += 1;
-			break;
-
-		case TestLessOrEqual:
-			generated << "le $3 $4 #tess less or equal lhs rhs\n";
-			instrs += 1;
-			break;
-
-		case TestGreater:
-			generated << "gt $3 $4 #test greater\n";
-			instrs += 2;
-			break;
-
-		case TestGreaterOrEqual:
-			generated << "ge $3 $4 #test greater or equal\n";
-			instrs += 2;
-			break;
-
-		default:
-			printf("Test statement unimplemented.\n");
-			break;
-		}
-
-		//3
-		generated << "load 1 $" << VM::vmTempRegisterThree << "\n";
-		instrs++;
-
-		//Move the temp register result to the result register if they aren't the same register ( For example for will temp 3 to store its condition )
-		if (VM::vmTempRegisterThree != resultRegister) {
-			//4
-			generated << "move $" << VM::vmTempRegisterThree << " $";
-			generated << resultRegister;
-			generated << "\n";
-
-			instrs++;
-		}
-
-		generated << "#Test statement end. " << instrs << " instructions\n";
-
+	default:
+		printf("Test statement unimplemented.\n");
+		break;
 	}
+
+	//3
+	generated << "load 1 $" << VM::vmTempRegisterThree << "\n";
+	instrs++;
+
+	//Move the temp register result to the result register if they aren't the same register ( For example for will temp 3 to store its condition )
+	if (VM::vmTempRegisterThree != resultRegister) {
+		//4
+		generated << "move $" << VM::vmTempRegisterThree << " $";
+		generated << resultRegister;
+		generated << "\n";
+
+		instrs++;
+	}
+
+	generated << "#Test statement end. " << instrs << " instructions\n";
 
 	return instrs;
 }
