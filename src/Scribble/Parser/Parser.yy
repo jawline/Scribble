@@ -104,7 +104,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 
 %left PLUS MINUS
 %left TIMES DIVIDE
-%left TRUE FALSE EQUALS 
+%left TRUE FALSE EQUALS AND OR
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -611,10 +611,9 @@ Expression: TRUE {
 		$$ = new IntStatement(scribble_lineno, scribble_text, $1);
 	} | STRING {
 		$$ = new StringStatement(scribble_lineno, scribble_text, *$1);
-		
+
 		//Free string pointer
 		delete $1;
-
 	} | Type LBRACKET Arguments RBRACKET {
 		$$ = new StructureStatement(scribble_lineno, scribble_text, *$1, *$3);
 		delete $3;

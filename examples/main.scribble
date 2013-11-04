@@ -1,14 +1,16 @@
 import("sys");
 import("tests/loops");
+import("tests/logical");
 import("tests/variables");
 import("tests/recursion");
 import("tests/arrays");
 import("tests/primes");
 import("tests/sorts");
-import("tests/structures");
+//import("tests/structures");
 
 func main() {
 
+	logical.Test();
 	variables.Test();
 	loops.Test();
 	recursion.Test();
@@ -16,5 +18,4 @@ func main() {
 	primes.Test();
 	sorts.Test();
 	
-	sys.Write("All tests passed\n");
 }

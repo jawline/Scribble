@@ -9,6 +9,7 @@
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <Scribble/Value/Bool.hpp>
+#include <VM/Constants.hpp>
 #include <sstream>
 
 AndStatement::AndStatement(int lineNo, std::string sym,
@@ -65,6 +66,10 @@ Type* AndStatement::type() {
 int AndStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
+	if (resultRegister == -1) {
+		resultRegister = VM::vmTempRegisterOne;
+	}
+
 	int instrs = 0;
 
 	generated << "#And test\n";
@@ -90,4 +95,6 @@ int AndStatement::generateCode(int resultRegister,
 	//TODO: Needs to be verified
 
 	generated << "#End of and test\n";
+
+	return instrs;
 }

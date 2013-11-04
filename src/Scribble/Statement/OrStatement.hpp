@@ -9,15 +9,19 @@
 #define ORSTATEMENT_HPP_
 #include "Statement.hpp"
 
-class OrStatement : public Statement {
+class OrStatement: public Statement {
+private:
+	SafeStatement lhs_, rhs_;
+
 public:
-	OrStatement(int lineNo, std::string sym,
-			SafeStatement leftHandSide, SafeStatement rightHandSide);
+	OrStatement(int lineNo, std::string sym, SafeStatement leftHandSide,
+			SafeStatement rightHandSide);
 	virtual ~OrStatement();
 
 	virtual void checkTree(Type* functionType);
 	virtual Value* execute(std::vector<Value*> const& variables);
 	virtual Type* type();
+	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* ORSTATEMENT_HPP_ */

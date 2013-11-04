@@ -17,7 +17,7 @@ func Sort( n : array(int) ) : array(int) {
  for i := 1; i < len(n); i++ do {
  	k := n[i];
  	
- 	for j := i - 1; (j >= 0) & (k < n[j]); j-- do {
+ 	for j := i - 1; (j >= 0) and (k < n[j]); j-- do {
  		n[j+1] := n[j];
  	}
  
