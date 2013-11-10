@@ -6,7 +6,6 @@ import("tests/recursion");
 import("tests/arrays");
 import("tests/primes");
 import("tests/sorts");
-//import("tests/structures");
 
 func main() {
 

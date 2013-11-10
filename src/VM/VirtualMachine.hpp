@@ -64,6 +64,10 @@ private:
 	 * Pointer to registers and whether they are a reference.
 	 */
 
+	long currentInstruction;
+	long stackBasePointer;
+	long stackCurrentPointer;
+
 	long* registers_;
 	bool* registerReference_;
 

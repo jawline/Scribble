@@ -21,6 +21,10 @@ VirtualMachine::VirtualMachine() {
 	registers_ = new long[vmNumRegisters];
 	registerReference_ = new bool[vmNumRegisters];
 
+	currentInstruction = 0;
+	stackCurrentPointer = 0;
+	stackBasePointer = 0;
+
 	//Initialize all the registers
 	for (unsigned int i = 0; i < vmNumRegisters; ++i) {
 		registers_[i] = 0;
@@ -114,7 +118,7 @@ bool VirtualMachine::returnToPreviousFunction(
 
 				currentFunction = top.func_;
 				set = currentFunction->getInstructions();
-				registers_[VM::vmProgramCounter] = top.pc_;
+				currentInstruction = top.pc_;
 
 				return true;
 			} else {
@@ -141,8 +145,11 @@ void VirtualMachine::execute(std::string function) {
 
 	InstructionSet instructionSet = currentFunction->getInstructions();
 
-	registers_[vmProgramCounter] = instructionSet.startInstruction();
-	long* current = &registers_[vmProgramCounter];
+	currentInstruction = instructionSet.startInstruction();
+
+	//TODO: This relic is from when currentInstruction was a register. Remove it
+	long* current = &currentInstruction;
+
 	bool shouldReturn = false;
 
 	while (!shouldReturn) {
@@ -931,7 +938,7 @@ void VirtualMachine::printState() {
 
 	VM_PRINTF_LOG("%s", "--VM STATE--\n");
 
-	for (unsigned int i = 0; i < registers_[vmStackCurrentPointer]; i++) {
+	for (unsigned int i = 0; i < stackCurrentPointer; i++) {
 		VM_PRINTF_LOG("%x ", stack_[i]);
 	}
 

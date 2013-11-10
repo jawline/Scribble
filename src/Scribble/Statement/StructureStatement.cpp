@@ -67,3 +67,6 @@ Value* StructureStatement::execute(std::vector<Value*> const& variables) {
 Type* StructureStatement::type() {
 	return type_->type;
 }
+
+int StructureStatement::generateCode(int result, std::stringstream& code) {
+}

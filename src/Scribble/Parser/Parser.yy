@@ -147,7 +147,7 @@ Program: {
 
 BaseStructureInfo: {
 		$$ = new StructureInfo("INVALID");
-	} | BaseStructureInfo WORD COLON Type {
+	} | BaseStructureInfo WORD COLON Type END {
 		$1->addInfo(*$2, *$4);
 		delete $2;
 		delete $4;

@@ -19,13 +19,13 @@ void VirtualMachine::stackSetLong(long pos, long v) {
 }
 
 void VirtualMachine::popStackLong(long& val, bool& ref) {
-	val = stackLong(registers_[vmStackCurrentPointer] - 8);
-	registers_[vmStackCurrentPointer] -= 8;
+	val = stackLong(stackCurrentPointer - 8);
+	stackCurrentPointer -= 8;
 
 	ref = false;
 
 	if (stackReferences_.size() > 0
-			&& stackReferences_.back() >= registers_[vmStackCurrentPointer]) {
+			&& stackReferences_.back() >= stackCurrentPointer) {
 		stackReferences_.pop_back();
 		ref = true;
 	}
@@ -52,14 +52,14 @@ void VirtualMachine::expandStack() {
 
 void VirtualMachine::pushStackLong(long v) {
 
-	long max = registers_[vmStackCurrentPointer] + 32;
+	long max = stackCurrentPointer + 32;
 
 	while (max >= currentStackHeight_) {
 		expandStack();
 	}
 
-	stackSetLong(registers_[vmStackCurrentPointer], v);
-	registers_[vmStackCurrentPointer] += 8;
+	stackSetLong(stackCurrentPointer, v);
+	stackCurrentPointer += 8;
 }
 
 /**
@@ -67,7 +67,7 @@ void VirtualMachine::pushStackLong(long v) {
  */
 
 void VirtualMachine::markStackReference() {
-	stackReferences_.push_back(registers_[vmStackCurrentPointer]);
+	stackReferences_.push_back(stackCurrentPointer);
 }
 
 }
