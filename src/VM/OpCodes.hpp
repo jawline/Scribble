@@ -22,7 +22,6 @@ enum OpCodes {
 	OpEqualZero,
 	OpLessThan,
 	OpLessThanOrEqual,
-	OpAnd,
 	OpNewArray,
 	OpArraySet,
 	OpArrayGet,

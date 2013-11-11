@@ -11,16 +11,23 @@
 namespace VM {
 
 long VirtualMachine::stackLong(long pos) {
+	//VM_PRINTF_LOG("Returning stack value at address %li\n", pos);
 	return *((long*) (stack_ + pos));
 }
 
 void VirtualMachine::stackSetLong(long pos, long v) {
+	//VM_PRINTF_LOG("Setting stack value at position %li\n", pos);
 	*((long*) (stack_ + pos)) = v;
 }
 
 void VirtualMachine::popStackLong(long& val, bool& ref) {
+
+	if (stackCurrentPointer < 8) {
+		VM_PRINTF_FATAL("Error - Cannot pop on empty stack. Stack current pointer %li\n", stackCurrentPointer);
+	}
+
 	val = stackLong(stackCurrentPointer - 8);
-	stackCurrentPointer -= 8;
+	stackCurrentPointer = stackCurrentPointer - 8;
 
 	ref = false;
 
@@ -30,6 +37,23 @@ void VirtualMachine::popStackLong(long& val, bool& ref) {
 		ref = true;
 	}
 
+	//VM_PRINTF_LOG("Popped long %li from stack. Current Stack pointer is now %li\n", val, stackCurrentPointer);
+}
+
+void VirtualMachine::pushStackLong(long v) {
+
+	//Work out the current maximum address of the stack.
+	long max = stackCurrentPointer + 8;
+
+	//If max >= currentStackHeight then expand the stack a bit.
+	while (max >= currentStackHeight_) {
+		expandStack();
+	}
+
+	stackSetLong(stackCurrentPointer, v);
+	stackCurrentPointer = stackCurrentPointer + 8;
+
+	//VM_PRINTF_LOG("Pushed long to stack now %li value %li\n", stackCurrentPointer, v);
 }
 
 void VirtualMachine::expandStack() {
@@ -48,18 +72,6 @@ void VirtualMachine::expandStack() {
 	stack_ = newStack;
 	currentStackHeight_ += vmStackIncrease;
 
-}
-
-void VirtualMachine::pushStackLong(long v) {
-
-	long max = stackCurrentPointer + 32;
-
-	while (max >= currentStackHeight_) {
-		expandStack();
-	}
-
-	stackSetLong(stackCurrentPointer, v);
-	stackCurrentPointer += 8;
 }
 
 /**

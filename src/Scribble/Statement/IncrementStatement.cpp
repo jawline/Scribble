@@ -8,6 +8,7 @@
 #include "IncrementStatement.hpp"
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+#include <VM/Constants.hpp>
 
 IncrementStatement::IncrementStatement(int line, std::string sym,
 		SP<Variable> variable, IncrementType op, bool post) :
@@ -85,14 +86,14 @@ int IncrementStatement::generateCode(int resultRegister,
 
 		if (post_) {
 
-			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
-					<< variable_->getPosition() + 6 << "\n";
+			generated << "add $" << variable_->getPosition() + VM::vmNumReservedRegisters << " 1 $"
+					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
 
 			instrs += 2;
 
 			if (resultRegister != -1) {
 
-				generated << "move $" << variable_->getPosition() + 6 << " $"
+				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
 						<< resultRegister << "\n";
 
 				instrs += 1;
@@ -101,13 +102,13 @@ int IncrementStatement::generateCode(int resultRegister,
 		} else {
 
 			if (resultRegister != -1) {
-				generated << "move $" << variable_->getPosition() + 6 << " $"
+				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
 						<< resultRegister << "\n";
 				instrs++;
 			}
 
-			generated << "add $" << variable_->getPosition() + 6 << " 1 $"
-					<< variable_->getPosition() + 6 << "\n";
+			generated << "add $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " 1 $"
+					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
 
 			instrs += 2;
 		}
@@ -118,14 +119,14 @@ int IncrementStatement::generateCode(int resultRegister,
 
 		if (post_) {
 
-			generated << "sub $" << variable_->getPosition() + 6 << " 1 $"
-					<< variable_->getPosition() + 6 << "\n";
+			generated << "sub $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " 1 $"
+					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
 
 			instrs += 2;
 
 			if (resultRegister != -1) {
 
-				generated << "move $" << variable_->getPosition() + 6 << " $"
+				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
 						<< resultRegister << "\n";
 
 				instrs++;
@@ -135,15 +136,15 @@ int IncrementStatement::generateCode(int resultRegister,
 
 			if (resultRegister != -1) {
 
-				generated << "move $" << variable_->getPosition() + 6 << " $"
+				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
 						<< resultRegister << "\n";
 
 				instrs++;
 
 			}
 
-			generated << "sub $" << variable_->getPosition() + 6 << " 1 $"
-					<< variable_->getPosition() + 6 << "\n";
+			generated << "sub $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " 1 $"
+					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
 
 			instrs += 2;
 		}

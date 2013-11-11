@@ -321,8 +321,8 @@ Program: {
 	} | Program ARRAY_LENGTH REG REG {
 		ArrayLength($3, $4);
 	} | Program NEW_ARRAY STRING INT REG {
-		LoadInt($4, 3);
-		Array(*$3, 3, $5);
+		LoadInt($4, VM::vmTempRegisterOne);
+		Array(*$3, VM::vmTempRegisterOne, $5);
 		delete $3;
 	} | Program PUSH_REGISTERS REG INT {
 		PushRegisters($3, $4);

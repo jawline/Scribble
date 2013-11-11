@@ -6,15 +6,16 @@ import("tests/recursion");
 import("tests/arrays");
 import("tests/primes");
 import("tests/sorts");
+//import("tests/structures");
 
 func main() {
 
-	logical.Test();
-	variables.Test();
-	loops.Test();
-	recursion.Test();
-	arrays.Test();
-	primes.Test();
-	sorts.Test();
-	
+        logical.Test();
+        variables.Test();
+        loops.Test();
+        recursion.Test();
+        arrays.Test();
+        primes.Test();
+        sorts.Test();
+        
 }

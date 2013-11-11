@@ -10,6 +10,7 @@
 #include <Scribble/Value/Void.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Statement/ReturnStatement.hpp>
+#include <VM/Constants.hpp>
 
 IfStatement::IfStatement(int lineNo, std::string sym, SP<Statement> condition,
 		std::vector<SP<Statement>> ifTrueStatements,
@@ -82,11 +83,11 @@ int IfStatement::generateCode(int resultRegister,
 	int instrs = 0;
 
 	generated << "#if statement test\n";
-	instrs += condition_->generateCode(5, generated);
+	instrs += condition_->generateCode(VM::vmTempRegisterThree, generated);
 
 	generated << "#if check test result\n";
 
-	generated << "neq $5 1\n";
+	generated << "neq $" << VM::vmTempRegisterThree << " 1\n";
 	generated << "jmpr " << (trueSize + 2) << "\n";
 
 	instrs += 4;

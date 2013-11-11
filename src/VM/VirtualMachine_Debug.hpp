@@ -10,7 +10,7 @@
 #include "Constants.hpp"
 #include <stdio.h>
 
-#define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); this->printState(); do { } while (1)
+#define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
 
 #ifdef VM_DEBUG
 extern FILE* flog;

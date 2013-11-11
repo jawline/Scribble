@@ -456,11 +456,11 @@ void VirtualMachine::execute(std::string function) {
 				uint8_t startRegister = instructionSet.getInst(*current + 1);
 				uint8_t numRegisters = instructionSet.getInst(*current + 2);
 
-				//printf("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
+//				VM_PRINTF_LOG("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
 
-				for (uint8_t i = (startRegister + numRegisters) - 1;
-						i >= startRegister; i--) {
-					popStackLong(registers_[i], registerReference_[i]);
+				for (uint8_t i = (startRegister + numRegisters);
+						i > startRegister; i--) {
+					popStackLong(registers_[i-1], registerReference_[i-1]);
 				}
 
 				*current += vmOpCodeSize;
@@ -812,7 +812,7 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpReturn: {
 
-				VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
+				//VM_PRINTF_DBG("VM Return at instruction %li\n", *current);
 
 				if (!returnToPreviousFunction(currentFunction,
 						instructionSet)) {

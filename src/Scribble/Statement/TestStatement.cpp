@@ -167,32 +167,32 @@ int TestStatement::generateCode(int resultRegister,
 
 	case TestEquals:
 		//2
-		generated << "eq $3 $4 #test lhs rhs\n";
+		generated << "eq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test lhs rhs\n";
 		instrs += 1;
 		break;
 
 	case TestNotEquals:
-		generated << "neq $3 $4\n";
+		generated << "neq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
 		instrs += 2;
 		break;
 
 	case TestLess:
-		generated << "lt $3 $4 #test less than lhs rhs\n";
+		generated << "lt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test less than lhs rhs\n";
 		instrs += 1;
 		break;
 
 	case TestLessOrEqual:
-		generated << "le $3 $4 #tess less or equal lhs rhs\n";
+		generated << "le $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #tess less or equal lhs rhs\n";
 		instrs += 1;
 		break;
 
 	case TestGreater:
-		generated << "gt $3 $4 #test greater\n";
+		generated << "gt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test greater\n";
 		instrs += 2;
 		break;
 
 	case TestGreaterOrEqual:
-		generated << "ge $3 $4 #test greater or equal\n";
+		generated << "ge $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test greater or equal\n";
 		instrs += 2;
 		break;
 
