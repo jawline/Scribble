@@ -519,7 +519,7 @@ void VirtualMachine::execute(std::string function) {
 
 				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
 
-				if (!arrayType->isArray()) {
+				if (arrayType->getBaseType() != VM::VMArray) {
 					VM_PRINTF_FATAL("%s",
 							"Target register is not a reference to an array\n");
 				}
@@ -588,7 +588,7 @@ void VirtualMachine::execute(std::string function) {
 
 				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
 
-				if (!arrayType->isArray()) {
+				if (arrayType->getBaseType() != VM::VMArray) {
 
 					VM_PRINTF_FATAL(
 							"Register %i is not a reference to an array\n",
@@ -672,7 +672,7 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				//Check the type is an array
-				if (!typeSearch->isArray()) {
+				if (typeSearch->getBaseType() != VM::VMArray) {
 					VM_PRINTF_FATAL("%s",
 							"Cannot create valid array from type\n");
 				}
@@ -734,7 +734,7 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				//Check that it is an array
-				if (!heap_.getType(registers_[arrayRegister])->isArray()) {
+				if (heap_.getType(registers_[arrayRegister])->getBaseType() != VM::VMArray) {
 					VM_PRINTF_FATAL("%s",
 							"Reference is not an array (OpArrayLength)\n");
 				}
@@ -896,7 +896,7 @@ void VirtualMachine::garbageCollection() {
 		}
 
 		//If it is an array check if it is an array of references and if it is flag and check every reference.
-		if (nextType->isArray()) {
+		if (nextType->getBaseType() == VM::VMArray) {
 
 			SP<VMEntryType> subtype = nextType->arraySubtype();
 

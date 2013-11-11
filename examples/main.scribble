@@ -1,21 +1,30 @@
 import("sys");
-import("tests/loops");
-import("tests/logical");
-import("tests/variables");
-import("tests/recursion");
-import("tests/arrays");
-import("tests/primes");
-import("tests/sorts");
-//import("tests/structures");
+//import("tests/loops");
+//import("tests/logical");
+//import("tests/variables");
+//import("tests/recursion");
+//import("tests/arrays");
+//import("tests/primes");
+//import("tests/sorts");
+
+type TestStructure := struct {
+	Hello : string;
+	World : string;
+}
 
 func main() {
 
-        logical.Test();
-        variables.Test();
-        loops.Test();
-        recursion.Test();
-        arrays.Test();
-        primes.Test();
-        sorts.Test();
-        
+	var str := TestStructure { 
+		"Hello", 
+		"World" 
+	};
+
+    //logical.Test();
+    //variables.Test();
+    //loops.Test();
+    //recursion.Test();
+    //arrays.Test();
+    //primes.Test();
+    //sorts.Test();
+
 }
