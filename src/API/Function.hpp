@@ -7,6 +7,7 @@
 #include <VM/VMFunc.hpp>
 #include <VM/VirtualMachine.hpp>
 #include <API/Value/APIValue.hpp>
+#include <sstream>
 
 namespace API {
 
@@ -98,6 +99,7 @@ public:
 	virtual Type* argType(unsigned int arg) = 0;
 
 	virtual int debugCode(std::stringstream& gen) {
+		gen << std::string("#NativeFunction");
 		return 0;
 	}
 

@@ -966,4 +966,30 @@ void VirtualMachine::printState() {
 	VM_PRINTF_LOG("%s", "--VM STATE END--\n");
 }
 
+void VirtualMachine::logMessage(VMLogLevel level, std::string message) {
+	switch (level) {
+		
+		case Log: {
+			VM_PRINTF_LOG("%s", message.c_str());
+			break;
+		}
+		
+		case Debug: {
+			VM_PRINTF_DBG("%s", message.c_str());
+			break;
+		}
+		
+		case Warn: {
+			VM_PRINTF_WARN("%s", message.c_str());
+			break;
+		}
+		
+		case Fatal: {
+			VM_PRINTF_FATAL("%s", message.c_str());
+			break;
+		}
+
+	}
+}
+
 } /* namespace VM */

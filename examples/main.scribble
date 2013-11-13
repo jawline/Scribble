@@ -19,6 +19,8 @@ func main() {
 		"World" 
 	};
 
+ sys.Write("Hello world\n");
+
     //logical.Test();
     //variables.Test();
     //loops.Test();

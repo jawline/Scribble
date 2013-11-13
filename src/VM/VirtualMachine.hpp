@@ -19,6 +19,13 @@
 
 namespace VM {
 
+enum VMLogLevel {
+	Log,
+	Debug,
+	Warn,
+	Fatal
+};
+
 class VMState {
 public:
 	SmartPointer<VMFunc> func_;
@@ -125,6 +132,8 @@ public:
 	virtual void hitGc() {
 		gcStat_++;
 	}
+
+	virtual void logMessage(VMLogLevel, std::string message);
 };
 
 } /* namespace VM */

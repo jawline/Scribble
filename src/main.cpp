@@ -65,6 +65,8 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 	for (auto selectedNamespaceIter = allNames.begin();
 			selectedNamespaceIter != allNames.end(); selectedNamespaceIter++) {
 
+		vm.logMessage(VM::Log, std::string("Registering namespace ") + selectedNamespaceIter->first + std::string("\n"));
+
 		VM::VMNamespace newSpace;
 
 		NamespaceType names = selectedNamespaceIter->second;
@@ -81,22 +83,19 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 					std::stringstream code;
 					function->debugCode(code);
-					printf("Function debug code %s\n", code.str().c_str());
 
 					newSpace[function->getName()] = VM::NamespaceEntry(function->generateVMFunction());
 
-					printf("Registered function %s\n",
-							function->getName().c_str());
+					vm.logMessage(VM::Log, std::string("Registered string ") + function->getName());
+
+					vm.logMessage(VM::Log, std::string(" {\n") + code.str() + std::string("\n}\n"));
 				}
 
 			} else {
-				printf("TODO: Register Type %s\n", iterator->first.c_str());
+				vm.logMessage(VM::Log, std::string("TODO: Register Type ") + iterator->first + "\n");
 			}
 
 		}
-
-		printf("Registering namespace %s\n",
-				selectedNamespaceIter->first.c_str());
 
 		vm.registerEntry(selectedNamespaceIter->first,
 				VM::NamespaceEntry(newSpace));
