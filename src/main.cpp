@@ -177,7 +177,11 @@ int main(int argc, char* argv[]) {
 	}
 
 	//The function to be executed, defaults to 'main'
-	char const* execFunction = getCmdOption(argv, argv + argc, (std::string(packageName)+".main();").c_str(), "--exec");
+	char const* execFunction = getCmdOption(argv, argv + argc, std::string( std::string(packageName) + ".main();\n").c_str(), "--exec");
+	printf("Exec %s\n", execFunction);
+
+	std::string initCode = writeInit(targetFile, packageName, execFunction);
+	printf("Init %s\n", initCode.c_str());
 
 	//Compile the scribble program using the default namespaces
 	std::map<std::string, NamespaceType> names;
@@ -185,7 +189,7 @@ int main(int argc, char* argv[]) {
 	generateBuiltinNamespace(names);
 
 	try {
-		names = Parser::compileText(writeInit(targetFile, packageName, execFunction), "__init__", names);
+		names = Parser::compileText(initCode, "__init__", names);
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());
 		return -1;
