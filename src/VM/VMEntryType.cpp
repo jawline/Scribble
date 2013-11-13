@@ -16,7 +16,16 @@ VMEntryType::VMEntryType(std::string name, unsigned int size, bool reference) :
 }
 
 VMEntryType::VMEntryType(std::string name, SP<VMEntryType> subtype) :
-name_(name), size_(8), reference_(true), baseType_(VMArray), arraySubtype_(subtype){
+name_(name), size_(8), reference_(true), baseType_(VMArray), arraySubtype_(subtype) {
+}
+
+
+VMEntryType::VMEntryType(std::string name, std::vector<VMStructureField> fields) : name_(name), size_(8), reference_(true), baseType_(VMStructure) {
+
+	for (int i = 0; i < fields.size(); i++) {
+		structureFields_.push_back(fields[i]);
+	}
+
 }
 
 VMEntryType::~VMEntryType() {

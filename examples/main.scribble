@@ -8,16 +8,16 @@ import("sys");
 //import("tests/sorts");
 
 type TestStructure := struct {
-	Hello : string;
-	World : string;
+ Hello : string;
+ World : string;
 }
 
 func main() {
 
-	var str := TestStructure { 
-		"Hello", 
-		"World" 
-	};
+ var str := TestStructure { 
+  "Hello", 
+  "World" 
+ };
 
  sys.Write("Hello world\n");
 

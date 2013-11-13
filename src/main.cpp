@@ -4,6 +4,7 @@
  */
 
 #include <Scribble/Statement/Statement.hpp>
+#include <Scribble/Value/StructureInfo.hpp>
 #include <API/WriteFunction.hpp>
 #include <API/ReadLine.hpp>
 #include <API/StringFunction.hpp>
@@ -91,8 +92,19 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 					vm.logMessage(VM::Log, std::string(" {\n") + code.str() + std::string("\n}\n"));
 				}
 
-			} else {
-				vm.logMessage(VM::Log, std::string("TODO: Register Type ") + iterator->first + "\n");
+			} else if (iterator->second.type() == TypeEntry) {
+
+				vm.logMessage(VM::Log, std::string("Registering Type ") + iterator->first + "\n");
+
+				TypeReference type = iterator->second.getType();
+				StructureInfo* info = (StructureInfo*) iterator->second.getType()->type;
+
+				for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
+					vm.logMessage(VM::Log, std::string("Registering field ") + info->getIndex(i).first + "\n");
+				}
+
+				vm.logMessage(VM::Log, "\n");
+
 			}
 
 		}

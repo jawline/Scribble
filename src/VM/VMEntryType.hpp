@@ -9,11 +9,42 @@
 #define VMENTRYTYPE_HPP_
 #include <Pointers/SmartPointer.hpp>
 #include <string>
+#include <vector>
 
 namespace VM {
 
+/**
+ * The base type of the VMEntry changes how the garbage collector sees it and what instructions can use it.
+ */
+
 enum VMEntryBaseType {
 	VMPrimitive, VMArray, VMStructure
+};
+
+/**
+ * Pre declare VMEntryType so VMStructureField can see it
+ */
+
+class VMEntryType;
+
+class VMStructureField {
+private:
+	std::string name_;
+	SP<VMEntryType> type_;
+
+public:
+
+	VMStructureField(std::string name, SP<VMEntryType> type) : name_(name), type_(type) {
+	}
+
+	std::string getName() {
+		return name_;
+	}
+
+	SP<VMEntryType> getType() {
+		return type_;
+	}
+
 };
 
 class VMEntryType {
@@ -29,9 +60,11 @@ private:
 	//TODO: Potentially make this a pointer or smart pointer to reduce on space used by types.
 	SP<VMEntryType> arraySubtype_;
 
+	std::vector<VMStructureField> structureFields_;
 public:
 	VMEntryType(std::string name, unsigned int size, bool reference);
 	VMEntryType(std::string name, SP<VMEntryType> subtype);
+	VMEntryType(std::string name, std::vector<VMStructureField> fields);
 
 	virtual ~VMEntryType();
 
