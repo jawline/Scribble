@@ -16,7 +16,7 @@ VMEntryType::VMEntryType(std::string name, unsigned int size, bool reference) :
 }
 
 VMEntryType::VMEntryType(std::string name, SP<VMEntryType> subtype) :
-name_(name), size_(8), reference_(true), baseType_(VMArray), subtype_(subtype){
+name_(name), size_(8), reference_(true), baseType_(VMArray), arraySubtype_(subtype){
 }
 
 VMEntryType::~VMEntryType() {

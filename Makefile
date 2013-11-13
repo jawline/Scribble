@@ -1,10 +1,14 @@
 #Output executable
-EXECUTABLE=./bin/scribble
+OUTPUT_DIR=./bin/
+OUTPUT_FILE=scribble
+EXECUTABLE=$(OUTPUT_DIR)$(OUTPUT_FILE)
 
 #Directory information
 SOURCE_DIR=src
 GEN_DIR=gen
 OBJ_DIR=obj
+
+INSTALL_PATH = /usr/bin/scribble
 
 #Generated files
 GEN_FILES = $(GEN_DIR)/ScribbleLexer.cpp $(GEN_DIR)/ScribbleParser.cpp $(GEN_DIR)/SASMLexer.cpp $(GEN_DIR)/SASMParser.cpp
@@ -19,6 +23,9 @@ SOURCES=$(GEN_FILES) $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**
 OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 
 all: preprocess $(SOURCES) $(EXECUTABLE)
+
+install: all
+	@ln $(EXECUTABLE) $(INSTALL_PATH)
 
 clean:
 	@rm -r $(OBJ_DIR) $(EXECUTABLE) $(GEN_DIR)
@@ -42,6 +49,7 @@ $(OBJ_DIR)/%.o: %.cpp
 
 preprocess: gen bison sasm_bison
 	@sh scripts/build_number_increment.sh 
+	@mkdir -p $(OUTPUT_DIR)
 
 gen:
 	@mkdir -p $(GEN_DIR)
