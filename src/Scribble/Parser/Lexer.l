@@ -38,7 +38,7 @@ integer {digit}+
 exponent [eE][+-]?{integer}
 real {integer}("."{integer})
 string \"[^\"\n]*\"
-word [_|a-z|A-Z][a-z|A-Z|0-9]*
+word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 
 %%
 

@@ -384,8 +384,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
 		
-		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4));
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -444,8 +443,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 	
 		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
 		
-		printf("WARN: VERSIONS NOT DO\n");
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, 0, currentNamespaceName, voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
+		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		

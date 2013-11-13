@@ -221,27 +221,14 @@ void Parser::resolve(TypeReference reference, NamespaceType ns) {
 	reference->type = ref->type;
 }
 
-NamespaceType Parser::include(std::string const& filename,
-		std::string const& path) {
+NamespaceType Parser::includeText(std::string source, std::string const& filename, std::string const& path) {
 
 	currentNamespaceName = filename;
 
-	//Create the inputSource from the buffer
-	std::string inputSource = bufferText(path + filename + ".scribble");
-
-	//Clear and previous errors
-	ParsingError = false;
-
-	//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
-	char* a = strdup(inputSource.c_str());
-
 	//Pass the data to the parser.
-	scribble__scan_string(a);
+	scribble__scan_string(source.c_str());
 	scribble_parse();
 	scribble_lex_destroy();
-
-	//Free the bison buffer
-	delete[] a;
 
 	//Check to see if any errors occured
 	if (ParsingError) {
@@ -431,6 +418,25 @@ NamespaceType Parser::include(std::string const& filename,
 	}
 
 	return Functions;
+
+}
+
+NamespaceType Parser::include(std::string const& filename,
+		std::string const& path) {
+
+	//Create the inputSource from the buffer
+	std::string inputSource = bufferText(path + filename + ".scribble");
+
+	//Clear and previous errors
+	ParsingError = false;
+
+	//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
+	char* a = strdup(inputSource.c_str());
+
+	NamespaceType res = includeText(a, filename, path);
+	delete[] a;
+
+	return res;
 }
 
 std::map<std::string, NamespaceType> Parser::compile(std::string const& file,
@@ -452,9 +458,33 @@ std::map<std::string, NamespaceType> Parser::compile(std::string const& file,
 
 	std::map<std::string, NamespaceType> result = Namespace;
 
-//printAllSpaces(Namespace);
+	parser_free_all();
+
+	return result;
+}
+
+std::map<std::string, NamespaceType> Parser::compileText(std::string const& text, std::string const& file,
+		std::map<std::string, NamespaceType> builtinNamespace) {
+	parser_free_all();
+
+//For calculate the path to the file
+	auto pathEnd = file.find_last_of("/");
+	std::string path = "";
+	std::string filename = file;
+
+	if (pathEnd != std::string::npos) {
+		path = filename.substr(0, pathEnd + 1);
+		filename = file.substr(pathEnd + 1, file.size());
+	}
+
+	Namespace = builtinNamespace;
+	NamespaceType ns = includeText(text, filename, path);
+
+	std::map<std::string, NamespaceType> result = Namespace;
 
 	parser_free_all();
 
 	return result;
 }
+
+

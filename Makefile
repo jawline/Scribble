@@ -8,7 +8,7 @@ SOURCE_DIR=src
 GEN_DIR=gen
 OBJ_DIR=obj
 
-INSTALL_PATH = /usr/bin/scribble
+INSTALL_PATH = /usr/bin/
 
 #Generated files
 GEN_FILES = $(GEN_DIR)/ScribbleLexer.cpp $(GEN_DIR)/ScribbleParser.cpp $(GEN_DIR)/SASMLexer.cpp $(GEN_DIR)/SASMParser.cpp
@@ -24,11 +24,12 @@ OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 
 all: preprocess $(SOURCES) $(EXECUTABLE)
 
-install: all
-	@ln $(EXECUTABLE) $(INSTALL_PATH)
+install:
+	-@rm $(INSTALL_PATH)$(OUTPUT_FILE)
+	@ln $(EXECUTABLE) $(INSTALL_PATH)$(OUTPUT_FILE)
 
 clean:
-	@rm -r $(OBJ_DIR) $(EXECUTABLE) $(GEN_DIR)
+	-@rm -r $(OBJ_DIR) $(EXECUTABLE) $(GEN_DIR)
 
 #The executable rule compiles the set of objects into the target executable
 $(EXECUTABLE): $(OBJECTS)
@@ -39,20 +40,20 @@ $(EXECUTABLE): $(OBJECTS)
 $(OBJECTS) : $(OBJ_DIR)
 
 $(OBJ_DIR):
-	@mkdir -p $@
+	-@mkdir -p $@
 
 $(OBJ_DIR)/%.o: %.cpp
-	@mkdir -p $(@D)
+	-@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $< -o $@
 
 #The preprocess rules will generate the source files from the grammar and perform any operations that need to be performed before the compiler is run ( Such as version numbering )
 
 preprocess: gen bison sasm_bison
 	@sh scripts/build_number_increment.sh 
-	@mkdir -p $(OUTPUT_DIR)
+	-@mkdir -p $(OUTPUT_DIR)
 
 gen:
-	@mkdir -p $(GEN_DIR)
+	-@mkdir -p $(GEN_DIR)
 
 
 #Preprocessor steps for the parser

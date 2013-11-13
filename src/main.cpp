@@ -135,6 +135,23 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option)
     return std::find(begin, end, option) != end;
 }
 
+std::string writeInit(std::string package, std::string thin, std::string execStr) {
+
+	if (package.size() == 0) {
+		std::string result = "import(\"sys\");\n";
+		result += "func __init__() {\n";
+		result += execStr;
+		result += "}\n";
+		return result;
+	} else {
+		std::string result = "import(\"sys\");\nimport(\"" + package + "\");\n";
+		result += "func __init__() {\n";
+		result += execStr;
+		result += "}\n";
+		return result;
+	}
+}
+
 
 int main(int argc, char* argv[]) {
 
@@ -143,22 +160,24 @@ int main(int argc, char* argv[]) {
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
 
-	if (argc < 2) {
-		printf("Expected usage %s filename\n", argv[0]);
+	if (!cmdOptionExists(argv, argv + argc, "--file") && !cmdOptionExists(argv, argv + argc, "--exec")) {
+		printf("Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
 		return -1;
 	}
 
+	char const* targetFile = getCmdOption(argv, argv+argc, "", "--file");
+
 	//Calculate the name of the package being executed
-	char const* packageName = strrchr(argv[1], '/');
+	char const* packageName = strrchr(targetFile, '/');
 
 	if (!packageName) {
-		packageName = argv[1];
+		packageName = targetFile;
 	} else {
 		packageName++;
 	}
 
 	//The function to be executed, defaults to 'main'
-	char const* execFunction = getCmdOption(argv, argv + argc, "main", "--exec");
+	char const* execFunction = getCmdOption(argv, argv + argc, (std::string(packageName)+".main();").c_str(), "--exec");
 
 	//Compile the scribble program using the default namespaces
 	std::map<std::string, NamespaceType> names;
@@ -166,48 +185,96 @@ int main(int argc, char* argv[]) {
 	generateBuiltinNamespace(names);
 
 	try {
-		names = Parser::compile(argv[1], names);
+		names = Parser::compileText(writeInit(targetFile, packageName, execFunction), "__init__", names);
 	} catch (ParserException& e) {
 		printf("Unfortunately a parser error occurred because %s.\n", e.what());
 		return -1;
 	}
 
-	if (names[packageName].find(execFunction) != names[packageName].end() && names[packageName][execFunction].type() == FunctionSetEntry && names[packageName][execFunction].getFunctionSet().size() > 0) {
-		API::SafeFunction toExecute = names[packageName][execFunction].getFunctionSet()[0];
+	if (names["__init__"].find("__init__") == names["__init__"].end() || names["__init__"]["__init__"].type() != FunctionSetEntry || names["__init__"]["__init__"].getFunctionSet().size() != 1 || names["__init__"]["__init__"].getFunctionSet()[0]->numArgs() != 0) {
+		printf("Init function did not create properly\n");
+	}
 
-		printf("Tree execution of %s\n", packageName);
+	API::SafeFunction toExecute = names["__init__"]["__init__"].getFunctionSet()[0];
 
-		double treeStart = getCPUTime();
+			printf("Tree execution of %s\n", packageName);
 
-		valueHeap.free(
-				toExecute->execute(
-						std::vector<Value*>()));
+			double treeStart = getCPUTime();
 
-		double treeEnd = getCPUTime();
+			valueHeap.free(
+					toExecute->execute(
+							std::vector<Value*>()));
 
-		printf("Now in the VM\n");
+			double treeEnd = getCPUTime();
+
+			printf("Now in the VM\n");
 
 	
-		VM::VirtualMachine vm;
+			VM::VirtualMachine vm;
 
-		registerEntireNamespace(names, vm);
+			registerEntireNamespace(names, vm);
 
-		double vmStart = getCPUTime();
+			double vmStart = getCPUTime();
 
-		vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
+			vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
 
-		double vmEnd = getCPUTime();
+			double vmEnd = getCPUTime();
 
-		vm.printState();
+			vm.printState();
 
-		printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
-				vmEnd - vmStart);
+			printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
+					vmEnd - vmStart);
+
+	/**
+	if (names[packageName].find(execFunction) != names[packageName].end() && names[packageName][execFunction].type() == FunctionSetEntry && names[packageName][execFunction].getFunctionSet().size() > 0) {
+
+		bool selected = false;
+		API::SafeFunction toExecute;
+
+		for (unsigned int i = 0; i < names[packageName][execFunction].getFunctionSet().size(); i++) {
+
+			if (names[packageName][execFunction].getFunctionSet()[i]->numArgs() == 0) {
+				selected = true;
+				toExecute = names[packageName][execFunction].getFunctionSet()[i];
+			}
+
+		}
+
+		if (!selected) {
+			printf("There is no version of %s that takes zero arguments\n", execFunction);
+		} else {
+			printf("Tree execution of %s\n", packageName);
+
+			double treeStart = getCPUTime();
+
+			valueHeap.free(
+					toExecute->execute(
+							std::vector<Value*>()));
+
+			double treeEnd = getCPUTime();
+
+			printf("Now in the VM\n");
+
+	
+			VM::VirtualMachine vm;
+
+			registerEntireNamespace(names, vm);
+
+			double vmStart = getCPUTime();
+
+			vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
+
+			double vmEnd = getCPUTime();
+
+			vm.printState();
+
+			printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
+					vmEnd - vmStart);
+		}
 
 	} else {
-
-		printf("Function %s was not declared in %s\n", execFunction, packageName);
-
-	}
+		printf("Function %s() was not declared in %s\n", execFunction, packageName);
+	} */
 
 	printf("Exit\n");
 

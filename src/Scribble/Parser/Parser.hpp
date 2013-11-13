@@ -71,6 +71,9 @@ private:
 
 	static NamespaceType include(std::string const& inputSource,
 			std::string const& path);
+
+	static NamespaceType includeText(std::string source, std::string const& filename, std::string const& path);
+
 	static void printNamespace(NamespaceType const& ns);
 	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
 	static void resolve(TypeReference reference, NamespaceType ns);
@@ -115,6 +118,10 @@ public:
 
 	static std::map<std::string, NamespaceType> compile(std::string const& file,
 			std::map<std::string, NamespaceType> builtinNamespace);
+
+	static std::map<std::string, NamespaceType> compileText(std::string const& text, std::string const& packageName,
+			std::map<std::string, NamespaceType> builtinNamespace);
+
 };
 
 #endif //_PARSER_DEF_H_
