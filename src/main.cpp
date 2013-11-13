@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <cputime.hpp>
+#include <algorithm>
 
 void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 
@@ -116,37 +117,39 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 }
 
-int main(int argc, char** argv) {
+char const* getCmdOption(char ** begin, char ** end, char const* defaultOption, std::string option)
+{
+
+    char ** itr = std::find(begin, end, option);
+
+    if (itr != end && ++itr != end)
+    {
+        return *itr;
+    }
+
+    return defaultOption;
+}
+
+bool cmdOptionExists(char** begin, char** end, const std::string& option)
+{
+    return std::find(begin, end, option) != end;
+}
+
+
+int main(int argc, char* argv[]) {
 
 	srand(time(0));
 
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
 
-	if (argc != 2) {
+	if (argc < 2) {
 		printf("Expected usage %s filename\n", argv[0]);
 		return -1;
 	}
 
-	std::map<std::string, NamespaceType> names;
-	generateBuiltinNamespace(names);
-
-	VM::VirtualMachine vm;
-
-	try {
-
-		names = Parser::compile(argv[1], names);
-
-	} catch (ParserException& e) {
-
-		printf("Unfortunately a parser error occurred because %s.\n", e.what());
-
-		return -1;
-	}
-
-	registerEntireNamespace(names, vm);
-
-	char* packageName = strrchr(argv[1], '/');
+	//Calculate the name of the package being executed
+	char const* packageName = strrchr(argv[1], '/');
 
 	if (!packageName) {
 		packageName = argv[1];
@@ -154,28 +157,57 @@ int main(int argc, char** argv) {
 		packageName++;
 	}
 
-	printf("Tree execution of %s\n", packageName);
+	//The function to be executed, defaults to 'main'
+	char const* execFunction = getCmdOption(argv, argv + argc, "main", "--exec");
 
-	double treeStart = getCPUTime();
+	//Compile the scribble program using the default namespaces
+	std::map<std::string, NamespaceType> names;
 
-	valueHeap.free(
-			names[packageName]["main"].getFunctionSet()[0]->execute(
-					std::vector<Value*>()));
+	generateBuiltinNamespace(names);
 
-	double treeEnd = getCPUTime();
+	try {
+		names = Parser::compile(argv[1], names);
+	} catch (ParserException& e) {
+		printf("Unfortunately a parser error occurred because %s.\n", e.what());
+		return -1;
+	}
 
-	printf("Now in the VM\n");
+	if (names[packageName].find(execFunction) != names[packageName].end() && names[packageName][execFunction].type() == FunctionSetEntry && names[packageName][execFunction].getFunctionSet().size() > 0) {
+		API::SafeFunction toExecute = names[packageName][execFunction].getFunctionSet()[0];
 
-	double vmStart = getCPUTime();
+		printf("Tree execution of %s\n", packageName);
 
-	vm.execute(std::string(packageName) + ".main#0");
+		double treeStart = getCPUTime();
 
-	double vmEnd = getCPUTime();
+		valueHeap.free(
+				toExecute->execute(
+						std::vector<Value*>()));
 
-	vm.printState();
+		double treeEnd = getCPUTime();
 
-	printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
-			vmEnd - vmStart);
+		printf("Now in the VM\n");
+
+	
+		VM::VirtualMachine vm;
+
+		registerEntireNamespace(names, vm);
+
+		double vmStart = getCPUTime();
+
+		vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
+
+		double vmEnd = getCPUTime();
+
+		vm.printState();
+
+		printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
+				vmEnd - vmStart);
+
+	} else {
+
+		printf("Function %s was not declared in %s\n", execFunction, packageName);
+
+	}
 
 	printf("Exit\n");
 
