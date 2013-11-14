@@ -1,0 +1,9 @@
+This package depends on bison, flex, make and g++
+
+To install the package run make in the git directory.
+
+To install scribble run make && sudo make install with root access from the git diectory.
+
+Parameters:
+--exec Override the default .main(); call with your own code ( For example --exec "sys.Write(\"Hello World\\n\");" )
+--file Set the file to be compiled

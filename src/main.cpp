@@ -178,16 +178,16 @@ int main(int argc, char* argv[]) {
 
 	//The function to be executed, defaults to 'main'
 	char const* execFunction = getCmdOption(argv, argv + argc, std::string( std::string(packageName) + ".main();\n").c_str(), "--exec");
-	printf("Exec %s\n", execFunction);
 
+	//Write an initialization function based off the the parameters given
 	std::string initCode = writeInit(targetFile, packageName, execFunction);
-	printf("Init %s\n", initCode.c_str());
 
 	//Compile the scribble program using the default namespaces
 	std::map<std::string, NamespaceType> names;
 
 	generateBuiltinNamespace(names);
 
+	//Compile the program using the new __init__ package created, crash on any exceptions.
 	try {
 		names = Parser::compileText(initCode, "__init__", names);
 	} catch (ParserException& e) {
@@ -195,90 +195,40 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
+	//Check that the __init__ code has compiled properly.
 	if (names["__init__"].find("__init__") == names["__init__"].end() || names["__init__"]["__init__"].type() != FunctionSetEntry || names["__init__"]["__init__"].getFunctionSet().size() != 1 || names["__init__"]["__init__"].getFunctionSet()[0]->numArgs() != 0) {
 		printf("Init function did not create properly\n");
 	}
 
+	//Grab a reference to __init__.__init__ for execution
 	API::SafeFunction toExecute = names["__init__"]["__init__"].getFunctionSet()[0];
 
-			printf("Tree execution of %s\n", packageName);
+	printf("Tree execution of %s\n", packageName);
 
-			double treeStart = getCPUTime();
+	double treeStart = getCPUTime();
 
-			valueHeap.free(
-					toExecute->execute(
-							std::vector<Value*>()));
+	valueHeap.free(
+		toExecute->execute(
+		std::vector<Value*>()));
 
-			double treeEnd = getCPUTime();
+	double treeEnd = getCPUTime();
 
-			printf("Now in the VM\n");
+	printf("Now in the VM\n");
 
-	
-			VM::VirtualMachine vm;
+	VM::VirtualMachine vm;
 
-			registerEntireNamespace(names, vm);
+	registerEntireNamespace(names, vm);
 
-			double vmStart = getCPUTime();
+	double vmStart = getCPUTime();
 
-			vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
+	vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
 
-			double vmEnd = getCPUTime();
+	double vmEnd = getCPUTime();
 
-			vm.printState();
+	vm.printState();
 
-			printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
+	printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
 					vmEnd - vmStart);
-
-	/**
-	if (names[packageName].find(execFunction) != names[packageName].end() && names[packageName][execFunction].type() == FunctionSetEntry && names[packageName][execFunction].getFunctionSet().size() > 0) {
-
-		bool selected = false;
-		API::SafeFunction toExecute;
-
-		for (unsigned int i = 0; i < names[packageName][execFunction].getFunctionSet().size(); i++) {
-
-			if (names[packageName][execFunction].getFunctionSet()[i]->numArgs() == 0) {
-				selected = true;
-				toExecute = names[packageName][execFunction].getFunctionSet()[i];
-			}
-
-		}
-
-		if (!selected) {
-			printf("There is no version of %s that takes zero arguments\n", execFunction);
-		} else {
-			printf("Tree execution of %s\n", packageName);
-
-			double treeStart = getCPUTime();
-
-			valueHeap.free(
-					toExecute->execute(
-							std::vector<Value*>()));
-
-			double treeEnd = getCPUTime();
-
-			printf("Now in the VM\n");
-
-	
-			VM::VirtualMachine vm;
-
-			registerEntireNamespace(names, vm);
-
-			double vmStart = getCPUTime();
-
-			vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
-
-			double vmEnd = getCPUTime();
-
-			vm.printState();
-
-			printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
-					vmEnd - vmStart);
-		}
-
-	} else {
-		printf("Function %s() was not declared in %s\n", execFunction, packageName);
-	} */
 
 	printf("Exit\n");
 
