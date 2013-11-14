@@ -41,7 +41,6 @@
 #include <Scribble/Value/Util.hpp>
 #include <Scribble/Parser/Parser.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
-
 #include <Scribble/Value/Variable.hpp>
 #include <Scribble/Value/String.hpp>
 
@@ -131,7 +130,6 @@ Program: {
 		$$ = 0;
 	} | Program PACKAGE WORD ASSIGN IMPORT LPAREN STRING RPAREN END {
 		ImportList[*$3] = *$7;
-		printf("Mark import on %s\n", ((*$7)).c_str());
 		delete $7;
 		delete $3;
 		$$ = 0;
