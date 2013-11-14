@@ -1,4 +1,4 @@
-import("test");
+package test := import("test");
 
 func Test() {
 

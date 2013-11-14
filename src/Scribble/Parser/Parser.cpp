@@ -1,17 +1,24 @@
 #include "Parser.hpp"
 #include "ParserException.hpp"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <Scribble/Function/ScriptedFunction.hpp>
 #include <Scribble/Function/FunctionReference.hpp>
 #include <Scribble/Value/Util.hpp>
 
+#include <limits.h> /* PATH_MAX */
+#include <stdio.h>
+#include <stdlib.h>
+
 extern std::map<std::string, NamespaceType> Namespace;
 extern NamespaceType Functions;
+
 extern std::string currentNamespaceName;
 
-extern std::vector<std::string> ImportList;
+extern map<std::string, std::string> ImportList;
 
 extern std::vector<ParserReference> StatementReferences;
 extern std::vector<SP<Variable>> VariableReferences;
@@ -24,6 +31,15 @@ extern void scribble_parse();
 extern void scribble__scan_string(char const*);
 extern void scribble_lex_destroy();
 extern void parser_free_all();
+
+/**
+ * This function should return the uniform relative path to a file ( For example test/dog and ./test/dog should both evaluate to test/dog )
+ */
+
+std::string getUniformRelativePath(std::string currentPath) {
+	//TODO: This function currently does nothing except return the relative path.
+	return currentPath;
+}
 
 SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 		FunctionSet const& set) {
@@ -221,9 +237,14 @@ void Parser::resolve(TypeReference reference, NamespaceType ns) {
 	reference->type = ref->type;
 }
 
-NamespaceType Parser::includeText(std::string source, std::string const& filename, std::string const& path) {
+std::string Parser::includeText(std::string source, std::string const& filename, std::string const& path) {
 
-	currentNamespaceName = filename;
+	currentNamespaceName = getUniformRelativePath(path + filename);
+
+	//Check to see whether it is already loaded
+	if (Namespace.find(currentNamespaceName) != Namespace.end()) {
+		return currentNamespaceName;
+	}
 
 	//Pass the data to the parser.
 	scribble__scan_string(source.c_str());
@@ -235,10 +256,10 @@ NamespaceType Parser::includeText(std::string source, std::string const& filenam
 		throw ParserException(filename, "Parser error occurred");
 	}
 
-	Namespace[filename] = Functions;
+	Namespace[currentNamespaceName] = Functions;
 	Functions = NamespaceType();
 
-	std::vector < std::string > imports = ImportList;
+	std::map <std::string, std::string > imports = ImportList;
 	ImportList.clear();
 
 	std::vector<ParserReference> references = StatementReferences;
@@ -250,35 +271,39 @@ NamespaceType Parser::includeText(std::string source, std::string const& filenam
 	VariableReferences.clear();
 
 	//Look at the list of requested imports and attempt to resolve them.
-	for (unsigned int i = 0; i < imports.size(); ++i) {
+	for (auto iter = imports.begin(); iter != imports.end(); iter++) {
 
-		//If not already loaded attempt to load the file.
-		if (Namespace.find(imports[i]) == Namespace.end()) {
 
-			//Calculate the new path if it is any different ( For example sorts/quick is recalculated to quick with path += sorts/ )
-			auto pathEnd = imports[i].find_last_of("/");
+		//Calculate the new path if it is any different ( For example sorts/quick is recalculated to quick with path += sorts/ )
+		auto pathEnd = iter->second.find_last_of("/");
 
-			//Set the import path to be empty and the importFile to be imports[i]
-			std::string toImportPath = "";
-			std::string importFile = imports[i];
+		//Set the import path to be empty and the importFile to be ier->second
+		std::string toImportPath = "";
+		std::string importFile = iter->second;
 
-			//If the imported file is in another directory then update its path ( So ./examples/ will become ./examples/sorts/)
-			if (pathEnd != std::string::npos) {
-				toImportPath = importFile.substr(0, pathEnd + 1);
-				importFile = importFile.substr(pathEnd + 1, importFile.size());
-			}
-
-			include(importFile, path + toImportPath);
-			currentNamespaceName = filename;
-
-			Functions = NamespaceType();
-
-			imports[i] = importFile;
+		//If the imported file is in another directory then update its path ( So ./examples/ will become ./examples/sorts/)
+		if (pathEnd != std::string::npos) {
+			toImportPath = importFile.substr(0, pathEnd + 1);
+			importFile = importFile.substr(pathEnd + 1, importFile.size());
 		}
 
+		//Include can modify the include path based on where it finds the target.
+		std::string includePath = path + toImportPath;
+
+		printf("Including file %s toImportPath %s existing path %s full path %s\n", importFile.c_str(), toImportPath.c_str(), path.c_str(), includePath.c_str());
+
+		std::string resolvedImportPath = include(importFile, includePath);
+
+		//Change imports[iter->first] to the location include found the file at ( includePath is the 
+		imports[iter->first] = resolvedImportPath;
+
+		//After each include change currentNamespaceName as it may have been changed by the include
+		currentNamespaceName = getUniformRelativePath(path + filename);
+
+		Functions = NamespaceType();
 	}
 
-	Functions = Namespace[filename];
+	Functions = Namespace[currentNamespaceName];
 
 	for (unsigned int i = 0; i < typeReferences.size(); ++i) {
 
@@ -314,10 +339,8 @@ NamespaceType Parser::includeText(std::string source, std::string const& filenam
 			if (ref->getNamespace().size() != 0) {
 
 				//Check the namespace has been loaded. If not then do not resolve the reference.
-				if (Parser::listContains(ref->getNamespace(), imports)) {
-
-					selectedNamespace = Namespace[ref->getNamespace()];
-
+				if (imports.find(ref->getNamespace()) != imports.end()) {
+					selectedNamespace = Namespace[imports.find(ref->getNamespace())->second];
 				} else {
 
 					ref->setResolveIssue(
@@ -336,7 +359,7 @@ NamespaceType Parser::includeText(std::string source, std::string const& filenam
 
 				ref->setResolveIssue(
 						std::string("the function ") + ref->getDebugName()
-						+ " is not defined");
+						+ " is not defined in " + imports.find(ref->getNamespace())->second);
 
 			} else {
 
@@ -417,26 +440,50 @@ NamespaceType Parser::includeText(std::string source, std::string const& filenam
 		throw ParserException(filename, e.what());
 	}
 
-	return Functions;
+	return currentNamespaceName;
 
 }
 
-NamespaceType Parser::include(std::string const& filename,
+std::string Parser::include(std::string const& filename,
 		std::string const& path) {
 
-	//Create the inputSource from the buffer
-	std::string inputSource = bufferText(path + filename + ".scribble");
+
+	currentNamespaceName = getUniformRelativePath(path + filename);
+
+	//Check to see if its already loaded
+	if (Namespace.find(currentNamespaceName) != Namespace.end()) {
+		return currentNamespaceName;
+	}
+
+	std::string inputSource;
+
+	//If the path is root and the file is not found then search the root.
+	if (path.size() > 0) {
+
+		try {
+			//Create the inputSource from the buffer
+			inputSource = bufferText(currentNamespaceName + ".scribble");
+		} catch (ParserException& ex) {
+			printf("Parser exception looking for %s, looking in the top level\n", (currentNamespaceName).c_str());
+			return include(filename, "");
+		}
+
+	} else {
+
+		//If path is root and the file is not found then let the resolution fail ( So the import path  is CURRENT/file then if that fails it checks /file and if that fails it throws an error.
+		inputSource = bufferText(filename + ".scribble");
+
+	}
 
 	//Clear and previous errors
 	ParsingError = false;
 
 	//Copy the input source to a buffer and then parse it ( As Bison/Flex only work with C strings)
 	char* a = strdup(inputSource.c_str());
-
-	NamespaceType res = includeText(a, filename, path);
+	std::string packagePath = includeText(a, filename, path);
 	delete[] a;
 
-	return res;
+	return currentNamespaceName;
 }
 
 std::map<std::string, NamespaceType> Parser::compile(std::string const& file,
@@ -454,7 +501,7 @@ std::map<std::string, NamespaceType> Parser::compile(std::string const& file,
 	}
 
 	Namespace = builtinNamespace;
-	NamespaceType ns = include(filename, path);
+	include(filename, path);
 
 	std::map<std::string, NamespaceType> result = Namespace;
 
@@ -478,7 +525,7 @@ std::map<std::string, NamespaceType> Parser::compileText(std::string const& text
 	}
 
 	Namespace = builtinNamespace;
-	NamespaceType ns = includeText(text, filename, path);
+	includeText(text, filename, path);
 
 	std::map<std::string, NamespaceType> result = Namespace;
 

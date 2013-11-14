@@ -61,6 +61,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 
 "and" return AND;
 "or" return OR;
+"package" return PACKAGE;
 
 "(" return LPAREN;
 ")" return RPAREN;

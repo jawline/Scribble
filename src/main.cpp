@@ -138,13 +138,13 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option)
 std::string writeInit(std::string package, std::string thin, std::string execStr) {
 
 	if (package.size() == 0) {
-		std::string result = "import(\"sys\");\n";
+		std::string result = "package sys := import(\"sys\");\n";
 		result += "func __init__() {\n";
 		result += execStr;
 		result += "}\n";
 		return result;
 	} else {
-		std::string result = "import(\"sys\");\nimport(\"" + package + "\");\n";
+		std::string result = "package sys := import(\"sys\");\npackage target := import(\"" + package + "\");\n";
 		result += "func __init__() {\n";
 		result += execStr;
 		result += "}\n";
@@ -177,7 +177,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	//The function to be executed, defaults to 'main'
-	char const* execFunction = getCmdOption(argv, argv + argc, std::string( std::string(packageName) + ".main();\n").c_str(), "--exec");
+	char const* execFunction = getCmdOption(argv, argv + argc, "target.main();\n", "--exec");
 
 	//Write an initialization function based off the the parameters given
 	std::string initCode = writeInit(targetFile, packageName, execFunction);
@@ -186,6 +186,8 @@ int main(int argc, char* argv[]) {
 	std::map<std::string, NamespaceType> names;
 
 	generateBuiltinNamespace(names);
+
+	printf("%s\n", initCode.c_str());
 
 	//Compile the program using the new __init__ package created, crash on any exceptions.
 	try {

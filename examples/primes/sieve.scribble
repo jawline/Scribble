@@ -1,4 +1,4 @@
-import("sys");
+package sys := import("sys");
 
 func Sieve(n:int) : array(bool) {
 

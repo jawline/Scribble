@@ -23,7 +23,7 @@ private:
 
 public:
 
-	ScriptedFunction(std::string name, int version, std::string names, TypeReference functionType,
+	ScriptedFunction(std::string name, int version, std::string nameSpace, TypeReference functionType,
 			SP<Variable> templateReturn,
 			std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variableTemplates,

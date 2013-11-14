@@ -1,7 +1,7 @@
-import("test");
-import("sys");
-import("../primes/sieve");
-import("../primes/isprime");
+package test := import("test");
+package sys := import("sys");
+package sieve := import("../primes/sieve");
+package isprime := import("../primes/isprime");
 
 func Test() {
 
@@ -23,6 +23,7 @@ func Test() {
 			sys.Write(" ");
 		
 			test.Fatal("IsPrime differs from primesList result");
+
 		}
 		
 	}

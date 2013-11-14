@@ -49,10 +49,11 @@ int scribble_lex();
 void scribble_error(const char* s);
 
 bool ParsingError;
-std::vector<std::string> ImportList;
+std::map<std::string, std::string> ImportList;
 std::map<std::string, SP<Variable>> Variables;
 
 std::string currentNamespaceName;
+
 std::map<std::string, NamespaceType> Namespace;
 NamespaceType Functions;
 
@@ -100,7 +101,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
-%token <token> END DO OR
+%token <token> END DO OR PACKAGE
 
 %left PLUS MINUS
 %left TIMES DIVIDE
@@ -125,13 +126,14 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %%
 
 Program: {
-		//
 		lastuid = 0;
 		Variables.clear();
 		$$ = 0;
-	} | Program IMPORT LPAREN STRING RPAREN END {
-		ImportList.push_back(*$4);
-		delete $4;
+	} | Program PACKAGE WORD ASSIGN IMPORT LPAREN STRING RPAREN END {
+		ImportList[*$3] = *$7;
+		printf("Mark import on %s\n", ((*$7)).c_str());
+		delete $7;
+		delete $3;
 		$$ = 0;
 	} | Program Function {
 		$$ = 0;

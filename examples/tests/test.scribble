@@ -1,4 +1,4 @@
-import("sys");
+package sys := import("sys");
 
 func Fatal(error : string) {
 
