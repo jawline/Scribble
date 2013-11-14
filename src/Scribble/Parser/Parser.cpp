@@ -32,13 +32,23 @@ extern void scribble__scan_string(char const*);
 extern void scribble_lex_destroy();
 extern void parser_free_all();
 
+std::string ReplaceString(std::string subject, const std::string& search,
+                          const std::string& replace) {
+    size_t pos = 0;
+    while ((pos = subject.find(search, pos)) != std::string::npos) {
+         subject.replace(pos, search.length(), replace);
+         pos += replace.length();
+    }
+    return subject;
+}
+
 /**
  * This function should return the uniform relative path to a file ( For example test/dog and ./test/dog should both evaluate to test/dog )
  */
 
 std::string getUniformRelativePath(std::string currentPath) {
-	//TODO: This function currently does nothing except return the relative path.
-	return currentPath;
+	//TODO: This needs improving. Currently does not factor out .. when possible meaning "Hello/../Blah" and "Blah" will resolve to different strings
+	return ReplaceString(currentPath, "/./", "/");
 }
 
 SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
