@@ -3,21 +3,19 @@ package loopsTest := import("tests/loops");
 package logialTest := import("tests/logical");
 package variablesTest := import("tests/variables");
 package recursionTest := import("tests/recursion");
-//import("tests/arrays");
+package arraysTest := import("tests/arrays");
 package primesTest := import("tests/primes");
 //import("tests/sorts");
 
 func main() {
    
     loopsTest.Test();
+    arraysTest.Test();
     variablesTest.Test();
     recursionTest.Test();
     primesTest.Test();
-    //logicalTest.poo();
-    //logicalTest.Test();
-    //variables.Test();
-    //loops.Test();
-    //recursion.Test();
+    logicalTest.Test();
+    
     //arrays.Test();
     //sorts.Test();
 

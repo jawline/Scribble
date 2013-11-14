@@ -223,7 +223,7 @@ int main(int argc, char* argv[]) {
 
 	double vmStart = getCPUTime();
 
-	vm.execute(toExecute->getNamespace() + "." + toExecute->getName());
+	vm.execute(toExecute->getNamespace() + VM::vmNamespaceSeperator + toExecute->getName());
 
 	double vmEnd = getCPUTime();
 

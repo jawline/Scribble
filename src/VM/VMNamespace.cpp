@@ -6,10 +6,11 @@
  */
 
 #include "VMNamespace.hpp"
+#include <VM/Constants.hpp>
 
 bool VM::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& entry) {
 
-	size_t pos = target.find(".");
+	size_t pos = target.find(VM::vmNamespaceSeperator);
 
 	if (pos == std::string::npos) {
 

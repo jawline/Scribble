@@ -1,5 +1,6 @@
 #include "FunctionStatement.hpp"
 #include <Scribble/Value/TypeManager.hpp>
+#include <VM/Constants.hpp>
 
 void FunctionStatement::checkTree(Type* functionType) {
 
@@ -86,7 +87,7 @@ int FunctionStatement::generateCode(int resultRegister,
 	}
 
 	generated
-			<< "call \"" + func_->getFunction()->getNamespace() + "."
+			<< "call \"" + func_->getFunction()->getNamespace() + VM::vmNamespaceSeperator
 					+ func_->getFunction()->getName() + "\"\n";
 
 	generated << "popr $" << VM::vmReturnResultRegister + 1 << " "

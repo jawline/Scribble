@@ -37,6 +37,8 @@ const static unsigned int vmStackIncrement = 32;
 
 const static unsigned int vmStackIncrease = vmStackBlockSize * vmStackIncrement;
 
+const static char vmNamespaceSeperator = ':';
+
 }
 
 #endif //_VM_CONSTANTS_DEF_H_

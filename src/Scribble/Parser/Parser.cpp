@@ -47,8 +47,14 @@ std::string ReplaceString(std::string subject, const std::string& search,
  */
 
 std::string getUniformRelativePath(std::string currentPath) {
-	//TODO: This needs improving. Currently does not factor out .. when possible meaning "Hello/../Blah" and "Blah" will resolve to different strings
-	return ReplaceString(currentPath, "/./", "/");
+	//TODO: This needs improving. Currently provides absolute path if the file exists otherwise returns the currentPath handed
+	char pBuf[PATH_MAX];
+	
+	if (realpath(currentPath.c_str(), pBuf) == 0) {
+		return currentPath;
+	}
+	
+	return std::string(pBuf);
 }
 
 SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
@@ -300,7 +306,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 		//Include can modify the include path based on where it finds the target.
 		std::string includePath = path + toImportPath;
 
-		printf("Including file %s toImportPath %s existing path %s full path %s\n", importFile.c_str(), toImportPath.c_str(), path.c_str(), includePath.c_str());
+		//printf("Including file %s toImportPath %s existing path %s full path %s\n", importFile.c_str(), toImportPath.c_str(), path.c_str(), includePath.c_str());
 
 		std::string resolvedImportPath = include(importFile, includePath);
 
@@ -474,7 +480,7 @@ std::string Parser::include(std::string const& filename,
 			//Create the inputSource from the buffer
 			inputSource = bufferText(currentNamespaceName + ".scribble");
 		} catch (ParserException& ex) {
-			printf("Parser exception looking for %s, looking in the top level\n", (currentNamespaceName).c_str());
+			//printf("Parser exception looking for %s, looking in the top level\n", (currentNamespaceName).c_str());
 			return include(filename, "");
 		}
 
