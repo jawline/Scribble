@@ -7,6 +7,12 @@ package arraysTest := import("tests/arrays");
 package primesTest := import("tests/primes");
 package sortsTest := import("tests/sorts");
 
+/**
+ * This is a comment
+ * Extra line
+ * La la la la la
+ */
+
 func main() {
    
     loopsTest.Test();

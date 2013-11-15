@@ -61,6 +61,9 @@ public:
 	AutoVariablePair autoVariableType;
 };
 
+
+const static std::string ScribbleFileSuffix = ".sc";
+
 /**
  * Parser facade, hides the Parser implementation and provides function to convert between files and returns low level code.
  */
@@ -77,6 +80,7 @@ private:
 	static void printNamespace(NamespaceType const& ns);
 	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
 	static void resolve(TypeReference reference, NamespaceType ns);
+	static std::string getUniformPath(std::string const& path);
 
 public:
 

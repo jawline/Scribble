@@ -32,28 +32,18 @@ extern void scribble__scan_string(char const*);
 extern void scribble_lex_destroy();
 extern void parser_free_all();
 
-std::string ReplaceString(std::string subject, const std::string& search,
-                          const std::string& replace) {
-    size_t pos = 0;
-    while ((pos = subject.find(search, pos)) != std::string::npos) {
-         subject.replace(pos, search.length(), replace);
-         pos += replace.length();
-    }
-    return subject;
-}
-
 /**
  * This function should return the uniform relative path to a file ( For example test/dog and ./test/dog should both evaluate to test/dog )
  */
 
-std::string getUniformRelativePath(std::string currentPath) {
+std::string Parser::getUniformPath(std::string const& currentPath) {
 	//TODO: This needs improving. Currently provides absolute path if the file exists otherwise returns the currentPath handed
 	char pBuf[PATH_MAX];
-	
-	if (realpath(currentPath.c_str(), pBuf) == 0) {
+
+	if (realpath((currentPath + ScribbleFileSuffix).c_str(), pBuf) == 0) {
 		return currentPath;
 	}
-	
+
 	return std::string(pBuf);
 }
 
@@ -253,9 +243,10 @@ void Parser::resolve(TypeReference reference, NamespaceType ns) {
 	reference->type = ref->type;
 }
 
-std::string Parser::includeText(std::string source, std::string const& filename, std::string const& path) {
+std::string Parser::includeText(std::string source, std::string const& filename,
+		std::string const& path) {
 
-	currentNamespaceName = getUniformRelativePath(path + filename);
+	currentNamespaceName = getUniformPath(path + filename);
 
 	//Check to see whether it is already loaded
 	if (Namespace.find(currentNamespaceName) != Namespace.end()) {
@@ -275,12 +266,12 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	Namespace[currentNamespaceName] = Functions;
 	Functions = NamespaceType();
 
-	std::map <std::string, std::string > imports = ImportList;
+	std::map < std::string, std::string > imports = ImportList;
 	ImportList.clear();
 
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
-	std::vector < SP < Variable >> variableReferences = VariableReferences;
+	std::vector < SP< Variable >> variableReferences = VariableReferences;
 
 	StatementReferences.clear();
 	TypeReferences.clear();
@@ -288,7 +279,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 	//Look at the list of requested imports and attempt to resolve them.
 	for (auto iter = imports.begin(); iter != imports.end(); iter++) {
-
 
 		//Calculate the new path if it is any different ( For example sorts/quick is recalculated to quick with path += sorts/ )
 		auto pathEnd = iter->second.find_last_of("/");
@@ -314,7 +304,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 		imports[iter->first] = resolvedImportPath;
 
 		//After each include change currentNamespaceName as it may have been changed by the include
-		currentNamespaceName = getUniformRelativePath(path + filename);
+		currentNamespaceName = getUniformPath(path + filename);
 
 		Functions = NamespaceType();
 	}
@@ -463,8 +453,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 std::string Parser::include(std::string const& filename,
 		std::string const& path) {
 
-
-	currentNamespaceName = getUniformRelativePath(path + filename);
+	currentNamespaceName = getUniformPath(path + filename);
 
 	//Check to see if its already loaded
 	if (Namespace.find(currentNamespaceName) != Namespace.end()) {
@@ -478,7 +467,7 @@ std::string Parser::include(std::string const& filename,
 
 		try {
 			//Create the inputSource from the buffer
-			inputSource = bufferText(currentNamespaceName + ".scribble");
+			inputSource = bufferText(currentNamespaceName);
 		} catch (ParserException& ex) {
 			//printf("Parser exception looking for %s, looking in the top level\n", (currentNamespaceName).c_str());
 			return include(filename, "");
@@ -526,7 +515,8 @@ std::map<std::string, NamespaceType> Parser::compile(std::string const& file,
 	return result;
 }
 
-std::map<std::string, NamespaceType> Parser::compileText(std::string const& text, std::string const& file,
+std::map<std::string, NamespaceType> Parser::compileText(
+		std::string const& text, std::string const& file,
 		std::map<std::string, NamespaceType> builtinNamespace) {
 	parser_free_all();
 
@@ -549,5 +539,4 @@ std::map<std::string, NamespaceType> Parser::compileText(std::string const& text
 
 	return result;
 }
-
 

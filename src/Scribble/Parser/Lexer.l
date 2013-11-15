@@ -4,6 +4,7 @@
 %option prefix="scribble_"
 
 %x C_COMMENT
+%x C_LONG_COMMENT
 
 %{
 #include <API/Function.hpp>
@@ -45,6 +46,11 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "//"            { BEGIN(C_COMMENT); }
 <C_COMMENT>"\n" { BEGIN(INITIAL); }
 <C_COMMENT>.    { }
+
+"/*" { BEGIN(C_LONG_COMMENT); }
+<C_LONG_COMMENT>"*/" { BEGIN(INITIAL); }
+<C_LONG_COMMENT>"\n" {}
+<C_LONG_COMMENT>. {}
 
 {white} { }
 
