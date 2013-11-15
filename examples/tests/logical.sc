@@ -1,3 +1,9 @@
+/**
+ * This package provides function to test the logical operators in Scribble
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 package test := import("test");
 
 func Test() {

@@ -1,682 +1,0 @@
-Script started on Thu 14 Nov 2013 16:59:01 GMT
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ xfwm4-settingswindow-managerxfwm4 --help-gtk[K-gtk[2Pwindow-managerxfwm4-settings[Kmwk4[K[K[Kqk[K[Kake clean
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make
-flex -o ./gen/ScribbleLexer.cpp ./src/Scribble/Parser/Lexer.l
-bison --verbose -d -o ./gen/ScribbleParser.cpp src/Scribble/Parser/Parser.yy
-src/Scribble/Parser/Parser.yy: conflicts: 157 shift/reduce
-flex -o ./gen/SASMLexer.cpp src/SASM/Lexer.l
-bison --verbose -d -o ./gen/SASMParser.cpp src/SASM/Parser.yy
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/ScribbleLexer.cpp -o obj/gen/ScribbleLexer.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/ScribbleParser.cpp -o obj/gen/ScribbleParser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/SASMLexer.cpp -o obj/gen/SASMLexer.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/SASMParser.cpp -o obj/gen/SASMParser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/cputime.cpp -o obj/src/cputime.o
-src/cputime.cpp: In function ‘double getCPUTime()’:
-src/cputime.cpp:53:13: warning: variable ‘id’ set but not used [-Wunused-but-set-variable]
-   clockid_t id;
-             ^
-src/cputime.cpp:54:19: warning: unused variable ‘ts’ [-Wunused-variable]
-   struct timespec ts;
-                   ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/main.cpp -o obj/src/main.o
-src/main.cpp: In function ‘void registerEntireNamespace(std::map<std::basic_string<char>, std::map<std::basic_string<char>, NamespaceEntry> >&, VM::VirtualMachine&)’:
-src/main.cpp:103:53: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-     for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
-                                                     ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/Concat.cpp -o obj/src/API/Concat.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/Modulo.cpp -o obj/src/API/Modulo.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/RandomInt.cpp -o obj/src/API/RandomInt.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/ReadLine.cpp -o obj/src/API/ReadLine.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/StringFunction.cpp -o obj/src/API/StringFunction.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/WriteFunction.cpp -o obj/src/API/WriteFunction.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/SASM/Parser.cpp -o obj/src/SASM/Parser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/SASM/SasmException.cpp -o obj/src/SASM/SasmException.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/Heap.cpp -o obj/src/VM/Heap.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/InstructionSet.cpp -o obj/src/VM/InstructionSet.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VirtualMachine.cpp -o obj/src/VM/VirtualMachine.o
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine.cpp: In member function ‘virtual void VM::VirtualMachine::execute(std::string)’:
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%li’ expects argument of type ‘long int’, but argument 7 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%li’ expects argument of type ‘long int’, but argument 8 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%li’ expects argument of type ‘long int’, but argument 7 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%li’ expects argument of type ‘long int’, but argument 8 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:612:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:612:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VirtualMachine_Debug.cpp -o obj/src/VM/VirtualMachine_Debug.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VirtualMachine_Stack.cpp -o obj/src/VM/VirtualMachine_Stack.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VMEntryType.cpp -o obj/src/VM/VMEntryType.o
-src/VM/VMEntryType.cpp: In constructor ‘VM::VMEntryType::VMEntryType(std::string, std::vector<VM::VMStructureField>)’:
-src/VM/VMEntryType.cpp:25:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-  for (int i = 0; i < fields.size(); i++) {
-                                  ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VMFunc.cpp -o obj/src/VM/VMFunc.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VMNamespace.cpp -o obj/src/VM/VMNamespace.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/Value/APIValue.cpp -o obj/src/API/Value/APIValue.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Function/FunctionReference.cpp -o obj/src/Scribble/Function/FunctionReference.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Function/ScriptedFunction.cpp -o obj/src/Scribble/Function/ScriptedFunction.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Parser/NamespaceEntry.cpp -o obj/src/Scribble/Parser/NamespaceEntry.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Parser/Parser.cpp -o obj/src/Scribble/Parser/Parser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Parser/ParserException.cpp -o obj/src/Scribble/Parser/ParserException.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/AndStatement.cpp -o obj/src/Scribble/Statement/AndStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ArrayLengthStatement.cpp -o obj/src/Scribble/Statement/ArrayLengthStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ArrayStatement.cpp -o obj/src/Scribble/Statement/ArrayStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/AssignArrayStatement.cpp -o obj/src/Scribble/Statement/AssignArrayStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/AssignVariable.cpp -o obj/src/Scribble/Statement/AssignVariable.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/BoolStatement.cpp -o obj/src/Scribble/Statement/BoolStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ForStatement.cpp -o obj/src/Scribble/Statement/ForStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/FunctionStatement.cpp -o obj/src/Scribble/Statement/FunctionStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/GetArrayStatement.cpp -o obj/src/Scribble/Statement/GetArrayStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/GetStructureElementStatement.cpp -o obj/src/Scribble/Statement/GetStructureElementStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/GetVariableStatement.cpp -o obj/src/Scribble/Statement/GetVariableStatement.o
-src/Scribble/Statement/GetVariableStatement.cpp: In member function ‘virtual int GetVariableStatement::generateCode(int, std::stringstream&)’:
-src/Scribble/Statement/GetVariableStatement.cpp:35:35: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-      != var_->getPosition() + VM::vmNumReservedRegisters) {
-                                   ^
-src/Scribble/Statement/GetVariableStatement.cpp:44:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/Heap.cpp -o obj/src/Scribble/Statement/Heap.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/IfStatement.cpp -o obj/src/Scribble/Statement/IfStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/IncrementStatement.cpp -o obj/src/Scribble/Statement/IncrementStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/IntStatement.cpp -o obj/src/Scribble/Statement/IntStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/NegativeStatement.cpp -o obj/src/Scribble/Statement/NegativeStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/OperateStatement.cpp -o obj/src/Scribble/Statement/OperateStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/OrStatement.cpp -o obj/src/Scribble/Statement/OrStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ReturnStatement.cpp -o obj/src/Scribble/Statement/ReturnStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StatementException.cpp -o obj/src/Scribble/Statement/StatementException.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StringStatement.cpp -o obj/src/Scribble/Statement/StringStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StructureAssignElement.cpp -o obj/src/Scribble/Statement/StructureAssignElement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StructureStatement.cpp -o obj/src/Scribble/Statement/StructureStatement.o
-src/Scribble/Statement/StructureStatement.cpp: In member function ‘virtual void StructureStatement::checkTree(Type*)’:
-src/Scribble/Statement/StructureStatement.cpp:36:47: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-  if (info->getNumIndexs() != statements_.size()) {
-                                               ^
-src/Scribble/Statement/StructureStatement.cpp: In member function ‘virtual int StructureStatement::generateCode(int, std::stringstream&)’:
-src/Scribble/Statement/StructureStatement.cpp:72:1: warning: no return statement in function returning non-void [-Wreturn-type]
- }
- ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/TestNilStatement.cpp -o obj/src/Scribble/Statement/TestNilStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/TestStatement.cpp -o obj/src/Scribble/Statement/TestStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/WhileStatement.cpp -o obj/src/Scribble/Statement/WhileStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Array.cpp -o obj/src/Scribble/Value/Array.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/ArrayData.cpp -o obj/src/Scribble/Value/ArrayData.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Bool.cpp -o obj/src/Scribble/Value/Bool.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Int.cpp -o obj/src/Scribble/Value/Int.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/String.cpp -o obj/src/Scribble/Value/String.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Structure.cpp -o obj/src/Scribble/Value/Structure.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/StructureData.cpp -o obj/src/Scribble/Value/StructureData.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/StructureInfo.cpp -o obj/src/Scribble/Value/StructureInfo.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Type.cpp -o obj/src/Scribble/Value/Type.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/TypeManager.cpp -o obj/src/Scribble/Value/TypeManager.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Util.cpp -o obj/src/Scribble/Value/Util.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/ValueHeap.cpp -o obj/src/Scribble/Value/ValueHeap.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Variable.cpp -o obj/src/Scribble/Value/Variable.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Void.cpp -o obj/src/Scribble/Value/Void.o
-g++ -pthread -lpthread obj/gen/ScribbleLexer.o obj/gen/ScribbleParser.o obj/gen/SASMLexer.o obj/gen/SASMParser.o obj/src/cputime.o obj/src/main.o obj/src/API/Concat.o obj/src/API/Modulo.o obj/src/API/RandomInt.o obj/src/API/ReadLine.o obj/src/API/StringFunction.o obj/src/API/WriteFunction.o obj/src/SASM/Parser.o obj/src/SASM/SasmException.o obj/src/VM/Heap.o obj/src/VM/InstructionSet.o obj/src/VM/VirtualMachine.o obj/src/VM/VirtualMachine_Debug.o obj/src/VM/VirtualMachine_Stack.o obj/src/VM/VMEntryType.o obj/src/VM/VMFunc.o obj/src/VM/VMNamespace.o obj/src/API/Value/APIValue.o obj/src/Scribble/Function/FunctionReference.o obj/src/Scribble/Function/ScriptedFunction.o obj/src/Scribble/Parser/NamespaceEntry.o obj/src/Scribble/Parser/Parser.o obj/src/Scribble/Parser/ParserException.o obj/src/Scribble/Statement/AndStatement.o obj/src/Scribble/Statement/ArrayLengthStatement.o obj/src/Scribble/Statement/ArrayStatement.o obj/src/Scribble/Statement/AssignArrayStatement.o obj/src/Scribble/Statement/AssignVariable.o obj/src/Scribble/Statement/BoolStatement.o obj/src/Scribble/Statement/ForStatement.o obj/src/Scribble/Statement/FunctionStatement.o obj/src/Scribble/Statement/GetArrayStatement.o obj/src/Scribble/Statement/GetStructureElementStatement.o obj/src/Scribble/Statement/GetVariableStatement.o obj/src/Scribble/Statement/Heap.o obj/src/Scribble/Statement/IfStatement.o obj/src/Scribble/Statement/IncrementStatement.o obj/src/Scribble/Statement/IntStatement.o obj/src/Scribble/Statement/NegativeStatement.o obj/src/Scribble/Statement/OperateStatement.o obj/src/Scribble/Statement/OrStatement.o obj/src/Scribble/Statement/ReturnStatement.o obj/src/Scribble/Statement/StatementException.o obj/src/Scribble/Statement/StringStatement.o obj/src/Scribble/Statement/StructureAssignElement.o obj/src/Scribble/Statement/StructureStatement.o obj/src/Scribble/Statement/TestNilStatement.o obj/src/Scribble/Statement/TestStatement.o obj/src/Scribble/Statement/WhileStatement.o obj/src/Scribble/Value/Array.o obj/src/Scribble/Value/ArrayData.o obj/src/Scribble/Value/Bool.o obj/src/Scribble/Value/Int.o obj/src/Scribble/Value/String.o obj/src/Scribble/Value/Structure.o obj/src/Scribble/Value/StructureData.o obj/src/Scribble/Value/StructureInfo.o obj/src/Scribble/Value/Type.o obj/src/Scribble/Value/TypeManager.o obj/src/Scribble/Value/Util.o obj/src/Scribble/Value/ValueHeap.o obj/src/Scribble/Value/Variable.o obj/src/Scribble/Value/Void.o -o bin/scribble
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make cleanxfwm4-settingswindow-managerxfwm4 --help-gtk[Kls[Kwindowxfwm4 --replace &&[K[Ksudo apt-get install xfwm4xfwm4[Ksudo apt-get install xfwm4xfwm4[K --replace &&[K[11Pwindow[4Plsxfwm4 --help-gtk[2Pwindow-managerxfwm4-settings[4Pmake clean[K[K./bin/scribble --f[Kexec "Test"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-Test}
-
-ERROR: Variable not defined at symbol } on line 3
-Unfortunately a parser error occurred because Parser Exception in file __init__ Parser error occurred.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "Test"("0"[1P")";"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-Test();}
-
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-Aborted (core dumped)
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "Test();"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-Test();}
-
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-Aborted (core dumped)
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "Test();"[K./bin/scribble --exec "Test();"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-Test();}
-
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-Aborted (core dumped)
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "Test();""[K();"j();"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-Testj();}
-
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-Aborted (core dumped)
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "Testj();"rTestj();" [A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
-
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-rTestj();}
-
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-Aborted (core dumped)
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "rTestj();" [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Ptj();"
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-rTetj();}
-
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-Aborted (core dumped)
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "rTetj();"[C[C[1P"[1P"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-rTetj(}
-
-ERROR: syntax error, unexpected RBRACKET at symbol } on line 3
-Unfortunately a parser error occurred because Parser Exception in file __init__ Parser error occurred.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "rTetj("[C[1P"[1P"[1P"[1P"[1P"(")";"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-r();}
-
-terminate called after throwing an instance of 'std::bad_alloc'
-  what():  std::bad_alloc
-Aborted (core dumped)
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ sudo apt-get install eclipse ecli pse-cdt g++
-[sudo] password for blake: 
-Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
-Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
-Reading state information... 0%Reading state information... 0%Reading state information... Done
-g++ is already the newest version.
-g++ set to manually installed.
-eclipse is already the newest version.
-The following extra packages will be installed:
-  eclipse-cdt-jni
-Suggested packages:
-  eclipse-cdt-autotools eclipse-cdt-launch-remote
-The following NEW packages will be installed
-  eclipse-cdt eclipse-cdt-jni
-0 upgraded, 2 newly installed, 0 to remove and 65 not upgraded.
-Need to get 34.9 MB of archives.
-After this operation, 37.7 MB of additional disk space will be used.
-Do you want to continue [Y/n]? y
-0% [Working]            Get:1 http://gb.archive.ubuntu.com/ubuntu/ saucy/universe eclipse-cdt-jni amd64 8.1.2-2 [18.1 kB]
-            0% [1 eclipse-cdt-jni 5,485 B/18.1 kB 30%]                                          0% [Working]            Get:2 http://gb.archive.ubuntu.com/ubuntu/ saucy/universe eclipse-cdt all 8.1.2-2 [34.9 MB]
-            0% [2 eclipse-cdt 2,584 B/34.9 MB 0%]                                     1% [2 eclipse-cdt 227 kB/34.9 MB 1%]2% [2 eclipse-cdt 640 kB/34.9 MB 2%]                                    3% [2 eclipse-cdt 1,139 kB/34.9 MB 3%]5% [2 eclipse-cdt 1,553 kB/34.9 MB 4%]6% [2 eclipse-cdt 1,986 kB/34.9 MB 6%]7% [2 eclipse-cdt 2,422 kB/34.9 MB 7%]9% [2 eclipse-cdt 2,975 kB/34.9 MB 9%]                                      10% [2 eclipse-cdt 3,388 kB/34.9 MB 10%]11% [2 eclipse-cdt 3,802 kB/34.9 MB 11%]12% [2 eclipse-cdt 4,221 kB/34.9 MB 12%]13% [2 eclipse-cdt 4,683 kB/34.9 MB 13%]                                        15% [2 eclipse-cdt 5,079 kB/34.9 MB 15%]                           816 kB/s 36s16% [2 eclipse-cdt 5,540 kB/34.9 MB 16%]                           816 kB/s 35s17% [2 eclipse-cdt 5,931 kB/34.9 MB 17%]                           816 kB/s 35s19% [2 eclipse-cdt 6,461 kB/34.9 MB 19%]                           816 kB/s 34s20% [2 eclipse-cdt 6,941 kB/34.9 MB 20%]                           816 kB/s 34s21% [2 eclipse-cdt 7,370 kB/34.9 MB 21%]                           816 kB/s 33s23% [2 eclipse-cdt 7,842 kB/34.9 MB 22%]                           816 kB/s 33s24% [2 eclipse-cdt 8,334 kB/34.9 MB 24%]                           816 kB/s 32s26% [2 eclipse-cdt 8,892 kB/34.9 MB 26%]                           816 kB/s 31s28% [2 eclipse-cdt 9,572 kB/34.9 MB 27%]                           816 kB/s 30s29% [2 eclipse-cdt 10.2 MB/34.9 MB 29%]                            816 kB/s 30s31% [2 eclipse-cdt 10.8 MB/34.9 MB 31%]                            816 kB/s 29s32% [2 eclipse-cdt 11.2 MB/34.9 MB 32%]                          1,024 kB/s 23s33% [2 eclipse-cdt 11.6 MB/34.9 MB 33%]                          1,024 kB/s 22s35% [2 eclipse-cdt 12.1 MB/34.9 MB 35%]                          1,024 kB/s 22s36% [2 eclipse-cdt 12.6 MB/34.9 MB 36%]                          1,024 kB/s 21s38% [2 eclipse-cdt 13.2 MB/34.9 MB 38%]                          1,024 kB/s 21s39% [2 eclipse-cdt 13.7 MB/34.9 MB 39%]                          1,024 kB/s 20s41% [2 eclipse-cdt 14.3 MB/34.9 MB 41%]                          1,024 kB/s 20s42% [2 eclipse-cdt 14.8 MB/34.9 MB 42%]                          1,024 kB/s 19s44% [2 eclipse-cdt 15.4 MB/34.9 MB 44%]                          1,024 kB/s 19s45% [2 eclipse-cdt 15.8 MB/34.9 MB 45%]                          1,024 kB/s 18s47% [2 eclipse-cdt 16.3 MB/34.9 MB 47%]                          1,024 kB/s 18s48% [2 eclipse-cdt 16.7 MB/34.9 MB 48%]                          1,024 kB/s 17s49% [2 eclipse-cdt 17.1 MB/34.9 MB 49%]                            973 kB/s 18s50% [2 eclipse-cdt 17.6 MB/34.9 MB 50%]                            973 kB/s 17s52% [2 eclipse-cdt 18.0 MB/34.9 MB 52%]                            973 kB/s 17s53% [2 eclipse-cdt 18.6 MB/34.9 MB 53%]                            973 kB/s 16s55% [2 eclipse-cdt 19.1 MB/34.9 MB 55%]                            973 kB/s 16s56% [2 eclipse-cdt 19.6 MB/34.9 MB 56%]                            973 kB/s 15s57% [2 eclipse-cdt 19.9 MB/34.9 MB 57%]                            973 kB/s 15s58% [2 eclipse-cdt 20.4 MB/34.9 MB 58%]                            973 kB/s 14s60% [2 eclipse-cdt 20.8 MB/34.9 MB 60%]                            973 kB/s 14s61% [2 eclipse-cdt 21.2 MB/34.9 MB 61%]                            973 kB/s 14s62% [2 eclipse-cdt 21.5 MB/34.9 MB 62%]                            973 kB/s 13s63% [2 eclipse-cdt 21.8 MB/34.9 MB 63%]                            973 kB/s 13s63% [2 eclipse-cdt 22.1 MB/34.9 MB 63%]                            838 kB/s 15s64% [2 eclipse-cdt 22.5 MB/34.9 MB 64%]                            838 kB/s 14s65% [2 eclipse-cdt 22.7 MB/34.9 MB 65%]                            838 kB/s 14s66% [2 eclipse-cdt 23.0 MB/34.9 MB 66%]                            838 kB/s 14s67% [2 eclipse-cdt 23.2 MB/34.9 MB 67%]                            838 kB/s 13s67% [2 eclipse-cdt 23.5 MB/34.9 MB 67%]                            838 kB/s 13s68% [2 eclipse-cdt 23.8 MB/34.9 MB 68%]                            838 kB/s 13s69% [2 eclipse-cdt 24.0 MB/34.9 MB 69%]                            838 kB/s 12s70% [2 eclipse-cdt 24.3 MB/34.9 MB 70%]                            838 kB/s 12s70% [2 eclipse-cdt 24.5 MB/34.9 MB 70%]                            838 kB/s 12s71% [2 eclipse-cdt 24.7 MB/34.9 MB 71%]                            838 kB/s 12s72% [2 eclipse-cdt 24.9 MB/34.9 MB 72%]                            838 kB/s 11s72% [2 eclipse-cdt 25.1 MB/34.9 MB 72%]                            504 kB/s 19s73% [2 eclipse-cdt 25.4 MB/34.9 MB 73%]                            504 kB/s 18s74% [2 eclipse-cdt 25.7 MB/34.9 MB 74%]                            504 kB/s 18s75% [2 eclipse-cdt 26.0 MB/34.9 MB 74%]                            504 kB/s 17s75% [2 eclipse-cdt 26.2 MB/34.9 MB 75%]                            504 kB/s 17s76% [2 eclipse-cdt 26.4 MB/34.9 MB 76%]                            504 kB/s 16s77% [2 eclipse-cdt 26.7 MB/34.9 MB 77%]                            504 kB/s 16s77% [2 eclipse-cdt 27.0 MB/34.9 MB 77%]                            504 kB/s 15s78% [2 eclipse-cdt 27.3 MB/34.9 MB 78%]                            504 kB/s 14s80% [2 eclipse-cdt 27.7 MB/34.9 MB 80%]                            504 kB/s 14s81% [2 eclipse-cdt 28.2 MB/34.9 MB 81%]                            504 kB/s 13s82% [2 eclipse-cdt 28.6 MB/34.9 MB 82%]                            504 kB/s 12s83% [2 eclipse-cdt 29.1 MB/34.9 MB 83%]                             656 kB/s 8s85% [2 eclipse-cdt 29.6 MB/34.9 MB 85%]                             656 kB/s 8s86% [2 eclipse-cdt 30.0 MB/34.9 MB 86%]                             656 kB/s 7s87% [2 eclipse-cdt 30.5 MB/34.9 MB 87%]                             656 kB/s 6s89% [2 eclipse-cdt 31.0 MB/34.9 MB 89%]                             656 kB/s 5s90% [2 eclipse-cdt 31.4 MB/34.9 MB 90%]                             656 kB/s 5s91% [2 eclipse-cdt 31.8 MB/34.9 MB 91%]                             656 kB/s 4s92% [2 eclipse-cdt 32.1 MB/34.9 MB 92%]                             656 kB/s 4s93% [2 eclipse-cdt 32.5 MB/34.9 MB 93%]                             656 kB/s 3s94% [2 eclipse-cdt 32.9 MB/34.9 MB 94%]                             656 kB/s 2s96% [2 eclipse-cdt 33.4 MB/34.9 MB 96%]                             656 kB/s 2s97% [2 eclipse-cdt 33.8 MB/34.9 MB 97%]                             656 kB/s 1s98% [2 eclipse-cdt 34.2 MB/34.9 MB 98%]                             856 kB/s 0s100% [2 eclipse-cdt 34.7 MB/34.9 MB 100%]                           856 kB/s 0s100% [Working]                                                      856 kB/s 0s                                                                               Fetched 34.9 MB in 42s (811 kB/s)
-Selecting previously unselected package eclipse-cdt-jni.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 166921 files and directories currently installed.)
-Unpacking eclipse-cdt-jni (from .../eclipse-cdt-jni_8.1.2-2_amd64.deb) ...
-Selecting previously unselected package eclipse-cdt.
-Unpacking eclipse-cdt (from .../eclipse-cdt_8.1.2-2_all.deb) ...
-Setting up eclipse-cdt-jni (8.1.2-2) ...
-Setting up eclipse-cdt (8.1.2-2) ...
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ sudo apt-get install gdp
-Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
-Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
-Reading state information... 0%Reading state information... 0%Reading state information... Done
-E: Unable to locate package gdp
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ sudo apt-get install gdp[Kb
-Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
-Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
-Reading state information... 0%Reading state information... 0%Reading state information... Done
-The following extra packages will be installed:
-  libc6-dbg
-Suggested packages:
-  gdb-doc gdbserver
-Recommended packages:
-  libc-dbg
-The following NEW packages will be installed
-  gdb libc6-dbg
-0 upgraded, 2 newly installed, 0 to remove and 65 not upgraded.
-Need to get 6,049 kB of archives.
-After this operation, 30.0 MB of additional disk space will be used.
-Do you want to continue [Y/n]? y
-0% [Working]            0% [Waiting for headers]                        Get:1 http://gb.archive.ubuntu.com/ubuntu/ saucy/main gdb amd64 7.6.1-0ubuntu3 [2,539 kB]
-                        0% [1 gdb 1,136 B/2,539 kB 0%]                              2% [1 gdb 118 kB/2,539 kB 5%]                             5% [1 gdb 305 kB/2,539 kB 12%]                              10% [1 gdb 598 kB/2,539 kB 24%]                               17% [1 gdb 1,022 kB/2,539 kB 40%]25% [1 gdb 1,484 kB/2,539 kB 58%]32% [1 gdb 1,934 kB/2,539 kB 76%]40% [1 gdb 2,393 kB/2,539 kB 94%]                                 42% [Working]             Get:2 http://gb.archive.ubuntu.com/ubuntu/ saucy/main libc6-dbg amd64 2.17-93ubuntu4 [3,511 kB]
-             42% [2 libc6-dbg 2,585 B/3,511 kB 0%]49% [2 libc6-dbg 440 kB/3,511 kB 13%]                                     59% [2 libc6-dbg 1,000 kB/3,511 kB 28%]68% [2 libc6-dbg 1,598 kB/3,511 kB 46%]                                       79% [2 libc6-dbg 2,259 kB/3,511 kB 64%]                             755 kB/s 1s87% [2 libc6-dbg 2,700 kB/3,511 kB 77%]                             755 kB/s 1s94% [2 libc6-dbg 3,130 kB/3,511 kB 89%]                             755 kB/s 0s100% [Working]                                                      755 kB/s 0s                                                                               Fetched 6,049 kB in 7s (790 kB/s)
-Selecting previously unselected package gdb.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 167035 files and directories currently installed.)
-Unpacking gdb (from .../gdb_7.6.1-0ubuntu3_amd64.deb) ...
-Selecting previously unselected package libc6-dbg:amd64.
-Unpacking libc6-dbg:amd64 (from .../libc6-dbg_2.17-93ubuntu4_amd64.deb) ...
-Processing triggers for man-db ...
-Setting up gdb (7.6.1-0ubuntu3) ...
-Setting up libc6-dbg:amd64 (2.17-93ubuntu4) ...
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ sudo apt-get install gdbpeclipse eclippse-cdt g++[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [5P./bin/scribble --exec "r();"
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CTetj("[2P();"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-r();}
-
-Unfortunately a parser error occurred because Parser Exception in file __init__ Function .r could not be resolved. the function r is not defined in  at Line Number: 3 Symbol: ).
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "r();"
-Scribble 0.5.3630
-package sys := import("sys");
-func __init__() {
-r();}
-
-Unfortunately a parser error occurred because Parser Exception in file __init__ Function .r could not be resolved. the function r is not defined in  at Line Number: 3 Symbol: ).
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --exec "r();"[4Psudo apt-get install gdbpb./bin/scribble --exec "r();"[K[K[K[K[K[K[K[K[K[K[Kfile ~/[K[Kexamples/ma in
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/main");
-func __init__() {
-target.main();
-}
-
-Unfortunately a parser error occurred because Parser Exception in file main Function logicalTest.Test could not be resolved. the function logicalTest.Test is not defined in logicalTest at Line Number: 17 Symbol: ).
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/main");
-func __init__() {
-target.main();
-}
-
-Tree execution of main
-Now in the VM
-Tree to 0.057596 time. VM took 0.150281 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/main");
-func __init__() {
-target.main();
-}
-
-Tree execution of main
-Now in the VM
-Tree to 0.053225 time. VM took 0.143381 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Pexec "r();"
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfile examples/maiin
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/main");
-func __init__() {
-target.main();
-}
-
-ERROR: syntax error, unexpected IMPORT, expecting $end or TYPE or FUNCTION or PACKAGE at symbol import on line 1
-Unfortunately a parser error occurred because Parser Exception in file bubble Parser error occurred.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/main");
-func __init__() {
-target.main();
-}
-
-ERROR: syntax error, unexpected IMPORT, expecting $end or TYPE or FUNCTION or PACKAGE at symbol import on line 1
-Unfortunately a parser error occurred because Parser Exception in file populate Parser error occurred.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [K
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./bin/scribble --file examples/maiin
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/main");
-func __init__() {
-target.main();
-}
-
-Tree execution of main
-Now in the VM
-Tree to 0.194647 time. VM took 0.325160 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/main");
-func __init__() {
-target.main();
-}
-
-Tree execution of main
-Now in the VM
-Tree to 0.197794 time. VM took 0.335631 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[Kmples/im port_test
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/import_test");
-func __init__() {
-target.main();
-}
-
-Unfortunately a parser error occurred because Parser Exception in file import_test.scribble file could not be opened.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/impport_tests
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/import_tests");
-func __init__() {
-target.main();
-}
-
-Unfortunately a parser error occurred because Parser Exception in file import_tests.scribble file could not be opened.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/impport_tests[K[K[K[K[K[K
-import_example.scribble   import_example.scribble~  imports_test/
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/impport_example
-Scribble 0.5.3630
-package sys := import("sys");
-package target := import("examples/import_example");
-func __init__() {
-target.main();
-}
-
-Tree execution of import_example
-Hello thar world
-Hello thar bud
-Now in the VM
-Hello thar world
-Hello thar bud
-Tree to 0.000069 time. VM took 0.000000 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/impport_example[C[C[C[C[C[2Ptestsexample#[K
-Scribble 0.5.3635
-Tree execution of import_example
-Hello thar world
-Hello thar bud
-Now in the VM
-Hello thar world
-Hello thar bud
-Tree to 0.000000 time. VM took 0.000000 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ git add --allg[K
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ git commit
-[?1049h[1;24r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.2.6           File: .git/COMMIT_EDITMSG                            [4;1H(B[m# Please enter the commit message for your changes. Lines starting[5d# with '#' will be ignored, and an empty message aborts the commit.[6d# On branch master[7d# Changes to be committed:[8d#   (use "git reset HEAD <file>..." to unstage)[9d#[10d#[9Gmodified:   examples/import_example.scribble[11d#[9Gmodified:   examples/imports_test/port.scribble[12d#[9Gmodified:   examples/main.scribble[13d#[9Gmodified:   examples/sorts/bubble.scribble[14d#[9Gmodified:   examples/sorts/insert.scribble[15d#[9Gmodified:   examples/sorts/populate.scribble[16d#[9Gmodified:   examples/sorts/quick.scribble[17d#[9Gmodified:   examples/sorts/sorted.scribble[18d#[9Gmodified:   examples/tests/sorts.scribble[19d#[9Gmodified:   src/Scribble/Parser/Parser.cpp[20d#[9Gmodified:   src/main.cpp[21d#[9Gmodified:   src/version_info.hpp[22;32H(B[0;7m[ Read 21 lines ][23d^G(B[m Get Help  (B[0;7m^O(B[m WriteOut  (B[0;7m^R(B[m Read File (B[0;7m^Y(B[m Prev Page (B[0;7m^K(B[m Cut Text  (B[0;7m^C(B[m Cur Pos[24d(B[0;7m^X(B[m Exit[14G(B[0;7m^J(B[m Justify   (B[0;7m^W(B[m Where Is  (B[0;7m^V(B[m Next Page (B[0;7m^U(B[m UnCut Text(B[0;7m^T(B[m To Spell[3d[1;71H(B[0;7mModified[3d(B[mFixed a bug causing the pr[22d[K[3;27Hogram to crash on calls o to non existatn  nt namespaces[22d(B[0;7mSave modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                    [23;1H Y(B[m Yes[K[24d(B[0;7m N(B[m No  [14G   (B[0;7m^C(B[m Cancel[K[22;62H(B[0;7mFile Name to Write: .git/COMMIT_EDITMSG                     [23d^G(B[m Get Help[23;21H(B[0;7mM-D(B[m DOS Format[41G(B[0;7mM-A(B[m Append[23;61H(B[0;7mM-B(B[m Backup File[24d(B[0;7m^C(B[m Cancel[17G    (B[0;7mM-M(B[m Mac Format[41G(B[0;7mM-P(B[m Prefix[22;40H[23d[39;49m(B[m[J[1;71H(B[0;7m        [22;31H(B[m[1K (B[0;7m[ Wrote 21 lines ](B[m[K[24;80H[24;1H[?1049l[?1l>[master a908123] Fixed a bug causing the program to crash on calls to non existant namespaces
- 13 files changed, 441 insertions(+), 68 deletions(-)
- create mode 100644 typescript
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ git push
-Username for 'https://github.com': mmjack
-Password for 'https://mmjack@github.com': 
-Counting objects: 42, done.
-Delta compression using up to 4 threads.
-Compressing objects:   4% (1/21)   Compressing objects:   9% (2/21)   Compressing objects:  14% (3/21)   Compressing objects:  19% (4/21)   Compressing objects:  23% (5/21)   Compressing objects:  28% (6/21)   Compressing objects:  33% (7/21)   Compressing objects:  38% (8/21)   Compressing objects:  42% (9/21)   Compressing objects:  47% (10/21)   Compressing objects:  52% (11/21)   Compressing objects:  57% (12/21)   Compressing objects:  61% (13/21)   Compressing objects:  66% (14/21)   Compressing objects:  71% (15/21)   Compressing objects:  76% (16/21)   Compressing objects:  80% (17/21)   Compressing objects:  85% (18/21)   Compressing objects:  90% (19/21)   Compressing objects:  95% (20/21)   Compressing objects: 100% (21/21)   Compressing objects: 100% (21/21), done.
-Writing objects:   4% (1/22)   Writing objects:   9% (2/22)   Writing objects:  13% (3/22)   Writing objects:  18% (4/22)   Writing objects:  22% (5/22)   Writing objects:  27% (6/22)   Writing objects:  31% (7/22)   Writing objects:  36% (8/22)   Writing objects:  40% (9/22)   Writing objects:  45% (10/22)   Writing objects:  50% (11/22)   Writing objects:  54% (12/22)   Writing objects:  59% (13/22)   Writing objects:  63% (14/22)   Writing objects:  68% (15/22)   Writing objects:  72% (16/22)   Writing objects:  77% (17/22)   Writing objects:  81% (18/22)   Writing objects:  86% (19/22)   Writing objects:  90% (20/22)   Writing objects:  95% (21/22)   Writing objects: 100% (22/22)   Writing objects: 100% (22/22), 7.51 KiB | 0 bytes/s, done.
-Total 22 (delta 15), reused 0 (delta 0)
-To https://github.com/mmjack/Scribble/
-   e384685..a908123  master -> master
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ git pushcommitadd --all./bin/scribble --file examples/impport_example[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [20Pgit add --all
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./bin/scribble --file examples/impport_example[C[C[C[C[C[2Ptests[K[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmain[K[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Pexec "r();"
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Psudo apt-get install gdbpb./bin/scribble --exec "r();"file examples/maiin[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cimport_testsexample[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [20Pgit add --all
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pcommit[2Ppush[Kmake clean
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make
-flex -o ./gen/ScribbleLexer.cpp ./src/Scribble/Parser/Lexer.l
-bison --verbose -d -o ./gen/ScribbleParser.cpp src/Scribble/Parser/Parser.yy
-src/Scribble/Parser/Parser.yy: conflicts: 157 shift/reduce
-flex -o ./gen/SASMLexer.cpp src/SASM/Lexer.l
-bison --verbose -d -o ./gen/SASMParser.cpp src/SASM/Parser.yy
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/ScribbleLexer.cpp -o obj/gen/ScribbleLexer.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/ScribbleParser.cpp -o obj/gen/ScribbleParser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/SASMLexer.cpp -o obj/gen/SASMLexer.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/SASMParser.cpp -o obj/gen/SASMParser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/cputime.cpp -o obj/src/cputime.o
-src/cputime.cpp: In function ‘double getCPUTime()’:
-src/cputime.cpp:53:13: warning: variable ‘id’ set but not used [-Wunused-but-set-variable]
-   clockid_t id;
-             ^
-src/cputime.cpp:54:19: warning: unused variable ‘ts’ [-Wunused-variable]
-   struct timespec ts;
-                   ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/main.cpp -o obj/src/main.o
-src/main.cpp: In function ‘void registerEntireNamespace(std::map<std::basic_string<char>, std::map<std::basic_string<char>, NamespaceEntry> >&, VM::VirtualMachine&)’:
-src/main.cpp:103:53: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-     for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
-                                                     ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/Concat.cpp -o obj/src/API/Concat.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/Modulo.cpp -o obj/src/API/Modulo.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/RandomInt.cpp -o obj/src/API/RandomInt.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/ReadLine.cpp -o obj/src/API/ReadLine.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/StringFunction.cpp -o obj/src/API/StringFunction.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/WriteFunction.cpp -o obj/src/API/WriteFunction.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/SASM/Parser.cpp -o obj/src/SASM/Parser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/SASM/SasmException.cpp -o obj/src/SASM/SasmException.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/Heap.cpp -o obj/src/VM/Heap.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/InstructionSet.cpp -o obj/src/VM/InstructionSet.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VirtualMachine.cpp -o obj/src/VM/VirtualMachine.o
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine.cpp: In member function ‘virtual void VM::VirtualMachine::execute(std::string)’:
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%li’ expects argument of type ‘long int’, but argument 7 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%li’ expects argument of type ‘long int’, but argument 8 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%li’ expects argument of type ‘long int’, but argument 7 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%li’ expects argument of type ‘long int’, but argument 8 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:540:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine_Debug.hpp:13:67: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                   ^
-src/VM/VirtualMachine.cpp:612:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-In file included from src/VM/VirtualMachine.cpp:12:0:
-src/VM/VirtualMachine_Debug.hpp:22:63: warning: format ‘%i’ expects argument of type ‘int’, but argument 4 has type ‘long int’ [-Wformat=]
- #define VM_PRINTF_LOG(fmt, ...) fprintf(flog, fmt, __VA_ARGS__); fflush(flog)
-                                                               ^
-src/VM/VirtualMachine_Debug.hpp:13:70: note: in expansion of macro ‘VM_PRINTF_LOG’
- #define VM_PRINTF_FATAL(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__); VM_PRINTF_LOG(fmt, __VA_ARGS__); this->printState(); do { } while (1)
-                                                                      ^
-src/VM/VirtualMachine.cpp:612:6: note: in expansion of macro ‘VM_PRINTF_FATAL’
-      VM_PRINTF_FATAL(
-      ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VirtualMachine_Debug.cpp -o obj/src/VM/VirtualMachine_Debug.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VirtualMachine_Stack.cpp -o obj/src/VM/VirtualMachine_Stack.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VMEntryType.cpp -o obj/src/VM/VMEntryType.o
-src/VM/VMEntryType.cpp: In constructor ‘VM::VMEntryType::VMEntryType(std::string, std::vector<VM::VMStructureField>)’:
-src/VM/VMEntryType.cpp:25:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-  for (int i = 0; i < fields.size(); i++) {
-                                  ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VMFunc.cpp -o obj/src/VM/VMFunc.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/VM/VMNamespace.cpp -o obj/src/VM/VMNamespace.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/API/Value/APIValue.cpp -o obj/src/API/Value/APIValue.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Function/FunctionReference.cpp -o obj/src/Scribble/Function/FunctionReference.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Function/ScriptedFunction.cpp -o obj/src/Scribble/Function/ScriptedFunction.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Parser/NamespaceEntry.cpp -o obj/src/Scribble/Parser/NamespaceEntry.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Parser/Parser.cpp -o obj/src/Scribble/Parser/Parser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Parser/ParserException.cpp -o obj/src/Scribble/Parser/ParserException.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/AndStatement.cpp -o obj/src/Scribble/Statement/AndStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ArrayLengthStatement.cpp -o obj/src/Scribble/Statement/ArrayLengthStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ArrayStatement.cpp -o obj/src/Scribble/Statement/ArrayStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/AssignArrayStatement.cpp -o obj/src/Scribble/Statement/AssignArrayStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/AssignVariable.cpp -o obj/src/Scribble/Statement/AssignVariable.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/BoolStatement.cpp -o obj/src/Scribble/Statement/BoolStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ForStatement.cpp -o obj/src/Scribble/Statement/ForStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/FunctionStatement.cpp -o obj/src/Scribble/Statement/FunctionStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/GetArrayStatement.cpp -o obj/src/Scribble/Statement/GetArrayStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/GetStructureElementStatement.cpp -o obj/src/Scribble/Statement/GetStructureElementStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/GetVariableStatement.cpp -o obj/src/Scribble/Statement/GetVariableStatement.o
-src/Scribble/Statement/GetVariableStatement.cpp: In member function ‘virtual int GetVariableStatement::generateCode(int, std::stringstream&)’:
-src/Scribble/Statement/GetVariableStatement.cpp:35:35: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-      != var_->getPosition() + VM::vmNumReservedRegisters) {
-                                   ^
-src/Scribble/Statement/GetVariableStatement.cpp:44:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/Heap.cpp -o obj/src/Scribble/Statement/Heap.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/IfStatement.cpp -o obj/src/Scribble/Statement/IfStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/IncrementStatement.cpp -o obj/src/Scribble/Statement/IncrementStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/IntStatement.cpp -o obj/src/Scribble/Statement/IntStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/NegativeStatement.cpp -o obj/src/Scribble/Statement/NegativeStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/OperateStatement.cpp -o obj/src/Scribble/Statement/OperateStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/OrStatement.cpp -o obj/src/Scribble/Statement/OrStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/ReturnStatement.cpp -o obj/src/Scribble/Statement/ReturnStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StatementException.cpp -o obj/src/Scribble/Statement/StatementException.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StringStatement.cpp -o obj/src/Scribble/Statement/StringStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StructureAssignElement.cpp -o obj/src/Scribble/Statement/StructureAssignElement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/StructureStatement.cpp -o obj/src/Scribble/Statement/StructureStatement.o
-src/Scribble/Statement/StructureStatement.cpp: In member function ‘virtual void StructureStatement::checkTree(Type*)’:
-src/Scribble/Statement/StructureStatement.cpp:36:47: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-  if (info->getNumIndexs() != statements_.size()) {
-                                               ^
-src/Scribble/Statement/StructureStatement.cpp: In member function ‘virtual int StructureStatement::generateCode(int, std::stringstream&)’:
-src/Scribble/Statement/StructureStatement.cpp:72:1: warning: no return statement in function returning non-void [-Wreturn-type]
- }
- ^
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/TestNilStatement.cpp -o obj/src/Scribble/Statement/TestNilStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/TestStatement.cpp -o obj/src/Scribble/Statement/TestStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Statement/WhileStatement.cpp -o obj/src/Scribble/Statement/WhileStatement.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Array.cpp -o obj/src/Scribble/Value/Array.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/ArrayData.cpp -o obj/src/Scribble/Value/ArrayData.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Bool.cpp -o obj/src/Scribble/Value/Bool.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Int.cpp -o obj/src/Scribble/Value/Int.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/String.cpp -o obj/src/Scribble/Value/String.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Structure.cpp -o obj/src/Scribble/Value/Structure.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/StructureData.cpp -o obj/src/Scribble/Value/StructureData.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/StructureInfo.cpp -o obj/src/Scribble/Value/StructureInfo.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Type.cpp -o obj/src/Scribble/Value/Type.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/TypeManager.cpp -o obj/src/Scribble/Value/TypeManager.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Util.cpp -o obj/src/Scribble/Value/Util.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/ValueHeap.cpp -o obj/src/Scribble/Value/ValueHeap.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Variable.cpp -o obj/src/Scribble/Value/Variable.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Value/Void.cpp -o obj/src/Scribble/Value/Void.o
-g++ -pthread -lpthread obj/gen/ScribbleLexer.o obj/gen/ScribbleParser.o obj/gen/SASMLexer.o obj/gen/SASMParser.o obj/src/cputime.o obj/src/main.o obj/src/API/Concat.o obj/src/API/Modulo.o obj/src/API/RandomInt.o obj/src/API/ReadLine.o obj/src/API/StringFunction.o obj/src/API/WriteFunction.o obj/src/SASM/Parser.o obj/src/SASM/SasmException.o obj/src/VM/Heap.o obj/src/VM/InstructionSet.o obj/src/VM/VirtualMachine.o obj/src/VM/VirtualMachine_Debug.o obj/src/VM/VirtualMachine_Stack.o obj/src/VM/VMEntryType.o obj/src/VM/VMFunc.o obj/src/VM/VMNamespace.o obj/src/API/Value/APIValue.o obj/src/Scribble/Function/FunctionReference.o obj/src/Scribble/Function/ScriptedFunction.o obj/src/Scribble/Parser/NamespaceEntry.o obj/src/Scribble/Parser/Parser.o obj/src/Scribble/Parser/ParserException.o obj/src/Scribble/Statement/AndStatement.o obj/src/Scribble/Statement/ArrayLengthStatement.o obj/src/Scribble/Statement/ArrayStatement.o obj/src/Scribble/Statement/AssignArrayStatement.o obj/src/Scribble/Statement/AssignVariable.o obj/src/Scribble/Statement/BoolStatement.o obj/src/Scribble/Statement/ForStatement.o obj/src/Scribble/Statement/FunctionStatement.o obj/src/Scribble/Statement/GetArrayStatement.o obj/src/Scribble/Statement/GetStructureElementStatement.o obj/src/Scribble/Statement/GetVariableStatement.o obj/src/Scribble/Statement/Heap.o obj/src/Scribble/Statement/IfStatement.o obj/src/Scribble/Statement/IncrementStatement.o obj/src/Scribble/Statement/IntStatement.o obj/src/Scribble/Statement/NegativeStatement.o obj/src/Scribble/Statement/OperateStatement.o obj/src/Scribble/Statement/OrStatement.o obj/src/Scribble/Statement/ReturnStatement.o obj/src/Scribble/Statement/StatementException.o obj/src/Scribble/Statement/StringStatement.o obj/src/Scribble/Statement/StructureAssignElement.o obj/src/Scribble/Statement/StructureStatement.o obj/src/Scribble/Statement/TestNilStatement.o obj/src/Scribble/Statement/TestStatement.o obj/src/Scribble/Statement/WhileStatement.o obj/src/Scribble/Value/Array.o obj/src/Scribble/Value/ArrayData.o obj/src/Scribble/Value/Bool.o obj/src/Scribble/Value/Int.o obj/src/Scribble/Value/String.o obj/src/Scribble/Value/Structure.o obj/src/Scribble/Value/StructureData.o obj/src/Scribble/Value/StructureInfo.o obj/src/Scribble/Value/Type.o obj/src/Scribble/Value/TypeManager.o obj/src/Scribble/Value/Util.o obj/src/Scribble/Value/ValueHeap.o obj/src/Scribble/Value/Variable.o obj/src/Scribble/Value/Void.o -o bin/scribble
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make clean[2Pgit pushcommitadd --all./bin/scribble --file examples/impport_example
-Scribble 0.5.3636
-Unfortunately a parser error occurred because Parser Exception in file import_example.scribble file could not be opened.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/impport_example[C[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K/ma in
-Scribble 0.5.3636
-Unfortunately a parser error occurred because Parser Exception in file main.scribble file could not be opened.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [K
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./bin/scribble --file examples/maiin[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cimport_example[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make[K
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
-flex -o ./gen/ScribbleLexer.cpp ./src/Scribble/Parser/Lexer.l
-bison --verbose -d -o ./gen/ScribbleParser.cpp src/Scribble/Parser/Parser.yy
-src/Scribble/Parser/Parser.yy: conflicts: 157 shift/reduce
-flex -o ./gen/SASMLexer.cpp src/SASM/Lexer.l
-bison --verbose -d -o ./gen/SASMParser.cpp src/SASM/Parser.yy
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/ScribbleLexer.cpp -o obj/gen/ScribbleLexer.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/ScribbleParser.cpp -o obj/gen/ScribbleParser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/SASMLexer.cpp -o obj/gen/SASMLexer.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread gen/SASMParser.cpp -o obj/gen/SASMParser.o
-g++ -c -Wall -I src -I gen -std=c++0x -g -O0 -pthread -lpthread src/Scribble/Parser/Parser.cpp -o obj/src/Scribble/Parser/Parser.o
-g++ -pthread -lpthread obj/gen/ScribbleLexer.o obj/gen/ScribbleParser.o obj/gen/SASMLexer.o obj/gen/SASMParser.o obj/src/cputime.o obj/src/main.o obj/src/API/Concat.o obj/src/API/Modulo.o obj/src/API/RandomInt.o obj/src/API/ReadLine.o obj/src/API/StringFunction.o obj/src/API/WriteFunction.o obj/src/SASM/Parser.o obj/src/SASM/SasmException.o obj/src/VM/Heap.o obj/src/VM/InstructionSet.o obj/src/VM/VirtualMachine.o obj/src/VM/VirtualMachine_Debug.o obj/src/VM/VirtualMachine_Stack.o obj/src/VM/VMEntryType.o obj/src/VM/VMFunc.o obj/src/VM/VMNamespace.o obj/src/API/Value/APIValue.o obj/src/Scribble/Function/FunctionReference.o obj/src/Scribble/Function/ScriptedFunction.o obj/src/Scribble/Parser/NamespaceEntry.o obj/src/Scribble/Parser/Parser.o obj/src/Scribble/Parser/ParserException.o obj/src/Scribble/Statement/AndStatement.o obj/src/Scribble/Statement/ArrayLengthStatement.o obj/src/Scribble/Statement/ArrayStatement.o obj/src/Scribble/Statement/AssignArrayStatement.o obj/src/Scribble/Statement/AssignVariable.o obj/src/Scribble/Statement/BoolStatement.o obj/src/Scribble/Statement/ForStatement.o obj/src/Scribble/Statement/FunctionStatement.o obj/src/Scribble/Statement/GetArrayStatement.o obj/src/Scribble/Statement/GetStructureElementStatement.o obj/src/Scribble/Statement/GetVariableStatement.o obj/src/Scribble/Statement/Heap.o obj/src/Scribble/Statement/IfStatement.o obj/src/Scribble/Statement/IncrementStatement.o obj/src/Scribble/Statement/IntStatement.o obj/src/Scribble/Statement/NegativeStatement.o obj/src/Scribble/Statement/OperateStatement.o obj/src/Scribble/Statement/OrStatement.o obj/src/Scribble/Statement/ReturnStatement.o obj/src/Scribble/Statement/StatementException.o obj/src/Scribble/Statement/StringStatement.o obj/src/Scribble/Statement/StructureAssignElement.o obj/src/Scribble/Statement/StructureStatement.o obj/src/Scribble/Statement/TestNilStatement.o obj/src/Scribble/Statement/TestStatement.o obj/src/Scribble/Statement/WhileStatement.o obj/src/Scribble/Value/Array.o obj/src/Scribble/Value/ArrayData.o obj/src/Scribble/Value/Bool.o obj/src/Scribble/Value/Int.o obj/src/Scribble/Value/String.o obj/src/Scribble/Value/Structure.o obj/src/Scribble/Value/StructureData.o obj/src/Scribble/Value/StructureInfo.o obj/src/Scribble/Value/Type.o obj/src/Scribble/Value/TypeManager.o obj/src/Scribble/Value/Util.o obj/src/Scribble/Value/ValueHeap.o obj/src/Scribble/Value/Variable.o obj/src/Scribble/Value/Void.o -o bin/scribble
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make./bin/scribble --file examples/maiin
-Scribble 0.5.3636
-Tree execution of main
-Now in the VM
-Tree to 0.182255 time. VM took 0.368487 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make[K
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./bin/scribble --file examples/maiin
-Scribble 0.5.3636
-Tree execution of main
-Now in the VM
-Tree to 0.192287 time. VM took 0.376564 time
-Exit
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin[A]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ make[K
-[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./bin/scribble --file examples/maiin
-Scribble 0.5.3636
-Unfortunately a parser error occurred because Parser Exception in file main.scribble file could not be opened.
-]0;blake@Blake-Laptop: ~/Dropbox/Current/Scribbleblake@Blake-Laptop:~/Dropbox/Current/Scribble$ ./bin/scribble --file examples/maiin

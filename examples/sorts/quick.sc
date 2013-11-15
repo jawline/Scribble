@@ -1,3 +1,9 @@
+/**
+ * Package contains an implementation of the quicksort algorithm on arrays of integers.
+ *
+ * Copyright (c) Blake Loring
+ */
+
 func qs( n:array(int), low : int, high : int) {
 
  var i := low;

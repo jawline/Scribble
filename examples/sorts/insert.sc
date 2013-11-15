@@ -1,3 +1,9 @@
+/**
+ * This package provides functions which run insertion sort on arrays of integers to sort them.
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 func Sort( n : array(int) ) : array(int) {
 
  //Loop i between 1 and n

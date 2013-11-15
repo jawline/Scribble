@@ -1,3 +1,9 @@
+/**
+ * Package provides functions to test prime number functions provided.
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 package test := import("test");
 package sys := import("sys");
 package sieve := import("../primes/sieve");

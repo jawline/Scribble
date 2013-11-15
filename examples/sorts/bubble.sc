@@ -1,3 +1,9 @@
+/**
+ * This package provides function to run the bubble sort algorithm on arrays of integers
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 package sys := import ("sys");
 
 func Sort( n : array(int) ) : array(int) {

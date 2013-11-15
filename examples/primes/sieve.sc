@@ -1,3 +1,10 @@
+/**
+ * This package provides functions to run the sieve of eratosthenes prime number algorithm and return an array of 
+ * booleans signalling whether a number is true or false
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 package sys := import("sys");
 
 func Sieve(n:int) : array(bool) {

@@ -1,3 +1,9 @@
+/**
+ * This package contains functions to test arrays functionality
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 package test := import("test");
 
 func Test() {

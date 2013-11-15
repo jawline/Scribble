@@ -1,3 +1,9 @@
+/**
+ * This package provides functions to check whether a given integer is a prime number
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 package sys := import("sys");
 
 func IsPrime(n : int) : bool {

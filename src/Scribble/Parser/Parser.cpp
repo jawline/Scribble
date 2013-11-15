@@ -9,6 +9,7 @@
 #include <Scribble/Function/FunctionReference.hpp>
 #include <Scribble/Value/Util.hpp>
 
+#include <SHA3/sha3.h>
 #include <limits.h> /* PATH_MAX */
 #include <stdio.h>
 #include <stdlib.h>

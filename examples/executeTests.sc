@@ -1,3 +1,8 @@
+/**
+ * Scribble tests execution file
+ * Copyright (c) Blake Loring 2013
+ */
+
 package sys := import("sys");
 package loopsTest := import("tests/loops");
 package logicalTest := import("tests/logical");
