@@ -1,4 +1,4 @@
-import("sys");
+package sys := import("sys");
 
 func PopulateWorstCase( list : array(int)) : array(int) {
 

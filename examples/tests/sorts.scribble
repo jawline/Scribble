@@ -1,11 +1,11 @@
-import("test");
-import("../sorts/bubble");
-import("../sorts/quick");
-import("../sorts/sorted");
-import("../sorts/heap");
-import("../sorts/insert");
-import("../sorts/populate");
-import("sys");
+package test := import("test");
+package bubble := import("../sorts/bubble");
+package quick := import("../sorts/quick");
+package sorted := import("../sorts/sorted");
+package heap := import("../sorts/heap");
+package insert := import("../sorts/insert");
+package populate := import("../sorts/populate");
+package sys := import("sys");
 
 func Test() {
 

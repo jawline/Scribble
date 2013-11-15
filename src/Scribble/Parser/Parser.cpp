@@ -375,7 +375,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 				ref->setResolveIssue(
 						std::string("the function ") + ref->getDebugName()
-						+ " is not defined in " + imports.find(ref->getNamespace())->second);
+						+ " is not defined in " + ref->getNamespace());
 
 			} else {
 

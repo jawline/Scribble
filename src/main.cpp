@@ -32,30 +32,28 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 	NamespaceType builtinFunctions;
 
 	std::vector<SafeFunction> write;
-	write.push_back(SmartPointer < Function > (new WriteFunction("sys")));
+	write.push_back(SmartPointer< Function > (new WriteFunction("sys")));
 	builtinFunctions["Write"] = NamespaceEntry(write);
 
 	std::vector<SafeFunction> concat;
-	concat.push_back(SmartPointer < Function > (new Concat("sys")));
+	concat.push_back(SmartPointer< Function > (new Concat("sys")));
 	builtinFunctions["Concat"] = NamespaceEntry(concat);
 
 	std::vector<SafeFunction> string;
-	string.push_back(
-			SmartPointer < Function > (new IntToStringFunction("sys")));
-	string.push_back(
-			SmartPointer < Function > (new BoolToStringFunction("sys")));
+	string.push_back(SmartPointer< Function > (new IntToStringFunction("sys")));
+	string.push_back(SmartPointer< Function > (new BoolToStringFunction("sys")));
 	builtinFunctions["String"] = NamespaceEntry(string);
 
 	std::vector<SafeFunction> readLine;
-	readLine.push_back(SP < Function > (new ReadLine("sys")));
+	readLine.push_back(SP< Function > (new ReadLine("sys")));
 	builtinFunctions["ReadLine"] = readLine;
 
 	std::vector<SafeFunction> mod;
-	mod.push_back(SP < Function > (new Modulo("sys")));
+	mod.push_back(SP< Function > (new Modulo("sys")));
 	builtinFunctions["Mod"] = NamespaceEntry(mod);
 
 	std::vector<SafeFunction> randomInt;
-	randomInt.push_back(SmartPointer < Function > (new RandomInt("sys")));
+	randomInt.push_back(SmartPointer< Function > (new RandomInt("sys")));
 	builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
 
 	builtin["sys"] = builtinFunctions;
@@ -67,7 +65,9 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 	for (auto selectedNamespaceIter = allNames.begin();
 			selectedNamespaceIter != allNames.end(); selectedNamespaceIter++) {
 
-		vm.logMessage(VM::Log, std::string("Registering namespace ") + selectedNamespaceIter->first + std::string("\n"));
+		vm.logMessage(VM::Log,
+				std::string("Registering namespace ")
+						+ selectedNamespaceIter->first + std::string("\n"));
 
 		VM::VMNamespace newSpace;
 
@@ -117,25 +117,24 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 }
 
-char const* getCmdOption(char ** begin, char ** end, char const* defaultOption, std::string option)
-{
+char const* getCmdOption(char ** begin, char ** end, char const* defaultOption,
+		std::string option) {
 
-    char ** itr = std::find(begin, end, option);
+	char ** itr = std::find(begin, end, option);
 
-    if (itr != end && ++itr != end)
-    {
-        return *itr;
-    }
+	if (itr != end && ++itr != end) {
+		return *itr;
+	}
 
-    return defaultOption;
+	return defaultOption;
 }
 
-bool cmdOptionExists(char** begin, char** end, const std::string& option)
-{
-    return std::find(begin, end, option) != end;
+bool cmdOptionExists(char** begin, char** end, const std::string& option) {
+	return std::find(begin, end, option) != end;
 }
 
-std::string writeInit(std::string package, std::string thin, std::string execStr) {
+std::string writeInit(std::string package, std::string thin,
+		std::string execStr) {
 
 	if (package.size() == 0) {
 		std::string result = "package sys := import(\"sys\");\n";
@@ -144,14 +143,15 @@ std::string writeInit(std::string package, std::string thin, std::string execStr
 		result += "}\n";
 		return result;
 	} else {
-		std::string result = "package sys := import(\"sys\");\npackage target := import(\"" + package + "\");\n";
+		std::string result =
+				"package sys := import(\"sys\");\npackage target := import(\""
+						+ package + "\");\n";
 		result += "func __init__() {\n";
 		result += execStr;
 		result += "}\n";
 		return result;
 	}
 }
-
 
 int main(int argc, char* argv[]) {
 
@@ -160,12 +160,14 @@ int main(int argc, char* argv[]) {
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 			VERSION_BUILD_NUMBER);
 
-	if (!cmdOptionExists(argv, argv + argc, "--file") && !cmdOptionExists(argv, argv + argc, "--exec")) {
-		printf("Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
+	if (!cmdOptionExists(argv, argv + argc, "--file")
+			&& !cmdOptionExists(argv, argv + argc, "--exec")) {
+		printf(
+				"Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
 		return -1;
 	}
 
-	char const* targetFile = getCmdOption(argv, argv+argc, "", "--file");
+	char const* targetFile = getCmdOption(argv, argv + argc, "", "--file");
 
 	//Calculate the name of the package being executed
 	char const* packageName = strrchr(targetFile, '/');
@@ -177,7 +179,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	//The function to be executed, defaults to 'main'
-	char const* execFunction = getCmdOption(argv, argv + argc, "target.main();\n", "--exec");
+	char const* execFunction = getCmdOption(argv, argv + argc,
+			"target.main();\n", "--exec");
 
 	//Write an initialization function based off the the parameters given
 	std::string initCode = writeInit(targetFile, packageName, execFunction);
@@ -186,8 +189,6 @@ int main(int argc, char* argv[]) {
 	std::map<std::string, NamespaceType> names;
 
 	generateBuiltinNamespace(names);
-
-	printf("%s\n", initCode.c_str());
 
 	//Compile the program using the new __init__ package created, crash on any exceptions.
 	try {
@@ -198,20 +199,23 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Check that the __init__ code has compiled properly.
-	if (names["__init__"].find("__init__") == names["__init__"].end() || names["__init__"]["__init__"].type() != FunctionSetEntry || names["__init__"]["__init__"].getFunctionSet().size() != 1 || names["__init__"]["__init__"].getFunctionSet()[0]->numArgs() != 0) {
+	if (names["__init__"].find("__init__") == names["__init__"].end()
+			|| names["__init__"]["__init__"].type() != FunctionSetEntry
+			|| names["__init__"]["__init__"].getFunctionSet().size() != 1
+			|| names["__init__"]["__init__"].getFunctionSet()[0]->numArgs()
+					!= 0) {
 		printf("Init function did not create properly\n");
 	}
 
 	//Grab a reference to __init__.__init__ for execution
-	API::SafeFunction toExecute = names["__init__"]["__init__"].getFunctionSet()[0];
+	API::SafeFunction toExecute =
+			names["__init__"]["__init__"].getFunctionSet()[0];
 
 	printf("Tree execution of %s\n", packageName);
 
 	double treeStart = getCPUTime();
 
-	valueHeap.free(
-		toExecute->execute(
-		std::vector<Value*>()));
+	valueHeap.free(toExecute->execute(std::vector<Value*>()));
 
 	double treeEnd = getCPUTime();
 
@@ -223,14 +227,16 @@ int main(int argc, char* argv[]) {
 
 	double vmStart = getCPUTime();
 
-	vm.execute(toExecute->getNamespace() + VM::vmNamespaceSeperator + toExecute->getName());
+	vm.execute(
+			toExecute->getNamespace() + VM::vmNamespaceSeperator
+					+ toExecute->getName());
 
 	double vmEnd = getCPUTime();
 
 	vm.printState();
 
 	printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
-					vmEnd - vmStart);
+			vmEnd - vmStart);
 
 	printf("Exit\n");
 

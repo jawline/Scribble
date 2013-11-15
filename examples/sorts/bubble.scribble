@@ -1,6 +1,4 @@
-import ("sys");
-import ("populate");
-
+package sys := import ("sys");
 
 func Sort( n : array(int) ) : array(int) {
  

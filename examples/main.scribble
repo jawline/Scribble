@@ -1,11 +1,11 @@
 package sys := import("sys");
 package loopsTest := import("tests/loops");
-package logialTest := import("tests/logical");
+package logicalTest := import("tests/logical");
 package variablesTest := import("tests/variables");
 package recursionTest := import("tests/recursion");
 package arraysTest := import("tests/arrays");
 package primesTest := import("tests/primes");
-//import("tests/sorts");
+package sortsTest := import("tests/sorts");
 
 func main() {
    
@@ -15,8 +15,6 @@ func main() {
     recursionTest.Test();
     primesTest.Test();
     logicalTest.Test();
-    
-    //arrays.Test();
-    //sorts.Test();
+    sortsTest.Test();
 
 }
