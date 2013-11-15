@@ -100,7 +100,7 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 				TypeReference type = iterator->second.getType();
 				StructureInfo* info = (StructureInfo*) iterator->second.getType()->type;
 
-				for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
+				for (int i = 0; i < info->getNumIndexs(); i++) {
 					vm.logMessage(VM::Log, std::string("Registering field ") + info->getIndex(i).first + "\n");
 				}
 
@@ -211,32 +211,63 @@ int main(int argc, char* argv[]) {
 	API::SafeFunction toExecute =
 			names["__init__"]["__init__"].getFunctionSet()[0];
 
-	printf("Tree execution of %s\n", packageName);
-
-	double treeStart = getCPUTime();
-
-	valueHeap.free(toExecute->execute(std::vector<Value*>()));
-
-	double treeEnd = getCPUTime();
-
-	printf("Now in the VM\n");
 
 	VM::VirtualMachine vm;
 
 	registerEntireNamespace(names, vm);
 
-	double vmStart = getCPUTime();
+	char const* execMode = getCmdOption(argv, argv + argc, "vm", "--mode");
 
-	vm.execute(
-			toExecute->getNamespace() + VM::vmNamespaceSeperator
-					+ toExecute->getName());
+	if (strcmp(execMode, "vm") == 0) {
 
-	double vmEnd = getCPUTime();
+		double vmStart = getCPUTime();
 
-	vm.printState();
+		vm.execute(
+				toExecute->getNamespace() + VM::vmNamespaceSeperator
+						+ toExecute->getName());
 
-	printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
-			vmEnd - vmStart);
+		double vmEnd = getCPUTime();
+
+		vm.printState();
+
+		printf("VM execution took time %f\n", vmEnd - vmStart);
+
+	} else if (strcmp(execMode, "tree") == 0) {
+
+		double treeStart = getCPUTime();
+
+		valueHeap.free(toExecute->execute(std::vector<Value*>()));
+
+		double treeEnd = getCPUTime();
+
+		printf("Tree execution took time %f\n", treeEnd - treeStart);
+
+	} else {
+
+		printf("Tree execution of %s\n", packageName);
+
+		double treeStart = getCPUTime();
+
+		valueHeap.free(toExecute->execute(std::vector<Value*>()));
+
+		double treeEnd = getCPUTime();
+
+		printf("Now in the VM\n");
+
+		double vmStart = getCPUTime();
+
+		vm.execute(
+				toExecute->getNamespace() + VM::vmNamespaceSeperator
+						+ toExecute->getName());
+
+		double vmEnd = getCPUTime();
+
+		vm.printState();
+
+		printf("Tree to %f time. VM took %f time\n", treeEnd - treeStart,
+				vmEnd - vmStart);
+
+	}
 
 	printf("Exit\n");
 
