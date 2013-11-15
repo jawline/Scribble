@@ -7,3 +7,4 @@ To install scribble run make && sudo make install with root access from the git 
 Parameters:
 --exec Override the default .main(); call with your own code ( For example --exec "sys.Write(\"Hello World\\n\");" )
 --file Set the file to be compiled
+--mode Set the mode of execution. Options are "vm", "tree" or "all" to execute it in both for comparison
