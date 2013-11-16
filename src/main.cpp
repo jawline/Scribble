@@ -269,7 +269,5 @@ int main(int argc, char* argv[]) {
 
 	}
 
-	printf("Exit\n");
-
 	return 0;
 }
