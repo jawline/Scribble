@@ -9,7 +9,7 @@
 #define HEAP_HPP_
 #include "VMHeapEntry.hpp"
 #include <string>
-#include <stdint.h>
+#include <types.h>
 #include <map>
 
 //TODO: This will break at 4bn indexs created in a runtime. Do it cleaner

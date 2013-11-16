@@ -7,7 +7,7 @@
 
 #ifndef INSTRUCTIONSET_HPP_
 #define INSTRUCTIONSET_HPP_
-#include <stdint.h>
+#include <types.h>
 #include <iostream>
 #include <vector>
 

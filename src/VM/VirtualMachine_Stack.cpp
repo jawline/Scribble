@@ -12,11 +12,15 @@ namespace VM {
 
 long VirtualMachine::stackLong(long pos) {
 	//VM_PRINTF_LOG("Returning stack value at address %li\n", pos);
+
+	//Return the value of the stack at a given position pos in bytes.
+
 	return *((long*) (stack_ + pos));
 }
 
 void VirtualMachine::stackSetLong(long pos, long v) {
 	//VM_PRINTF_LOG("Setting stack value at position %li\n", pos);
+	//Set the value of the stack at index pos in bytes to the value v.
 	*((long*) (stack_ + pos)) = v;
 }
 

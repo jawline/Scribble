@@ -32,27 +32,21 @@ VirtualMachine::VirtualMachine() {
 	}
 
 	//Register all the primitive types
-	registerEntry("char",
-			NamespaceEntry(
-					SP < VMEntryType > (new VMEntryType("char", 1, false))));
-	registerEntry("bool",
-			NamespaceEntry(
-					SP < VMEntryType > (new VMEntryType("bool", 1, false))));
-	registerEntry("short",
-			NamespaceEntry(
-					SP < VMEntryType > (new VMEntryType("short", 2, false))));
-	registerEntry("int",
-			NamespaceEntry(
-					SP < VMEntryType > (new VMEntryType("int", 4, false))));
-	registerEntry("long",
-			NamespaceEntry(
-					SP < VMEntryType > (new VMEntryType("int", 8, false))));
+	registerEntry("char", NamespaceEntry(SP< VMEntryType > (new VMEntryType("char", 1, false))));
 
-	registerEntry("string",
-			NamespaceEntry(
-					SP < VMEntryType
-							> (new VMEntryType("string",
-									namespace_["char"].getTypeReference()))));
+	registerEntry("bool", NamespaceEntry(SP< VMEntryType > (new VMEntryType("bool", 1, false))));
+
+	registerEntry("short", NamespaceEntry(SP< VMEntryType > (new VMEntryType("short", 2, false))));
+
+	registerEntry("int", NamespaceEntry(SP< VMEntryType > (new VMEntryType("int", 4, false))));
+
+	registerEntry("float32", NamespaceEntry(SP< VMEntryType > (new VMEntryType("float32", 4, false))));
+
+	registerEntry("long", NamespaceEntry(SP< VMEntryType > (new VMEntryType("int", 8, false))));
+
+	registerEntry("string", NamespaceEntry(SP< VMEntryType
+	> (new VMEntryType("string",
+					namespace_["char"].getTypeReference()))));
 
 	//Allocate the stack
 	stack_ = new uint8_t[vmStackIncrease];
@@ -108,23 +102,22 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 	return entry.getTypeReference();
 }
 
-bool VirtualMachine::returnToPreviousFunction(
-		SmartPointer<VMFunc>& currentFunction, InstructionSet& set) {
+bool VirtualMachine::returnToPreviousFunction(SmartPointer<VMFunc>& currentFunction, InstructionSet& set) {
 
-			if (currentVmState_.size() > 0) {
+	if (currentVmState_.size() > 0) {
 
-				VMState top = currentVmState_.top();
-				currentVmState_.pop();
+		VMState top = currentVmState_.top();
+		currentVmState_.pop();
 
-				currentFunction = top.func_;
-				set = currentFunction->getInstructions();
-				currentInstruction = top.pc_;
+		currentFunction = top.func_;
+		set = currentFunction->getInstructions();
+		currentInstruction = top.pc_;
 
-				return true;
-			} else {
-				return false;
-			}
-		}
+		return true;
+	} else {
+		return false;
+	}
+}
 
 void VirtualMachine::execute(std::string function) {
 
@@ -460,7 +453,7 @@ void VirtualMachine::execute(std::string function) {
 
 				for (uint8_t i = (startRegister + numRegisters);
 						i > startRegister; i--) {
-					popStackLong(registers_[i-1], registerReference_[i-1]);
+					popStackLong(registers_[i - 1], registerReference_[i - 1]);
 				}
 
 				*current += vmOpCodeSize;
@@ -539,7 +532,9 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
-							registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]), dataPtr, max);
+							registers_[index], offsetBytes,
+							arrayType->arraySubtype()->getElementSize(),
+							heap_.getSize(registers_[tgtArray]), dataPtr, max);
 
 				}
 
@@ -562,7 +557,8 @@ void VirtualMachine::execute(std::string function) {
 					break;
 
 				default:
-					VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
+					VM_PRINTF_FATAL("%i is an unsupported move size\n", size)
+					;
 					break;
 				}
 
@@ -611,7 +607,9 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i\n",
-							registers_[index], offsetBytes, arrayType->arraySubtype()->getElementSize(), heap_.getSize(registers_[tgtArray]));
+							registers_[index], offsetBytes,
+							arrayType->arraySubtype()->getElementSize(),
+							heap_.getSize(registers_[tgtArray]));
 
 				}
 
@@ -634,7 +632,8 @@ void VirtualMachine::execute(std::string function) {
 					break;
 
 				default:
-					VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
+					VM_PRINTF_FATAL("%i is an unsupported move size\n", size)
+					;
 					break;
 
 				}
@@ -667,8 +666,7 @@ void VirtualMachine::execute(std::string function) {
 				auto typeSearch = findType(type);
 
 				if (typeSearch.get() == nullptr) {
-					VM_PRINTF_FATAL("Type %s is not registered\n",
-							type.c_str());
+					VM_PRINTF_FATAL("Type %s is not registered\n", type.c_str());
 				}
 
 				//Check the type is an array
@@ -685,8 +683,7 @@ void VirtualMachine::execute(std::string function) {
 
 				//Check that the desired length is valid
 				if (registers_[lengthRegister] < 1) {
-					VM_PRINTF_FATAL("%s",
-							"Cannot allocate array of length < 1");
+					VM_PRINTF_FATAL("%s", "Cannot allocate array of length < 1");
 				}
 
 				long length = registers_[lengthRegister]
@@ -704,7 +701,8 @@ void VirtualMachine::execute(std::string function) {
 
 				VM_PRINTF_LOG(
 						"Allocated and created new array %li of size %li\n",
-						registers_[destinationRegister], registers_[lengthRegister]);
+						registers_[destinationRegister],
+						registers_[lengthRegister]);
 
 				*current += vmOpCodeSize;
 
@@ -734,7 +732,8 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				//Check that it is an array
-				if (heap_.getType(registers_[arrayRegister])->getBaseType() != VM::VMArray) {
+				if (heap_.getType(registers_[arrayRegister])->getBaseType()
+						!= VM::VMArray) {
 					VM_PRINTF_FATAL("%s",
 							"Reference is not an array (OpArrayLength)\n");
 				}
@@ -823,8 +822,8 @@ void VirtualMachine::execute(std::string function) {
 			}
 
 			default: {
-				VM_PRINTF_FATAL("Invalid instruction %li. %ii\n",
-						*current, instructionSet.getInst(*current));
+				VM_PRINTF_FATAL("Invalid instruction %li. %ii\n", *current,
+						instructionSet.getInst(*current));
 				return;
 			}
 
@@ -885,8 +884,7 @@ void VirtualMachine::garbageCollection() {
 		long next = toInvestigate[i];
 
 		if (!heap_.validReference(next)) {
-			VM_PRINTF_FATAL("ERROR: Reference at register %i is not valid\n",
-					i);
+			VM_PRINTF_FATAL("ERROR: Reference at register %i is not valid\n", i);
 		}
 
 		SP<VMEntryType> nextType = heap_.getType(next);
@@ -968,26 +966,26 @@ void VirtualMachine::printState() {
 
 void VirtualMachine::logMessage(VMLogLevel level, std::string message) {
 	switch (level) {
-		
-		case Log: {
-			VM_PRINTF_LOG("%s", message.c_str());
-			break;
-		}
-		
-		case Debug: {
-			VM_PRINTF_DBG("%s", message.c_str());
-			break;
-		}
-		
-		case Warn: {
-			VM_PRINTF_WARN("%s", message.c_str());
-			break;
-		}
-		
-		case Fatal: {
-			VM_PRINTF_FATAL("%s", message.c_str());
-			break;
-		}
+
+	case Log: {
+		VM_PRINTF_LOG("%s", message.c_str());
+		break;
+	}
+
+	case Debug: {
+		VM_PRINTF_DBG("%s", message.c_str());
+		break;
+	}
+
+	case Warn: {
+		VM_PRINTF_WARN("%s", message.c_str());
+		break;
+	}
+
+	case Fatal: {
+		VM_PRINTF_FATAL("%s", message.c_str());
+		break;
+	}
 
 	}
 }

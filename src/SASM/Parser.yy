@@ -7,7 +7,7 @@
 #include <string.h>
 #include <string>
 #include <VM/OpCodes.hpp>
-#include <stdint.h>
+#include <types.h>
 #include <VM/Constants.hpp>
 #include <VM/InstructionSet.hpp>
 #include <VM/ConstantTypes.hpp>

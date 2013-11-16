@@ -40,5 +40,6 @@ Type* getStringType();
 Type* getIntType();
 Type* getBooleanType();
 Type* getVoidType();
+Type* getFloat32Type();
 
 #endif /* TYPEMANAGER_HPP_ */

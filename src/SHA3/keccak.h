@@ -4,7 +4,7 @@
 #ifndef KECCAK_H
 #define KECCAK_H
 
-#include <stdint.h>
+#include <types.h>
 #include <string.h>
 
 #ifndef KECCAK_ROUNDS

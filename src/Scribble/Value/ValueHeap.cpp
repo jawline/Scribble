@@ -6,6 +6,7 @@
  */
 
 #include "ValueHeap.hpp"
+#include <Scribble/Value/Float32.hpp>
 #include <Scribble/Value/Util.hpp>
 #include <Scribble/Value/Bool.hpp>
 #include <Scribble/Value/Int.hpp>
@@ -49,6 +50,12 @@ Value* ValueHeap::make(Type* type) {
 Value* ValueHeap::make(bool value) {
 	Value* val = make(getBooleanType());
 	((BoolValue*) val)->setValue(value);
+	return val;
+}
+
+Value* ValueHeap::make(float32_t value) {
+	Value* val = make(getFloat32Type());
+	((Float32Value*) val)->setValue(value);
 	return val;
 }
 

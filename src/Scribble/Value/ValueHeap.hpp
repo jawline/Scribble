@@ -11,6 +11,7 @@
 #include <Stack/Stack.hpp>
 #include <stack>
 #include <mutex>
+#include <types.h>
 
 /**
  * The value heap stores a bunch of primitive values which can are free to be reused without requiring a new.
@@ -44,6 +45,12 @@ public:
 	 */
 
 	Value* make(int value);
+
+	/**
+	 * Get a float32 value class.
+	 */
+
+	Value* make(float32_t value);
 
 	/**
 	 * Add the specified value back into the ValueHeap.

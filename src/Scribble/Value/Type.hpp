@@ -31,32 +31,38 @@ enum ValueType {
 	/**
 	 * 1 byte booleans.
 	 */
-	Boolean = 1,
+	Boolean,
 
 	/**
 	 * Integer numbers. Stored as 4 byte signed integers.
 	 */
-	Int = 2,
+	Int,
+
+	/**
+	 * 32 bit floating point numbers.
+	 */
+
+	Float32,
 
 	/**
 	 * Void type, Null type.
 	 */
-	Void = 3,
+	Void,
 
 	/**
 	 * Primitive array type, always grouped with a subtype used to tell what it is an array of.
 	 */
-	Array = 4,
+	Array,
 
 	/**
 	 * Structure type. Subtype will be StructureInfo
 	 */
-	StructureType = 5,
+	StructureType,
 
 	/**
 	 * Max hint used so that heaps can allocate arrays of the correct number of buckets.
 	 */
-	ValueTypeMax = 7
+	ValueTypeMax
 };
 
 /**
@@ -135,6 +141,8 @@ public:
 			return "string";
 		case Void:
 			return "void";
+		case Float32:
+			return "float32";
 		case StructureType:
 		case ValueTypeMax:
 		case TypeUnresolved:

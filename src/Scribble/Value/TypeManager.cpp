@@ -83,3 +83,8 @@ Type* getVoidType() {
 	return voidType;
 }
 
+Type* float32Type = getTypeManager().getType(Float32);
+
+Type* getFloat32Type() {
+	return float32Type;
+}
