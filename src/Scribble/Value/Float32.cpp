@@ -10,7 +10,8 @@
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Statement/StatementException.hpp>
 
-Float32Value::Float32Value(float32_t value) : value_(value) {
+Float32Value::Float32Value(float32_t value) :
+		value_(value) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -18,8 +19,6 @@ Float32Value::Float32Value(float32_t value) : value_(value) {
 Float32Value::~Float32Value() {
 	// TODO Auto-generated destructor stub
 }
-
-
 
 void Float32Value::applyOperator(ValueOperator v, Value* r) {
 
@@ -31,9 +30,24 @@ void Float32Value::applyOperator(ValueOperator v, Value* r) {
 		value_ = other->getValue();
 		break;
 
+	case Add:
+		value_ = value_ + other->getValue();
+		break;
+
+	case Subtract:
+		value_ -= other->getValue();
+		break;
+
+	case Multiply:
+		value_ *= other->getValue();
+		break;
+
+	case Divide:
+		value_ /= other->getValue();
+		break;
+
 	default:
-		throw StatementException(0,
-				"Operation not value on Float32");
+		throw StatementException(0, "Operation not value on Float32");
 		break;
 	}
 

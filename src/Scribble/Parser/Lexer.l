@@ -18,7 +18,7 @@
 #include "ScribbleParser.hpp"
 
 #define SAVE_INT scribble_lval.integer = atoi(scribble_text);
-#define SAVE_REAL scribble_lval.real = atof(scribble_text);
+#define SAVE_FLOAT scribble_lval.float32 = atof(scribble_text);
 #define SAVE_TOKEN scribble_lval.string = new std::string(scribble_text, scribble_leng);
 
 void stringReplace(std::string& str, const std::string& oldStr, const std::string& newStr)
@@ -40,6 +40,7 @@ exponent [eE][+-]?{integer}
 real {integer}("."{integer})
 string \"[^\"\n]*\"
 word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
+float {real}f
 
 %%
 
@@ -89,6 +90,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "var" return VARIABLE;
 "int" return TYPE_INT;
 "bool" return TYPE_BOOL;
+"float32" return TYPE_FLOAT32;
 "nil" return NIL;
 "string" return TYPE_STRING;
 "void" return TYPE_VOID;
@@ -110,8 +112,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
  return INT;
 }
 
-{real} { SAVE_REAL; 
- return REAL;
+{float} { SAVE_FLOAT; 
+ return FLOAT32;
 }
 
 {word} { SAVE_TOKEN; return WORD; }

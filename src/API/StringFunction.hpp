@@ -26,6 +26,22 @@ public:
 			VM::VirtualMachine* virt);
 };
 
+class Float32ToStringFunction: public Function {
+public:
+	Float32ToStringFunction(std::string ns);
+	virtual ~Float32ToStringFunction();
+
+	Value* execute(std::vector<Value*> arguments);
+
+	virtual API::APIValue execute(API::APIValue* values,
+			VM::VirtualMachine* virt);
+
+	Type* getType();
+	const unsigned int numArgs();
+	Type* argType(unsigned int arg);
+
+};
+
 class BoolToStringFunction: public Function {
 public:
 	BoolToStringFunction(std::string ns);
@@ -36,7 +52,7 @@ public:
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 
-	 Type* getType();
+	Type* getType();
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);
 

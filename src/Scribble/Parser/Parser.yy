@@ -9,10 +9,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <types.h>
 #include <Scribble/Statement/BoolStatement.hpp>
 #include <Scribble/Statement/IntStatement.hpp>
 #include <Scribble/Statement/OperateStatement.hpp>
 #include <Scribble/Statement/StringStatement.hpp>
+#include <Scribble/Statement/Float32Statement.hpp>
 #include <Scribble/Statement/AssignVariable.hpp>
 #include <Scribble/Statement/GetVariableStatement.hpp>
 #include <Scribble/Statement/FunctionStatement.hpp>
@@ -88,18 +90,18 @@ extern char *scribble_text;	// defined and maintained in lex.c
 	SP<Variable>* variable;
 	std::string* string;
 	
-	float real;
+	float32_t float32;
 	int integer;
 	TypeReference* type;
 }
 
 %token <string> WORD STRING
-%token <real> REAL
+%token <float32> FLOAT32
 %token <integer> INT
 %token <token> PLUS MINUS TIMES DIVIDE EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY TYPE_VOID RETURN WHILE NOT IMPORT LINK
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
-%token <token> TYPE_INT TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
+%token <token> TYPE_INT TYPE_FLOAT32 TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
 %token <token> END DO OR PACKAGE
 
 %left PLUS MINUS
@@ -158,6 +160,8 @@ Type: TYPE_INT {
 		$$ = new TypeReference( new TypeReferenceCore ( "", getTypeManager().getType(Int) ) );
 	} | TYPE_STRING {
 		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(String) ) );
+	} | TYPE_FLOAT32 {
+		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Float32)));
 	} | TYPE_BOOL {
 		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Boolean) ) );
 	} | TYPE_ARRAY LPAREN Type RPAREN {
@@ -607,6 +611,8 @@ Expression: TRUE {
 		$$ = new BoolStatement(scribble_lineno, scribble_text, false);
 	} | INT {
 		$$ = new IntStatement(scribble_lineno, scribble_text, $1);
+	} | FLOAT32 {
+		$$ = new Float32Statement(scribble_lineno, scribble_text, $1);
 	} | STRING {
 		$$ = new StringStatement(scribble_lineno, scribble_text, *$1);
 

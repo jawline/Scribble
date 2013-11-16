@@ -10,6 +10,7 @@
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/Bool.hpp>
 #include <Scribble/Value/String.hpp>
+#include <Scribble/Value/Float32.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <sstream>
 
@@ -110,5 +111,50 @@ API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 		heapEntry = virt->getHeap().allocate(virt->findType("string"), strlen("false") + 1, (uint8_t*) "false");
 	}
 
+	return API::APIValue(virt->findType("string"), virt->getHeap().getAddress(heapEntry), heapEntry);
+}
+
+Float32ToStringFunction::Float32ToStringFunction(std::string ns) : Function("BoolToString", ns) {
+	// TODO Auto-generated constructor stub
+
+}
+
+Float32ToStringFunction::~Float32ToStringFunction() {
+	// TODO Auto-generated destructor stub
+}
+
+Value* Float32ToStringFunction::execute(std::vector<Value*> arguments) {
+	Value* arg = arguments[0];
+	std::stringstream st;
+	st << ((Float32Value*) arg)->getValue();
+	return new StringValue(st.str());
+}
+
+Type* Float32ToStringFunction::getType() {
+	return getTypeManager().getType(String);
+}
+
+unsigned int const Float32ToStringFunction::numArgs() {
+	return 1;
+}
+
+Type* Float32ToStringFunction::argType(unsigned int arg) {
+
+	if (arg == 0) {
+		return getTypeManager().getType(Float32);
+	}
+
+	return getTypeManager().getType(TypeUnresolved);
+}
+
+
+API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
+		VM::VirtualMachine* virt) {
+
+	float32_t toConv = ((float32_t)values[0].getValue());
+	std::stringstream res;
+	res << toConv;
+	std::string resultString = res.str();
+	long heapEntry = virt->getHeap().allocate(virt->findType("string"), resultString.length() + 1, (uint8_t*) resultString.c_str());
 	return API::APIValue(virt->findType("string"), virt->getHeap().getAddress(heapEntry), heapEntry);
 }

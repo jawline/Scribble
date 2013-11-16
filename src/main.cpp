@@ -42,6 +42,7 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 	std::vector<SafeFunction> string;
 	string.push_back(SmartPointer< Function > (new IntToStringFunction("sys")));
 	string.push_back(SmartPointer< Function > (new BoolToStringFunction("sys")));
+	string.push_back(SmartPointer< Function > (new Float32ToStringFunction("sys")));
 	builtinFunctions["String"] = NamespaceEntry(string);
 
 	std::vector<SafeFunction> readLine;
@@ -214,11 +215,11 @@ int main(int argc, char* argv[]) {
 
 	VM::VirtualMachine vm;
 
-	registerEntireNamespace(names, vm);
-
 	char const* execMode = getCmdOption(argv, argv + argc, "vm", "--mode");
 
 	if (strcmp(execMode, "vm") == 0) {
+
+		registerEntireNamespace(names, vm);
 
 		double vmStart = getCPUTime();
 
@@ -253,6 +254,8 @@ int main(int argc, char* argv[]) {
 		double treeEnd = getCPUTime();
 
 		printf("Now in the VM\n");
+
+		registerEntireNamespace(names, vm);
 
 		double vmStart = getCPUTime();
 

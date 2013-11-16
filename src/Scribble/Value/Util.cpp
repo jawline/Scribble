@@ -12,6 +12,7 @@
 #include "Bool.hpp"
 #include "Array.hpp"
 #include "Structure.hpp"
+#include "Float32.hpp"
 #include <sstream>
 #include <exception>
 
@@ -46,6 +47,9 @@ Value* ValueUtil::generateValue(Type* type) {
 
 	case Int:
 		return new IntValue(0);
+
+	case Float32:
+		return new Float32Value(0);
 
 	case String:
 		return new StringValue("");
