@@ -12,6 +12,7 @@
 #include <API/RandomInt.hpp>
 #include <API/Concat.hpp>
 #include <API/Int.hpp>
+#include <API/Float.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Parser/Parser.hpp>
 #include <Scribble/Parser/ParserException.hpp>
@@ -43,6 +44,10 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 	std::vector<SafeFunction> intConvertor;
 	intConvertor.push_back(SmartPointer < Function> ( new IntFromFloat32("sys")));
 	builtinFunctions["Int"] = intConvertor;
+
+	std::vector<SafeFunction> floatConvertor;
+	floatConvertor.push_back(SmartPointer < Function> ( new Float32FromInt("sys")));
+	builtinFunctions["Float32"] = floatConvertor;
 
 	std::vector<SafeFunction> string;
 	string.push_back(SmartPointer< Function > (new IntToStringFunction("sys")));
