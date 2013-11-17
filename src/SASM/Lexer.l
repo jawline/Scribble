@@ -55,6 +55,7 @@ float32 {real}f
 "subf32" return SUBTRACT_FLOAT32;
 "mulf32" return MULTIPLY_FLOAT32;
 "divf32" return DIVIDE_FLOAT32;
+"cmpf32" return COMPARE_FLOAT32;
 
 "call" return CALL_FN;
 "move" return MOVE;

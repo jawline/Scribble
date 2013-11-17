@@ -75,7 +75,7 @@ private:
 	long stackBasePointer;
 	long stackCurrentPointer;
 
-	long* registers_;
+	int64_t* registers_;
 	bool* registerReference_;
 
 	/**

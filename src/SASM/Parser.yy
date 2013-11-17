@@ -237,6 +237,14 @@ void DivideFloat32(uint8_t left, uint8_t right, uint8_t dest) {
 	current += 4;
 }
 
+void CompareFloat32(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpCmpFloat32);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 4;
+}
+
 void Move(uint8_t target, uint8_t dest) {
 
 	Set(buffer, current, (uint8_t) VM::OpMove);
@@ -339,7 +347,7 @@ void TestEqualNil(uint8_t left) {
 %token <float32> FLOAT32
 %token <integer> INT REG
 %token <lval> LONG
-%token ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token COMPARE_FLOAT32 ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -398,6 +406,8 @@ Program: {
 		MultiplyFloat32($3, $4, $5);
 	} | Program DIVIDE_FLOAT32 REG REG REG {
 		DivideFloat32($3, $4, $5);
+	} | Program COMPARE_FLOAT32 REG REG REG {
+		CompareFloat32($3, $4, $5);
 	} | Program ADD REG REG REG {
 		Add($3, $4, $5);
 	} | Program ADD REG INT REG {

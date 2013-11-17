@@ -160,14 +160,15 @@ API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
 
 	//Get the data which contains the float value then use a pointer to make C reinterpret the data as a float32_t* without actually modifying it
 	long toConv = values[0].getValue();
-	float* tCv = (float32_t*) &toConv;
 
 	std::stringstream res;
-	res << *tCv;
+	res << *((float32_t*)&toConv);
 
 	std::string resultString = res.str();
+
 	long heapEntry = virt->getHeap().allocate(virt->findType("string"),
 			resultString.length() + 1, (uint8_t*) resultString.c_str());
+
 	return API::APIValue(virt->findType("string"),
 			virt->getHeap().getAddress(heapEntry), heapEntry);
 }

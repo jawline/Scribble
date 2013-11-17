@@ -11,6 +11,7 @@
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/Bool.hpp>
 #include <Scribble/Value/String.hpp>
+#include <Scribble/Value/Float32.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
@@ -93,6 +94,41 @@ Value* TestStatement::execute(std::vector<Value*> const& variables) {
 		break;
 	}
 
+	case Float32: {
+
+		Float32Value* il = (Float32Value*) lhRes;
+		Float32Value* rl = (Float32Value*) rhRes;
+
+		switch (tType_) {
+		case TestEquals:
+			//Result is a bool test of truth
+			result = valueHeap.make((il->getValue() == rl->getValue()));
+			break;
+
+		case TestNotEquals:
+			result = valueHeap.make(!(il->getValue() == rl->getValue()));
+			break;
+
+		case TestLess:
+			result = valueHeap.make((il->getValue() < rl->getValue()));
+			break;
+
+		case TestGreater:
+			result = valueHeap.make((il->getValue() > rl->getValue()));
+			break;
+
+		case TestLessOrEqual:
+			result = valueHeap.make((il->getValue() <= rl->getValue()));
+			break;
+
+		case TestGreaterOrEqual:
+			result = valueHeap.make((il->getValue() >= rl->getValue()));
+			break;
+		}
+
+		break;
+	}
+
 	case String: {
 
 		StringValue* sl = (StringValue*) lhRes;
@@ -163,42 +199,137 @@ int TestStatement::generateCode(int resultRegister,
 	generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
 	instrs++;
 
-	switch (tType_) {
+	switch (lhs_->type()->getType()) {
 
-	case TestEquals:
-		//2
-		generated << "eq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test lhs rhs\n";
-		instrs += 1;
-		break;
+	case Boolean: {
+		switch (tType_) {
 
-	case TestNotEquals:
-		generated << "neq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
-		instrs += 2;
-		break;
+		case TestEquals:
+			//2
+			generated << "eq $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " #test lhs rhs\n";
+			instrs += 1;
+			break;
 
-	case TestLess:
-		generated << "lt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test less than lhs rhs\n";
-		instrs += 1;
-		break;
+		case TestNotEquals:
+			generated << "neq $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << "\n";
+			instrs += 2;
+			break;
 
-	case TestLessOrEqual:
-		generated << "le $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #tess less or equal lhs rhs\n";
-		instrs += 1;
-		break;
+		default:
+			throw StatementException(this, "Invalid test for type");
+		}
 
-	case TestGreater:
-		generated << "gt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test greater\n";
-		instrs += 2;
 		break;
+	}
 
-	case TestGreaterOrEqual:
-		generated << "ge $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " #test greater or equal\n";
-		instrs += 2;
-		break;
+	case Float32: {
 
-	default:
-		printf("Test statement unimplemented.\n");
+		generated << "cmpf32 $" << VM::vmTempRegisterOne << " $"
+				<< VM::vmTempRegisterTwo << " $" << VM::vmTempRegisterOne
+				<< "\n";
+		instrs++;
+
+		switch (tType_) {
+
+		case TestEquals:
+			generated << "eqz $" << VM::vmTempRegisterOne << "\n";
+			instrs++;
+			break;
+
+		case TestNotEquals:
+			generated << "eqz $" << VM::vmTempRegisterOne << "\n";
+			generated << "jmpr 2\n";
+			instrs += 2;
+			break;
+
+		case TestLess:
+			generated << "load -1 $" << VM::vmTempRegisterTwo << "\n";
+			generated << "eq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			instrs += 2;
+			break;
+
+		case TestLessOrEqual:
+			generated << "load 1 $" << VM::vmTempRegisterTwo << "\n";
+			generated << "lt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			instrs += 2;
+			break;
+
+		case TestGreater:
+			generated << "load 1 $" << VM::vmTempRegisterTwo << "\n";
+			generated << "eq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			instrs += 2;
+			break;
+
+		case TestGreaterOrEqual:
+			generated << "load -1 $" << VM::vmTempRegisterTwo << "\n";
+			generated << "gt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			instrs += 2;
+			break;
+
+		default:
+			break;
+		}
+
 		break;
+	}
+
+	case Int: {
+		switch (tType_) {
+
+		case TestEquals:
+			//2
+			generated << "eq $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " #test lhs rhs\n";
+			instrs += 1;
+			break;
+
+		case TestNotEquals:
+			generated << "neq $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << "\n";
+			instrs += 2;
+			break;
+
+		case TestLess:
+			generated << "lt $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " #test less than lhs rhs\n";
+			instrs += 1;
+			break;
+
+		case TestLessOrEqual:
+			generated << "le $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo
+					<< " #tess less or equal lhs rhs\n";
+			instrs += 1;
+			break;
+
+		case TestGreater:
+			generated << "gt $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " #test greater\n";
+			instrs += 2;
+			break;
+
+		case TestGreaterOrEqual:
+			generated << "ge $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " #test greater or equal\n";
+			instrs += 2;
+			break;
+
+		default:
+			printf("Test statement unimplemented.\n");
+			break;
+		}
+
+		break;
+	}
+
+	default: {
+		throw StatementException(this,
+				"Cannot generate test code for given type");
+		break;
+	}
+
 	}
 
 	//3

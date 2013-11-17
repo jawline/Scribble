@@ -22,6 +22,7 @@ enum OpCodes {
 	OpSubFloat32,
 	OpMulFloat32,
 	OpDivFloat32,
+	OpCmpFloat32,
 	OpEqual,
 	OpEqualZero,
 	OpLessThan,

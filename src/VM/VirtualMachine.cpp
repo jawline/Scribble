@@ -18,7 +18,7 @@ namespace VM {
 VirtualMachine::VirtualMachine() {
 
 	//Allocate memory for registers
-	registers_ = new long[vmNumRegisters];
+	registers_ = new int64_t[vmNumRegisters];
 	registerReference_ = new bool[vmNumRegisters];
 
 	currentInstruction = 0;
@@ -396,10 +396,7 @@ void VirtualMachine::execute(std::string function) {
 				float32_t* leftR = (float32_t*) &registers_[left];
 				float32_t* rightR = (float32_t*) &registers_[right];
 
-
-				printf("%f %f", *leftR, *rightR);
 				*index = *leftR + *rightR;
-				printf(" %f Index\n", *index);
 
 				registerReference_[dest] = false;
 
@@ -464,6 +461,27 @@ void VirtualMachine::execute(std::string function) {
 				*index = *leftR / *rightR;
 
 				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+			case OpCmpFloat32: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				float32_t* leftR = (float32_t*) &registers_[left];
+				float32_t* rightR = (float32_t*) &registers_[right];
+
+				if (*leftR == *rightR) {
+					registers_[dest] = 0;
+				} else if (*leftR > *rightR) {
+					registers_[dest] = 1;
+				} else {
+					registers_[dest] = -1;
+				}
 
 				*current += vmOpCodeSize;
 				break;
