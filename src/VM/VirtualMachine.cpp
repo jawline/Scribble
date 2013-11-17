@@ -483,6 +483,8 @@ void VirtualMachine::execute(std::string function) {
 					registers_[dest] = -1;
 				}
 
+				registerReference_[dest] = false;
+
 				*current += vmOpCodeSize;
 				break;
 			}

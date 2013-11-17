@@ -11,6 +11,7 @@ package recursionTest := import("tests/recursion");
 package arraysTest := import("tests/arrays");
 package primesTest := import("tests/primes");
 package sortsTest := import("tests/sorts");
+package floatsTest := import("tests/floats");
 
 /**
  * This is a comment
@@ -27,5 +28,6 @@ func main() {
     primesTest.Test();
     logicalTest.Test();
     sortsTest.Test();
+    floatsTest.Test();
 
 }
