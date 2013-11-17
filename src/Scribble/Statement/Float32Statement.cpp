@@ -30,3 +30,8 @@ Type* Float32Statement::type() {
 
 void Float32Statement::checkTree(Type* functionType) {
 }
+
+int Float32Statement::generateCode(int resultRegister, std::stringstream& generated) {
+	generated << "load " << val_ << "f $" << resultRegister << "\n";
+	return 1;
+}

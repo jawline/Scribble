@@ -56,6 +56,10 @@ public:
 		return *(long*)(constants_ + index);
 	}
 
+	inline float32_t getConstantFloat32(size_t index) {
+		return *(float32_t*)(constants_+index);
+	}
+
 	inline char* getConstantString(size_t index) {
 		return (char*)(constants_ + index);
 	}

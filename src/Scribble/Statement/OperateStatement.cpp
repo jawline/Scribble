@@ -51,47 +51,108 @@ void OperateStatement::checkTree(Type* type) {
 int OperateStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
-	int instrs = lhs_->generateCode(VM::vmTempRegisterOne, generated);
+	int instrs = 0;
 
-	generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
-	instrs++;
+	switch (lhs_->type()->getType()) {
+	case Int: {
 
-	instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
+		instrs = lhs_->generateCode(VM::vmTempRegisterOne, generated);
 
-	generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
-	instrs++;
+		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+		instrs++;
 
-	switch (op_) {
+		instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
 
-	case Assign: {
-		printf("UNIMPLEMENTED ARGH\n");
+		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+		instrs++;
+
+		switch (op_) {
+
+		case Assign: {
+			printf("UNIMPLEMENTED ARGH\n");
+			break;
+		}
+
+		case Add: {
+			generated << "add $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		case Subtract: {
+			generated << "sub $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		case Multiply: {
+			generated << "mul $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		case Divide: {
+			generated << "div $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		}
 		break;
 	}
+	case Float32: {
+		instrs = lhs_->generateCode(VM::vmTempRegisterOne, generated);
 
-	case Add: {
-		generated << "add $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
-		instrs += 1;
+		generated << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+		instrs++;
+
+		instrs += rhs_->generateCode(VM::vmTempRegisterTwo, generated);
+
+		generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
+		instrs++;
+
+		switch (op_) {
+
+		case Assign: {
+			printf("UNIMPLEMENTED ARGH\n");
+			break;
+		}
+
+		case Add: {
+			generated << "addf32 $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		case Subtract: {
+			generated << "subf32 $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		case Multiply: {
+			generated << "mulf32 $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		case Divide: {
+			generated << "divf32 $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+			instrs += 1;
+			break;
+		}
+
+		}
 		break;
 	}
-
-	case Subtract: {
-		generated << "sub $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
-		instrs += 1;
-		break;
-	}
-
-	case Multiply: {
-		generated << "mul $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
-		instrs += 1;
-		break;
-	}
-
-	case Divide: {
-		generated << "div $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
-		instrs += 1;
-		break;
-	}
-
 	}
 
 	return instrs;

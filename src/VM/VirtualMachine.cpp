@@ -187,6 +187,14 @@ void VirtualMachine::execute(std::string function) {
 					registerReference_[destinationRegister] = false;
 					break;
 
+				case CFloat32:
+
+					*((float32_t*) &registers_[destinationRegister]) =
+							instructionSet.getConstantFloat32(
+									constantDataStart + 1);
+					registerReference_[destinationRegister] = false;
+					break;
+
 				case CArray: {
 
 					//Read in the type of array from the constant data with this instruction set.
@@ -368,6 +376,93 @@ void VirtualMachine::execute(std::string function) {
 				//		left, right, dest);
 
 				registers_[dest] = registers_[left] / registers_[right];
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+			case OpAddFloat32: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
+				//			left, right, dest);
+
+
+				float32_t* index = (float32_t*) &registers_[dest];
+				float32_t* leftR = (float32_t*) &registers_[left];
+				float32_t* rightR = (float32_t*) &registers_[right];
+
+
+				printf("%f %f", *leftR, *rightR);
+				*index = *leftR + *rightR;
+				printf(" %f Index\n", *index);
+
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+			case OpSubFloat32: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//VM_PRINTF_LOG(
+				//	"Subtracted registers %i and %i. Placing result in %i\n",
+				//left, right, dest);
+
+				float32_t* index = (float32_t*) &registers_[dest];
+				float32_t* leftR = (float32_t*) &registers_[left];
+				float32_t* rightR = (float32_t*) &registers_[right];
+				*index = *leftR - *rightR;
+
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+			case OpMulFloat32: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//VM_PRINTF_LOG(
+				//		"Multiplied registers %i and %i. Placing result in %i\n",
+				//		left, right, dest);
+
+				float32_t* index = (float32_t*) &registers_[dest];
+				float32_t* leftR = (float32_t*) &registers_[left];
+				float32_t* rightR = (float32_t*) &registers_[right];
+				*index = *leftR * *rightR;
+
+				registerReference_[dest] = false;
+
+				*current += vmOpCodeSize;
+				break;
+			}
+
+			case OpDivFloat32: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+				uint8_t dest = instructionSet.getInst(*current + 3);
+
+				//VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
+				//		left, right, dest);
+
+				float32_t* index = (float32_t*) &registers_[dest];
+				float32_t* leftR = (float32_t*) &registers_[left];
+				float32_t* rightR = (float32_t*) &registers_[right];
+				*index = *leftR / *rightR;
+
 				registerReference_[dest] = false;
 
 				*current += vmOpCodeSize;

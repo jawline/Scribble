@@ -7,11 +7,12 @@
 
 %{
 #include <string>
+#include <types.h>
 #include "SASMParser.hpp"
 
 #define SAVE_INT sasm_lval.integer = atoi(sasm_text);
 #define SAVE_REG sasm_lval.integer = atoi(sasm_text+1);
-#define SAVE_REAL sasm_lval.real = atof(sasm_text);
+#define SAVE_FLOAT32 sasm_lval.float32 = atof(sasm_text);
 #define SAVE_TOKEN sasm_lval.string = new std::string(sasm_text, sasm_leng);
 
 void replaceString(std::string& str, const std::string& oldStr, const std::string& newStr)
@@ -30,10 +31,11 @@ white [ \t]+
 digit [0-9]
 integer -?{digit}+
 long {integer}L
-real {integer}("."{integer})
+real {integer}("."{integer})*
 register ${integer}
 string \"[^\"]*\"
 word [_|a-z|A-Z][a-z|A-Z|0-9]*
+float32 {real}f
 
 %%
 
@@ -48,6 +50,12 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
 "sub" return SUBTRACT;
 "mul" return MULTIPLY;
 "div" return DIVIDE;
+
+"addf32" return ADD_FLOAT32;
+"subf32" return SUBTRACT_FLOAT32;
+"mulf32" return MULTIPLY_FLOAT32;
+"divf32" return DIVIDE_FLOAT32;
+
 "call" return CALL_FN;
 "move" return MOVE;
 "popn" return POP_NIL;
@@ -77,8 +85,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9]*
  return INT;
 }
 
-{real} { SAVE_REAL; 
- return REAL;
+{float32} { SAVE_FLOAT32; 
+ return FLOAT32;
 }
 
 {long} { sasm_lval.lval = atoi(sasm_text); return LONG; }

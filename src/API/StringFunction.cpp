@@ -14,7 +14,8 @@
 #include <Scribble/Value/TypeManager.hpp>
 #include <sstream>
 
-IntToStringFunction::IntToStringFunction(std::string ns) : Function("IntToString", ns) {
+IntToStringFunction::IntToStringFunction(std::string ns) :
+		Function("IntToString", ns) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -49,18 +50,20 @@ Type* IntToStringFunction::argType(unsigned int arg) {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
-
 API::APIValue IntToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 	int toConv = values[0].getValue();
 	std::stringstream res;
 	res << toConv;
 	std::string resultString = res.str();
-	long heapEntry = virt->getHeap().allocate(virt->findType("string"), resultString.length() + 1, (uint8_t*) resultString.c_str());
-	return API::APIValue(virt->findType("string"), virt->getHeap().getAddress(heapEntry), heapEntry);
+	long heapEntry = virt->getHeap().allocate(virt->findType("string"),
+			resultString.length() + 1, (uint8_t*) resultString.c_str());
+	return API::APIValue(virt->findType("string"),
+			virt->getHeap().getAddress(heapEntry), heapEntry);
 }
 
-BoolToStringFunction::BoolToStringFunction(std::string ns) : Function("BoolToString", ns) {
+BoolToStringFunction::BoolToStringFunction(std::string ns) :
+		Function("BoolToString", ns) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -99,22 +102,25 @@ Type* BoolToStringFunction::argType(unsigned int arg) {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
-
 API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 
 	long heapEntry = -1;
 
 	if (values[0].getValue() == VM::vmTrue) {
-		heapEntry = virt->getHeap().allocate(virt->findType("string"), strlen("true") + 1, (uint8_t*) "true");
+		heapEntry = virt->getHeap().allocate(virt->findType("string"),
+				strlen("true") + 1, (uint8_t*) "true");
 	} else {
-		heapEntry = virt->getHeap().allocate(virt->findType("string"), strlen("false") + 1, (uint8_t*) "false");
+		heapEntry = virt->getHeap().allocate(virt->findType("string"),
+				strlen("false") + 1, (uint8_t*) "false");
 	}
 
-	return API::APIValue(virt->findType("string"), virt->getHeap().getAddress(heapEntry), heapEntry);
+	return API::APIValue(virt->findType("string"),
+			virt->getHeap().getAddress(heapEntry), heapEntry);
 }
 
-Float32ToStringFunction::Float32ToStringFunction(std::string ns) : Function("BoolToString", ns) {
+Float32ToStringFunction::Float32ToStringFunction(std::string ns) :
+		Function("BoolToString", ns) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -147,14 +153,21 @@ Type* Float32ToStringFunction::argType(unsigned int arg) {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
-
 API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 
-	float32_t toConv = ((float32_t)values[0].getValue());
+	//TODO: This is nasty, hacky buisness. Find a nicer way of doing this ( There must be a way under C's syntax to cast without altering primatives )
+
+	//Get the data which contains the float value then use a pointer to make C reinterpret the data as a float32_t* without actually modifying it
+	long toConv = values[0].getValue();
+	float* tCv = (float32_t*) &toConv;
+
 	std::stringstream res;
-	res << toConv;
+	res << *tCv;
+
 	std::string resultString = res.str();
-	long heapEntry = virt->getHeap().allocate(virt->findType("string"), resultString.length() + 1, (uint8_t*) resultString.c_str());
-	return API::APIValue(virt->findType("string"), virt->getHeap().getAddress(heapEntry), heapEntry);
+	long heapEntry = virt->getHeap().allocate(virt->findType("string"),
+			resultString.length() + 1, (uint8_t*) resultString.c_str());
+	return API::APIValue(virt->findType("string"),
+			virt->getHeap().getAddress(heapEntry), heapEntry);
 }

@@ -35,6 +35,11 @@ void Set(uint8_t* inst, int& current, int val) {
 	current += 4;
 }
 
+void Set(uint8_t* inst, int& current, float32_t val) {
+	*(float32_t*)(inst+current) = val;
+	current += 4;
+}
+
 void Set(uint8_t* inst, int& current, long lval) {
 	*((long*) (inst + current)) = lval;
 	current += sizeof(long);
@@ -54,6 +59,17 @@ void LoadInt(int val, uint8_t dest) {
 
 	Set(constant, currentConstant, (uint8_t) VM::CInt);
 	Set(constant, currentConstant, (int) val);
+	
+	current += 2;
+}
+
+void LoadFloat32(float32_t val, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
+	Set(buffer, current, (int) currentConstant);
+	Set(buffer, current, (uint8_t) dest);
+
+	Set(constant, currentConstant, (uint8_t) VM::CFloat32);
+	Set(constant, currentConstant, (float32_t) val);
 	
 	current += 2;
 }
@@ -181,7 +197,6 @@ void Multiply(uint8_t left, uint8_t right, uint8_t dest) {
 	current += 4;
 }
 
-
 void Divide(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, (uint8_t) VM::OpDiv);
 	Set(buffer, current, left);
@@ -190,6 +205,37 @@ void Divide(uint8_t left, uint8_t right, uint8_t dest) {
 	current += 4;
 }
 
+void AddFloat32(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpAddFloat32);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 4;
+}
+
+void SubtractFloat32(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpSubFloat32);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 4;
+}
+
+void MultiplyFloat32(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpMulFloat32);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 4;
+}
+
+void DivideFloat32(uint8_t left, uint8_t right, uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpDivFloat32);
+	Set(buffer, current, left);
+	Set(buffer, current, right);
+	Set(buffer, current, dest);
+	current += 4;
+}
 
 void Move(uint8_t target, uint8_t dest) {
 
@@ -284,16 +330,16 @@ void TestEqualNil(uint8_t left) {
 
 %union {
 	std::string* string;	
-	float real;
+	float32_t float32;
 	int integer;
 	long lval;
 }
 
 %token <string> WORD STRING
-%token <real> REAL
+%token <float32> FLOAT32
 %token <integer> INT REG
 %token <lval> LONG
-%token PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -335,6 +381,8 @@ Program: {
 		delete $3;
 	} | Program LOAD INT REG {
 		LoadInt($3, $4);
+	} | Program LOAD FLOAT32 REG {
+		LoadFloat32($3, $4);
 	} | Program LOAD LONG REG {
 		LoadLong($3, $4);
 	} | Program LOAD STRING REG {
@@ -342,6 +390,14 @@ Program: {
 		delete $3;
 	} | Program MOVE REG REG {
 		Move($3, $4);
+	} | Program ADD_FLOAT32 REG REG REG {
+		AddFloat32($3, $4, $5);
+	} | Program SUBTRACT_FLOAT32 REG REG REG {
+		SubtractFloat32($3, $4, $5);
+	} | Program MULTIPLY_FLOAT32 REG REG REG {
+		MultiplyFloat32($3, $4, $5);
+	} | Program DIVIDE_FLOAT32 REG REG REG {
+		DivideFloat32($3, $4, $5);
 	} | Program ADD REG REG REG {
 		Add($3, $4, $5);
 	} | Program ADD REG INT REG {
