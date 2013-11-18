@@ -315,7 +315,8 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	for (unsigned int i = 0; i < typeReferences.size(); ++i) {
 
 		if (imports.find(typeReferences[i]->typeNamespace) != imports.end()) {
-			typeReferences[i]->typeNamespace = getUniformPath(imports.find(typeReferences[i]->typeNamespace)->second);
+			typeReferences[i]->typeNamespace = getUniformPath(
+					imports.find(typeReferences[i]->typeNamespace)->second);
 		}
 
 		resolve(typeReferences[i], Functions);

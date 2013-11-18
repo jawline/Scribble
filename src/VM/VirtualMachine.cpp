@@ -391,7 +391,6 @@ void VirtualMachine::execute(std::string function) {
 				//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
 				//			left, right, dest);
 
-
 				float32_t* index = (float32_t*) &registers_[dest];
 				float32_t* leftR = (float32_t*) &registers_[left];
 				float32_t* rightR = (float32_t*) &registers_[right];

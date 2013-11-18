@@ -5,7 +5,11 @@
  */
  
 package sys := import("sys");
- 
+
+/**
+ * Vector3 structure takes 3 floating points as variables x, y and z
+ */
+
 type Vector3 := struct {
 	x : float32;
 	y : float32;
@@ -53,6 +57,18 @@ func Cross(left : Vector3, right : Vector3) : Vector3 {
 	};
 
 }
+
+/**
+ * Return the dot product of two vectors as a float.
+ */
+
+func Dot(left : Vector3, right : Vector3) : float32 {
+	return (left->x * right->x) + (left->y * right->y) + (left->z * right->z);
+}
+
+/**
+ * Print information about a given vector to the command line.
+ */
 
 func Debug(v : Vector3) {
 	sys.Write("X: ");
