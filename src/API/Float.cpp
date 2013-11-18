@@ -10,6 +10,7 @@
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+#include <types.h>
 
 namespace API {
 
@@ -30,7 +31,7 @@ Value* Float32FromInt::execute(std::vector<Value*> arguments) {
 
 API::APIValue Float32FromInt::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
-	long returnData = 0;
+	int64_t returnData = 0;
 	*((float32_t*)&returnData) = values[0].getValue();
 	return returnData;
 }

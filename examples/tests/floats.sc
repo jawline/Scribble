@@ -1,6 +1,18 @@
 package test := import("test");
 package sys := import("sys");
 
+func floatArgument(f : float32) {
+	
+	if f != 36.45f then {
+		test.Fatal("Float argument fail");
+	}
+	
+}
+
+func floatReturn() : float32 {
+	return 16.45f;
+}
+
 func Test() {
 
 	var testVariable := 50f;
@@ -16,5 +28,10 @@ func Test() {
 	if testVariable < testVariableTwo then
 		test.Fatal("Float less than test failed");
 		
-	sys.Int(5f);
+	floatArgument(36.45f);
+	
+	if floatReturn() != 16.45f then {
+		test.Fatal("Float return fail");
+	}
+	
 }

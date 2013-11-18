@@ -159,7 +159,7 @@ API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
 	//TODO: This is nasty, hacky buisness. Find a nicer way of doing this ( There must be a way under C's syntax to cast without altering primatives )
 
 	//Get the data which contains the float value then use a pointer to make C reinterpret the data as a float32_t* without actually modifying it
-	long toConv = values[0].getValue();
+	int64_t toConv = values[0].getValue();
 
 	std::stringstream res;
 	res << *((float32_t*)&toConv);

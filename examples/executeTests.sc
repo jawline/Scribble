@@ -12,6 +12,7 @@ package arraysTest := import("tests/arrays");
 package primesTest := import("tests/primes");
 package sortsTest := import("tests/sorts");
 package floatsTest := import("tests/floats");
+package vector := import("graphics/vector");
 
 /**
  * This is a comment
@@ -20,6 +21,12 @@ package floatsTest := import("tests/floats");
  */
 
 func main() {
+
+	var j := vector.Vector3 { 0f, 10f, 0f };
+	var r := vector.Vector3 { 10f, 0f, 10f };
+	var z := vector.Vector3 { 0f, 1f, 0f };
+	
+	vector.Debug(vector.Cross(z, vector.Add(j, r)));
    
     loopsTest.Test();
     arraysTest.Test();

@@ -9,7 +9,7 @@
 
 namespace API {
 
-APIValue::APIValue(long val) :
+APIValue::APIValue(int64_t val) :
 		type_(nullptr), data_(nullptr), val_(val) {
 
 }

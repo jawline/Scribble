@@ -42,7 +42,7 @@ Value* IntFromFloat32::execute(std::vector<Value*> arguments) {
 
 API::APIValue IntFromFloat32::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
-	long floatData = values[0].getValue();
+	int64_t floatData = values[0].getValue();
 	float floatValue = *((float32_t*)&floatData);
 	return API::APIValue( (int)(floatValue));
 }

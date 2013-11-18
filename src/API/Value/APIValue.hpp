@@ -15,15 +15,15 @@ class APIValue {
 private:
 	SP<VM::VMEntryType> type_;
 	uint8_t* data_;
-	long val_;
+	int64_t val_;
 
 public:
 	APIValue() { val_ = 0; type_ = nullptr; data_ = nullptr;}
-	APIValue(long val);
+	APIValue(int64_t val);
 	APIValue(SP<VM::VMEntryType> type, uint8_t* data, long val);
 	virtual ~APIValue();
 
-	long getValue() {
+	int64_t getValue() {
 		return val_;
 	}
 
