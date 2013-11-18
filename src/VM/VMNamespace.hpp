@@ -9,7 +9,7 @@
 #define VMNAMESPACE_HPP_
 #include <string>
 #include <string>
-#include <map>
+#include <Util/HashMap.hpp>
 #include "VMFunc.hpp"
 #include "VMEntryType.hpp"
 
@@ -21,7 +21,7 @@ enum NamespaceEntryType {
 
 class NamespaceEntry;
 
-typedef std::map<std::string, NamespaceEntry> VMNamespace;
+typedef HashMap<NamespaceEntry> VMNamespace;
 
 class NamespaceEntry {
 private:

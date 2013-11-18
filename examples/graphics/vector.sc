@@ -77,5 +77,5 @@ func Debug(v : Vector3) {
 	sys.Write(sys.String(v->y));
 	sys.Write(" Z: ");
 	sys.Write(sys.String(v->z));
-	sys.Write("\n");	
+	sys.Write("\n");
 }

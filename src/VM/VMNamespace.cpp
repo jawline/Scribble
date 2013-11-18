@@ -14,25 +14,25 @@ bool VM::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& 
 
 	if (pos == std::string::npos) {
 
-		auto spaceSearch = space.find(target);
-		if (spaceSearch == space.end()) {
+		NamespaceEntry spaceSearch = space.find(target);
+		if (spaceSearch.getType() == Invalid) {
 			//printf("Could not find %s\n", target.c_str());
 			return false;
 		}
 
-		entry = spaceSearch->second;
+		entry = spaceSearch;
 		return true;
 	} else {
 
 		std::string prefix = target.substr(0, pos);
 		target = target.substr(pos+1);
 
-		if (space[prefix].getType() != Namespace) {
+		if (space.find(prefix).getType() != Namespace) {
 			//printf("Could not find %s\n", nextSpace.c_str());
 			return false;
 		}
 
-		return searchNamespace(space[prefix].getNamespace(), target, entry);
+		return searchNamespace(space.find(prefix).getNamespace(), target, entry);
 	}
 
 }

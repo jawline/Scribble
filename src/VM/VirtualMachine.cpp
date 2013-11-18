@@ -46,7 +46,7 @@ VirtualMachine::VirtualMachine() {
 
 	registerEntry("string", NamespaceEntry(SP< VMEntryType
 	> (new VMEntryType("string",
-					namespace_["char"].getTypeReference()))));
+					namespace_.find("char").getTypeReference()))));
 
 	//Allocate the stack
 	stack_ = new uint8_t[vmStackIncrease];
@@ -202,7 +202,7 @@ void VirtualMachine::execute(std::string function) {
 							constantDataStart + 1);
 
 					//Check the type is valid
-					if (namespace_[type].getType() != Type) {
+					if (namespace_.find(type).getType() != Type) {
 						VM_PRINTF_FATAL("Invalid type %s\n", type.c_str());
 					}
 
@@ -228,7 +228,7 @@ void VirtualMachine::execute(std::string function) {
 					}
 
 					registers_[destinationRegister] = heap_.allocate(
-							namespace_[type].getTypeReference(), sizeBytes,
+							namespace_.find(type).getTypeReference(), sizeBytes,
 							initial);
 
 					delete[] initial;

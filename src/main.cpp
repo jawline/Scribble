@@ -97,7 +97,7 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 					std::stringstream code;
 					function->debugCode(code);
 
-					newSpace[function->getName()] = VM::NamespaceEntry(function->generateVMFunction());
+					newSpace.insert(function->getName(), VM::NamespaceEntry(function->generateVMFunction()));
 
 					vm.logMessage(VM::Log, std::string("Registered string ") + function->getName());
 
@@ -165,7 +165,6 @@ std::string writeInit(std::string package, std::string thin,
 }
 
 int main(int argc, char* argv[]) {
-
 	srand(time(0));
 
 	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,

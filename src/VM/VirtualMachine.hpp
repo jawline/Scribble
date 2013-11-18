@@ -122,7 +122,7 @@ public:
 	virtual SP<VMEntryType> findType(std::string name);
 
 	virtual void registerEntry(std::string name, NamespaceEntry entry) {
-		namespace_[name] = entry;
+		namespace_.insert(name, entry);
 	}
 
 	virtual void execute(std::string function);
