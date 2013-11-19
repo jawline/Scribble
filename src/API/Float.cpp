@@ -50,6 +50,7 @@ Type* Float32FromInt::argType(unsigned int arg) {
 		return getIntType();
 	}
 
+	return getTypeManager().getType(TypeUnresolved);
 }
 
 } /* namespace API */

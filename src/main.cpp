@@ -113,7 +113,7 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 
 				std::vector<SP<VM::VMStructureField>> fields;
 
-				for (int i = 0; i < info->getNumIndexs(); i++) {
+				for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
 					vm.logMessage(VM::Log, std::string("Registering field ") + info->getIndex(i).first + " (Type " + "." + ((StructureInfo*) info->getIndex(i).second->type)->getTypeName() + ")\n");
 					fields.push_back( SP<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr)));
 				}

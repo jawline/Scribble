@@ -12,7 +12,8 @@
 
 namespace API {
 
-IntFromFloat32::IntFromFloat32( std::string ns) : Function("Int", ns) {
+IntFromFloat32::IntFromFloat32(std::string ns) :
+		Function("Int", ns) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -30,9 +31,12 @@ const unsigned int IntFromFloat32::numArgs() {
 }
 
 Type* IntFromFloat32::argType(unsigned int arg) {
+
 	if (arg == 0) {
 		return getFloat32Type();
 	}
+
+	return getTypeManager().getType(TypeUnresolved);
 }
 
 Value* IntFromFloat32::execute(std::vector<Value*> arguments) {
@@ -43,8 +47,8 @@ Value* IntFromFloat32::execute(std::vector<Value*> arguments) {
 API::APIValue IntFromFloat32::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 	int64_t floatData = values[0].getValue();
-	float floatValue = *((float32_t*)&floatData);
-	return API::APIValue( (int)(floatValue));
+	float floatValue = *((float32_t*) &floatData);
+	return API::APIValue((int) (floatValue));
 }
 
 } /* namespace API */
