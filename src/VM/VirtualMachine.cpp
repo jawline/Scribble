@@ -721,7 +721,7 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i\n",
-							registers_[index], offsetBytes,
+							(long int) registers_[index], offsetBytes,
 							arrayType->arraySubtype()->getElementSize(),
 							heap_.getSize(registers_[tgtArray]));
 
