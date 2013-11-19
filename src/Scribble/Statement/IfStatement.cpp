@@ -89,8 +89,7 @@ int IfStatement::generateCode(int resultRegister,
 
 	generated << "neq $" << VM::vmTempRegisterThree << " 1\n";
 	generated << "jmpr " << (trueSize + 2) << "\n";
-
-	instrs += 4;
+	instrs += 3;
 
 	generated << "#if statement body\n";
 

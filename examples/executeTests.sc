@@ -27,16 +27,20 @@ type Test := struct {
  */
 
 func main() {
+
+	var max := 100000000;
    
-    for var i := 0; i < 100000; i++ do {}
-   
-    loopsTest.Test();
+    for var i := 0; i < max; i++ do {}
+    
+    for i := max; i > 0; i-- do {}
+    
+    /**loopsTest.Test();
     arraysTest.Test();
     variablesTest.Test();
     recursionTest.Test();
     primesTest.Test();
     logicalTest.Test();
     sortsTest.Test();
-    floatsTest.Test();
+    floatsTest.Test();**/
 
 }

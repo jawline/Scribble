@@ -14,23 +14,53 @@ enum OpCodes {
 	OpLoadConstant = 0,
 	OpMove,
 	OpJump,
+
+	/**
+	 * Arithmetic operations
+	 */
+
 	OpAdd,
 	OpSub,
 	OpMul,
 	OpDiv,
+	OpInc,
+	OpDec,
+
+	/**
+	 * Float operations
+	 */
+
 	OpAddFloat32,
 	OpSubFloat32,
 	OpMulFloat32,
 	OpDivFloat32,
 	OpCmpFloat32,
+
+	/**
+	 *  Tests
+	 */
+
 	OpEqual,
+	OpNotEqual,
 	OpEqualZero,
 	OpLessThan,
 	OpLessThanOrEqual,
+	OpGreaterThan,
+	OpGreaterThanOrEqual,
+
+	/**
+	 * Array operators
+	 */
+
 	OpNewArray,
 	OpArraySet,
 	OpArrayGet,
 	OpArrayLength,
+
+	/**
+	 * Function & Stack operators
+	 */
+
 	OpPushRegisters,
 	OpPopNil,
 	OpPopRegisters,

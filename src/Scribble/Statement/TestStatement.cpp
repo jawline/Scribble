@@ -214,7 +214,7 @@ int TestStatement::generateCode(int resultRegister,
 		case TestNotEquals:
 			generated << "neq $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << "\n";
-			instrs += 2;
+			instrs += 1;
 			break;
 
 		default:
@@ -288,7 +288,7 @@ int TestStatement::generateCode(int resultRegister,
 		case TestNotEquals:
 			generated << "neq $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << "\n";
-			instrs += 2;
+			instrs += 1;
 			break;
 
 		case TestLess:
@@ -307,13 +307,13 @@ int TestStatement::generateCode(int resultRegister,
 		case TestGreater:
 			generated << "gt $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << " #test greater\n";
-			instrs += 2;
+			instrs += 1;
 			break;
 
 		case TestGreaterOrEqual:
 			generated << "ge $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << " #test greater or equal\n";
-			instrs += 2;
+			instrs += 1;
 			break;
 
 		default:

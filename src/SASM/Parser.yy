@@ -297,11 +297,10 @@ void LessThan(uint8_t left, uint8_t right) {
 }
 
 void GreaterThan(uint8_t left, uint8_t right) {
-	Set(buffer, current, (uint8_t) VM::OpLessThanOrEqual);
+	Set(buffer, current, (uint8_t) VM::OpGreaterThan);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	current += 5;
-	JumpDirectRelative(2);
 }
 
 void LessThanOrEqual(uint8_t left, uint8_t right) {
@@ -312,19 +311,29 @@ void LessThanOrEqual(uint8_t left, uint8_t right) {
 }
 
 void GreaterThanOrEqual(uint8_t left, uint8_t right) {
-	Set(buffer, current, (uint8_t) VM::OpLessThan);
+	Set(buffer, current, (uint8_t) VM::OpGreaterThanOrEqual);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	current += 5;
-	JumpDirectRelative(2);
+}
+
+void Increment(uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpInc);
+	Set(buffer, current, dest);
+	current += 6;
+}
+
+void Decrement(uint8_t dest) {
+	Set(buffer, current, (uint8_t) VM::OpDec);
+	Set(buffer, current, dest);
+	current += 6;
 }
 
 void TestNotEqual(uint8_t left, uint8_t right) {
-	Set(buffer, current, (uint8_t) VM::OpEqual);
+	Set(buffer, current, (uint8_t) VM::OpNotEqual);
 	Set(buffer, current, left);
 	Set(buffer, current, right);
 	current += 5;
-	JumpDirectRelative(2);
 }
 
 void TestEqualNil(uint8_t left) {
@@ -347,7 +356,7 @@ void TestEqualNil(uint8_t left) {
 %token <float32> FLOAT32
 %token <integer> INT REG
 %token <lval> LONG
-%token COMPARE_FLOAT32 ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token COMPARE_FLOAT32 INCREMENT DECREMENT ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -398,6 +407,10 @@ Program: {
 		delete $3;
 	} | Program MOVE REG REG {
 		Move($3, $4);
+	} | Program INCREMENT REG {
+		Increment($3);
+	} | Program DECREMENT REG {
+		Decrement($3);
 	} | Program ADD_FLOAT32 REG REG REG {
 		AddFloat32($3, $4, $5);
 	} | Program SUBTRACT_FLOAT32 REG REG REG {
@@ -410,40 +423,12 @@ Program: {
 		CompareFloat32($3, $4, $5);
 	} | Program ADD REG REG REG {
 		Add($3, $4, $5);
-	} | Program ADD REG INT REG {
-		LoadInt($4, VM::vmTempRegisterOne);
-		Add($3, VM::vmTempRegisterOne, $5);
-	} | Program ADD INT INT REG {
-		LoadInt($3, VM::vmTempRegisterOne);
-		LoadInt($4, VM::vmTempRegisterTwo);
-		Add(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
 	} | Program SUBTRACT REG REG REG {
 		Subtract($3, $4, $5);
-	} | Program SUBTRACT REG INT REG {
-		LoadInt($4, VM::vmTempRegisterOne);
-		Subtract($3, VM::vmTempRegisterOne, $5);
-	} | Program SUBTRACT INT INT REG {
-		LoadInt($3, VM::vmTempRegisterOne);
-		LoadInt($4, VM::vmTempRegisterTwo);
-		Subtract(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
 	} | Program MULTIPLY REG REG REG {
 		Multiply($3, $4, $5);
-	} | Program MULTIPLY REG INT REG {
-		LoadInt($4, VM::vmTempRegisterOne);
-		Multiply($3, VM::vmTempRegisterOne, $5);
-	} | Program MULTIPLY INT INT REG {
-		LoadInt($3, VM::vmTempRegisterOne);
-		LoadInt($4, VM::vmTempRegisterTwo);
-		Multiply(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
 	} | Program DIVIDE REG REG REG {
 		Divide($3, $4, $5);
-	} | Program DIVIDE REG INT REG {
-		LoadInt($4, VM::vmTempRegisterOne);
-		Divide($3, VM::vmTempRegisterOne, $5);
-	} | Program DIVIDE INT INT REG {
-		LoadInt($3, VM::vmTempRegisterOne);
-		LoadInt($4, VM::vmTempRegisterTwo);
-		Divide(VM::vmTempRegisterOne, VM::vmTempRegisterTwo, $5);
 	} | Program TEST_EQUAL_NIL REG {
 		TestEqualNil($3);
 	} | Program TEST_EQUAL REG REG {

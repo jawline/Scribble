@@ -13,8 +13,8 @@
 IncrementStatement::IncrementStatement(int line, std::string sym,
 		SP<Variable> variable, IncrementType op, bool post) :
 		Statement(line, sym), variable_(variable), operator_(op), post_(post) {
-	oneVal_ = new IntValue(1);
-}
+			oneVal_ = new IntValue(1);
+		}
 
 IncrementStatement::~IncrementStatement() {
 }
@@ -86,15 +86,16 @@ int IncrementStatement::generateCode(int resultRegister,
 
 		if (post_) {
 
-			generated << "add $" << variable_->getPosition() + VM::vmNumReservedRegisters << " 1 $"
-					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
+			//TODO: Inc operator
 
-			instrs += 2;
+			generated << "inc $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			instrs += 1;
 
 			if (resultRegister != -1) {
 
-				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
-						<< resultRegister << "\n";
+				generated << "move $"
+						<< variable_->getPosition() + VM::vmNumReservedRegisters
+						<< " $" << resultRegister << "\n";
 
 				instrs += 1;
 			}
@@ -102,15 +103,15 @@ int IncrementStatement::generateCode(int resultRegister,
 		} else {
 
 			if (resultRegister != -1) {
-				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
-						<< resultRegister << "\n";
+				generated << "move $"
+						<< variable_->getPosition() + VM::vmNumReservedRegisters
+						<< " $" << resultRegister << "\n";
 				instrs++;
 			}
 
-			generated << "add $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " 1 $"
-					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
-
-			instrs += 2;
+			//TODO: Inc operator
+			generated << "inc $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			instrs += 1;
 		}
 
 		break;
@@ -119,15 +120,14 @@ int IncrementStatement::generateCode(int resultRegister,
 
 		if (post_) {
 
-			generated << "sub $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " 1 $"
-					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
-
-			instrs += 2;
+			generated << "dec $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			instrs += 1;
 
 			if (resultRegister != -1) {
 
-				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
-						<< resultRegister << "\n";
+				generated << "move $"
+						<< variable_->getPosition() + VM::vmNumReservedRegisters
+						<< " $" << resultRegister << "\n";
 
 				instrs++;
 			}
@@ -136,17 +136,16 @@ int IncrementStatement::generateCode(int resultRegister,
 
 			if (resultRegister != -1) {
 
-				generated << "move $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " $"
-						<< resultRegister << "\n";
+				generated << "move $"
+						<< variable_->getPosition() + VM::vmNumReservedRegisters
+						<< " $" << resultRegister << "\n";
 
 				instrs++;
 
 			}
 
-			generated << "sub $" << variable_->getPosition() +  VM::vmNumReservedRegisters << " 1 $"
-					<< variable_->getPosition() +  VM::vmNumReservedRegisters << "\n";
-
-			instrs += 2;
+			generated << "dec $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			instrs += 1;
 		}
 
 		break;

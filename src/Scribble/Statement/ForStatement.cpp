@@ -105,7 +105,7 @@ int ForStatement::generateCode(int resultRegister,
 	generated << "#FOR CONTINUE TEST\n";
 	generated << "neq $" << VM::vmTempRegisterThree << " 1\n";
 	generated << "jmpr " << (bodyInstrs + 2) << "\n";
-	instrs += 4;
+	instrs += 3;
 
 	//Insert the body of the for into the code
 	generated << forbody.str();

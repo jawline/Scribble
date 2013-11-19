@@ -382,6 +382,20 @@ void VirtualMachine::execute(std::string function) {
 				break;
 			}
 
+			case OpInc: {
+				uint8_t dst = instructionSet.getInst(*current + 1);
+				registers_[dst] = registers_[dst] + 1;
+				*current += vmOpCodeSize;
+				break;
+			}
+
+			case OpDec: {
+				uint8_t dst = instructionSet.getInst(*current + 1);
+				registers_[dst] = registers_[dst] - 1;
+				*current += vmOpCodeSize;
+				break;
+			}
+
 			case OpAddFloat32: {
 
 				uint8_t left = instructionSet.getInst(*current + 1);
@@ -506,6 +520,20 @@ void VirtualMachine::execute(std::string function) {
 				break;
 			}
 
+			case OpNotEqual: {
+
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+
+				if (registers_[left] != registers_[right]) {
+					*current += vmOpCodeSize;
+				} else {
+					*current += 2 * vmOpCodeSize;
+				}
+
+				break;
+			}
+
 			case OpEqualZero: {
 				uint8_t tReg = instructionSet.getInst(*current + 1);
 
@@ -527,6 +555,32 @@ void VirtualMachine::execute(std::string function) {
 				uint8_t right = instructionSet.getInst(*current + 2);
 
 				if (registers_[left] < registers_[right]) {
+					*current += vmOpCodeSize;
+				} else {
+					*current += 2 * vmOpCodeSize;
+				}
+
+				break;
+			}
+
+			case OpGreaterThan: {
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+
+				if (registers_[left] > registers_[right]) {
+					*current += vmOpCodeSize;
+				} else {
+					*current += 2 * vmOpCodeSize;
+				}
+
+				break;
+			}
+
+			case OpGreaterThanOrEqual: {
+				uint8_t left = instructionSet.getInst(*current + 1);
+				uint8_t right = instructionSet.getInst(*current + 2);
+
+				if (registers_[left] >= registers_[right]) {
 					*current += vmOpCodeSize;
 				} else {
 					*current += 2 * vmOpCodeSize;
@@ -721,7 +775,7 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i\n",
-							(long int) registers_[index], offsetBytes,
+							(long int ) registers_[index], offsetBytes,
 							arrayType->arraySubtype()->getElementSize(),
 							heap_.getSize(registers_[tgtArray]));
 

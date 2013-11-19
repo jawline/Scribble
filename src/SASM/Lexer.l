@@ -63,6 +63,8 @@ float32 {real}f
 "neq" return TEST_NOT_EQUAL;
 "eq" return TEST_EQUAL;
 "eqz" return TEST_EQUAL_NIL;
+"inc" return INCREMENT;
+"dec" return DECREMENT;
 "lt" return LESS_THAN;
 "le" return LESS_THAN_OR_EQUAL;
 "gt" return GREATER_THAN;
