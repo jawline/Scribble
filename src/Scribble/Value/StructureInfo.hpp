@@ -27,7 +27,7 @@ public:
 	std::pair<std::string, TypeReference> getIndex(int i);
 	Type* getType(std::string name);
 	int getIndex(std::string name);
-	int getNumIndexs();
+	unsigned int getNumIndexs();
 
 	void setName(std::string name) {
 		name_ = name;

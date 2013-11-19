@@ -18,7 +18,7 @@ void StructureInfo::addInfo(std::string name, TypeReference t) {
 	dataIndexs_.push_back(std::pair<std::string, TypeReference>(name, t));
 }
 
-int StructureInfo::getNumIndexs() {
+unsigned int StructureInfo::getNumIndexs() {
 	return dataIndexs_.size();
 }
 
