@@ -27,7 +27,7 @@ public:
 		next_ = 0;
 	}
 
-	std::string getName() {
+	std::string const& getName() {
 		return name_;
 	}
 
@@ -60,11 +60,11 @@ public:
 			root_(nullptr) {
 	}
 
-	bool strEqual(std::string left, std::string right) {
+	bool strEqual(std::string const& left, std::string const& right) {
 		return left.compare(right) == 0;
 	}
 
-	HashItemLink<T>* find(std::string id) {
+	HashItemLink<T>* find(std::string const& id) {
 
 		if (root_ == nullptr) {
 			return nullptr;
@@ -84,7 +84,31 @@ public:
 		return nullptr;
 	}
 
-	void insert(std::string id, T data) {
+	void remove(std::string const& id) {
+
+		HashItemLink<T>* iter = root_;
+
+		if (strEqual(iter->getName(), iter->name_)) {
+			root_ = root_->getNext();
+			delete iter;
+			return;
+		}
+
+		while (iter->getNext() != nullptr) {
+
+			if (strEqual(iter->getNext()->getName(), id)) {
+				HashItemLink<T>* str = iter->getNext();
+				iter->setNext(str->getNext());
+				delete str;
+				return;
+			}
+
+			iter = iter->getNext();
+		}
+
+	}
+
+	void insert(std::string const& id, T data) {
 
 		//printf("Inserting %s\n", id.c_str());
 
@@ -124,7 +148,7 @@ public:
 
 }
 
-const static unsigned int numBucketsDefault = 128;
+const static unsigned int numBucketsDefault = 64;
 
 template<class T>
 class HashMap {
@@ -147,11 +171,15 @@ public:
 	virtual ~HashMap() {
 	}
 
-	void insert(std::string id, T data) {
+	void insert(std::string const& id, T data) {
 		buckets_[hash(id)].insert(id, data);
 	}
 
-	bool exists(std::string id) {
+	void remove(std::string const& id) {
+		buckets_[hash(id)].remove(id);
+	}
+
+	bool exists(std::string const& id) {
 
 		if (buckets_[hash(id)].find(id) != nullptr) {
 			return true;
@@ -164,7 +192,7 @@ public:
 		return buckets_[hash(id)].find(id);
 	}
 
-	T find(std::string id) {
+	T find(std::string const& id) {
 		HashMapUtils::HashItemLink<T>* linked = get(id);
 
 		if (linked != nullptr) {
@@ -174,17 +202,25 @@ public:
 		return T();
 	}
 
-	int hash(std::string id) {
+	int hash(std::string const& id) {
 
-		int hash = 0;
+	    size_t len = id.size();
+	    uint32_t hash = 0;
+	    uint32_t i = 0;
 
-		hash = hash + id[0];
+	    for(hash = i = 0; i < len; ++i)
+	    {
+	        hash += id[i];
+	        hash += (hash << 10);
+	        hash ^= (hash >> 6);
+	    }
 
-		/**for (unsigned int i = 0; i < id.size(); i++) {
-			hash = 31 * (hash + id[i]);
-		}*/
+	    hash += (hash << 3);
+	    hash ^= (hash >> 11);
+	    hash += (hash << 15);
 
-		return hash % numBuckets_;
+		//printf("Hash %s %i\n", id.c_str(), hash % numBuckets_);
+	    return hash % numBuckets_;
 	}
 };
 

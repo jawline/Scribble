@@ -20,7 +20,7 @@ name_(name), size_(8), reference_(true), baseType_(VMArray), arraySubtype_(subty
 }
 
 
-VMEntryType::VMEntryType(std::string name, std::vector<VMStructureField> fields) : name_(name), size_(8), reference_(true), baseType_(VMStructure) {
+VMEntryType::VMEntryType(std::string name, std::vector<SP<VMStructureField>> fields) : name_(name), size_(8), reference_(true), baseType_(VMStructure) {
 
 	for (int i = 0; i < fields.size(); i++) {
 		structureFields_.push_back(fields[i]);

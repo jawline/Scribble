@@ -142,6 +142,8 @@ Program: {
 		delete $3;
 		delete $5;
 	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
+		$7->setName(*$3);
+		$7->setNamespace(currentNamespaceName);
 		Functions[*$3] = NamespaceEntry(TypeReference(new TypeReferenceCore(*$3, $7)));
 		delete $3;
 	}

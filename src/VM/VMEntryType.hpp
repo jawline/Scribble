@@ -29,8 +29,7 @@ class VMEntryType;
 
 class VMStructureField {
 private:
-	std::string name_;
-	SP<VMEntryType> type_;
+	std::string name_;SP<VMEntryType> type_;
 
 public:
 
@@ -45,6 +44,10 @@ public:
 		return type_;
 	}
 
+	void setType(SP<VMEntryType> type) {
+		type_ = type;
+	}
+
 };
 
 class VMEntryType {
@@ -57,15 +60,14 @@ private:
 
 	VMEntryBaseType baseType_;
 
-	//TODO: Potentially make this a pointer or smart pointer to reduce on space used by types.
 	SP<VMEntryType> arraySubtype_;
 
-	std::vector<VMStructureField> structureFields_;
+	std::vector<SP<VMStructureField>> structureFields_;
 public:
+
 	VMEntryType(std::string name, unsigned int size, bool reference);
 	VMEntryType(std::string name, SP<VMEntryType> subtype);
-	VMEntryType(std::string name, std::vector<VMStructureField> fields);
-
+	VMEntryType(std::string name, std::vector<SP<VMStructureField>> fields);
 	virtual ~VMEntryType();
 
 	/**

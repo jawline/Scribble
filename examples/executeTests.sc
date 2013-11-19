@@ -13,12 +13,22 @@ package primesTest := import("tests/primes");
 package sortsTest := import("tests/sorts");
 package floatsTest := import("tests/floats");
 
+type Test := struct {
+	a : float32;
+	b : string;
+	c : int;
+	d : bool;
+	e : Test;
+}
+
 /**
  * This is a comment
  * Extra line
  */
 
 func main() {
+   
+    for var i := 0; i < 100000; i++ do {}
    
     loopsTest.Test();
     arraysTest.Test();

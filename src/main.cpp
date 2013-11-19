@@ -42,11 +42,11 @@ void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
 	builtinFunctions["Concat"] = NamespaceEntry(concat);
 
 	std::vector<SafeFunction> intConvertor;
-	intConvertor.push_back(SmartPointer < Function> ( new IntFromFloat32("sys")));
+	intConvertor.push_back(SmartPointer< Function> ( new IntFromFloat32("sys")));
 	builtinFunctions["Int"] = intConvertor;
 
 	std::vector<SafeFunction> floatConvertor;
-	floatConvertor.push_back(SmartPointer < Function> ( new Float32FromInt("sys")));
+	floatConvertor.push_back(SmartPointer< Function> ( new Float32FromInt("sys")));
 	builtinFunctions["Float32"] = floatConvertor;
 
 	std::vector<SafeFunction> string;
@@ -111,8 +111,11 @@ void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
 				TypeReference type = iterator->second.getType();
 				StructureInfo* info = (StructureInfo*) iterator->second.getType()->type;
 
+				std::vector<SP<VM::VMStructureField>> fields;
+
 				for (int i = 0; i < info->getNumIndexs(); i++) {
-					vm.logMessage(VM::Log, std::string("Registering field ") + info->getIndex(i).first + "\n");
+					vm.logMessage(VM::Log, std::string("Registering field ") + info->getIndex(i).first + " (Type " + "." + ((StructureInfo*) info->getIndex(i).second->type)->getTypeName() + ")\n");
+					fields.push_back( SP<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr)));
 				}
 
 				vm.logMessage(VM::Log, "\n");
@@ -220,7 +223,6 @@ int main(int argc, char* argv[]) {
 	//Grab a reference to __init__.__init__ for execution
 	API::SafeFunction toExecute =
 			names["__init__"]["__init__"].getFunctionSet()[0];
-
 
 	VM::VirtualMachine vm;
 

@@ -12,9 +12,11 @@
 #include <Scribble/Parser/TypeReference.hpp>
 #include "Type.hpp"
 
-class StructureInfo : public Type {
+class StructureInfo: public Type {
 private:
 	std::string name_;
+	std::string namespace_;
+
 	std::vector<std::pair<std::string, TypeReference>> dataIndexs_;
 
 public:
@@ -27,14 +29,23 @@ public:
 	int getIndex(std::string name);
 	int getNumIndexs();
 
-	StructureInfo setName(std::string name) {
+	void setName(std::string name) {
 		name_ = name;
-		return *this;
+		namespace_ = "";
+	}
+
+	void setNamespace(std::string name) {
+		namespace_ = name;
 	}
 
 	virtual std::string getTypeName() {
-		return "struct#" + name_;
+		return "__struct(" + name_ + ")";
 	}
+
+	virtual std::string getNamespace() {
+		return namespace_;
+	}
+
 };
 
 typedef StructureInfo SInfo;
