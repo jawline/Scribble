@@ -29,22 +29,14 @@ public:
 	int getIndex(std::string name);
 	unsigned int getNumIndexs();
 
-	void setName(std::string name) {
-		name_ = name;
-		namespace_ = "";
-	}
+	void setName(std::string name);
+	void setNamespace(std::string name);
 
-	void setNamespace(std::string name) {
-		namespace_ = name;
-	}
-
-	virtual std::string getTypeName() {
+	std::string getName() {
 		return "__struct(" + name_ + ")";
 	}
-
-	virtual std::string getNamespace() {
-		return namespace_;
-	}
+	std::string getTypeName();
+	std::string getNamespace();
 
 };
 
