@@ -7,10 +7,9 @@
 package test := import("test");
 
 func Test() {
-	
-	if false or false then {
-		test.Fatal("false false or fail so false many fail");
-	}
+
+	test.Assert(true, true, "true true fail so false many fail");
+	test.Assert(false, false, "so fail many false");
 	
 	if false or true then {
 		
@@ -23,28 +22,13 @@ func Test() {
 	} else {
 		test.Fatal("true false fail so false many fail");
 	}
-	
-	if true or true then {
-		
-	} else {
-		test.Fatal("true true fail so false many fail");
-	}
-	
-	if true and true then {
-	} else {
-		test.Fatal("true true and fail so false many fail");
-	}
-	
+
 	if true and false then {
 		test.Fatal("true false and fail so false many fail");
 	}
 	
 	if false and true then {
 		test.Fatal("false true and fail so false many fail");
-	}
-	
-	if false and false then {
-		test.Fatal("false false and fail so false many fail");
 	}
 
 }

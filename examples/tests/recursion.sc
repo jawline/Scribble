@@ -26,16 +26,8 @@ func odd(n : int) : bool {
 
 func Test() {
 
-	if simple(1000) != 1000 then {
-		test.Fatal("Simple(1000) test failed");
-	}
-
-	if even(1000) = false then {
-		test.Fatal("even(1000) test failed");
-	}
-
-	if odd(1000) = true then {
-		test.Fatal("odd(1000) test failed");
-	}
+	test.Assert(simple(1000), 1000, "Simple(1000) test failed");
+	test.Assert(even(1000), true, "Even(1000) test failed");
+	test.Assert(odd(1000), false, "Odd(1000) test failed");
 
 }

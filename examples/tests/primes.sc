@@ -16,22 +16,8 @@ func Test() {
 	for var i := 0; i < len(primesList); i++ do {
 		
 		var isPrimeResult := isprime.IsPrime(i);
-		
-		if isPrimeResult != primesList[i] then {
 
-			sys.Write( sys.String(i) );
-			sys.Write(" ");
-			
-			sys.Write( sys.String( isPrimeResult ) );
-			sys.Write(" ");
-			
-			sys.Write( sys.String ( primesList[i] ) );
-			sys.Write(" ");
-		
-			test.Fatal("IsPrime differs from primesList result");
-
-		}
-		
+		test.Assert(isPrimeResult, primesList[i], "IsPrime differs from primelist result");
 	}
 
 }

@@ -12,6 +12,7 @@ package arraysTest := import("tests/arrays");
 package primesTest := import("tests/primes");
 package sortsTest := import("tests/sorts");
 package floatsTest := import("tests/floats");
+package powTest := import("tests/pow");
 
 type Test := struct {
 	a : float32;
@@ -36,5 +37,6 @@ func main() {
     logicalTest.Test();
     sortsTest.Test();
     floatsTest.Test();
+    powTest.Test();
 
 }

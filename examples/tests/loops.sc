@@ -14,14 +14,8 @@ func Test() {
 		}
 	
 	}
-	
-	if iter != 10000 then {
-		
-		sys.Write( sys.String(iter) );
-		sys.Write("\n");
-		
-		test.Fatal("Iter is not correct. Loops test has failed on a for loop");
-	}
+
+	test.Assert(iter, 10000, "Iter is not correct. Loops test has failed on a for loop");
 	
 	i := 0;
 	iter := 0;
@@ -36,13 +30,6 @@ func Test() {
 		
 		i++;
 	}
-	
-	if iter != 10000 then {
-		
-		sys.Write( sys.String(iter) );
-		sys.Write("\n");
-		
-		test.Fatal("Iter is not correct. Loops test has failed on a while loop");
-	}
-	
+
+	test.Assert(iter, 10000, "Iter is not correct. Loops test has failed on a while loop");
 }

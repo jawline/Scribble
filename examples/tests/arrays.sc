@@ -14,17 +14,12 @@ func Test() {
 		
 		arr[i] := i;
 		
-		if arr[i] != i then {
-			test.Fatal("arr[i] != i fail");
-		}
-		
+		test.Assert(arr[i], i, "arr[i] != i fail");
 	}
 
 	for i := 0; i < 150; i++ do {
-		
-		if arr[i] != i then {
-			test.Fatal("arr[i] != i fail");
-		}
+
+		test.Assert(arr[i], i, "arr[i] != i second loop fail");
 		
 	}
 }
