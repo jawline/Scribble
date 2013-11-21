@@ -16,6 +16,7 @@ func Test() {
 	test.Assert(j, 150, "J should equal 150");
 
 	r := 15;
+
 	test.Assert(r, 15, "R should equal 15");
 	test.Assert(j, 150, "J should equal 150");
 }

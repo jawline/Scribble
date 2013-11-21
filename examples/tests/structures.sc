@@ -1,3 +1,9 @@
+/**
+ *
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 import("test");
 
 type TestStructure := struct {

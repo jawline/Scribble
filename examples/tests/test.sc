@@ -1,3 +1,9 @@
+/**
+ * Test package provides functions to test values and their expected values and display an error if they are not correct.
+ *
+ * Copyright (c) Blake Loring 2013
+ */
+
 package sys := import("sys");
 
 func Fatal(error : string) {
