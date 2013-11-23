@@ -16,10 +16,10 @@ func Test() {
 	test.Assert(math.PowInt(2, 4), 16, "PowInt fail");
 	
 	//Test positive PowFloats
-	test.Assert(math.PowFloat(8f, 2f), 64f, 0.01f, "PowFloat fail");
-	test.Assert(math.PowFloat(2f, 2f), 4f, 0.01f, "PowFloat fail");
-	test.Assert(math.PowFloat(2f, 3f), 8f, 0.01f, "PowFloat fail");
-	test.Assert(math.PowFloat(2f, 4f), 16f, 0.01f, "PowFloat fail");
+	test.Assert(math.PowFloat32(8f, 2f), 64f, 0.01f, "PowFloat fail");
+	test.Assert(math.PowFloat32(2f, 2f), 4f, 0.01f, "PowFloat fail");
+	test.Assert(math.PowFloat32(2f, 3f), 8f, 0.01f, "PowFloat fail");
+	test.Assert(math.PowFloat32(2f, 4f), 16f, 0.01f, "PowFloat fail");
 	
 	//TODO: Test negative pow & edge cases
 }

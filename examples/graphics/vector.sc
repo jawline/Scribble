@@ -21,7 +21,7 @@ type Vector3 := struct {
  */
 
 func Add(left : Vector3, right : Vector3) : Vector3 {
-	
+
 	return Vector3{
 		left->x + right->x,
 		left->y + right->y,

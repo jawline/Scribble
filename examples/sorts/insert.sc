@@ -4,24 +4,16 @@
  * Copyright (c) Blake Loring 2013
  */
 
+/**
+ * Sort a given array of integers using an insertion sort algorithm.
+ */
+
 func Sort( n : array(int) ) : array(int) {
-
- //Loop i between 1 and n
- //Set temp to n[i]
- //Loop j between i and 0 while n[j-1] > temp
- //Set n[j] to n[j-1]
- //End loop
- //n[j] := temp
- //End loop
-
- var i : int;
- var j : int;
- var k : int;
  
- for i := 1; i < len(n); i++ do {
- 	k := n[i];
+ for var i := 1; i < len(n); i++ do {
+ 	var k := n[i];
  	
- 	for j := i - 1; (j >= 0) and (k < n[j]); j-- do {
+ 	for var j := i - 1; (j >= 0) and (k < n[j]); j-- do {
  		n[j+1] := n[j];
  	}
  

@@ -6,6 +6,10 @@
 
 package sys := import ("sys");
 
+/**
+ * Sorts an array of integers using the bubble sort algorithm.
+ */
+
 func Sort( n : array(int) ) : array(int) {
  
  var swapped := true;

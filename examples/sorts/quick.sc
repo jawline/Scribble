@@ -4,6 +4,10 @@
  * Copyright (c) Blake Loring
  */
 
+/**
+ * Perform a quicksort on a given array of integers between the low and high indexs.
+ */
+
 func qs( n:array(int), low : int, high : int) {
 
  var i := low;
@@ -38,6 +42,10 @@ func qs( n:array(int), low : int, high : int) {
  if low < j then qs(n, low, j);
  if i < high then qs(n, i, high);
 }
+
+/**
+ * Sort a given array of integers using the quicksort algorithm
+ */
 
 func Sort(n : array(int)) : array(int) {
 	qs(n, 0, len(n) - 1);

@@ -482,7 +482,7 @@ std::string Parser::include(std::string const& filename,
 	} else {
 
 		//If path is root and the file is not found then let the resolution fail ( So the import path  is CURRENT/file then if that fails it checks /file and if that fails it throws an error.
-		inputSource = bufferText(filename + ".scribble");
+		inputSource = bufferText(filename);
 
 	}
 
