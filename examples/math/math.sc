@@ -14,7 +14,7 @@ func Exp(pow : float32) : float32 {
 
 	var e := 2.71828182846f;
 
-	return PowFloat32(e, pow);
+	return Pow(e, pow);
 }
 
 /**
@@ -29,7 +29,7 @@ func Exp(x : float32, n : float32) : float32 {
  * Return the maximum of the left or right values
  */
 
-func MaxInt(left : int, right : int) : int {	
+func Max(left : int, right : int) : int {	
 
 	if left > right then {
 		return left;
@@ -42,7 +42,7 @@ func MaxInt(left : int, right : int) : int {
  * Return the minimum of the left or right values
  */
 
-func MinInt(left : int, right : int) : int {
+func Min(left : int, right : int) : int {
 
 	if left < right then {
 		return left;
@@ -55,7 +55,7 @@ func MinInt(left : int, right : int) : int {
  * Return the max of the left or right values
  */
 
-func MaxFloat32(left : float32, right : float32) : float32 {
+func Max(left : float32, right : float32) : float32 {
 
 	if left > right then {
 		return left;
@@ -69,7 +69,7 @@ func MaxFloat32(left : float32, right : float32) : float32 {
  * Return the min of the left or right values
  */
 
-func MinFloat32(left : float32, right : float32) : float32 {
+func Min(left : float32, right : float32) : float32 {
 
 	if left < right then {
 		return left;
@@ -82,7 +82,7 @@ func MinFloat32(left : float32, right : float32) : float32 {
  * Return val to the power of pow ( val^pow )
  */
 
-func PowInt(val : int, pow : int) : int {
+func Pow(val : int, pow : int) : int {
 	return sys.PowInt(val, pow);
 }
 
@@ -90,6 +90,54 @@ func PowInt(val : int, pow : int) : int {
  * Return val to the power of pow ( val^pow )
  */
 
-func PowFloat32(val : float32, pow : float32) : float32 {
+func Pow(val : float32, pow : float32) : float32 {
 	return sys.PowFloat(val, pow);
+}
+
+/**
+ * Return the remainder of the division of integer val by integer divisor
+ */
+
+func Mod(val : int, divisor : int) : int {
+	return sys.Mod(val, divisor);
+}
+
+/**
+ * Return the positive value of a given float.
+ */
+ 
+func Abs(val : float32) : float32 {
+
+	if val < 0f then
+		return -val;
+
+	return val;
+}
+
+/**
+ * Return the positive value of a given integer.
+ */
+
+func Abs(val : int) : int {
+
+	if val < 0 then
+		return -val;
+
+	return val;
+}
+
+/**
+ * Return the positive difference between two integers.
+ */
+
+func Diff(val1 : int, val2 : int) : int {
+	return Abs(val1 - val2);
+}
+
+/**
+ * Return the positive difference between two floating point values.
+ */
+
+func Diff(val1 : float32, val2 : float32) : float32 {
+	return Abs(val1 - val2);
 }

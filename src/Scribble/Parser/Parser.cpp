@@ -193,6 +193,10 @@ FunctionSet const& functionSet) {
 
 				duplicate = true;
 
+				if (!function->getType()->Equals(compared->getType())) {
+					duplicate = false;
+				}
+
 				for (unsigned int j = 0; j < function->numArgs(); ++j) {
 
 					if (function->argType(j) != compared->argType(j)) {

@@ -298,15 +298,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
 			
-			if ( functions.size() > 0) {
-				
-				printf("TODO: Function return type.\n");
-				
-				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
-					yyerror("Identical function already defined");
-					return -1;
-				}
-			}
+			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
 			
 			Functions[*$2].addFunctionToSet(fn);
 		
@@ -358,15 +350,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
 			
-			if ( functions.size() > 0) {
-			
-				printf("TODO: Function return type.\n");
-				
-				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
-					yyerror("Identical function already defined");
-					return -1;
-				}
-			}
+			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
 			
 			Functions[*$2].addFunctionToSet(fn);
 		
@@ -409,15 +393,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
 			
-			if ( functions.size() > 0) {
-				
-				printf("TODO: Function return type.\n");
-				
-				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
-					yyerror("Identical function already defined");
-					return -1;
-				}
-			}
+			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
 			
 			Functions[*$2].addFunctionToSet(fn);
 		
@@ -468,15 +444,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
 			
-			if ( functions.size() > 0) {
-			
-				printf("TODO: Function return type.\n");
-				
-				if (Parser::functionSetAlreadyContainsEquivilent(fn, functions) == true) {
-					yyerror("Identical function already defined");
-					return -1;
-				}
-			}
+			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
 			
 			Functions[*$2].addFunctionToSet(fn);
 		
@@ -608,7 +576,9 @@ Statement: Expression END {
 	}
 ;
 
-Expression: TRUE {
+Expression: MINUS Expression {
+		$$ = new NegativeStatement(scribble_lineno, scribble_text, SafeStatement($2));
+	} | TRUE {
 		$$ = new BoolStatement(scribble_lineno, scribble_text, true);
 	} | FALSE {
 		$$ = new BoolStatement(scribble_lineno, scribble_text, false);

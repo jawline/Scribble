@@ -87,6 +87,7 @@ public:
 	/**
 	 * Check the number of arguments a function must have in this set
 	 */
+
 	static unsigned int functionSetNumArguments(FunctionSet const& functionSet);
 
 	/**

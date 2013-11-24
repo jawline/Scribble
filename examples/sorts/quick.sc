@@ -39,8 +39,11 @@ func qs( n:array(int), low : int, high : int) {
 
  }
  
- if low < j then qs(n, low, j);
- if i < high then qs(n, i, high);
+ if low < j then 
+ 	qs(n, low, j);
+ 
+ if i < high then 
+ 	qs(n, i, high);
 }
 
 /**

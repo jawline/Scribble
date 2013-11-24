@@ -10,6 +10,8 @@
 
 func IsSorted(n : array(int)) : bool {
 
+	//Check that each element in the list is less than the next element. If it is not then return false
+
 	for var i := 1; i < len(n); i++ do {
 
 		if n[i] < n[i-1] then

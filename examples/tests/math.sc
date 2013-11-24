@@ -6,10 +6,14 @@
 
 package pow := import("pow");
 package exp := import("exp");
+package abs := import("abs");
 package max := import("max");
 
 func Test() {
+
 	pow.Test();
 	exp.Test();
 	max.Test();
+	abs.Test();
+	
 }
