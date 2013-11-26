@@ -8,6 +8,7 @@ package pow := import("pow");
 package exp := import("exp");
 package abs := import("abs");
 package max := import("max");
+package dif := import("dif");
 
 func Test() {
 
@@ -15,5 +16,6 @@ func Test() {
 	exp.Test();
 	max.Test();
 	abs.Test();
+	dif.Test();
 	
 }

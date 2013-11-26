@@ -4,9 +4,9 @@
  * Copyright (c) Blake Loring 2013
  */
 
+package sys := import("sys");
 package test := import("test");
 package math := import("../math/math");
-package sys := import("sys");
 
 func Test() {
 
