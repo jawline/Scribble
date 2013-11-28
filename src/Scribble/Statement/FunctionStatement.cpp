@@ -80,9 +80,9 @@ int FunctionStatement::generateCode(int resultRegister,
 
 		SafeStatement arg = func_->getArgs()[i];
 
-		numInstructions += arg->generateCode(VM::vmTempRegisterOne, generated);
+		numInstructions += arg->generateCode(VM::vmTempRegisterThree, generated);
 
-		generated << "pushr $" << VM::vmTempRegisterOne << " " << 1 << "\n";
+		generated << "pushr $" << VM::vmTempRegisterThree << " " << 1 << "\n";
 		numInstructions += 1;
 	}
 
