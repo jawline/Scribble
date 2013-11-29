@@ -13,7 +13,6 @@
 #include <Scribble/Statement/GetStructureElementStatement.hpp>
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Value/Variable.hpp> // Variable class
-
 typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
 typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;
@@ -61,7 +60,6 @@ public:
 	AutoVariablePair autoVariableType;
 };
 
-
 const static std::string ScribbleFileSuffix = ".sc";
 
 /**
@@ -70,32 +68,46 @@ const static std::string ScribbleFileSuffix = ".sc";
 
 class Parser {
 private:
+
+	/**
+	 * Buffer the given file and return it's contents as a std::string.
+	 */
+
 	static std::string bufferText(std::string const& filePath);
 
-	static std::string include(std::string const& inputSource,
+	/**
+	 * Include the specified file, resolving it from the path.
+	 */
+
+	static std::string include(std::string const& inputFile,
 			std::string const& path);
 
-	static std::string includeText(std::string source, std::string const& filename, std::string const& path);
+	/**
+	 * Include the given source text as the specified filename.
+	 */
+
+	static std::string includeText(std::string source,
+			std::string const& filename, std::string const& path);
 
 	static void printNamespace(NamespaceType const& ns);
 	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
 	static void resolve(TypeReference reference, NamespaceType ns);
+
+	/**
+	 * Return an internal uniform path of a given file ( For example ../src/Test and Test would return the same string ) if the file exists
+	 * or return input string if the file does not exist.
+	 */
+
 	static std::string getUniformPath(std::string const& path);
 
 public:
-
-	/**
-	 * Check the number of arguments a function must have in this set
-	 */
-
-	static unsigned int functionSetNumArguments(FunctionSet const& functionSet);
 
 	/**
 	 * Check whether the set already contains an equivalent function
 	 */
 
 	static bool functionSetAlreadyContainsEquivilent(SP<Function> function,
-			FunctionSet const& functionSet);
+	FunctionSet const& functionSet);
 
 	/**
 	 * Attempt to find a function that meets the criteria of a reference within a function set.
@@ -104,15 +116,14 @@ public:
 			FunctionSet const& set);
 
 	/**
-	 *
-	 */
-	static SP<Function> functionSetSearch(FunctionSet const& functionSet,
-			std::vector<int> argumentTypes);
-
-	/**
 	 * Get the return type of a function set
 	 */
+
 	static Type* functionSetType(FunctionSet const& functionSet);
+
+	/**
+	 * Search a list of strings and return true if it contains the target string
+	 */
 
 	static bool listContains(std::string target,
 			std::vector<std::string> const& list);
@@ -124,7 +135,7 @@ public:
 	static std::map<std::string, NamespaceType> compile(std::string const& file,
 			std::map<std::string, NamespaceType> builtinNamespace);
 
-	static std::map<std::string, NamespaceType> compileText(std::string const& text, std::string const& packageName,
+	static std::map<std::string, NamespaceType> compileText(std::string const&text, std::string const& packageName,
 			std::map<std::string, NamespaceType> builtinNamespace);
 
 };

@@ -217,11 +217,6 @@ FunctionSet const& functionSet) {
 		return false;
 	}
 
-unsigned int Parser::functionSetNumArguments(FunctionSet const& set) {
-	SP<Function> fn = set[0];
-	return fn->numArgs();
-}
-
 Type* Parser::functionSetType(FunctionSet const& functionSet) {
 	SP<Function> fn = functionSet[0];
 	return fn->getType();
@@ -263,16 +258,23 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	scribble_parse();
 	scribble_lex_destroy();
 
-	//Check to see if any errors occured
+	//Check to see if any errors occured and if they did throw a ParserException
+
 	if (ParsingError) {
 		throw ParserException(filename, "Parser error occurred");
 	}
 
+	//Store the loaded namespace
+
 	Namespace[currentNamespaceName] = Functions;
 	Functions = NamespaceType();
 
+	//Store the import list generated whilst parsing and then clear it so that imports don't already have imported libraries.
+
 	std::map < std::string, std::string > imports = ImportList;
 	ImportList.clear();
+
+	//Store the global lists of things to be resolved and then clear them ( As the import or include functions will use these ).
 
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
@@ -331,8 +333,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 		variableReferences[i]->setValue(
 				ValueUtil::generateValue(variableReferences[i]->getType()));
-
-		//printf("TODO: Variable decl\n");
 
 		if (variableReferences[i]->getType()->getType() == Void) {
 			throw ParserException(filename,
