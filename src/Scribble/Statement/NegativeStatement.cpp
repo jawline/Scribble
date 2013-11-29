@@ -53,9 +53,23 @@ int NegativeStatement::generateCode(int resultRegister,
 	int instr = exp_->generateCode(VM::vmTempRegisterTwo, generated);
 
 	if (resultRegister != -1) {
+
 		generated << "load 0 $" << VM::vmTempRegisterOne << "\n";
-		generated << "sub $" << VM::vmTempRegisterOne << " $"
-				<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+
+		if (exp_->type()->getType() == Int) {
+
+			generated << "sub $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+
+		} else if (exp_->type()->getType() == Float32) {
+
+			generated << "subf32 $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+
+		} else {
+			throw StatementException(this,
+					"Code generation on negation of value not supported\n");
+		}
 
 		instr += 2;
 	}

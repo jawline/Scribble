@@ -20,7 +20,7 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="carousel.css" rel="stylesheet">
+    <link href="scribble.css" rel="stylesheet">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -65,25 +65,32 @@
     </div> -->
 
     <div class="container header">
-	<h1 class="featurette-heading" style="margin: 0;padding-top: 1em; padding-left: 1em; color: white;">Scribble Programming Language</h1>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
-
         <li data-target="#myCarousel" data-slide-to="3"></li>
-
         <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
       </ol>
       <div class="carousel-inner">
 
-        <div class="item active">
+	<div class="item active">
+          <div class="container">
+            <div class="carousel-caption">
+		<h2 class="featurette-heading">Scribble Programming Language</h2>
+		<p class="lead">Scroll down for more information</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
           <div class="container">
             <div class="carousel-caption">
 		<h2 class="featurette-heading">Strict</h2>
-          	<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          	<p class="lead">Strictly typed functions reduce ambiguity.</p>
             </div>
           </div>
         </div>
@@ -92,7 +99,7 @@
           <div class="container">
             <div class="carousel-caption">
 		          <h2 class="featurette-heading">Structured</h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead">Seperation.</p>
             </div>
           </div>
         </div>
@@ -100,7 +107,7 @@
         <div class="item">
           <div class="container">
             <div class="carousel-caption">
-		          
+		       
 <h2 class="featurette-heading">Open Source</h2>
           <p class="lead">Scribble will be released under an open source license allowing anybody to use it in their own projects or modify it to suit their needs.</p>
             </div>
@@ -129,6 +136,14 @@
 
       </div>
     </div><!-- /.carousel -->
+
+
+    <div style="color: white;" align="center" > 
+	<a href="#content-start">
+		<span class="glyphicon glyphicon-chevron-down"></span>
+	</a>
+    </div>
+
     </div>
 
 
@@ -137,6 +152,9 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing">
+
+	
+	<a name="content-start"></a>
 
           <p style="padding: 1em; "class="lead">Scribble is a programming language which can be embedded into a larger application to allow customization of easy extension of existing functionality.</p>
 
@@ -208,6 +226,14 @@
           <p class="lead">Every file is seen as a package, a package is comprised of methods and structures.<p> <br/><p>One example of this would be using a method inside the math library to return the absolute value of an integer.</p><br/><code>package math := import("math/math");<br/><br/>func main() {<br/>&nbsp;var i := math.Abs(-15);<br/>}</code></p>
         </div>
       </div>
+
+      <hr class="featurette-divider">
+
+            <div align="center">
+              <h1>Download Scribble</h1>
+              <p>To download Scribble or get involved please</p>
+              <p><a class="btn btn-lg btn-primary" href="http://github.com/mmjack/Scribble/" role="button">Visit Github</a></p>
+            </div>
 
 
       <hr class="featurette-divider">
