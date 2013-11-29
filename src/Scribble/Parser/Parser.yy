@@ -298,8 +298,6 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
 			
-			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
-			
 			Functions[*$2].addFunctionToSet(fn);
 		
 		}
@@ -349,8 +347,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			}
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
-			
-			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
+		
 			
 			Functions[*$2].addFunctionToSet(fn);
 		
@@ -392,8 +389,6 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			}
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
-			
-			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
 			
 			Functions[*$2].addFunctionToSet(fn);
 		
@@ -443,8 +438,6 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 			}
 			
 			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
-			
-			printf("FUNCTION SET EQUIVILENTS NEEDS CHECKING\n");
 			
 			Functions[*$2].addFunctionToSet(fn);
 		

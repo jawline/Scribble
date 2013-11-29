@@ -173,49 +173,41 @@ bool Parser::listContains(std::string target,
 	return false;
 }
 
-bool Parser::functionSetAlreadyContainsEquivilent(SP<Function> function,
-FunctionSet const& functionSet) {
+bool Parser::testFunctionEquivilence(SP<Function> function, SP<Function> compared) {
 
 	bool duplicate = false;
 
-	//For each function in a set check to see if it has the same argument types as a given function and if it does return true.
-		for (unsigned int i = 0; i < functionSet.size(); ++i) {
+	if (compared.get() == function.get()) {
+		return true;
+	} else {
 
-			auto compared = functionSet[i];
+		if (function->numArgs() != compared->numArgs()) {
+			return false;
+		}
 
-			if (compared.get() == function.get()) {
-				return true;
-			} else {
+		if (!function->getType()->Equals(compared->getType())) {
+			duplicate = false;
+		}
 
-				if (function->numArgs() != compared->numArgs()) {
-					return false;
-				}
+		duplicate = true;
 
-				duplicate = true;
+		for (unsigned int j = 0; j < function->numArgs(); ++j) {
 
-				if (!function->getType()->Equals(compared->getType())) {
-					duplicate = false;
-				}
-
-				for (unsigned int j = 0; j < function->numArgs(); ++j) {
-
-					if (function->argType(j) != compared->argType(j)) {
-						duplicate = false;
-						break;
-					}
-
-				}
-
-				if (duplicate) {
-					return true;
-				}
-
+			if (function->argType(j) != compared->argType(j)) {
+				duplicate = false;
+				break;
 			}
 
 		}
 
-		return false;
+		if (duplicate) {
+			return true;
+		}
+
 	}
+
+	return false;
+}
 
 Type* Parser::functionSetType(FunctionSet const& functionSet) {
 	SP<Function> fn = functionSet[0];
@@ -318,22 +310,62 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 	Functions = Namespace[currentNamespaceName];
 
-	for (unsigned int i = 0; i < typeReferences.size(); ++i) {
+	//Loop through every function set and test for duplicates.
+	for (auto iter = Functions.begin(); iter != Functions.end(); iter++) {
 
-		if (imports.find(typeReferences[i]->typeNamespace) != imports.end()) {
-			typeReferences[i]->typeNamespace = getUniformPath(
-					imports.find(typeReferences[i]->typeNamespace)->second);
+		if (iter->second.type() == FunctionSetEntry) {
+
+			FunctionSet setToTest = iter->second.getFunctionSet();
+
+			for (unsigned int i = 0; i < setToTest.size(); i++) {
+
+				for (unsigned int j = i + 1; j < setToTest.size(); j++) {
+
+					if (testFunctionEquivilence(setToTest[i], setToTest[j])) {
+						throw ParserException(filename, std::string("Function set ") + iter->first + " contains two identical functions ( Same number of arguments and return type )");
+					}
+
+				}
+
+			}
+
 		}
 
-		resolve(typeReferences[i], Functions);
-		//printf("Resolved %s\n", typeReferences[i]->name.c_str());
 	}
 
+	// For every unresolved reference ( Function statatements etcetera ) modify the
+	//import path to its internal representation then resolve it.
+
+	for (unsigned int i = 0; i < typeReferences.size(); ++i) {
+
+		//If the package can be found in the imports list ( Which maps package names to their internal names )
+		//then set change the type namespace from the local representation to the internal parser representation
+		//Otherwise throw an error because the package has not been imported.
+
+		if (imports.find(typeReferences[i]->typeNamespace) != imports.end()) {
+
+			typeReferences[i]->typeNamespace = getUniformPath(
+					imports.find(typeReferences[i]->typeNamespace)->second);
+
+		} else {
+
+			throw ParserException(filename,
+					"Package " + typeReferences[i]->typeNamespace
+							+ " has not been included");
+
+		}
+
+		//Attempt to resolve the given type reference.
+		resolve(typeReferences[i], Functions);
+	}
+
+	//Generate all the initial values for variables.
 	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
 
 		variableReferences[i]->setValue(
 				ValueUtil::generateValue(variableReferences[i]->getType()));
 
+		//Check whether the user has tried to assign the variable to a null type.
 		if (variableReferences[i]->getType()->getType() == Void) {
 			throw ParserException(filename,
 					"cannot declare a variable as a void");
