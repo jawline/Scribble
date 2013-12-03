@@ -1,0 +1,686 @@
+\documentclass[]{final_report}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Input project details
+\def\studentname{Blake Loring}
+\def\reportyear{2013}
+\def\projecttitle{Scribble Programming Language}
+\def\supervisorname{Adrian Johnstone}
+\def\degree{BSc (Hons) in Computer Science}
+\def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
+\def\finalOrInterim{Final Report} % indicate if this document is your Final Report or Interim Report
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Declaration
+
+\chapter*{Declaration}
+
+This report has been prepared on the basis of my own work. Where other published and unpublished source materials have been used, these have been acknowledged.
+
+\vskip3em
+
+Word Count: 
+
+\vskip3em
+
+Student Name: \studentname
+
+\vskip3em
+
+Date of Submission: 
+
+\vskip3em
+
+Signature:
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Contents
+\tableofcontents\pdfbookmark[0]{Table of Contents}{toc}\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Your Abstract here
+
+\begin{abstract}
+
+The aim of the project is to create a platform independant programming language, parser and virtual machine capable of being embedded as a scripting language inside larger C++ applications.
+
+\end{abstract}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Project Spec
+
+\chapter*{Project Specification}
+\addcontentsline{toc}{chapter}{Project Specification}
+Your project specification goes here.
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Introduction
+\chapter{Introduction}
+
+The aim of my project was to create a programming language which could be used within C++ applications to make the development process easier whilst allowing enough access to native functions to perform native of time dependant operations.
+
+\chapter{The Language}
+
+This chapter defines the syntax and rules of the high level language. The language has been designed to attempt make functions and structures more immediately readable when compared to other scripting languages like Javascript.
+
+\section{Types}
+
+Scribble has three primitive types.
+
+The type bool is a primitive type capable of representing true or false.
+
+The type int is a 32 bit signed integer capable of representing values between  −2,147,483,648 and 2,147,483,647.
+
+The type float32 is a 32 bit floating point value.
+
+The type string stores references to null terminated strings on the heap.
+
+\section{Arithmetic}
+
+There are four arithmetic operators. + - * and /. These operators only work on numeric expressions of the same type.
+
+You can also use i++, ++i, i-- and --i to increment and decrement the value of integer variables by one. These operators also carry the value of the variable either before or after the increment i++ and i-- will increment and decrement respectively and return the original value. ++i and --i will increment and decrement and then return the new value.
+
+\section{Tests}
+
+In Scribble there are tests for equality, greater than and less than. The tests for equality are = and != which test whether two expressions are equal or whether they are not equal respectivelly and the tests for less than and greater than are \textless, \textless=, \textgreater, \textgreater= which are less than, less than or equals too, greater than and greater than or equals to.
+
+The tests for equality work with boolean and numeric expressions. The \textless \textless= \textgreater \textgreater= tests only work on expressions that can be evaluated to numbers. In both cases the expression on the left hand side has to evaluate to the same type as the expression on the right hand side ( So comparisons or arithmetic on different types  )
+
+All of these tests will result in a boolean value with the result being produced.
+
+Some examples would be
+
+5 \textless 10; would be true
+
+10 = 10; would be true
+
+true \textgreater false; would cause a syntax error as > only works on numeric expressions
+
+There is also a logical and test. Using the syntax left \& right will result in a boolean expression that is only true if both left and right are true. So true \& true will equal true however any other variation will return false. 
+
+\section{Expressions}
+
+Sequences of tests, function calls or arithmetic operations can be combined. Parentheses can also be used to control the order in which things are execute. For example
+
+\begin{verbatim}
+(5 * 10) + (5 * 10)
+5 * 10 + 5 * 10
+\end{verbatim}
+
+\section{Variables}
+
+Primitive data can be represented either a boolean, integer or string. Booleans can only store the values true or false, Integers are capable of storing 32 bit signed integers and strings are capable of storing strings of text of varying length.
+
+To declare a variable of a specific type the syntax var Name : type; is used. For example var i : int := 0; is valid.
+
+Assignment is done using the := operator. J := 15; would set the value of the variable J to be 15.
+
+Scribble also has the ability to infer the type of a variable when it is declared. So if you have an expression such as 15 + 96 + 4 you can define a variable which automatically infers the type. So var Test := 15 + 96 + 4; would create a new variable of the type integer.
+
+This inference also works with the values obtained from function calls. So in the example
+
+\begin{verbatim}
+func Hello() : int {
+ return 30;
+}
+
+func main() {
+ var j := Hello();
+}
+\end{verbatim}
+
+The type of variable j will be set to int.
+
+\section{Flow Control}
+
+The language has three primary control structures.
+
+\subsection{If}
+
+If statements execute pieces of code depending on whether a boolean condition is true.
+
+\begin{verbatim}
+if BooleanExpression then {
+ Code
+}
+\end{verbatim}
+
+You can also specify statements to be executed when the statement is not true.
+
+\begin{verbatim}
+If BooleanExpression then {
+ Code
+} else {
+ Code 
+}
+\end{verbatim}
+
+and chain if statements together so
+
+\begin{verbatim}
+if FirstBooleanExpr then {
+ Code
+} else if SecondBooleanExpr then {
+ Code
+}
+\end{verbatim}
+
+would also be valid.
+
+\subsection{While}
+
+A while statement will repeat until the given boolean expression is false. It is written in the form
+
+\begin{verbatim}
+while BooleanExpression do {
+ Code
+}
+\end{verbatim}
+
+as an example for a 10 element loop you would write
+
+\begin{verbatim}
+var i := 0;
+
+while i < 10 do {
+ i++;
+}
+\end{verbatim}
+
+\subsection{For}
+
+A for statement like a while loop will continue until a condition is false. Unlike the while loop however is also contains syntax to initialize the loop and to step through it which allows for easily loop through arrays using an iterator as well as many other uses.
+
+The syntax for the for loop is as follows
+
+\begin{verbatim}
+for Initialize; Condition; Step do {
+ Code
+}
+\end{verbatim}
+
+for example
+
+\begin{verbatim}
+for var i := 0; i < 100; i++ {
+ sys.Write(“Hello World\n”);
+}
+\end{verbatim}
+
+will print hello world 100 times to the screen.
+
+\section{Arrays}
+
+Arrays in Scribble have the type array(Subtype) where subtype is another type. You are allowed to have arrays and structures as a subtype ( So array(array(int)) is a valid array type ).
+
+Like structures arrays are accessed through references to the heap. To create a reference to an array you can write var I : array(int); In this case I would be nil by default as it by default is not a reference to nil.
+
+To create a new array you use the [NumberOfElements]Type syntax. So an array of 100 integers would be constructed using [100]int;
+
+To access an index in an array you use the [Index] syntax. So given the array var Test := [100]int; to access the 50th index you would write Test[50] or to assign to the 50th index you would write Test[50] := 50.
+
+The length of an array can be accessed via the len(Array) function. This will return an integer with the length of the array.
+
+\section{Structures}
+
+Structures can be declared using the syntax type Name := struct { Name : Type, Name : Type }. Structures can only be declared outside of functions. For example
+
+\begin{verbatim}
+function main() {
+
+ type D := struct {}
+
+}
+\end{verbatim}
+
+Is not valid however
+
+\begin{verbatim}
+type D := struct {
+}
+
+function main() {
+}
+\end{verbatim}
+
+is valid.
+
+To create a new instance of a structure you use the syntax Name{ Data1, Data2, Data... }. This will return a reference to the new object on the heap. An example would be
+
+\begin{verbatim}
+
+type User := struct {
+ FirstName : string,
+ LastName : string,
+ Age : int
+}
+
+func main() {
+ 
+ var blake := User {
+  “Blake”,
+  “Loring”, 
+  20 };
+
+}
+\end{verbatim}
+
+Structures are accessed through references to them. So given the example above if you then wrote
+
+\begin{verbatim}
+var john := blake;
+\end{verbatim}
+
+Then john would be a reference to the same instance of the structure that blake does and not a copy. 
+
+To access members of a structure you use the -\textgreater operator. So to access the firstname of the User structure created in the last example you would write blake -\textgreater FirstName 
+
+A reference will default to 'nil' unless it is assigned to something. You can also assign it to nil to remove the data connected to it. The language handles all memory allocation under the hood so it will be automatically freed without any explicit deletion.
+
+You can tell whether a reference is nil or points to data by testing equality against nil.
+
+\begin{verbatim}
+var j := nil; 
+
+if j = nil then 
+ sys.Write(“Hello World\n”);
+\end{verbatim}
+
+References can be used to construct structures like linked lists.
+
+\begin{verbatim}
+type List := struct {
+ User payload,
+ List next
+}
+\end{verbatim}
+
+
+\section{Functions}
+
+A function is declared using the syntax
+
+\begin{verbatim}
+function Name( One or more arguments ) : Type {
+ Statements
+}
+\end{verbatim}
+
+If type is not set then the function is assumed to be of a Void type. A function of Void type does not return any values.
+
+Arguments are written in the form Name : Type, Name : Type, Name : Type so to declare a function which takes two integers as arguments you would write
+
+\begin{verbatim}
+func TestArgs(A : int, B : int) {
+}
+\end{verbatim}
+
+To exit out of a function early or return a value you can use the return keyword. In Void functions return; will exit immediately and in functions with type return X; where X is an expression or variable of the functions type will exit and return the given value. If the argument given to return differs from the functions type a syntax error will occur.
+
+The order in which a function is defined does not matter. Unlike languages such as C you are allowed to call a function before it is defined. This allows mutual recursion as shown in the example
+
+\begin{verbatim}
+func even(x : int) : bool {
+ if x = 0 then 
+   return true;
+ return odd(x-1);
+}
+
+func odd(x : int) : bool {
+ if x = 0 then 
+  return false;
+ return even(x-1);
+}
+\end{verbatim}
+
+Multiple functions can share the same name as long as they take different arguments and have the same return type. An example of this is the system String function which has two version one which takes a boolean and one which takes a number. A practical example of this would be
+
+\begin{verbatim}
+
+func PrintTrue(i : bool) {
+
+ if i then 
+  sys.Write(“True”); 
+ else 
+  sys.Write(“False”);
+
+}
+
+func PrintTrue(i : int) {
+
+ if i = 1 then
+  sys.Write(“True”);
+ else
+  sys.Write(“False”);
+
+}
+
+\end{verbatim}
+
+this would compile successfully and upon any call to PrintTrue the compiler would resolve the correct function to be executed.
+
+\subsection{Constraints}
+
+Functions which take the same arguments but differ by return type cannot share the same name. For instance
+
+\begin{verbatim}
+
+func A() : int {
+ return 1;
+}
+
+func A() : float32 {
+ return 1f;
+}
+ 
+\end{verbatim}
+
+is not allowed. This is becuase the compiler would have no way of supporting type inference on variables and matching functions.
+
+\section{Packages}
+
+A package is represented as a separate file and interaction between methods and functions in a different package to the one being compiled must be explicit ( For example if function A in Hello wants to call function B in world it must use the syntax world.B(); and not just B(); ).
+
+To use any structures or functions declared in another namespace you must first import it. This will load and compile the file if it has not already been compiled or link it to the current if it has.
+
+An example of this is the “sys” package which provides functions that allow input and output.
+
+\begin{verbatim}
+import(“sys”);
+
+func main() {
+ sys.Write(“Hello World”);
+}
+\end{verbatim}
+
+in this example the Write function in name space sys is called which should cause 'Hello World' to be written to the console.
+
+\section{Operators Summary}
+
+\begin {verbatim}
++ Addition
+- Subtraction
+* Multiply
+/ Divide
+[ ] Either array index or array initialize
+( ) Function call
+++ Increment
+-- Decrement
+. Namespace entry select
+-\textgreater Structure element select
+= Equality test
+!= Non equality test
+> Greater than
+>= Greater than or equal to
+< Less than
+<= Less than or equal to
+& Logical and 
+:= Assignment
+\end{verbatim}
+
+\chapter{The Compiler}
+
+The Scribble compiler takes the input files and returns either a tree or statements or intermediate code which can be used to execute the program. The compiler also checks that every input file meets all of the rules of the language ( Both syntax rules and type rules ), handles type inference and links function calls with their equivilent function.
+
+\section{Lexical Analysis}
+
+A lexical analyser takes an input string and returns a list of tokens which can be used by the parser. Tokens are strings which can represent a larger type. For instance the symbol ';' would create a 'END\_STATEMENT' token or "Hello World" would create a STRING token.
+
+\subsection{Flex}
+
+Flex is a tool written in C to generate a lexical analyser from a set of regular expressions and rules on what to do with them. Flex generates Scribbles lexical analyser from the file src/Scribble/Parser/Lexer.l. Flex is a more modern version of the tool lex and has much of the same functionality and comes with bindings to yacc and bison.
+
+\section{Parsing}
+
+A parser takes the set of tokens generated by the lexical analyser and uses them to construct the statement tree. The parser is also responsible for detection of syntax errors in the source code.
+
+\subsection{Bison}
+
+Bison is a newer version of the tool Yacc which will construct a parser for a language from a grammar file, Scribbles grammar file is located at src/Scribble/Parser/Parser.yy. The Grammar file contains all of the rules on how to construct the statement 
+
+\section{The Statement Tree}
+
+The statement tree is a representation of the parsed program as a tree of possible statements. This tree is constructed by the rules defined in the Bison grammar and can be used to execute the program ( Using the tree execution mode ) or construct intermediate code for the virtual machine.
+
+This tree is built from children of the Statement class ( See src/Scribble/Statement/Statement.hpp ) and when Bison constructs each statement it supplies the information it needs to execute, for example AssignStatement takes information about the variable it should be modifying and a pointer to the expression which the variables value should be set to.
+
+\section{Type Inference}
+
+Type inference is handled by examining the types of expressions after the statement tree is constructed and setting the type of the variable which needs to be inferred to the type of the expression. This type inference has to be done at the same time as other operations which could modify an expressions such as function matching and in the same order that they would execute in the code to ensure that any potential references used in the expressions being examined have been resolved.
+
+\section{Function Matching}
+
+As Scribble can have multiple defined functions which share a name ( For an example look at Diff or Abs in examples/math/math.sc ). This allows a programmer to write a function for different types without having to change its name, so the C functions abs, labs, fabs could all be defined as Abs in Scribble.
+
+This adds an additional complexity to the compiler as it has to be able to select a function from a list of potential functions, this is achieved by examining the type of each argument and looking in the list of potential functions for a function which takes the same argument. 
+
+\section{Error Checking}
+
+There are several kind of mistakes that can be made when writing Scribble files. 
+
+Syntax errors occur when the user has written something which cannot be handled by the lexical analyser or grammar. An example of this would be mistyping 'for' when writing a for loop. 
+
+Type errors occur in Scribble whenever an operation is performed between two seperate types. This can be attempting to assign the value of variable to an expression of the wrong type, comparing expressions of different types or attempting arithmetic on expressions of different types. As Scribble is a strict language no casting is implicit these would all be issues that cause the compiler to exit without compiling the program. These errors are caught using the checkTree function in the statement tree, the reason they are not checked when compiling the grammar is because as functions can be used before they are defined the type of expressions can remain unknown until the statement trees for every function in a package are constructed.
+
+Resolution errors occur when the programmer has tried to use a structure, function or package that do not exist or have not been imported. This is caught when the compiler tries to link all function calls or structure references to equivilent functions or structures. Whilst most of these errors are obvious resolution errors can also be caused when a programmer uses a function which does not have arguments that match it. For example
+ 
+\begin{verbatim}
+func Abs(i : float32) {
+  if i < 0 then return -i;
+  return i;
+}
+
+func Other() {
+  Abs(3);
+}
+\end{verbatim}
+
+would cause a resolution error as although the function Abs is defined the compiler would not be able to match the function call with the function as the argument is a different type to the type of the parameter i.
+
+\chapter{Intermediate Code}
+
+To make debugging generated code easier and to seperate the compiler and virtual machine logically an intermediate language was constructed. This language was modeled around assembly with each line representing a single virtual machine instruction. It follows a three address format, with most instructions taking two inputs and an output.
+
+To differentiate between integers and registers the '\$' symbol is placed before any register. So a command to load the integer 5 into register 0 would be 'load 5 \$0' instead of 'load 5 0'.
+
+Scribble's intermediate code has no type checking whatsoever, this is expected to be done by the high level compiler. Whilst the virtual machine does sanity check types, arrays lengths etc any errors in intermediate code will only be picked up at runtime.
+
+\section{Instructions}
+
+Valid Scribble ASM instructions are
+
+"load" Value Register
+
+"add" Left Right Destination - Add the left and the right register and place the result in the destination register.
+
+"sub" Left Right Destination - Subtract the left and the right register and place the result in the destination register.
+
+"mul" Left Right Destination - Multiply the left and the right register and place the result in the destination register.
+
+"div" Left Right Destination - Divide the left and the right register and place the result in the destination register.
+
+"addf32" Left Right Destination - Add the left and the right register as 32bit floating point values and place the result in the destination register.
+
+"subf32" Left Right Destination - Subtract the left and the right register as 32bit floating point values and place the result in the destination register.
+
+"mulf32" Left Right Destination - Multiply the left and the right register as 32bit floating point values and place the result in the destination register.
+
+"call" Register - Call the function referenced by the register specified ( The register must point to a string on the heap with the name of the function )
+
+"move" From To - Copy the value of the From register and place it in the To register
+
+"popn" - Pop and discard a single value from the stack
+
+"neq" Left Right - Test whether the left and right registers are not equal
+
+"eq" Left Right - Test whether the left and right registers are equal
+
+"eqz" Register - Test whether the specified register is equal to zero
+
+"inc" Register - Increment the value of the register by one
+
+"dec" Register - Decrement the value of the register by one
+
+"lt" Left Right - Test whether the left register is less than the right one
+
+"le" Left Right - Test whether the left register is less than or equal to the right one
+
+"gt" Left Right - Test whether the left register is greater than the right register
+
+"ge" Left Right - Test whether the left register is greater than or equal to the right register
+
+"ret" - Return from the current function
+
+"jmp" Instruction - Jump to the specified instruction
+
+"jmpr" Instructions - Jump relative to the current PC by the specified number of instructions
+
+"newarray" Type Length Dest - Create a new array of the specified type and length and place a reference to it in dest
+
+"aset" Array Index Value - Set the register Value to the value of the array at the specified index
+
+"aget" Array Index Value - Set the array at the given index to the value
+
+"alen" Array Dest - Place the length of the array specified into Dest 
+"pushr" From N - Push N registers to the stack starting from the register From
+"popr" From N - Pop N values into registers from the stack in reverse order ending with From
+
+\section{Parsing}
+
+The conversion of intermediate code to virtual machine instructions is done by a seperate Lex based compiler ( see src/SASM/ ). It is a much simpler compiler than the Scribble compiler capable of producing objects of the class 'InstructionSet' from a piece of intermediate code.
+
+\chapter{The Virtual Machine}
+
+\section{Registers}
+
+ScribbleVM is a register based virtual machine. Registers are fixed size ( 64 bit ) areas in memory used to
+store values. In the case of ScribbleVM a large number of registers ( Up to 255 ) are used. Most of these
+registers are used to store the values of variables however there are also several registers reserved for
+storing the results of operations.
+
+\section{Primitives}
+
+The primitives in ScribbleVM are byte, short, int, long which are 1, 2, 4 and 8 bytes wide accordingly. When
+in registers they are all seen as 8 bytes wide ( So the opcodes do not have to differentiate between primitive
+type before executing ) and these sizes only apply to values within heap memory or in the constant region.
+
+\section{Instructions}
+
+Instructions within ScribbleVM will all be fixed size ( 8 bytes ). The first byte of the instruction will used to
+identify what operation the instruction is to perform and the remaining bytes will be used to carry the data
+necessary to perform that operation.
+
+\section{Instruction Set}
+
+The instruction set in ScribbleVM is split up into two regions, the instructions list ( an array of fixed size
+instructions which ScribbleVM can execute ) and the constant region a variable sized region that contains all
+of the constants used in the functions. 
+
+\section{Namespaces, Functions \& Types}
+
+Functions and types are registered to namespaces within the VM before it is executed. This registration
+allows them to be identified by the VM at runtime.
+Namespaces can also have namespaces as children, so the root namespace may contain the namespaces
+'sys' and 'main'.
+
+Calls to entries in different namespaces are resolved at runtime using '.' as a delimiter ( So a call to
+hello.World would look for the entry World in the hello namespace ).
+
+\section{Heap}
+
+The VM heap is garbage collected and very heavily policed. Each entry inside it will have a type from a set of
+types that have been registered with the virtual machine and these types will contain information about what
+is contained within each element on the heap.
+
+\section{Instructions List}
+
+LoadConstant(ConstantIndex : Constant Location ( 4 bytes), Destination : Register ( 1 byte)) – Load a constant from the constants list and place it in the specified register.
+
+Move (from : Register(1 byte) , to Register ( 1 byte )) – Copy whatever is at the from register to the
+to register.
+
+JumpDirect(Where : 4 bytes) – Jump to the specified instruction.
+
+JumpIndrect(Register : 1 byte) – Jump to the location specified by the register.
+
+Add(left : Register ( 1 byte ), right : Register ( 1 byte ) , dest : Register ( 1 byte )) – Place the
+addition of the left and right registers in the destination register
+
+Subtract(left : Register ( 1 byte ), right : Register ( 1 byte ), dest : Register ( 1 byte )) – Place the
+subtraction of the right register from the left register in the destination register
+
+Multiply(left : Register ( 1 byte ), right : Register ( 1 byte ), dest : Register ( 1 byte )) – Multiply
+the left register value by the right register value and place it in the dest register
+
+Divide(left : Register ( 1 byte ), right : Register ( 1 byte ), dest : Register ( 1 byte )) – Divide the
+left register by the right register and place it in the destination register
+
+Equals(left : Register ( 1 byte ), right : Register ( 1 byte )) – Test whether the left register is equal
+to the right register. If it is then execute the next instruction otherwise skip an instruction.
+
+EqualsZero(register : Register ( 1 byte )) – Test whether the specified register equals zero. If it is
+then execute the next instruction else skip an instruction.
+
+LessThan(left : Register ( 1 byte ), right : Register ( 1 byte )) – Test whether the left register is less
+than the right register. If it is then execute the next instruction otherwise skip an instruction.
+
+LessThanOrEqual(left : Register ( 1 byte ), right : Register ( 1 byte )) – Test whether the left
+register is less than or equal to the right register. If it is then execute the next instruction otherwise
+skip an instruction.
+
+NewArray(Length : Register ( 1 byte), Destination : Register ( 1 byte), TypeConstant : Constant
+location ( 4 bytes)) – Create a new array of the specified length and type and place a reference to it
+in the Destination register.
+
+ArraySet(ArrayReg : Register ( 1 byte ) , IndexReg : Register ( 1 byte ), ValueReg : Register ( 1
+byte)) – Set the value of the array at the specified index to be the value of the specified value
+register.
+
+ArrayGet(ArrayReg : Register ( 1 byte), IndexReg : Register ( 1 byte ), DestReg : Register ( 1
+byte )) - Set value of the DestRegister to be the value of the array at the specified index
+
+ArrayLength(ArrayReg : Register ( 1 byte ), Dest : Register ( 1 byte) ) – Place the length of the
+array at ArrayReg into Dest
+
+PushRegisters(Start : Register ( 1 byte ) , N : 1 Byte) – Push N registers to the stack starting from
+the start register.
+
+PopRegisters(Start : Register ( 1 byte ), N : 1 Byte) – Pop N registers starting from the Start + Nth
+register and ending with the Start register ( The reverse order is so that push $0 10 pop $0 10 are
+complimentary)
+
+PopNil() – Pop a register from the stack and discard it.
+
+CallFunctionConstant(Constant : Int ( 4 bytes ) ) – Call a function given a function name in the
+constant area
+
+CallFunction(Fn : Register ( 1 byte) ) - Call a function with the name of the string that Fn is a
+reference to
+
+Return - Returns to the previous function and sets the program counter to the instruction after the
+function call. If there is no function to return to then the VM->execute function will return and by default the program will exit.
+
+%%%% ADD YOUR BIBLIOGRAPHY HERE
+\newpage
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliography}
+\end{thebibliography}
+\label{endpage}
+
+
+
+\end{document}
+
+\end{article}
