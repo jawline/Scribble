@@ -68,7 +68,7 @@ Your project specification goes here.
 %%% Introduction
 \chapter{Introduction}
 
-The aim of my project was to create a programming language which could be used within C++ applications to make the development process easier whilst allowing enough access to native functions to perform native of time dependant operations.
+The aim of my project was to create a programming language which could be used within C++ applications to make the development process easier whilst allowing enough access to native functions to perform native of time dependant operation. The design of my project was split into three key sections, the compiler handles the process of turning the input source into executable code using the syntax I have defined. The intermediate language acts as a stepping stone, a language the compiler can relitively easily generate code for which can then be turned into instructions for the virtual machine which will do the actual execution.
 
 \chapter{The Language}
 
@@ -94,9 +94,9 @@ You can also use i++, ++i, i-- and --i to increment and decrement the value of i
 
 \section{Tests}
 
-In Scribble there are tests for equality, greater than and less than. The tests for equality are = and != which test whether two expressions are equal or whether they are not equal respectivelly and the tests for less than and greater than are \textless, \textless=, \textgreater, \textgreater= which are less than, less than or equals too, greater than and greater than or equals to.
+In Scribble there are tests for equality, greater than and less than. The tests for equality are = and != which test whether two expressions are equal or whether they are not equal respectivelly and the tests for less than and greater than are \textless, \textless=, \textgreater and \vspace{1pt} \textgreater= which are less than, less than or equals too, greater than and greater than or equals to.
 
-The tests for equality work with boolean and numeric expressions. The \textless \textless= \textgreater \textgreater= tests only work on expressions that can be evaluated to numbers. In both cases the expression on the left hand side has to evaluate to the same type as the expression on the right hand side ( So comparisons or arithmetic on different types  )
+The tests for equality work with boolean and numeric expressions. The \textless, \textless=, \textgreater \vspace{1pt} and \textgreater= tests only work on expressions that can be evaluated to numbers. In both cases the expression on the left hand side has to evaluate to the same type as the expression on the right hand side ( So comparisons or arithmetic on different types  )
 
 All of these tests will result in a boolean value with the result being produced.
 
@@ -106,7 +106,7 @@ Some examples would be
 
 10 = 10; would be true
 
-true \textgreater false; would cause a syntax error as > only works on numeric expressions
+true \textgreater \vspace{1pt} false; would cause a syntax error as \textgreater \vspace{1pt} only works on numeric expressions
 
 There is also a logical and test. Using the syntax left \& right will result in a boolean expression that is only true if both left and right are true. So true \& true will equal true however any other variation will return false. 
 
@@ -285,7 +285,7 @@ var john := blake;
 
 Then john would be a reference to the same instance of the structure that blake does and not a copy. 
 
-To access members of a structure you use the -\textgreater operator. So to access the firstname of the User structure created in the last example you would write blake -\textgreater FirstName 
+To access members of a structure you use the -\textgreater \vspace{1pt} operator. So to access the firstname of the User structure created in the last example you would write blake -\textgreater FirstName 
 
 A reference will default to 'nil' unless it is assigned to something. You can also assign it to nil to remove the data connected to it. The language handles all memory allocation under the hood so it will be automatically freed without any explicit deletion.
 
@@ -419,7 +419,7 @@ in this example the Write function in name space sys is called which should caus
 ++ Increment
 -- Decrement
 . Namespace entry select
--\textgreater Structure element select
+-> Structure element select
 = Equality test
 != Non equality test
 > Greater than
@@ -670,7 +670,7 @@ CallFunction(Fn : Register ( 1 byte) ) - Call a function with the name of the st
 reference to
 
 Return - Returns to the previous function and sets the program counter to the instruction after the
-function call. If there is no function to return to then the VM->execute function will return and by default the program will exit.
+function call. If there is no function to return to then the VM-\textgreater execute function will return and by default the program will exit.
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
