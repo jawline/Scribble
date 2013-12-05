@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.12.1)  5 DEC 2013 02:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.12.1)  5 DEC 2013 03:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -393,73 +393,39 @@ Missing character: There is no ’ in font cmr10!
 [6
 
 ]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 132.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 134.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <11> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 132.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 134.
  [7] [8] [9]
 [10]
-Overfull \hbox (53.36942pt too wide) in paragraph at lines 292--292
+Overfull \hbox (53.36942pt too wide) in paragraph at lines 294--294
 []\OT1/cmtt/m/n/10.95 'for' Expression ';' Expression ';' Expression 'do' ( Sta
 tement | '{' Statements '}' )[] 
  []
 
-[11] [12] [13] [14] [15]
+[11] [12] [13] [14] [15] [16]
 Chapter 3.
 
-Overfull \hbox (20.55577pt too wide) in paragraph at lines 529--530
+Overfull \hbox (20.55577pt too wide) in paragraph at lines 543--544
 []\OT1/cmr/m/n/10.95 This tree is built from chil-dren of the State-ment class 
 ( See src/Scribble/Statement/Statement.hpp
  []
 
-[16
+[17
 
-] [17] [18]
+] [18] [19]
 Chapter 4.
-[19
+[20
 
 ]
 Chapter 5.
-[20
+[21
 
-] [21]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
- [22]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no “ in font cmr10!
+] [22]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
@@ -485,11 +451,45 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
  [23]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+ [24]
 Chapter 6.
-[24
+[25
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 728--729
+Underfull \hbox (badness 10000) in paragraph at lines 742--743
 []\OT1/cmr/m/n/10.95 The MSDN re-source on data type ranges http://msdn.microso
 ft.com/en-
  []
@@ -498,24 +498,24 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no Ž in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 730--731
+Underfull \hbox (badness 10000) in paragraph at lines 744--745
 []\OT1/cmr/m/n/10.95 A No-Frills In-tro-duc-tion to Lua 5.1 VM In-struc-tions
  []
 
 
-Overfull \hbox (26.88855pt too wide) in paragraph at lines 731--732
+Overfull \hbox (26.88855pt too wide) in paragraph at lines 745--746
 []\OT1/cmr/m/n/10.95 Java Vir-tual Ma-chine - Wikipedia Ar-ti-cle - http://en.w
 ikipedia.org/wiki/Java[]virtual[]machine 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 738.
-[25
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 752.
+[26
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 738.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 752.
  (./Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 738.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 738.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 752.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 752.
 Package rerunfilecheck Info: File `Report.out' has not changed.
 (rerunfilecheck)             Checksum: 9966623F0E5DE62D58C4B5A8A0DD929C;2131.
 
@@ -523,11 +523,11 @@ Package rerunfilecheck Info: File `Report.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 738.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 752.
  ) 
 Here is how much of TeX's memory you used:
- 6081 strings out of 495031
- 89357 string characters out of 6181531
+ 6082 strings out of 495031
+ 89364 string characters out of 6181531
  178099 words of memory out of 5000000
  9165 multiletter control sequences out of 15000+600000
  11417 words of font info for 40 fonts, out of 8000000 for 9000
@@ -542,10 +542,10 @@ fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmtt10.pfb>
-Output written on Report.pdf (26 pages, 389874 bytes).
+Output written on Report.pdf (27 pages, 391200 bytes).
 PDF statistics:
- 382 PDF objects out of 1000 (max. 8388607)
- 338 compressed objects within 4 object streams
- 79 named destinations out of 1000 (max. 500000)
+ 386 PDF objects out of 1000 (max. 8388607)
+ 341 compressed objects within 4 object streams
+ 80 named destinations out of 1000 (max. 500000)
  302 words of extra memory for PDF output out of 10000 (max. 10000000)
 

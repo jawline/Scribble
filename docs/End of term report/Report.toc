@@ -17,27 +17,27 @@
 \contentsline {subsection}{\numberline {2.9.1}Constraints}{14}{subsection.2.9.1}
 \contentsline {section}{\numberline {2.10}Packages}{15}{section.2.10}
 \contentsline {section}{\numberline {2.11}Operators Summary}{15}{section.2.11}
-\contentsline {chapter}{\numberline {3}The Compiler}{16}{chapter.3}
-\contentsline {section}{\numberline {3.1}Lexical Analysis}{16}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Flex}{16}{subsection.3.1.1}
-\contentsline {section}{\numberline {3.2}Parsing}{16}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Bison}{16}{subsection.3.2.1}
-\contentsline {section}{\numberline {3.3}The Statement Tree}{16}{section.3.3}
-\contentsline {section}{\numberline {3.4}Type Inference}{17}{section.3.4}
-\contentsline {section}{\numberline {3.5}Function Matching}{17}{section.3.5}
-\contentsline {section}{\numberline {3.6}Error Checking}{17}{section.3.6}
-\contentsline {chapter}{\numberline {4}Intermediate Code}{19}{chapter.4}
-\contentsline {section}{\numberline {4.1}Parsing}{19}{section.4.1}
-\contentsline {chapter}{\numberline {5}The Virtual Machine}{20}{chapter.5}
-\contentsline {section}{\numberline {5.1}Registers}{20}{section.5.1}
-\contentsline {section}{\numberline {5.2}Primitives}{20}{section.5.2}
-\contentsline {section}{\numberline {5.3}Instructions}{21}{section.5.3}
-\contentsline {section}{\numberline {5.4}Instruction Set}{21}{section.5.4}
-\contentsline {section}{\numberline {5.5}Namespaces, Functions \& Types}{21}{section.5.5}
-\contentsline {section}{\numberline {5.6}Heap}{22}{section.5.6}
-\contentsline {subsection}{\numberline {5.6.1}Garbage Collection}{22}{subsection.5.6.1}
-\contentsline {section}{\numberline {5.7}Instructions List}{22}{section.5.7}
-\contentsline {chapter}{\numberline {6}Progress \& Second term goals}{24}{chapter.6}
-\contentsline {section}{\numberline {6.1} Current Progress }{24}{section.6.1}
-\contentsline {section}{\numberline {6.2} Future Tasks }{24}{section.6.2}
-\contentsline {chapter}{Bibliography}{25}{chapter*.3}
+\contentsline {chapter}{\numberline {3}The Compiler}{17}{chapter.3}
+\contentsline {section}{\numberline {3.1}Lexical Analysis}{17}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Flex}{17}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Parsing}{17}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Bison}{17}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}The Statement Tree}{17}{section.3.3}
+\contentsline {section}{\numberline {3.4}Type Inference}{18}{section.3.4}
+\contentsline {section}{\numberline {3.5}Function Matching}{18}{section.3.5}
+\contentsline {section}{\numberline {3.6}Error Checking}{18}{section.3.6}
+\contentsline {chapter}{\numberline {4}Intermediate Code}{20}{chapter.4}
+\contentsline {section}{\numberline {4.1}Parsing}{20}{section.4.1}
+\contentsline {chapter}{\numberline {5}The Virtual Machine}{21}{chapter.5}
+\contentsline {section}{\numberline {5.1}Registers}{21}{section.5.1}
+\contentsline {section}{\numberline {5.2}Primitives}{21}{section.5.2}
+\contentsline {section}{\numberline {5.3}Instructions}{22}{section.5.3}
+\contentsline {section}{\numberline {5.4}Instruction Set}{22}{section.5.4}
+\contentsline {section}{\numberline {5.5}Namespaces, Functions \& Types}{22}{section.5.5}
+\contentsline {section}{\numberline {5.6}Heap}{23}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Garbage Collection}{23}{subsection.5.6.1}
+\contentsline {section}{\numberline {5.7}Instructions List}{23}{section.5.7}
+\contentsline {chapter}{\numberline {6}Progress \& Second term goals}{25}{chapter.6}
+\contentsline {section}{\numberline {6.1} Current Progress }{25}{section.6.1}
+\contentsline {section}{\numberline {6.2} Future Tasks }{25}{section.6.2}
+\contentsline {chapter}{Bibliography}{26}{chapter*.3}

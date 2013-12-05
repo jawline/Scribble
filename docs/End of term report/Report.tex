@@ -51,7 +51,7 @@ Signature:
 
 \begin{abstract}
 
-The aim of the project is to create a platform independant programming language, parser and virtual machine capable of being embedded as a scripting language inside larger C++ applications.
+The aim of the project is to create a platform independent programming language, parser and virtual machine capable of being embedded as a scripting language inside larger C++ applications.
 
 \end{abstract}
 
@@ -72,13 +72,13 @@ The aim of my project was to create a programming language which could be used w
 
 This approach is most commonly taken within the games industry with languages like LUA, UnrealScript, TorqueScript and JavaScript being used to let developers create a scene or manipulate a virtual world without needing to directly interact with the substantially more complex C or C++ source code in which these engines are usually written.
 
-The design of my project was split into three key sections, the compiler handles the process of turning the input source into executable code using the syntax I have defined. The intermediate language acts as a stepping stone, a language the compiler can relitively easily generate code for which can then be turned into instructions for the virtual machine which will do the actual execution.
+The design of my project was split into three key sections, the compiler handles the process of turning the input source into executable code using the syntax I have defined. The intermediate language acts as a stepping stone, a language the compiler can relatively easily generate code for which can then be turned into instructions for the virtual machine which will do the actual execution.
 
 \section{Motivation}
 
 I decided to create a scripting language because they are an increasingly important part of software engineering, uses range from everyday software such as Microsoft office to highly specific software like virtual reality. I have used languages like LUA and Javascript ( Through V8 ) in previous projects and have wanted to experiment with my own ideas about how a language should be written based on my experiences with the others. 
 
-My choices when defining syntax are the result of a desire to take what I consider the better parts of the Go programming language and make them usable within the context of a scripting language. GoLang also made me very interested in seeing whether a syntax could be defined so that non object oriented language was as capable and readable when writing equivilent programs as its OO alternatives ( In this case Javascript would likely be the closest comparison ).
+My choices when defining syntax are the result of a desire to take what I consider the better parts of the Go programming language and make them usable within the context of a scripting language. GoLang also made me very interested in seeing whether a syntax could be defined so that non object oriented language was as capable and readable when writing equivalent programs as its OO alternatives ( In this case Javascript would likely be the closest comparison ).
 
 \chapter{The Language}
 
@@ -100,9 +100,9 @@ bool - A boolean value capable of being set to only 'true' or 'false'.
 
 int - A 32 bit signed integer capable of representing values between  −2,147,483,648 and 2,147,483,647.
 
-float32 - A 32 bit floating point value capable of representing approximations real numbers. Floats are differentiate from integers by ending with an f, so 5f would be a float32 representation of the number 5 wheras just writing 5 would be a int.
+float32 - A 32 bit floating point value capable of representing approximations real numbers. Floats are differentiate from integers by ending with an f, so 5f would be a float32 representation of the number 5 whereas just writing 5 would be a int.
 
-The language is also capable of storing and handling references to arrays or structures, a value of the type string for instance would be a reference to a null terminated array of characters. Array and structure reference types are also possible and are explained in the Arrays and Structures sections respectivelly.
+The language is also capable of storing and handling references to arrays or structures, a value of the type string for instance would be a reference to a null terminated array of characters. Array and structure reference types are also possible and are explained in the Arrays and Structures sections respectively.
 
 \section{Arithmetic}
 
@@ -120,7 +120,7 @@ Using the '-' operator with only a right hand expression is also valid and will 
 
 You can also use i++, ++i, i-- and --i to increment and decrement the value of integer variables by one. These operators also carry the value of the variable either before or after the increment i++ and i-- will increment and decrement respectively and return the original value. ++i and --i will increment and decrement and then return the new value.
 
-These are defined in the grammer as
+These are defined in the grammar as
 \begin{verbatim}
 WORD '++'
 WORD '--'
@@ -131,7 +131,7 @@ WORD '--'
 
 \section{Tests \& Boolean operations}
 
-In Scribble there are tests for equality, greater than and less than. The tests for equality are = and != which test whether two expressions are equal or whether they are not equal respectivelly and the tests for less than and greater than are \textless, \textless=, \textgreater and \vspace{1pt} \textgreater= which are less than, less than or equals too, greater than and greater than or equals to.
+In Scribble there are tests for equality, greater than and less than. The tests for equality are = and != which test whether two expressions are equal or whether they are not equal respectively and the tests for less than and greater than are \textless, \textless=, \textgreater and \vspace{1pt} \textgreater= which are less than, less than or equals too, greater than and greater than or equals to.
 
 The tests for equality work with boolean and numeric expressions. The \textless, \textless=, \textgreater \vspace{1pt} and \textgreater= tests only work on expressions that can be evaluated to numbers. In both cases the expression on the left hand side has to evaluate to the same type as the expression on the right hand side ( So comparisons or arithmetic on different types  ).
 
@@ -152,7 +152,7 @@ In addition to these tests there the boolean tests 'and' \& 'or'. These tests ca
  
 The 'and' test will check whether the left and right hand arguments are both true and if that is the case then it will evaluate to true, in the case that the left hand side is false the 'and' test will not check the right hand side. 
 
-The 'or' test will check whether either the left and right hand arguments are true. It checks the left argument first and in the case that it is true then the right hand side will not be checked as the test is guarenteed to be true.
+The 'or' test will check whether either the left and right hand arguments are true. It checks the left argument first and in the case that it is true then the right hand side will not be checked as the test is guaranteed to be true.
 
 These are defined in the grammar as
 
@@ -173,7 +173,7 @@ into the grammar to allow a developer to manipulate how an expression is execute
 
 \section{Variables}
 
-Scribble was designed to be a strict language in which every piece of data had a defined type. It was also designed with type declerations on the right hand side of data to attempt to increase the readability of code. This however made variable definitions convoluted as something like 'int A = 0;' in a language like C would become 'var A : int := 0;' in Scribble. This lead to an alternative method of defining variables was defined which allowed a developer to infer a created variables type from the type of an expression at compile time, maintaining the strict type system within the language but making the definition of variables much simpler.
+Scribble was designed to be a strict language in which every piece of data had a defined type. It was also designed with type decelerations on the right hand side of data to attempt to increase the readability of code. This however made variable definitions convoluted as something like 'int A = 0;' in a language like C would become 'var A : int := 0;' in Scribble. This lead to an alternative method of defining variables was defined which allowed a developer to infer a created variables type from the type of an expression at compile time, maintaining the strict type system within the language but making the definition of variables much simpler.
 
 Defined in the grammar as
 
@@ -181,7 +181,7 @@ Defined in the grammar as
 'var' WORD ':' Type 
 \end{verbatim}
 
-for variables which explicitely specify their type and
+for variables which explicitly specify their type and
 
 \begin{verbatim}
 'var' WORD ':=' Expression
@@ -461,25 +461,37 @@ func A() : float32 {
  
 \end{verbatim}
 
-is not allowed. This is becuase the compiler would have no way of supporting type inference on variables and matching functions.
+is not allowed. This is because the compiler would have no way of supporting type inference on variables and matching functions.
 
 \section{Packages}
 
-A package is represented as a separate file and interaction between methods and functions in a different package to the one being compiled must be explicit ( For example if function A in Hello wants to call function B in world it must use the syntax world.B(); and not just B(); ).
+Every file in Scribble is seen as a separate package. These packages contain sets of functions and structures which make up the functionality of that part of the program. Scribble also defines syntax so that packages can import and use structures and functions from other packages.
 
-To use any structures or functions declared in another namespace you must first import it. This will load and compile the file if it has not already been compiled or link it to the current if it has.
+I originally attempted to have every package addressed by its file name ( So to use the math library you would first import math and then write math.Something();  ) however I ran into issues when two packages shared a name ( Such as math.sc in /examples/tests/ and math.sc in /examples/math/ ). Because of this I devised a syntax which lets you choose how an imported package will be addressed. 
 
-An example of this is the "sys" package which provides functions that allow input and output.
-
+You do this by writing
 \begin{verbatim}
-import("sys");
-
-func main() {
- sys.Write("Hello World");
-}
+package LocalName := import("Path/To/File");
 \end{verbatim}
 
-in this example the Write function in name space sys is called which should cause 'Hello World' to be written to the console.
+To use a function or structure from a different package you first write the packages local name then a '.' and then the name of the function or structure you wish to use. For example to print some output to the screen you write 
+\begin{verbatim}sys.Write("Hello World");\end{verbatim}
+
+I have found so far that this approach is very effective, allowing Scribble files to be split up so that code can be split up logically and common functions can be reused without adding a difficult syntax when interacting with different packages.
+
+This has also given me the opportunity to start building a 'library' of packages which provide common functionality. See the packages in /examples/sorts/ and /examples/math/ for examples.
+
+Importing is defined in the grammar as 
+
+\begin{verbatim}
+'package' WORD ':=' 'import' '(' STRING ')' ';'
+\end{verbatim}
+
+and the use of an imported function is defined as
+
+\begin{verbatim}
+WORD '.' WORD '(' Arguments ')'
+\end{verbatim}
 
 \section{Operators Summary}
 
@@ -492,7 +504,7 @@ in this example the Write function in name space sys is called which should caus
 ( ) Function call
 ++ Increment
 -- Decrement
-. Namespace entry select
+. Package entry select
 -> Structure element select
 = Equality test
 != Non equality test
@@ -506,7 +518,7 @@ in this example the Write function in name space sys is called which should caus
 
 \chapter{The Compiler}
 
-The Scribble compiler takes the input files and returns either a tree or statements or intermediate code which can be used to execute the program. The compiler also checks that every input file meets all of the rules of the language ( Both syntax rules and type rules ), handles type inference and links function calls with their equivilent function.
+The Scribble compiler takes the input files and returns either a tree or statements or intermediate code which can be used to execute the program. The compiler also checks that every input file meets all of the rules of the language ( Both syntax rules and type rules ), handles type inference and links function calls with their equivalent function.
 
 \section{Lexical Analysis}
 
@@ -544,13 +556,13 @@ This adds an additional complexity to the compiler as it has to be able to selec
 
 There are several kind of mistakes that can be made when writing Scribble files. 
 
-Lexical errors occur when the input string cannot be turned into tokens. These will rarely occur in practice in Scribble as most items that aren't keywords would be interpretted as Words for variable IDs or function calls. They will occur however when symbols which are not valid in function names or variable id's are used ( Something like ?!*% )
+Lexical errors occur when the input string cannot be turned into tokens. These will rarely occur in practice in Scribble as most items that aren't keywords would be interpreted as Words for variable IDs or function calls. They will occur however when symbols which are not valid in function names or variable id's are used ( Something like ?!*% )
 
 Syntax errors occur when the set of tokens produced by the lexical analyser does not make a valid program according to the grammar. 
 
-Type errors occur in Scribble whenever an operation is performed between two seperate types. This can be attempting to assign the value of variable to an expression of the wrong type, comparing expressions of different types or attempting arithmetic on expressions of different types. As Scribble is a strict language no casting is implicit these would all be issues that cause the compiler to exit without compiling the program. These errors are caught using the checkTree function in the statement tree, the reason they are not checked when compiling the grammar is because as functions can be used before they are defined the type of expressions can remain unknown until the statement trees for every function in a package are constructed.
+Type errors occur in Scribble whenever an operation is performed between two separate types. This can be attempting to assign the value of variable to an expression of the wrong type, comparing expressions of different types or attempting arithmetic on expressions of different types. As Scribble is a strict language no casting is implicit these would all be issues that cause the compiler to exit without compiling the program. These errors are caught using the checkTree function in the statement tree, the reason they are not checked when compiling the grammar is because as functions can be used before they are defined the type of expressions can remain unknown until the statement trees for every function in a package are constructed.
 
-Resolution errors occur when the programmer has tried to use a structure, function or package that do not exist or have not been imported. This is caught when the compiler tries to link all function calls or structure references to equivilent functions or structures. Whilst most of these errors are obvious resolution errors can also be caused when a programmer uses a function which does not have arguments that match it. For example
+Resolution errors occur when the programmer has tried to use a structure, function or package that do not exist or have not been imported. This is caught when the compiler tries to link all function calls or structure references to equivalent functions or structures. Whilst most of these errors are obvious resolution errors can also be caused when a programmer uses a function which does not have arguments that match it. For example
  
 \begin{verbatim}
 func Abs(i : float32) {
@@ -567,15 +579,15 @@ would cause a resolution error as although the function Abs is defined the compi
 
 \chapter{Intermediate Code}
 
-To make debugging generated code easier and to seperate the compiler and virtual machine logically an intermediate language was constructed. This language was modeled around assembly with each line representing a single virtual machine instruction. It follows a three address format, with most instructions taking two inputs and an output.
+To make debugging generated code easier and to separate the compiler and virtual machine logically an intermediate language was constructed. This language was modelled around assembly with each line representing a single virtual machine instruction. It follows a three address format, with most instructions taking two inputs and an output.
 
 To differentiate between integers and registers the '\$' symbol is placed before any register. So a command to load the integer 5 into register 0 would be 'load 5 \$0' instead of 'load 5 0'.
 
-Scribble's intermediate code has no type checking whatsoever, this is expected to be done by the high level compiler. Whilst the virtual machine does sanity check types, arrays lengths etc any errors in intermediate code will only be picked up at runtime.
+Scribbles intermediate code has no type checking whatsoever, this is expected to be done by the high level compiler. Whilst the virtual machine does sanity check types, arrays lengths etc. any errors in intermediate code will only be picked up at runtime.
 
 \section{Parsing}
 
-The conversion of intermediate code to virtual machine instructions is done by a seperate Lex based compiler ( see src/SASM/ ). It is a much simpler compiler than the Scribble compiler capable of producing objects of the class 'InstructionSet' from a piece of intermediate code.
+The conversion of intermediate code to virtual machine instructions is done by a separate Lex based compiler ( see src/SASM/ ). It is a much simpler compiler than the Scribble compiler capable of producing objects of the class 'InstructionSet' from a piece of intermediate code.
 
 \chapter{The Virtual Machine}
 
@@ -595,14 +607,14 @@ This approach to variable storage has some major disadvantages, if more than 255
 
 Primitives within the virtual machine are the name given to values which can be stored within a 64 bit register. The instruction set has support for integer values of size 1, 2, 4 and 8 bytes as well as support for floating point numbers of 4 bytes.
 
-Support for all primitives is not yet fully complete within the virtual machine, there needs to be support for 64 bit floating point values and a need for testing how effectivelly primitives function on the heap.
+Support for all primitives is not yet fully complete within the virtual machine, there needs to be support for 64 bit floating point values and a need for testing how effectively primitives function on the heap.
 
 \section{Instructions}
 
 Instructions within ScribbleVM will all be fixed size ( 8 bytes ). The first byte of the instruction is used to
 identify what operation the instruction is to perform and the remaining bytes carry the operands for the instruction.
 
-When I designed the virtual machine I made the decision to make every instruction the same size. This choice made any flow control or jumps considerably easier as now the compiler doesn't have to take the length of instructions it is jumping over into account however it has the downside of forcing smaller operations such as the 'TestEqualsZero' to waste space. This issue is exasterbated by the large size of each instruction in Scribble which leads to a lot of instructions wasting space. I will be attempting to reduce the size of each instruction over the next term and potentially redesigning how several instructions function in order to minimize this, my aim being to ensure that each instruction can be encoded into 4 bytes instead of the current 8.
+When I designed the virtual machine I made the decision to make every instruction the same size. This choice made any flow control or jumps considerably easier as now the compiler doesn't have to take the length of instructions it is jumping over into account however it has the downside of forcing smaller operations such as the 'TestEqualsZero' to waste space. This issue is exacerbated by the large size of each instruction in Scribble which leads to a lot of instructions wasting space. I will be attempting to reduce the size of each instruction over the next term and potentially redesigning how several instructions function in order to minimize this, my aim being to ensure that each instruction can be encoded into 4 bytes instead of the current 8.
 
 \section{Instruction Set}
 
@@ -612,13 +624,13 @@ of the constants used in the functions.
 
 The instructions list is a list of fixed size instructions 
 
-The constants area was necissary to allow for instructions which needed more data than could fit within a single instruction or to store data of varying size such as a string. Currently this area is access via an index to the first byte of the data to be looked at from the instruction requiring, this approach has the drawback of requiring 4 bytes per constant address to be encoded into an instruction. I will revise this during the second term to make the constant zone more like a table with an index referencing a single element in the constant zone, this should make 2 bytes sufficient for an index and reduce the size of instructions which use the constant area.
+The constants area was necessary to allow for instructions which needed more data than could fit within a single instruction or to store data of varying size such as a string. Currently this area is access via an index to the first byte of the data to be looked at from the instruction requiring, this approach has the drawback of requiring 4 bytes per constant address to be encoded into an instruction. I will revise this during the second term to make the constant zone more like a table with an index referencing a single element in the constant zone, this should make 2 bytes sufficient for an index and reduce the size of instructions which use the constant area.
 
 \section{Namespaces, Functions \& Types}
 
 Instead of having every function in Scribble defined in a single instruction set with labels to jumps to access other functions like machine code I instead have a seperate instruction set for every function and have instructions and special instructions to call between them. I chose to place these instructions with the definition of types which also have to be defined so that the virtual machine can find their size and garbage collection information during runtime.
 
-Instead of having a single large list of entries I chose to instead create 'Namespaces' within the virtual machine. These namespaces form a tree structure, having children which are either functions, types or other namespaces. This reduced the size of the list and also removed the issue of conflicts occuring when two packages declared a function of the same and tried to register them both to the virtual machine.
+Instead of having a single large list of entries I chose to instead create 'Namespaces' within the virtual machine. These namespaces form a tree structure, having children which are either functions, types or other namespaces. This reduced the size of the list and also removed the issue of conflicts occurring when two packages declared a function of the same and tried to register them both to the virtual machine.
 
 Calls to entries in different namespaces are resolved at runtime using ':' as a delimiter ( So a call to
 hello:World would look for the entry World in the hello namespace ). I use ':' as the delimiter as it is not valid as a package name under Scribble and so there would not be conflicts with namespaces like 'Test:Namespace'.
@@ -719,14 +731,14 @@ Currently variables are located in registers, whilst this approach was beneficia
 
 I will be looking into potential faster alternatives to my garbage collection routine. As the virtual machine has to be halted while the garbage collector is running any potential increases in speed of garbage collection should be investigated as they will significantly impact on the time it takes to execute a program.
 
-A application programming interface ( API ) needs to be written to allow easy interaction between native and Scribble functions. Currently all interaction is done by manipulating the state of the virtual machine through a very crude interface that relies on a deep knowledge of how the VM works. For the language to be viable as a scripting language this needs to be greatly simplified so that developers can easily call native code or Scribble functions however this presents several technical issues regarding arguments located on the heap which will need to be overcome.
+A application programming interface ( API ) needs to be written to allow easy interaction between native and Scribble functions. Currently all interaction between the native code and the VM is done by manipulating the state of the virtual machine through a very crude interface that relies on a intricate knowledge of how the VM works. For the language to be viable as a scripting language this needs to be greatly simplified so that developers can easily call native code or Scribble functions however this presents several technical issues regarding arguments located on the heap which will need to be overcome.
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliography}
 \bibitem{BISON} Bison - The GNU Parser generator website http://www.gnu.org/software/bison/
-\bibitem{FLEX} Flex - The fast lexical analyzer website http://flex.sourceforge.net/
+\bibitem{FLEX} Flex - The fast lexical analyser website http://flex.sourceforge.net/
 \bibitem{MSDNRanges} The MSDN resource on data type ranges http://msdn.microsoft.com/en-us/library/s3f49ktz.aspx
 \bibitem{GOLANG_SPEC} The GoLang specification http://golang.org/ref/spec
 \bibitem{LUAVM} A No-Frills Introduction to Lua 5.1 VM Instructions http://luaforge.net/docman/83/98/ANoFrillsIntroToLua51VMInstructions.pdf‎
