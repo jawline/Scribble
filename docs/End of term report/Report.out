@@ -2,28 +2,28 @@
 \BOOKMARK [0][-]{chapter*.2}{Abstract}{}% 2
 \BOOKMARK [0][-]{chapter*.3}{Project Specification}{}% 3
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 4
-\BOOKMARK [0][-]{chapter.2}{The Language}{}% 5
-\BOOKMARK [1][-]{section.2.1}{Types}{chapter.2}% 6
-\BOOKMARK [1][-]{section.2.2}{Arithmetic}{chapter.2}% 7
-\BOOKMARK [1][-]{section.2.3}{Tests}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.4}{Expressions}{chapter.2}% 9
-\BOOKMARK [1][-]{section.2.5}{Variables}{chapter.2}% 10
-\BOOKMARK [1][-]{section.2.6}{Flow Control}{chapter.2}% 11
-\BOOKMARK [1][-]{section.2.7}{Arrays}{chapter.2}% 12
-\BOOKMARK [1][-]{section.2.8}{Structures}{chapter.2}% 13
-\BOOKMARK [1][-]{section.2.9}{Functions}{chapter.2}% 14
-\BOOKMARK [1][-]{section.2.10}{Packages}{chapter.2}% 15
-\BOOKMARK [1][-]{section.2.11}{Operators Summary}{chapter.2}% 16
-\BOOKMARK [0][-]{chapter.3}{The Compiler}{}% 17
-\BOOKMARK [1][-]{section.3.1}{Lexical Analysis}{chapter.3}% 18
-\BOOKMARK [1][-]{section.3.2}{Parsing}{chapter.3}% 19
-\BOOKMARK [1][-]{section.3.3}{The Statement Tree}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.4}{Type Inference}{chapter.3}% 21
-\BOOKMARK [1][-]{section.3.5}{Function Matching}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.6}{Error Checking}{chapter.3}% 23
-\BOOKMARK [0][-]{chapter.4}{Intermediate Code}{}% 24
-\BOOKMARK [1][-]{section.4.1}{Instructions}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.2}{Parsing}{chapter.4}% 26
+\BOOKMARK [1][-]{section.1.1}{Motivation}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{The Language}{}% 6
+\BOOKMARK [1][-]{section.2.1}{Types}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Arithmetic}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.3}{Tests \046 Boolean operations}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.4}{Expressions}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.5}{Variables}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.6}{Flow Control}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.7}{Arrays}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.8}{Structures}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.9}{Functions}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.10}{Packages}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.11}{Operators Summary}{chapter.2}% 17
+\BOOKMARK [0][-]{chapter.3}{The Compiler}{}% 18
+\BOOKMARK [1][-]{section.3.1}{Lexical Analysis}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.2}{Parsing}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.3}{The Statement Tree}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.4}{Type Inference}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.5}{Function Matching}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.6}{Error Checking}{chapter.3}% 24
+\BOOKMARK [0][-]{chapter.4}{Intermediate Code}{}% 25
+\BOOKMARK [1][-]{section.4.1}{Parsing}{chapter.4}% 26
 \BOOKMARK [0][-]{chapter.5}{The Virtual Machine}{}% 27
 \BOOKMARK [1][-]{section.5.1}{Registers}{chapter.5}% 28
 \BOOKMARK [1][-]{section.5.2}{Primitives}{chapter.5}% 29
@@ -32,4 +32,7 @@
 \BOOKMARK [1][-]{section.5.5}{Namespaces, Functions \046 Types}{chapter.5}% 32
 \BOOKMARK [1][-]{section.5.6}{Heap}{chapter.5}% 33
 \BOOKMARK [1][-]{section.5.7}{Instructions List}{chapter.5}% 34
-\BOOKMARK [0][-]{chapter*.4}{Bibliography}{}% 35
+\BOOKMARK [0][-]{chapter.6}{Progress \046 Second term goals}{}% 35
+\BOOKMARK [1][-]{section.6.1}{ Current Progress }{chapter.6}% 36
+\BOOKMARK [1][-]{section.6.2}{ Future Tasks }{chapter.6}% 37
+\BOOKMARK [0][-]{chapter*.4}{Bibliography}{}% 38
