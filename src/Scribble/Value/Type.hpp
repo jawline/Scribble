@@ -128,6 +128,10 @@ public:
 
 	TypeReference getSubtypeReference();
 
+	/**
+	 * Get the human readable name of this type.
+	 */
+
 	virtual std::string getTypeName() {
 
 		switch (getType()) {
@@ -151,7 +155,6 @@ public:
 
 		return "ERROR: Unresolved/Illegal Type";
 	}
-
 
 };
 

@@ -307,6 +307,26 @@ The length of an array can be accessed via the len(Array) function. This will re
 
 There is no explicit array destruction in Scribble, once there are no more references to a given piece of data ( Locally or in the heap ) it will automatically be freed.
 
+The initialization of an array is defined in the grammar as
+\begin{verbatim}
+
+'[' Expression ']' Type
+
+\end{verbatim}
+
+The compilation will only succeed if the expression is an integer expression.
+
+Access to array elements is defined in the grammar as
+\begin{verbatim}
+
+Sets array data at a given index
+WORD '[' Expression ']' ':=' Expression
+
+Gets array data at a given index
+WORD '[' Expression ']'
+
+\end{verbatim}
+
 \section{Structures}
 
 Structures can be declared using the syntax type Name := struct { Name : Type, Name : Type }. Structures can only be declared outside of functions. For example
@@ -381,6 +401,41 @@ type List := struct {
 }
 \end{verbatim}
 
+Structure definition is defined in the grammar as
+\begin{verbatim}
+
+DataDefinition: 'WORD' ':' Type
+StructureData: DataDefinition | StructureData ',' DataDefinition
+
+Structure:
+'type' WORD ':=' 'struct' '{'
+  StructureData
+'}' ';'
+
+\end{verbatim}
+
+The initialization of a structure is defined as
+
+\begin{verbatim}
+
+WORD '{' Arguments '}'
+
+\end{verbatim}
+
+Where the WORD is the name of the structure and the arguments are statements with which the values are to be initialized.
+
+The getting and setting of structure data is defined in the grammar as 
+\begin{verbatim}
+
+For set
+Expression '->' WORD ':=' Expression
+
+For get
+Expression '->' WORD
+
+\end{verbatim}
+
+where the expression evaluates to a reference to the structure and the WORD is the name of the variable to get or set.
 
 \section{Functions}
 
@@ -445,6 +500,19 @@ func PrintTrue(i : int) {
 
 this would compile successfully and upon any call to PrintTrue the compiler would resolve the correct function to be executed.
 
+
+\begin{verbatim}
+
+'func' WORD '(' FunctionArguments ')' ':' Type '{' Statements '}'
+
+\end{verbatim}
+
+and function calls are written into the grammar as
+
+\begin{verbatim}
+WORD '(' Arguments ')' ';'
+\end{verbatim}
+
 \subsection{Constraints}
 
 Functions which take the same arguments but differ by return type cannot share the same name. For instance
@@ -462,6 +530,8 @@ func A() : float32 {
 \end{verbatim}
 
 is not allowed. This is because the compiler would have no way of supporting type inference on variables and matching functions.
+
+The definition of the function in the grammar is
 
 \section{Packages}
 
@@ -731,7 +801,7 @@ Currently variables are located in registers, whilst this approach was beneficia
 
 I will be looking into potential faster alternatives to my garbage collection routine. As the virtual machine has to be halted while the garbage collector is running any potential increases in speed of garbage collection should be investigated as they will significantly impact on the time it takes to execute a program.
 
-A application programming interface ( API ) needs to be written to allow easy interaction between native and Scribble functions. Currently all interaction between the native code and the VM is done by manipulating the state of the virtual machine through a very crude interface that relies on a intricate knowledge of how the VM works. For the language to be viable as a scripting language this needs to be greatly simplified so that developers can easily call native code or Scribble functions however this presents several technical issues regarding arguments located on the heap which will need to be overcome.
+A application programming interface ( API ) needs to be written to allow easy interaction between native and Scribble functions. Currently all interaction between the native code and the VM is done by manipulating the state of the virtual machine through a very crude interface that relies on a intricate knowledge of how the VM works. For the language to be viable as a scripting language this needs to be greatly simplified so that developers can easily call native code or Scribble functions, however this presents several technical issues regarding arguments located on the heap which will need to be overcome.
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage

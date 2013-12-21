@@ -270,7 +270,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
-	std::vector < SP< Variable >> variableReferences = VariableReferences;
+	std::vector < SP < Variable >> variableReferences = VariableReferences;
 
 	StatementReferences.clear();
 	TypeReferences.clear();
@@ -322,7 +322,9 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 				for (unsigned int j = i + 1; j < setToTest.size(); j++) {
 
 					if (testFunctionEquivilence(setToTest[i], setToTest[j])) {
-						throw ParserException(filename, std::string("Function set ") + iter->first + " contains two identical functions ( Same number of arguments and return type )");
+						throw ParserException(filename,
+								std::string("Function set ") + iter->first
+										+ " contains two identical functions ( Same number of arguments and return type )");
 					}
 
 				}
@@ -342,16 +344,21 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 		//then set change the type namespace from the local representation to the internal parser representation
 		//Otherwise throw an error because the package has not been imported.
 
-		if (imports.find(typeReferences[i]->typeNamespace) != imports.end()) {
+		if (typeReferences[i]->typeNamespace.length() > 0) {
 
-			typeReferences[i]->typeNamespace = getUniformPath(
-					imports.find(typeReferences[i]->typeNamespace)->second);
+			if (imports.find(typeReferences[i]->typeNamespace)
+					!= imports.end()) {
 
-		} else {
+				typeReferences[i]->typeNamespace = getUniformPath(
+						imports.find(typeReferences[i]->typeNamespace)->second);
 
-			throw ParserException(filename,
-					"Package " + typeReferences[i]->typeNamespace
-							+ " has not been included");
+			} else {
+
+				throw ParserException(filename,
+						"Package " + typeReferences[i]->typeNamespace
+								+ " has not been included");
+
+			}
 
 		}
 

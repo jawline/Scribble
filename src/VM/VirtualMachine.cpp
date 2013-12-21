@@ -813,6 +813,35 @@ void VirtualMachine::execute(std::string function) {
 				break;
 			}
 
+			case OpNewStruct: {
+
+				int constantLocation = instructionSet.getInt(*current + 1);
+				uint8_t dest = instructionSet.getInst(*current + 5);
+
+				//Get the type
+				std::string type =
+						(char const*) instructionSet.getConstantString(
+								constantLocation);
+
+				//Find the type.
+				auto typeSearch = findType(type);
+
+				if (typeSearch.get() == nullptr) {
+					VM_PRINTF_FATAL("Type %s is not registered\n", type.c_str());
+				}
+
+				if (typeSearch->getBaseType() != VMStructure) {
+					VM_PRINTF_FATAL("Namespace entry %s is not a structure\n", type.c_str());
+				}
+
+				registers_[dest] = getHeap().allocate(typeSearch, typeSearch->getStructureSize(), 0);
+				registerReference_[dest] = true;
+
+				VM_PRINTF_LOG("Allocated %i bytes for type %s and placed reference in register %i", typeSearch->getStructureSize(), type.c_str(), dest);
+
+				break;
+			}
+
 				/**
 				 * Create a new array of the specified type ( Stored in constants ) and length ( The value of lengthRegister ) and set its reference to the specified register.
 				 */
@@ -857,15 +886,10 @@ void VirtualMachine::execute(std::string function) {
 				long length = registers_[lengthRegister]
 						* typeSearch->arraySubtype()->getElementSize();
 
-				uint8_t* initial = new uint8_t[length];
-				memset(initial, 0, length);
-
 				registers_[destinationRegister] = heap_.allocate(typeSearch,
-						length, initial);
+						length, nullptr);
 
 				registerReference_[destinationRegister] = true;
-
-				delete[] initial;
 
 				VM_PRINTF_LOG(
 						"Allocated and created new array %li of size %li\n",

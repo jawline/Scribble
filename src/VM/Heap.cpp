@@ -8,6 +8,7 @@
 #include "Heap.hpp"
 #include <sstream>
 #include <vector>
+#include <string.h>
 
 namespace VM {
 
@@ -34,8 +35,20 @@ long Heap::allocate(SP<VMEntryType> type, int size, uint8_t* initial) {
 
 	uint8_t* memory = new uint8_t[size];
 
-	for (int i = 0; i < size; ++i) {
-		memory[i] = initial[i];
+	/**
+	 * If initial is null then null all values instead of copying
+	 */
+
+	if (initial != nullptr) {
+
+		for (int i = 0; i < size; ++i) {
+			memory[i] = initial[i];
+		}
+
+	} else {
+
+		memset(memory, 0, size);
+
 	}
 
 	VMHeapEntry entry;

@@ -4,8 +4,8 @@
 GetVariableStatement::GetVariableStatement(int lineNo, std::string sym,
 		SP<Variable> var) :
 		Statement(lineNo, sym) {
-	var_ = var;
-}
+			var_ = var;
+		}
 
 GetVariableStatement::~GetVariableStatement() {
 }

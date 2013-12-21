@@ -29,7 +29,8 @@ class VMEntryType;
 
 class VMStructureField {
 private:
-	std::string name_;SP<VMEntryType> type_;
+	std::string name_;
+	SP<VMEntryType> type_;
 
 public:
 
@@ -63,6 +64,9 @@ private:
 	SP<VMEntryType> arraySubtype_;
 
 	std::vector<SP<VMStructureField>> structureFields_;
+	unsigned int structureSizeBytes_;
+	bool structureSizeDirty_;
+
 public:
 
 	VMEntryType(std::string name, unsigned int size, bool reference);
@@ -107,6 +111,21 @@ public:
 	 */
 
 	std::string debugType();
+
+	/**
+	 * Return the list of fields in a structure.
+	 */
+
+	std::vector<SP<VMStructureField>> getStructureFields() {
+		return structureFields_;
+	}
+
+	/**
+	 * Get the size in bytes of the structure.
+	 */
+
+	unsigned int getStructureSize();
+
 };
 
 } /* namespace VM */

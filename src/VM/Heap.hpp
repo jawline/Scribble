@@ -32,7 +32,8 @@ public:
 
 	long allocate(SP<VMEntryType> type, int size, uint8_t* initial);
 
-	bool validReference(long entry);SP<VMEntryType> getType(long entry);
+	bool validReference(long entry);
+	SP<VMEntryType> getType(long entry);
 	uint8_t* getAddress(long entry);
 	int getSize(long entry);
 

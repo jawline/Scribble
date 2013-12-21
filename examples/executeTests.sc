@@ -14,12 +14,19 @@ package sortsTest := import("tests/sorts");
 package floatsTest := import("tests/floats");
 package mathTest := import("tests/math");
 
+type Dog := struct {
+	a : int;
+	b : int;
+}
+
 /**
  * This is a comment
  * Extra line
  */
 
 func main() {
+
+ var J := Dog { 0, 0 };
 
     loopsTest.Test();
     arraysTest.Test();

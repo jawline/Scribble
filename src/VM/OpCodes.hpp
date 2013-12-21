@@ -58,6 +58,22 @@ enum OpCodes {
 	OpArrayLength,
 
 	/**
+	 * Structure operators
+	 */
+
+	OpNewStruct,
+
+	/**
+	 * Generic heap operators
+	 */
+
+	//Set value in heap entry at given offset
+	OpReferenceSet,
+
+	//Get value in heap at given offset
+	OpReferenceGet,
+
+	/**
 	 * Function & Stack operators
 	 */
 
