@@ -73,6 +73,7 @@ float32 {real}f
 "jmp" return JUMP;
 "jmpr" return JUMP_RELATIVE;
 "newarray" return NEW_ARRAY;
+"newstruct" return NEW_STRUCT;
 "aset" return ARRAY_SET;
 "aget" return ARRAY_GET;
 "alen" return ARRAY_LENGTH;

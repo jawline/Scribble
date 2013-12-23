@@ -35,7 +35,13 @@ public:
 	std::string getName() {
 		return "__struct(" + name_ + ")";
 	}
-	std::string getTypeName();
+
+	/**
+	 * Overrides Type::getTypeName() to return more complex structure name.
+	 */
+
+	virtual std::string getTypeName();
+
 	std::string getNamespace();
 
 };

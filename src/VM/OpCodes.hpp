@@ -11,6 +11,7 @@
 namespace VM {
 
 enum OpCodes {
+
 	OpLoadConstant = 0,
 	OpMove,
 	OpJump,
@@ -62,16 +63,8 @@ enum OpCodes {
 	 */
 
 	OpNewStruct,
-
-	/**
-	 * Generic heap operators
-	 */
-
-	//Set value in heap entry at given offset
-	OpReferenceSet,
-
-	//Get value in heap at given offset
-	OpReferenceGet,
+	OpStructSetField,
+	OpStructGetField,
 
 	/**
 	 * Function & Stack operators

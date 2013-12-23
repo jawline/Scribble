@@ -662,6 +662,35 @@ void VirtualMachine::execute(std::string function) {
 				break;
 			}
 
+			case OpStructSetField: {
+
+				uint8_t tgtArray = instructionSet.getInst(*current + 1);
+				uint8_t index = instructionSet.getInst(*current + 2);
+				uint8_t data = instructionSet.getInst(*current+3);
+
+
+				//Check that the target array is a valid reference
+				if (!registerReference_[tgtArray]) {
+					VM_PRINTF_FATAL(
+							"Target array register %i is not a reference\n",
+							tgtArray);
+				}
+
+				//Check that the array type is a structure
+				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+
+				if (arrayType->getBaseType() != VM::VMStructure) {
+					VM_PRINTF_FATAL("%s",
+							"Target register is not a reference to an array\n");
+				}
+
+				//TODO: From here
+
+				*current += vmOpCodeSize;
+
+				break;
+			}
+
 				/**
 				 * Set the specified element in the target array to the given data value.
 				 */
@@ -827,17 +856,26 @@ void VirtualMachine::execute(std::string function) {
 				auto typeSearch = findType(type);
 
 				if (typeSearch.get() == nullptr) {
-					VM_PRINTF_FATAL("Type %s is not registered\n", type.c_str());
+					VM_PRINTF_FATAL("Structure type %s is not registered\n",
+							type.c_str());
 				}
 
 				if (typeSearch->getBaseType() != VMStructure) {
-					VM_PRINTF_FATAL("Namespace entry %s is not a structure\n", type.c_str());
+					VM_PRINTF_FATAL("Namespace entry %s is not a structure\n",
+							type.c_str());
 				}
 
-				registers_[dest] = getHeap().allocate(typeSearch, typeSearch->getStructureSize(), 0);
+				registers_[dest] = getHeap().allocate(typeSearch,
+						typeSearch->getStructureSize(), 0);
+
 				registerReference_[dest] = true;
 
-				VM_PRINTF_LOG("Allocated %i bytes for type %s and placed reference in register %i", typeSearch->getStructureSize(), type.c_str(), dest);
+				VM_PRINTF_LOG(
+						"Allocated %i bytes for type %s and placed reference in register %i\n",
+						typeSearch->getStructureSize(), type.c_str(), dest);
+
+				*current += vmOpCodeSize;
+				gcStat_++;
 
 				break;
 			}
@@ -863,7 +901,8 @@ void VirtualMachine::execute(std::string function) {
 				auto typeSearch = findType(type);
 
 				if (typeSearch.get() == nullptr) {
-					VM_PRINTF_FATAL("Type %s is not registered\n", type.c_str());
+					VM_PRINTF_FATAL("Array Type %s is not registered\n",
+							type.c_str());
 				}
 
 				//Check the type is an array
@@ -1033,6 +1072,10 @@ void VirtualMachine::execute(std::string function) {
 
 	}
 
+	//As the function exits run the garbage collector and reset the GC stat value
+	garbageCollection();
+	gcStat_ = 0;
+
 }
 
 void VirtualMachine::pushRegister(uint8_t reg) {
@@ -1105,6 +1148,30 @@ void VirtualMachine::garbageCollection() {
 					}
 
 					data++;
+				}
+
+			}
+
+		} else if (nextType->getBaseType() == VMStructure) {
+
+			//For every field in the structure
+			for (unsigned int i = 0; i < nextType->getStructureFields().size(); i++) {
+
+				//If that field is a reference to anything on the heap
+				if (nextType->getStructureFields()[i]->getType()->isReference()) {
+
+					//Get a pointer to the structure data
+					uint8_t* structurePtr = heap_.getAddress(next);
+
+					//Get a pointer to the reference within the structure
+					long* referencePtr = (long*) (structurePtr + nextType->getStructureFieldOffset(i));
+
+					//If we aren't looking at a null pointer
+					if (*referencePtr != 0) {
+						heap_.flag(*referencePtr);
+						toInvestigate.push_back(*referencePtr);
+					}
+
 				}
 
 			}

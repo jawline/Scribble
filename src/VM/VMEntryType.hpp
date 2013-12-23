@@ -29,8 +29,7 @@ class VMEntryType;
 
 class VMStructureField {
 private:
-	std::string name_;
-	SP<VMEntryType> type_;
+	std::string name_;SP<VMEntryType> type_;
 
 public:
 
@@ -118,6 +117,27 @@ public:
 
 	std::vector<SP<VMStructureField>> getStructureFields() {
 		return structureFields_;
+	}
+
+	/**
+	 * Return the offset in bytes of the start of a structure element
+	 * or -1 if the id value is greater than the number of fields.
+	 * TODO: Speed this up by caching it.
+	 */
+
+	int getStructureFieldOffset(unsigned int id) {
+
+		int count = 0;
+
+		if (id > getStructureFields().size()) {
+			return -1;
+		}
+
+		for (unsigned int i = 0; i < id; i++) {
+			count += getStructureFields()[i]->getType()->getElementSize();
+		}
+
+		return count;
 	}
 
 	/**

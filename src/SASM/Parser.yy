@@ -145,6 +145,17 @@ void ArrayGet(uint8_t arrayReg, uint8_t indexReg, uint8_t dataReg) {
 	current += 4;
 }
 
+void Structure(std::string type, uint8_t dst) {
+	Set(buffer, current, (uint8_t) VM::OpNewStruct);
+	Set(buffer, current, (int) currentConstant);
+	Set(buffer, current, (uint8_t) dst);
+	
+	const char* typePointer = type.c_str();
+	Set(constant, currentConstant, typePointer);
+	
+	current += 2;
+}
+
 void Array(std::string type, uint8_t sizereg, uint8_t reg) {
 
 	Set(buffer, current, (uint8_t) VM::OpNewArray);
@@ -152,8 +163,8 @@ void Array(std::string type, uint8_t sizereg, uint8_t reg) {
 	Set(buffer, current, (uint8_t) reg);
 	Set(buffer, current, (int) currentConstant);
 
-	const char* typeCstr = type.c_str();
-	Set(constant, currentConstant, typeCstr);
+	const char* typePointer = type.c_str();
+	Set(constant, currentConstant, typePointer);
 	
 	current += 1;
 }
@@ -356,7 +367,7 @@ void TestEqualNil(uint8_t left) {
 %token <float32> FLOAT32
 %token <integer> INT REG
 %token <lval> LONG
-%token COMPARE_FLOAT32 INCREMENT DECREMENT ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token NEW_STRUCT COMPARE_FLOAT32 INCREMENT DECREMENT ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -383,9 +394,11 @@ Program: {
 		ArrayGet($3, $4, $5);
 	} | Program ARRAY_LENGTH REG REG {
 		ArrayLength($3, $4);
-	} | Program NEW_ARRAY STRING INT REG {
-		LoadInt($4, VM::vmTempRegisterOne);
-		Array(*$3, VM::vmTempRegisterOne, $5);
+	} | Program NEW_ARRAY STRING REG REG {
+		Array(*$3, $4, $5);
+		delete $3;
+	} | Program NEW_STRUCT STRING REG {
+		Structure(*$3, $4);
 		delete $3;
 	} | Program PUSH_REGISTERS REG INT {
 		PushRegisters($3, $4);
@@ -393,10 +406,7 @@ Program: {
 		PopRegisters($3, $4);
 	} | Program POP_NIL {
 		PopNil();
-	} | Program NEW_ARRAY STRING REG REG {
-		Array(*$3, $4, $5);
-		delete $3;
-	} | Program LOAD INT REG {
+	}| Program LOAD INT REG {
 		LoadInt($3, $4);
 	} | Program LOAD FLOAT32 REG {
 		LoadFloat32($3, $4);

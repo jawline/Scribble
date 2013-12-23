@@ -52,8 +52,8 @@ unsigned int VMEntryType::getStructureSize() {
 		structureSizeBytes_ = 0;
 
 		for (unsigned int i = 0; i < structureFields_.size(); i++) {
-			structureSizeBytes_ =
-					structureFields_[i]->getType()->getStructureSize();
+			structureSizeBytes_ +=
+					structureFields_[i]->getType()->getElementSize();
 		}
 
 	}

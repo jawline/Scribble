@@ -11,6 +11,7 @@
 #include <VM/VMEntryType.hpp>
 
 class TypeReferenceCore;
+
 typedef SP<TypeReferenceCore> TypeReference;
 
 /**
@@ -147,13 +148,12 @@ public:
 			return "void";
 		case Float32:
 			return "float32";
-		case StructureType:
 		case ValueTypeMax:
+			return "invalid";
 		case TypeUnresolved:
-			break;
+			return "unresolved";
 		}
 
-		return "ERROR: Unresolved/Illegal Type";
 	}
 
 };

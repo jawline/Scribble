@@ -17,6 +17,11 @@ package mathTest := import("tests/math");
 type Dog := struct {
 	a : int;
 	b : int;
+	c : Cat;
+}
+
+type Cat := struct {
+	name : string;
 }
 
 /**
@@ -26,7 +31,8 @@ type Dog := struct {
 
 func main() {
 
- var J := Dog { 0, 0 };
+ var C := Cat { "Hello "};
+ var J := Dog { 0, 0, Cat { "Phillip" } };
 
     loopsTest.Test();
     arraysTest.Test();

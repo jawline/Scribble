@@ -22,6 +22,7 @@ Heap::~Heap() {
 }
 
 bool Heap::validReference(long entry) {
+
 	auto it = heapMap_.find(entry);
 
 	if (it == heapMap_.end()) {

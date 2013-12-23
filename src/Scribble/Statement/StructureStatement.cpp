@@ -10,6 +10,7 @@
 #include <Scribble/Value/Structure.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
 #include <Scribble/Value/StructureData.hpp>
+#include <VM/Constants.hpp>
 
 StructureStatement::StructureStatement(int lineno, std::string token,
 		TypeReference type, std::vector<SafeStatement> statements) :
@@ -70,6 +71,27 @@ Type* StructureStatement::type() {
 }
 
 int StructureStatement::generateCode(int result, std::stringstream& code) {
-	throw StatementException(this, "Unimplemented yow");
-	return 0;
+
+	int instrs = 0;
+
+	//Create the structure reference
+	code << "newstruct \"" << type()->getTypeName() << "\" $" << VM::vmTempRegisterOne << "\n";
+	instrs += 1;
+
+	//For each argument in the constructor
+	for (unsigned int i = 0; i < statements_.size(); i++) {
+
+		// Put the arguments value in temp register 2
+		instrs += statements_[i]->generateCode(VM::vmTempRegisterTwo, code);
+
+		//Load the field index into a register
+		code << "load " << i << " $" << VM::vmTempRegisterThree << "\n";
+		instrs++;
+
+		//Place the value into the structure field.
+		code << "sset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterThree << " $" << VM::vmTempRegisterTwo;
+		instrs++;
+	}
+
+	return instrs;
 }
