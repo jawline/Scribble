@@ -75,6 +75,7 @@ float32 {real}f
 "newarray" return NEW_ARRAY;
 "newstruct" return NEW_STRUCT;
 "sset" return STRUCTURE_SET;
+"sget" return STRUCTURE_GET;
 "aset" return ARRAY_SET;
 "aget" return ARRAY_GET;
 "alen" return ARRAY_LENGTH;

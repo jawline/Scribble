@@ -9,6 +9,7 @@
 #include "Heap.hpp"
 #include <Scribble/Value/Structure.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
+#include <VM/Constants.hpp>
 
 GetStructureElementStatement::GetStructureElementStatement(int yylineno,
 		std::string sym, SafeStatement stmt, std::string name) :
@@ -69,4 +70,20 @@ Value* GetStructureElementStatement::execute(
 
 Type* GetStructureElementStatement::type() {
 	return elementType_;
+}
+
+int GetStructureElementStatement::generateCode(int resultRegister,
+		std::stringstream& code) {
+	int instrs = 0;
+
+	instrs += statement_->generateCode(VM::vmTempRegisterOne, code);
+
+	code << "load " << elementIndex_ << " $" << VM::vmTempRegisterTwo << "\n";
+	instrs++;
+
+	code << "sget $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo
+			<< " $" << resultRegister << "\n";
+	instrs++;
+
+	return instrs;
 }

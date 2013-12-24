@@ -18,6 +18,7 @@ type Dog := struct {
 	a : int;
 	b : int;
 	c : Cat;
+	d : string;
 }
 
 type Cat := struct {
@@ -31,7 +32,18 @@ type Cat := struct {
 
 func main() {
 
- var J := Dog { 0, 0, Cat { "Phillip" } };
+ var j := [100]Dog;
+
+ for var i := 0; i < len(j); i++ do {
+  j[i] := Dog { i, 15, Cat { "Phil" }, "Hiccup" };
+ }
+
+ for i := 0; i < len(j); i++ do {
+  sys.Write(sys.String(j[i]->a));
+  sys.Write(": ");
+  sys.Write(j[i]->c->name);
+  sys.Write("\n");
+ }
 
     loopsTest.Test();
     arraysTest.Test();

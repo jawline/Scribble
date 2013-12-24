@@ -28,6 +28,8 @@ public:
 	virtual Value* execute(std::vector<Value*> const& variables);
 	virtual Type* type();
 	virtual void fix();
+
+	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 #endif /* GETSTRUCTUREELEMENTSTATEMENT_HPP_ */

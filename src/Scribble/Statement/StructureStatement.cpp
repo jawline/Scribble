@@ -75,14 +75,15 @@ int StructureStatement::generateCode(int result, std::stringstream& code) {
 	int instrs = 0;
 
 	//Create the structure reference
-	code << "newstruct \"" << type()->getTypeName() << "\" $" << VM::vmTempRegisterOne << "\n";
+	code << "newstruct \"" << type()->getTypeName() << "\" $"
+			<< VM::vmTempRegisterOne << "\n";
 	instrs += 1;
 
 	//For each argument in the constructor
 	for (unsigned int i = 0; i < statements_.size(); i++) {
 
 		//Push the array register
-		code << "pushr $0 1\n";
+		code << "pushr $" << VM::vmTempRegisterOne << " 1\n";
 		instrs++;
 
 		// Put the arguments value in temp register 2
@@ -93,12 +94,23 @@ int StructureStatement::generateCode(int result, std::stringstream& code) {
 		instrs++;
 
 		//Pop the array register
-		code << "popr $0 1\n";
+		code << "popr $" << VM::vmTempRegisterOne << " 1\n";
 		instrs++;
 
 		//Place the value into the structure field.
-		code << "sset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterThree << " $" << VM::vmTempRegisterTwo << "\n";
+		code << "sset $" << VM::vmTempRegisterOne << " $"
+				<< VM::vmTempRegisterThree << " $" << VM::vmTempRegisterTwo
+				<< "\n";
+
 		instrs++;
+	}
+
+	if (result != VM::vmTempRegisterOne) {
+
+		//Move the array reference into the result register.
+		code << "move $" << VM::vmTempRegisterOne << " $" << result << "\n";
+		instrs++;
+
 	}
 
 	return instrs;
