@@ -115,7 +115,7 @@ public:
 	 * Return the list of fields in a structure.
 	 */
 
-	std::vector<SP<VMStructureField>> getStructureFields() {
+	std::vector<SP<VMStructureField>> const& getStructureFields() {
 		return structureFields_;
 	}
 

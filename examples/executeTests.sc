@@ -31,7 +31,6 @@ type Cat := struct {
 
 func main() {
 
- var C := Cat { "Hello "};
  var J := Dog { 0, 0, Cat { "Phillip" } };
 
     loopsTest.Test();

@@ -81,6 +81,10 @@ int StructureStatement::generateCode(int result, std::stringstream& code) {
 	//For each argument in the constructor
 	for (unsigned int i = 0; i < statements_.size(); i++) {
 
+		//Push the array register
+		code << "pushr $0 1\n";
+		instrs++;
+
 		// Put the arguments value in temp register 2
 		instrs += statements_[i]->generateCode(VM::vmTempRegisterTwo, code);
 
@@ -88,8 +92,12 @@ int StructureStatement::generateCode(int result, std::stringstream& code) {
 		code << "load " << i << " $" << VM::vmTempRegisterThree << "\n";
 		instrs++;
 
+		//Pop the array register
+		code << "popr $0 1\n";
+		instrs++;
+
 		//Place the value into the structure field.
-		code << "sset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterThree << " $" << VM::vmTempRegisterTwo;
+		code << "sset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterThree << " $" << VM::vmTempRegisterTwo << "\n";
 		instrs++;
 	}
 

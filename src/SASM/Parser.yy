@@ -156,6 +156,15 @@ void Structure(std::string type, uint8_t dst) {
 	current += 2;
 }
 
+void StructureFieldSet(uint8_t tgtArray, uint8_t index, uint8_t data) {
+	Set(buffer, current, (uint8_t) VM::OpStructSetField);
+	Set(buffer, current, (uint8_t) tgtArray);
+	Set(buffer, current, (uint8_t) index);
+	Set(buffer, current, (uint8_t) data);	
+	
+	current += 4;
+}
+
 void Array(std::string type, uint8_t sizereg, uint8_t reg) {
 
 	Set(buffer, current, (uint8_t) VM::OpNewArray);
@@ -367,7 +376,7 @@ void TestEqualNil(uint8_t left) {
 %token <float32> FLOAT32
 %token <integer> INT REG
 %token <lval> LONG
-%token NEW_STRUCT COMPARE_FLOAT32 INCREMENT DECREMENT ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token STRUCTURE_SET NEW_STRUCT COMPARE_FLOAT32 INCREMENT DECREMENT ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
 %type <int> Program
 
@@ -400,6 +409,8 @@ Program: {
 	} | Program NEW_STRUCT STRING REG {
 		Structure(*$3, $4);
 		delete $3;
+	} | Program STRUCTURE_SET REG REG REG {
+		StructureFieldSet($3, $4, $5);
 	} | Program PUSH_REGISTERS REG INT {
 		PushRegisters($3, $4);
 	} | Program POP_REGISTERS REG INT {
