@@ -4,20 +4,25 @@
  * Copyright (c) Blake Loring 2013
  */
 
-import("test");
+package sys := import("sys");
+package test := import("test");
 
 type TestStructure := struct {
-	Hello : int
-	World : string
+	Hello : int,
+	World : int
 }
 
 func Test() {
 	
-	var j := TestStructure { 15, "John A Penis" };
-	
-	test.Assert(j->Hello, 15, "Test structure initialization error");
+ var j := TestStructure { 15, 20 };
 
-	j->Hello := j->Hello + 5;
-	
-	test.Assert(j->Hello, 20, "Test structure get and assign error");
+ sys.Write( sys.String( j->Hello ) );
+ sys.Write("\n");
+
+ sys.Write( sys.String( j->World ) );
+ sys.Write("\n");
+
+ test.Assert(j->Hello, 15, "Structure initialization construct incorrect");
+ test.Assert(j->World, 20, "Structure initialization construct incorrect");
+
 }

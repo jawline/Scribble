@@ -13,17 +13,7 @@ package primesTest := import("tests/primes");
 package sortsTest := import("tests/sorts");
 package floatsTest := import("tests/floats");
 package mathTest := import("tests/math");
-
-type Dog := struct {
-	a : int;
-	b : int;
-	c : Cat;
-	d : string;
-}
-
-type Cat := struct {
-	name : string;
-}
+package structTest := import("tests/structures");
 
 /**
  * This is a comment
@@ -31,19 +21,6 @@ type Cat := struct {
  */
 
 func main() {
-
- var j := [100]Dog;
-
- for var i := 0; i < len(j); i++ do {
-  j[i] := Dog { i, 15, Cat { "Phil" }, "Hiccup" };
- }
-
- for i := 0; i < len(j); i++ do {
-  sys.Write(sys.String(j[i]->a));
-  sys.Write(": ");
-  sys.Write(j[i]->c->name);
-  sys.Write("\n");
- }
 
     loopsTest.Test();
     arraysTest.Test();
@@ -54,5 +31,6 @@ func main() {
     sortsTest.Test();
     floatsTest.Test();
     mathTest.Test();
+    structTest.Test();
 
 }

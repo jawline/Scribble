@@ -13,6 +13,7 @@
 #include <Scribble/Statement/GetStructureElementStatement.hpp>
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Value/Variable.hpp> // Variable class
+
 typedef std::vector<SP<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
 typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;

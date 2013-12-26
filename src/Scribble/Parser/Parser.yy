@@ -150,12 +150,20 @@ Program: {
 	}
 ;
 
-BaseStructureInfo: {
+BaseStructureInfo: WORD COLON Type {
+
 		$$ = new StructureInfo("INVALID");
-	} | BaseStructureInfo WORD COLON Type END {
-		$1->addInfo(*$2, *$4);
-		delete $2;
-		delete $4;
+		
+		$$->addInfo(*$1, *$3);
+		delete $1;
+		delete $3;
+		
+	} | BaseStructureInfo COMMA WORD COLON Type {
+		$$ = $1;
+		$$->addInfo(*$3, *$5);
+		
+		delete $3;
+		delete $5;
 	}
 ;
 

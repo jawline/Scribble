@@ -3,26 +3,6 @@
  * @author Blake Loring
  */
 
-#include <Scribble/Statement/Statement.hpp>
-#include <Scribble/Value/StructureInfo.hpp>
-#include <API/WriteFunction.hpp>
-#include <API/ReadLine.hpp>
-#include <API/StringFunction.hpp>
-#include <API/Modulo.hpp>
-#include <API/RandomInt.hpp>
-#include <API/Concat.hpp>
-#include <API/Int.hpp>
-#include <API/Float.hpp>
-#include <API/Pow.hpp>
-#include <Scribble/Statement/Heap.hpp>
-#include <Scribble/Parser/Parser.hpp>
-#include <Scribble/Parser/ParserException.hpp>
-#include <Scribble/Value/TypeManager.hpp>
-#include <version_info.hpp>
-#include <SASM/Parser.hpp>
-#include <VM/VMNamespace.hpp>
-#include <VM/OpCodes.hpp>
-#include <VM/VirtualMachine.hpp>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,143 +10,29 @@
 #include <cputime.hpp>
 #include <algorithm>
 
-void generateBuiltinNamespace(std::map<std::string, NamespaceType>& builtin) {
+#include <Scribble/Statement/Statement.hpp>
+#include <Scribble/Value/StructureInfo.hpp>
+#include <Scribble/Statement/Heap.hpp>
+#include <Scribble/Parser/Parser.hpp>
+#include <Scribble/Parser/ParserException.hpp>
+#include <Scribble/Value/TypeManager.hpp>
+#include <SASM/Parser.hpp>
+#include <VM/OpCodes.hpp>
+#include <VM/VirtualMachine.hpp>
 
-	NamespaceType builtinFunctions;
+/**
+ * Version info defines the automatically generated scribble version.
+ */
 
-	std::vector<SafeFunction> write;
-	write.push_back(SmartPointer< Function > (new WriteFunction("sys")));
-	builtinFunctions["Write"] = NamespaceEntry(write);
+#include <version_info.hpp>
 
-	std::vector<SafeFunction> concat;
-	concat.push_back(SmartPointer< Function > (new Concat("sys")));
-	builtinFunctions["Concat"] = NamespaceEntry(concat);
+/**
+ * API/System defines the generateSystemPackage function which creates the sys library.
+ */
 
-	std::vector<SafeFunction> intConvertor;
-	intConvertor.push_back(SmartPointer< Function> ( new IntFromFloat32("sys")));
-	builtinFunctions["Int"] = intConvertor;
+#include <API/System.hpp>
 
-	std::vector<SafeFunction> floatConvertor;
-	floatConvertor.push_back(SmartPointer< Function> ( new Float32FromInt("sys")));
-	builtinFunctions["Float32"] = floatConvertor;
-
-	std::vector<SafeFunction> powInt;
-	powInt.push_back(SmartPointer< Function> ( new Pow("sys")));
-	builtinFunctions["PowInt"] = powInt;
-
-
-	std::vector<SafeFunction> powFloat;
-	powFloat.push_back(SmartPointer< Function> ( new PowFloat32("sys")));
-	builtinFunctions["PowFloat"] = powFloat;
-
-	std::vector<SafeFunction> string;
-	string.push_back(SmartPointer< Function > (new IntToStringFunction("sys")));
-	string.push_back(SmartPointer< Function > (new BoolToStringFunction("sys")));
-	string.push_back(SmartPointer< Function > (new Float32ToStringFunction("sys")));
-	builtinFunctions["String"] = NamespaceEntry(string);
-
-	std::vector<SafeFunction> readLine;
-	readLine.push_back(SP< Function > (new ReadLine("sys")));
-	builtinFunctions["ReadLine"] = readLine;
-
-	std::vector<SafeFunction> mod;
-	mod.push_back(SP< Function > (new Modulo("sys")));
-	builtinFunctions["Mod"] = NamespaceEntry(mod);
-
-	std::vector<SafeFunction> randomInt;
-	randomInt.push_back(SmartPointer< Function > (new RandomInt("sys")));
-	builtinFunctions["RandomInt"] = NamespaceEntry(randomInt);
-
-	builtin["sys"] = builtinFunctions;
-}
-
-void registerEntireNamespace(std::map<std::string, NamespaceType>& allNames,
-		VM::VirtualMachine& vm) {
-
-	std::vector < std::pair<std::string, SP<VM::VMStructureField>>>postResolveList;
-
-	for (auto selectedNamespaceIter = allNames.begin();
-			selectedNamespaceIter != allNames.end(); selectedNamespaceIter++) {
-
-		vm.logMessage(VM::Log,
-				std::string("Registering namespace ")
-				+ selectedNamespaceIter->first + std::string("\n"));
-
-		VM::VMNamespace newSpace;
-
-		NamespaceType names = selectedNamespaceIter->second;
-
-		for (auto iterator = names.begin(); iterator != names.end();
-				iterator++) {
-
-			if (iterator->second.type() == FunctionSetEntry) {
-
-				FunctionSet functionSet = iterator->second.getFunctionSet();
-
-				for (unsigned int i = 0; i < functionSet.size(); i++) {
-					SP<Function> function = functionSet[i];
-
-					std::stringstream code;
-					function->debugCode(code);
-
-					newSpace.insert(function->getName(), VM::NamespaceEntry(function->generateVMFunction()));
-
-					vm.logMessage(VM::Log, std::string("Registered string ") + function->getName());
-
-					vm.logMessage(VM::Log, std::string(" {\n") + code.str() + std::string("\n}\n"));
-				}
-
-			} else if (iterator->second.type() == TypeEntry) {
-
-				if (iterator->second.getType()->type->getType() == StructureType) {
-					vm.logMessage(VM::Log, std::string("Registering Type ") + selectedNamespaceIter->first + VM::vmNamespaceSeperator + iterator->first + " {\n");
-
-					TypeReference type = iterator->second.getType();
-					StructureInfo* info = (StructureInfo*) iterator->second.getType()->type;
-
-					std::vector<SP<VM::VMStructureField>> fields;
-
-					for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
-
-						Type* fieldType = info->getIndex(i).second->type;
-
-						std::string fullTypeName = info->getIndex(i).second->type->getTypeName();
-
-						vm.logMessage(VM::Log, info->getIndex(i).first + " : " + ((StructureInfo*) info->getIndex(i).second->type)->getTypeName() + "\n");
-
-						SP<VM::VMStructureField> newField = SP<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr));
-						postResolveList.push_back(std::pair<std::string, SP<VM::VMStructureField>>(fullTypeName, newField));
-						fields.push_back( newField );
-					}
-
-					newSpace.insert(info->getName(), VM::NamespaceEntry(SP<VM::VMEntryType>(new VM::VMEntryType(info->getName(), fields))));
-
-					vm.logMessage(VM::Log, "}\n");
-				}
-
-			}
-
-		}
-
-		vm.registerEntry(selectedNamespaceIter->first,
-				VM::NamespaceEntry(newSpace));
-
-	}
-
-	for (auto iter = postResolveList.begin(); iter != postResolveList.end(); iter++) {
-
-		auto resolvedType = vm.findType(iter->first);
-
-		if (resolvedType != nullptr) {
-			iter->second->setType(vm.findType(iter->first));
-		} else {
-			printf("FATAL ERROR: Type could not be resolved ( %s not registered )", iter->first.c_str());
-			exit(-1);
-		}
-
-	}
-
-}
+#include <API/RegisterPackages.hpp>
 
 char const* getCmdOption(char ** begin, char ** end, char const* defaultOption,
 		std::string option) {
@@ -238,7 +104,8 @@ int main(int argc, char* argv[]) {
 	//Compile the scribble program using the default namespaces
 	std::map<std::string, NamespaceType> names;
 
-	generateBuiltinNamespace(names);
+	//Generate the sys package
+	generateSystemPackage(names);
 
 	//Compile the program using the new __init__ package created, crash on any exceptions.
 	try {
@@ -263,11 +130,11 @@ int main(int argc, char* argv[]) {
 
 	VM::VirtualMachine vm;
 
+	registerPackages(names, vm);
+
 	char const* execMode = getCmdOption(argv, argv + argc, "vm", "--mode");
 
 	if (strcmp(execMode, "vm") == 0) {
-
-		registerEntireNamespace(names, vm);
 
 		double vmStart = getCPUTime();
 
@@ -302,8 +169,6 @@ int main(int argc, char* argv[]) {
 		double treeEnd = getCPUTime();
 
 		printf("Now in the VM\n");
-
-		registerEntireNamespace(names, vm);
 
 		double vmStart = getCPUTime();
 
