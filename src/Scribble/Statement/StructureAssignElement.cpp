@@ -85,7 +85,7 @@ int StructureAssignElement::generateCode(int result, std::stringstream& code) {
 	code << "load " << elementIndex_ << " $" << VM::vmTempRegisterTwo << "\n";
 	instrs++;
 
-	code << "sget $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo
+	code << "sset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo
 			<< " $" << VM::vmTempRegisterThree << "\n";
 	instrs++;
 
