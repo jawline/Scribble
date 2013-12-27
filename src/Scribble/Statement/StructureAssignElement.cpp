@@ -9,6 +9,7 @@
 #include "Heap.hpp"
 #include <Scribble/Value/Structure.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
+#include <VM/Constants.hpp>
 
 StructureAssignElement::StructureAssignElement(int line, std::string token,
 		SafeStatement lhs, SafeStatement rhs, std::string elem) :
@@ -68,4 +69,25 @@ Value* StructureAssignElement::execute(std::vector<Value*> const& variables) {
 
 Type* StructureAssignElement::type() {
 	return elementType_;
+}
+
+int StructureAssignElement::generateCode(int result, std::stringstream& code) {
+
+	int instrs = lhs_->generateCode(VM::vmTempRegisterOne, code);
+
+	code << "pushr $" << VM::vmTempRegisterOne << " 1\n";
+
+	instrs += rhs_->generateCode(VM::vmTempRegisterThree, code);
+
+	code << "popr $" << VM::vmTempRegisterOne << " 1\n";
+	instrs++;
+
+	code << "load " << elementIndex_ << " $" << VM::vmTempRegisterTwo << "\n";
+	instrs++;
+
+	code << "sget $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo
+			<< " $" << VM::vmTempRegisterThree << "\n";
+	instrs++;
+
+	return instrs;
 }

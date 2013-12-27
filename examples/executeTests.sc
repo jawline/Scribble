@@ -3,6 +3,7 @@
  * Copyright (c) Blake Loring 2013
  */
 
+
 package sys := import("sys");
 package loopsTest := import("tests/loops");
 package logicalTest := import("tests/logical");
@@ -16,8 +17,7 @@ package mathTest := import("tests/math");
 package structTest := import("tests/structures");
 
 /**
- * This is a comment
- * Extra line
+ * The main function executes all of the Scribble unit tests.
  */
 
 func main() {

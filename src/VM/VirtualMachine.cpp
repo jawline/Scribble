@@ -710,27 +710,21 @@ void VirtualMachine::execute(std::string function) {
 				int8_t* elementData = (int8_t*) getHeap().getAddress(
 						registers_[tgtArray]) + offset;
 
-				long temp = 0;
-
 				switch (type->getElementSize()) {
 
 				case 1:
-					temp = (int64_t) *elementData;
+					registers_[dataReg] = (int64_t)(*elementData);
 					break;
 				case 2:
-					temp = (int64_t) *((int16_t*) elementData);
+					registers_[dataReg] = (int64_t)(*((int16_t*) elementData));
 					break;
 				case 4:
-					temp = (int64_t) *((int32_t*) elementData);
+					registers_[dataReg] = (int64_t)(*((int32_t*) elementData));
 					break;
 				case 8:
-					temp = (int64_t) *((int64_t*) elementData);
+					registers_[dataReg] = (int64_t)(*((int64_t*) elementData));
 					break;
 				}
-
-				registers_[dataReg] = temp;
-
-				//printf("Loaded %li from offset %i element size %i\n", registers_[dataReg], offset, type->getElementSize());
 
 				//After getting the data check if the data got was a reference. If it was then mark it as one.
 				registerReference_[dataReg] = type->isReference();

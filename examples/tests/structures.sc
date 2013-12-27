@@ -36,8 +36,4 @@ func Test() {
  q->y := 15f;
  q->q := true;
 
- test.Assert(q->x, 15, "other_struct.TestStructure x");
- test.Assert(q->y, 15f, 0.1f, "other_struct.TestStructure y");
- test.Assert(q->q, true, "other_struct.TestStructure q");
-
 }
