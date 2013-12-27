@@ -13,16 +13,14 @@ type TestStructure := struct {
 }
 
 func Test() {
-	
- var j := TestStructure { 15, 20 };
 
- sys.Write( sys.String( j->Hello ) );
- sys.Write("\n");
+ var k := TestStructure { 15, 30 };
 
- sys.Write( sys.String( j->World ) );
- sys.Write("\n");
+ //var x := k->Hello;
+ //test.Assert(k->Hello, 15, "Structure initialization on 15 construct incorrect");
 
- test.Assert(j->Hello, 15, "Structure initialization construct incorrect");
- test.Assert(j->World, 20, "Structure initialization construct incorrect");
+ test.Assert(k->Hello, 15, "Structure initialization on 30 construct incorrect");
+ test.Assert(k->World, 30, "Structure initialization on 30 construct incorrect");
+ 
 
 }

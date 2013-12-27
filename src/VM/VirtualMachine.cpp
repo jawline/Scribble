@@ -710,18 +710,27 @@ void VirtualMachine::execute(std::string function) {
 				int8_t* elementData = (int8_t*) getHeap().getAddress(
 						registers_[tgtArray]) + offset;
 
+				long temp = 0;
+
 				switch (type->getElementSize()) {
 
 				case 1:
-					registers_[dataReg] = *elementData;
+					temp = (int64_t) *elementData;
+					break;
 				case 2:
-					registers_[dataReg] = *((int16_t*) elementData);
+					temp = (int64_t) *((int16_t*) elementData);
+					break;
 				case 4:
-					registers_[dataReg] = *((int32_t*) elementData);
+					temp = (int64_t) *((int32_t*) elementData);
+					break;
 				case 8:
-					registers_[dataReg] = *((int64_t*) elementData);
+					temp = (int64_t) *((int64_t*) elementData);
 					break;
 				}
+
+				registers_[dataReg] = temp;
+
+				//printf("Loaded %li from offset %i element size %i\n", registers_[dataReg], offset, type->getElementSize());
 
 				//After getting the data check if the data got was a reference. If it was then mark it as one.
 				registerReference_[dataReg] = type->isReference();
@@ -759,14 +768,17 @@ void VirtualMachine::execute(std::string function) {
 				if (registers_[indexReg] < 0
 						|| registers_[indexReg]
 								>= arrayType->getStructureFields().size()) {
+
 					VM_PRINTF_FATAL(
 							"Index %li is not a valid index to the structure. The structure only takes %li elements\n",
 							registers_[indexReg],
 							arrayType->getStructureFields().size());
+
 				}
 
 				//Get the VM type of the field being set and the offset of it in bytes in the structure data.
 				SP<VMEntryType> type = arrayType->getStructureFields()[registers_[indexReg]]->getType();
+
 				unsigned int offset = arrayType->getStructureFieldOffset(
 						registers_[indexReg]);
 
@@ -777,13 +789,13 @@ void VirtualMachine::execute(std::string function) {
 				switch (type->getElementSize()) {
 
 				case 1:
-					*elementData = registers_[dataReg];
+					*elementData = (int8_t) registers_[dataReg];
 				case 2:
-					*((int16_t*) elementData) = registers_[dataReg];
+					*((int16_t*) elementData) = (int16_t) registers_[dataReg];
 				case 4:
-					*((int32_t*) elementData) = registers_[dataReg];
+					*((int32_t*) elementData) = (int32_t) registers_[dataReg];
 				case 8:
-					*((int64_t*) elementData) = registers_[dataReg];
+					*((int64_t*) elementData) = (int64_t) registers_[dataReg];
 					break;
 
 				}
@@ -841,19 +853,19 @@ void VirtualMachine::execute(std::string function) {
 				switch (size) {
 
 				case 1:
-					*dataPtr = registers_[data];
+					*(int8_t*) (dataPtr) = registers_[data];
 					break;
 
 				case 2:
-					*(uint16_t*) (dataPtr) = registers_[data];
+					*(int16_t*) (dataPtr) = registers_[data];
 					break;
 
 				case 4:
-					*(uint32_t*) (dataPtr) = registers_[data];
+					*(int32_t*) (dataPtr) = registers_[data];
 					break;
 
 				case 8:
-					*(uint64_t*) (dataPtr) = registers_[data];
+					*(int64_t*) (dataPtr) = registers_[data];
 					break;
 
 				default:
@@ -995,8 +1007,10 @@ void VirtualMachine::execute(std::string function) {
 				//Get the arguments
 				uint8_t lengthRegister = instructionSet.getInst(
 						currentInstruction + 1);
+
 				uint8_t destinationRegister = instructionSet.getInst(
 						currentInstruction + 2);
+
 				int constantLocation = instructionSet.getInt(
 						currentInstruction + 3);
 
