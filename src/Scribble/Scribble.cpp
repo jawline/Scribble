@@ -51,6 +51,7 @@ void Scribble::execute() {
 	environment.printState();
 
 	printf("VM execution took time %f\n", vmEnd - vmStart);
+
 }
 
 void Scribble::load(std::string const& code) {

@@ -12,6 +12,11 @@
 #include <Scribble/Parser/TypeReference.hpp>
 #include "Type.hpp"
 
+/**
+ * StructureInfo contains the fields ( Name and type )  within a structure, its name and namespace.
+ * The order in which fields are defined
+ */
+
 class StructureInfo: public Type {
 private:
 	std::string name_;

@@ -11,7 +11,7 @@
 void registerPackages(std::map<std::string, NamespaceType>& allNames,
 		VM::VirtualMachine& vm) {
 
-	std::vector < std::pair<std::string, SP<VM::VMStructureField>>>postResolveList;
+	std::vector < std::pair < std::string, SP<VM::VMStructureField>>>postResolveList;
 
 	for (auto selectedNamespaceIter = allNames.begin();
 			selectedNamespaceIter != allNames.end(); selectedNamespaceIter++) {
@@ -37,7 +37,7 @@ void registerPackages(std::map<std::string, NamespaceType>& allNames,
 					std::stringstream code;
 					function->debugCode(code);
 
-					newSpace.insert(function->getName(), VM::NamespaceEntry(function->generateVMFunction()));
+					newSpace.insert(function->getName(), VM::NamespaceEntry(API::Function::generateVMFunction(function)));
 
 					vm.logMessage(VM::Log, std::string("Registered string ") + function->getName());
 

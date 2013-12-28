@@ -22,17 +22,16 @@ namespace VM {
 class VMFunc {
 private:
 	std::string name_;
-	InstructionSet instrs_;
-	Function* func_;
+	InstructionSet instrs_;SmartPointer<Function> func_;
 
 public:
 
 	VMFunc() :
-			name_("INVALID") {
+	name_("INVALID") {
 	}
 
 	VMFunc(std::string name, InstructionSet instrs);
-	VMFunc(std::string name, Function* func);
+	VMFunc(std::string name, SmartPointer<Function> func);
 	virtual ~VMFunc();
 
 	InstructionSet& getInstructions() {
@@ -43,7 +42,7 @@ public:
 		return name_;
 	}
 
-	Function* getFunction() {
+	SmartPointer<Function> getFunction() {
 		return func_;
 	}
 

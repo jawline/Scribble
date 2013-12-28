@@ -13,7 +13,6 @@
 #include <version_info.hpp>
 #include <Scribble/Scribble.hpp>
 
-
 char const* getCmdOption(char ** begin, char ** end, char const* defaultOption,
 		std::string option) {
 
@@ -47,7 +46,6 @@ int main(int argc, char* argv[]) {
 
 	Scribble environment(targetFile);
 	environment.execute();
-
 
 	return 0;
 }

@@ -41,7 +41,7 @@ public:
 
 	int debugCode(std::stringstream& gen);
 
-	virtual SP<VM::VMFunc> generateVMFunction() {
+	SP<VM::VMFunc> generateScriptedFunc() {
 
 		std::stringstream code;
 
@@ -53,6 +53,10 @@ public:
 				code.str().c_str());
 
 		return SP<VM::VMFunc>( new VM::VMFunc(getName(), instructions) );
+	}
+
+	bool isNativeFunction() {
+		return false;
 	}
 };
 

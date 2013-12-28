@@ -15,8 +15,8 @@ VMFunc::VMFunc(std::string name, InstructionSet instrs) :
 
 }
 
-VMFunc::VMFunc(std::string name, Function* func) :
-		name_(name), func_(func) {
+VMFunc::VMFunc(std::string name, SmartPointer<Function> func) :
+name_(name), func_(func) {
 
 }
 

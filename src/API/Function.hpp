@@ -112,12 +112,28 @@ public:
 	}
 
 	/**
-	 * Function returns a valid VM::VMFunc of this function ( the object is registerable inside the VM )
-	 * By default returns a native VM func to this function. Overload if custom VMFunc is required ( Such as ScriptedFunction )
+	 * Returns true if this is a function written in Native code.
 	 */
 
-	virtual SmartPointer<VM::VMFunc> generateVMFunction() {
-		return SmartPointer<VM::VMFunc>(new VM::VMFunc(getName(), this));
+	virtual bool isNativeFunction() {
+		return true;
+	}
+
+	/**
+	 * If the function is scripted and not native this will generate a VMFunc for it.
+	 */
+
+	virtual SmartPointer<VM::VMFunc> generateScriptedFunc() {
+		return SmartPointer<VM::VMFunc>(nullptr);
+	}
+
+	static SmartPointer<VM::VMFunc> generateVMFunction(SmartPointer<Function> func) {
+
+		if (func->isNativeFunction()) {
+			return SmartPointer<VM::VMFunc>(new VM::VMFunc(func->getName(), func));
+		}
+
+		return func->generateScriptedFunc();
 	}
 
 };
