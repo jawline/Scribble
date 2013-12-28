@@ -37,8 +37,9 @@ int main(int argc, char* argv[]) {
 
 	if (!cmdOptionExists(argv, argv + argc, "--file")
 			&& !cmdOptionExists(argv, argv + argc, "--exec")) {
-		printf(
-				"Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
+
+		printf("Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
+
 		return -1;
 	}
 

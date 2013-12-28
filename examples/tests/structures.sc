@@ -1,5 +1,5 @@
 /**
- *
+ * Test package tests the structure functionality of Scribble.
  *
  * Copyright (c) Blake Loring 2013
  */
@@ -18,8 +18,8 @@ func Test() {
  //Test a structure from this package
  var k := TestStructure { 15, 30 };
 
- //var x := k->Hello;
- //test.Assert(k->Hello, 15, "Structure initialization on 15 construct incorrect");
+ var x := k->Hello;
+ test.Assert(x, 15, "Structure initialization on 15 construct incorrect");
 
  test.Assert(k->Hello, 15, "Structure initialization on 30 construct incorrect");
  test.Assert(k->World, 30, "Structure initialization on 30 construct incorrect");

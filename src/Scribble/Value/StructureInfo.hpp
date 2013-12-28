@@ -19,8 +19,18 @@
 
 class StructureInfo: public Type {
 private:
+
+	/**
+	 * The name of the structure.
+	 */
+
 	std::string name_;
-	std::string namespace_;
+
+	/**
+	 * The name of the package it is in
+	 */
+
+	std::string package_;
 
 	std::vector<std::pair<std::string, TypeReference>> dataIndexs_;
 
@@ -35,7 +45,7 @@ public:
 	unsigned int getNumIndexs();
 
 	void setName(std::string name);
-	void setNamespace(std::string name);
+	void setPackage(std::string name);
 
 	std::string getName() {
 		return "__struct(" + name_ + ")";
@@ -47,7 +57,7 @@ public:
 
 	virtual std::string getTypeName();
 
-	std::string getNamespace();
+	std::string getPackage();
 
 };
 

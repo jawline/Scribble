@@ -143,7 +143,7 @@ Program: {
 		delete $5;
 	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
 		$7->setName(*$3);
-		$7->setNamespace(currentNamespaceName);
+		$7->setPackage(currentNamespaceName);
 		Functions[*$3] = NamespaceEntry(TypeReference(new TypeReferenceCore(*$3, $7)));
 		delete $3;
 	}
@@ -186,6 +186,7 @@ Type: TYPE_INT {
 		TypeReferences.push_back(*$$);
 		
 		delete $1;
+
 	} | WORD LINK WORD {
 	
 		//Same as the above except targets a type in a seperate namespace

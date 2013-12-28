@@ -9,7 +9,8 @@
 #include <VM/Constants.hpp>
 
 StructureInfo::StructureInfo(std::string name) :
-		Type(StructureType, nullptr), name_(name), namespace_("__INVALID__NAMESPACE__") {
+		Type(StructureType, nullptr), name_(name), package_(
+				"__INVALID__NAMESPACE__") {
 }
 
 StructureInfo::~StructureInfo() {
@@ -53,14 +54,14 @@ void StructureInfo::setName(std::string name) {
 	name_ = name;
 }
 
-void StructureInfo::setNamespace(std::string name) {
-	namespace_ = name;
+void StructureInfo::setPackage(std::string name) {
+	package_ = name;
 }
 
 std::string StructureInfo::getTypeName() {
-	return getNamespace() + VM::vmNamespaceSeperator + getName();
+	return getPackage() + VM::vmNamespaceSeperator + getName();
 }
 
-std::string StructureInfo::getNamespace() {
-	return namespace_;
+std::string StructureInfo::getPackage() {
+	return package_;
 }

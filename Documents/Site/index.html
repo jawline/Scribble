@@ -156,7 +156,7 @@
 	
 	<a name="content-start"></a>
 
-          <p style="padding: 1em; "class="lead">Scribble is a programming language which can be embedded into a larger application to allow customization of easy extension of existing functionality.</p>
+          <p style="padding: 1em; "class="lead">Scribble is a programming language which can be embedded into a larger application to allow customization of easy extension of existing functionality. The language has been designed with a focus on usefulness in games however it would be useful in many scenarios.</p>
 
       <hr class="featurette-divider">
 
@@ -256,19 +256,46 @@
      <div class="row featurette">
         <div class="col-md-12" >
           <h2 class="featurette-heading" >Structures</h2>
-          <p class="lead">Todo</p>
+          <p class="lead">Scribble allows the definition of structures to represent complex types.</p>
 
-	  <p>Todo</p>
+	  <p>Unlike most modern languages, Scribble omits classes in favor of C style structures. Structures are defined by writing</p><br/>
+	  <code>type Name := struct { <br/>&nbsp;Fields <br/>}</code><br/><br/>
+	  <p>where 'Name' is the name of the new structure and 'Fields' are the names and types of elements within a structure, seperated with a comma.</p>
+	  <p>An example of a structure would be </p>
+	  <code>
+		type User := struct {<br/>
+			&nbsp;username : string,<br/>
+			&nbsp;passwordHash : string,<br/>
+			&nbsp;age : int,<br/>
+			&nbsp;email : string,<br/>
+			&nbsp;address : string<br/>
+		}
+	  </code><br/><br/>
+	  <p>To create a new instance of a structure you can write </p>
+	  <code>
+	  var TheUser := User { "test",<br/>
+		  &nbsp;"SomeHash",<br/>
+		  &nbsp;32,<br/>
+		  &nbsp;"test@test.net",<br/>
+		  &nbsp;"Test street, Testington" <br/>
+		};
+	  </code>
+	  <br/><br/>
+	  <p>To access elements from a structure you use the -> operator. For example to access the username of the User defined you would write 'TheUser->username'. To assign it you would write 'TheUser->username := "NewString"'.</p>
+	  <code></code>
 
         </div>
       </div>
       <hr class="featurette-divider">
 
       <div class="row featurette">
+
         <div class="col-md-12" >
+
           <h2 class="featurette-heading" >Packages</h2>
           <p class="lead">Every file is seen as a package, a package is comprised of methods and structures.<p> <br/><p>One example of this would be using a method inside the math library to return the absolute value of an integer.</p><br/><code>package math := import("math/math");<br/><br/>func main() {<br/>&nbsp;var i := math.Abs(-15);<br/>}</code></p>
         </div>
+
       </div>
 
       <hr class="featurette-divider">
