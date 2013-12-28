@@ -41,25 +41,23 @@ Value* Concat::execute(std::vector<Value*> arguments) {
 
 API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 
-	char* lhs = (char*) values[0].getReferencePointer();
-	char* rhs = (char*) values[1].getReferencePointer();
+	char* lhs = values[0].getValueString();
+	char* rhs = values[1].getValueString();
 
 	if (lhs == nullptr || rhs == nullptr) {
+
 		virt->printState();
+
 		printf("Concat FCall Error\n");
+
 		for (;;) {
 		}
+
 	}
 
-	char* result = new char[strlen(lhs) + strlen(rhs) + 1];
-	memcpy(result, lhs, strlen(lhs));
-	memcpy(result + strlen(lhs), rhs, strlen(rhs) + 1);
+	std::string result = std::string(lhs) + std::string(rhs);
 
-	long ref = virt->getHeap().allocate(virt->findType("string"),
-			strlen(result) + 1, (uint8_t*) result);
-
-	return API::APIValue(virt->findType("string"),
-			virt->getHeap().getAddress(ref), ref);
+	return API::APIValue::makeString(result, virt);
 }
 
 } /* namespace API */

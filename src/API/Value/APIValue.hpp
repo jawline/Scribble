@@ -98,9 +98,11 @@ public:
 	 */
 
 	bool isReference() {
+
 		if (type_.get() == nullptr) {
 			return false;
 		}
+
 		return true;
 	}
 

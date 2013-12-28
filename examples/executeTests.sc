@@ -21,7 +21,6 @@ package structTest := import("tests/structures");
  */
 
 func main() {
-
     loopsTest.Test();
     arraysTest.Test();
     variablesTest.Test();
