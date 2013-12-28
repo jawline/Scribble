@@ -2,7 +2,7 @@
 #include <VM/Constants.hpp>
 
 GetVariableStatement::GetVariableStatement(int lineNo, std::string sym,
-		SP<Variable> var) :
+		SmartPointer<Variable> var) :
 		Statement(lineNo, sym) {
 			var_ = var;
 		}

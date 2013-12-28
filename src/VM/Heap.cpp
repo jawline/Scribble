@@ -32,7 +32,7 @@ bool Heap::validReference(long entry) {
 	return true;
 }
 
-long Heap::allocate(SP<VMEntryType> type, int size, uint8_t* initial) {
+long Heap::allocate(SmartPointer<VMEntryType> type, int size, uint8_t* initial) {
 
 	uint8_t* memory = new uint8_t[size];
 
@@ -84,7 +84,7 @@ int Heap::getSize(long entry) {
 	return heapMap_[entry].sizeBytes;
 }
 
-SP<VMEntryType> Heap::getType(long entry) {
+SmartPointer<VMEntryType> Heap::getType(long entry) {
 
 	if (!validReference(entry)) {
 		return nullptr;

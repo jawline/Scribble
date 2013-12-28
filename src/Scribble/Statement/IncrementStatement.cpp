@@ -11,7 +11,7 @@
 #include <VM/Constants.hpp>
 
 IncrementStatement::IncrementStatement(int line, std::string sym,
-		SP<Variable> variable, IncrementType op, bool post) :
+		SmartPointer<Variable> variable, IncrementType op, bool post) :
 		Statement(line, sym), variable_(variable), operator_(op), post_(post) {
 			oneVal_ = new IntValue(1);
 		}

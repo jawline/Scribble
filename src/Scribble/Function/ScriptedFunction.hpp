@@ -16,7 +16,7 @@
 
 class ScriptedFunction: public Function {
 private:
-	TypeReference fType_;SP<Variable> templateReturn_;
+	TypeReference fType_;SmartPointer<Variable> templateReturn_;
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variableTemplates_;
 	std::vector<SmartPointer<Variable>> arguments_;
@@ -24,7 +24,7 @@ private:
 public:
 
 	ScriptedFunction(std::string name, int version, std::string nameSpace, TypeReference functionType,
-			SP<Variable> templateReturn,
+			SmartPointer<Variable> templateReturn,
 			std::vector<SmartPointer<Statement>> statements,
 			std::vector<SmartPointer<Variable>> variableTemplates,
 			std::vector<SmartPointer<Variable>> variables);
@@ -41,7 +41,7 @@ public:
 
 	int debugCode(std::stringstream& gen);
 
-	SP<VM::VMFunc> generateScriptedFunc() {
+	SmartPointer<VM::VMFunc> generateScriptedFunc() {
 
 		std::stringstream code;
 
@@ -52,7 +52,7 @@ public:
 		VM::InstructionSet instructions = SimpleASM::Parser::parse(
 				code.str().c_str());
 
-		return SP<VM::VMFunc>( new VM::VMFunc(getName(), instructions) );
+		return SmartPointer<VM::VMFunc>( new VM::VMFunc(getName(), instructions) );
 	}
 
 	bool isNativeFunction() {

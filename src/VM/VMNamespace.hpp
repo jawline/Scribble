@@ -42,12 +42,12 @@ public:
 		namespace_ = names;
 	}
 
-	NamespaceEntry(SP<VMFunc> func) {
+	NamespaceEntry(SmartPointer<VMFunc> func) {
 		type_ = Function;
 		funcRef_ = func;
 	}
 
-	NamespaceEntry(SP<VMEntryType> type) {
+	NamespaceEntry(SmartPointer<VMEntryType> type) {
 		type_ = Type;
 		typeRef_ = type;
 	}
@@ -56,11 +56,11 @@ public:
 		return namespace_;
 	}
 
-	SP<VMEntryType> getTypeReference() {
+	SmartPointer<VMEntryType> getTypeReference() {
 		return typeRef_;
 	}
 
-	SP<VMFunc> getFunction() {
+	SmartPointer<VMFunc> getFunction() {
 		return funcRef_;
 	}
 

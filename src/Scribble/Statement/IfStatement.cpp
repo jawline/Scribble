@@ -12,9 +12,9 @@
 #include <Scribble/Statement/ReturnStatement.hpp>
 #include <VM/Constants.hpp>
 
-IfStatement::IfStatement(int lineNo, std::string sym, SP<Statement> condition,
-		std::vector<SP<Statement>> ifTrueStatements,
-		std::vector<SP<Statement>> ifFalseStatements) :
+IfStatement::IfStatement(int lineNo, std::string sym, SmartPointer<Statement> condition,
+		std::vector<SmartPointer<Statement>> ifTrueStatements,
+		std::vector<SmartPointer<Statement>> ifFalseStatements) :
 		Statement(lineNo, sym) {
 	condition_ = condition;
 	ifTrueStatements_ = ifTrueStatements;

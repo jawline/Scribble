@@ -14,14 +14,14 @@
 
 class IfStatement: public Statement {
 private:
-	SP<Statement> condition_;
-	std::vector<SP<Statement>> ifTrueStatements_;
-	std::vector<SP<Statement>> ifFalseStatements_;
+	SmartPointer<Statement> condition_;
+	std::vector<SmartPointer<Statement>> ifTrueStatements_;
+	std::vector<SmartPointer<Statement>> ifFalseStatements_;
 
 public:
-	IfStatement(int lineNo, std::string sym, SP<Statement> condition,
-			std::vector<SP<Statement>> ifTrueStatements,
-			std::vector<SP<Statement>> ifFalseStatements);
+	IfStatement(int lineNo, std::string sym, SmartPointer<Statement> condition,
+			std::vector<SmartPointer<Statement>> ifTrueStatements,
+			std::vector<SmartPointer<Statement>> ifFalseStatements);
 	virtual ~IfStatement();
 
 	Value* execute(std::vector<Value*> const& variables);

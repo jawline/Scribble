@@ -40,7 +40,7 @@ void ArrayValue::applyOperator(ValueOperator v, Value* r) {
 	throw StatementException(nullptr, "Invalid operator");
 }
 
-void ArrayValue::setArrayData(SP<ArrayData> d, int start, int length) {
+void ArrayValue::setArrayData(SmartPointer<ArrayData> d, int start, int length) {
 	data_ = d;
 	start_ = start;
 	length_ = length;

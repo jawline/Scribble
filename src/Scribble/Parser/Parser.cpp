@@ -22,7 +22,7 @@ extern std::string currentNamespaceName;
 extern map<std::string, std::string> ImportList;
 
 extern std::vector<ParserReference> StatementReferences;
-extern std::vector<SP<Variable>> VariableReferences;
+extern std::vector<SmartPointer<Variable>> VariableReferences;
 extern std::vector<TypeReference> TypeReferences;
 
 extern bool ParsingError;
@@ -48,7 +48,7 @@ std::string Parser::getUniformPath(std::string const& currentPath) {
 	return std::string(pBuf);
 }
 
-SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
+SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference> toFind,
 		FunctionSet const& set) {
 
 	//If the target set is empty return null
@@ -62,7 +62,7 @@ SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 	//If the function takes zero arguments then there can only be one option.
 	if (args.size() == 0) {
 
-		SP<Function> fn = set[0];
+		SmartPointer<Function> fn = set[0];
 
 		if (fn->numArgs() == 0) {
 			return fn;
@@ -75,7 +75,7 @@ SP<Function> Parser::findFunctionInSet(SP<FunctionReference> toFind,
 	//Otherwise search through each function and do a thorough search.
 	for (unsigned int i = 0; i < set.size(); ++i) {
 
-		SP<Function> fn = set[i];
+		SmartPointer<Function> fn = set[i];
 
 		if (fn->numArgs() == args.size()) {
 
@@ -173,7 +173,7 @@ bool Parser::listContains(std::string target,
 	return false;
 }
 
-bool Parser::testFunctionEquivilence(SP<Function> function, SP<Function> compared) {
+bool Parser::testFunctionEquivilence(SmartPointer<Function> function, SmartPointer<Function> compared) {
 
 	bool duplicate = false;
 
@@ -210,7 +210,7 @@ bool Parser::testFunctionEquivilence(SP<Function> function, SP<Function> compare
 }
 
 Type* Parser::functionSetType(FunctionSet const& functionSet) {
-	SP<Function> fn = functionSet[0];
+	SmartPointer<Function> fn = functionSet[0];
 	return fn->getType();
 }
 
@@ -270,7 +270,8 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
-	std::vector < SP < Variable >> variableReferences = VariableReferences;
+	std::vector < SmartPointer < Variable >> variableReferences =
+			VariableReferences;
 
 	StatementReferences.clear();
 	TypeReferences.clear();
@@ -387,7 +388,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 		case FunctionEvaluation: {
 
-			SP<FunctionReference> ref = references[i].functionReference;
+			SmartPointer<FunctionReference> ref = references[i].functionReference;
 
 			NamespaceType selectedNamespace = Functions;
 
@@ -425,7 +426,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 				} else {
 
-					SP<Function> searchResult = Parser::findFunctionInSet(ref,
+					SmartPointer<Function> searchResult = Parser::findFunctionInSet(ref,
 							it->second.getFunctionSet());
 
 					if (searchResult.get() != nullptr) {

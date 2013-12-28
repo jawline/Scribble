@@ -12,7 +12,7 @@
 namespace VM {
 
 struct VMHeapEntry {
-	SP<VMEntryType> type;
+	SmartPointer<VMEntryType> type;
 	unsigned int sizeBytes;
 	uint8_t* pointer;
 	bool flagged;

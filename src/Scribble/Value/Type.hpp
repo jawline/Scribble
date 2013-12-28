@@ -12,7 +12,7 @@
 
 class TypeReferenceCore;
 
-typedef SP<TypeReferenceCore> TypeReference;
+typedef SmartPointer<TypeReferenceCore> TypeReference;
 
 /**
  *  Enum defining variable types (Integer, Boolean, Etcetera)

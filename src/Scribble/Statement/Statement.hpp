@@ -46,6 +46,6 @@ public:
 	}
 };
 
-typedef SP<Statement> SafeStatement;
+typedef SmartPointer<Statement> SafeStatement;
 
 #endif //_STATEMENT_DEF_H_

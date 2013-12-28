@@ -89,5 +89,5 @@ public:
 };*/
 
 #define SmartPointer std::shared_ptr
-#define SP SmartPointer
+
 #endif //_SMART_POINTER_DEF_H_

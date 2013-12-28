@@ -5,10 +5,10 @@
 
 class GetVariableStatement: public Statement {
 private:
-	SP<Variable> var_;
+	SmartPointer<Variable> var_;
 
 public:
-	GetVariableStatement(int lineNo, std::string sym, SP<Variable> var);
+	GetVariableStatement(int lineNo, std::string sym, SmartPointer<Variable> var);
 	~GetVariableStatement();
 	Value* execute(std::vector<Value*> const& variables);
 

@@ -28,7 +28,7 @@ Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
 	int length = l->value();
 	valueHeap.free(l);
 
-	SP<ArrayData> data = SP<ArrayData>(nullptr);
+	SmartPointer<ArrayData> data = SmartPointer<ArrayData>(nullptr);
 
 	if (length > 0) {
 
@@ -38,7 +38,7 @@ Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
 			initial[i] = ValueUtil::generateValue(type_->getSubtype());
 		}
 
-		data = SP<ArrayData>(new ArrayData(length, initial));
+		data = SmartPointer<ArrayData>(new ArrayData(length, initial));
 	}
 
 	ArrayValue* arr = (ArrayValue*) ValueUtil::generateValue(type_);

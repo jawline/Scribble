@@ -4,7 +4,7 @@
 #include <VM/Constants.hpp>
 
 AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym,
-		SP<Variable> var, SafeStatement exp) :
+		SmartPointer<Variable> var, SafeStatement exp) :
 		Statement(lineNo, sym), exp_(exp), var_(var) {
 }
 

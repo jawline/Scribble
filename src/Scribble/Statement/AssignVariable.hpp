@@ -20,7 +20,7 @@ private:
 	 * The variable which is modified.
 	 */
 
-	SP<Variable> var_;
+	SmartPointer<Variable> var_;
 
 public:
 
@@ -32,7 +32,7 @@ public:
 	 * @param exp The expression which the variable is set to the result of.
 	 */
 
-	AssignVariableStatement(int lineNo, std::string sym, SP<Variable> var,
+	AssignVariableStatement(int lineNo, std::string sym, SmartPointer<Variable> var,
 			SafeStatement exp);
 	~AssignVariableStatement();
 

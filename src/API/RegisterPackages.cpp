@@ -11,7 +11,7 @@
 void registerPackages(std::map<std::string, NamespaceType>& allNames,
 		VM::VirtualMachine& vm) {
 
-	std::vector < std::pair < std::string, SP<VM::VMStructureField>>>postResolveList;
+	std::vector < std::pair < std::string, SmartPointer<VM::VMStructureField>>>postResolveList;
 
 	for (auto selectedNamespaceIter = allNames.begin();
 			selectedNamespaceIter != allNames.end(); selectedNamespaceIter++) {
@@ -32,7 +32,7 @@ void registerPackages(std::map<std::string, NamespaceType>& allNames,
 				FunctionSet functionSet = iterator->second.getFunctionSet();
 
 				for (unsigned int i = 0; i < functionSet.size(); i++) {
-					SP<Function> function = functionSet[i];
+					SmartPointer<Function> function = functionSet[i];
 
 					std::stringstream code;
 					function->debugCode(code);
@@ -52,7 +52,7 @@ void registerPackages(std::map<std::string, NamespaceType>& allNames,
 					TypeReference type = iterator->second.getType();
 					StructureInfo* info = (StructureInfo*) iterator->second.getType()->type;
 
-					std::vector<SP<VM::VMStructureField>> fields;
+					std::vector<SmartPointer<VM::VMStructureField>> fields;
 
 					for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
 
@@ -62,12 +62,12 @@ void registerPackages(std::map<std::string, NamespaceType>& allNames,
 
 						vm.logMessage(VM::Log, info->getIndex(i).first + " : " + ((StructureInfo*) info->getIndex(i).second->type)->getTypeName() + "\n");
 
-						SP<VM::VMStructureField> newField = SP<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr));
-						postResolveList.push_back(std::pair<std::string, SP<VM::VMStructureField>>(fullTypeName, newField));
+						SmartPointer<VM::VMStructureField> newField = SmartPointer<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr));
+						postResolveList.push_back(std::pair<std::string, SmartPointer<VM::VMStructureField>>(fullTypeName, newField));
 						fields.push_back( newField );
 					}
 
-					newSpace.insert(info->getName(), VM::NamespaceEntry(SP<VM::VMEntryType>(new VM::VMEntryType(info->getName(), fields))));
+					newSpace.insert(info->getName(), VM::NamespaceEntry(SmartPointer<VM::VMEntryType>(new VM::VMEntryType(info->getName(), fields))));
 
 					vm.logMessage(VM::Log, "}\n");
 				}

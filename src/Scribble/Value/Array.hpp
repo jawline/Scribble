@@ -61,7 +61,7 @@ public:
 	/**
 	 * Get a reference to the array data.
 	 */
-	SP<ArrayData> getArrayData() {
+	SmartPointer<ArrayData> getArrayData() {
 		return data_;
 	}
 
@@ -80,7 +80,7 @@ public:
 	/**
 	 * Set the array data, start index and length vertex.
 	 */
-	void setArrayData(SP<ArrayData> d, int start, int l);
+	void setArrayData(SmartPointer<ArrayData> d, int start, int l);
 };
 
 #endif /* ARRAY_SYS_HPP_ */

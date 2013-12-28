@@ -14,9 +14,9 @@
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Value/Variable.hpp> // Variable class
 
-typedef std::vector<SP<Function>> FunctionSet;
+typedef std::vector<SmartPointer<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
-typedef std::pair<SP<Variable>, SafeStatement> AutoVariablePair;
+typedef std::pair<SmartPointer<Variable>, SafeStatement> AutoVariablePair;
 
 enum ParserReferenceType {
 	FunctionEvaluation,
@@ -31,7 +31,7 @@ private:
 
 public:
 
-	ParserReference(SP<FunctionReference> reference) {
+	ParserReference(SmartPointer<FunctionReference> reference) {
 		type_ = FunctionEvaluation;
 		functionReference = reference;
 	}
@@ -107,12 +107,12 @@ public:
 	 * Check whether the set already contains an equivalent function
 	 */
 
-	static bool testFunctionEquivilence(SP<Function> function, SP<Function> other);
+	static bool testFunctionEquivilence(SmartPointer<Function> function, SmartPointer<Function> other);
 
 	/**
 	 * Attempt to find a function that meets the criteria of a reference within a function set.
 	 */
-	static SP<Function> findFunctionInSet(SP<FunctionReference> toFind,
+	static SmartPointer<Function> findFunctionInSet(SmartPointer<FunctionReference> toFind,
 			FunctionSet const& set);
 
 	/**

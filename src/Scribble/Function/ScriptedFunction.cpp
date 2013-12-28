@@ -17,7 +17,7 @@ std::string makeName(std::string name, int version) {
 }
 
 ScriptedFunction::ScriptedFunction(std::string name, int version,
-		std::string names, TypeReference fType, SP<Variable> templateReturn,
+		std::string names, TypeReference fType, SmartPointer<Variable> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :

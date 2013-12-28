@@ -13,21 +13,21 @@ namespace API {
 
 class APIValue {
 private:
-	SP<VM::VMEntryType> type_;
+	SmartPointer<VM::VMEntryType> type_;
 	uint8_t* data_;
 	int64_t val_;
 
 public:
 	APIValue() { val_ = 0; type_ = nullptr; data_ = nullptr;}
 	APIValue(int64_t val);
-	APIValue(SP<VM::VMEntryType> type, uint8_t* data, long val);
+	APIValue(SmartPointer<VM::VMEntryType> type, uint8_t* data, long val);
 	virtual ~APIValue();
 
 	int64_t getValue() {
 		return val_;
 	}
 
-	SP<VM::VMEntryType> getReferenceType() {
+	SmartPointer<VM::VMEntryType> getReferenceType() {
 		return type_;
 	}
 

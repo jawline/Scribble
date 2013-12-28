@@ -15,11 +15,11 @@ VMEntryType::VMEntryType(std::string name, unsigned int size, bool reference) :
 
 }
 
-VMEntryType::VMEntryType(std::string name, SP<VMEntryType> subtype) :
+VMEntryType::VMEntryType(std::string name, SmartPointer<VMEntryType> subtype) :
 name_(name), size_(8), reference_(true), baseType_(VMArray), arraySubtype_(subtype) {
 }
 
-VMEntryType::VMEntryType(std::string name, std::vector<SP<VMStructureField>> fields) : name_(name), size_(8), reference_(true), baseType_(VMStructure) {
+VMEntryType::VMEntryType(std::string name, std::vector<SmartPointer<VMStructureField>> fields) : name_(name), size_(8), reference_(true), baseType_(VMStructure) {
 
 	//Set the structure size to 0 and the dirty flag to true to tell the structure to recompute its size when requested.
 	structureSizeBytes_ = 0;
@@ -65,7 +65,7 @@ bool VMEntryType::isReference() {
 	return reference_;
 }
 
-SP<VMEntryType> VMEntryType::arraySubtype() {
+SmartPointer<VMEntryType> VMEntryType::arraySubtype() {
 	return arraySubtype_;
 }
 

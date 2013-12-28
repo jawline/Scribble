@@ -32,19 +32,19 @@ VirtualMachine::VirtualMachine() {
 	}
 
 	//Register all the primitive types
-	registerEntry("char", NamespaceEntry(SP< VMEntryType > (new VMEntryType("char", 1, false))));
+	registerEntry("char", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("char", 1, false))));
 
-	registerEntry("bool", NamespaceEntry(SP< VMEntryType > (new VMEntryType("bool", 1, false))));
+	registerEntry("bool", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("bool", 1, false))));
 
-	registerEntry("short", NamespaceEntry(SP< VMEntryType > (new VMEntryType("short", 2, false))));
+	registerEntry("short", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("short", 2, false))));
 
-	registerEntry("int", NamespaceEntry(SP< VMEntryType > (new VMEntryType("int", 4, false))));
+	registerEntry("int", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("int", 4, false))));
 
-	registerEntry("float32", NamespaceEntry(SP< VMEntryType > (new VMEntryType("float32", 4, false))));
+	registerEntry("float32", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("float32", 4, false))));
 
-	registerEntry("long", NamespaceEntry(SP< VMEntryType > (new VMEntryType("int", 8, false))));
+	registerEntry("long", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("int", 8, false))));
 
-	registerEntry("string", NamespaceEntry(SP< VMEntryType
+	registerEntry("string", NamespaceEntry(SmartPointer< VMEntryType
 	> (new VMEntryType("string",
 					namespace_.find("char").getTypeReference()))));
 
@@ -62,7 +62,7 @@ VirtualMachine::~VirtualMachine() {
 	// TODO Auto-generated destructor stub
 }
 
-SP<VMEntryType> VirtualMachine::findType(std::string name) {
+SmartPointer<VMEntryType> VirtualMachine::findType(std::string name) {
 
 	NamespaceEntry entry;
 
@@ -76,7 +76,7 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 
 			std::string subtypeName = name.substr(strlen(prefix),
 					name.size() - strlen(prefix) - 1);
-			SP<VMEntryType> subtype = findType(subtypeName);
+			SmartPointer<VMEntryType> subtype = findType(subtypeName);
 
 			if (subtype.get() == nullptr) {
 				VM_PRINTF_FATAL("Cannot create array of invalid subtype %s\n",
@@ -84,7 +84,7 @@ SP<VMEntryType> VirtualMachine::findType(std::string name) {
 				return nullptr;
 			}
 
-			SP<VMEntryType> entryType = SP<VMEntryType>(new VMEntryType(name, subtype));
+			SmartPointer<VMEntryType> entryType = SmartPointer<VMEntryType>(new VMEntryType(name, subtype));
 			registerEntry(name, entryType);
 			VM_PRINTF_LOG("Generating new type %s\n", name.c_str());
 			return entryType;
@@ -684,7 +684,7 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				//Check that the array type is a structure
-				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+				SmartPointer<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
 
 				if (arrayType->getBaseType() != VM::VMStructure) {
 					VM_PRINTF_FATAL("%s",
@@ -702,7 +702,7 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				//Get the VM type of the field being set and the offset of it in bytes in the structure data.
-				SP<VMEntryType> type = arrayType->getStructureFields()[registers_[indexReg]]->getType();
+				SmartPointer<VMEntryType> type = arrayType->getStructureFields()[registers_[indexReg]]->getType();
 				unsigned int offset = arrayType->getStructureFieldOffset(
 						registers_[indexReg]);
 
@@ -751,7 +751,7 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				//Check that the array type is a structure
-				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+				SmartPointer<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
 
 				if (arrayType->getBaseType() != VM::VMStructure) {
 					VM_PRINTF_FATAL("%s",
@@ -771,7 +771,7 @@ void VirtualMachine::execute(std::string function) {
 				}
 
 				//Get the VM type of the field being set and the offset of it in bytes in the structure data.
-				SP<VMEntryType> type = arrayType->getStructureFields()[registers_[indexReg]]->getType();
+				SmartPointer<VMEntryType> type = arrayType->getStructureFields()[registers_[indexReg]]->getType();
 
 				unsigned int offset = arrayType->getStructureFieldOffset(
 						registers_[indexReg]);
@@ -816,7 +816,7 @@ void VirtualMachine::execute(std::string function) {
 							tgtArray);
 				}
 
-				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+				SmartPointer<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
 
 				if (arrayType->getBaseType() != VM::VMArray) {
 					VM_PRINTF_FATAL("%s",
@@ -890,7 +890,7 @@ void VirtualMachine::execute(std::string function) {
 							tgtArray);
 				}
 
-				SP<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
+				SmartPointer<VMEntryType> arrayType = heap_.getType(registers_[tgtArray]);
 
 				if (arrayType->getBaseType() != VM::VMArray) {
 
@@ -1242,7 +1242,7 @@ void VirtualMachine::garbageCollection() {
 			VM_PRINTF_FATAL("ERROR: Reference at register %i is not valid\n", i);
 		}
 
-		SP<VMEntryType> nextType = heap_.getType(next);
+		SmartPointer<VMEntryType> nextType = heap_.getType(next);
 
 		if (nextType.get() == nullptr) {
 			VM_PRINTF_FATAL("%s", "ERROR: Heap type failure\n");
@@ -1251,7 +1251,7 @@ void VirtualMachine::garbageCollection() {
 		//If it is an array check if it is an array of references and if it is flag and check every reference.
 		if (nextType->getBaseType() == VM::VMArray) {
 
-			SP<VMEntryType> subtype = nextType->arraySubtype();
+			SmartPointer<VMEntryType> subtype = nextType->arraySubtype();
 
 			if (subtype->isReference()) {
 

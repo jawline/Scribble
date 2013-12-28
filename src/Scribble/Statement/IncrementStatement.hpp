@@ -16,14 +16,14 @@ enum IncrementType {
 
 class IncrementStatement: public Statement {
 private:
-	SP<Variable> variable_;
+	SmartPointer<Variable> variable_;
 	IncrementType operator_;
 	bool post_;
 	Value* oneVal_;
 
 public:
 
-	IncrementStatement(int line, std::string sym, SP<Variable> var,
+	IncrementStatement(int line, std::string sym, SmartPointer<Variable> var,
 			IncrementType op, bool post);
 	virtual ~IncrementStatement();
 

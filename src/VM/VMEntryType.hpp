@@ -29,22 +29,22 @@ class VMEntryType;
 
 class VMStructureField {
 private:
-	std::string name_;SP<VMEntryType> type_;
+	std::string name_;SmartPointer<VMEntryType> type_;
 
 public:
 
-	VMStructureField(std::string name, SP<VMEntryType> type) : name_(name), type_(type) {
+	VMStructureField(std::string name, SmartPointer<VMEntryType> type) : name_(name), type_(type) {
 	}
 
 	std::string getName() {
 		return name_;
 	}
 
-	SP<VMEntryType> getType() {
+	SmartPointer<VMEntryType> getType() {
 		return type_;
 	}
 
-	void setType(SP<VMEntryType> type) {
+	void setType(SmartPointer<VMEntryType> type) {
 		type_ = type;
 	}
 
@@ -60,17 +60,17 @@ private:
 
 	VMEntryBaseType baseType_;
 
-	SP<VMEntryType> arraySubtype_;
+	SmartPointer<VMEntryType> arraySubtype_;
 
-	std::vector<SP<VMStructureField>> structureFields_;
+	std::vector<SmartPointer<VMStructureField>> structureFields_;
 	unsigned int structureSizeBytes_;
 	bool structureSizeDirty_;
 
 public:
 
 	VMEntryType(std::string name, unsigned int size, bool reference);
-	VMEntryType(std::string name, SP<VMEntryType> subtype);
-	VMEntryType(std::string name, std::vector<SP<VMStructureField>> fields);
+	VMEntryType(std::string name, SmartPointer<VMEntryType> subtype);
+	VMEntryType(std::string name, std::vector<SmartPointer<VMStructureField>> fields);
 	virtual ~VMEntryType();
 
 	/**
@@ -103,7 +103,7 @@ public:
 	 * If this object is of the base type VMArray then this function will return a VMEntryType with the subtype of the array.
 	 */
 
-	SP<VMEntryType> arraySubtype();
+	SmartPointer<VMEntryType> arraySubtype();
 
 	/**
 	 * Return a text description of the VMEntryType
@@ -115,7 +115,7 @@ public:
 	 * Return the list of fields in a structure.
 	 */
 
-	std::vector<SP<VMStructureField>> const& getStructureFields() {
+	std::vector<SmartPointer<VMStructureField>> const& getStructureFields() {
 		return structureFields_;
 	}
 

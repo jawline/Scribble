@@ -51,7 +51,7 @@ void scribble_error(const char* s);
 
 bool ParsingError;
 std::map<std::string, std::string> ImportList;
-std::map<std::string, SP<Variable>> Variables;
+std::map<std::string, SmartPointer<Variable>> Variables;
 
 std::string currentNamespaceName;
 
@@ -59,7 +59,7 @@ std::map<std::string, NamespaceType> Namespace;
 NamespaceType Functions;
 
 std::vector<TypeReference> TypeReferences;
-std::vector<SP<Variable>> VariableReferences;
+std::vector<SmartPointer<Variable>> VariableReferences;
 std::vector<ParserReference> StatementReferences;
 
 int lastuid;
@@ -87,7 +87,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 	StructureInfo* structureinfo;
 	Statement* statement;
 	Function* function;
-	SP<Variable>* variable;
+	SmartPointer<Variable>* variable;
 	std::string* string;
 	
 	float32_t float32;
@@ -208,7 +208,7 @@ Variable:  VARIABLE WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable(0, *$4, nullptr));
+			SmartPointer<Variable>* nVar = new SmartPointer<Variable>(new Variable(0, *$4, nullptr));
 			VariableReferences.push_back(*nVar);
 			Variables[*$2] = *nVar;
 			$$ = nVar;
@@ -230,7 +230,7 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 		
 			SafeStatement sp = SafeStatement($4);
 		
-			SP<Variable> nVar = SP<Variable>(new Variable(0, nullptr, nullptr));
+			SmartPointer<Variable> nVar = SmartPointer<Variable>(new Variable(0, nullptr, nullptr));
 			Variables[*$2] = nVar;
 			
 			ParserReference r(AutoVariablePair(nVar, sp));
@@ -251,7 +251,7 @@ ArgumentDefinition: WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SP<Variable>* nVar = new SP<Variable>(new Variable(0, *$3, nullptr));
+			SmartPointer<Variable>* nVar = new SmartPointer<Variable>(new Variable(0, *$3, nullptr));
 			VariableReferences.push_back(*nVar);
 			Variables[*$1] = *nVar;
 			$$ = nVar;
@@ -263,7 +263,7 @@ ArgumentDefinition: WORD COLON Type {
 ;
 
 ArgumentDefinitions: ArgumentDefinition {
-		$$ = new std::vector<SP<Variable>>();
+		$$ = new std::vector<SmartPointer<Variable>>();
 		$$->push_back(*$1);
 		delete $1;
 	} | ArgumentDefinitions COMMA ArgumentDefinition {
@@ -274,7 +274,7 @@ ArgumentDefinitions: ArgumentDefinition {
 ;
 
 Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET Statements RBRACKET {
-		std::vector<SP<Variable>> values;
+		std::vector<SmartPointer<Variable>> values;
 
 		int pos = 0;
 		for (auto it = Variables.begin(); it != Variables.end(); it++) {
@@ -284,10 +284,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		}
 
 
-		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, *$7, nullptr));
+		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, *$7, nullptr));
 		VariableReferences.push_back(returnTemplate);
 		
-		SP<Function> fn = SP<Function>( new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4));
+		SmartPointer<Function> fn = SmartPointer<Function>( new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -324,7 +324,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
 		
-		std::vector<SP<Variable>> values;
+		std::vector<SmartPointer<Variable>> values;
 
 		int pos = 0;
 		for (auto it = Variables.begin(); it != Variables.end(); it++) {
@@ -334,10 +334,10 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		}
 	
 	
-		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, *$6, nullptr));
+		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, *$6, nullptr));
 		VariableReferences.push_back(returnTemplate);
 		
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$6, returnTemplate, *$8, values, std::vector<SP<Variable>>()));
+		SmartPointer<Function> fn = SmartPointer<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$6, returnTemplate, *$8, values, std::vector<SmartPointer<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -366,7 +366,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		delete $8;
 		delete $6;
 	} | FUNCTION WORD LPAREN ArgumentDefinitions RPAREN LBRACKET Statements RBRACKET {
-		std::vector<SP<Variable>> values;
+		std::vector<SmartPointer<Variable>> values;
 
 		int pos = 0;
 		for (auto it = Variables.begin(); it != Variables.end(); it++) {
@@ -377,9 +377,9 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
 
-		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
+		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
 		
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4));
+		SmartPointer<Function> fn = SmartPointer<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -414,7 +414,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 
 	} | FUNCTION WORD LPAREN RPAREN LBRACKET Statements RBRACKET {
 		
-		std::vector<SP<Variable>> values;
+		std::vector<SmartPointer<Variable>> values;
 
 		int pos = 0;
 		for (auto it = Variables.begin(); it != Variables.end(); it++) {
@@ -426,9 +426,9 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 	
 		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
 	
-		SP<Variable> returnTemplate = SP<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
+		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
 		
-		SP<Function> fn = SP<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$6, values, std::vector<SP<Variable>>()));
+		SmartPointer<Function> fn = SmartPointer<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$6, values, std::vector<SmartPointer<Variable>>()));
 		
 		if (Functions[*$2].type() == EmptyEntry) {
 		
@@ -559,7 +559,7 @@ IfStatements: Statement {
 Statement: Expression END {
 		$$ = $1;
 	} | IF Expression THEN IfStatements  {
-		$$ = new IfStatement(scribble_lineno, scribble_text, SafeStatement($2), *$4, std::vector<SP<Statement>>());
+		$$ = new IfStatement(scribble_lineno, scribble_text, SafeStatement($2), *$4, std::vector<SmartPointer<Statement>>());
 		delete $4;
 	} | IF Expression THEN IfStatements ELSE IfStatements {
 		$$ = new IfStatement(scribble_lineno, scribble_text, SafeStatement($2), *$4, *$6);
