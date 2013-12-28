@@ -71,11 +71,11 @@ public:
 		APIValue returnVal = execute(vals, virt);
 
 		if (returnVal.isReference()) {
-			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue(),
+			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
 					true);
 			virt->hitGc();
 		} else {
-			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue(),
+			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
 					false);
 		}
 	}

@@ -46,9 +46,8 @@ Value* IntFromFloat32::execute(std::vector<Value*> arguments) {
 
 API::APIValue IntFromFloat32::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
-	int64_t floatData = values[0].getValue();
-	float floatValue = *((float32_t*) &floatData);
-	return API::APIValue((int) (floatValue));
+	int val = values[0].getValueFloat32();
+	return API::APIValue(val);
 }
 
 } /* namespace API */

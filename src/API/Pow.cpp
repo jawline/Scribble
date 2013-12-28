@@ -25,7 +25,7 @@ Pow::~Pow() {
 }
 
 APIValue Pow::execute(API::APIValue* values, VM::VirtualMachine* virt) {
-	return API::APIValue(pow(values[0].getValue(), (int) values[1].getValue()));
+	return API::APIValue(pow(values[0].getValue32(), (int) values[1].getValue32()));
 }
 
 Value* Pow::execute(std::vector<Value*> arguments) {
@@ -67,8 +67,8 @@ PowFloat32::~PowFloat32() {
 
 APIValue PowFloat32::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 
-	int64_t left = values[0].getValue();
-	int64_t right = values[1].getValue();
+	int64_t left = values[0].getValue32();
+	int64_t right = values[1].getValue32();
 
 	float32_t power = pow(*((float32_t*) &left), *((float32_t*) &right));
 

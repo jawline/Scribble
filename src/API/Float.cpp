@@ -31,9 +31,7 @@ Value* Float32FromInt::execute(std::vector<Value*> arguments) {
 
 API::APIValue Float32FromInt::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
-	int64_t returnData = 0;
-	*((float32_t*)&returnData) = values[0].getValue();
-	return returnData;
+	return values[0].getValueFloat32();
 }
 
 Type* Float32FromInt::getType() {

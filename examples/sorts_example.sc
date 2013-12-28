@@ -4,7 +4,7 @@ package sys := import("sys");
 
 func main() {
 
-	var worstCaseList := populate.PopulateWorstCase([100]int);
+	var worstCaseList := populate.PopulateWorstCase([1000]int);
 
 	sys.Write("Worst Case: ");
 	populate.PrintList(worstCaseList);

@@ -52,14 +52,18 @@ Type* IntToStringFunction::argType(unsigned int arg) {
 
 API::APIValue IntToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
-	int toConv = values[0].getValue();
+
+	//Get the number to convert to a string
+	int toConv = values[0].getValue32();
+
+	//Create a string stream to convert the integer to a string
 	std::stringstream res;
 	res << toConv;
+
+	//Get the resulting string
 	std::string resultString = res.str();
-	long heapEntry = virt->getHeap().allocate(virt->findType("string"),
-			resultString.length() + 1, (uint8_t*) resultString.c_str());
-	return API::APIValue(virt->findType("string"),
-			virt->getHeap().getAddress(heapEntry), heapEntry);
+
+	return API::APIValue::makeString(resultString, virt);
 }
 
 BoolToStringFunction::BoolToStringFunction(std::string ns) :
@@ -107,16 +111,11 @@ API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 
 	long heapEntry = -1;
 
-	if (values[0].getValue() == VM::vmTrue) {
-		heapEntry = virt->getHeap().allocate(virt->findType("string"),
-				strlen("true") + 1, (uint8_t*) "true");
-	} else {
-		heapEntry = virt->getHeap().allocate(virt->findType("string"),
-				strlen("false") + 1, (uint8_t*) "false");
+	if (values[0].getValueBoolean()) {
+		return API::APIValue::makeString("true", virt);
 	}
 
-	return API::APIValue(virt->findType("string"),
-			virt->getHeap().getAddress(heapEntry), heapEntry);
+	return API::APIValue::makeString("false", virt);
 }
 
 Float32ToStringFunction::Float32ToStringFunction(std::string ns) :
@@ -156,19 +155,15 @@ Type* Float32ToStringFunction::argType(unsigned int arg) {
 API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 
-	//TODO: This is nasty, hacky buisness. Find a nicer way of doing this ( There must be a way under C's syntax to cast without altering primatives )
+	//Get the floating point value to convert
+	float32_t val = values[0].getValueFloat32();
 
-	//Get the data which contains the float value then use a pointer to make C reinterpret the data as a float32_t* without actually modifying it
-	int64_t toConv = values[0].getValue();
-
+	//Use a string stream to convert it to a string
 	std::stringstream res;
-	res << *((float32_t*)&toConv);
+	res << val;
 
 	std::string resultString = res.str();
 
-	long heapEntry = virt->getHeap().allocate(virt->findType("string"),
-			resultString.length() + 1, (uint8_t*) resultString.c_str());
-
-	return API::APIValue(virt->findType("string"),
-			virt->getHeap().getAddress(heapEntry), heapEntry);
+	//Return a new API string from the resulting string
+	return API::APIValue::makeString(resultString, virt);
 }

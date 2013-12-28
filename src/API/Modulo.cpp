@@ -20,7 +20,7 @@ Modulo::~Modulo() {
 }
 
 APIValue Modulo::execute(API::APIValue* values, VM::VirtualMachine* virt) {
-	return API::APIValue(values[0].getValue() % values[1].getValue());
+	return API::APIValue(values[0].getValue32() % values[1].getValue32());
 }
 
 Value* Modulo::execute(std::vector<Value*> arguments) {
