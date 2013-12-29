@@ -109,8 +109,6 @@ Type* BoolToStringFunction::argType(unsigned int arg) {
 API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 
-	long heapEntry = -1;
-
 	if (values[0].getValueBoolean()) {
 		return API::APIValue::makeString("true", virt);
 	}

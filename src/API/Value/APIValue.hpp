@@ -106,6 +106,10 @@ public:
 		return true;
 	}
 
+	static API::APIValue makeFloat32(float32_t val) {
+		return API::APIValue( *((long*)&val) );
+	}
+
 	static API::APIValue makeString(std::string const& text, VM::VirtualMachine* vm) {
 
 		//Create the new heap entry

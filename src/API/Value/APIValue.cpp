@@ -11,7 +11,6 @@ namespace API {
 
 APIValue::APIValue(int64_t val) :
 		type_(nullptr), data_(nullptr), val_(val) {
-
 }
 
 APIValue::APIValue(SmartPointer<VM::VMEntryType> type, uint8_t* data, long val) :
