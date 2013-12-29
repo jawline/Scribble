@@ -18,6 +18,9 @@ public:
 	RandomInt(std::string ns);
 	virtual ~RandomInt();
 
+
+	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+
 	Value* execute(std::vector<Value*> arguments);
 	Type* getType();
 	const unsigned int numArgs();

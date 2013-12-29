@@ -31,5 +31,4 @@ func main() {
     floatsTest.Test();
     mathTest.Test();
     structTest.Test();
-
 }

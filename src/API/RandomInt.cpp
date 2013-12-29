@@ -10,7 +10,8 @@
 #include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
-RandomInt::RandomInt(std::string ns) : Function("RandomInt", ns) {
+RandomInt::RandomInt(std::string ns) :
+		Function("RandomInt", ns) {
 }
 
 RandomInt::~RandomInt() {
@@ -31,4 +32,9 @@ const unsigned int RandomInt::numArgs() {
 
 Type* RandomInt::argType(unsigned int arg) {
 	return getTypeManager().getType(Int);
+}
+
+APIValue RandomInt::execute(API::APIValue* values,
+		VM::VirtualMachine* virt) {
+	return API::APIValue(rand() % values[0].getValue32());
 }
