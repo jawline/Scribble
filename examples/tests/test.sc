@@ -81,26 +81,13 @@ func AssertInt(val : int, target : int, error : string) {
 
 func AssertFloat(val : float32, target : float32, drift : float32, error : string) {
 
-	if val > (target + drift) then {
-	
-		sys.Write("Assert failed ");
-		sys.Write( sys.String(val) );
-		sys.Write(" ");
-		sys.Write( sys.String(target) );
-		sys.Write("\n");
-		
-		Fatal(error);
-	}
-
-	if val < (target - drift) then {
-	
-		sys.Write("Assert failed ");
-		sys.Write( sys.String(val) );
-		sys.Write(" ");
-		sys.Write( sys.String(target) );
-		sys.Write("\n");
-		
-		Fatal(error);
-	}
+ if (val > (target + drift)) or (val < (target - drift)) then {
+  sys.Write("Assert failed ");
+  sys.Write( sys.String(val) );
+  sys.Write(" ");
+  sys.Write( sys.String(target) );
+  sys.Write("\n");
+  Fatal(error);
+ }
 
 }
