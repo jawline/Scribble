@@ -9,8 +9,8 @@ package test := import("test");
 package other_struct := import("other_struct");
 
 type TestStructure := struct {
-	Hello : int,
-	World : int
+ Hello : int,
+ World : int
 }
 
 func Test() {

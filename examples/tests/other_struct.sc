@@ -3,8 +3,8 @@
  */
 
 type TestStructure := struct {
-	x : int,
-	y : float32,
-	z : string,
-	q : bool
+ x : int,
+ y : float32,
+ z : string,
+ q : bool
 }

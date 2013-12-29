@@ -11,13 +11,11 @@ package isprime := import("../primes/isprime");
 
 func Test() {
 
-	var primesList := sieve.Sieve(150);
+ var primesList := sieve.Sieve(150);
 
-	for var i := 0; i < len(primesList); i++ do {
-		
-		var isPrimeResult := isprime.IsPrime(i);
-
-		test.Assert(isPrimeResult, primesList[i], "IsPrime differs from primelist result");
-	}
+ for var i := 0; i < len(primesList); i++ do {
+  var isPrimeResult := isprime.IsPrime(i);
+  test.Assert(isPrimeResult, primesList[i], "IsPrime differs from primelist result");
+ }
 
 }

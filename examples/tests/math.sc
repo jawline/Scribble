@@ -11,11 +11,10 @@ package max := import("max");
 package dif := import("dif");
 
 func Test() {
-
-	pow.Test();
-	exp.Test();
-	max.Test();
-	abs.Test();
-	dif.Test();
+ pow.Test();
+ exp.Test();
+ max.Test();
+ abs.Test();
+ dif.Test();
 	
 }

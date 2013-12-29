@@ -21,14 +21,14 @@ package structTest := import("tests/structures");
  */
 
 func main() {
-    loopsTest.Test();
-    arraysTest.Test();
-    variablesTest.Test();
-    recursionTest.Test();
-    primesTest.Test();
-    logicalTest.Test();
-    sortsTest.Test();
-    floatsTest.Test();
-    mathTest.Test();
-    structTest.Test();
+ loopsTest.Test();
+ arraysTest.Test();
+ variablesTest.Test();
+ recursionTest.Test();
+ primesTest.Test();
+ logicalTest.Test();
+ sortsTest.Test();
+ floatsTest.Test();
+ mathTest.Test();
+ structTest.Test();
 }

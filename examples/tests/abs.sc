@@ -10,10 +10,10 @@ package math := import("../math/math");
 
 func Test() {
 
-	test.Assert(15, math.Abs(-15), "AbsInt failed");
-	test.Assert(15f, math.Abs(-15f), 0.01f, "AbsFloat failed");
+ test.Assert(15, math.Abs(-15), "AbsInt failed");
+ test.Assert(15f, math.Abs(-15f), 0.01f, "AbsFloat failed");
 
-	test.Assert(15, math.Abs(15), "AbsInt failed");
-	test.Assert(15f, math.Abs(15f), 0.01f, "AbsFloat failed");
+ test.Assert(15, math.Abs(15), "AbsInt failed");
+ test.Assert(15f, math.Abs(15f), 0.01f, "AbsFloat failed");
 
 }
