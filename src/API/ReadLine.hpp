@@ -31,6 +31,8 @@ public:
 		return newValue;
 	}
 
+	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+
 	/**
 	 * Get the return type of the function.
 	 */
