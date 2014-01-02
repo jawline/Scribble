@@ -54,7 +54,7 @@ void ArrayStatement::checkTree(Type* functionType) {
 	length_->checkTree(functionType);
 
 	if (length_->type()->getType() != Int) {
-		throw new StatementException(this, "Error expected int for array size");
+		throw new StatementException(this, std::string("Type ") + length_->type()->getTypeName() + " cannot be used as the length of an array. Integer values must be used for array size.");
 	}
 }
 

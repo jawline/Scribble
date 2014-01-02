@@ -49,17 +49,15 @@ void AssignArrayStatement::checkTree(Type* functionType) {
 	position_->checkTree(functionType);
 
 	if (array_->type()->getType() != Array) {
-		throw StatementException(this,
-				"Error cannot array assign. This object is not an array");
+		throw StatementException(this, std::string("Not an array, Type ") + array_->type()->getTypeName() + " given when an array was expected.");
 	}
 
 	if (position_->type()->getType() != Int) {
-		throw StatementException(this, "Expecting integer index");
+		throw StatementException(this, std::string("Type ") + position_->type()->getTypeName() + " cannot be used as an index. Index must be an integer");
 	}
 
 	if (!array_->type()->getSubtype()->Equals(toAssign_->type())) {
-		throw StatementException(this,
-				"Cannot assign to array. Type is different to array type");
+		throw StatementException(this, std::string("Value given is of type ") + toAssign_->type()->getTypeName() + " which differs from expected type " + array_->type()->getSubtype()->getTypeName());
 	}
 }
 

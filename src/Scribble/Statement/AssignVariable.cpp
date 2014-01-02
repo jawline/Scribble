@@ -23,7 +23,7 @@ void AssignVariableStatement::checkTree(Type* functionType) {
 	if (!var_->getType()->Equals(exp_->type())) {
 
 		throw StatementException(this,
-				"Cannot assign statement to a variable of a different type");
+				std::string("Cannot assign value of type ") + exp_->type()->getTypeName() + " to variable of type " + var_->getType()->getTypeName());
 
 	}
 }
