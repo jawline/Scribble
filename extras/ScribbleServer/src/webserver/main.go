@@ -14,7 +14,7 @@ var path = ""
 
 func writeSource(source string) string {
 
-	fo, err := os.Create("temp.scribble")
+	fo, err := os.Create("temp.sc")
 
 	if err != nil {
 		return ""
@@ -24,7 +24,7 @@ func writeSource(source string) string {
 
 	fo.Close()
 
-	return "temp"
+	return "./temp.sc"
 }
 
 func pageHandler(c http.ResponseWriter, req *http.Request) {
@@ -32,8 +32,9 @@ func pageHandler(c http.ResponseWriter, req *http.Request) {
 
 	c.Header().Set("Access-Control-Allow-Origin", "*")
 
+	tempFile := writeSource(req.FormValue("source"))
 
-	out, err := exec.Command(path, writeSource(req.FormValue("source"))).Output()
+	out, err := exec.Command(path,  "--file",  tempFile).Output()
 
 	if err != nil {
 		c.Write([]byte("Error:"+err.Error()+"\n"+ string(out)))
