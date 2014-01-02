@@ -25,7 +25,7 @@ void ArrayLengthStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
 	if (exp_->type()->getType() != Array) {
-		throw StatementException(this, "Cannot get length of non array");
+		throw StatementException(this, std::string("Cannot get length of ") + exp_->type()->getTypeName() + ". Can only get the length of an array");
 	}
 
 }
