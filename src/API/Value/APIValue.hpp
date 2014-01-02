@@ -20,6 +20,8 @@
 
 namespace API {
 
+static std::string cStringTypename = "string";
+
 class APIValue {
 private:
 	SmartPointer<VM::VMEntryType> type_;
@@ -113,11 +115,11 @@ public:
 	static API::APIValue makeString(std::string const& text, VM::VirtualMachine* vm) {
 
 		//Create the new heap entry
-		long heapEntry = vm->getHeap().allocate(vm->findType("string"),
+		long heapEntry = vm->getHeap().allocate(vm->findType(cStringTypename),
 				text.length() + 1, (uint8_t*) text.c_str());
 
 		//Make a new API value from it
-		return API::APIValue(vm->findType("string"),
+		return API::APIValue(vm->findType(cStringTypename),
 				vm->getHeap().getAddress(heapEntry), heapEntry);
 	}
 };

@@ -17,26 +17,31 @@ typedef SmartPointer<TypeReferenceCore> TypeReference;
 /**
  *  Enum defining variable types (Integer, Boolean, Etcetera)
  */
+
 enum ValueType {
 
 	/**
 	 * Unresolved type used during parsing when a function call, variable type etc has not yet been inferred.
 	 */
+
 	TypeUnresolved = -1,
 
 	/**
 	 * String type, represented by std::string. n bytes
 	 */
+
 	String = 0,
 
 	/**
 	 * 1 byte booleans.
 	 */
+
 	Boolean,
 
 	/**
 	 * Integer numbers. Stored as 4 byte signed integers.
 	 */
+
 	Int,
 
 	/**
@@ -48,21 +53,25 @@ enum ValueType {
 	/**
 	 * Void type, Null type.
 	 */
+
 	Void,
 
 	/**
 	 * Primitive array type, always grouped with a subtype used to tell what it is an array of.
 	 */
+
 	Array,
 
 	/**
 	 * Structure type. Subtype will be StructureInfo
 	 */
+
 	StructureType,
 
 	/**
 	 * Max hint used so that heaps can allocate arrays of the correct number of buckets.
 	 */
+
 	ValueTypeMax
 };
 
@@ -70,6 +79,7 @@ enum ValueType {
  * The class type represents a data type within the language.
  * For instance array(int) would be a unique type represented by Type ( primtive:array, subtype: Type(primitive:int) )
  */
+
 class Type {
 private:
 

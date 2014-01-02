@@ -62,7 +62,7 @@ VirtualMachine::~VirtualMachine() {
 	// TODO Auto-generated destructor stub
 }
 
-SmartPointer<VMEntryType> VirtualMachine::findType(std::string name) {
+SmartPointer<VMEntryType> VirtualMachine::findType(std::string& name) {
 
 	NamespaceEntry entry;
 
