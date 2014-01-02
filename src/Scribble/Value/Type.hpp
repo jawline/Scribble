@@ -148,6 +148,9 @@ public:
 		switch (getType()) {
 		case Array:
 			return std::string("array(") + getSubtype()->getTypeName() + ")";
+		case StructureType:
+			//StructureType overrides getTypeName. This should never execute.
+			return "INVALID-SHOULD-HAVE-BEEN-OVERWRITTEN";
 		case Int:
 			return "int";
 		case Boolean:
