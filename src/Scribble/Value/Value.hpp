@@ -2,7 +2,10 @@
 #define _VALUE_H_
 #include "Type.hpp"
 
-// Enum defining all value operators (Add, Divide, Assign, Subtract, Mod etc)
+/**
+ *  Enum defining all value operators (Add, Divide, Assign, Subtract, Mod etc)
+ */
+
 enum ValueOperator {
 	Assign, Add, Subtract, Multiply, Divide
 };

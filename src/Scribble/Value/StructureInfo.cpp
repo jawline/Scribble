@@ -24,7 +24,7 @@ unsigned int StructureInfo::getNumIndexs() {
 	return dataIndexs_.size();
 }
 
-int StructureInfo::getIndex(std::string name) {
+int StructureInfo::getIndex(std::string const& name) {
 
 	for (unsigned int i = 0; i < dataIndexs_.size(); ++i) {
 
@@ -37,7 +37,7 @@ int StructureInfo::getIndex(std::string name) {
 	return -1;
 }
 
-Type* StructureInfo::getType(std::string name) {
+Type* StructureInfo::getType(std::string const& name) {
 
 	if (getIndex(name) != -1) {
 		return dataIndexs_[getIndex(name)].second->type;
@@ -50,11 +50,11 @@ std::pair<std::string, TypeReference> StructureInfo::getIndex(int index) {
 	return dataIndexs_[index];
 }
 
-void StructureInfo::setName(std::string name) {
+void StructureInfo::setName(std::string const& name) {
 	name_ = name;
 }
 
-void StructureInfo::setPackage(std::string name) {
+void StructureInfo::setPackage(std::string const& name) {
 	package_ = name;
 }
 

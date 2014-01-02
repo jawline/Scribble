@@ -40,12 +40,12 @@ public:
 
 	void addInfo(std::string name, TypeReference type);
 	std::pair<std::string, TypeReference> getIndex(int i);
-	Type* getType(std::string name);
-	int getIndex(std::string name);
+	Type* getType(std::string const& name);
+	int getIndex(std::string const& name);
 	unsigned int getNumIndexs();
 
-	void setName(std::string name);
-	void setPackage(std::string name);
+	void setName(std::string const& name);
+	void setPackage(std::string const& name);
 
 	std::string getName() {
 		return "__struct(" + name_ + ")";

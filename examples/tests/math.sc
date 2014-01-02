@@ -16,5 +16,4 @@ func Test() {
  max.Test();
  abs.Test();
  dif.Test();
-	
 }

@@ -8,7 +8,7 @@
 #include "VMNamespace.hpp"
 #include <VM/Constants.hpp>
 
-bool VM::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& entry) {
+bool VM::NamespaceEntry::searchNamespace(VMNamespace space, std::string& target, NamespaceEntry& entry) {
 
 	size_t pos = target.find(VM::vmNamespaceSeperator);
 

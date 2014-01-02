@@ -68,10 +68,10 @@ public:
 		return type_;
 	}
 
+	static bool searchNamespace(VM::VMNamespace space, std::string& target,
+			NamespaceEntry& entry);
 };
 
-bool searchNamespace(VM::VMNamespace space, std::string target,
-		NamespaceEntry& entry);
 
 }
 

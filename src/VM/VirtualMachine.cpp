@@ -67,7 +67,7 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string name) {
 	NamespaceEntry entry;
 
 	//If the namespace entry is not found in the namespace
-	if (!searchNamespace(namespace_, name, entry)) {
+	if (!VM::NamespaceEntry::searchNamespace(namespace_, name, entry)) {
 
 		//If it starts with 'array(' try to generate it from existing types
 		char const* prefix = "array(";
@@ -124,7 +124,7 @@ void VirtualMachine::execute(std::string function) {
 	NamespaceEntry functionEntry;
 	SmartPointer<VMFunc> currentFunction;
 
-	if (!VM::searchNamespace(namespace_, function, functionEntry)
+	if (!VM::NamespaceEntry::searchNamespace(namespace_, function, functionEntry)
 			|| functionEntry.getType() != Function) {
 		VM_PRINTF_FATAL("%s is not a registered function\n", function.c_str());
 	}
@@ -1127,7 +1127,7 @@ void VirtualMachine::execute(std::string function) {
 
 				//VM_PRINTF_LOG("Calling function %s\n", name);
 
-				if (!VM::searchNamespace(namespace_, name, functionEntry)
+				if (!VM::NamespaceEntry::searchNamespace(namespace_, name, functionEntry)
 						|| functionEntry.getType() != Function) {
 
 					VM_PRINTF_FATAL("%s is not a registered function\n",

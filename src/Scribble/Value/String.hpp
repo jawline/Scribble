@@ -35,11 +35,13 @@ public:
 	/**
 	 * Get the value of the string element.
 	 */
+
 	std::string getValue();
 
 	/**
 	 * Set the value of the string to a new value.
 	 */
+
 	void setValue(std::string const& ref);
 };
 
