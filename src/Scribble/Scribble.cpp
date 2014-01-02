@@ -66,12 +66,7 @@ void Scribble::load(std::string const& code) {
 	generateSystemPackage(names);
 
 	//Compile the program using the new __init__ package created, crash on any exceptions.
-	try {
-		names = Parser::compileText(initCode, "__init__", names);
-	} catch (ParserException& e) {
-		printf("Unfortunately a parser error occurred because %s.\n", e.what());
-		return;
-	}
+	names = Parser::compileText(initCode, "__init__", names);
 
 	//Check that the __init__ code has compiled properly.
 	if (names["__init__"].find("__init__") == names["__init__"].end()

@@ -46,6 +46,7 @@ public:
 
 	/**
 	 * Loads, compiles and prepares the package for execution.
+         * Throws a parser exception if anything goes wrong.
 	 */
 
 	Scribble(std::string const& package);

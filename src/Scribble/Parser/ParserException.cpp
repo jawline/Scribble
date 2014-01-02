@@ -8,7 +8,7 @@
 #include "ParserException.hpp"
 
 ParserException::ParserException(std::string file, std::string details) : file_(file), details_(details) {
-	error_ = std::string("Parser Exception in file ") + file_ + " " + details_;
+	error_ = std::string("Parser Exception in package \"") + file_ + "\": " + details_;
 }
 
 ParserException::~ParserException() throw() {

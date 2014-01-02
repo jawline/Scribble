@@ -27,13 +27,10 @@ void AndStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->Equals(getTypeManager().getType(Boolean))) {
-		throw StatementException(this, "And can only be performed on booleans");
+	if (!lhs_->type()->Equals(getTypeManager().getType(Boolean)) || !rhs_->type()->Equals(getTypeManager().getType(Boolean))) {
+		throw StatementException(this, std::string("And on types ") + lhs_->type()->getTypeName() + " and " + rhs_->type()->getTypeName() + " is not possible. And can only be performed on two booleans");
 	}
 
-	if (!rhs_->type()->Equals(getTypeManager().getType(Boolean))) {
-		throw StatementException(this, "And can only be performed on booleans");
-	}
 }
 
 Value* AndStatement::execute(std::vector<Value*> const& variables) {
