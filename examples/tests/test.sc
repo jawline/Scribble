@@ -8,9 +8,9 @@ package sys := import("sys");
 
 func Fatal(error : string) {
 
- sys.Write( "FATAL ERROR HANG: " );
- sys.Write(error);
- sys.Write("\n");
+ sys.Log( "FATAL ERROR HANG: " );
+ sys.Log(error);
+ sys.Log("\n");
 
  while true do {
  }
@@ -48,11 +48,11 @@ func Assert(val : float32, target : float32, drift : float32, error : string) {
 func AssertBool(val : bool, target : bool, error : string) {
 
  if val != target then {	
-  sys.Write("Assert failed ");
-  sys.Write( sys.String(val) );
-  sys.Write(" ");
-  sys.Write( sys.String(target) );
-  sys.Write("\n");	
+  sys.Log("Assert failed ");
+  sys.Log( sys.String(val) );
+  sys.Log(" ");
+  sys.Log( sys.String(target) );
+  sys.Log("\n");	
   Fatal(error);
  }
 
@@ -65,11 +65,11 @@ func AssertBool(val : bool, target : bool, error : string) {
 func AssertInt(val : int, target : int, error : string) {
 
  if val != target then {
-  sys.Write("Assert failed ");
-  sys.Write( sys.String(val) );
-  sys.Write(" ");
-  sys.Write( sys.String(target) );
-  sys.Write("\n");
+  sys.Log("Assert failed ");
+  sys.Log( sys.String(val) );
+  sys.Log(" ");
+  sys.Log( sys.String(target) );
+  sys.Log("\n");
   test.Fatal(error);
  }
 
@@ -82,11 +82,11 @@ func AssertInt(val : int, target : int, error : string) {
 func AssertFloat(val : float32, target : float32, drift : float32, error : string) {
 
  if (val > (target + drift)) or (val < (target - drift)) then {
-  sys.Write("Assert failed ");
-  sys.Write( sys.String(val) );
-  sys.Write(" ");
-  sys.Write( sys.String(target) );
-  sys.Write("\n");
+  sys.Log("Assert failed ");
+  sys.Log( sys.String(val) );
+  sys.Log(" ");
+  sys.Log( sys.String(target) );
+  sys.Log("\n");
   Fatal(error);
  }
 

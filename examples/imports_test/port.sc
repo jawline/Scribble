@@ -11,5 +11,5 @@ package sys := import("sys");
  */
 
 func Test() {
-	sys.Write("Hello thar bud\n");
+	sys.Log("Hello thar bud\n");
 }

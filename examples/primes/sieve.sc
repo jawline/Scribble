@@ -5,8 +5,6 @@
  * Copyright (c) Blake Loring 2013
  */
 
-package sys := import("sys");
-
 func Sieve(n:int) : array(bool) {
 
  var results := [n]bool;

@@ -6,10 +6,10 @@ func main() {
 
 	var worstCaseList := populate.PopulateWorstCase([1000]int);
 
-	sys.Write("Worst Case: ");
+	sys.Log("Worst Case: ");
 	populate.PrintList(worstCaseList);
 
-	sys.Write("\nAfter Sorting: ");
+	sys.Log("\nAfter Sorting: ");
 	
 	var sortedList := quick.Sort(worstCaseList);
 	populate.PrintList(sortedList);

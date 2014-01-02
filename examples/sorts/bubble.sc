@@ -4,8 +4,6 @@
  * Copyright (c) Blake Loring 2013
  */
 
-package sys := import ("sys");
-
 /**
  * Sorts an array of integers using the bubble sort algorithm.
  */

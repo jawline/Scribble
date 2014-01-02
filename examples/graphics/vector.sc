@@ -71,11 +71,11 @@ func Dot(left : Vector3, right : Vector3) : float32 {
  */
 
 func Debug(v : Vector3) {
-	sys.Write("X: ");
-	sys.Write(sys.String(v->x));
-	sys.Write(" Y: ");
-	sys.Write(sys.String(v->y));
-	sys.Write(" Z: ");
-	sys.Write(sys.String(v->z));
-	sys.Write("\n");
+	sys.Log("X: ");
+	sys.Log(sys.String(v->x));
+	sys.Log(" Y: ");
+	sys.Log(sys.String(v->y));
+	sys.Log(" Z: ");
+	sys.Log(sys.String(v->z));
+	sys.Log("\n");
 }

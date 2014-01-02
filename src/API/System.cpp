@@ -20,9 +20,9 @@ void generateSystemPackage(std::map<std::string, NamespaceType>& builtin) {
 
 	NamespaceType builtinFunctions;
 
-	std::vector<SafeFunction> write;
-	write.push_back(SmartPointer < Function > (new WriteFunction("sys")));
-	builtinFunctions["Write"] = NamespaceEntry(write);
+	std::vector<SafeFunction> log;
+	log.push_back(SmartPointer < Function > (new WriteFunction("sys")));
+	builtinFunctions["Log"] = NamespaceEntry(log);
 
 	std::vector<SafeFunction> concat;
 	concat.push_back(SmartPointer < Function > (new Concat("sys")));

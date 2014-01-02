@@ -39,9 +39,9 @@ func PopulateBestCase(list : array(int)) : array(int) {
 func PrintList(list : array(int)) {
 
 	for var i := 0; i < len(list); i++ do {
-		sys.Write( sys.String(list[i]) );
-		sys.Write(" ");
+		sys.Log( sys.String(list[i]) );
+		sys.Log(" ");
 	}
 	
-	sys.Write("\n");
+	sys.Log("\n");
 }

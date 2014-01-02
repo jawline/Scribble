@@ -2,6 +2,10 @@
 #define _WRITE_FUNCTION_H_
 #include "Function.hpp"
 
+/**
+ * WriteFunction writes a given string to the command line.
+ */
+
 class WriteFunction: public Function {
 public:
 
