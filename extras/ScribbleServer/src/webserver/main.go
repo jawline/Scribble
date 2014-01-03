@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-var addr = flag.String("addr", ":80", "WebServer Service")
+var addr = flag.String("addr", ":9760", "WebServer Service")
 var path = ""
 
 func writeSource(source string) string {
@@ -32,9 +32,8 @@ func pageHandler(c http.ResponseWriter, req *http.Request) {
 
 	c.Header().Set("Access-Control-Allow-Origin", "*")
 
-	tempFile := writeSource(req.FormValue("source"))
 
-	out, err := exec.Command(path,  "--file",  tempFile).Output()
+	out, err := exec.Command(path, "--file",  writeSource(req.FormValue("source"))).Output()
 
 	if err != nil {
 		c.Write([]byte("Error:"+err.Error()+"\n"+ string(out)))
@@ -45,7 +44,7 @@ func pageHandler(c http.ResponseWriter, req *http.Request) {
 
 func main() {
 
-	directoryFlag := flag.String("path", "./", "The path to the scribble interpretor")
+	directoryFlag := flag.String("path", "scribble", "The path to the scribble interpretor")
 	flag.Parse()
 	path = *directoryFlag
 
