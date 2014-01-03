@@ -52,6 +52,7 @@ Type* ForStatement::type() {
 }
 
 void ForStatement::checkTree(Type* functionType) {
+
 	initial_->checkTree(functionType);
 	condition_->checkTree(functionType);
 	step_->checkTree(functionType);
@@ -61,8 +62,9 @@ void ForStatement::checkTree(Type* functionType) {
 	}
 
 	if (condition_->type()->getType() != Boolean) {
-		throw StatementException(this,
-				"For second paramater must evaluate to a boolean");
+
+		throw StatementException(this, std::string("For condition cannot be a ") + condition_->type()->getTypeName() + ", has to be a boolean");
+
 	}
 }
 
