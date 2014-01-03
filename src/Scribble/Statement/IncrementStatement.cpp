@@ -22,8 +22,7 @@ IncrementStatement::~IncrementStatement() {
 void IncrementStatement::checkTree(Type* functionType) {
 
 	if (variable_->getType()->getType() != Int) {
-		throw StatementException(this,
-				"Increment invalid on types other than int");
+		throw StatementException(this, std::string("Cannot use the increment operator on type ") + variable_->getType()->getTypeName());
 	}
 
 }
