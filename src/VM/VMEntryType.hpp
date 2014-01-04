@@ -63,8 +63,13 @@ private:
 	SmartPointer<VMEntryType> arraySubtype_;
 
 	std::vector<SmartPointer<VMStructureField>> structureFields_;
+	int* structureFieldOffsets_;
+
 	unsigned int structureSizeBytes_;
 	bool structureSizeDirty_;
+	bool structureFieldsDirty_;
+
+	int cacheFieldOffsets();
 
 public:
 
@@ -122,23 +127,9 @@ public:
 	/**
 	 * Return the offset in bytes of the start of a structure element
 	 * or -1 if the id value is greater than the number of fields.
-	 * TODO: Speed this up by caching it.
 	 */
 
-	int getStructureFieldOffset(unsigned int id) {
-
-		int count = 0;
-
-		if (id > getStructureFields().size()) {
-			return -1;
-		}
-
-		for (unsigned int i = 0; i < id; i++) {
-			count += getStructureFields()[i]->getType()->getElementSize();
-		}
-
-		return count;
-	}
+	int getStructureFieldOffset(unsigned int id);
 
 	/**
 	 * Get the size in bytes of the structure.

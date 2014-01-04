@@ -11,12 +11,13 @@
 namespace VM {
 
 VMEntryType::VMEntryType(std::string name, unsigned int size, bool reference) :
-		name_(name), size_(size), reference_(reference), baseType_(VMPrimitive) {
+		name_(name), size_(size), reference_(reference), structureFieldOffsets_(
+				nullptr), baseType_(VMPrimitive) {
 
 }
 
 VMEntryType::VMEntryType(std::string name, SmartPointer<VMEntryType> subtype) :
-name_(name), size_(8), reference_(true), baseType_(VMArray), arraySubtype_(subtype) {
+name_(name), size_(8), reference_(true), structureFieldOffsets_(nullptr),baseType_(VMArray), arraySubtype_(subtype) {
 }
 
 VMEntryType::VMEntryType(std::string name, std::vector<SmartPointer<VMStructureField>> fields) : name_(name), size_(8), reference_(true), baseType_(VMStructure) {
@@ -25,14 +26,38 @@ VMEntryType::VMEntryType(std::string name, std::vector<SmartPointer<VMStructureF
 	structureSizeBytes_ = 0;
 	structureSizeDirty_ = true;
 
+	//Because the field types are resolved after the initial type is constructed instead of
+	//caching now use a dirty flag to make sure its cached before use.
+	structureFieldsDirty_ = true;
+
+	//Add the structure fields to the list
 	for (unsigned int i = 0; i < fields.size(); i++) {
 		structureFields_.push_back(fields[i]);
 	}
 
+	//Create a cache for the field offsets
+	structureFieldOffsets_ = new int[fields.size()];
+
 }
 
 VMEntryType::~VMEntryType() {
-	// TODO Auto-generated destructor stub
+
+	if (structureFieldOffsets_ != nullptr) {
+		delete[] structureFieldOffsets_;
+	}
+
+}
+
+int VMEntryType::cacheFieldOffsets() {
+
+	int count = 0;
+
+	for (int id = 0; id < structureFields_.size(); ++id) {
+
+		structureFieldOffsets_[id] = count;
+		count += structureFields_[id]->getType()->getElementSize();
+
+	}
 }
 
 std::string VMEntryType::typeName() {
@@ -41,6 +66,15 @@ std::string VMEntryType::typeName() {
 
 unsigned int VMEntryType::getElementSize() {
 	return size_;
+}
+
+int VMEntryType::getStructureFieldOffset(unsigned int id) {
+
+	if (structureFieldsDirty_) {
+		cacheFieldOffsets();
+	}
+
+	return structureFieldOffsets_[id];
 }
 
 unsigned int VMEntryType::getStructureSize() {
