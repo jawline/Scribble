@@ -13,6 +13,12 @@
 #include <version_info.hpp>
 #include <Scribble/Scribble.hpp>
 
+/**
+ * In this case that the program files to compile ParserException will be thrown.
+ */
+
+#include <Scribble/Parser/ParserException.hpp>
+
 char const* getCmdOption(char ** begin, char ** end, char const* defaultOption,
 		std::string option) {
 
@@ -38,15 +44,22 @@ int main(int argc, char* argv[]) {
 	if (!cmdOptionExists(argv, argv + argc, "--file")
 			&& !cmdOptionExists(argv, argv + argc, "--exec")) {
 
-		printf("Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
+		printf(
+				"Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
 
 		return -1;
 	}
 
 	char const* targetFile = getCmdOption(argv, argv + argc, "", "--file");
 
-	Scribble environment(targetFile);
-	environment.execute();
+	try {
+
+		Scribble environment(targetFile);
+		environment.execute();
+
+	} catch (ParserException& ex) {
+		printf("Error: %s\n", ex.what());
+	}
 
 	return 0;
 }
