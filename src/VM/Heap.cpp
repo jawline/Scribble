@@ -13,7 +13,6 @@
 namespace VM {
 
 Heap::Heap() {
-	lastIndex_ = 1;
 	lastFlagState_ = false;
 }
 
@@ -23,9 +22,11 @@ Heap::~Heap() {
 
 bool Heap::validReference(long entry) {
 
-	auto it = heapMap_.find(entry);
+	if (entry > heapItems_.size()) {
+		return false;
+	}
 
-	if (it == heapMap_.end()) {
+	if (heapItems_[entry].pointer == nullptr) {
 		return false;
 	}
 
@@ -59,9 +60,16 @@ long Heap::allocate(SmartPointer<VMEntryType> type, int size, uint8_t* initial) 
 	entry.sizeBytes = size;
 	entry.flagged = lastFlagState_;
 
-	long index = lastIndex_++;
+	long index = 0;
 
-	heapMap_[index] = entry;
+	if (unusedIndexs_.empty()) {
+		index = heapItems_.size();
+		heapItems_.push_back(entry);
+	} else {
+		index = unusedIndexs_.top();
+		unusedIndexs_.pop();
+		heapItems_[index] = entry;
+	}
 
 	return index;
 }
@@ -72,7 +80,7 @@ uint8_t* Heap::getAddress(long entry) {
 		return nullptr;
 	}
 
-	return heapMap_[entry].pointer;
+	return heapItems_[entry].pointer;
 }
 
 int Heap::getSize(long entry) {
@@ -81,7 +89,7 @@ int Heap::getSize(long entry) {
 		return -1;
 	}
 
-	return heapMap_[entry].sizeBytes;
+	return heapItems_[entry].sizeBytes;
 }
 
 SmartPointer<VMEntryType> Heap::getType(long entry) {
@@ -90,7 +98,7 @@ SmartPointer<VMEntryType> Heap::getType(long entry) {
 		return nullptr;
 	}
 
-	return heapMap_[entry].type;
+	return heapItems_[entry].type;
 }
 
 void Heap::flag(long i) {
@@ -98,7 +106,7 @@ void Heap::flag(long i) {
 	if (validReference(i)) {
 
 		//Flag it ensuring it won't be deleted the next time processUnflagged is called.
-		heapMap_[i].flagged = !lastFlagState_;
+		heapItems_[i].flagged = !lastFlagState_;
 
 	}
 
@@ -108,16 +116,13 @@ int Heap::processUnflagged() {
 
 	std::vector < std::map<int, VMHeapEntry>::iterator > remove;
 
-	for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
+	for (unsigned int id = 0; id < heapItems_.size(); id++) {
 
-		if (iter->second.flagged == lastFlagState_) {
-			delete[] iter->second.pointer;
-			remove.push_back(iter);
+		if (heapItems_[id].flagged == lastFlagState_ && heapItems_[id].pointer != nullptr) {
+			delete[] heapItems_[id].pointer;
+			heapItems_[id].pointer = nullptr;
+			unusedIndexs_.push(id);
 		}
-	}
-
-	for (unsigned int i = 0; i < remove.size(); i++) {
-		heapMap_.erase(remove[i]);
 	}
 
 	//Flip last flag state. This allows us to monitor which heap variables are used without constantly cycling through every garbage collected element each time this is run.
@@ -130,9 +135,10 @@ std::string Heap::debugState() {
 	std::stringstream dbg;
 	dbg << "--HEAP DATA--\n";
 	dbg << "Num heap entries: ";
-	dbg << heapMap_.size();
+	dbg << heapItems_.size() - unusedIndexs_.size();
 	dbg << "\n";
 
+	/**
 	for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
 		dbg << "Entry: " << iter->first << " type "
 				<< iter->second.type->typeName();
@@ -142,7 +148,7 @@ std::string Heap::debugState() {
 		}
 
 		dbg << "\n";
-	}
+	}*/
 
 	dbg << "--END HEAP--\n";
 	return dbg.str();

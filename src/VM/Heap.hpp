@@ -8,6 +8,7 @@
 #ifndef HEAP_HPP_
 #define HEAP_HPP_
 #include "VMHeapEntry.hpp"
+#include <stack>
 #include <string>
 #include <types.h>
 #include <map>
@@ -18,8 +19,9 @@ namespace VM {
 
 class Heap {
 private:
-	std::map<int, VMHeapEntry> heapMap_;
-	long lastIndex_;
+	std::vector<VMHeapEntry> heapItems_;
+	std::stack<int> unusedIndexs_;
+
 	bool lastFlagState_;
 
 public:

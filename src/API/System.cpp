@@ -27,7 +27,7 @@ void generateSystemPackage(std::map<std::string, NamespaceType>& builtin) {
 
 	std::vector<Type*> sqrtf32Args;
 	sqrtf32Args.push_back(getFloat32Type());
-	sqrt.push_back(SmartPointer<Function> ( new APIFunction("Sqrt", "sys",getFloat32Type(), sqrtf32Args, SquareRoot) ));
+	sqrt.push_back(SmartPointer<Function> ( new APIFunction("Sqrt", "sys",getFloat32Type(), sqrtf32Args, SquareRootFloat32) ));
 	builtinFunctions["Sqrt"] = NamespaceEntry(sqrt);
 
 	std::vector<SafeFunction> log;
