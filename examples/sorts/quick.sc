@@ -28,7 +28,6 @@ func qs( n:array(int), low : int, high : int) {
 
   // As long as i <= j swap n[i] and n[j] and increment them both
   if i <= j then {
-  
    var temp := n[i];
    n[i] := n[j];
    n[j] := temp;

@@ -35,7 +35,9 @@ public:
 	 * Execute the function and return the result value.
 	 */
 
-	virtual Value* execute(std::vector<Value*> arguments) = 0;
+	virtual Value* execute(std::vector<Value*> arguments) {
+
+	}
 
 	/**
 	 * This function executes the given API::Function and returns it's result. It called by the more complex execute(VM::VirtualMachine*) after that function has converted all arguments into API values.

@@ -21,6 +21,11 @@ package structTest := import("tests/structures");
  */
 
 func main() {
+
+ sys.Log ( sys.String ( sys.Sqrt(36f) ) );
+ sys.Log ( "\n" );
+ 
+
  loopsTest.Test();
  arraysTest.Test();
  variablesTest.Test();
@@ -31,4 +36,5 @@ func main() {
  floatsTest.Test();
  mathTest.Test();
  structTest.Test();
+
 }

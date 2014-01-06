@@ -1297,7 +1297,6 @@ void VirtualMachine::garbageCollection() {
 			}
 
 		} else if (nextType->isReference()) {
-			printf("Is a reference\n");
 			long ref = *(long*) (heap_.getAddress(next));
 			heap_.flag(ref);
 			toInvestigate.push_back(ref);
