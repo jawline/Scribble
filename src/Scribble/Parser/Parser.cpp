@@ -72,7 +72,7 @@ SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference>
 
 	}
 
-	//Otherwise search through each function and do a thorough search.
+	//Otherwise search through each function.
 	for (unsigned int i = 0; i < set.size(); ++i) {
 
 		SmartPointer<Function> fn = set[i];
@@ -95,6 +95,27 @@ SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference>
 	}
 
 	return 0;
+}
+
+void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
+
+	for (unsigned int i = 0; i < fs.size(); i++) {
+
+		printf("%s(", fnName.c_str());
+
+		for (unsigned int j = 0; j < fs[i]->numArgs(); j++) {
+
+			if (j != 0) {
+				printf(", ");
+			}
+
+			printf("%s", fs[i]->argType(j)->getTypeName().c_str());
+
+		}
+
+		printf(") : %s\n", fs[i]->getType()->getTypeName().c_str());
+	}
+
 }
 
 void Parser::printNamespace(NamespaceType const& ns) {
@@ -263,15 +284,15 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 	//Store the import list generated whilst parsing and then clear it so that imports don't already have imported libraries.
 
-	std::map < std::string, std::string > imports = ImportList;
+	std::map<std::string, std::string> imports = ImportList;
 	ImportList.clear();
 
 	//Store the global lists of things to be resolved and then clear them ( As the import or include functions will use these ).
 
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
-	std::vector < SmartPointer < Variable >> variableReferences =
-			VariableReferences;
+	std::vector<SmartPointer< Variable >> variableReferences =
+	VariableReferences;
 
 	StatementReferences.clear();
 	TypeReferences.clear();
@@ -437,8 +458,24 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 						char errorText[256];
 
+						printf("Definitions of %s\n", ref->getName().c_str());
+						printFunctionSet(ref->getName(), it->second.getFunctionSet());
+
+						std::string types = "(";
+
+						for (unsigned int i = 0; i < ref->getArgs().size(); i++) {
+							types += ref->getArgs()[i]->type()->getTypeName();
+
+							if (i != 0) {
+								types += ", ";
+							}
+
+						}
+
+						types += ")";
+
 						sprintf(errorText,
-								"the function %s is defined but does not have any versions which take the specified argument types.",
+								(std::string("the function %s is defined but does not have any versions which take the argument types ") + types + ".").c_str(),
 								ref->getDebugName().c_str());
 
 						ref->setResolveIssue(errorText);

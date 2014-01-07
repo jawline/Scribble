@@ -90,6 +90,7 @@ private:
 	static std::string includeText(std::string source,
 			std::string const& filename, std::string const& path);
 
+	static void printFunctionSet(std::string name, FunctionSet fs);
 	static void printNamespace(NamespaceType const& ns);
 	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
 	static void resolve(TypeReference reference, NamespaceType ns);
