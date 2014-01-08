@@ -3,8 +3,6 @@
  * Copyright (c) Blake Loring 2013
  */
 
-
-package sys := import("sys");
 package loopsTest := import("tests/loops");
 package logicalTest := import("tests/logical");
 package variablesTest := import("tests/variables");

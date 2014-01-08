@@ -34,13 +34,41 @@
 Scribble::Scribble(std::string const& package) {
 	packagePath = package;
 	packageName = strrchr(package.c_str(), '/');
-	load("target.main();");
+	load();
 }
 
 Scribble::~Scribble() {
 }
 
-void Scribble::execute() {
+void Scribble::execute(std::string code) {
+
+	compiledPackages.erase("__init__");
+
+	//Write an initialization function based off the the parameters given
+	std::string initCode = writeInit(packagePath, code);
+
+	compiledPackages = Parser::compileText(initCode, "__init__", compiledPackages);
+
+	//Check that the __init__ code has compiled properly.
+	if (compiledPackages["__init__"].find("__init__") == compiledPackages["__init__"].end()
+			|| compiledPackages["__init__"]["__init__"].type() != FunctionSetEntry
+			|| compiledPackages["__init__"]["__init__"].getFunctionSet().size() != 1
+			|| compiledPackages["__init__"]["__init__"].getFunctionSet()[0]->numArgs()
+					!= 0) {
+		printf("Init function did not create properly\n");
+		return;
+	}
+
+	//Grab a reference to __init__.__init__ for execution
+	API::SafeFunction toExecute =
+			compiledPackages["__init__"]["__init__"].getFunctionSet()[0];
+
+	VM::VirtualMachine environment;
+
+	registerPackages(compiledPackages, environment);
+
+	vmFuncName = toExecute->getNamespace() + VM::vmNamespaceSeperator
+			+ toExecute->getName();
 
 	double vmStart = getCPUTime();
 
@@ -54,37 +82,14 @@ void Scribble::execute() {
 
 }
 
-void Scribble::load(std::string const& code) {
-
-	//Write an initialization function based off the the parameters given
-	std::string initCode = writeInit(packagePath, code);
-
-	//Compile the scribble program using the default namespaces
-	std::map<std::string, NamespaceType> names;
+void Scribble::load() {
 
 	//Generate the sys package
-	generateSystemPackage(names);
+	generateSystemPackage (compiledPackages);
 
-	//Compile the program using the new __init__ package created, crash on any exceptions.
-	names = Parser::compileText(initCode, "__init__", names);
+	//Compile the program
+	compiledPackages = Parser::compile(packagePath, compiledPackages);
 
-	//Check that the __init__ code has compiled properly.
-	if (names["__init__"].find("__init__") == names["__init__"].end()
-			|| names["__init__"]["__init__"].type() != FunctionSetEntry
-			|| names["__init__"]["__init__"].getFunctionSet().size() != 1
-			|| names["__init__"]["__init__"].getFunctionSet()[0]->numArgs()
-					!= 0) {
-		printf("Init function did not create properly\n");
-	}
-
-	//Grab a reference to __init__.__init__ for execution
-	API::SafeFunction toExecute =
-			names["__init__"]["__init__"].getFunctionSet()[0];
-
-	registerPackages(names, environment);
-
-	vmFuncName = toExecute->getNamespace() + VM::vmNamespaceSeperator
-			+ toExecute->getName();
 }
 
 std::string Scribble::writeInit(std::string const& package,

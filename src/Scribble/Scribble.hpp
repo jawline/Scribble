@@ -9,6 +9,7 @@
 #define SCRIBBLE_HPP_
 #include <string>
 #include <VM/VirtualMachine.hpp>
+#include <Scribble/Parser/Parser.hpp>
 
 /**
  * Wrapper class that is capable of loading and executing Scribble functions
@@ -31,16 +32,16 @@ private:
 	std::string vmFuncName;
 
 	/**
-	 * The VM environment on which the loaded package is stored.
+	 * Stores the compiled code
 	 */
 
-	VM::VirtualMachine environment;
+	std::map<std::string, NamespaceType> compiledPackages;
 
 	/**
 	 * Loads the package using code as init code.
 	 */
 
-	void load(std::string const& code);
+	void load();
 
 public:
 
@@ -52,7 +53,7 @@ public:
 	Scribble(std::string const& package);
 	virtual ~Scribble();
 
-	void execute();
+	void execute(std::string code);
 
 	std::string writeInit(std::string const& package,
 			std::string const& execStr);
