@@ -10,7 +10,8 @@ SOURCE_DIR=src
 GEN_DIR=gen
 OBJ_DIR=obj
 
-INSTALL_PATH = /usr/bin/
+INSTALL_EXE_PATH = /usr/bin/
+INSTALL_LIB_PATH = /usr/lib/
 
 #Generated files
 GEN_FILES = $(GEN_DIR)/ScribbleLexer.cpp $(GEN_DIR)/ScribbleParser.cpp $(GEN_DIR)/SASMLexer.cpp $(GEN_DIR)/SASMParser.cpp
@@ -28,7 +29,8 @@ all: preprocess $(SOURCES) $(EXECUTABLE) $(LIBRARY)
 
 install:
 	-@rm $(INSTALL_PATH)$(OUTPUT_FILE)
-	@ln $(EXECUTABLE) $(INSTALL_PATH)$(OUTPUT_FILE)
+	@cp $(LIBRARY) $(INSTALL_LIB_PATH)$(OUTPUT_LIB)
+	@cp $(EXECUTABLE) $(INSTALL_EXE_PATH)$(OUTPUT_FILE)
 
 clean:
 	-@rm -r $(OBJ_DIR) $(EXECUTABLE) $(LIBRARY) $(GEN_DIR)
