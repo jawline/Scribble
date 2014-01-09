@@ -1,7 +1,9 @@
 #Output executable
 OUTPUT_DIR=./bin/
 OUTPUT_FILE=scribble
+OUTPUT_LIB=libscribble.a
 EXECUTABLE=$(OUTPUT_DIR)$(OUTPUT_FILE)
+LIBRARY=$(OUTPUT_DIR)$(OUTPUT_LIB)
 
 #Directory information
 SOURCE_DIR=src
@@ -15,26 +17,28 @@ GEN_FILES = $(GEN_DIR)/ScribbleLexer.cpp $(GEN_DIR)/ScribbleParser.cpp $(GEN_DIR
 
 #Compiler settings
 CC=g++
-CFLAGS=-c -Wall -I $(SOURCE_DIR) -I $(GEN_DIR) -std=c++0x -g -O0 -pthread -lpthread
-LDFLAGS=-pthread -lpthread
+CFLAGS=-c -Wall -I $(SOURCE_DIR) -I $(GEN_DIR) -std=c++0x -g -O0 -pthread -lpthread -fPIC
+LDFLAGS=-pthread -lpthread -fPIC
 
 #Rules to find source code - NOTE: Look for a better way to scan directories. Nonrecursive works but is a bit ugly
 SOURCES=$(GEN_FILES) $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp) $(wildcard $(SOURCE_DIR)/**/**/*.cpp)
 OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 
-all: preprocess $(SOURCES) $(EXECUTABLE)
+all: preprocess $(SOURCES) $(EXECUTABLE) $(LIBRARY)
 
 install:
 	-@rm $(INSTALL_PATH)$(OUTPUT_FILE)
 	@ln $(EXECUTABLE) $(INSTALL_PATH)$(OUTPUT_FILE)
 
 clean:
-	-@rm -r $(OBJ_DIR) $(EXECUTABLE) $(GEN_DIR)
+	-@rm -r $(OBJ_DIR) $(EXECUTABLE) $(LIBRARY) $(GEN_DIR)
 
 #The executable rule compiles the set of objects into the target executable
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
+$(LIBRARY): $(OBJECTS)
+	$(CC) $(LDFLAGS)  -shared  $(OBJECTS) -o $@
 
 #These rule tells the compiler to generate an object from the source code.
 $(OBJECTS) : $(OBJ_DIR)
