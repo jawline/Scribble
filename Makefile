@@ -1,7 +1,7 @@
 #Output executable
 OUTPUT_DIR=./bin/
 OUTPUT_FILE=scribble
-OUTPUT_LIB=libscribble.a
+OUTPUT_LIB=libscribble.so
 EXECUTABLE=$(OUTPUT_DIR)$(OUTPUT_FILE)
 LIBRARY=$(OUTPUT_DIR)$(OUTPUT_LIB)
 
@@ -28,9 +28,12 @@ OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
 all: preprocess $(SOURCES) $(EXECUTABLE) $(LIBRARY)
 
 install:
-	-@rm $(INSTALL_PATH)$(OUTPUT_FILE)
 	@cp $(LIBRARY) $(INSTALL_LIB_PATH)$(OUTPUT_LIB)
 	@cp $(EXECUTABLE) $(INSTALL_EXE_PATH)$(OUTPUT_FILE)
+
+remove:
+	@rm $(INSTALL_LIB_PATH)$(OUTPUT_LIB)
+	@rm $(INSTALL_EXE_PATH)$(OUTPUT_FILE)
 
 clean:
 	-@rm -r $(OBJ_DIR) $(EXECUTABLE) $(LIBRARY) $(GEN_DIR)

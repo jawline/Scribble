@@ -95,13 +95,6 @@ private:
 	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
 	static void resolve(TypeReference reference, NamespaceType ns);
 
-	/**
-	 * Return an internal uniform path of a given file ( For example ../src/Test and Test would return the same string ) if the file exists
-	 * or return input string if the file does not exist.
-	 */
-
-	static std::string getUniformPath(std::string const& path);
-
 public:
 
 	/**
@@ -138,6 +131,13 @@ public:
 
 	static std::map<std::string, NamespaceType> compileText(std::string const&text, std::string const& packageName,
 			std::map<std::string, NamespaceType> builtinNamespace);
+
+	/**
+	 * Return an internal uniform path of a given file ( For example ../src/Test and Test would return the same string ) if the file exists
+	 * or return input string if the file does not exist.
+	 */
+
+	static std::string getUniformPath(std::string const& path);
 
 };
 

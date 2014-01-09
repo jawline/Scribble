@@ -33,35 +33,29 @@
 
 Scribble::Scribble(std::string const& package) {
 	packagePath = package;
-	packageName = strrchr(package.c_str(), '/');
 	load();
 }
 
 Scribble::~Scribble() {
 }
 
-void Scribble::execute(std::string code) {
+void Scribble::execute(std::string function) {
 
-	compiledPackages.erase("__init__");
-
-	//Write an initialization function based off the the parameters given
-	std::string initCode = writeInit(packagePath, code);
-
-	compiledPackages = Parser::compileText(initCode, "__init__", compiledPackages);
+	auto entry = compiledPackages[Parser::getUniformPath(packagePath)].find(function);
 
 	//Check that the __init__ code has compiled properly.
-	if (compiledPackages["__init__"].find("__init__") == compiledPackages["__init__"].end()
-			|| compiledPackages["__init__"]["__init__"].type() != FunctionSetEntry
-			|| compiledPackages["__init__"]["__init__"].getFunctionSet().size() != 1
-			|| compiledPackages["__init__"]["__init__"].getFunctionSet()[0]->numArgs()
+	if (entry == compiledPackages["__init__"].end()
+			|| entry->second.type() != FunctionSetEntry
+			|| entry->second.getFunctionSet().size() != 1
+			|| entry->second.getFunctionSet()[0]->numArgs()
 					!= 0) {
-		printf("Init function did not create properly\n");
+		printf("Function %s does not exist\n", function.c_str());
 		return;
 	}
 
 	//Grab a reference to __init__.__init__ for execution
 	API::SafeFunction toExecute =
-			compiledPackages["__init__"]["__init__"].getFunctionSet()[0];
+			compiledPackages[Parser::getUniformPath(packagePath)][function].getFunctionSet()[0];
 
 	VM::VirtualMachine environment;
 
@@ -89,31 +83,4 @@ void Scribble::load() {
 
 	//Compile the program
 	compiledPackages = Parser::compile(packagePath, compiledPackages);
-
-}
-
-std::string Scribble::writeInit(std::string const& package,
-		std::string const& execStr) {
-
-	if (package.size() == 0) {
-
-		std::string result = "package sys := import(\"sys\");\n";
-
-		result += "func __init__() {\n";
-		result += execStr;
-		result += "}\n";
-
-		return result;
-	} else {
-
-		std::string result =
-				"package sys := import(\"sys\");\npackage target := import(\""
-						+ package + "\");\n";
-
-		result += "func __init__() {\n";
-		result += execStr;
-		result += "}\n";
-
-		return result;
-	}
 }

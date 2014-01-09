@@ -54,9 +54,6 @@ public:
 	virtual ~Scribble();
 
 	void execute(std::string code);
-
-	std::string writeInit(std::string const& package,
-			std::string const& execStr);
 };
 
 #endif /* SCRIBBLE_HPP_ */

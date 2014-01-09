@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 	try {
 
 		Scribble environment(targetFile);
-		environment.execute("target.main();");
+		environment.execute("main");
 
 	} catch (ParserException& ex) {
 		printf("Error: %s\n", ex.what());
