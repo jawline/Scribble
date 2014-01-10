@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
 		double vmEnd = getCPUTime();
 
 
-		printf("VM execution took time %f\nResult: %i\n", vmEnd - vmStart, val.getValueBoolean());
+		printf("VM execution took time %f\n", vmEnd - vmStart);
 
 	} catch (ParserException& ex) {
 		printf("Error: %s\n", ex.what());

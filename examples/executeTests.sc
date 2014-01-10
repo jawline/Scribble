@@ -18,7 +18,7 @@ package structTest := import("tests/structures");
  * The main function executes all of the Scribble unit tests.
  */
 
-func main() : bool {
+func main() {
 
  loopsTest.Test();
  arraysTest.Test();
@@ -30,6 +30,4 @@ func main() : bool {
  floatsTest.Test();
  mathTest.Test();
  structTest.Test();
- 
- return true;
 }
