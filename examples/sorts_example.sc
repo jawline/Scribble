@@ -1,6 +1,7 @@
 package quick := import("sorts/quick");
 package populate := import("sorts/populate");
 package sys := import("sys");
+package console := import("console");
 
 func main() {
 
