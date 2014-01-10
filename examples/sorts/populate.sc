@@ -5,6 +5,7 @@
  */
 
 package sys := import("sys");
+package console := import("console");
 
 /**
  * Populate the given array with reverse order values
@@ -39,9 +40,9 @@ func PopulateBestCase(list : array(int)) : array(int) {
 func PrintList(list : array(int)) {
 
 	for var i := 0; i < len(list); i++ do {
-		sys.Log( sys.String(list[i]) );
-		sys.Log(" ");
+		console.Log( sys.String(list[i]) );
+		console.Log(" ");
 	}
 	
-	sys.Log("\n");
+	console.Log("\n");
 }

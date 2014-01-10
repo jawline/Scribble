@@ -26,10 +26,10 @@ private:
 	std::string packagePath;
 
 	/**
-	 * Stores the of the VM func to execute
+	 * The VM environment running the code.
 	 */
 
-	std::string vmFuncName;
+	VM::VirtualMachine environment;
 
 	/**
 	 * Stores the compiled code
@@ -47,7 +47,7 @@ public:
 
 	/**
 	 * Loads, compiles and prepares the package for execution.
-         * Throws a parser exception if anything goes wrong.
+	 * Throws a parser exception if anything goes wrong.
 	 */
 
 	Scribble(std::string const& package);

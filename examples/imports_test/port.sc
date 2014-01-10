@@ -4,12 +4,12 @@
  * Copyright (c) Blake Loring 2013
  */
 
-package sys := import("sys");
+package console := import("console");
 
 /*
  * This function outputs the string "Hello thar bud\n" to the output stream.
  */
 
 func Test() {
-	sys.Log("Hello thar bud\n");
+	console.Log("Hello thar bud\n");
 }

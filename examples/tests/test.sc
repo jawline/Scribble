@@ -5,12 +5,13 @@
  */
 
 package sys := import("sys");
+package console := import("console");
 
 func Fatal(error : string) {
 
- sys.Log( "FATAL ERROR HANG: " );
- sys.Log(error);
- sys.Log("\n");
+ console.Log( "FATAL ERROR HANG: " );
+ console.Log(error);
+ console.Log("\n");
 
  while true do {
  }
@@ -48,11 +49,11 @@ func Assert(val : float32, target : float32, drift : float32, error : string) {
 func AssertBool(val : bool, target : bool, error : string) {
 
  if val != target then {	
-  sys.Log("Assert failed ");
-  sys.Log( sys.String(val) );
-  sys.Log(" ");
-  sys.Log( sys.String(target) );
-  sys.Log("\n");	
+  console.Log("Assert failed ");
+  console.Log( sys.String(val) );
+  console.Log(" ");
+  console.Log( sys.String(target) );
+  console.Log("\n");	
   Fatal(error);
  }
 
@@ -65,11 +66,11 @@ func AssertBool(val : bool, target : bool, error : string) {
 func AssertInt(val : int, target : int, error : string) {
 
  if val != target then {
-  sys.Log("Assert failed ");
-  sys.Log( sys.String(val) );
-  sys.Log(" ");
-  sys.Log( sys.String(target) );
-  sys.Log("\n");
+  console.Log("Assert failed ");
+  console.Log( sys.String(val) );
+  console.Log(" ");
+  console.Log( sys.String(target) );
+  console.Log("\n");
   test.Fatal(error);
  }
 
@@ -82,11 +83,11 @@ func AssertInt(val : int, target : int, error : string) {
 func AssertFloat(val : float32, target : float32, drift : float32, error : string) {
 
  if (val > (target + drift)) or (val < (target - drift)) then {
-  sys.Log("Assert failed ");
-  sys.Log( sys.String(val) );
-  sys.Log(" ");
-  sys.Log( sys.String(target) );
-  sys.Log("\n");
+  console.Log("Assert failed ");
+  console.Log( sys.String(val) );
+  console.Log(" ");
+  console.Log( sys.String(target) );
+  console.Log("\n");
   Fatal(error);
  }
 

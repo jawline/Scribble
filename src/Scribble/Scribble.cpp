@@ -28,6 +28,7 @@
  */
 
 #include <API/System.hpp>
+#include <API/Console.hpp>
 
 #include <API/RegisterPackages.hpp>
 
@@ -41,28 +42,24 @@ Scribble::~Scribble() {
 
 void Scribble::execute(std::string function) {
 
-	auto entry = compiledPackages[Parser::getUniformPath(packagePath)].find(function);
+	auto entry = compiledPackages[Parser::getUniformPath(packagePath)].find(
+			function);
 
 	//Check that the __init__ code has compiled properly.
 	if (entry == compiledPackages["__init__"].end()
 			|| entry->second.type() != FunctionSetEntry
 			|| entry->second.getFunctionSet().size() != 1
-			|| entry->second.getFunctionSet()[0]->numArgs()
-					!= 0) {
+			|| entry->second.getFunctionSet()[0]->numArgs() != 0) {
 		printf("Function %s does not exist\n", function.c_str());
 		return;
 	}
 
 	//Grab a reference to __init__.__init__ for execution
-	API::SafeFunction toExecute =
-			compiledPackages[Parser::getUniformPath(packagePath)][function].getFunctionSet()[0];
+	API::SafeFunction toExecute = compiledPackages[Parser::getUniformPath(
+			packagePath)][function].getFunctionSet()[0];
 
-	VM::VirtualMachine environment;
-
-	registerPackages(compiledPackages, environment);
-
-	vmFuncName = toExecute->getNamespace() + VM::vmNamespaceSeperator
-			+ toExecute->getName();
+	std::string vmFuncName = toExecute->getNamespace()
+			+ VM::vmNamespaceSeperator + toExecute->getName();
 
 	double vmStart = getCPUTime();
 
@@ -79,8 +76,14 @@ void Scribble::execute(std::string function) {
 void Scribble::load() {
 
 	//Generate the sys package
-	generateSystemPackage (compiledPackages);
+	generateSystemPackage(compiledPackages);
+
+	//Generate the console package
+	generateConsolePackage(compiledPackages);
 
 	//Compile the program
 	compiledPackages = Parser::compile(packagePath, compiledPackages);
+
+	//Compile the virtual machine from the packages.
+	registerPackages(compiledPackages, environment);
 }

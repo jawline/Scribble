@@ -6,8 +6,6 @@
  */
 
 #include <API/APIFunction.hpp>
-#include <API/WriteFunction.hpp>
-#include <API/ReadLine.hpp>
 #include <API/StringFunction.hpp>
 #include <API/Modulo.hpp>
 #include <API/RandomInt.hpp>
@@ -29,10 +27,6 @@ void generateSystemPackage(std::map<std::string, NamespaceType>& builtin) {
 	sqrtf32Args.push_back(getFloat32Type());
 	sqrt.push_back(SmartPointer<Function> ( new APIFunction("Sqrt", "sys",getFloat32Type(), sqrtf32Args, SquareRootFloat32) ));
 	builtinFunctions["Sqrt"] = NamespaceEntry(sqrt);
-
-	std::vector<SafeFunction> log;
-	log.push_back(SmartPointer< Function > (new WriteFunction("sys")));
-	builtinFunctions["Log"] = NamespaceEntry(log);
 
 	std::vector<SafeFunction> concat;
 	concat.push_back(SmartPointer< Function > (new Concat("sys")));
@@ -63,10 +57,6 @@ void generateSystemPackage(std::map<std::string, NamespaceType>& builtin) {
 	std::vector<SafeFunction> mod;
 	mod.push_back(SmartPointer< Function > (new Modulo("sys")));
 	builtinFunctions["Mod"] = NamespaceEntry(mod);
-
-	std::vector<SafeFunction> readLine;
-	readLine.push_back(SmartPointer< Function > (new ReadLine("sys")));
-	builtinFunctions["ReadLine"] = readLine;
 
 	std::vector<SafeFunction> randomInt;
 	randomInt.push_back(SmartPointer< Function > (new RandomInt("sys")));

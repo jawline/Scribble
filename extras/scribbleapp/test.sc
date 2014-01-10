@@ -1,10 +1,5 @@
-package sys := import("sys");
+package console := import("console");
 
 func test() {
- sys.Log("Hello Ha Ha Ha\n");
-
- for var i := 0; i < 1000; i++ do {
-  sys.Log("I am the laughing sheep\n");
- }
-
+ console.Log("Hello world from Scribble\n");
 }
