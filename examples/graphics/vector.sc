@@ -5,6 +5,7 @@
  */
  
 package sys := import("sys");
+package console := import("console");
 
 /**
  * Vector3 structure takes 3 floating points as variables x, y and z
@@ -71,11 +72,11 @@ func Dot(left : Vector3, right : Vector3) : float32 {
  */
 
 func Debug(v : Vector3) {
-	sys.Log("X: ");
-	sys.Log(sys.String(v->x));
-	sys.Log(" Y: ");
-	sys.Log(sys.String(v->y));
-	sys.Log(" Z: ");
-	sys.Log(sys.String(v->z));
-	sys.Log("\n");
+	console.Log("X: ");
+	console.Log(sys.String(v->x));
+	console.Log(" Y: ");
+	console.Log(sys.String(v->y));
+	console.Log(" Z: ");
+	console.Log(sys.String(v->z));
+	console.Log("\n");
 }
