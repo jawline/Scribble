@@ -80,15 +80,17 @@ int FunctionStatement::generateCode(int resultRegister,
 
 		SafeStatement arg = func_->getArgs()[i];
 
-		numInstructions += arg->generateCode(VM::vmTempRegisterThree, generated);
+		numInstructions += arg->generateCode(VM::vmTempRegisterThree,
+				generated);
 
 		generated << "pushr $" << VM::vmTempRegisterThree << " " << 1 << "\n";
 		numInstructions += 1;
 	}
 
 	generated
-			<< "call \"" + func_->getFunction()->getNamespace() + VM::vmNamespaceSeperator
-					+ func_->getFunction()->getName() + "\"\n";
+			<< "call \"" + func_->getFunction()->getNamespace()
+					+ VM::vmNamespaceSeperator + func_->getFunction()->getName()
+					+ "\"\n";
 
 	generated << "popr $" << VM::vmReturnResultRegister + 1 << " "
 			<< VM::vmNumReservedRegisters + numDeclaredVariables_ - 1 << "\n";
@@ -99,9 +101,12 @@ int FunctionStatement::generateCode(int resultRegister,
 	//Otherwise move the value to the desired result register
 
 	if (resultRegister != -1 || VM::vmReturnResultRegister == resultRegister) {
+
 		generated << "move $" << VM::vmReturnResultRegister << " $"
 				<< resultRegister << "\n";
+
 		numInstructions += 1;
+
 	}
 
 	//If the result register is the return register then pop the previous value of that register. If it is not then restore its value

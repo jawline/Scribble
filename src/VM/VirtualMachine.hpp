@@ -106,8 +106,9 @@ public:
 	virtual void markStackReference();
 	virtual void pushRegister(uint8_t reg);
 
-	virtual long getRegister(uint8_t reg) {
-		return registers_[reg];
+	virtual void getRegister(uint8_t reg, long& val, bool& isReg) {
+		val = registers_[reg];
+		isReg = registerReference_[reg];
 	}
 
 	virtual void setRegister(uint8_t reg, long val, bool ref) {

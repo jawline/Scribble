@@ -124,8 +124,8 @@ void VirtualMachine::execute(std::string function) {
 	NamespaceEntry functionEntry;
 	SmartPointer<VMFunc> currentFunction;
 
-	if (!VM::NamespaceEntry::searchNamespace(namespace_, function, functionEntry)
-			|| functionEntry.getType() != Function) {
+	if (!VM::NamespaceEntry::searchNamespace(namespace_, function,
+			functionEntry) || functionEntry.getType() != Function) {
 		VM_PRINTF_FATAL("%s is not a registered function\n", function.c_str());
 	}
 
@@ -713,16 +713,16 @@ void VirtualMachine::execute(std::string function) {
 				switch (type->getElementSize()) {
 
 				case 1:
-					registers_[dataReg] = (int64_t)(*elementData);
+					registers_[dataReg] = (int64_t) (*elementData);
 					break;
 				case 2:
-					registers_[dataReg] = (int64_t)(*((int16_t*) elementData));
+					registers_[dataReg] = (int64_t) (*((int16_t*) elementData));
 					break;
 				case 4:
-					registers_[dataReg] = (int64_t)(*((int32_t*) elementData));
+					registers_[dataReg] = (int64_t) (*((int32_t*) elementData));
 					break;
 				case 8:
-					registers_[dataReg] = (int64_t)(*((int64_t*) elementData));
+					registers_[dataReg] = (int64_t) (*((int64_t*) elementData));
 					break;
 				}
 
@@ -1127,8 +1127,8 @@ void VirtualMachine::execute(std::string function) {
 
 				//VM_PRINTF_LOG("Calling function %s\n", name);
 
-				if (!VM::NamespaceEntry::searchNamespace(namespace_, name, functionEntry)
-						|| functionEntry.getType() != Function) {
+				if (!VM::NamespaceEntry::searchNamespace(namespace_, name,
+						functionEntry) || functionEntry.getType() != Function) {
 
 					VM_PRINTF_FATAL("%s is not a registered function\n",
 							name.c_str());

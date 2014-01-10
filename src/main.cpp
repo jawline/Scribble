@@ -14,6 +14,12 @@
 #include <Scribble/Scribble.hpp>
 
 /**
+ * Defines getCPUTime
+ */
+
+#include <cputime.hpp>
+
+/**
  * In this case that the program files to compile ParserException will be thrown.
  */
 
@@ -55,7 +61,13 @@ int main(int argc, char* argv[]) {
 	try {
 
 		Scribble environment(targetFile);
-		environment.execute("main");
+
+		double vmStart = getCPUTime();
+		API::APIValue val = environment.execute("main");
+		double vmEnd = getCPUTime();
+
+
+		printf("VM execution took time %f\nResult: %i\n", vmEnd - vmStart, val.getValueBoolean());
 
 	} catch (ParserException& ex) {
 		printf("Error: %s\n", ex.what());

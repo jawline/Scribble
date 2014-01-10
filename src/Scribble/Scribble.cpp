@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <cputime.hpp>
 
 #include <Scribble/Statement/Statement.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
@@ -40,7 +39,7 @@ Scribble::Scribble(std::string const& package) {
 Scribble::~Scribble() {
 }
 
-void Scribble::execute(std::string function) {
+API::APIValue Scribble::execute(std::string function) {
 
 	auto entry = compiledPackages[Parser::getUniformPath(packagePath)].find(
 			function);
@@ -51,7 +50,7 @@ void Scribble::execute(std::string function) {
 			|| entry->second.getFunctionSet().size() != 1
 			|| entry->second.getFunctionSet()[0]->numArgs() != 0) {
 		printf("Function %s does not exist\n", function.c_str());
-		return;
+		return API::APIValue(0);
 	}
 
 	//Grab a reference to __init__.__init__ for execution
@@ -61,16 +60,30 @@ void Scribble::execute(std::string function) {
 	std::string vmFuncName = toExecute->getNamespace()
 			+ VM::vmNamespaceSeperator + toExecute->getName();
 
-	double vmStart = getCPUTime();
-
 	environment.execute(vmFuncName);
-
-	double vmEnd = getCPUTime();
-
 	environment.printState();
 
-	printf("VM execution took time %f\n", vmEnd - vmStart);
+	API::APIValue result;
 
+	if (!toExecute->getType()->Equals(getVoidType())) {
+
+		long val = 0;
+		bool ref = 0;
+
+		environment.getRegister(VM::vmReturnResultRegister, val, ref);
+
+		if (ref) {
+			result = API::APIValue(environment.getHeap().getType(val),
+					environment.getHeap().getAddress(val), val);
+		} else {
+			result = API::APIValue(val);
+		}
+
+	} else {
+		result = API::APIValue(0);
+	}
+
+	return result;
 }
 
 void Scribble::load() {

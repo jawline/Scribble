@@ -10,6 +10,7 @@
 #include <string>
 #include <VM/VirtualMachine.hpp>
 #include <Scribble/Parser/Parser.hpp>
+#include <API/Value/APIValue.hpp>
 
 /**
  * Wrapper class that is capable of loading and executing Scribble functions
@@ -53,7 +54,7 @@ public:
 	Scribble(std::string const& package);
 	virtual ~Scribble();
 
-	void execute(std::string code);
+	API::APIValue execute(std::string code);
 };
 
 #endif /* SCRIBBLE_HPP_ */
