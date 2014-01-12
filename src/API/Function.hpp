@@ -63,7 +63,7 @@ public:
 
 			if (ref) {
 				vals[i] = API::APIValue(virt->getHeap().getType(val),
-						virt->getHeap().getAddress(val), val, virt);
+						virt->getHeap().getSmartPointer(val), val);
 			} else {
 				vals[i] = API::APIValue(val);
 			}

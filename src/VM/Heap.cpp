@@ -56,7 +56,7 @@ long Heap::allocate(SmartPointer<VMEntryType> type, int size, uint8_t* initial) 
 	VMHeapEntry entry;
 
 	entry.type = type;
-	entry.pointer = memory;
+	entry.pointer = SmartPointer<uint8_t>(memory);
 	entry.sizeBytes = size;
 	entry.flagged = lastFlagState_;
 
@@ -80,6 +80,15 @@ uint8_t* Heap::getAddress(long entry) {
 		return nullptr;
 	}
 
+	return heapItems_[entry].pointer.get();
+}
+
+SmartPointer<uint8_t> Heap::getSmartPointer(long entry) {
+
+	if (!validReference(entry)) {
+		return SmartPointer<uint8_t>(nullptr);
+	}
+
 	return heapItems_[entry].pointer;
 }
 
@@ -101,22 +110,6 @@ SmartPointer<VMEntryType> Heap::getType(long entry) {
 	return heapItems_[entry].type;
 }
 
-void Heap::lock(long i) {
-
-	if (validReference(i)) {
-		heapItems_[i].locked++;
-	}
-
-}
-
-void Heap::unlock(long i) {
-
-	if (validReference(i)) {
-		heapItems_[i].locked--;
-	}
-
-}
-
 void Heap::flag(long i) {
 
 	if (validReference(i)) {
@@ -135,10 +128,8 @@ int Heap::processUnflagged() {
 	for (unsigned int id = 0; id < heapItems_.size(); id++) {
 
 		if (heapItems_[id].flagged == lastFlagState_
-				&& heapItems_[id].pointer != nullptr
-				&& heapItems_[id].locked < 1) {
+				&& heapItems_[id].pointer != nullptr) {
 
-			delete[] heapItems_[id].pointer;
 			heapItems_[id].pointer = nullptr;
 			unusedIndexs_.push(id);
 

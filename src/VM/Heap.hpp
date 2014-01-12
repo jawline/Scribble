@@ -36,6 +36,7 @@ public:
 
 	bool validReference(long entry);
 	SmartPointer<VMEntryType> getType(long entry);
+	SmartPointer<uint8_t> getSmartPointer(long entry);
 	uint8_t* getAddress(long entry);
 	int getSize(long entry);
 

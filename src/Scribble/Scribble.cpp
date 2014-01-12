@@ -74,7 +74,7 @@ API::APIValue Scribble::execute(std::string function) {
 
 		if (ref) {
 			result = API::APIValue(environment.getHeap().getType(val),
-					environment.getHeap().getAddress(val), val, &environment);
+					environment.getHeap().getSmartPointer(val), val);
 		} else {
 			result = API::APIValue(val);
 		}
