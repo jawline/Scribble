@@ -41,6 +41,9 @@ public:
 
 	void flag(long i);
 
+	void lock(long i);
+	void unlock(long i);
+
 	/**
 	 * This function deletes any unflagged heap elements and then sets flag states for the next garbage collector run
 	 */

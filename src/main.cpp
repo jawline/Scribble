@@ -66,7 +66,6 @@ int main(int argc, char* argv[]) {
 		API::APIValue val = environment.execute("main");
 		double vmEnd = getCPUTime();
 
-
 		printf("VM execution took time %f\n", vmEnd - vmStart);
 
 	} catch (ParserException& ex) {

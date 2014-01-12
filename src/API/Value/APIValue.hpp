@@ -24,14 +24,15 @@ static std::string cStringTypename = "string";
 
 class APIValue {
 private:
+	VM::VirtualMachine* virt_;
 	SmartPointer<VM::VMEntryType> type_;
 	uint8_t* data_;
 	int64_t val_;
 
 public:
-	APIValue() {val_ = 0; type_ = nullptr; data_ = nullptr;}
+	APIValue() { virt_ = nullptr; val_ = 0; type_ = nullptr; data_ = nullptr;}
 	APIValue(int64_t val);
-	APIValue(SmartPointer<VM::VMEntryType> type, uint8_t* data, long val);
+	APIValue(SmartPointer<VM::VMEntryType> type, uint8_t* data, long val, VM::VirtualMachine* virt);
 	virtual ~APIValue();
 
 	/**
@@ -120,7 +121,7 @@ public:
 
 		//Make a new API value from it
 		return API::APIValue(vm->findType(cStringTypename),
-				vm->getHeap().getAddress(heapEntry), heapEntry);
+				vm->getHeap().getAddress(heapEntry), heapEntry, vm);
 	}
 };
 

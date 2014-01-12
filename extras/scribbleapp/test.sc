@@ -18,3 +18,11 @@ func DoMath() : int {
 func DoBool() : bool {
  return false;
 }
+
+func DoStringTwo() : string {
+ return "String Two";
+}
+
+func DoString() : string {
+ return "Hello World Scribble String";
+}

@@ -101,6 +101,22 @@ SmartPointer<VMEntryType> Heap::getType(long entry) {
 	return heapItems_[entry].type;
 }
 
+void Heap::lock(long i) {
+
+	if (validReference(i)) {
+		heapItems_[i].locked++;
+	}
+
+}
+
+void Heap::unlock(long i) {
+
+	if (validReference(i)) {
+		heapItems_[i].locked--;
+	}
+
+}
+
 void Heap::flag(long i) {
 
 	if (validReference(i)) {
@@ -114,14 +130,18 @@ void Heap::flag(long i) {
 
 int Heap::processUnflagged() {
 
-	std::vector < std::map<int, VMHeapEntry>::iterator > remove;
+	std::vector<std::map<int, VMHeapEntry>::iterator> remove;
 
 	for (unsigned int id = 0; id < heapItems_.size(); id++) {
 
-		if (heapItems_[id].flagged == lastFlagState_ && heapItems_[id].pointer != nullptr) {
+		if (heapItems_[id].flagged == lastFlagState_
+				&& heapItems_[id].pointer != nullptr
+				&& heapItems_[id].locked < 1) {
+
 			delete[] heapItems_[id].pointer;
 			heapItems_[id].pointer = nullptr;
 			unusedIndexs_.push(id);
+
 		}
 	}
 
@@ -139,16 +159,16 @@ std::string Heap::debugState() {
 	dbg << "\n";
 
 	/**
-	for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
-		dbg << "Entry: " << iter->first << " type "
-				<< iter->second.type->typeName();
+	 for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
+	 dbg << "Entry: " << iter->first << " type "
+	 << iter->second.type->typeName();
 
-		if (iter->second.type->typeName().compare("string") == 0) {
-			dbg << " string value: " << iter->second.pointer;
-		}
+	 if (iter->second.type->typeName().compare("string") == 0) {
+	 dbg << " string value: " << iter->second.pointer;
+	 }
 
-		dbg << "\n";
-	}*/
+	 dbg << "\n";
+	 }*/
 
 	dbg << "--END HEAP--\n";
 	return dbg.str();

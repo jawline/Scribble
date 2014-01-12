@@ -10,17 +10,26 @@
 namespace API {
 
 APIValue::APIValue(int64_t val) :
-		type_(nullptr), data_(nullptr), val_(val) {
+		virt_(nullptr), type_(nullptr), data_(nullptr), val_(val) {
 }
 
-APIValue::APIValue(SmartPointer<VM::VMEntryType> type, uint8_t* data, long val) :
-		type_(type), data_(data), val_(val) {
-	// TODO Auto-generated constructor stub
+APIValue::APIValue(SmartPointer<VM::VMEntryType> type, uint8_t* data, long val, VM::VirtualMachine* virt) :
+virt_(virt), type_(type), data_(data), val_(val) {
+
+	//Lock the reference so the VM doesn't free it even if its no longer used in Scribble
+	virt_->getHeap().lock(val_);
 
 }
 
 APIValue::~APIValue() {
-	// TODO Auto-generated destructor stub
+
+	//If this is a heap reference then unlock it notifying Scribble that the
+	//Gc can delete it again ( As long as no other locks exist )
+
+	if (virt_ != nullptr && data_ != nullptr) {
+		virt_->getHeap().unlock(val_);
+	}
+
 }
 
 } /* namespace API */
