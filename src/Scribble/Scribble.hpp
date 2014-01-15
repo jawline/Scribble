@@ -54,6 +54,10 @@ public:
 	Scribble(std::string const& package);
 	virtual ~Scribble();
 
+	VM::VirtualMachine* getEnvironment() {
+		return &environment;
+	}
+
 	API::APIValue execute(std::string function, std::vector<API::APIValue> arguments);
 };
 

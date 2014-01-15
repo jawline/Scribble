@@ -14,6 +14,15 @@ package floatsTest := import("tests/floats");
 package mathTest := import("tests/math");
 package structTest := import("tests/structures");
 
+type J := struct {
+ name : string,
+ age : int
+}
+
+func MakeJ() : J {
+ return J { "Hello", 15 };
+}
+
 /**
  * The main function executes all of the Scribble unit tests.
  */

@@ -34,7 +34,7 @@ private:
 	Type* cType_;
 
 public:
-	APIValue() { cType_ = getVoidType(); val_ = 0; vType_ = nullptr; data_ = nullptr;}
+	APIValue() {cType_ = getVoidType(); val_ = 0; vType_ = nullptr; data_ = nullptr;}
 	APIValue(Type* type, int64_t val);
 	APIValue(Type* type, SmartPointer<VM::VMEntryType> vmType, SmartPointer<uint8_t> data, long val);
 	virtual ~APIValue();
@@ -117,7 +117,16 @@ public:
 		return true;
 	}
 
-	APIValue getField(std::string const& name) {
+	bool isNull() {
+
+		if (val_ == 0) {
+			return true;
+		}
+
+		return false;
+	}
+
+	APIValue getField(std::string const& name, VM::VirtualMachine* vm) {
 
 		if (cType_->getType() != StructureType) {
 			return APIValue();
@@ -129,6 +138,38 @@ public:
 
 		if (index == -1) {
 			return APIValue();
+		}
+
+		int offset = getReferenceType()->getStructureFieldOffset(index);
+
+		long res = 0;
+
+		unsigned char* elementData = data_.get() + offset;
+		//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
+
+		switch (getReferenceType()->getStructureFields()[index]->getType()->getElementSize()) {
+			case 1:
+			res = (int64_t) (*elementData);
+			break;
+			case 2:
+			res = (int64_t) (*((int16_t*) elementData));
+			break;
+			case 4:
+			res = (int64_t) (*((int32_t*) elementData));
+			break;
+			case 8:
+			res = (int64_t) (*((int64_t*) elementData));
+			break;
+			default:
+			printf("Issues");
+			return API::APIValue();
+			break;
+		}
+
+		if (getReferenceType()->getStructureFields()[index]->getType()->isReference()) {
+			return API::APIValue(info->getType(name), getReferenceType()->getStructureFields()[index]->getType(), vm->getHeap().getSmartPointer(res), res);
+		} else {
+			return API::APIValue(info->getType(name), res);
 		}
 
 	}
