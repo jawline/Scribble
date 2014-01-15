@@ -15,6 +15,14 @@ func DoMath() : int {
  return math;
 }
 
+func DoFactorial( n : int ) : int {
+
+ if n < 2 then
+  return 1;
+
+ return n * DoFactorial( n - 1 );
+}
+
 func DoBool() : bool {
  return false;
 }

@@ -42,6 +42,7 @@ private:
 	/**
 	 * A smart pointer to the function in question, SmartPointer to nullptr if it has not been resolved.
 	 */
+
 	SmartPointer<Function> func_;
 
 public:

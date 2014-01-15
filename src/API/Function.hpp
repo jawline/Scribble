@@ -47,7 +47,7 @@ public:
 	 */
 
 	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt) {
-		return API::APIValue(0);
+		return API::APIValue();
 	}
 
 	virtual void execute(VM::VirtualMachine* virt) {
@@ -62,10 +62,10 @@ public:
 			virt->popStackLong(val, ref);
 
 			if (ref) {
-				vals[i] = API::APIValue(virt->getHeap().getType(val),
+				vals[i] = API::APIValue(argType(i), virt->getHeap().getType(val),
 						virt->getHeap().getSmartPointer(val), val);
 			} else {
-				vals[i] = API::APIValue(val);
+				vals[i] = API::APIValue(argType(i), val);
 			}
 
 		}

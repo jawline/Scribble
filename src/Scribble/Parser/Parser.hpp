@@ -106,6 +106,7 @@ public:
 	/**
 	 * Attempt to find a function that meets the criteria of a reference within a function set.
 	 */
+
 	static SmartPointer<Function> findFunctionInSet(SmartPointer<FunctionReference> toFind,
 			FunctionSet const& set);
 

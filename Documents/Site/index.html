@@ -203,7 +203,7 @@
 	  <p>An example of a for loop would be <br/>
 		<code>
 			for var i := 0; i < 100; i++ do {
-			<br/>&nbsp;sys.Write("Hello World");
+			<br/>&nbsp;console.Log("Hello World");
 			<br/>}
 		</code>
 	  </p>
@@ -232,7 +232,7 @@
 	  <p>When you define a variable of an array type ( <code>var j : array(Anything)</code> ) it is initialized as a nil reference ( The equivilent in C would be a null pointer ) to actually create an array you use the <code>[NumberOfElements]BaseType</code> syntax. For example to create an array of 100 integers you would write <code>var j := [100]int;</code>. The number of elements specified has to be an integer expression</p>
 	  <p>To access an element within the array the <code>[IndexNumber]</code> syntax is used.</p>
 	  <p>The <code>len(Array)</code> function will return the number of elements in an array. E.g. <code>len([100]int) = 100</code></p>
-	  <p>An example of creating an array of integers and assigning each element to be the numeric value of its index and then printing it out to the screen.<br/><br/><code>var j := [100]int;<br>for var i := 0; i < len(j); i++ do {<br/>&nbsp;j[i] := i;<br/>&nbsp;sys.Write(sys.String(j[i]));<br/>}</code></p>
+	  <p>An example of creating an array of integers and assigning each element to be the numeric value of its index and then printing it out to the screen.<br/><br/><code>var j := [100]int;<br>for var i := 0; i < len(j); i++ do {<br/>&nbsp;j[i] := i;<br/>&nbsp;console.Log(sys.String(j[i]));<br/>}</code></p>
 
         </div>
       </div>
@@ -301,9 +301,18 @@
       <hr class="featurette-divider">
 
             <div align="center">
+              <h1>Test Scribble</h1>
+              <p>An early version of Scribble can be executed in your browser</p>
+             <p><a class="btn btn-lg btn-primary" href="./test.html" role="button">Here</a></p>
+            </div>
+
+
+      <hr class="featurette-divider">
+
+            <div align="center">
               <h1>Download Scribble</h1>
-              <p>To download Scribble or get involved please</p>
-              <p><a class="btn btn-lg btn-primary" href="http://github.com/mmjack/Scribble/" role="button">Visit Github</a></p>
+              <p>To get a copy of Scribble please contact Blake Loring at </p><p><a href="mailto:blake_l@imclueless.co.uk">blake_l@imclueless.co.uk</a></p>
+              <!-- <p><a class="btn btn-lg btn-primary" href="http://github.com/mmjack/Scribble/" role="button">Visit Github</a></p> -->
             </div>
 
 

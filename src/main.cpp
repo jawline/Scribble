@@ -62,8 +62,10 @@ int main(int argc, char* argv[]) {
 
 		Scribble environment(targetFile);
 
+		std::vector<API::APIValue> args;
+
 		double vmStart = getCPUTime();
-		API::APIValue val = environment.execute("main");
+		API::APIValue val = environment.execute("main", args);
 		double vmEnd = getCPUTime();
 
 		printf("VM execution took time %f\n", vmEnd - vmStart);

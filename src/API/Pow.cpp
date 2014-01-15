@@ -25,7 +25,7 @@ Pow::~Pow() {
 }
 
 APIValue Pow::execute(API::APIValue* values, VM::VirtualMachine* virt) {
-	return API::APIValue(pow(values[0].getValue32(), (int) values[1].getValue32()));
+	return API::APIValue(getIntType(), pow(values[0].getValue32(), (int) values[1].getValue32()));
 }
 
 Value* Pow::execute(std::vector<Value*> arguments) {

@@ -54,7 +54,7 @@ public:
 	Scribble(std::string const& package);
 	virtual ~Scribble();
 
-	API::APIValue execute(std::string code);
+	API::APIValue execute(std::string function, std::vector<API::APIValue> arguments);
 };
 
 #endif /* SCRIBBLE_HPP_ */

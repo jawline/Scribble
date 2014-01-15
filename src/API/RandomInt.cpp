@@ -36,5 +36,5 @@ Type* RandomInt::argType(unsigned int arg) {
 
 APIValue RandomInt::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
-	return API::APIValue(rand() % values[0].getValue32());
+	return API::APIValue(getIntType(), rand() % values[0].getValue32());
 }

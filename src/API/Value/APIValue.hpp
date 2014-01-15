@@ -18,6 +18,9 @@
 
 #include <VM/VirtualMachine.hpp>
 #include <Pointers/SmartPointer.hpp>
+#include <Scribble/Value/Type.hpp>
+#include <Scribble/Value/StructureInfo.hpp>
+#include <Scribble/Value/TypeManager.hpp>
 
 namespace API {
 
@@ -25,14 +28,15 @@ static std::string cStringTypename = "string";
 
 class APIValue {
 private:
-	SmartPointer<VM::VMEntryType> type_;
+	SmartPointer<VM::VMEntryType> vType_;
 	SmartPointer<uint8_t> data_;
 	int64_t val_;
+	Type* cType_;
 
 public:
-	APIValue() { val_ = 0; type_ = nullptr; data_ = nullptr;}
-	APIValue(int64_t val);
-	APIValue(SmartPointer<VM::VMEntryType> type, SmartPointer<uint8_t> data, long val);
+	APIValue() { cType_ = getVoidType(); val_ = 0; vType_ = nullptr; data_ = nullptr;}
+	APIValue(Type* type, int64_t val);
+	APIValue(Type* type, SmartPointer<VM::VMEntryType> vmType, SmartPointer<uint8_t> data, long val);
 	virtual ~APIValue();
 
 	/**
@@ -85,7 +89,7 @@ public:
 	 */
 
 	SmartPointer<VM::VMEntryType> getReferenceType() {
-		return type_;
+		return vType_;
 	}
 
 	/**
@@ -96,21 +100,50 @@ public:
 		return data_.get();
 	}
 
+	Type* getType() {
+		return cType_;
+	}
+
 	/**
 	 * Returns true if this APIValue is a reference to a piece of data on the heap.
 	 */
 
 	bool isReference() {
 
-		if (type_.get() == nullptr) {
+		if (vType_.get() == nullptr) {
 			return false;
 		}
 
 		return true;
 	}
 
+	APIValue getField(std::string const& name) {
+
+		if (cType_->getType() != StructureType) {
+			return APIValue();
+		}
+
+		StructureInfo* info = (StructureInfo*) cType_;
+
+		int index = info->getIndex(name);
+
+		if (index == -1) {
+			return APIValue();
+		}
+
+	}
+
+	void pushToVM(VM::VirtualMachine* virt) {
+
+		if (isReference()) {
+			virt->markStackReference();
+		}
+
+		virt->pushStackLong(val_);
+	}
+
 	static API::APIValue makeFloat32(float32_t val) {
-		return API::APIValue( *((long*)&val) );
+		return API::APIValue(getFloat32Type(), *((long*)&val) );
 	}
 
 	static API::APIValue makeString(std::string const& text, VM::VirtualMachine* vm) {
@@ -120,7 +153,7 @@ public:
 				text.length() + 1, (uint8_t*) text.c_str());
 
 		//Make a new API value from it
-		return API::APIValue(vm->findType(cStringTypename),
+		return API::APIValue(getStringType(), vm->findType(cStringTypename),
 				vm->getHeap().getSmartPointer(heapEntry), heapEntry);
 	}
 };

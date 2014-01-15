@@ -9,12 +9,12 @@
 
 namespace API {
 
-APIValue::APIValue(int64_t val) :
-		type_(nullptr), data_(nullptr), val_(val) {
+APIValue::APIValue(Type* type, int64_t val) :
+		cType_(type), vType_(nullptr), data_(nullptr), val_(val) {
 }
 
-APIValue::APIValue(SmartPointer<VM::VMEntryType> type, SmartPointer<uint8_t> data, long val) :
-type_(type), data_(data), val_(val) {
+APIValue::APIValue(Type* type, SmartPointer<VM::VMEntryType> vmType, SmartPointer<uint8_t> data, long val) :
+cType_(type), vType_(vmType), data_(data), val_(val) {
 
 }
 
