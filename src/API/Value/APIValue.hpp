@@ -174,6 +174,48 @@ public:
 
 	}
 
+	void setField(std::string const& name, API::APIValue val, VM::VirtualMachine* vm) {
+
+		if (cType_->getType() != StructureType) {
+			return;
+		}
+
+		StructureInfo* info = (StructureInfo*) cType_;
+
+		int index = info->getIndex(name);
+
+		if (index == -1) {
+			return;
+		}
+
+		int offset = getReferenceType()->getStructureFieldOffset(index);
+
+		long res = 0;
+
+		unsigned char* elementData = data_.get() + offset;
+		//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
+
+		switch (getReferenceType()->getStructureFields()[index]->getType()->getElementSize()) {
+			case 1:
+			(*(int8_t*)elementData) = val.getValue64();
+			break;
+			case 2:
+			(*(int16_t*)elementData) = val.getValue64();
+			break;
+			case 4:
+			(*(int32_t*)elementData) = val.getValue64();
+			break;
+			case 8:
+			(*(int64_t*)elementData) = val.getValue64();
+			break;
+			default:
+			printf("Issues");
+			return;
+			break;
+		}
+
+	}
+
 	void pushToVM(VM::VirtualMachine* virt) {
 
 		if (isReference()) {

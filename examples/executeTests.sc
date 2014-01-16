@@ -14,13 +14,18 @@ package floatsTest := import("tests/floats");
 package mathTest := import("tests/math");
 package structTest := import("tests/structures");
 
+package console := import("console");
+package sys := import("sys");
+
 type J := struct {
  name : string,
  age : int
 }
 
-func MakeJ() : J {
- return J { "Hello", 15 };
+func PrintJ(x : J) : J {
+ console.Log(x->name);
+ console.Log(sys.String(x->age));
+ return x;
 }
 
 /**
