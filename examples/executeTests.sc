@@ -17,15 +17,23 @@ package structTest := import("tests/structures");
 package console := import("console");
 package sys := import("sys");
 
-type J := struct {
- name : string,
- age : int
+func MakeArray() : array(int) {
+ var arr := [100]int;
+ 
+ for var i := 0; i < len(arr); i++ do {
+  arr[i] := i;
+ }
+ 
+ return arr;
 }
 
-func PrintJ(x : J) : J {
- console.Log(x->name);
- console.Log(sys.String(x->age));
- return x;
+func PrintArray( arr : array(int) ) {
+
+ for var i := 0; i < len(arr); i++ do {
+  console.Log(sys.String(arr[i]));
+  console.Log(" ");
+ }
+
 }
 
 /**

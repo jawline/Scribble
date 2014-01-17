@@ -174,6 +174,52 @@ public:
 
 	}
 
+	unsigned int getArrayLength(VM::VirtualMachine* vm) {
+		return vm->getHeap().getSize(val_) / getReferenceType()->arraySubtype()->getElementSize();
+	}
+
+	APIValue getIndex(unsigned int index, VM::VirtualMachine* vm) {
+
+		if (cType_->getType() != Array) {
+			return API::APIValue();
+		}
+
+		//TODO: Check against array length
+
+		int offset = getReferenceType()->arraySubtype()->getElementSize() * index;
+
+		unsigned char* elementData = data_.get() + offset;
+		//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
+
+		int64_t res = 0;
+
+		switch (getReferenceType()->arraySubtype()->getElementSize()) {
+			case 1:
+			res = (int64_t) (*elementData);
+			break;
+			case 2:
+			res = (int64_t) (*((int16_t*) elementData));
+			break;
+			case 4:
+			res = (int64_t) (*((int32_t*) elementData));
+			break;
+			case 8:
+			res = (int64_t) (*((int64_t*) elementData));
+			break;
+			default:
+			printf("Issues");
+			return API::APIValue();
+			break;
+		}
+
+		if (getReferenceType()->arraySubtype()->isReference()) {
+			return API::APIValue(cType_->getSubtype(), getReferenceType()->arraySubtype(), vm->getHeap().getSmartPointer(res), res);
+		} else {
+			return API::APIValue(cType_->getSubtype(), res);
+		}
+
+	}
+
 	void setField(std::string const& name, API::APIValue val, VM::VirtualMachine* vm) {
 
 		if (cType_->getType() != StructureType) {
@@ -190,12 +236,45 @@ public:
 
 		int offset = getReferenceType()->getStructureFieldOffset(index);
 
-		long res = 0;
-
 		unsigned char* elementData = data_.get() + offset;
 		//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
 
 		switch (getReferenceType()->getStructureFields()[index]->getType()->getElementSize()) {
+			case 1:
+			(*(int8_t*)elementData) = val.getValue64();
+			break;
+			case 2:
+			(*(int16_t*)elementData) = val.getValue64();
+			break;
+			case 4:
+			(*(int32_t*)elementData) = val.getValue64();
+			break;
+			case 8:
+			(*(int64_t*)elementData) = val.getValue64();
+			break;
+			default:
+			printf("Issues");
+			return;
+			break;
+		}
+
+	}
+
+	void setIndex(unsigned int index, API::APIValue val, VM::VirtualMachine* vm) {
+
+		if (cType_->getType() != Array) {
+			return;
+		}
+
+
+		//TODO: Check against array length
+
+		int offset = getReferenceType()->arraySubtype()->getElementSize() * index;
+
+		unsigned char* elementData = data_.get() + offset;
+		//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
+
+		switch (getReferenceType()->arraySubtype()->getElementSize()) {
 			case 1:
 			(*(int8_t*)elementData) = val.getValue64();
 			break;
@@ -223,6 +302,10 @@ public:
 		}
 
 		virt->pushStackLong(val_);
+	}
+
+	static API::APIValue makeInt32(int val) {
+		return API::APIValue(getIntType(), val);
 	}
 
 	static API::APIValue makeFloat32(float32_t val) {
