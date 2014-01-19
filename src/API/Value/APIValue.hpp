@@ -184,7 +184,9 @@ public:
 			return API::APIValue();
 		}
 
-		//TODO: Check against array length
+		if (index > getArrayLength(vm)) {
+			return API::APIValue();
+		}
 
 		int offset = getReferenceType()->arraySubtype()->getElementSize() * index;
 
@@ -266,6 +268,9 @@ public:
 			return;
 		}
 
+		if (index > getArrayLength(vm)) {
+			return;
+		}
 
 		//TODO: Check against array length
 

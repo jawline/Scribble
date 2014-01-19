@@ -116,6 +116,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <statements> Statements;
 %type <function> Function;
 %type <variables> ArgumentDefinitions;
+%type <variables> OptionalArgumentDefinitions;
 %type <statement> AutoVariable;
 %type <type> Type;
 %type <statement> FunctionCall;
@@ -263,6 +264,13 @@ ArgumentDefinition: WORD COLON Type {
 	}
 ;
 
+OptionalArgumentDefinitions: {
+		$$ = new std::vector<SmartPointer<Variable>>();
+	} | ArgumentDefinitions {
+		$$ = $1;
+	}
+;
+
 ArgumentDefinitions: ArgumentDefinition {
 		$$ = new std::vector<SmartPointer<Variable>>();
 		$$->push_back(*$1);
@@ -274,7 +282,7 @@ ArgumentDefinitions: ArgumentDefinition {
 	}
 ;
 
-Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET Statements RBRACKET {
+Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBRACKET Statements RBRACKET {
 		std::vector<SmartPointer<Variable>> values;
 
 		int pos = 0;
@@ -323,50 +331,7 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		
 		delete $7;
 
-	} | FUNCTION WORD LPAREN RPAREN COLON Type LBRACKET Statements RBRACKET {
-		
-		std::vector<SmartPointer<Variable>> values;
-
-		int pos = 0;
-		for (auto it = Variables.begin(); it != Variables.end(); it++) {
-			it->second->setPosition(pos);
-			values.push_back(it->second);
-			pos++;
-		}
-	
-	
-		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, *$6, nullptr));
-		VariableReferences.push_back(returnTemplate);
-		
-		SmartPointer<Function> fn = SmartPointer<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$6, returnTemplate, *$8, values, std::vector<SmartPointer<Variable>>()));
-		
-		if (Functions[*$2].type() == EmptyEntry) {
-		
-			std::vector<SafeFunction> newSet;
-			newSet.push_back(fn);
-
-			Functions[*$2] = NamespaceEntry(newSet);
-		
-		} else {
-		
-			if ( Functions[*$2].type() != FunctionSetEntry) {
-				yyerror("Not a function type");
-				return -1;
-			}
-			
-			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
-		
-			
-			Functions[*$2].addFunctionToSet(fn);
-		
-		}
-	
-		Variables.clear();
-
-		delete $2;
-		delete $8;
-		delete $6;
-	} | FUNCTION WORD LPAREN ArgumentDefinitions RPAREN LBRACKET Statements RBRACKET {
+	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN LBRACKET Statements RBRACKET {
 		std::vector<SmartPointer<Variable>> values;
 
 		int pos = 0;
@@ -413,48 +378,6 @@ Function: FUNCTION WORD LPAREN ArgumentDefinitions RPAREN COLON Type LBRACKET St
 		//Delete variables vector
 		delete $4;
 
-	} | FUNCTION WORD LPAREN RPAREN LBRACKET Statements RBRACKET {
-		
-		std::vector<SmartPointer<Variable>> values;
-
-		int pos = 0;
-		for (auto it = Variables.begin(); it != Variables.end(); it++) {
-			it->second->setPosition(pos);
-			values.push_back(it->second);
-			pos++;
-		}
-	
-	
-		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
-	
-		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
-		
-		SmartPointer<Function> fn = SmartPointer<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$6, values, std::vector<SmartPointer<Variable>>()));
-		
-		if (Functions[*$2].type() == EmptyEntry) {
-		
-			std::vector<SafeFunction> newSet;
-			newSet.push_back(fn);
-
-			Functions[*$2] = NamespaceEntry(newSet);
-		
-		} else {
-		
-			if ( Functions[*$2].type() != FunctionSetEntry) {
-				yyerror("Not a function type");
-				return -1;
-			}
-			
-			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
-			
-			Functions[*$2].addFunctionToSet(fn);
-		
-		}
-	
-		Variables.clear();
-
-		delete $2;
-		delete $6;
 	}
 ;
 
