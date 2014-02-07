@@ -38,9 +38,9 @@ digit [0-9]
 integer {digit}+
 exponent [eE][+-]?{integer}
 real {integer}("."{integer})*
+float {real}f
 string \"[^\"\n]*\"
 word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
-float {real}f
 
 %%
 
@@ -66,10 +66,6 @@ float {real}f
 ":=" return ASSIGN;
 "=" return EQUALS;
 
-"and" return AND;
-"or" return OR;
-"package" return PACKAGE;
-
 "(" return LPAREN;
 ")" return RPAREN;
 "{" return LBRACKET;
@@ -80,7 +76,15 @@ float {real}f
 ">" return GREATER;
 "<" return LESSER;
 "!" return NOT;
+"[" return LSQBRACKET;
+"]" return RSQBRACKET;
+
 "\n" ;
+
+
+"and" return AND;
+"or" return OR;
+"package" return PACKAGE;
 "then" return THEN;
 "if" return IF;
 "else" return ELSE;
@@ -101,12 +105,8 @@ float {real}f
 "false" return FALSE;
 "type" return TYPE;
 "do" return DO;
-"." return LINK;
-"->" return POINT;
 "array" return TYPE_ARRAY;
 "len" return LENGTH;
-"[" return LSQBRACKET;
-"]" return RSQBRACKET;
 
 {integer} { SAVE_INT;
  return INT;

@@ -113,6 +113,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <variable> Variable;
 %type <variable> ArgumentDefinition;
 %type <statements> Arguments;
+%type <statements> Arguments_2;
 %type <statements> Statements;
 %type <function> Function;
 %type <variables> ArgumentDefinitions;
@@ -150,6 +151,11 @@ Program: {
 	}
 ;
 
+/**
+ * BaseStructureInfo is the definition of each field within a structure in the form Name : Type.
+ * Accepts 1 or more definition.
+ */
+
 BaseStructureInfo: WORD COLON Type {
 
 		$$ = new StructureInfo("INVALID");
@@ -166,6 +172,11 @@ BaseStructureInfo: WORD COLON Type {
 		delete $5;
 	}
 ;
+
+/**
+ * Definition of a type. Either a primitive ( int, string, float, bool ) or an array or Structure. NOTE: Structures and arrays are defined 
+ * as references which are resolved after parsing to allow for structures which are defined after they are used in the file.
+ */
 
 Type: TYPE_INT {
 		$$ = new TypeReference( new TypeReferenceCore ( "", getTypeManager().getType(Int) ) );
@@ -200,6 +211,10 @@ Type: TYPE_INT {
 	}
 ;
 
+/**
+ * The definition of a variable with an explicit type ( var Name : Type )
+ */
+
 Variable:  VARIABLE WORD COLON Type {
 
 		//Check if the variable is already defined. If it isn't then create a new one and add a reference to the list of variables so any extra data can be resolved.
@@ -220,6 +235,10 @@ Variable:  VARIABLE WORD COLON Type {
 		delete $4;
 	}
 ;
+
+/**
+ * The definition of a variable that has it's type inferred from the type of the expresion it is assigned to.
+ */
 
 AutoVariable: VARIABLE WORD ASSIGN Expression {
 
@@ -245,6 +264,10 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 	}
 ;
 
+/**
+ * Defines the syntax of an argument, written like Name : Type
+ */
+
 ArgumentDefinition: WORD COLON Type {
 
 		auto it = Variables.find(*$1);
@@ -264,12 +287,20 @@ ArgumentDefinition: WORD COLON Type {
 	}
 ;
 
+/**
+ * Accept zero or more argument definitions
+ */
+
 OptionalArgumentDefinitions: {
 		$$ = new std::vector<SmartPointer<Variable>>();
 	} | ArgumentDefinitions {
 		$$ = $1;
 	}
 ;
+
+/**
+ * Accept one or more argument definitions in the form Name : Type, Name : Type..
+ */
 
 ArgumentDefinitions: ArgumentDefinition {
 		$$ = new std::vector<SmartPointer<Variable>>();
@@ -281,6 +312,11 @@ ArgumentDefinitions: ArgumentDefinition {
 		delete $3;
 	}
 ;
+
+/**
+ * The definition of a function. func Name ( Arguments ) { Code } defines a function of void type
+ * and func Name ( Arguments ) : Type { Code } defines a function of a specific type.
+ */
 
 Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBRACKET Statements RBRACKET {
 		std::vector<SmartPointer<Variable>> values;
@@ -381,7 +417,18 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBR
 	}
 ;
 
-Arguments: Expression {
+/**
+ * Defines the arguments for a functional call or structure constructor.
+ */
+ 
+Arguments: {
+		$$ = new std::vector<SmartPointer<Statement>>();
+	} | Arguments_2 {
+		$$ = $1;
+	}
+;
+
+Arguments_2: Expression {
 		$$ = new std::vector<SmartPointer<Statement>>();
 		$$->push_back(SafeStatement($1));
 	} | Arguments COMMA Expression {
@@ -389,6 +436,10 @@ Arguments: Expression {
 		$$->push_back(SafeStatement($3));
 	}
 ;
+
+/**
+ * Define statements as zero or more Statement rules.
+ */
 
 Statements: {
 		$$ = new std::vector<SmartPointer<Statement>>();
@@ -400,6 +451,10 @@ Statements: {
 		$$->push_back( SafeStatement( new ReturnStatement(scribble_lineno, scribble_text, nullptr)));
 	}
 ;
+
+/**
+ * Defines a functional call as either Name ( Args ) or Package.Name ( Args ).
+ */
 
 FunctionCall: WORD LPAREN Arguments RPAREN {
 	
@@ -421,19 +476,6 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		//Free the name pointer
 		delete $1;
 		
-	} | WORD LPAREN RPAREN {
-		std::vector<SmartPointer<Statement>> args;
-		
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference("", *$1, args, 0));
-		
-		ParserReference r(reference);
-		StatementReferences.push_back(r);
-		
-		
-		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
-		
-		//Free the name pointer
-		delete $1;
 	} | WORD LINK WORD LPAREN Arguments RPAREN {
 	
 		std::vector<SmartPointer<Statement>> args;
@@ -454,22 +496,12 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		//Free the name pointers
 		delete $1;
 		delete $3;
-		
-	} | WORD LINK WORD LPAREN RPAREN {
-		std::vector<SmartPointer<Statement>> args;
-		SmartPointer<FunctionReference> reference = SmartPointer<FunctionReference>(new FunctionReference(*$1, *$3, args, 0));
-		
-		ParserReference r(reference);
-		StatementReferences.push_back(r);
-		
-		$$ = new FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
-		
-		//Free the name pointers
-		delete $1;
-		delete $3;
-
 	}
 ;
+
+/**
+ * either a single Statement or many statements inside some curly brackets { }.
+ */
 
 IfStatements: Statement {
 		std::vector<SafeStatement>* stmts = new std::vector<SafeStatement>();
@@ -479,6 +511,11 @@ IfStatements: Statement {
 		$$ = $2;
 	}
 ;
+
+/**
+ * Defines a statement as either one of the three control 
+ * structures, a return statement or an expression.
+ */
 
 Statement: Expression END {
 		$$ = $1;
