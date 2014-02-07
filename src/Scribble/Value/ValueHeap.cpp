@@ -25,8 +25,6 @@ ValueHeap::~ValueHeap() {
 
 Value* ValueHeap::make(Type* type) {
 
-	lock_.lock();
-
 	Value* generated = nullptr;
 
 	//If it is a complex type we don't store it so ignore it
@@ -41,8 +39,6 @@ Value* ValueHeap::make(Type* type) {
 	if (generated == nullptr) {
 		generated = ValueUtil::generateValue(type);
 	}
-
-	lock_.unlock();
 
 	return generated;
 }
@@ -75,15 +71,11 @@ void ValueHeap::free(Value* v) {
 
 	//Otherwise lock the heap and then add it on
 
-	lock_.lock();
-
 	if (valueStore_[v->type()->getType()].size() < ValueStackMax) {
 		valueStore_[v->type()->getType()].push(v);
 	} else {
 		delete v;
 	}
-
-	lock_.unlock();
 
 }
 

@@ -8,9 +8,6 @@ StringStatement::StringStatement(int lineNo, std::string sym, std::string string
 }
 
 Value* StringStatement::execute(std::vector<Value*> const& variables) {
-	StringValue* gen = (StringValue*) valueHeap.make(getStringType());
-	gen->setValue(stringValue_);
-	return gen;
 }
 
 void StringStatement::checkTree(Type* functionType) {

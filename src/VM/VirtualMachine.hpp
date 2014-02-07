@@ -98,10 +98,10 @@ public:
 	VirtualMachine();
 	virtual ~VirtualMachine();
 
-	virtual long stackLong(long pos);
-	virtual void stackSetLong(long pos, long v);
-	virtual void popStackLong(long& val, bool& ref);
-	virtual void pushStackLong(long v);
+	virtual long stackLong(int64_t pos);
+	virtual void stackSetLong(int64_t pos, int64_t v);
+	virtual void popStackLong(int64_t& val, bool& ref);
+	virtual void pushStackLong(int64_t v);
 	virtual void expandStack();
 	virtual void markStackReference();
 	virtual void pushRegister(uint8_t reg);

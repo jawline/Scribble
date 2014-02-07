@@ -51,9 +51,6 @@ Value* ValueUtil::generateValue(Type* type) {
 	case Float32:
 		return new Float32Value(0);
 
-	case String:
-		return new StringValue("");
-
 	case Void:
 		return new VoidValue();
 
