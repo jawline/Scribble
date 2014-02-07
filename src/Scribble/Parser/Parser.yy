@@ -181,7 +181,7 @@ BaseStructureInfo: WORD COLON Type {
 Type: TYPE_INT {
 		$$ = new TypeReference( new TypeReferenceCore ( "", getTypeManager().getType(Int) ) );
 	} | TYPE_STRING {
-		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(String) ) );
+		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(StringType) ) );
 	} | TYPE_FLOAT32 {
 		$$ = new TypeReference ( new TypeReferenceCore ( "", getTypeManager().getType(Float32)));
 	} | TYPE_BOOL {

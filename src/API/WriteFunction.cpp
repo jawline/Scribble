@@ -13,7 +13,7 @@ Value* WriteFunction::execute(std::vector<Value*> arguments) {
 Type* WriteFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
-		return getTypeManager().getType(String);
+		return getTypeManager().getType(StringType);
 	}
 
 	return getTypeManager().getType(TypeUnresolved);

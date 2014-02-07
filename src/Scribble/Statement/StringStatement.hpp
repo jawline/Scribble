@@ -13,7 +13,7 @@ public:
 	Value* execute(std::vector<Value*> const& variables);
 
 	Type* type() {
-		return getTypeManager().getType(String);
+		return getTypeManager().getType(StringType);
 	}
 
 	void checkTree(Type* functionType);
