@@ -25,6 +25,7 @@ private:
 
 	std::string packageName;
 	std::string packagePath;
+	std::string sourceCode;
 
 	/**
 	 * The VM environment running the code.
@@ -52,6 +53,14 @@ public:
 	 */
 
 	Scribble(std::string const& package);
+
+	/**
+	 * Compiles and prepares the package packageName by using the source code provided.
+	 * Throws a parsing exception if anything goes wrong.
+	 */
+
+	Scribble(std::string const& packageName, std::string const& sourceCode);
+
 	virtual ~Scribble();
 
 	VM::VirtualMachine* getEnvironment() {
