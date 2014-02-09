@@ -3,6 +3,7 @@
  * Copyright (c) Blake Loring 2013
  */
 
+/*
 package loopsTest := import("tests/loops");
 package logicalTest := import("tests/logical");
 package variablesTest := import("tests/variables");
@@ -12,36 +13,25 @@ package primesTest := import("tests/primes");
 package sortsTest := import("tests/sorts");
 package floatsTest := import("tests/floats");
 package mathTest := import("tests/math");
-package structTest := import("tests/structures");
+package structTest := import("tests/structures");*/
 
 package console := import("console");
 package sys := import("sys");
-
-func MakeArray() : array(int) {
- var arr := [100]int;
- 
- for var i := 0; i < len(arr); i++ do {
-  arr[i] := i;
- }
- 
- return arr;
-}
-
-func PrintArray( arr : array(int) ) {
-
- for var i := 0; i < len(arr); i++ do {
-  console.Log(sys.String(arr[i]));
-  console.Log(" ");
- }
-
-}
+package p := import("sorts/bubble");
 
 /**
  * The main function executes all of the Scribble unit tests.
  */
+ 
+func r(j : int) {
+	p.Sort([j]int);
+}
 
 func main() {
 
+ r(4);
+
+/*
  loopsTest.Test();
  arraysTest.Test();
  variablesTest.Test();
@@ -52,4 +42,6 @@ func main() {
  floatsTest.Test();
  mathTest.Test();
  structTest.Test();
+*/
+
 }

@@ -1,3 +1,0 @@
-WARNING: libscribble must have been installed to the path before compilation and you must have a C++ 11 compatable compiler.
-
-To compile this example application execute make in this directory. The executable a.out will be produced.

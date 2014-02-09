@@ -10,7 +10,6 @@
 #include <Scribble/Value/Value.hpp>
 #include <Stack/Stack.hpp>
 #include <stack>
-#include <mutex>
 #include <types.h>
 
 /**
@@ -22,7 +21,6 @@ class ValueHeap {
 private:
 	Stack<Value*>* valueStore_;
 	const static unsigned int ValueStackMax = 50;
-	std::mutex lock_;
 
 public:
 	ValueHeap();

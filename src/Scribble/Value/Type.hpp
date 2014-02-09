@@ -30,7 +30,7 @@ enum ValueType {
 	 * String type, represented by std::string. n bytes
 	 */
 
-	String = 0,
+	StringType = 0,
 
 	/**
 	 * 1 byte booleans.
@@ -115,9 +115,9 @@ public:
 	bool isPrimitive() {
 
 		switch (rawType_) {
-		case String:
-		case Array:
-		case StructureType:
+		case ValueType::StringType:
+		case ValueType::Array:
+		case ValueType::StructureType:
 			return false;
 
 		default:
@@ -151,19 +151,19 @@ public:
 		case StructureType:
 			//StructureType overrides getTypeName. This should never execute.
 			return "INVALID-SHOULD-HAVE-BEEN-OVERWRITTEN";
-		case Int:
+		case ValueType::Int:
 			return "int";
-		case Boolean:
+		case ValueType::Boolean:
 			return "bool";
-		case String:
+		case ValueType::StringType:
 			return "string";
-		case Void:
+		case ValueType::Void:
 			return "void";
-		case Float32:
+		case ValueType::Float32:
 			return "float32";
-		case ValueTypeMax:
+		case ValueType::ValueTypeMax:
 			return "invalid";
-		case TypeUnresolved:
+		case ValueType::TypeUnresolved:
 			return "unresolved";
 		}
 

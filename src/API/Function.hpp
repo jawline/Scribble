@@ -56,7 +56,7 @@ public:
 
 		for (int i = numArgs() - 1; i > -1; --i) {
 
-			long val;
+			int64_t val;
 			bool ref;
 
 			virt->popStackLong(val, ref);

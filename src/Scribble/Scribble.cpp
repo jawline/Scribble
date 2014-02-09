@@ -31,15 +31,23 @@
 
 #include <API/RegisterPackages.hpp>
 
-Scribble::Scribble(std::string const& package) {
+Scribble::Scribble(std::string const& package) :
+		sourceCode("") {
 	packagePath = package;
+	load();
+}
+
+Scribble::Scribble(std::string const& package, std::string const& src) {
+	packagePath = package;
+	sourceCode = src;
 	load();
 }
 
 Scribble::~Scribble() {
 }
 
-SafeFunction findFunction(std::vector<API::APIValue> arguments, FunctionSet set) {
+SafeFunction findFunction(std::vector<API::APIValue> arguments,
+		FunctionSet set) {
 
 	for (int i = 0; i < set.size(); i++) {
 		SafeFunction iter = set[i];
@@ -68,24 +76,26 @@ SafeFunction findFunction(std::vector<API::APIValue> arguments, FunctionSet set)
 	return nullptr;
 }
 
-API::APIValue Scribble::execute(std::string function, std::vector<API::APIValue> arguments) {
+API::APIValue Scribble::execute(std::string function,
+		std::vector<API::APIValue> arguments) {
 
 	auto entry = compiledPackages[Parser::getUniformPath(packagePath)].find(
 			function);
 
-/*
-	//Check that the __init__ code has compiled properly.
-	if (entry == compiledPackages["__init__"].end()
-			|| entry->second.type() != FunctionSetEntry
-			|| entry->second.getFunctionSet().size() != 1
-			|| entry->second.getFunctionSet()[0]->numArgs() != 0) {
-		printf("Function %s does not exist\n", function.c_str());
-		return API::APIValue();
-	}*/
+	/*
+	 //Check that the __init__ code has compiled properly.
+	 if (entry == compiledPackages["__init__"].end()
+	 || entry->second.type() != FunctionSetEntry
+	 || entry->second.getFunctionSet().size() != 1
+	 || entry->second.getFunctionSet()[0]->numArgs() != 0) {
+	 printf("Function %s does not exist\n", function.c_str());
+	 return API::APIValue();
+	 }*/
 
 	//Grab a reference to __init__.__init__ for execution
-	API::SafeFunction toExecute = findFunction(arguments, compiledPackages[Parser::getUniformPath(
-			packagePath)][function].getFunctionSet());
+	API::SafeFunction toExecute =
+			findFunction(arguments,
+					compiledPackages[Parser::getUniformPath(packagePath)][function].getFunctionSet());
 
 	if (toExecute.get() == nullptr) {
 		printf("Function %s does not exist\n", function.c_str());
@@ -114,7 +124,8 @@ API::APIValue Scribble::execute(std::string function, std::vector<API::APIValue>
 
 		if (ref) {
 
-			result = API::APIValue(toExecute->getType(), environment.getHeap().getType(val),
+			result = API::APIValue(toExecute->getType(),
+					environment.getHeap().getType(val),
 					environment.getHeap().getSmartPointer(val), val);
 
 		} else {
@@ -138,8 +149,17 @@ void Scribble::load() {
 	//Generate the console package
 	generateConsolePackage(compiledPackages);
 
-	//Compile the program
-	compiledPackages = Parser::compile(packagePath, compiledPackages);
+	if (sourceCode.length() == 0) {
+
+		//Compile the program
+		compiledPackages = Parser::compile(packagePath, compiledPackages);
+
+	} else {
+
+		compiledPackages = Parser::compileText(sourceCode, packagePath,
+				compiledPackages);
+
+	}
 
 	//Compile the virtual machine from the packages.
 	registerPackages(compiledPackages, environment);

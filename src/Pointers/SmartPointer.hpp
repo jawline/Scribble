@@ -1,7 +1,9 @@
 #ifndef _SMART_POINTER_DEF_H_
 #define _SMART_POINTER_DEF_H_
 #include "ReferenceCounter.hpp"
-#include <mutex>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <memory>
 
 /**

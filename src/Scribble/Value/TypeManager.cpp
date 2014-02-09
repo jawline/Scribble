@@ -59,7 +59,7 @@ TypeManager& getTypeManager() {
 	return typeInstance;
 }
 
-Type* stringType = getTypeManager().getType(String);
+Type* stringType = getTypeManager().getType(StringType);
 
 Type* getStringType() {
 	return stringType;

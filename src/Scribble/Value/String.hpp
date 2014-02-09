@@ -5,8 +5,8 @@
  *      Author: Blake Loring
  */
 
-#ifndef _STRING_H_
-#define _STRING_H_
+#ifndef _SCR_STRING_H_
+#define _SCR_STRING_H_
 #include "Value.hpp"
 #include <string>
 #include <Scribble/Statement/Heap.hpp>
@@ -45,4 +45,4 @@ public:
 	void setValue(std::string const& ref);
 };
 
-#endif //_STRING_H_
+#endif //_SCR_STRING_H_

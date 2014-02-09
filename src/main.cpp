@@ -68,18 +68,7 @@ int main(int argc, char* argv[]) {
 		API::APIValue val = environment.execute("main", args);
 		double vmEnd = getCPUTime();
 
-		val = environment.execute("MakeArray", args);
-
-		for (unsigned int i = 0; i < val.getArrayLength(environment.getEnvironment()); i++) {
-			val.setIndex(i, API::APIValue::makeInt32(val.getIndex(i, environment.getEnvironment()).getValue32() * 10), environment.getEnvironment());
-		}
-
-		val.setIndex(0, val.getIndex(1, environment.getEnvironment()), environment.getEnvironment());
-		args.push_back(val);
-		environment.execute("PrintArray", args);
-
 		printf("VM execution took time %f\n", vmEnd - vmStart);
-
 	} catch (ParserException& ex) {
 		printf("Error: %s\n", ex.what());
 	}

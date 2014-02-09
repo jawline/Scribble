@@ -22,7 +22,7 @@ Concat::~Concat() {
 }
 
 Type* Concat::getType() {
-	return getTypeManager().getType(String);
+	return getTypeManager().getType(StringType);
 }
 
 const unsigned int Concat::numArgs() {
@@ -30,7 +30,7 @@ const unsigned int Concat::numArgs() {
 }
 
 Type* Concat::argType(unsigned int arg) {
-	return getTypeManager().getType(String);
+	return getTypeManager().getType(StringType);
 }
 
 Value* Concat::execute(std::vector<Value*> arguments) {

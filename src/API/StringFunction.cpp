@@ -34,7 +34,7 @@ Value* IntToStringFunction::execute(std::vector<Value*> arguments) {
 }
 
 Type* IntToStringFunction::getType() {
-	return getTypeManager().getType(String);
+	return getTypeManager().getType(StringType);
 }
 
 unsigned int const IntToStringFunction::numArgs() {
@@ -90,7 +90,7 @@ Value* BoolToStringFunction::execute(std::vector<Value*> arguments) {
 }
 
 Type* BoolToStringFunction::getType() {
-	return getTypeManager().getType(String);
+	return getTypeManager().getType(StringType);
 }
 
 unsigned int const BoolToStringFunction::numArgs() {
@@ -134,7 +134,7 @@ Value* Float32ToStringFunction::execute(std::vector<Value*> arguments) {
 }
 
 Type* Float32ToStringFunction::getType() {
-	return getTypeManager().getType(String);
+	return getTypeManager().getType(StringType);
 }
 
 unsigned int const Float32ToStringFunction::numArgs() {

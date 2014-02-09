@@ -639,7 +639,7 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpPopNil: {
 
-				long t;
+				int64_t t;
 				bool r;
 
 				popStackLong(t, r);
@@ -696,8 +696,8 @@ void VirtualMachine::execute(std::string function) {
 						|| registers_[indexReg]
 								>= arrayType->getStructureFields().size()) {
 					VM_PRINTF_FATAL(
-							"Index %li is not a valid index to the structure. The structure only takes %li elements\n",
-							registers_[indexReg],
+							"Index %i is not a valid index to the structure. The structure only takes %i elements\n",
+							indexReg,
 							arrayType->getStructureFields().size());
 				}
 
@@ -765,8 +765,8 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"Index %li is not a valid index to the structure. The structure only takes %li elements\n",
-							registers_[indexReg],
-							arrayType->getStructureFields().size());
+							(long int)registers_[indexReg],
+							(long int)arrayType->getStructureFields().size());
 
 				}
 
@@ -837,10 +837,10 @@ void VirtualMachine::execute(std::string function) {
 				if (dataPtr > max) {
 
 					VM_PRINTF_FATAL(
-							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i data pointer %li max %li\n",
-							registers_[index], offsetBytes,
-							arrayType->arraySubtype()->getElementSize(),
-							heap_.getSize(registers_[tgtArray]), dataPtr, max);
+							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i max %li\n",
+							(long int)registers_[index], (int)offsetBytes,
+							(int)arrayType->arraySubtype()->getElementSize(),
+							(int)heap_.getSize(registers_[tgtArray]), (long int)max);
 
 				}
 
@@ -915,9 +915,9 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i\n",
-							(long int ) registers_[index], offsetBytes,
-							arrayType->arraySubtype()->getElementSize(),
-							heap_.getSize(registers_[tgtArray]));
+							(long int ) registers_[index], (int)offsetBytes,
+							(int)arrayType->arraySubtype()->getElementSize(),
+							(int)heap_.getSize(registers_[tgtArray]));
 
 				}
 
@@ -1048,8 +1048,8 @@ void VirtualMachine::execute(std::string function) {
 
 				VM_PRINTF_LOG(
 						"Allocated and created new array %li of size %li\n",
-						registers_[destinationRegister],
-						registers_[lengthRegister]);
+						(long int)registers_[destinationRegister],
+						(long int)registers_[lengthRegister]);
 
 				currentInstruction += vmOpCodeSize;
 
@@ -1323,15 +1323,15 @@ void VirtualMachine::printState() {
 	for (unsigned int i = 0; i < vmNumRegisters; i += 3) {
 
 		if (i < vmNumRegisters) {
-			VM_PRINTF_LOG("#%i:%li ", i, registers_[i]);
+			VM_PRINTF_LOG("#%i:%li ", i, (long int)registers_[i]);
 		}
 
 		if (i + 1 < vmNumRegisters) {
-			VM_PRINTF_LOG("#%i:%li ", i + 1, registers_[i + 1]);
+			VM_PRINTF_LOG("#%i:%li ", i + 1, (long int)registers_[i + 1]);
 		}
 
 		if (i + 2 < vmNumRegisters) {
-			VM_PRINTF_LOG("#%i:%li", i + 2, registers_[i + 2]);
+			VM_PRINTF_LOG("#%i:%li", i + 2, (long int)registers_[i + 2]);
 		}
 
 		VM_PRINTF_LOG("%s", "\n");
