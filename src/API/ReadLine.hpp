@@ -19,18 +19,6 @@ public:
 	ReadLine(std::string ns);
 	virtual ~ReadLine();
 
-	/**
-	 * Execute the function and return the result value.
-	 */
-	virtual Value* execute(std::vector<Value*> arguments) {
-		std::string line;
-		std::getline(std::cin, line);
-
-		StringValue* newValue = (StringValue*) valueHeap.make(getStringType());
-		newValue->setValue(line);
-		return newValue;
-	}
-
 	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
 	/**

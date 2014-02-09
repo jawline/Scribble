@@ -24,15 +24,6 @@ IntToStringFunction::~IntToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* IntToStringFunction::execute(std::vector<Value*> arguments) {
-	Value* arg = arguments[0];
-	std::stringstream st;
-
-	st << ((IntValue*) arg)->value();
-
-	return new StringValue(st.str());
-}
-
 Type* IntToStringFunction::getType() {
 	return getTypeManager().getType(StringType);
 }
@@ -76,19 +67,6 @@ BoolToStringFunction::~BoolToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* BoolToStringFunction::execute(std::vector<Value*> arguments) {
-	Value* arg = arguments[0];
-	std::stringstream st;
-
-	if (((BoolValue*) arg)->value()) {
-		st << "true";
-	} else {
-		st << "false";
-	}
-
-	return new StringValue(st.str());
-}
-
 Type* BoolToStringFunction::getType() {
 	return getTypeManager().getType(StringType);
 }
@@ -124,13 +102,6 @@ Float32ToStringFunction::Float32ToStringFunction(std::string ns) :
 
 Float32ToStringFunction::~Float32ToStringFunction() {
 	// TODO Auto-generated destructor stub
-}
-
-Value* Float32ToStringFunction::execute(std::vector<Value*> arguments) {
-	Value* arg = arguments[0];
-	std::stringstream st;
-	st << ((Float32Value*) arg)->getValue();
-	return new StringValue(st.str());
 }
 
 Type* Float32ToStringFunction::getType() {

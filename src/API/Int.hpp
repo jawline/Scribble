@@ -16,8 +16,6 @@ public:
 	IntFromFloat32(std::string ns);
 	virtual ~IntFromFloat32();
 
-	Value* execute(std::vector<Value*> arguments);
-
 	API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 

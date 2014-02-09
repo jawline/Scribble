@@ -33,12 +33,6 @@ Type* Concat::argType(unsigned int arg) {
 	return getTypeManager().getType(StringType);
 }
 
-Value* Concat::execute(std::vector<Value*> arguments) {
-	return new StringValue(
-			((StringValue*) arguments[0])->getValue()
-					+ ((StringValue*) arguments[1])->getValue());
-}
-
 API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 
 	char* lhs = values[0].getValueString();

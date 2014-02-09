@@ -18,10 +18,6 @@ RandomInt::~RandomInt() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* RandomInt::execute(std::vector<Value*> arguments) {
-	return new IntValue(rand() % (((IntValue*) arguments[0])->value() + 1));
-}
-
 Type* RandomInt::getType() {
 	return getTypeManager().getType(Int);
 }

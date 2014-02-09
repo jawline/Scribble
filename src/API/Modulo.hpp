@@ -22,12 +22,6 @@ public:
 	virtual ~Modulo();
 
 	/**
-	 * Execute the function and return the result value.
-	 */
-
-	virtual Value* execute(std::vector<Value*> arguments);
-
-	/**
 	 * Returns the resulting modulo as an API value.
 	 */
 

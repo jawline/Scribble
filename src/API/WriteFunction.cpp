@@ -5,11 +5,6 @@
 #include <Scribble/Value/Void.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
-Value* WriteFunction::execute(std::vector<Value*> arguments) {
-	printf("%s", ((StringValue*) arguments[0])->getValue().c_str());
-	return valueHeap.make(getVoidType());
-}
-
 Type* WriteFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {

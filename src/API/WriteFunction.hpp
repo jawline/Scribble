@@ -20,8 +20,6 @@ public:
 		return API::APIValue();
 	}
 
-	Value* execute(std::vector<Value*> arguments);
-
 	Type* getType();
 	const unsigned int numArgs();
 	Type* argType(unsigned int arg);

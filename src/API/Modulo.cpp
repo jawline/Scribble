@@ -23,16 +23,6 @@ APIValue Modulo::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 	return API::APIValue(getIntType(), values[0].getValue32() % values[1].getValue32());
 }
 
-Value* Modulo::execute(std::vector<Value*> arguments) {
-
-	 IntValue* lhs = (IntValue*) arguments[0];
-	 IntValue* rhs = (IntValue*) arguments[1];
-
-	 int mod = lhs->value() % rhs->value();
-
-	 return valueHeap.make(mod);
-}
-
 Type* Modulo::getType() {
 	return getIntType();
 }

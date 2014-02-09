@@ -16,8 +16,6 @@ public:
 	Concat(std::string ns);
 	virtual ~Concat();
 
-	Value* execute(std::vector<Value*> arguments);
-
 	API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 

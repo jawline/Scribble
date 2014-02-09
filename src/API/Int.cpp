@@ -39,11 +39,6 @@ Type* IntFromFloat32::argType(unsigned int arg) {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
-Value* IntFromFloat32::execute(std::vector<Value*> arguments) {
-	Float32Value* val = (Float32Value*) arguments[0];
-	return valueHeap.make((int) val->getValue());
-}
-
 API::APIValue IntFromFloat32::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 	int val = values[0].getValueFloat32();

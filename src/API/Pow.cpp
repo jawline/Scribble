@@ -28,16 +28,6 @@ APIValue Pow::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 	return API::APIValue(getIntType(), pow(values[0].getValue32(), (int) values[1].getValue32()));
 }
 
-Value* Pow::execute(std::vector<Value*> arguments) {
-
-	IntValue* lhs = (IntValue*) arguments[0];
-	IntValue* rhs = (IntValue*) arguments[1];
-
-	int mod = pow(lhs->value(), rhs->value());
-
-	return valueHeap.make(mod);
-}
-
 Type* Pow::getType() {
 	return getIntType();
 }

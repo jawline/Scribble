@@ -23,12 +23,6 @@ Float32FromInt::~Float32FromInt() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* Float32FromInt::execute(std::vector<Value*> arguments) {
-	IntValue* arg = (IntValue*) arguments[0];
-	float val = arg->value();
-	return valueHeap.make(val);
-}
-
 API::APIValue Float32FromInt::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 	return API::APIValue(getIntType(), values[0].getValueFloat32());
