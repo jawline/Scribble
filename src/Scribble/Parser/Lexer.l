@@ -58,6 +58,9 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "++" return INCREMENT;
 "--" return DECREMENT;
 
+"->" return POINT;
+"." return LINK;
+
 "+" return PLUS;
 "-" return MINUS;
 "*" return TIMES;
@@ -78,7 +81,6 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "!" return NOT;
 "[" return LSQBRACKET;
 "]" return RSQBRACKET;
-"." return LINK;
 
 "\n" ;
 

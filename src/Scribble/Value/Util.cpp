@@ -57,6 +57,9 @@ Value* ValueUtil::generateValue(Type* type) {
 	case Boolean:
 		return new BoolValue(false);
 
+	case StringType:
+		return new StringValue("");
+
 	case StructureType:
 		return new Structure(type);
 
