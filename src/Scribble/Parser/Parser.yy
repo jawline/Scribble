@@ -106,7 +106,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 
 %left PLUS MINUS
 %left TIMES DIVIDE
-%left TRUE FALSE EQUALS AND OR
+%left TRUE FALSE EQUALS AND OR LINK
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -573,20 +573,6 @@ Expression: MINUS Expression {
 		$$ = new AssignArrayStatement(scribble_lineno, scribble_text, SafeStatement($1), SafeStatement($6), SafeStatement($3));
 	} | Expression LSQBRACKET Expression RSQBRACKET {
 		$$ = new GetArrayStatement(scribble_lineno, scribble_text, SafeStatement($1), SafeStatement($3)); 
-	} | WORD {
-
-		auto it = Variables.find(*$1);
-
-		if (it == Variables.end()) {
-			scribble_error("Variable not defined");
-			return -1;
-		} else {
-			$$ = new GetVariableStatement(scribble_lineno, scribble_text, it->second);
-		}
-
-		//Free name pointer
-		delete $1;
-		
 	} | FunctionCall {
 		$$ = $1;
 	} | Expression PLUS Expression {
@@ -620,7 +606,7 @@ Expression: MINUS Expression {
 		auto it = Variables.find(*$1);
 
 		if (it == Variables.end()) {
-			scribble_error("Variable not defined");
+			scribble_error((std::string(*$1) + " is not defined").c_str());
 		} else {
 			$$ = new AssignVariableStatement(scribble_lineno, scribble_text, it->second, SafeStatement($3));
 		}
@@ -633,7 +619,7 @@ Expression: MINUS Expression {
 		auto it = Variables.find(*$1);
 		
 		if (it == Variables.end()) {
-			scribble_error("Variable not defined");
+			scribble_error((std::string(*$1) + " is not defined").c_str());
 		} else {
 			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Increment, false);
 		}
@@ -646,7 +632,7 @@ Expression: MINUS Expression {
 		auto it = Variables.find(*$2);
 		
 		if (it == Variables.end()) {
-			scribble_error("Variable not defined");
+			scribble_error((std::string(*$2) + " is not defined").c_str());
 		} else {
 			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Increment, true);
 		}
@@ -659,7 +645,7 @@ Expression: MINUS Expression {
 		auto it = Variables.find(*$1);
 		
 		if (it == Variables.end()) {
-			scribble_error("Variable not defined");
+			scribble_error((std::string(*$1) + " is not defined").c_str());
 		} else {
 			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Decrement, false);
 		}
@@ -672,7 +658,7 @@ Expression: MINUS Expression {
 		auto it = Variables.find(*$2);
 		
 		if (it == Variables.end()) {
-			yyerror("Variable not defined");
+			scribble_error((std::string(*$2) + " is not defined").c_str());
 		} else {
 			$$ = new IncrementStatement(scribble_lineno, scribble_text, it->second, Decrement, true);
 		}
@@ -699,6 +685,20 @@ Expression: MINUS Expression {
 		StatementReferences.push_back(r);
 	
 		delete $3;
+	} | WORD {
+
+		auto it = Variables.find(*$1);
+
+		if (it == Variables.end()) {
+			scribble_error((std::string("Variable '") + std::string(*$1) + "' is not defined").c_str());
+			return -1;
+		} else {
+			$$ = new GetVariableStatement(scribble_lineno, scribble_text, it->second);
+		}
+
+		//Free name pointer
+		delete $1;
+		
 	}
 ;
 
