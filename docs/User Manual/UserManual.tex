@@ -22,6 +22,8 @@
 \section{Hello World}
 
 \begin{verbatim}
+
+//Import the console package allowing us to write to stdout
 package console := import("console");
 
 func main() {
@@ -195,11 +197,131 @@ would cause a parsing error.
 
 \chapter{Types}
 
-\section{Type System}
+Scribble is a strictly typed language. This means that every variable, function and value has a specific type. Unlike other language Scribble will never implicitly cast another object. A programmer will have to use one of the casting functions provided or write their own to cast between types, even the basic primitive types such as integers and floats.
+
+For example
+\begin{verbatim}
+var j : int := 5;
+var k : float32 := j;
+\end{verbatim}
+would cause a parsing error but
+\begin{verbatim}
+var j : int := 5;
+var k : float32 := sys.Float32(j);
+\end{verbatim}
+would be correct.
+
+
+Scribbles type system is right handed. This means that you declare the type of a variable, argument or function on the right hand side of its deceleration instead of the left.
+
+If a function is not given a type then it is assumed to be of type void. You cannot explicitly create a function or variable of void type.
+
+Examples:
+\begin{verbatim}
+
+//Void function which takes an argument of type int
+func vFunction(j : int) {
+ //Do something with j
+}
+
+//Function that returns an int
+func iFunction() : int {
+ var j : int := 15;
+ return j;
+}
+
+//Main function which creates some variables
+func main() {
+ var j := iFunction();
+ vFunction(j);
+}
+\end{verbatim}
+
 \section{Primitive Types}
+
+There are several primitive types in Scribble. Primitive types are the building blocks of a program, representing fixed size pieces of data within the language giving them a fixed range.
+
+\subsection{bool}
+
+A boolean value is capable of representing one of two values, true or false. They are identified with the bool keyword.
+
+Examples:
+\begin{verbatim}
+var j : bool := false;
+var r : bool := true;
+\end{verbatim}
+
+\subsection{int}
+
+The int type represents a 32 bit signed integer value which is capable of representing integers between -2147483648 and 2147483647.
+
+They are identified by the keyword int. 
+
+\subsection{float32}
+
+The float32 type represents 32 bit floating point numbers allowing approximations of numbers with decimal points to be used in a program. They are identified by the float32 keyword.
+
 \section{Reference Types}
-\section{Arrays}
-\section{Structures}
+
+A reference type are types of a variable size which are stored on the heap, an area in memory which allows for dynamic memory allocation.
+
+Reference types are garbage collected, this means that like Java the data is automatically destructed when a reference to it no longer exists.
+
+\subsection{string}
+
+The string type represents a string of characters. It is really syntax sugar for an array of characters. When a string constant is written in Scribble the expression generated will be to create a new item on he heap and then load that data into it, so "Hello World" would make a new array of 12 characters ( Including the null terminator ) and then load the string into it as initial values.
+
+Strings are immutable. Any operation on them using the functions provided will not change the memory of the string and will instead create a new string with which to place the result of the operations, this can have some performance implications as repeated string manipulations cause the heap and garbage collector to perform a lot of expensive operations.
+
+The string keyword identifies this type.
+
+\subsection{Arrays}
+
+Arrays are capable of contain a set number of values of the same type, including reference types. Two arrays which represent different types are not equivalent ( So you couldn't assign an array of integers to a variable which is mean to store an array of booleans ).
+
+Arrays are written in Scribble as array(subType), this differs from the subtype[] syntax often used in other languages. The changes where made in order to make type information clearer especially when dealing with a right handed type system.
+
+The length of an array can also be obtained after it is declared by writing len(arrayValue). This will return the number of elements in the array, not the size in bytes.
+
+\subsection{Structures}
+
+
+
+\section{Type Inference}
+
+\section{Types in the grammar}
+
+The types defined above are expressed in the grammar as
+\begin{verbatim}
+Type: TYPE_INT {
+	} | TYPE_STRING {
+	} | TYPE_FLOAT32 {
+	} | TYPE_BOOL {
+	} | TYPE_ARRAY LPAREN Type RPAREN {
+	/* Structure types name from this and other packages */	
+	} | WORD {
+	} | WORD LINK WORD {
+	}
+;
+
+/**
+ * BaseStructureInfo is the definition of each field within a structure in the form Name : Type.
+ * Accepts 1 or more definition.
+ */
+
+BaseStructureInfo: WORD COLON Type {		
+	} | BaseStructureInfo COMMA WORD COLON Type {
+	}
+;
+
+/**
+ * Defines a structure within a package
+ */
+ 
+Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
+}
+
+\end{verbatim}
 
 \chapter{Operators \& Expressions}
 
@@ -422,24 +544,35 @@ Expression AND Expression {
 
 Assignment in Scribble is done using the ':=' operator. It takes a variable ID and an expression and sets the value of that variable to the value given when the expression is evaluated.
 
+Assignment will only take place of the expression to be assigned is exactly the same type as the variable being assigned to. Any other values will have to be cast using a custom or built in function.
+
 Assignments can be done on the index's of an array by using the Expression[IndexExpression] := Expression notation.
 
 Assignment can also be done on the fields of a structure using the Structure Expression -> FieldId := Expression notation. 
 
-Examples:
+Examples: \begin{verbatim}
 var j := 65;
 j := 192;
+\end{verbatim}
 
+Would create a variable j, set j's value to 65 and then set j's value to 192.
+
+\begin{verbatim}
 var arr := [10]int;
 arr[0] := 5;
+\end{verbatim}
 
+Would create the array arr with 10 integers and then assign arr's 0th index to the value 5.
+
+\begin{verbatim}
 type J := struct {
 	name : string
 }
 
 var j := J{"Hello"};
 j->name := "Hello World";
-Will result in a structure of type J being created with the name field set to "Hello World"
+\end{verbatim}
+Will result in a structure of type J being created with the name field set to "Hello" and then the name field of j being set to "Hello World"
 
 If the variable and expression types differ then a parsing error will occur.
 
@@ -585,7 +718,120 @@ It is defined in the grammar as
 
 \chapter{Functions}
 
+A function is declared using the syntax
+
+\begin{verbatim}
+function Name( One or more arguments ) : Type {
+ Statements
+}
+\end{verbatim}
+
+If type is not set then the function is assumed to be of a Void type. A function of Void type does not return any values.
+
+Arguments are written in the form Name : Type, Name : Type, Name : Type so to declare a function which takes two integers as arguments you would write
+
+\begin{verbatim}
+func TestArgs(A : int, B : int) {
+}
+\end{verbatim}
+The order in which a function is defined does not matter. Unlike languages such as C you are allowed to call a function before it is defined. This allows mutual recursion as shown in the example
+
+\begin{verbatim}
+func even(x : int) : bool {
+ if x = 0 then 
+   return true;
+ return odd(x-1);
+}
+
+func odd(x : int) : bool {
+ if x = 0 then 
+  return false;
+ return even(x-1);
+}
+\end{verbatim}
+
+Multiple functions can share the same name as long as they take different arguments and have the same return type. An example of this is the system String function which has two version one which takes a boolean and one which takes a number. A practical example of this would be
+
+\begin{verbatim}
+
+func PrintTrue(i : bool) {
+
+ if i then 
+  sys.Write("True"); 
+ else 
+  sys.Write("False");
+
+}
+
+func PrintTrue(i : int) {
+
+ if i = 1 then
+  sys.Write("True");
+ else
+  sys.Write("False");
+
+}
+
+\end{verbatim}
+
+this would compile successfully and upon any call to PrintTrue the compiler would resolve the correct function to be executed.
+
+Functions are defined in the grammar as 
+
+\begin{verbatim}
+
+/**
+ * Accept zero or more argument definitions
+ */
+
+OptionalArgumentDefinitions: {
+	} | ArgumentDefinitions {
+	}
+;
+
+/**
+ * Accept one or more argument definitions in the form Name : Type, Name : Type..
+ */
+
+ArgumentDefinitions: ArgumentDefinition {
+	} | ArgumentDefinitions COMMA ArgumentDefinition {
+	}
+;
+
+/**
+ * The definition of a function. func Name ( Arguments ) { Code } 
+ * defines a function of void type and func Name ( Arguments ) : Type { Code }
+ * defines a function of a specific type.
+ */
+
+Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions 
+	RPAREN COLON Type LBRACKET Statements RBRACKET { 	} 
+	| FUNCTION WORD LPAREN OptionalArgumentDefinitions 
+	RPAREN LBRACKET Statements RBRACKET {
+	}
+;
+\end{verbatim}
+
 \chapter{Packages \& Importing}
+
+Every file in Scribble is seen as a separate package. These packages contain sets of functions and structures which can be used to perform some function, for example one package may contain a linked list structure and a set of functions for inserting and removing elements from said list. Scribble also defines syntax so that packages can import and use structures and functions from other packages.
+
+\subsection{Importing Packages}
+
+One package can be used from another by using the
+\begin{verbatim}
+package LocalName := import("Package/Path");
+\end{verbatim}
+syntax.
+
+This syntax allows you to import a package from a given path and give it a local identifier which can be used to reference it. The local identifier allows the avoidance of package naming conflicts, as a importing package can give two packages of the same name ( Such as /tests/math.sc and /math/math.sc ) different local names to be identified by.
+
+To use a function or structure from a different package you first write the packages local name then a '.' and then the name of the function or structure you wish to use. For example to print some output to the screen you write.
+
+\begin{verbatim}
+console.Write("Hello World");
+\end{verbatim}
+
 
 \chapter{Standard Functions}
 
