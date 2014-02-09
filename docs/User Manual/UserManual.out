@@ -13,33 +13,29 @@
 \BOOKMARK [1][-]{section.3.4}{Comments}{chapter.3}% 13
 \BOOKMARK [1][-]{section.3.5}{Keywords List}{chapter.3}% 14
 \BOOKMARK [0][-]{chapter.4}{Identifiers}{}% 15
-\BOOKMARK [1][-]{section.4.1}{Functions}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.2}{Variables}{chapter.4}% 17
-\BOOKMARK [1][-]{section.4.3}{Structures}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.4}{Packages}{chapter.4}% 19
-\BOOKMARK [0][-]{chapter.5}{Types}{}% 20
-\BOOKMARK [1][-]{section.5.1}{Type System}{chapter.5}% 21
-\BOOKMARK [1][-]{section.5.2}{Primitive Types}{chapter.5}% 22
-\BOOKMARK [1][-]{section.5.3}{Reference Types}{chapter.5}% 23
-\BOOKMARK [1][-]{section.5.4}{Arrays}{chapter.5}% 24
-\BOOKMARK [1][-]{section.5.5}{Structures}{chapter.5}% 25
-\BOOKMARK [0][-]{chapter.6}{Operators \046 Expressions}{}% 26
-\BOOKMARK [1][-]{section.6.1}{Constant Expressions}{chapter.6}% 27
-\BOOKMARK [1][-]{section.6.2}{Variable Definition}{chapter.6}% 28
-\BOOKMARK [1][-]{section.6.3}{Variable Expressions}{chapter.6}% 29
-\BOOKMARK [1][-]{section.6.4}{Array Construction}{chapter.6}% 30
-\BOOKMARK [1][-]{section.6.5}{Structure Construction}{chapter.6}% 31
-\BOOKMARK [1][-]{section.6.6}{Array Index Expression}{chapter.6}% 32
-\BOOKMARK [1][-]{section.6.7}{Structure Field Expression}{chapter.6}% 33
-\BOOKMARK [1][-]{section.6.8}{Operators}{chapter.6}% 34
-\BOOKMARK [1][-]{section.6.9}{Array Length Expression}{chapter.6}% 35
-\BOOKMARK [1][-]{section.6.10}{Parenthesis Expressions}{chapter.6}% 36
-\BOOKMARK [1][-]{section.6.11}{Function Call Expressions}{chapter.6}% 37
-\BOOKMARK [0][-]{chapter.7}{Statements}{}% 38
-\BOOKMARK [1][-]{section.7.1}{Flow Control}{chapter.7}% 39
-\BOOKMARK [1][-]{section.7.2}{Expression Statements}{chapter.7}% 40
-\BOOKMARK [1][-]{section.7.3}{Return Statements}{chapter.7}% 41
-\BOOKMARK [0][-]{chapter.8}{Functions}{}% 42
-\BOOKMARK [0][-]{chapter.9}{Packages \046 Importing}{}% 43
-\BOOKMARK [0][-]{chapter.10}{Standard Functions}{}% 44
-\BOOKMARK [0][-]{chapter*.2}{Bibliography}{}% 45
+\BOOKMARK [0][-]{chapter.5}{Types}{}% 16
+\BOOKMARK [1][-]{section.5.1}{Type System}{chapter.5}% 17
+\BOOKMARK [1][-]{section.5.2}{Primitive Types}{chapter.5}% 18
+\BOOKMARK [1][-]{section.5.3}{Reference Types}{chapter.5}% 19
+\BOOKMARK [1][-]{section.5.4}{Arrays}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.5}{Structures}{chapter.5}% 21
+\BOOKMARK [0][-]{chapter.6}{Operators \046 Expressions}{}% 22
+\BOOKMARK [1][-]{section.6.1}{Constant Expressions}{chapter.6}% 23
+\BOOKMARK [1][-]{section.6.2}{Variable Definition}{chapter.6}% 24
+\BOOKMARK [1][-]{section.6.3}{Variable Expressions}{chapter.6}% 25
+\BOOKMARK [1][-]{section.6.4}{Array Construction}{chapter.6}% 26
+\BOOKMARK [1][-]{section.6.5}{Structure Construction}{chapter.6}% 27
+\BOOKMARK [1][-]{section.6.6}{Array Index Expression}{chapter.6}% 28
+\BOOKMARK [1][-]{section.6.7}{Structure Field Expression}{chapter.6}% 29
+\BOOKMARK [1][-]{section.6.8}{Operators}{chapter.6}% 30
+\BOOKMARK [1][-]{section.6.9}{Array Length Expression}{chapter.6}% 31
+\BOOKMARK [1][-]{section.6.10}{Parenthesis Expressions}{chapter.6}% 32
+\BOOKMARK [1][-]{section.6.11}{Function Call Expressions}{chapter.6}% 33
+\BOOKMARK [0][-]{chapter.7}{Statements}{}% 34
+\BOOKMARK [1][-]{section.7.1}{Flow Control}{chapter.7}% 35
+\BOOKMARK [1][-]{section.7.2}{Expression Statements}{chapter.7}% 36
+\BOOKMARK [1][-]{section.7.3}{Return Statements}{chapter.7}% 37
+\BOOKMARK [0][-]{chapter.8}{Functions}{}% 38
+\BOOKMARK [0][-]{chapter.9}{Packages \046 Importing}{}% 39
+\BOOKMARK [0][-]{chapter.10}{Standard Functions}{}% 40
+\BOOKMARK [0][-]{chapter*.2}{Bibliography}{}% 41

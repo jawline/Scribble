@@ -150,50 +150,48 @@ No two identifiers should have the same name ( Regardless of what they are ident
 
 Identifiers are always local to the package and are not accessible from other packages except for functions and types using an explicit syntax.
 
-\section{Functions}
+\subsection{Scope}
 
-A function identifier is the name of a function when it is defined. For example given the code
+Scribble currently has a simple very scoping system.
+
+Package, function and type identifiers are all global and their names are shared across all functions within a package.
+
+Variable names are always local to the function that they are defined in from that line onwards. Variable redefinition is not allowed and statement blocks ( Such as declaring it inside a flow control statement ) will not effect this.
+
+For example:
 \begin{verbatim}
-func HelloWorld() {
+func main() {
+ var j := 15;
+ 
+ if true then {
+ 	j := 30;
+ }
+
 }
 \end{verbatim}
-then HelloWorld would be an identifier for this new function which could be executed by writing HelloWorld();
-
-The scope of a function identifier is global within the package.
-
-\section{Variables}
-
-Variable identifiers are the name given to variables when they are defined. 
- 
-For example 
+and
 \begin{verbatim}
-var j := 0;
-var j := false;
+func main() {
+ 
+ if true then {
+ 	var j := 30;
+ }
+ 
+ j := 10;
+}
+\end{verbatim}
+are valid, however
+\begin{verbatim}
+func main() {
+ var j := 15;
+ 
+ if true then { 
+  var j := false; 
+ }
+
+}
 \end{verbatim}
 would cause a parsing error.
-
-Variables cannot be defined globally and are always local to the function in which they are defined.
-
-\section{Structures}
-
-A structure identifier is the name given to a structure when it is defined.
-
-\begin{verbatim}
-type TestStructure := struct { 
- j : int,
- r : int
-}
-\end{verbatim}
-
-\section{Packages}
-
-A package identifier is the local name given to a package when it is imported. For example the local name of the import 
-\begin{verbatim}
-package writer := import("console");
-\end{verbatim}
-would be writer and not the path of the package ( in this case console).
-
-The scope of a package identifier is global within the current package.
 
 \chapter{Types}
 
