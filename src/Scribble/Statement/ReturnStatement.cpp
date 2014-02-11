@@ -37,17 +37,6 @@ void ReturnStatement::checkTree(Type* functionType) {
 	}
 }
 
-Value* ReturnStatement::execute(std::vector<Value*> const& variables) {
-
-	if (stm_.get() == nullptr) {
-		Return j(valueHeap.make(getVoidType()));
-		throw j;
-	} else {
-		Return r(stm_->execute(variables));
-		throw r;
-	}
-}
-
 int ReturnStatement::generateCode(int resultRegister, std::stringstream& generated) {
 	int num = stm_->generateCode(VM::vmReturnResultRegister, generated);
 	generated << "ret\n";

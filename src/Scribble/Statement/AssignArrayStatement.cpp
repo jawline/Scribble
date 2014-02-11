@@ -21,24 +21,6 @@ AssignArrayStatement::AssignArrayStatement(int lineno, std::string text,
 AssignArrayStatement::~AssignArrayStatement() {
 }
 
-Value* AssignArrayStatement::execute(std::vector<Value*> const& variables) {
-
-	ArrayValue* lhs = (ArrayValue*) array_->execute(variables);
-	IntValue* pos = (IntValue*) position_->execute(variables);
-	Value* rhs = toAssign_->execute(variables);
-
-	if (pos->value() >= 0 && pos->value() < lhs->getLength()) {
-		lhs->getArrayData()->index(lhs->getStart() + pos->value())->applyOperator(
-				Assign, rhs);
-	} else {
-		throw StatementException(this, "Index out of bounds");
-	}
-
-	valueHeap.free(pos);
-	valueHeap.free(rhs);
-	return lhs;
-}
-
 Type* AssignArrayStatement::type() {
 	return array_->type();
 }

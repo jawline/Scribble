@@ -20,26 +20,6 @@ GetArrayStatement::GetArrayStatement(int line, std::string sym,
 GetArrayStatement::~GetArrayStatement() {
 }
 
-Value* GetArrayStatement::execute(std::vector<Value*> const& variables) {
-	IntValue* index = (IntValue*) index_->execute(variables);
-	ArrayValue* array = (ArrayValue*) array_->execute(variables);
-
-	std::stringstream err;
-	err << "Index " << index->value() << " out of bounds";
-
-	if (index->value() < 0 || index->value() >= array->getLength()) {
-		throw StatementException(this, err.str());
-	}
-
-	Value* v =
-			array->getArrayData()->index(array->getStart() + index->value())->clone();
-
-	valueHeap.free(index);
-	valueHeap.free(array);
-
-	return v;
-}
-
 Type* GetArrayStatement::type() {
 	return array_->type()->getSubtype();
 }

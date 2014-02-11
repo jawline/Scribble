@@ -18,7 +18,6 @@ public:
 	GetArrayStatement(int line, std::string sym, SafeStatement array, SafeStatement index);
 	virtual ~GetArrayStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
 	Type* type();
 
 	void checkTree(Type* functionType);

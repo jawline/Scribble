@@ -34,24 +34,6 @@ void WhileStatement::checkTree(Type* functionType) {
 	}
 }
 
-Value* WhileStatement::execute(std::vector<Value*> const& variables) {
-
-	BoolValue* conditionResult = 0;
-
-	while ((conditionResult = ((BoolValue*) condition_->execute(variables)))->value()
-			== true) {
-		valueHeap.free(conditionResult);
-
-		for (unsigned int i = 0; i < statements_.size(); ++i) {
-			valueHeap.free(statements_[i]->execute(variables));
-		}
-
-	}
-
-	valueHeap.free(conditionResult);
-	return valueHeap.make(getVoidType());
-}
-
 Type* WhileStatement::type() {
 	return getTypeManager().getType(Void);
 }

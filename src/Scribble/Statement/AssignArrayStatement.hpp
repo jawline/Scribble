@@ -45,8 +45,6 @@ public:
 
 	virtual ~AssignArrayStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
-
 	/**
 	 * Returns the type of array.
 	 * @return array_'s type.

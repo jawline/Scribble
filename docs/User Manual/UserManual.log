@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.2)  9 FEB 2014 23:51
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.2)  11 FEB 2014 10:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -365,66 +365,66 @@ Chapter 4.
 Chapter 5.
 [8
 
-] [9]
-Overfull \hbox (110.8563pt too wide) in paragraph at lines 324--324
+] [9] [10] [11]
+Overfull \hbox (110.8563pt too wide) in paragraph at lines 387--387
 [] \OT1/cmtt/m/n/10.95 * BaseStructureInfo is the definition of each field with
 in a structure in the form Name : Type.[] 
  []
 
-[10]
+[12]
 Chapter 6.
-[11
+[13
 
-] [12] [13] [14] [15] [16]
-Overfull \hbox (37.34456pt too wide) in paragraph at lines 613--614
+] [14] [15] [16] [17] [18]
+Overfull \hbox (37.34456pt too wide) in paragraph at lines 676--677
 []\OT1/cmr/m/n/10.95 A func-tion call is writ-ten as Func-tion-Name(Arguments) 
 or Pack-a-ge-Name.FunctionName(Arguments).
  []
 
-[17]
+[19]
 Chapter 7.
-[18
-
-] [19]
-Chapter 8.
 [20
 
+] [21]
+Chapter 8.
+[22
+
 ]
-Overfull \hbox (24.62598pt too wide) in paragraph at lines 813--813
+Overfull \hbox (24.62598pt too wide) in paragraph at lines 876--876
 [] \OT1/cmtt/m/n/10.95 * Accept one or more argument definitions in the form Na
 me : Type, Name : Type..[] 
  []
 
 
-Overfull \hbox (7.37991pt too wide) in paragraph at lines 813--813
+Overfull \hbox (7.37991pt too wide) in paragraph at lines 876--876
 [] \OT1/cmtt/m/n/10.95 * defines a function of void type and func Name ( Argume
 nts ) : Type { Code }[] 
  []
 
-[21]
+[23]
 Chapter 9.
-[22
+[24
 
 ]
 Chapter 10.
-[23
+[25
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 849.
- [24
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 910.
+ [26
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 849.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 910.
  (./UserManual.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 849.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 849.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 910.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 910.
 Package rerunfilecheck Info: File `UserManual.out' has not changed.
 (rerunfilecheck)             Checksum: 21C90ED5D7D77C5E7E1AED541D49688F;2352.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 849.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 910.
  ) 
 Here is how much of TeX's memory you used:
- 6037 strings out of 495031
- 88843 string characters out of 6181532
+ 6039 strings out of 495031
+ 88857 string characters out of 6181532
  176960 words of memory out of 5000000
  9121 multiletter control sequences out of 15000+600000
  8014 words of font info for 29 fonts, out of 8000000 for 9000
@@ -435,10 +435,10 @@ Here is how much of TeX's memory you used:
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on UserManual.pdf (24 pages, 113024 bytes).
+Output written on UserManual.pdf (26 pages, 115718 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 92 named destinations out of 1000 (max. 500000)
+ 348 PDF objects out of 1000 (max. 8388607)
+ 311 compressed objects within 4 object streams
+ 94 named destinations out of 1000 (max. 500000)
  321 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -7,9 +7,6 @@ StringStatement::StringStatement(int lineNo, std::string sym, std::string string
 	stringValue_ = stringValue;
 }
 
-Value* StringStatement::execute(std::vector<Value*> const& variables) {
-}
-
 void StringStatement::checkTree(Type* functionType) {
 
 }

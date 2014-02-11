@@ -24,8 +24,6 @@ public:
 			std::vector<SmartPointer<Statement>> ifFalseStatements);
 	virtual ~IfStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
-
 	Type* type() {
 		return getTypeManager().getType(Void);
 	}

@@ -31,18 +31,6 @@ void NegativeStatement::checkTree(Type* functionType) {
 
 }
 
-Value* NegativeStatement::execute(std::vector<Value*> const& variables) {
-	if (exp_->type()->getType() == Int) {
-		IntValue* lhs = (IntValue*) exp_->execute(variables);
-		lhs->setValue(-lhs->value());
-		return lhs;
-	} else if (exp_->type()->getType() == Float32) {
-		Float32Value* lhs = (Float32Value*) exp_->execute(variables);
-		lhs->setValue(-lhs->getValue());
-		return lhs;
-	}
-}
-
 Type* NegativeStatement::type() {
 	return exp_->type();
 }

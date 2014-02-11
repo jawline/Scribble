@@ -52,22 +52,6 @@ void GetStructureElementStatement::fix() {
 
 }
 
-Value* GetStructureElementStatement::execute(
-		std::vector<Value*> const& variables) {
-
-	Structure* gen = (Structure*) statement_->execute(variables);
-
-	if (gen->data().get() == nullptr) {
-		throw StatementException(this, "nil pointer. gen->data is null");
-	}
-
-	Value* e = gen->data()->get(elementIndex_)->clone();
-
-	valueHeap.free(gen);
-
-	return e;
-}
-
 Type* GetStructureElementStatement::type() {
 	return elementType_;
 }

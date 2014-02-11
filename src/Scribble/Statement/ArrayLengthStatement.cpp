@@ -30,19 +30,6 @@ void ArrayLengthStatement::checkTree(Type* functionType) {
 
 }
 
-Value* ArrayLengthStatement::execute(std::vector<Value*> const& variables) {
-
-	ArrayValue* v = (ArrayValue*) exp_->execute(variables);
-	int l = 0;
-
-	if (v->getArrayData().get() != nullptr) {
-		l = v->getLength();
-	}
-
-	valueHeap.free(v);
-	return valueHeap.make(l);
-}
-
 Type* ArrayLengthStatement::type() {
 	return getIntType();
 }

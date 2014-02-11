@@ -27,49 +27,6 @@ void IncrementStatement::checkTree(Type* functionType) {
 
 }
 
-Value* IncrementStatement::execute(std::vector<Value*> const& variables) {
-
-	switch (operator_) {
-
-	case Increment: {
-		Value* result = 0;
-
-		if (post_) {
-			variables[variable_->getPosition()]->applyOperator(Add, oneVal_);
-			result = variables[variable_->getPosition()]->clone();
-		} else {
-			result = variables[variable_->getPosition()]->clone();
-			variables[variable_->getPosition()]->applyOperator(Add, oneVal_);
-		}
-
-		return result;
-	}
-
-	case Decrement: {
-		Value* result = 0;
-
-		if (post_) {
-			variables[variable_->getPosition()]->applyOperator(Subtract,
-					oneVal_);
-			result = variables[variable_->getPosition()]->clone();
-		} else {
-			result = variables[variable_->getPosition()]->clone();
-			variables[variable_->getPosition()]->applyOperator(Subtract,
-					oneVal_);
-		}
-
-		return result;
-	}
-
-	default:
-		throw StatementException(this, "Not a valid increment operator");
-		break;
-
-	}
-
-	return 0;
-}
-
 Type* IncrementStatement::type() {
 	return getTypeManager().getType(Int);
 }

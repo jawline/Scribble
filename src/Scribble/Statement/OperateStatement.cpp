@@ -22,14 +22,6 @@ OperateStatement::~OperateStatement() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* OperateStatement::execute(std::vector<Value*> const& variables) {
-	Value* lhR = lhs_->execute(variables);
-	Value* rhR = rhs_->execute(variables);
-	lhR->applyOperator(op_, rhR);
-	valueHeap.free(rhR);
-	return lhR;
-}
-
 Type* OperateStatement::type() {
 	return lhs_->type();
 }

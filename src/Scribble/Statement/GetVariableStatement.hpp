@@ -10,7 +10,6 @@ private:
 public:
 	GetVariableStatement(int lineNo, std::string sym, SmartPointer<Variable> var);
 	~GetVariableStatement();
-	Value* execute(std::vector<Value*> const& variables);
 
 	Type* type();
 

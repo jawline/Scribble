@@ -11,12 +11,6 @@ AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym,
 AssignVariableStatement::~AssignVariableStatement() {
 }
 
-Value* AssignVariableStatement::execute(std::vector<Value*> const& variables) {
-	Value* ex = exp_->execute(variables);
-	variables[var_->getPosition()]->applyOperator(Assign, ex);
-	return ex;
-}
-
 void AssignVariableStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 

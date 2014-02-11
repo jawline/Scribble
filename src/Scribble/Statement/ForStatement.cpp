@@ -27,26 +27,6 @@ ForStatement::~ForStatement() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* ForStatement::execute(std::vector<Value*> const& variables) {
-
-	valueHeap.free(initial_->execute(variables));
-
-	BoolValue* condition;
-	while ((condition = ((BoolValue*) condition_->execute(variables)))->value()) {
-		valueHeap.free(condition);
-
-		for (unsigned int i = 0; i < statements_.size(); ++i) {
-			valueHeap.free(statements_[i]->execute(variables));
-		}
-
-		valueHeap.free(step_->execute(variables));
-	}
-
-	valueHeap.free(condition);
-
-	return valueHeap.make(getVoidType());
-}
-
 Type* ForStatement::type() {
 	return getTypeManager().getType(Void);
 }

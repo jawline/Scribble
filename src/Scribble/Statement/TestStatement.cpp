@@ -27,9 +27,6 @@ TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
 TestStatement::~TestStatement() {
 }
 
-Value* TestStatement::execute(std::vector<Value*> const& variables) {
-}
-
 Type* TestStatement::type() {
 	return getTypeManager().getType(Boolean);
 }

@@ -57,16 +57,6 @@ void StructureAssignElement::checkTree(Type* functionType) {
 
 }
 
-Value* StructureAssignElement::execute(std::vector<Value*> const& variables) {
-
-	Structure* loadedStruct = (Structure*) lhs_->execute(variables);
-	Value* result = rhs_->execute(variables);
-
-	loadedStruct->data()->get(elementIndex_)->applyOperator(Assign, result);
-
-	return result;
-}
-
 Type* StructureAssignElement::type() {
 	return elementType_;
 }

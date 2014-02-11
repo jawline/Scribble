@@ -33,7 +33,6 @@ public:
 	}
 
 	virtual void checkTree(Type* functionType) = 0;
-	virtual Value* execute(std::vector<Value*> const& variables) = 0;
 	virtual Type* type() = 0;
 
 	virtual int generateCode(int resultRegister, std::stringstream& generated) {

@@ -17,7 +17,6 @@ public:
 	NegativeStatement(int line, std::string text, SafeStatement exp);
 	virtual ~NegativeStatement();
 	virtual void checkTree(Type* functionType);
-	virtual Value* execute(std::vector<Value*> const& variables);
 	virtual Type* type();
 
 

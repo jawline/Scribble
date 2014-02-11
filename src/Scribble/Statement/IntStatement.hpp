@@ -11,8 +11,6 @@ private:
 
 public:
 	IntStatement(int lineNo, std::string sym, int intValue);
-	Value* execute(std::vector<Value*> const& variables);
-
 	Type* type() {
 		return getTypeManager().getType(Int);
 	}

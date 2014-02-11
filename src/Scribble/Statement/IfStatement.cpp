@@ -24,29 +24,6 @@ IfStatement::IfStatement(int lineNo, std::string sym, SmartPointer<Statement> co
 IfStatement::~IfStatement() {
 }
 
-Value* IfStatement::execute(std::vector<Value*> const& variables) {
-
-	BoolValue* v = (BoolValue*) condition_->execute(variables);
-	bool val = v->value();
-	valueHeap.free(v);
-
-	if (val) {
-
-		for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {
-			valueHeap.free(ifTrueStatements_[i]->execute(variables));
-		}
-
-	} else {
-
-		for (unsigned int i = 0; i < ifFalseStatements_.size(); i++) {
-			valueHeap.free(ifFalseStatements_[i]->execute(variables));
-		}
-
-	}
-
-	return valueHeap.make(getVoidType());
-}
-
 void IfStatement::checkTree(Type* functionType) {
 	condition_->checkTree(functionType);
 

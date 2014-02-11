@@ -48,24 +48,6 @@ void StructureStatement::checkTree(Type* functionType) {
 
 }
 
-Value* StructureStatement::execute(std::vector<Value*> const& variables) {
-
-	Structure* gen = (Structure*) valueHeap.make(type());
-
-	Value** initial = new Value*[statements_.size()];
-
-	for (unsigned int i = 0; i < statements_.size(); ++i) {
-		initial[i] = statements_[i]->execute(variables);
-	}
-
-	SafeStructureData data = SafeStructureData(
-			new StructureData(statements_.size(), initial));
-
-	gen->setData(data);
-
-	return gen;
-}
-
 Type* StructureStatement::type() {
 	return type_->type;
 }

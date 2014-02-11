@@ -19,12 +19,6 @@ BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) :
 BoolStatement::~BoolStatement() {
 }
 
-Value* BoolStatement::execute(std::vector<Value*> const& variables) {
-	BoolValue* gen = (BoolValue*) valueHeap.make(getBooleanType());
-	gen->setValue(value_);
-	return gen;
-}
-
 Type* BoolStatement::type() {
 	return getTypeManager().getType(Boolean);
 }

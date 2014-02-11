@@ -33,29 +33,6 @@ void AndStatement::checkTree(Type* functionType) {
 
 }
 
-Value* AndStatement::execute(std::vector<Value*> const& variables) {
-	Value* left = lhs_->execute(variables);
-	bool result = true;
-
-	if (((BoolValue*) left)->value()) {
-
-		BoolValue* right = (BoolValue*) rhs_->execute(variables);
-
-		if (!right->value()) {
-			result = false;
-		}
-
-		valueHeap.free(right);
-
-	} else {
-		result = false;
-	}
-
-	valueHeap.free(left);
-
-	return valueHeap.make(result);
-}
-
 Type* AndStatement::type() {
 	return getTypeManager().getType(Boolean);
 }

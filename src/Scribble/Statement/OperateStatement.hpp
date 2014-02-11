@@ -19,7 +19,6 @@ public:
 			SafeStatement rhs);
 	virtual ~OperateStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
 	Type* type();
 	void checkTree(Type* functionType);
 

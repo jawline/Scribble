@@ -20,7 +20,6 @@ public:
 	virtual ~AndStatement();
 
 	virtual void checkTree(Type* functionType);
-	virtual Value* execute(std::vector<Value*> const& variables);
 	virtual Type* type();
 
 	int generateCode(int resultRegister, std::stringstream& generated);

@@ -7,12 +7,6 @@ IntStatement::IntStatement(int lineNo, std::string sym, int intValue) :
 	intValue_ = intValue;
 }
 
-Value* IntStatement::execute(std::vector<Value*> const& variables) {
-	IntValue* gen = (IntValue*) valueHeap.make(getIntType());
-	gen->setValue(intValue_);
-	return gen;
-}
-
 void IntStatement::checkTree(Type* functionType) {
 
 }

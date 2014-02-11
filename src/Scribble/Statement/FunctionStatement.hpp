@@ -23,7 +23,6 @@ public:
 		func_ = function;
 	}
 
-	virtual Value* execute(std::vector<Value*> const& variables);
 	Type* type();
 
 	void checkTree(Type* functionType);

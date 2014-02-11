@@ -18,7 +18,6 @@ public:
 	virtual ~TestNilStatement();
 
 	void checkTree(Type* functionType);
-	Value* execute(std::vector<Value*> const& variables);
 	Type* type();
 
 	int generateCode(int result, std::stringstream& code);

@@ -41,8 +41,6 @@ public:
 	ArrayStatement(int line, std::string text, Type* type, SafeStatement length);
 	virtual ~ArrayStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
-
 	/**
 	 * Returns Array type.
 	 * @return Array.

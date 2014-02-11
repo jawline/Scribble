@@ -25,7 +25,6 @@ public:
 	virtual ~GetStructureElementStatement();
 
 	virtual void checkTree(Type* functionType);
-	virtual Value* execute(std::vector<Value*> const& variables);
 	virtual Type* type();
 	virtual void fix();
 

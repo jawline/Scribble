@@ -22,30 +22,6 @@ ArrayStatement::~ArrayStatement() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* ArrayStatement::execute(std::vector<Value*> const& variables) {
-
-	IntValue* l = (IntValue*) length_->execute(variables);
-	int length = l->value();
-	valueHeap.free(l);
-
-	SmartPointer<ArrayData> data = SmartPointer<ArrayData>(nullptr);
-
-	if (length > 0) {
-
-		Value** initial = new Value*[length];
-
-		for (int i = 0; i < length; i++) {
-			initial[i] = ValueUtil::generateValue(type_->getSubtype());
-		}
-
-		data = SmartPointer<ArrayData>(new ArrayData(length, initial));
-	}
-
-	ArrayValue* arr = (ArrayValue*) ValueUtil::generateValue(type_);
-	arr->setArrayData(data, 0, length);
-	return arr;
-}
-
 Type* ArrayStatement::type() {
 	return type_;
 }

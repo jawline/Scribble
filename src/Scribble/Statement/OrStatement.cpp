@@ -37,27 +37,6 @@ void OrStatement::checkTree(Type* functionType) {
 
 }
 
-Value* OrStatement::execute(std::vector<Value*> const& variables) {
-
-	BoolValue* left = (BoolValue*) lhs_->execute(variables);
-
-	if (left->value()) {
-		valueHeap.free(left);
-		return valueHeap.make(true);
-	}
-
-	valueHeap.free(left);
-
-	BoolValue* right = (BoolValue*) rhs_->execute(variables);
-
-	if (right->value()) {
-		valueHeap.free(right);
-		return valueHeap.make(true);
-	}
-
-	return valueHeap.make(false);
-}
-
 Type* OrStatement::type() {
 	return getTypeManager().getType(Boolean);
 }

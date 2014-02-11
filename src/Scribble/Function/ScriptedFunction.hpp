@@ -31,8 +31,6 @@ public:
 
 	virtual ~ScriptedFunction();
 
-	Value* execute(std::vector<Value*> arguments);
-
 	Type* getType();
 
 	const unsigned int numArgs();

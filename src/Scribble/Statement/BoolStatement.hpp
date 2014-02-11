@@ -32,8 +32,6 @@ public:
 	BoolStatement(int lineNo, std::string sym, bool value);
 	virtual ~BoolStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
-
 	/**
 	 * Returns a boolean
 	 * @return Boolean

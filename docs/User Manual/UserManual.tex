@@ -241,6 +241,22 @@ func main() {
 
 There are several primitive types in Scribble. Primitive types are the building blocks of a program, representing fixed size pieces of data within the language giving them a fixed range.
 
+Primitive types are passed around as values and not references, this means that if you create a primitive variable like var j : int and pass it to a function which modifies the copy of j in the calling function will not be affected.
+
+For example \begin{verbatim}
+func Hello() {
+ var j := 10;
+ World(j);
+ //Here j = 10 would still be true.
+}
+
+func World(x : int) {
+ x := 12;
+}
+\end{verbatim}
+
+This difference is the primary difference between referenced values, where a change will affect the value anywhere where the reference exists.
+
 \subsection{bool}
 
 A boolean value is capable of representing one of two values, true or false. They are identified with the bool keyword.
@@ -267,6 +283,45 @@ A reference type are types of a variable size which are stored on the heap, an a
 
 Reference types are garbage collected, this means that like Java the data is automatically destructed when a reference to it no longer exists.
 
+The values (arrays, structures or strings ) which are referenced only exist once in memory and any change to these values will be reflected across any functions which have a reference to it. The references themselves are like C pointers and are local to the function.
+
+For example
+\begin{verbatim}
+func ModifyArray(arr : array(int)) {
+
+ if len(arr) > 0 then {
+  arr[0] := 5;
+ }
+
+}
+
+func DoStuff() {
+ var j := [10]int;
+ ModifyArray(j);
+}
+\end{verbatim}
+In this case the value of j[0] after ModifyArray has been called would be 5 and not the initial value 0.
+
+However in the case
+\begin{verbatim}
+func ModifyArray(arr : array(int)) {
+
+ //Create a new array and assign it to arr
+ arr := [10]int;
+
+ if len(arr) > 0 then {
+  arr[0] := 5;
+ }
+
+}
+
+func DoStuff() {
+ var j := [10]int;
+ ModifyArray(j);
+}
+\end{verbatim}
+the value of j[0] in DoStuff would remain unchanged, as the reference arr in the ModifyArray function was modified to point to a new array rather than the one referenced by j in DoStuff.
+
 \subsection{string}
 
 The string type represents a string of characters. It is really syntax sugar for an array of characters. When a string constant is written in Scribble the expression generated will be to create a new item on he heap and then load that data into it, so "Hello World" would make a new array of 12 characters ( Including the null terminator ) and then load the string into it as initial values.
@@ -285,9 +340,17 @@ The length of an array can also be obtained after it is declared by writing len(
 
 \subsection{Structures}
 
-
+Structures are a predefined collection of fields with specific types.
 
 \section{Type Inference}
+
+Scribble allows for a variables type to be inferred when it is declared instead of explicitly typed. This reduces some of the typed overhead caused by strict languages without allowing the issues which lazy typing systems can cause ( Such as being unable to easily identify the type of a value as well as errors caused by casting ).
+
+The type is inferred from the type of the expression that it is being assigned to. The type of the expression is identified by the recursive inspection of the generated statement tree. Each element on the trees type is inferred from the type of its children down to the basic constant values.
+
+For example the expression 5 + 5 will be inferred to be of type integer as the two constant values are of type int and the addition expression will produce a value of the same type as the values it is adding, additionally 5f + 5f would be inferred to be float32.
+
+If the type of an expression is inferred to be 'Void' ( Scribbles keyword for expressions or functions which have no type ) then it cannot be used in variable type inference and a parser error will be raised.
 
 \section{Types in the grammar}
 
@@ -843,8 +906,6 @@ console.Write("Hello World");
 \bibitem{FLEX} Flex - The fast lexical analyser website http://flex.sourceforge.net/
 \end{thebibliography}
 \label{endpage}
-
-
 
 \end{document}
 

@@ -36,8 +36,6 @@ public:
 			SafeStatement exp);
 	~AssignVariableStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
-
 	/**
 	 * Returns the type of the variable.
 	 * @return The type of the variable/expression.

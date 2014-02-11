@@ -10,10 +10,6 @@ GetVariableStatement::GetVariableStatement(int lineNo, std::string sym,
 GetVariableStatement::~GetVariableStatement() {
 }
 
-Value* GetVariableStatement::execute(std::vector<Value*> const& variables) {
-	return variables[var_->getPosition()]->clone();
-}
-
 Type* GetVariableStatement::type() {
 	return var_->getType();
 }

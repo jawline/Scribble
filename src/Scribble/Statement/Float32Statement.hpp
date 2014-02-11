@@ -18,7 +18,6 @@ public:
 	Float32Statement(int lineNo, std::string sym, float32_t val);
 	virtual ~Float32Statement();
 
-	Value* execute(std::vector<Value*> const& variables);
 	Type* type();
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);

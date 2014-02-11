@@ -30,8 +30,6 @@ public:
 			SafeStatement leftHandSide, SafeStatement rightHandSide);
 	virtual ~TestStatement();
 
-	Value* execute(std::vector<Value*> const& variables);
-
 	Type* type();
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);

@@ -10,7 +10,6 @@ private:
 
 public:
 	StringStatement(int lineNo, std::string sym, std::string stringValue);
-	Value* execute(std::vector<Value*> const& variables);
 
 	Type* type() {
 		return getTypeManager().getType(StringType);

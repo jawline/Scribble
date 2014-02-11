@@ -29,20 +29,6 @@ void TestNilStatement::checkTree(Type* functionType) {
 
 }
 
-Value* TestNilStatement::execute(std::vector<Value*> const& variables) {
-	bool r = false;
-
-	ArrayValue* stmt = (ArrayValue*) statement_->execute(variables);
-
-	if (stmt->getArrayData().get() == nullptr) {
-		r = true;
-	}
-
-	valueHeap.free(stmt);
-
-	return valueHeap.make(r);
-}
-
 Type* TestNilStatement::type() {
 	return getBooleanType();
 }

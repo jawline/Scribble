@@ -20,10 +20,6 @@ Float32Statement::~Float32Statement() {
 	// TODO Auto-generated destructor stub
 }
 
-Value* Float32Statement::execute(std::vector<Value*> const& variables) {
-	return valueHeap.make(val_);
-}
-
 Type* Float32Statement::type() {
 	return getFloat32Type();
 }
