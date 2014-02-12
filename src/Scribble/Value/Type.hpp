@@ -112,6 +112,10 @@ public:
 		return rawType_;
 	}
 
+	/**
+	 * Returns true if the value is a primitive type that fits into a register.
+	 */
+
 	bool isPrimitive() {
 
 		switch (rawType_) {
