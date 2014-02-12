@@ -25,7 +25,10 @@ void ArrayLengthStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
 	if (exp_->type()->getType() != Array) {
-		throw StatementException(this, std::string("Cannot get length of ") + exp_->type()->getTypeName() + ". Can only get the length of an array");
+		throw StatementException(this,
+				std::string("Cannot get length of ")
+						+ exp_->type()->getTypeName()
+						+ ". Can only get the length of an array");
 	}
 
 }
@@ -37,6 +40,9 @@ Type* ArrayLengthStatement::type() {
 int ArrayLengthStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
+	//If there is a result register then place the length of the array in the result register
+	//otherwise ignore the statement.
+	//This means that len(a) will only generate instruction for code when the result is going to be used.
 	if (resultRegister != -1) {
 
 		int numArr = exp_->generateCode(VM::vmTempRegisterOne, generated);
