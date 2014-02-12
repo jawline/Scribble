@@ -1,20 +1,12 @@
 #include "Variable.hpp"
 #include <Scribble/Value/TypeManager.hpp>
 
-Variable::Variable(int position, TypeReference type, Value* value) :
-		value_(value), type_(type), position_(position) {
+Variable::Variable(int position, TypeReference type) :
+		type_(type), position_(position) {
 }
 
 Variable::~Variable() {
 
-	if (value_ != nullptr) {
-		delete value_;
-	}
-
-}
-
-Value* Variable::getValue() {
-	return value_;
 }
 
 Type* Variable::getType() {
@@ -24,9 +16,9 @@ Type* Variable::getType() {
 	}
 
 	/**
-	if (getValue()) {
-		return getValue()->type();
-	}*/
+	 if (getValue()) {
+	 return getValue()->type();
+	 }*/
 
 	return getTypeManager().getType(TypeUnresolved);
 }
@@ -34,7 +26,7 @@ Type* Variable::getType() {
 void Variable::setType(Type* type) {
 
 	if (type_.get() == nullptr) {
-		type_ = TypeReference ( new TypeReferenceCore( "", type) );
+		type_ = TypeReference(new TypeReferenceCore("", type));
 	} else {
 		type_->type = type;
 	}
@@ -47,8 +39,4 @@ void Variable::setPosition(int pos) {
 
 int Variable::getPosition() {
 	return position_;
-}
-
-void Variable::setValue(Value* v) {
-	value_ = v;
 }

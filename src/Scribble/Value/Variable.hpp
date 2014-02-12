@@ -11,17 +11,13 @@
 
 class Variable {
 private:
-	Value* value_;
 	TypeReference type_;
 	int position_;
 
 public:
 
-	Variable(int position, TypeReference type, Value* value);
+	Variable(int position, TypeReference type);
 	~Variable();
-
-	void setValue(Value* v);
-	Value* getValue();
 
 	Type* getType();
 	void setType(Type* type);

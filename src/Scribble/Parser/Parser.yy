@@ -225,7 +225,7 @@ Variable:  VARIABLE WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SmartPointer<Variable>* nVar = new SmartPointer<Variable>(new Variable(0, *$4, nullptr));
+			SmartPointer<Variable>* nVar = new SmartPointer<Variable>(new Variable(0, *$4));
 			VariableReferences.push_back(*nVar);
 			Variables[*$2] = *nVar;
 			$$ = nVar;
@@ -251,7 +251,7 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 		
 			SafeStatement sp = SafeStatement($4);
 		
-			SmartPointer<Variable> nVar = SmartPointer<Variable>(new Variable(0, nullptr, nullptr));
+			SmartPointer<Variable> nVar = SmartPointer<Variable>(new Variable(0, nullptr));
 			Variables[*$2] = nVar;
 			
 			ParserReference r(AutoVariablePair(nVar, sp));
@@ -276,7 +276,7 @@ ArgumentDefinition: WORD COLON Type {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SmartPointer<Variable>* nVar = new SmartPointer<Variable>(new Variable(0, *$3, nullptr));
+			SmartPointer<Variable>* nVar = new SmartPointer<Variable>(new Variable(0, *$3));
 			VariableReferences.push_back(*nVar);
 			Variables[*$1] = *nVar;
 			$$ = nVar;
@@ -329,7 +329,7 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBR
 		}
 
 
-		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, *$7, nullptr));
+		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, *$7));
 		VariableReferences.push_back(returnTemplate);
 		
 		SmartPointer<Function> fn = SmartPointer<Function>( new ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4));
@@ -379,7 +379,7 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBR
 
 		TypeReference voidReference = TypeReference( new TypeReferenceCore ( "", getVoidType() ) );
 
-		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, voidReference, ValueUtil::generateValue(getVoidType())));
+		SmartPointer<Variable> returnTemplate = SmartPointer<Variable>(new Variable(0, voidReference));
 		
 		SmartPointer<Function> fn = SmartPointer<Function>(new ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4));
 		

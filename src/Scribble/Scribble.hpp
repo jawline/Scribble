@@ -63,11 +63,28 @@ public:
 
 	virtual ~Scribble();
 
+	/**
+	 * Get the virtual machine context which has the packages loaded into it.
+	 */
+
 	VM::VirtualMachine* getEnvironment() {
 		return &environment;
 	}
 
-	API::APIValue execute(std::string function, std::vector<API::APIValue> arguments);
+	/**
+	 * Execute the function name with zero arguments ( Equivilent to execute(function, empty argument list); )
+	 */
+
+	API::APIValue execute(std::string function);
+
+	/**
+	 * Execute the given function with the specified arguments, if not function of
+	 * that name which takes the specified arguments is found then an error will
+	 * be thrown.
+	 */
+
+	API::APIValue execute(std::string function,
+			std::vector<API::APIValue> arguments);
 };
 
 #endif /* SCRIBBLE_HPP_ */

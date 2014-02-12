@@ -391,9 +391,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	//Generate all the initial values for variables.
 	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
 
-		variableReferences[i]->setValue(
-				ValueUtil::generateValue(variableReferences[i]->getType()));
-
 		//Check whether the user has tried to assign the variable to a null type.
 		if (variableReferences[i]->getType()->getType() == Void) {
 			throw ParserException(filename,
@@ -502,7 +499,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 		case VariableTypeEvaluation: {
 			AutoVariablePair p = references[i].autoVariableType;
 			p.first->setType(p.second->type());
-			p.first->setValue(ValueUtil::generateValue(p.second->type()));
 			break;
 		}
 
