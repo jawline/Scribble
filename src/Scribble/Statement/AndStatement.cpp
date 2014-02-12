@@ -40,6 +40,9 @@ Type* AndStatement::type() {
 int AndStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
+	//If the result of the and statement is to be ignored then place the result in temp register 1 ( In this case the and statement should still be executed in case the functions involved had desired side
+	//effects, though anything that causes this would be very badly written code )
+
 	if (resultRegister == -1) {
 		resultRegister = VM::vmTempRegisterOne;
 	}
@@ -54,15 +57,18 @@ int AndStatement::generateCode(int resultRegister,
 	std::stringstream secondStatement;
 	int secondInstrs = rhs_->generateCode(resultRegister, secondStatement);
 
+	//Add the first statement to the code
 	generated << firstStatement.str();
 	instrs += firstInstrs;
 
+	//If the result of the first statement equals zero then jump out as the second statement doesn't need to be tested.
 	generated << "eqz $" << resultRegister << "\n";
 	instrs++;
 
 	generated << "jmpr " << 1 + secondInstrs << "\n";
 	instrs++;
 
+	//Add the second statement test to the code.
 	generated << secondStatement.str();
 	instrs += secondInstrs;
 
