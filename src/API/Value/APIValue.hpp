@@ -11,6 +11,7 @@
 /**
  * Defines int32_t, int64_t and float32_t
  */
+
 #include <types.h>
 
 #include <VM/VMEntryType.hpp>
@@ -25,6 +26,15 @@
 namespace API {
 
 static std::string cStringTypename = "string";
+
+/**
+ * The APIValue class contains the arguments for or return value from a
+ * virtual machine function.
+ *
+ * It is a wrapper around the register value and heap data to provide an
+ * easy way to extra useful data from the result of a VM execution or pass
+ * information to it.
+ */
 
 class APIValue {
 private:
@@ -117,6 +127,10 @@ public:
 		return true;
 	}
 
+	/**
+	 * Returns true if the register value is set to zero.
+	 */
+
 	bool isNull() {
 
 		if (val_ == 0) {
@@ -125,6 +139,12 @@ public:
 
 		return false;
 	}
+
+	/**
+	 * Will return the value of a field within the structure pointer to by a reference
+	 * if that field exists. If the reference is not a structure or the field does not
+	 * exist then APIValue(0) will be returned.
+	 */
 
 	APIValue getField(std::string const& name, VM::VirtualMachine* vm) {
 
@@ -174,7 +194,23 @@ public:
 
 	}
 
+	/**
+	 * Return the length of the array pointer to by a reference.
+	 *
+	 * If the APIvalue is not an array reference or the reference is a null
+	 * reference then 0 will be returned.
+	 */
+
 	unsigned int getArrayLength(VM::VirtualMachine* vm) {
+
+		if (cType_->getType() != ArrayType) {
+			return 0;
+		}
+
+		if (isNull()) {
+			return 0;
+		}
+
 		return vm->getHeap().getSize(val_) / getReferenceType()->arraySubtype()->getElementSize();
 	}
 
