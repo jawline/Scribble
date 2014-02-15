@@ -21,6 +21,8 @@
 
 \section{Hello World}
 
+The hello world example will print "Hello World" to the screen.
+
 \begin{verbatim}
 
 //Import the console package allowing us to write to stdout
@@ -32,6 +34,8 @@ func main() {
 \end{verbatim}
 
 \section{Variables}
+
+The example below creates a variable and sets its value to a random integer between 0 and 1500 then prints it to the screen.
 
 \begin{verbatim}
 
@@ -59,9 +63,9 @@ func main() {
 
 \section{Loops}
 
+The example below uses a for loop to sum all the values between 0 and a randomly generated value.
 
 \begin{verbatim}
-
 //Import the console package allowing us to write to stdout
 package console := import("console");
 
@@ -94,9 +98,66 @@ func main() {
 }
 \end{verbatim}
 
+//TODO: While loop example
+
 \section{Functions}
+
+In the following example two mutually recursive functions will be defined to check whether a value is odd or even. It also uses if statements to detect base cases for the recursive functions.
+
+\begin{verbatim}
+//Import the console package allowing us to write to stdout
+package console := import("console");
+
+//Import the sys package for the RandomInt function and string casts
+package sys := import("sys");
+
+func Even(n : int) : int {
+
+ //If n = 0 then it is a base case return true
+ if n = 0 then {
+  return true;
+ }
+ 
+ return Odd(n-1);
+}
+
+func Odd(n : int) : int {
+
+ //If base case then return false
+ if n = 0 then {
+  return false;
+ }
+ 
+ return Even(n-1);
+}
+
+func main() {
+
+ //Generate a number between 0 and 150 to find the sum of
+ var random := sys.RandomInt(150);
+
+ //Write a message about odd/even
+ console.Log("Checking whether ");
+ console.Log(sys.String(random));
+ console.Log(" is even\n");
+ 
+ var even := Even(random);
+ 
+ if even then {
+ 	console.Log("The value is even\n");
+ } else {
+    console.Log("The function is odd\n");
+ } 
+ 
+}
+\end{verbatim}
+
 \section{Arrays}
 \section{Structures}
+
+\section{Quick Sort}
+
+\section{Native Interface}
 
 \chapter{Lexical}
 
