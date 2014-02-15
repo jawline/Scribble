@@ -32,7 +32,68 @@ func main() {
 \end{verbatim}
 
 \section{Variables}
+
+\begin{verbatim}
+
+//Import the console package allowing us to write to stdout
+package console := import("console");
+
+//Import the sys package for the RandomInt function and string casts
+package sys := import("sys");
+
+func main() {
+
+ //Write a message about generating the value
+ console.Log("Generating a random number between 0 and 1500\n");
+ 
+ //Create a new variable with a random number between 0 and 1500 in it
+ var random := sys.RandomInt(1500);
+ 
+ //Write the random number to stdout
+ console.Log(sys.String(random));
+ console.Log("\n");
+
+}
+\end{verbatim}
+
+
 \section{Loops}
+
+
+\begin{verbatim}
+
+//Import the console package allowing us to write to stdout
+package console := import("console");
+
+//Import the sys package for the RandomInt function and string casts
+package sys := import("sys");
+
+func main() {
+
+ //Generate a number between 0 and 150 to find the sum of
+ var random := sys.RandomInt(150);
+
+ //Write a message about finding the sum
+ console.Log("Finding the sum of all values between 0 and ");
+ console.Log(sys.String(random));
+ console.Log("\n");
+ 
+ //Create a sum value to store the result
+ var sum := 0;
+ 
+ //Loop i between 0 and random and add i to sum at each iteration
+ for var i := 0; i < random; i++ do {
+  sum := sum + i;
+ }  
+ 
+ //Write the sum to stdout
+ console.Log("Sum: ");
+ console.Log(sys.String(sum));
+ console.Log("\n"); 
+ 
+}
+\end{verbatim}
+
 \section{Functions}
 \section{Arrays}
 \section{Structures}
@@ -443,7 +504,18 @@ STRING {
 
 \section{Variable Definition}
 
-A variable can be defined in Scribble either with an explicit type or with its type inferred from its initial assignment.
+A variable can be defined in Scribble either with an explicit type or with its type inferred from its initial assignment. This will create a new identifier by which that variable is referenced for any line after the definition in that function.
+
+To explicitly specify the type of a variable you write var Name : Type;
+
+Using type inference allows you to automatically set the type of a created variable based on the expression that it being signed to initially. You do this by writing var Name := Expression; If no expression is supplied or the expression is Void then a parser error will be thrown otherwise the type of the new variable will be set to the type of the expression.
+
+examples:
+\begin{verbatim}
+var j := 5; //Create a new variable of type int
+var j : int := 5; //Explicitly create a new variable of type int.
+var j := (5 + 5) * 2; //Create a variable of type int from a more complex expression
+\end{verbatim}
 
 variable definition is defined in the grammar as
 \begin{verbatim}
