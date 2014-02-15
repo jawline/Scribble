@@ -1,6 +1,8 @@
 #include "Variable.hpp"
 #include <Scribble/Value/TypeManager.hpp>
 
+namespace ScribbleCore {
+
 Variable::Variable(int position, TypeReference type) :
 		type_(type), position_(position) {
 }
@@ -39,4 +41,6 @@ void Variable::setPosition(int pos) {
 
 int Variable::getPosition() {
 	return position_;
+}
+
 }

@@ -1,0 +1,53 @@
+\hypertarget{class_scribble_core_1_1_type_manager}{\section{Scribble\-Core\-:\-:Type\-Manager Class Reference}
+\label{class_scribble_core_1_1_type_manager}\index{Scribble\-Core\-::\-Type\-Manager@{Scribble\-Core\-::\-Type\-Manager}}
+}
+
+
+{\ttfamily \#include $<$Type\-Manager.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_type_manager_af8c5c47c0b35d90522cf8ce8ab136097}{get\-Type} (Value\-Type base)
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_type_manager_a12c0710b3d5bba41da760c85346d2a75}{get\-Type} (Value\-Type base, Type\-Reference sub\-Type)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class used to ensure that only one of every type is created ( And therefore the pointers will alyways be to that type and unique to that type). 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scribble_core_1_1_type_manager_af8c5c47c0b35d90522cf8ce8ab136097}{\index{Scribble\-Core\-::\-Type\-Manager@{Scribble\-Core\-::\-Type\-Manager}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!ScribbleCore::TypeManager@{Scribble\-Core\-::\-Type\-Manager}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scribble\-Core\-::\-Type\-Manager\-::get\-Type (
+\begin{DoxyParamCaption}
+\item[{Value\-Type}]{base}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_core_1_1_type_manager_af8c5c47c0b35d90522cf8ce8ab136097}
+Get a given primitive type (Int, Bool, etc) 
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scribble_core_1_1_type_manager_af8c5c47c0b35d90522cf8ce8ab136097_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_core_1_1_type_manager_a12c0710b3d5bba41da760c85346d2a75}{\index{Scribble\-Core\-::\-Type\-Manager@{Scribble\-Core\-::\-Type\-Manager}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!ScribbleCore::TypeManager@{Scribble\-Core\-::\-Type\-Manager}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scribble\-Core\-::\-Type\-Manager\-::get\-Type (
+\begin{DoxyParamCaption}
+\item[{Value\-Type}]{base, }
+\item[{Type\-Reference}]{sub\-Type}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_core_1_1_type_manager_a12c0710b3d5bba41da760c85346d2a75}
+Get a given complex type. (Array, Reference) 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Value/Type\-Manager.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Value/Type\-Manager.\-cpp\end{DoxyCompactItemize}

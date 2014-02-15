@@ -7,8 +7,6 @@
 
 #include "Modulo.hpp"
 #include <Scribble/Value/TypeManager.hpp>
-#include <Scribble/Value/Int.hpp>
-#include <Scribble/Statement/Heap.hpp>
 
 Modulo::Modulo(std::string names) : Function("NativeModulo", names) {
 	// TODO Auto-generated constructor stub
@@ -20,17 +18,17 @@ Modulo::~Modulo() {
 }
 
 APIValue Modulo::execute(API::APIValue* values, VM::VirtualMachine* virt) {
-	return API::APIValue(getIntType(), values[0].getValue32() % values[1].getValue32());
+	return API::APIValue(ScribbleCore::getIntType(), values[0].getValue32() % values[1].getValue32());
 }
 
-Type* Modulo::getType() {
-	return getIntType();
+ScribbleCore::Type* Modulo::getType() {
+	return ScribbleCore::getIntType();
 }
 
 const unsigned int Modulo::numArgs() {
 	return 2;
 }
 
-Type* Modulo::argType(unsigned int arg) {
-	return getIntType();
+ScribbleCore::Type* Modulo::argType(unsigned int arg) {
+	return ScribbleCore::getIntType();
 }

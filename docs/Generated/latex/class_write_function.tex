@@ -1,0 +1,122 @@
+\hypertarget{class_write_function}{\section{Write\-Function Class Reference}
+\label{class_write_function}\index{Write\-Function@{Write\-Function}}
+}
+
+
+{\ttfamily \#include $<$Write\-Function.\-hpp$>$}
+
+
+
+Inheritance diagram for Write\-Function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{class_write_function__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Write\-Function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{class_write_function__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_write_function_ad6e416a0d8e38b55a02ac2ace7941dfb}{{\bfseries Write\-Function} (std\-::string ns)}\label{class_write_function_ad6e416a0d8e38b55a02ac2ace7941dfb}
+
+\item 
+virtual \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} \hyperlink{class_write_function_a595652aa0e6f2f2dab95b251f4fed934}{execute} (\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} $\ast$values, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$virt)
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_write_function_af13b3f0f1a575a4836e7a0743dfc0016}{get\-Type} ()
+\item 
+const unsigned int \hyperlink{class_write_function_a19c26d1f8efd08ae7ef0051ca32fc1e9}{num\-Args} ()
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_write_function_a223f1c9a6f2d88ca561409fa21af3d86}{arg\-Type} (unsigned int arg)
+\item 
+\hypertarget{class_write_function_ab3a0ff179dc7ca7e92577e1a0ba010bf}{virtual std\-::string {\bfseries get\-Name} ()}\label{class_write_function_ab3a0ff179dc7ca7e92577e1a0ba010bf}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_write_function}{Write\-Function} writes a given string to the command line. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_write_function_a223f1c9a6f2d88ca561409fa21af3d86}{\index{Write\-Function@{Write\-Function}!arg\-Type@{arg\-Type}}
+\index{arg\-Type@{arg\-Type}!WriteFunction@{Write\-Function}}
+\subsubsection[{arg\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Write\-Function\-::arg\-Type (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_write_function_a223f1c9a6f2d88ca561409fa21af3d86}
+Get the expected type of the specified argument 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b}{A\-P\-I\-::\-Function}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_write_function_a223f1c9a6f2d88ca561409fa21af3d86_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_write_function_a595652aa0e6f2f2dab95b251f4fed934}{\index{Write\-Function@{Write\-Function}!execute@{execute}}
+\index{execute@{execute}!WriteFunction@{Write\-Function}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf A\-P\-I\-::\-A\-P\-I\-Value} Write\-Function\-::execute (
+\begin{DoxyParamCaption}
+\item[{{\bf A\-P\-I\-::\-A\-P\-I\-Value} $\ast$}]{values, }
+\item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{virt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_write_function_a595652aa0e6f2f2dab95b251f4fed934}
+This function executes the given \hyperlink{class_a_p_i_1_1_function}{A\-P\-I\-::\-Function} and returns it's result. It called by the more complex execute(\-V\-M\-::\-Virtual\-Machine$\ast$) after that function has converted all arguments into \hyperlink{namespace_a_p_i}{A\-P\-I} values. 
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments passed to the function \\
+\hline
+{\em virt} & The virtual machine this function is being run in the context of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting \hyperlink{namespace_a_p_i}{A\-P\-I} value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525ef181c4af}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_write_function_af13b3f0f1a575a4836e7a0743dfc0016}{\index{Write\-Function@{Write\-Function}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!WriteFunction@{Write\-Function}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Write\-Function\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_write_function_af13b3f0f1a575a4836e7a0743dfc0016}
+Get the return type of the function 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a85b0b2ee88d3ac61a0e77f94e06445b1}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_write_function_a19c26d1f8efd08ae7ef0051ca32fc1e9}{\index{Write\-Function@{Write\-Function}!num\-Args@{num\-Args}}
+\index{num\-Args@{num\-Args}!WriteFunction@{Write\-Function}}
+\subsubsection[{num\-Args}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int Write\-Function\-::num\-Args (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_write_function_a19c26d1f8efd08ae7ef0051ca32fc1e9}
+Return the number of arguments the function takes 
+
+Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77}{A\-P\-I\-::\-Function}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Write\-Function.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Write\-Function.\-cpp\end{DoxyCompactItemize}

@@ -1,6 +1,8 @@
 #include "StatementException.hpp"
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 StatementException::StatementException(Statement* statement,
 		std::string error) {
 
@@ -12,4 +14,6 @@ StatementException::StatementException(Statement* statement,
 }
 
 StatementException::~StatementException() throw() {
+}
+
 }

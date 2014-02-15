@@ -10,6 +10,8 @@
 #include "Statement.hpp"
 #include <Scribble/Parser/TypeReference.hpp>
 
+namespace ScribbleCore {
+
 class StructureStatement: public Statement {
 private:
 	TypeReference type_;
@@ -23,5 +25,7 @@ public:
 	virtual Type* type();
 	virtual int generateCode(int result, std::stringstream& code);
 };
+
+}
 
 #endif /* STRUCTURESTATEMENT_HPP_ */

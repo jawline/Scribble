@@ -7,10 +7,6 @@
 
 #include "StringFunction.hpp"
 #include <Scribble/Statement/StatementException.hpp>
-#include <Scribble/Value/Int.hpp>
-#include <Scribble/Value/Bool.hpp>
-#include <Scribble/Value/String.hpp>
-#include <Scribble/Value/Float32.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <sstream>
 
@@ -24,21 +20,21 @@ IntToStringFunction::~IntToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-Type* IntToStringFunction::getType() {
-	return getTypeManager().getType(StringType);
+ScribbleCore::Type* IntToStringFunction::getType() {
+	return ScribbleCore::getStringType();
 }
 
 unsigned int const IntToStringFunction::numArgs() {
 	return 1;
 }
 
-Type* IntToStringFunction::argType(unsigned int arg) {
+ScribbleCore::Type* IntToStringFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
-		return getTypeManager().getType(Int);
+		return ScribbleCore::getIntType();
 	}
 
-	return getTypeManager().getType(TypeUnresolved);
+	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
 }
 
 API::APIValue IntToStringFunction::execute(API::APIValue* values,
@@ -67,21 +63,21 @@ BoolToStringFunction::~BoolToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-Type* BoolToStringFunction::getType() {
-	return getTypeManager().getType(StringType);
+ScribbleCore::Type* BoolToStringFunction::getType() {
+	return ScribbleCore::getStringType();
 }
 
 unsigned int const BoolToStringFunction::numArgs() {
 	return 1;
 }
 
-Type* BoolToStringFunction::argType(unsigned int arg) {
+ScribbleCore::Type* BoolToStringFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
-		return getTypeManager().getType(Boolean);
+		return ScribbleCore::getBooleanType();
 	}
 
-	return getTypeManager().getType(TypeUnresolved);
+	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
 }
 
 API::APIValue BoolToStringFunction::execute(API::APIValue* values,
@@ -104,21 +100,21 @@ Float32ToStringFunction::~Float32ToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-Type* Float32ToStringFunction::getType() {
-	return getTypeManager().getType(StringType);
+ScribbleCore::Type* Float32ToStringFunction::getType() {
+	return ScribbleCore::getStringType();
 }
 
 unsigned int const Float32ToStringFunction::numArgs() {
 	return 1;
 }
 
-Type* Float32ToStringFunction::argType(unsigned int arg) {
+ScribbleCore::Type* Float32ToStringFunction::argType(unsigned int arg) {
 
 	if (arg == 0) {
-		return getTypeManager().getType(Float32);
+		return ScribbleCore::getFloat32Type();
 	}
 
-	return getTypeManager().getType(TypeUnresolved);
+	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
 }
 
 API::APIValue Float32ToStringFunction::execute(API::APIValue* values,

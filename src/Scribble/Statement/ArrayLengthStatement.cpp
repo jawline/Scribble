@@ -6,10 +6,10 @@
  */
 
 #include "ArrayLengthStatement.hpp"
-#include "Heap.hpp"
-#include <Scribble/Value/Array.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 ArrayLengthStatement::ArrayLengthStatement(int line, std::string text,
 		SafeStatement exp) :
@@ -54,4 +54,6 @@ int ArrayLengthStatement::generateCode(int resultRegister,
 	}
 
 	return 0;
+}
+
 }

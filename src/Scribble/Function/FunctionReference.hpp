@@ -12,6 +12,8 @@
 #include <API/Function.hpp>
 #include <string>
 
+namespace ScribbleCore {
+
 /**
  * A function reference used by the parser to provide a link between functions and the statements that call them.
  * Without these all functions would have to be defined before they are referenced. with these however the function
@@ -59,5 +61,7 @@ public:
 	SmartPointer<Function> getFunction();
 	void setFunction(SmartPointer<Function> func);
 };
+
+}
 
 #endif /* FUNCTIONREFERENCE_HPP_ */

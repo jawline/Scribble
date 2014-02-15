@@ -1,0 +1,78 @@
+\hypertarget{class_and_statement}{\section{And\-Statement Class Reference}
+\label{class_and_statement}\index{And\-Statement@{And\-Statement}}
+}
+
+
+{\ttfamily \#include $<$And\-Statement.\-hpp$>$}
+
+
+
+Inheritance diagram for And\-Statement\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{class_and_statement__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for And\-Statement\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{class_and_statement__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_and_statement_ae4b3ac8458ba7cfd84929bc37c59fdb1}{{\bfseries And\-Statement} (int line\-No, std\-::string sym, Safe\-Statement left\-Hand\-Side, Safe\-Statement right\-Hand\-Side)}\label{class_and_statement_ae4b3ac8458ba7cfd84929bc37c59fdb1}
+
+\item 
+\hypertarget{class_and_statement_a60176eb9d31790fa6c416178c8aa2924}{virtual void {\bfseries check\-Tree} (\hyperlink{class_type}{Type} $\ast$function\-Type)}\label{class_and_statement_a60176eb9d31790fa6c416178c8aa2924}
+
+\item 
+virtual \hyperlink{class_type}{Type} $\ast$ \hyperlink{class_and_statement_a61ea1adc2ed965f47e83559bde4a2ffb}{type} ()
+\item 
+\hypertarget{class_and_statement_a6dd3c7739985b2da6c6cda69e245aeeb}{int {\bfseries generate\-Code} (int result\-Register, std\-::stringstream \&generated)}\label{class_and_statement_a6dd3c7739985b2da6c6cda69e245aeeb}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The and statement returns true if the left and right hand expressions both evaluate to true.
+
+If the left side is false then the right side will not be checked. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_and_statement_a61ea1adc2ed965f47e83559bde4a2ffb}{\index{And\-Statement@{And\-Statement}!type@{type}}
+\index{type@{type}!AndStatement@{And\-Statement}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ And\-Statement\-::type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_and_statement_a61ea1adc2ed965f47e83559bde4a2ffb}
+And\-Statements type is boolean. 
+
+Implements \hyperlink{class_statement}{Statement}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{class_and_statement_a61ea1adc2ed965f47e83559bde4a2ffb_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Scribble/\-Statement/And\-Statement.\-hpp\item 
+Scribble/\-Statement/And\-Statement.\-cpp\end{DoxyCompactItemize}

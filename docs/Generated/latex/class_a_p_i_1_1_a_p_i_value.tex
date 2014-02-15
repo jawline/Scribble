@@ -1,0 +1,271 @@
+\hypertarget{class_a_p_i_1_1_a_p_i_value}{\section{A\-P\-I\-:\-:A\-P\-I\-Value Class Reference}
+\label{class_a_p_i_1_1_a_p_i_value}\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}}
+}
+
+
+{\ttfamily \#include $<$A\-P\-I\-Value.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_aa9c18784d818a39bf8ff1f91a5a9fa44}{{\bfseries A\-P\-I\-Value} (\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$type, int64\-\_\-t val)}\label{class_a_p_i_1_1_a_p_i_value_aa9c18784d818a39bf8ff1f91a5a9fa44}
+
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_ac6a9936ffcc934fd6e16fa9d26d2732c}{{\bfseries A\-P\-I\-Value} (\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$type, Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-::\-V\-M\-Entry\-Type} $>$ vm\-Type, Smart\-Pointer$<$ uint8\-\_\-t $>$ data, long val)}\label{class_a_p_i_1_1_a_p_i_value_ac6a9936ffcc934fd6e16fa9d26d2732c}
+
+\item 
+int64\-\_\-t \hyperlink{class_a_p_i_1_1_a_p_i_value_a26380a603f4fc9191608f047e6ea8250}{get\-Value64} ()
+\item 
+int32\-\_\-t \hyperlink{class_a_p_i_1_1_a_p_i_value_ae56a74e043a259b1a219804cb77165d7}{get\-Value32} ()
+\item 
+float32\-\_\-t \hyperlink{class_a_p_i_1_1_a_p_i_value_a2374ba437041f0c57514be649825312b}{get\-Value\-Float32} ()
+\item 
+char $\ast$ \hyperlink{class_a_p_i_1_1_a_p_i_value_a94eb3d9f4b1c0dfd397f6813fd8c8a94}{get\-Value\-String} ()
+\item 
+bool \hyperlink{class_a_p_i_1_1_a_p_i_value_a720e381988acbc87b34df8535d61e4d2}{get\-Value\-Boolean} ()
+\item 
+Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-::\-V\-M\-Entry\-Type} $>$ \hyperlink{class_a_p_i_1_1_a_p_i_value_adffeaebde4496d5ee7e9944f1aa4bb76}{get\-Reference\-Type} ()
+\item 
+uint8\-\_\-t $\ast$ \hyperlink{class_a_p_i_1_1_a_p_i_value_afaee05a374fbc7e04c9ceb9f4b0758af}{get\-Reference\-Pointer} ()
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a50687d887d23aabffd1f9df7f3ba94a1}{\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ {\bfseries get\-Type} ()}\label{class_a_p_i_1_1_a_p_i_value_a50687d887d23aabffd1f9df7f3ba94a1}
+
+\item 
+bool \hyperlink{class_a_p_i_1_1_a_p_i_value_a9f5b34b9c70f6279dea8f556698ca1f6}{is\-Reference} ()
+\item 
+bool \hyperlink{class_a_p_i_1_1_a_p_i_value_a8a97634f469ced8407f4ca6cdd0f9898}{is\-Null} ()
+\item 
+\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-Value} \hyperlink{class_a_p_i_1_1_a_p_i_value_ac52ce1c55cc0a808016b557d1fb74995}{get\-Field} (std\-::string const \&name, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$vm)
+\item 
+unsigned int \hyperlink{class_a_p_i_1_1_a_p_i_value_a1506f360a478ac864b76fec0409bc117}{get\-Array\-Length} (\hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$vm)
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a799ace497f1988f95af61d6796d67a19}{\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-Value} {\bfseries get\-Index} (unsigned int index, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$vm)}\label{class_a_p_i_1_1_a_p_i_value_a799ace497f1988f95af61d6796d67a19}
+
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_aa516e6d20f842e2dfd60c1c59a697312}{void {\bfseries set\-Field} (std\-::string const \&name, \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} val, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$vm)}\label{class_a_p_i_1_1_a_p_i_value_aa516e6d20f842e2dfd60c1c59a697312}
+
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_aa8a379bf602fc10523bfc4a4867dbc55}{void {\bfseries set\-Index} (unsigned int index, \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} val, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$vm)}\label{class_a_p_i_1_1_a_p_i_value_aa8a379bf602fc10523bfc4a4867dbc55}
+
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a54a170b1214ed9daf309c889b7daf77e}{void {\bfseries push\-To\-V\-M} (\hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$virt)}\label{class_a_p_i_1_1_a_p_i_value_a54a170b1214ed9daf309c889b7daf77e}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a5d2ee6a2550a35698b7f63678c64fc47}{static \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} {\bfseries make\-Int32} (int val)}\label{class_a_p_i_1_1_a_p_i_value_a5d2ee6a2550a35698b7f63678c64fc47}
+
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_ae4d8ca7c8a72f24e3b7419cc4fc2127c}{static \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} {\bfseries make\-Float32} (float32\-\_\-t val)}\label{class_a_p_i_1_1_a_p_i_value_ae4d8ca7c8a72f24e3b7419cc4fc2127c}
+
+\item 
+\hypertarget{class_a_p_i_1_1_a_p_i_value_abc6491d068cfc443ef5cbbc83156e46e}{static \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} {\bfseries make\-String} (std\-::string const \&text, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$vm)}\label{class_a_p_i_1_1_a_p_i_value_abc6491d068cfc443ef5cbbc83156e46e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-Value} class contains the arguments for or return value from a virtual machine function.
+
+It is a wrapper around the register value and heap data to provide an easy way to extra useful data from the result of a V\-M execution or pass information to it. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a1506f360a478ac864b76fec0409bc117}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Array\-Length@{get\-Array\-Length}}
+\index{get\-Array\-Length@{get\-Array\-Length}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Array\-Length}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Array\-Length (
+\begin{DoxyParamCaption}
+\item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{vm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_a1506f360a478ac864b76fec0409bc117}
+Return the length of the array pointer to by a reference.
+
+If the A\-P\-Ivalue is not an array reference or the reference is a null reference then 0 will be returned. 
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_a1506f360a478ac864b76fec0409bc117_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_ac52ce1c55cc0a808016b557d1fb74995}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Field@{get\-Field}}
+\index{get\-Field@{get\-Field}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Field}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\-P\-I\-Value} A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Field (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{name, }
+\item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{vm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_ac52ce1c55cc0a808016b557d1fb74995}
+Will return the value of a field within the structure pointer to by a reference if that field exists. If the reference is not a structure or the field does not exist then A\-P\-I\-Value(0) will be returned. 
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_ac52ce1c55cc0a808016b557d1fb74995_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_afaee05a374fbc7e04c9ceb9f4b0758af}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Reference\-Pointer@{get\-Reference\-Pointer}}
+\index{get\-Reference\-Pointer@{get\-Reference\-Pointer}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Reference\-Pointer}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t$\ast$ A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Reference\-Pointer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_afaee05a374fbc7e04c9ceb9f4b0758af}
+For a reference this will return a pointer to the reference data, for primitive types this will return a null pointer. 
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_afaee05a374fbc7e04c9ceb9f4b0758af_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_adffeaebde4496d5ee7e9944f1aa4bb76}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Reference\-Type@{get\-Reference\-Type}}
+\index{get\-Reference\-Type@{get\-Reference\-Type}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Reference\-Type}]{\setlength{\rightskip}{0pt plus 5cm}Smart\-Pointer$<${\bf V\-M\-::\-V\-M\-Entry\-Type}$>$ A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Reference\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_adffeaebde4496d5ee7e9944f1aa4bb76}
+If the value is a reference then return its type. 
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_adffeaebde4496d5ee7e9944f1aa4bb76_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_ae56a74e043a259b1a219804cb77165d7}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Value32@{get\-Value32}}
+\index{get\-Value32@{get\-Value32}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Value32}]{\setlength{\rightskip}{0pt plus 5cm}int32\-\_\-t A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Value32 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_ae56a74e043a259b1a219804cb77165d7}
+This returns the value as a 32 bit signed integer. 
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_ae56a74e043a259b1a219804cb77165d7_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a26380a603f4fc9191608f047e6ea8250}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Value64@{get\-Value64}}
+\index{get\-Value64@{get\-Value64}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Value64}]{\setlength{\rightskip}{0pt plus 5cm}int64\-\_\-t A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Value64 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_a26380a603f4fc9191608f047e6ea8250}
+This returns the value as a 64 bit signed integer. \hypertarget{class_a_p_i_1_1_a_p_i_value_a720e381988acbc87b34df8535d61e4d2}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Value\-Boolean@{get\-Value\-Boolean}}
+\index{get\-Value\-Boolean@{get\-Value\-Boolean}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Value\-Boolean}]{\setlength{\rightskip}{0pt plus 5cm}bool A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Value\-Boolean (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_a720e381988acbc87b34df8535d61e4d2}
+Returns true if the value is equal to V\-M\-::vm\-True ( The V\-Ms representation of a true boolean ) otherwise returns false. \hypertarget{class_a_p_i_1_1_a_p_i_value_a2374ba437041f0c57514be649825312b}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Value\-Float32@{get\-Value\-Float32}}
+\index{get\-Value\-Float32@{get\-Value\-Float32}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Value\-Float32}]{\setlength{\rightskip}{0pt plus 5cm}float32\-\_\-t A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Value\-Float32 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_a2374ba437041f0c57514be649825312b}
+This returns the value as a 32 bit floating point number. 
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_a2374ba437041f0c57514be649825312b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a94eb3d9f4b1c0dfd397f6813fd8c8a94}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!get\-Value\-String@{get\-Value\-String}}
+\index{get\-Value\-String@{get\-Value\-String}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{get\-Value\-String}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ A\-P\-I\-::\-A\-P\-I\-Value\-::get\-Value\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_a94eb3d9f4b1c0dfd397f6813fd8c8a94}
+If the value is a string, return a pointer to the string. 
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_a94eb3d9f4b1c0dfd397f6813fd8c8a94_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_a94eb3d9f4b1c0dfd397f6813fd8c8a94_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a8a97634f469ced8407f4ca6cdd0f9898}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!is\-Null@{is\-Null}}
+\index{is\-Null@{is\-Null}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{is\-Null}]{\setlength{\rightskip}{0pt plus 5cm}bool A\-P\-I\-::\-A\-P\-I\-Value\-::is\-Null (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_a8a97634f469ced8407f4ca6cdd0f9898}
+Returns true if the register value is set to zero. 
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_a8a97634f469ced8407f4ca6cdd0f9898_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_a_p_i_1_1_a_p_i_value_a9f5b34b9c70f6279dea8f556698ca1f6}{\index{A\-P\-I\-::\-A\-P\-I\-Value@{A\-P\-I\-::\-A\-P\-I\-Value}!is\-Reference@{is\-Reference}}
+\index{is\-Reference@{is\-Reference}!API::APIValue@{A\-P\-I\-::\-A\-P\-I\-Value}}
+\subsubsection[{is\-Reference}]{\setlength{\rightskip}{0pt plus 5cm}bool A\-P\-I\-::\-A\-P\-I\-Value\-::is\-Reference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_a_p_i_1_1_a_p_i_value_a9f5b34b9c70f6279dea8f556698ca1f6}
+Returns true if this \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-Value} is a reference to a piece of data on the heap. 
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_p_i_1_1_a_p_i_value_a9f5b34b9c70f6279dea8f556698ca1f6_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/\-Value/A\-P\-I\-Value.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/\-Value/A\-P\-I\-Value.\-cpp\end{DoxyCompactItemize}

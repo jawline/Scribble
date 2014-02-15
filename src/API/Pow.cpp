@@ -7,9 +7,6 @@
 
 #include "Pow.hpp"
 #include <Scribble/Value/TypeManager.hpp>
-#include <Scribble/Value/Int.hpp>
-#include <Scribble/Value/Float32.hpp>
-#include <Scribble/Statement/Heap.hpp>
 #include <math.h>       /* pow */
 
 namespace API {
@@ -25,24 +22,24 @@ Pow::~Pow() {
 }
 
 APIValue Pow::execute(API::APIValue* values, VM::VirtualMachine* virt) {
-	return API::APIValue(getIntType(), pow(values[0].getValue32(), (int) values[1].getValue32()));
+	return API::APIValue(ScribbleCore::getIntType(), pow(values[0].getValue32(), (int) values[1].getValue32()));
 }
 
-Type* Pow::getType() {
-	return getIntType();
+ScribbleCore::Type* Pow::getType() {
+	return ScribbleCore::getIntType();
 }
 
 const unsigned int Pow::numArgs() {
 	return 2;
 }
 
-Type* Pow::argType(unsigned int arg) {
+ScribbleCore::Type* Pow::argType(unsigned int arg) {
 
 	if ((arg == 0) || (arg == 1)) {
-		return getIntType();
+		return ScribbleCore::getIntType();
 	}
 
-	return getTypeManager().getType(TypeUnresolved);
+	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
 }
 
 PowFloat32::PowFloat32(std::string ns) :
@@ -65,31 +62,21 @@ APIValue PowFloat32::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 	return API::APIValue::makeFloat32(power);
 }
 
-Value* PowFloat32::execute(std::vector<Value*> arguments) {
-
-	Float32Value* lhs = (Float32Value*) arguments[0];
-	Float32Value* rhs = (Float32Value*) arguments[1];
-
-	float32_t mod = pow(lhs->getValue(), rhs->getValue());
-
-	return valueHeap.make(mod);
-}
-
-Type* PowFloat32::getType() {
-	return getFloat32Type();
+ScribbleCore::Type* PowFloat32::getType() {
+	return ScribbleCore::getFloat32Type();
 }
 
 const unsigned int PowFloat32::numArgs() {
 	return 2;
 }
 
-Type* PowFloat32::argType(unsigned int arg) {
+ScribbleCore::Type* PowFloat32::argType(unsigned int arg) {
 
 	if ((arg == 0) || (arg == 1)) {
-		return getFloat32Type();
+		return ScribbleCore::getFloat32Type();
 	}
 
-	return getTypeManager().getType(TypeUnresolved);
+	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
 }
 
 } /* namespace API */

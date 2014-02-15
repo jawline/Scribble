@@ -9,6 +9,8 @@
 #define STRUCTUREASSIGNELEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 class StructureAssignElement: public Statement {
 private:
 
@@ -30,5 +32,7 @@ public:
 
 	virtual int generateCode(int result, std::stringstream& code);
 };
+
+}
 
 #endif /* STRUCTUREASSIGNELEMENT_HPP_ */

@@ -9,6 +9,8 @@
 #define ORSTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 class OrStatement: public Statement {
 private:
 	SafeStatement lhs_, rhs_;
@@ -22,5 +24,7 @@ public:
 	virtual Type* type();
 	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* ORSTATEMENT_HPP_ */

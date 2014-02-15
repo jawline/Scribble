@@ -6,8 +6,9 @@
  */
 
 #include "ReturnStatement.hpp"
-#include "Heap.hpp"
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 ReturnStatement::ReturnStatement(int lineNo, std::string sym, SafeStatement stm) :
 		Statement(lineNo, sym) {
@@ -41,4 +42,6 @@ int ReturnStatement::generateCode(int resultRegister, std::stringstream& generat
 	int num = stm_->generateCode(VM::vmReturnResultRegister, generated);
 	generated << "ret\n";
 	return 1 + num;
+}
+
 }

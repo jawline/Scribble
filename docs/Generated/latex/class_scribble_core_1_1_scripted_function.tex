@@ -1,0 +1,134 @@
+\hypertarget{class_scribble_core_1_1_scripted_function}{\section{Scribble\-Core\-:\-:Scripted\-Function Class Reference}
+\label{class_scribble_core_1_1_scripted_function}\index{Scribble\-Core\-::\-Scripted\-Function@{Scribble\-Core\-::\-Scripted\-Function}}
+}
+
+
+Inheritance diagram for Scribble\-Core\-:\-:Scripted\-Function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{class_scribble_core_1_1_scripted_function__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scribble\-Core\-:\-:Scripted\-Function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{class_scribble_core_1_1_scripted_function__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_scribble_core_1_1_scripted_function_abbf5f1e50cac1e11b2882ae4f0c38878}{{\bfseries Scripted\-Function} (std\-::string name, int version, std\-::string name\-Space, Type\-Reference function\-Type, Smart\-Pointer$<$ \hyperlink{class_scribble_core_1_1_variable}{Variable} $>$ template\-Return, std\-::vector$<$ Smart\-Pointer$<$ \hyperlink{class_scribble_core_1_1_statement}{Statement} $>$$>$ statements, std\-::vector$<$ Smart\-Pointer$<$ \hyperlink{class_scribble_core_1_1_variable}{Variable} $>$$>$ variable\-Templates, std\-::vector$<$ Smart\-Pointer$<$ \hyperlink{class_scribble_core_1_1_variable}{Variable} $>$$>$ variables)}\label{class_scribble_core_1_1_scripted_function_abbf5f1e50cac1e11b2882ae4f0c38878}
+
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_scripted_function_a17fdb48f024f25d425c55a4ee0aff5a3}{get\-Type} ()
+\item 
+const unsigned int \hyperlink{class_scribble_core_1_1_scripted_function_a43340a1cf723f2862124eef8d92039f7}{num\-Args} ()
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_scripted_function_a78f81df4187093a5e7bc94c6d57fd11e}{arg\-Type} (unsigned int arg)
+\item 
+\hypertarget{class_scribble_core_1_1_scripted_function_ae527084185cc034975bf61ec23c57ba9}{void {\bfseries check} ()}\label{class_scribble_core_1_1_scripted_function_ae527084185cc034975bf61ec23c57ba9}
+
+\item 
+\hypertarget{class_scribble_core_1_1_scripted_function_a7e5968b233124279a9a9ff4a6706bd41}{int {\bfseries debug\-Code} (std\-::stringstream \&gen)}\label{class_scribble_core_1_1_scripted_function_a7e5968b233124279a9a9ff4a6706bd41}
+
+\item 
+Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_func}{V\-M\-::\-V\-M\-Func} $>$ \hyperlink{class_scribble_core_1_1_scripted_function_a80265e1d31e9e767fca0e365846251d4}{generate\-Scripted\-Func} ()
+\item 
+bool \hyperlink{class_scribble_core_1_1_scripted_function_a05fccc0cfe86d5efa8a19f7e5c3f6da0}{is\-Native\-Function} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scribble_core_1_1_scripted_function_a78f81df4187093a5e7bc94c6d57fd11e}{\index{Scribble\-Core\-::\-Scripted\-Function@{Scribble\-Core\-::\-Scripted\-Function}!arg\-Type@{arg\-Type}}
+\index{arg\-Type@{arg\-Type}!ScribbleCore::ScriptedFunction@{Scribble\-Core\-::\-Scripted\-Function}}
+\subsubsection[{arg\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scribble\-Core\-::\-Scripted\-Function\-::arg\-Type (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_scripted_function_a78f81df4187093a5e7bc94c6d57fd11e}
+Get the expected type of the specified argument 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b}{A\-P\-I\-::\-Function}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scribble_core_1_1_scripted_function_a78f81df4187093a5e7bc94c6d57fd11e_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_core_1_1_scripted_function_a80265e1d31e9e767fca0e365846251d4}{\index{Scribble\-Core\-::\-Scripted\-Function@{Scribble\-Core\-::\-Scripted\-Function}!generate\-Scripted\-Func@{generate\-Scripted\-Func}}
+\index{generate\-Scripted\-Func@{generate\-Scripted\-Func}!ScribbleCore::ScriptedFunction@{Scribble\-Core\-::\-Scripted\-Function}}
+\subsubsection[{generate\-Scripted\-Func}]{\setlength{\rightskip}{0pt plus 5cm}Smart\-Pointer$<${\bf V\-M\-::\-V\-M\-Func}$>$ Scribble\-Core\-::\-Scripted\-Function\-::generate\-Scripted\-Func (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_scribble_core_1_1_scripted_function_a80265e1d31e9e767fca0e365846251d4}
+If the function is scripted and not native this will generate a V\-M\-Func for it. 
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_a133061933b79944d3c2adb08c8d50a71}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_scribble_core_1_1_scripted_function_a17fdb48f024f25d425c55a4ee0aff5a3}{\index{Scribble\-Core\-::\-Scripted\-Function@{Scribble\-Core\-::\-Scripted\-Function}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!ScribbleCore::ScriptedFunction@{Scribble\-Core\-::\-Scripted\-Function}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scribble\-Core\-::\-Scripted\-Function\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_scripted_function_a17fdb48f024f25d425c55a4ee0aff5a3}
+Get the return type of the function 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a85b0b2ee88d3ac61a0e77f94e06445b1}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_scribble_core_1_1_scripted_function_a05fccc0cfe86d5efa8a19f7e5c3f6da0}{\index{Scribble\-Core\-::\-Scripted\-Function@{Scribble\-Core\-::\-Scripted\-Function}!is\-Native\-Function@{is\-Native\-Function}}
+\index{is\-Native\-Function@{is\-Native\-Function}!ScribbleCore::ScriptedFunction@{Scribble\-Core\-::\-Scripted\-Function}}
+\subsubsection[{is\-Native\-Function}]{\setlength{\rightskip}{0pt plus 5cm}bool Scribble\-Core\-::\-Scripted\-Function\-::is\-Native\-Function (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_scribble_core_1_1_scripted_function_a05fccc0cfe86d5efa8a19f7e5c3f6da0}
+Returns true if this is a function written in Native code. 
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_a450fc79d97dd8393bf94aead888592c3}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_scribble_core_1_1_scripted_function_a43340a1cf723f2862124eef8d92039f7}{\index{Scribble\-Core\-::\-Scripted\-Function@{Scribble\-Core\-::\-Scripted\-Function}!num\-Args@{num\-Args}}
+\index{num\-Args@{num\-Args}!ScribbleCore::ScriptedFunction@{Scribble\-Core\-::\-Scripted\-Function}}
+\subsubsection[{num\-Args}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int Scribble\-Core\-::\-Scripted\-Function\-::num\-Args (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_scripted_function_a43340a1cf723f2862124eef8d92039f7}
+Return the number of arguments the function takes 
+
+Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77}{A\-P\-I\-::\-Function}.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scribble_core_1_1_scripted_function_a43340a1cf723f2862124eef8d92039f7_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Function/Scripted\-Function.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Function/Scripted\-Function.\-cpp\end{DoxyCompactItemize}

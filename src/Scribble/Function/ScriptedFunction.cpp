@@ -9,6 +9,8 @@
 #include <Scribble/Statement/ReturnStatement.hpp>
 #include <sstream>
 
+namespace ScribbleCore {
+
 std::string makeName(std::string name, int version) {
 
 	std::stringstream funcName;
@@ -17,7 +19,8 @@ std::string makeName(std::string name, int version) {
 }
 
 ScriptedFunction::ScriptedFunction(std::string name, int version,
-		std::string names, TypeReference fType, SmartPointer<Variable> templateReturn,
+		std::string names, TypeReference fType,
+		SmartPointer<Variable> templateReturn,
 		std::vector<SmartPointer<Statement>> statements,
 		std::vector<SmartPointer<Variable>> templates,
 		std::vector<SmartPointer<Variable>> arguments) :
@@ -25,7 +28,7 @@ ScriptedFunction::ScriptedFunction(std::string name, int version,
 				templateReturn), statements_(statements), variableTemplates_(
 				templates), arguments_(arguments) {
 
-}
+		}
 
 ScriptedFunction::~ScriptedFunction() {
 }
@@ -70,4 +73,6 @@ int ScriptedFunction::debugCode(std::stringstream& gen) {
 	}
 
 	return script;
+}
+
 }

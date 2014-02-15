@@ -7,9 +7,9 @@
 
 #include "NegativeStatement.hpp"
 #include <Scribble/Value/TypeManager.hpp>
-#include <Scribble/Value/Int.hpp>
-#include <Scribble/Value/Float32.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 NegativeStatement::NegativeStatement(int line, std::string text,
 		SafeStatement exp) :
@@ -63,4 +63,6 @@ int NegativeStatement::generateCode(int resultRegister,
 	}
 
 	return instr;
+}
+
 }

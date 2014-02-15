@@ -6,9 +6,10 @@
  */
 
 #include "OperateStatement.hpp"
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 OperateStatement::OperateStatement(int lineNo, std::string sym,
 		ValueOperator op, SafeStatement lhs, SafeStatement rhs) :
@@ -60,11 +61,6 @@ int OperateStatement::generateCode(int resultRegister,
 
 		switch (op_) {
 
-		case Assign: {
-			printf("UNIMPLEMENTED ARGH\n");
-			break;
-		}
-
 		case Add: {
 			generated << "add $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
@@ -109,11 +105,6 @@ int OperateStatement::generateCode(int resultRegister,
 
 		switch (op_) {
 
-		case Assign: {
-			printf("UNIMPLEMENTED ARGH\n");
-			break;
-		}
-
 		case Add: {
 			generated << "addf32 $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
@@ -148,4 +139,6 @@ int OperateStatement::generateCode(int resultRegister,
 	}
 
 	return instrs;
+}
+
 }

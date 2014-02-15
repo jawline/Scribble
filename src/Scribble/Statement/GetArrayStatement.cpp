@@ -6,10 +6,9 @@
  */
 
 #include "GetArrayStatement.hpp"
-#include "Heap.hpp"
-#include <Scribble/Value/Array.hpp>
-#include <Scribble/Value/Int.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 GetArrayStatement::GetArrayStatement(int line, std::string sym,
 		SafeStatement array, SafeStatement index) :
@@ -68,4 +67,6 @@ int GetArrayStatement::generateCode(int resultRegister,
 	} else {
 		return 0;
 	}
+}
+
 }

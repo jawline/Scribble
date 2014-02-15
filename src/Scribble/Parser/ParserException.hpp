@@ -10,6 +10,8 @@
 #include <exception>
 #include <string>
 
+namespace ScribbleCore {
+
 /**
  * ParserException
  * thrown whenever an exception occurs during the parsing of a program.
@@ -27,5 +29,7 @@ public:
 	virtual ~ParserException() throw ();
 	virtual const char* what() const throw ();
 };
+
+}
 
 #endif /* PARSEREXCEPTION_HPP_ */

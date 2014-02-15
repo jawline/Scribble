@@ -9,6 +9,8 @@
 #define TESTNILSTATEMNT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 class TestNilStatement: public Statement {
 private:
 	SafeStatement statement_;
@@ -22,5 +24,7 @@ public:
 
 	int generateCode(int result, std::stringstream& code);
 };
+
+}
 
 #endif /* TESTNILSTATEMNT_HPP_ */

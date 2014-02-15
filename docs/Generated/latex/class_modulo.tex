@@ -1,0 +1,97 @@
+\hypertarget{class_modulo}{\section{Modulo Class Reference}
+\label{class_modulo}\index{Modulo@{Modulo}}
+}
+
+
+{\ttfamily \#include $<$Modulo.\-hpp$>$}
+
+
+
+Inheritance diagram for Modulo\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{class_modulo__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Modulo\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{class_modulo__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_modulo_ad8569ce14030d2947e15aa012be5043f}{{\bfseries Modulo} (std\-::string namesp)}\label{class_modulo_ad8569ce14030d2947e15aa012be5043f}
+
+\item 
+virtual \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-Value} \hyperlink{class_modulo_aaed393a98ec1434a75e8d16ca2a01fc2}{execute} (\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} $\ast$values, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$virt)
+\item 
+virtual \hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_modulo_acab773160bb5bfc25ab13de8dbf9a132}{get\-Type} ()
+\item 
+virtual const unsigned int \hyperlink{class_modulo_abf49f63e3d3896ebb50c1f6bdf1bc698}{num\-Args} ()
+\item 
+virtual \hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_modulo_a4b50580aa3465a4ba193e8fa462244d8}{arg\-Type} (unsigned int arg)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Built in function which provides modulo functionality (The remainder of division) so Mod(5,3) = 2 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_modulo_a4b50580aa3465a4ba193e8fa462244d8}{\index{Modulo@{Modulo}!arg\-Type@{arg\-Type}}
+\index{arg\-Type@{arg\-Type}!Modulo@{Modulo}}
+\subsubsection[{arg\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Modulo\-::arg\-Type (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_modulo_a4b50580aa3465a4ba193e8fa462244d8}
+Get the arg type for a given argument ( Both Integer) 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_modulo_aaed393a98ec1434a75e8d16ca2a01fc2}{\index{Modulo@{Modulo}!execute@{execute}}
+\index{execute@{execute}!Modulo@{Modulo}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\-P\-I\-Value} Modulo\-::execute (
+\begin{DoxyParamCaption}
+\item[{{\bf A\-P\-I\-::\-A\-P\-I\-Value} $\ast$}]{values, }
+\item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{virt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_modulo_aaed393a98ec1434a75e8d16ca2a01fc2}
+Returns the resulting modulo as an \hyperlink{namespace_a_p_i}{A\-P\-I} value. 
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525ef181c4af}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_modulo_acab773160bb5bfc25ab13de8dbf9a132}{\index{Modulo@{Modulo}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Modulo@{Modulo}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Modulo\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_modulo_acab773160bb5bfc25ab13de8dbf9a132}
+Get the return type of the function. 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a85b0b2ee88d3ac61a0e77f94e06445b1}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_modulo_abf49f63e3d3896ebb50c1f6bdf1bc698}{\index{Modulo@{Modulo}!num\-Args@{num\-Args}}
+\index{num\-Args@{num\-Args}!Modulo@{Modulo}}
+\subsubsection[{num\-Args}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int Modulo\-::num\-Args (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_modulo_abf49f63e3d3896ebb50c1f6bdf1bc698}
+Get the number of arguments (2) 
+
+Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77}{A\-P\-I\-::\-Function}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Modulo.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Modulo.\-cpp\end{DoxyCompactItemize}

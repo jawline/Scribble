@@ -14,16 +14,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern std::map<std::string, NamespaceType> Namespace;
-extern NamespaceType Functions;
+extern std::map<std::string, ScribbleCore::NamespaceType> Namespace;
+extern ScribbleCore::NamespaceType Functions;
 
 extern std::string currentNamespaceName;
 
 extern map<std::string, std::string> ImportList;
 
-extern std::vector<ParserReference> StatementReferences;
-extern std::vector<SmartPointer<Variable>> VariableReferences;
-extern std::vector<TypeReference> TypeReferences;
+extern std::vector<ScribbleCore::ParserReference> StatementReferences;
+extern std::vector<SmartPointer<ScribbleCore::Variable>> VariableReferences;
+extern std::vector<ScribbleCore::TypeReference> TypeReferences;
 
 extern bool ParsingError;
 extern int lastuid;
@@ -32,6 +32,8 @@ extern void scribble_parse();
 extern void scribble__scan_string(char const*);
 extern void scribble_lex_destroy();
 extern void parser_free_all();
+
+namespace ScribbleCore {
 
 /**
  * This function should return the uniform relative path to a file ( For example test/dog and ./test/dog should both evaluate to test/dog )
@@ -616,10 +618,11 @@ std::map<std::string, NamespaceType> Parser::compileText(
 	Namespace = builtinNamespace;
 	includeText(text, filename, path);
 
-	std::map<std::string, NamespaceType> result = Namespace;
+	std::map<std::string, ScribbleCore::NamespaceType> result = Namespace;
 
 	parser_free_all();
 
 	return result;
 }
 
+}

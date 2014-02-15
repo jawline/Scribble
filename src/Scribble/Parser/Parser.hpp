@@ -14,6 +14,8 @@
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Value/Variable.hpp> // Variable class
 
+namespace ScribbleCore {
+
 typedef std::vector<SmartPointer<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
 typedef std::pair<SmartPointer<Variable>, SafeStatement> AutoVariablePair;
@@ -141,5 +143,7 @@ public:
 	static std::string getUniformPath(std::string const& path);
 
 };
+
+}
 
 #endif //_PARSER_DEF_H_

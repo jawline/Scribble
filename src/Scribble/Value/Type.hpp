@@ -10,9 +10,15 @@
 #include <Pointers/SmartPointer.hpp>
 #include <VM/VMEntryType.hpp>
 
+namespace ScribbleCore {
+
 class TypeReferenceCore;
 
 typedef SmartPointer<TypeReferenceCore> TypeReference;
+
+enum ValueOperator {
+	Add, Subtract, Divide, Multiply
+};
 
 /**
  *  Enum defining variable types (Integer, Boolean, Etcetera)
@@ -174,5 +180,7 @@ public:
 	}
 
 };
+
+}
 
 #endif /* TYPE_HPP_ */

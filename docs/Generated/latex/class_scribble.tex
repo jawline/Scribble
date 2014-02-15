@@ -1,0 +1,86 @@
+\hypertarget{class_scribble}{\section{Scribble Class Reference}
+\label{class_scribble}\index{Scribble@{Scribble}}
+}
+
+
+{\ttfamily \#include $<$Scribble.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scribble_a202c6998a7d53bb572da33e3063aa73f}{Scribble} (std\-::string const \&package)
+\item 
+\hyperlink{class_scribble_a174060addf8e273bd01df97cee8de493}{Scribble} (std\-::string const \&package\-Name, std\-::string const \&source\-Code)
+\item 
+\hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$ \hyperlink{class_scribble_ab4eb803a6ddfdba61656a2a8dd56b777}{get\-Environment} ()
+\item 
+\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} \hyperlink{class_scribble_ade95d568ada3bdcbfc561914cdf04912}{execute} (std\-::string function)
+\item 
+\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} \hyperlink{class_scribble_aa540843227946815a077ae1ae9b65b8d}{execute} (std\-::string function, std\-::vector$<$ \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} $>$ arguments)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Wrapper class that is capable of loading and executing \hyperlink{class_scribble}{Scribble} functions 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scribble_a202c6998a7d53bb572da33e3063aa73f}{\index{Scribble@{Scribble}!Scribble@{Scribble}}
+\index{Scribble@{Scribble}!Scribble@{Scribble}}
+\subsubsection[{Scribble}]{\setlength{\rightskip}{0pt plus 5cm}Scribble\-::\-Scribble (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{package}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_a202c6998a7d53bb572da33e3063aa73f}
+Loads, compiles and prepares the package for execution. Throws a parser exception if anything goes wrong.
+
+A\-P\-I/\-System defines the generate\-System\-Package function which creates the sys library. \hypertarget{class_scribble_a174060addf8e273bd01df97cee8de493}{\index{Scribble@{Scribble}!Scribble@{Scribble}}
+\index{Scribble@{Scribble}!Scribble@{Scribble}}
+\subsubsection[{Scribble}]{\setlength{\rightskip}{0pt plus 5cm}Scribble\-::\-Scribble (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{package\-Name, }
+\item[{std\-::string const \&}]{source\-Code}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_a174060addf8e273bd01df97cee8de493}
+Compiles and prepares the package package\-Name by using the source code provided. Throws a parsing exception if anything goes wrong. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scribble_ade95d568ada3bdcbfc561914cdf04912}{\index{Scribble@{Scribble}!execute@{execute}}
+\index{execute@{execute}!Scribble@{Scribble}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\-P\-I\-::\-A\-P\-I\-Value} Scribble\-::execute (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{function}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_ade95d568ada3bdcbfc561914cdf04912}
+Execute the function name with zero arguments ( Equivilent to execute(function, empty argument list); ) \hypertarget{class_scribble_aa540843227946815a077ae1ae9b65b8d}{\index{Scribble@{Scribble}!execute@{execute}}
+\index{execute@{execute}!Scribble@{Scribble}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\-P\-I\-::\-A\-P\-I\-Value} Scribble\-::execute (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{function, }
+\item[{std\-::vector$<$ {\bf A\-P\-I\-::\-A\-P\-I\-Value} $>$}]{arguments}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_aa540843227946815a077ae1ae9b65b8d}
+Execute the given function with the specified arguments, if not function of that name which takes the specified arguments is found then an error will be thrown. 
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scribble_aa540843227946815a077ae1ae9b65b8d_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_ab4eb803a6ddfdba61656a2a8dd56b777}{\index{Scribble@{Scribble}!get\-Environment@{get\-Environment}}
+\index{get\-Environment@{get\-Environment}!Scribble@{Scribble}}
+\subsubsection[{get\-Environment}]{\setlength{\rightskip}{0pt plus 5cm}{\bf V\-M\-::\-Virtual\-Machine}$\ast$ Scribble\-::get\-Environment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_scribble_ab4eb803a6ddfdba61656a2a8dd56b777}
+Get the virtual machine context which has the packages loaded into it. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/Scribble.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/Scribble.\-cpp\end{DoxyCompactItemize}

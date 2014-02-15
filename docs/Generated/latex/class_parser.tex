@@ -1,0 +1,111 @@
+\hypertarget{class_parser}{\section{Parser Class Reference}
+\label{class_parser}\index{Parser@{Parser}}
+}
+
+
+{\ttfamily \#include $<$Parser.\-hpp$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{class_parser_a441ecac85709c72d4f23d850e6a68a4b}{test\-Function\-Equivilence} (Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ function, Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ other)
+\item 
+static Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ \hyperlink{class_parser_a0b76081a569a302b6bcc346b477d1a48}{find\-Function\-In\-Set} (Smart\-Pointer$<$ \hyperlink{class_function_reference}{Function\-Reference} $>$ to\-Find, Function\-Set const \&set)
+\item 
+static \hyperlink{class_type}{Type} $\ast$ \hyperlink{class_parser_aa83e86cc330a85fdc487447bf81672d1}{function\-Set\-Type} (Function\-Set const \&function\-Set)
+\item 
+static bool \hyperlink{class_parser_ac35fe3edecea6644af1f55f23a3840c4}{list\-Contains} (std\-::string target, std\-::vector$<$ std\-::string $>$ const \&list)
+\item 
+static std\-::map$<$ std\-::string, \\*
+Namespace\-Type $>$ \hyperlink{class_parser_aed96856c1befcaa93b41cd396c2c5c50}{compile} (std\-::string const \&file, std\-::map$<$ std\-::string, Namespace\-Type $>$ builtin\-Namespace)
+\item 
+\hypertarget{class_parser_ada7e2a0981fb1d7312307bc2b0a45856}{static std\-::map$<$ std\-::string, \\*
+Namespace\-Type $>$ {\bfseries compile\-Text} (std\-::string const \&text, std\-::string const \&package\-Name, std\-::map$<$ std\-::string, Namespace\-Type $>$ builtin\-Namespace)}\label{class_parser_ada7e2a0981fb1d7312307bc2b0a45856}
+
+\item 
+static std\-::string \hyperlink{class_parser_aed9dbea45bd44d05cd13eb5533204579}{get\-Uniform\-Path} (std\-::string const \&path)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_parser}{Parser} facade, hides the \hyperlink{class_parser}{Parser} implementation and provides function to convert between files and returns low level code. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_parser_aed96856c1befcaa93b41cd396c2c5c50}{\index{Parser@{Parser}!compile@{compile}}
+\index{compile@{compile}!Parser@{Parser}}
+\subsubsection[{compile}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, Namespace\-Type $>$ Parser\-::compile (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{file, }
+\item[{std\-::map$<$ std\-::string, Namespace\-Type $>$}]{builtin\-Namespace}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_parser_aed96856c1befcaa93b41cd396c2c5c50}
+Static function which will return the resulting namespace of the parsing of a given file. \hypertarget{class_parser_a0b76081a569a302b6bcc346b477d1a48}{\index{Parser@{Parser}!find\-Function\-In\-Set@{find\-Function\-In\-Set}}
+\index{find\-Function\-In\-Set@{find\-Function\-In\-Set}!Parser@{Parser}}
+\subsubsection[{find\-Function\-In\-Set}]{\setlength{\rightskip}{0pt plus 5cm}Smart\-Pointer$<$ {\bf Function} $>$ Parser\-::find\-Function\-In\-Set (
+\begin{DoxyParamCaption}
+\item[{Smart\-Pointer$<$ {\bf Function\-Reference} $>$}]{to\-Find, }
+\item[{Function\-Set const \&}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_parser_a0b76081a569a302b6bcc346b477d1a48}
+Attempt to find a function that meets the criteria of a reference within a function set. \hypertarget{class_parser_aa83e86cc330a85fdc487447bf81672d1}{\index{Parser@{Parser}!function\-Set\-Type@{function\-Set\-Type}}
+\index{function\-Set\-Type@{function\-Set\-Type}!Parser@{Parser}}
+\subsubsection[{function\-Set\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Parser\-::function\-Set\-Type (
+\begin{DoxyParamCaption}
+\item[{Function\-Set const \&}]{function\-Set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_parser_aa83e86cc330a85fdc487447bf81672d1}
+Get the return type of a function set 
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_parser_aa83e86cc330a85fdc487447bf81672d1_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_parser_aed9dbea45bd44d05cd13eb5533204579}{\index{Parser@{Parser}!get\-Uniform\-Path@{get\-Uniform\-Path}}
+\index{get\-Uniform\-Path@{get\-Uniform\-Path}!Parser@{Parser}}
+\subsubsection[{get\-Uniform\-Path}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Parser\-::get\-Uniform\-Path (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{current\-Path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_parser_aed9dbea45bd44d05cd13eb5533204579}
+\hyperlink{class_return}{Return} an internal uniform path of a given file ( For example ../src/\-Test and Test would return the same string ) if the file exists or return input string if the file does not exist.
+
+This function should return the uniform relative path to a file ( For example test/dog and ./test/dog should both evaluate to test/dog ) 
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{class_parser_aed9dbea45bd44d05cd13eb5533204579_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_parser_ac35fe3edecea6644af1f55f23a3840c4}{\index{Parser@{Parser}!list\-Contains@{list\-Contains}}
+\index{list\-Contains@{list\-Contains}!Parser@{Parser}}
+\subsubsection[{list\-Contains}]{\setlength{\rightskip}{0pt plus 5cm}bool Parser\-::list\-Contains (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{target, }
+\item[{std\-::vector$<$ std\-::string $>$ const \&}]{list}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_parser_ac35fe3edecea6644af1f55f23a3840c4}
+Search a list of strings and return true if it contains the target string \hypertarget{class_parser_a441ecac85709c72d4f23d850e6a68a4b}{\index{Parser@{Parser}!test\-Function\-Equivilence@{test\-Function\-Equivilence}}
+\index{test\-Function\-Equivilence@{test\-Function\-Equivilence}!Parser@{Parser}}
+\subsubsection[{test\-Function\-Equivilence}]{\setlength{\rightskip}{0pt plus 5cm}bool Parser\-::test\-Function\-Equivilence (
+\begin{DoxyParamCaption}
+\item[{Smart\-Pointer$<$ {\bf Function} $>$}]{function, }
+\item[{Smart\-Pointer$<$ {\bf Function} $>$}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_parser_a441ecac85709c72d4f23d850e6a68a4b}
+Check whether the set already contains an equivalent function 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Scribble/\-Parser/Parser.\-hpp\item 
+Scribble/\-Parser/Parser.\-cpp\end{DoxyCompactItemize}

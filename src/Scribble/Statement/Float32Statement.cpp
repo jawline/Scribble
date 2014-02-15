@@ -6,8 +6,9 @@
  */
 
 #include "Float32Statement.hpp"
-#include "Heap.hpp"
 #include <Scribble/Value/TypeManager.hpp>
+
+namespace ScribbleCore {
 
 Float32Statement::Float32Statement(int yylineno, std::string yysym,
 		float32_t val) :
@@ -30,4 +31,6 @@ void Float32Statement::checkTree(Type* functionType) {
 int Float32Statement::generateCode(int resultRegister, std::stringstream& generated) {
 	generated << "load " << val_ << "f $" << resultRegister << "\n";
 	return 1;
+}
+
 }

@@ -340,7 +340,15 @@ The length of an array can also be obtained after it is declared by writing len(
 
 \subsection{Structures}
 
-Structures are a predefined collection of fields with specific types.
+Structures are a predefined collection of fields with specific types. They are used to build complex types from collections of primitive data.
+
+A structure is defined by writing
+\begin{verbatim}
+type Name := struct {
+ FieldName : Type,
+ FieldName : Type
+}
+\end{verbatim}
 
 \section{Type Inference}
 

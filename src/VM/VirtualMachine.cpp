@@ -15,15 +15,12 @@
 
 namespace VM {
 
-VirtualMachine::VirtualMachine() {
+VirtualMachine::VirtualMachine() :
+		currentInstruction(0), stackBasePointer(0), stackCurrentPointer(0) {
 
 	//Allocate memory for registers
 	registers_ = new int64_t[vmNumRegisters];
 	registerReference_ = new bool[vmNumRegisters];
-
-	currentInstruction = 0;
-	stackCurrentPointer = 0;
-	stackBasePointer = 0;
 
 	//Initialize all the registers
 	for (unsigned int i = 0; i < vmNumRegisters; ++i) {
@@ -32,21 +29,41 @@ VirtualMachine::VirtualMachine() {
 	}
 
 	//Register all the primitive types
-	registerEntry("char", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("char", 1, false))));
+	registerEntry("char",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("char", 1, false))));
 
-	registerEntry("bool", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("bool", 1, false))));
+	registerEntry("bool",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("bool", 1, false))));
 
-	registerEntry("short", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("short", 2, false))));
+	registerEntry("short",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("short", 2, false))));
 
-	registerEntry("int", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("int", 4, false))));
+	registerEntry("int",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("int", 4, false))));
 
-	registerEntry("float32", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("float32", 4, false))));
+	registerEntry("float32",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("float32", 4, false))));
 
-	registerEntry("long", NamespaceEntry(SmartPointer< VMEntryType > (new VMEntryType("int", 8, false))));
+	registerEntry("long",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("int", 8, false))));
 
-	registerEntry("string", NamespaceEntry(SmartPointer< VMEntryType
-	> (new VMEntryType("string",
-					namespace_.find("char").getTypeReference()))));
+	registerEntry("string",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("string",
+									namespace_.find("char").getTypeReference()))));
 
 	//Allocate the stack
 	stack_ = new uint8_t[vmStackIncrease];
@@ -102,22 +119,23 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string& name) {
 	return entry.getTypeReference();
 }
 
-bool VirtualMachine::returnToPreviousFunction(SmartPointer<VMFunc>& currentFunction, InstructionSet& set) {
+bool VirtualMachine::returnToPreviousFunction(
+		SmartPointer<VMFunc>& currentFunction, InstructionSet& set) {
 
-	if (currentVmState_.size() > 0) {
+			if (currentVmState_.size() > 0) {
 
-		VMState top = currentVmState_.top();
-		currentVmState_.pop();
+				VMState top = currentVmState_.top();
+				currentVmState_.pop();
 
-		currentFunction = top.func_;
-		set = currentFunction->getInstructions();
-		currentInstruction = top.pc_;
+				currentFunction = top.func_;
+				set = currentFunction->getInstructions();
+				currentInstruction = top.pc_;
 
-		return true;
-	} else {
-		return false;
-	}
-}
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 void VirtualMachine::execute(std::string function) {
 
@@ -697,8 +715,7 @@ void VirtualMachine::execute(std::string function) {
 								>= arrayType->getStructureFields().size()) {
 					VM_PRINTF_FATAL(
 							"Index %i is not a valid index to the structure. The structure only takes %i elements\n",
-							indexReg,
-							arrayType->getStructureFields().size());
+							indexReg, arrayType->getStructureFields().size());
 				}
 
 				//Get the VM type of the field being set and the offset of it in bytes in the structure data.
@@ -765,8 +782,7 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"Index %li is not a valid index to the structure. The structure only takes %li elements\n",
-							(long int)registers_[indexReg],
-							(long int)arrayType->getStructureFields().size());
+							(long int)registers_[indexReg], (long int)arrayType->getStructureFields().size());
 
 				}
 
@@ -838,9 +854,7 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i max %li\n",
-							(long int)registers_[index], (int)offsetBytes,
-							(int)arrayType->arraySubtype()->getElementSize(),
-							(int)heap_.getSize(registers_[tgtArray]), (long int)max);
+							(long int)registers_[index], (int)offsetBytes, (int)arrayType->arraySubtype()->getElementSize(), (int)heap_.getSize(registers_[tgtArray]), (long int)max);
 
 				}
 
@@ -863,8 +877,7 @@ void VirtualMachine::execute(std::string function) {
 					break;
 
 				default:
-					VM_PRINTF_FATAL("%i is an unsupported move size\n", size)
-					;
+					VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
 					break;
 				}
 
@@ -915,9 +928,7 @@ void VirtualMachine::execute(std::string function) {
 
 					VM_PRINTF_FATAL(
 							"VM Array out of bounds exception accessing index %li offset %i element size %i size %i\n",
-							(long int ) registers_[index], (int)offsetBytes,
-							(int)arrayType->arraySubtype()->getElementSize(),
-							(int)heap_.getSize(registers_[tgtArray]));
+							(long int ) registers_[index], (int)offsetBytes, (int)arrayType->arraySubtype()->getElementSize(), (int)heap_.getSize(registers_[tgtArray]));
 
 				}
 
@@ -940,8 +951,7 @@ void VirtualMachine::execute(std::string function) {
 					break;
 
 				default:
-					VM_PRINTF_FATAL("%i is an unsupported move size\n", size)
-					;
+					VM_PRINTF_FATAL("%i is an unsupported move size\n", size);
 					break;
 
 				}
@@ -1035,7 +1045,8 @@ void VirtualMachine::execute(std::string function) {
 
 				//Check that the desired length is valid
 				if (registers_[lengthRegister] < 1) {
-					VM_PRINTF_FATAL("%s", "Cannot allocate array of length < 1");
+					VM_PRINTF_FATAL("%s",
+							"Cannot allocate array of length < 1");
 				}
 
 				long length = registers_[lengthRegister]
@@ -1048,8 +1059,7 @@ void VirtualMachine::execute(std::string function) {
 
 				VM_PRINTF_LOG(
 						"Allocated and created new array %li of size %li\n",
-						(long int)registers_[destinationRegister],
-						(long int)registers_[lengthRegister]);
+						(long int)registers_[destinationRegister], (long int)registers_[lengthRegister]);
 
 				currentInstruction += vmOpCodeSize;
 
@@ -1173,8 +1183,7 @@ void VirtualMachine::execute(std::string function) {
 
 			default: {
 				VM_PRINTF_FATAL("Invalid instruction %li. %ii\n",
-						currentInstruction,
-						instructionSet.getInst(currentInstruction));
+						currentInstruction, instructionSet.getInst(currentInstruction));
 				return;
 			}
 
@@ -1239,7 +1248,8 @@ void VirtualMachine::garbageCollection() {
 		long next = toInvestigate[i];
 
 		if (!heap_.validReference(next)) {
-			VM_PRINTF_FATAL("ERROR: Reference at register %i is not valid\n", i);
+			VM_PRINTF_FATAL("ERROR: Reference at register %i is not valid\n",
+					i);
 		}
 
 		SmartPointer<VMEntryType> nextType = heap_.getType(next);

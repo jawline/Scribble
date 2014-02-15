@@ -10,6 +10,8 @@
 #include "Statement.hpp"
 #include <vector>
 
+namespace ScribbleCore {
+
 class WhileStatement: public Statement {
 private:
 	SafeStatement condition_;
@@ -25,5 +27,7 @@ public:
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* WHILESTATEMENT_HPP_ */

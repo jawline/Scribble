@@ -20,9 +20,9 @@ public:
 		return API::APIValue();
 	}
 
-	Type* getType();
+	ScribbleCore::Type* getType();
 	const unsigned int numArgs();
-	Type* argType(unsigned int arg);
+	ScribbleCore::Type* argType(unsigned int arg);
 
 	virtual std::string getName() {
 		return "NativeWriteString";

@@ -9,6 +9,8 @@
 #define ARRAYLENGTHSTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 /**
  * This statement takes a statement which returns an array and returns the length of that array.
  */
@@ -44,5 +46,7 @@ public:
 
 	virtual Type* type();
 };
+
+}
 
 #endif /* ARRAYLENGTHSTATEMENT_HPP_ */

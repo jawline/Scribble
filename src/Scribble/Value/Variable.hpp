@@ -2,11 +2,14 @@
 #define _VARIABLE_H_
 #include <Scribble/Parser/TypeReference.hpp>
 #include <Pointers/SmartPointer.hpp>
-#include "Value.hpp"
 #include <map>
 
+namespace ScribbleCore {
+
 /**
- *
+ * The variable class is used to store meta data about a
+ * variable when it is defined in a package function ( It's type
+ * and position in registers )
  */
 
 class Variable {
@@ -26,5 +29,7 @@ public:
 	int getPosition();
 
 };
+
+}
 
 #endif //_VARIABLE_H_

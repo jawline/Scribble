@@ -10,6 +10,8 @@
 #include "Statement.hpp"
 #include <types.h>
 
+namespace ScribbleCore {
+
 class Float32Statement: public Statement {
 private:
 	float32_t val_;
@@ -22,5 +24,7 @@ public:
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* FLOATSTATEMENT_HPP_ */

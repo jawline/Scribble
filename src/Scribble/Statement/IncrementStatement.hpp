@@ -10,6 +10,8 @@
 #include "Statement.hpp"
 #include <Scribble/Value/Variable.hpp>
 
+namespace ScribbleCore {
+
 enum IncrementType {
 	Increment, Decrement
 };
@@ -19,7 +21,6 @@ private:
 	SmartPointer<Variable> variable_;
 	IncrementType operator_;
 	bool post_;
-	Value* oneVal_;
 
 public:
 
@@ -31,5 +32,7 @@ public:
 	virtual Type* type();
 	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* INCREMENTSTATEMENT_HPP_ */

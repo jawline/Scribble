@@ -16,18 +16,18 @@ namespace API {
 
 class APIFunction : public Function {
 private:
-	Type* returnType_;
-	std::vector<Type*> types_;
+	ScribbleCore::Type* returnType_;
+	std::vector<ScribbleCore::Type*> types_;
 	API::APIValue (*fn_)(API::APIValue*, VM::VirtualMachine* virt);
 
 public:
 
-	APIFunction(std::string name, std::string package, Type* returnType, std::vector<Type*> types,
+	APIFunction(std::string name, std::string package, ScribbleCore::Type* returnType, std::vector<ScribbleCore::Type*> types,
 			API::APIValue (*fn)(API::APIValue*, VM::VirtualMachine* virt));
 
 	virtual ~APIFunction();
 
-	Type* getType() {
+	ScribbleCore::Type* getType() {
 		return returnType_;
 	}
 
@@ -35,7 +35,7 @@ public:
 		return types_.size();
 	}
 
-	Type* argType(unsigned int arg) {
+	ScribbleCore::Type* argType(unsigned int arg) {
 		return types_[arg];
 	}
 

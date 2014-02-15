@@ -9,6 +9,8 @@
 #define ASSIGNARRAYSTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 /**
  * Assigns element assign at the specified position in the given array.
  */
@@ -56,5 +58,7 @@ public:
 	int generateCode(int resultRegister, std::stringstream& generated);
 
 };
+
+}
 
 #endif /* ASSIGNARRAYSTATEMENT_HPP_ */

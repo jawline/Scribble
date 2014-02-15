@@ -6,10 +6,9 @@
  */
 
 #include "AssignArrayStatement.hpp"
-#include "Heap.hpp"
-#include <Scribble/Value/Array.hpp>
-#include <Scribble/Value/Int.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 AssignArrayStatement::AssignArrayStatement(int lineno, std::string text,
 		SafeStatement array, SafeStatement assign, SafeStatement position) :
@@ -31,15 +30,24 @@ void AssignArrayStatement::checkTree(Type* functionType) {
 	position_->checkTree(functionType);
 
 	if (array_->type()->getType() != Array) {
-		throw StatementException(this, std::string("Not an array, Type ") + array_->type()->getTypeName() + " given when an array was expected.");
+		throw StatementException(this,
+				std::string("Not an array, Type ")
+						+ array_->type()->getTypeName()
+						+ " given when an array was expected.");
 	}
 
 	if (position_->type()->getType() != Int) {
-		throw StatementException(this, std::string("Type ") + position_->type()->getTypeName() + " cannot be used as an index. Index must be an integer");
+		throw StatementException(this,
+				std::string("Type ") + position_->type()->getTypeName()
+						+ " cannot be used as an index. Index must be an integer");
 	}
 
 	if (!array_->type()->getSubtype()->Equals(toAssign_->type())) {
-		throw StatementException(this, std::string("Value given is of type ") + toAssign_->type()->getTypeName() + " which differs from expected type " + array_->type()->getSubtype()->getTypeName());
+		throw StatementException(this,
+				std::string("Value given is of type ")
+						+ toAssign_->type()->getTypeName()
+						+ " which differs from expected type "
+						+ array_->type()->getSubtype()->getTypeName());
 	}
 }
 
@@ -62,8 +70,11 @@ int AssignArrayStatement::generateCode(int resultRegister,
 	generated << "popr $" << VM::vmTempRegisterOne << " 1\n";
 	instrs += 2;
 
-	generated << "aset $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << " $" << VM::vmTempRegisterThree << "\n";
+	generated << "aset $" << VM::vmTempRegisterOne << " $"
+			<< VM::vmTempRegisterTwo << " $" << VM::vmTempRegisterThree << "\n";
 	instrs++;
 
 	return instrs;
+}
+
 }

@@ -9,8 +9,6 @@
 #define READLINE_HPP_
 #include "Function.hpp"
 #include <Scribble/Value/TypeManager.hpp>
-#include <Scribble/Value/String.hpp>
-#include <Scribble/Statement/Heap.hpp>
 #include <iostream>
 #include <string>
 
@@ -24,15 +22,15 @@ public:
 	/**
 	 * Get the return type of the function.
 	 */
-	virtual Type* getType() {
-		return getStringType();
+	virtual ScribbleCore::Type* getType() {
+		return ScribbleCore::getStringType();
 	}
 
 	virtual const unsigned int numArgs() {
 		return 0;
 	}
 
-	virtual Type* argType(unsigned int arg) {
+	virtual ScribbleCore::Type* argType(unsigned int arg) {
 		return nullptr;
 	}
 

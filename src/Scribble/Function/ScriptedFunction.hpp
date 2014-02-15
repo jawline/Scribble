@@ -14,6 +14,8 @@
 #include <Scribble/Parser/TypeReference.hpp>
 #include <SASM/Parser.hpp>
 
+namespace ScribbleCore {
+
 class ScriptedFunction: public Function {
 private:
 	TypeReference fType_;SmartPointer<Variable> templateReturn_;
@@ -57,5 +59,7 @@ public:
 		return false;
 	}
 };
+
+}
 
 #endif /* SCRIPTEDFUNCTION_HPP_ */

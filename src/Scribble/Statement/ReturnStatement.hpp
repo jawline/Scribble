@@ -10,14 +10,7 @@
 #include "Statement.hpp"
 #include <Scribble/Value/TypeManager.hpp>
 
-class Return {
-public:
-	Return(Value* v) {
-		val_ = v;
-	}
-
-	Value* val_;
-};
+namespace ScribbleCore {
 
 class ReturnStatement: public Statement {
 private:
@@ -34,5 +27,7 @@ public:
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* RETURNSTATEMENT_HPP_ */

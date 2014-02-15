@@ -7,10 +7,10 @@
 
 #include "WhileStatement.hpp"
 #include <sstream>
-#include <Scribble/Value/Void.hpp>
-#include <Scribble/Value/Bool.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 WhileStatement::WhileStatement(int lineNo, std::string sym,
 		SafeStatement condition, std::vector<SafeStatement> statements) :
@@ -72,4 +72,6 @@ int WhileStatement::generateCode(int resultRegister,
 	numInstr++;
 
 	return numInstr;
+}
+
 }

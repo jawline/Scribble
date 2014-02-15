@@ -10,10 +10,13 @@
 #include "Type.hpp"
 #include <vector>
 
+namespace ScribbleCore {
+
 /**
  * Class used to ensure that only one of every type is created
  * ( And therefore the pointers will alyways be to that type and unique to that type).
  */
+
 class TypeManager {
 private:
 	std::vector<Type*> types_;
@@ -41,5 +44,7 @@ Type* getIntType();
 Type* getBooleanType();
 Type* getVoidType();
 Type* getFloat32Type();
+
+}
 
 #endif /* TYPEMANAGER_HPP_ */

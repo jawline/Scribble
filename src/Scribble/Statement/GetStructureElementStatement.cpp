@@ -6,10 +6,10 @@
  */
 
 #include "GetStructureElementStatement.hpp"
-#include "Heap.hpp"
-#include <Scribble/Value/Structure.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 GetStructureElementStatement::GetStructureElementStatement(int yylineno,
 		std::string sym, SafeStatement stmt, std::string name) :
@@ -70,4 +70,6 @@ int GetStructureElementStatement::generateCode(int resultRegister,
 	instrs++;
 
 	return instrs;
+}
+
 }

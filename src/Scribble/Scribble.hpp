@@ -37,7 +37,7 @@ private:
 	 * Stores the compiled code
 	 */
 
-	std::map<std::string, NamespaceType> compiledPackages;
+	std::map<std::string, ScribbleCore::NamespaceType> compiledPackages;
 
 	/**
 	 * Loads the package using code as init code.

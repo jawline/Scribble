@@ -9,6 +9,8 @@
 #define ARRAYSTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 /**
  * ArrayStatement which returns a new Array of length returned by the supplied statement.
  */
@@ -51,5 +53,7 @@ public:
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* ARRAYSTATEMENT_HPP_ */

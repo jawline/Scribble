@@ -10,6 +10,8 @@
 #include <API/Function.hpp>
 #include <Scribble/Parser/TypeReference.hpp>
 
+namespace ScribbleCore {
+
 enum EntryType {
 	EmptyEntry,
 	FunctionSetEntry,
@@ -33,5 +35,7 @@ public:
 	void addFunctionToSet(SafeFunction f);
 	TypeReference getType();
 };
+
+}
 
 #endif /* NAMESPACEENTRY_HPP_ */

@@ -1,7 +1,6 @@
 #ifndef _FUNCTION_H_
 #define _FUNCTION_H_
 #include <Pointers/SmartPointer.hpp>
-#include <Scribble/Value/Value.hpp>
 #include <vector>
 #include <VM/Constants.hpp>
 #include <VM/VMFunc.hpp>
@@ -78,7 +77,7 @@ public:
 	 * Get the return type of the function
 	 */
 
-	virtual Type* getType() = 0;
+	virtual ScribbleCore::Type* getType() = 0;
 
 	/**
 	 * Return the number of arguments the function takes
@@ -90,7 +89,7 @@ public:
 	 * Get the expected type of the specified argument
 	 */
 
-	virtual Type* argType(unsigned int arg) = 0;
+	virtual ScribbleCore::Type* argType(unsigned int arg) = 0;
 
 	virtual int debugCode(std::stringstream& gen) {
 		gen << std::string("#NativeFunction");

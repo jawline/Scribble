@@ -6,14 +6,14 @@
  */
 
 #include "IncrementStatement.hpp"
-#include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 IncrementStatement::IncrementStatement(int line, std::string sym,
 		SmartPointer<Variable> variable, IncrementType op, bool post) :
 		Statement(line, sym), variable_(variable), operator_(op), post_(post) {
-			oneVal_ = new IntValue(1);
 		}
 
 IncrementStatement::~IncrementStatement() {
@@ -109,4 +109,6 @@ int IncrementStatement::generateCode(int resultRegister,
 	}
 
 	return instrs;
+}
+
 }

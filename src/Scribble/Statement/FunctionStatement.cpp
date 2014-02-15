@@ -2,6 +2,8 @@
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
 
+namespace ScribbleCore {
+
 void FunctionStatement::checkTree(Type* functionType) {
 
 	if (func_->getFunction().get() == nullptr) {
@@ -101,4 +103,6 @@ int FunctionStatement::generateCode(int resultRegister,
 	numInstructions += 1;
 
 	return numInstructions;
+}
+
 }

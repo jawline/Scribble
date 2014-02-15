@@ -2,8 +2,9 @@
 #define _INT_STATEMENT_DEF_H_
 #include <sstream>
 #include "Statement.hpp"
-#include <Scribble/Value/Int.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+
+namespace ScribbleCore {
 
 class IntStatement: public Statement {
 private:
@@ -19,5 +20,7 @@ public:
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif //_INT_STATEMENT_DEF_H_

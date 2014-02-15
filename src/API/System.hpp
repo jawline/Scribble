@@ -9,6 +9,6 @@
 #define SYSTEM_HPP_
 #include <VM/VMNamespace.hpp>
 
-void generateSystemPackage(std::map<std::string, NamespaceType>& builtin);
+void generateSystemPackage(std::map<std::string, ScribbleCore::NamespaceType>& builtin);
 
 #endif /* SYSTEM_HPP_ */

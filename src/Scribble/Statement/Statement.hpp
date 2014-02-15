@@ -2,11 +2,13 @@
 #define _STATEMENT_DEF_H_
 #include "StatementException.hpp"
 #include <Pointers/SmartPointer.hpp>
-#include <Scribble/Value/Value.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
 #include <sstream>
+#include "../Value/Type.hpp"
+
+namespace ScribbleCore {
 
 class Statement {
 private:
@@ -46,5 +48,7 @@ public:
 };
 
 typedef SmartPointer<Statement> SafeStatement;
+
+}
 
 #endif //_STATEMENT_DEF_H_

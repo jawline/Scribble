@@ -1,0 +1,134 @@
+\hypertarget{class_scripted_function}{\section{Scripted\-Function Class Reference}
+\label{class_scripted_function}\index{Scripted\-Function@{Scripted\-Function}}
+}
+
+
+Inheritance diagram for Scripted\-Function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_scripted_function__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scripted\-Function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_scripted_function__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_scripted_function_a5c43e8fe3756e782f33bf9ed5dbcee9b}{{\bfseries Scripted\-Function} (std\-::string name, int version, std\-::string name\-Space, Type\-Reference function\-Type, Smart\-Pointer$<$ \hyperlink{class_variable}{Variable} $>$ template\-Return, std\-::vector$<$ Smart\-Pointer$<$ \hyperlink{class_statement}{Statement} $>$$>$ statements, std\-::vector$<$ Smart\-Pointer$<$ \hyperlink{class_variable}{Variable} $>$$>$ variable\-Templates, std\-::vector$<$ Smart\-Pointer$<$ \hyperlink{class_variable}{Variable} $>$$>$ variables)}\label{class_scripted_function_a5c43e8fe3756e782f33bf9ed5dbcee9b}
+
+\item 
+\hyperlink{class_type}{Type} $\ast$ \hyperlink{class_scripted_function_a3841e0c0f261be3199214c36a33e3e68}{get\-Type} ()
+\item 
+const unsigned int \hyperlink{class_scripted_function_a33e6157dbf33043399a981b2f30c3957}{num\-Args} ()
+\item 
+\hyperlink{class_type}{Type} $\ast$ \hyperlink{class_scripted_function_a55acb6fc25df756eb7a2f63149a4061e}{arg\-Type} (unsigned int arg)
+\item 
+\hypertarget{class_scripted_function_aa3846de822d0e552da2f8f8652fae958}{void {\bfseries check} ()}\label{class_scripted_function_aa3846de822d0e552da2f8f8652fae958}
+
+\item 
+\hypertarget{class_scripted_function_af1f2f8366c694d4fb2876c8a824f8a59}{int {\bfseries debug\-Code} (std\-::stringstream \&gen)}\label{class_scripted_function_af1f2f8366c694d4fb2876c8a824f8a59}
+
+\item 
+Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_func}{V\-M\-::\-V\-M\-Func} $>$ \hyperlink{class_scripted_function_a983fdbee28bd4c16bd05713be5aef312}{generate\-Scripted\-Func} ()
+\item 
+bool \hyperlink{class_scripted_function_acf8e99d7cf657c2dd8e0e596e09ecc57}{is\-Native\-Function} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scripted_function_a55acb6fc25df756eb7a2f63149a4061e}{\index{Scripted\-Function@{Scripted\-Function}!arg\-Type@{arg\-Type}}
+\index{arg\-Type@{arg\-Type}!ScriptedFunction@{Scripted\-Function}}
+\subsubsection[{arg\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scripted\-Function\-::arg\-Type (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scripted_function_a55acb6fc25df756eb7a2f63149a4061e}
+Get the expected type of the specified argument 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a98bcfb57bf4b71ab7acb3a2be56e0413}{A\-P\-I\-::\-Function}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scripted_function_a55acb6fc25df756eb7a2f63149a4061e_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scripted_function_a983fdbee28bd4c16bd05713be5aef312}{\index{Scripted\-Function@{Scripted\-Function}!generate\-Scripted\-Func@{generate\-Scripted\-Func}}
+\index{generate\-Scripted\-Func@{generate\-Scripted\-Func}!ScriptedFunction@{Scripted\-Function}}
+\subsubsection[{generate\-Scripted\-Func}]{\setlength{\rightskip}{0pt plus 5cm}Smart\-Pointer$<${\bf V\-M\-::\-V\-M\-Func}$>$ Scripted\-Function\-::generate\-Scripted\-Func (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_scripted_function_a983fdbee28bd4c16bd05713be5aef312}
+If the function is scripted and not native this will generate a V\-M\-Func for it. 
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_a133061933b79944d3c2adb08c8d50a71}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_scripted_function_a3841e0c0f261be3199214c36a33e3e68}{\index{Scripted\-Function@{Scripted\-Function}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!ScriptedFunction@{Scripted\-Function}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scripted\-Function\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scripted_function_a3841e0c0f261be3199214c36a33e3e68}
+Get the return type of the function 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a65ec0c8e749833d1db050ef9d310107a}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_scripted_function_acf8e99d7cf657c2dd8e0e596e09ecc57}{\index{Scripted\-Function@{Scripted\-Function}!is\-Native\-Function@{is\-Native\-Function}}
+\index{is\-Native\-Function@{is\-Native\-Function}!ScriptedFunction@{Scripted\-Function}}
+\subsubsection[{is\-Native\-Function}]{\setlength{\rightskip}{0pt plus 5cm}bool Scripted\-Function\-::is\-Native\-Function (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_scripted_function_acf8e99d7cf657c2dd8e0e596e09ecc57}
+Returns true if this is a function written in Native code. 
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_a450fc79d97dd8393bf94aead888592c3}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_scripted_function_a33e6157dbf33043399a981b2f30c3957}{\index{Scripted\-Function@{Scripted\-Function}!num\-Args@{num\-Args}}
+\index{num\-Args@{num\-Args}!ScriptedFunction@{Scripted\-Function}}
+\subsubsection[{num\-Args}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int Scripted\-Function\-::num\-Args (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scripted_function_a33e6157dbf33043399a981b2f30c3957}
+\hyperlink{class_return}{Return} the number of arguments the function takes 
+
+Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77}{A\-P\-I\-::\-Function}.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scripted_function_a33e6157dbf33043399a981b2f30c3957_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Scribble/\-Function/Scripted\-Function.\-hpp\item 
+Scribble/\-Function/Scripted\-Function.\-cpp\end{DoxyCompactItemize}

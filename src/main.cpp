@@ -60,16 +60,22 @@ int main(int argc, char* argv[]) {
 
 	try {
 
+		//Load the target package
 		Scribble environment(targetFile);
 
-		std::vector<API::APIValue> args;
-
+		//Get the current time
 		double vmStart = getCPUTime();
-		API::APIValue val = environment.execute("main", args);
+
+		//Execute func main()
+		API::APIValue val = environment.execute("main");
+
+		//Get the new current time
 		double vmEnd = getCPUTime();
 
+		//Print out the time the execution took
 		printf("VM execution took time %f\n", vmEnd - vmStart);
-	} catch (ParserException& ex) {
+
+	} catch (ScribbleCore::ParserException& ex) {
 		printf("Error: %s\n", ex.what());
 	}
 

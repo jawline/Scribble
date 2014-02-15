@@ -41,12 +41,12 @@ private:
 	SmartPointer<VM::VMEntryType> vType_;
 	SmartPointer<uint8_t> data_;
 	int64_t val_;
-	Type* cType_;
+	ScribbleCore::Type* cType_;
 
 public:
-	APIValue() {cType_ = getVoidType(); val_ = 0; vType_ = nullptr; data_ = nullptr;}
-	APIValue(Type* type, int64_t val);
-	APIValue(Type* type, SmartPointer<VM::VMEntryType> vmType, SmartPointer<uint8_t> data, long val);
+	APIValue() {cType_ = ScribbleCore::getVoidType(); val_ = 0; vType_ = nullptr; data_ = nullptr;}
+	APIValue(ScribbleCore::Type* type, int64_t val);
+	APIValue(ScribbleCore::Type* type, SmartPointer<VM::VMEntryType> vmType, SmartPointer<uint8_t> data, long val);
 	virtual ~APIValue();
 
 	/**
@@ -110,7 +110,7 @@ public:
 		return data_.get();
 	}
 
-	Type* getType() {
+	ScribbleCore::Type* getType() {
 		return cType_;
 	}
 
@@ -148,11 +148,11 @@ public:
 
 	APIValue getField(std::string const& name, VM::VirtualMachine* vm) {
 
-		if (cType_->getType() != StructureType) {
+		if (cType_->getType() != ScribbleCore::StructureType) {
 			return APIValue();
 		}
 
-		StructureInfo* info = (StructureInfo*) cType_;
+		ScribbleCore::StructureInfo* info = (ScribbleCore::StructureInfo*) cType_;
 
 		int index = info->getIndex(name);
 
@@ -203,7 +203,7 @@ public:
 
 	unsigned int getArrayLength(VM::VirtualMachine* vm) {
 
-		if (cType_->getType() != ArrayType) {
+		if (cType_->getType() != ScribbleCore::Array) {
 			return 0;
 		}
 
@@ -216,7 +216,7 @@ public:
 
 	APIValue getIndex(unsigned int index, VM::VirtualMachine* vm) {
 
-		if (cType_->getType() != Array) {
+		if (cType_->getType() != ScribbleCore::Array) {
 			return API::APIValue();
 		}
 
@@ -260,11 +260,11 @@ public:
 
 	void setField(std::string const& name, API::APIValue val, VM::VirtualMachine* vm) {
 
-		if (cType_->getType() != StructureType) {
+		if (cType_->getType() != ScribbleCore::StructureType) {
 			return;
 		}
 
-		StructureInfo* info = (StructureInfo*) cType_;
+		ScribbleCore::StructureInfo* info = (ScribbleCore::StructureInfo*) cType_;
 
 		int index = info->getIndex(name);
 
@@ -300,7 +300,7 @@ public:
 
 	void setIndex(unsigned int index, API::APIValue val, VM::VirtualMachine* vm) {
 
-		if (cType_->getType() != Array) {
+		if (cType_->getType() != ScribbleCore::Array) {
 			return;
 		}
 
@@ -346,11 +346,11 @@ public:
 	}
 
 	static API::APIValue makeInt32(int val) {
-		return API::APIValue(getIntType(), val);
+		return API::APIValue(ScribbleCore::getIntType(), val);
 	}
 
 	static API::APIValue makeFloat32(float32_t val) {
-		return API::APIValue(getFloat32Type(), *((long*)&val) );
+		return API::APIValue(ScribbleCore::getFloat32Type(), *((long*)&val) );
 	}
 
 	static API::APIValue makeString(std::string const& text, VM::VirtualMachine* vm) {
@@ -360,7 +360,7 @@ public:
 				text.length() + 1, (uint8_t*) text.c_str());
 
 		//Make a new API value from it
-		return API::APIValue(getStringType(), vm->findType(cStringTypename),
+		return API::APIValue(ScribbleCore::getStringType(), vm->findType(cStringTypename),
 				vm->getHeap().getSmartPointer(heapEntry), heapEntry);
 	}
 };

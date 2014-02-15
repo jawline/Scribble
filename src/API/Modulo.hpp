@@ -31,7 +31,7 @@ public:
 	 * Get the return type of the function.
 	 */
 
-	virtual Type* getType();
+	virtual ScribbleCore::Type* getType();
 
 	/**
 	 * Get the number of arguments (2)
@@ -43,7 +43,7 @@ public:
 	 * Get the arg type for a given argument ( Both Integer)
 	 */
 
-	virtual Type* argType(unsigned int arg);
+	virtual ScribbleCore::Type* argType(unsigned int arg);
 
 };
 

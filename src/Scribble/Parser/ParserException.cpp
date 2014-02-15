@@ -7,13 +7,19 @@
 
 #include "ParserException.hpp"
 
-ParserException::ParserException(std::string file, std::string details) : file_(file), details_(details) {
-	error_ = std::string("Parser Exception in package \"") + file_ + "\": " + details_;
+namespace ScribbleCore {
+
+ParserException::ParserException(std::string file, std::string details) :
+		file_(file), details_(details) {
+	error_ = std::string("Parser Exception in package \"") + file_ + "\": "
+			+ details_;
 }
 
-ParserException::~ParserException() throw() {
+ParserException::~ParserException() throw () {
 }
 
-const char* ParserException::what() const throw() {
+const char* ParserException::what() const throw () {
 	return error_.c_str();
+}
+
 }

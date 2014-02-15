@@ -11,6 +11,8 @@
 #include <Pointers/SmartPointer.hpp>
 #include <vector>
 
+namespace ScribbleCore {
+
 class ForStatement: public Statement {
 private:
 	SafeStatement initial_;
@@ -28,5 +30,7 @@ public:
 	virtual int generateBody(std::stringstream& generated);
 	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* FORSTATEMENT_HPP_ */

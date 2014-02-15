@@ -1,0 +1,87 @@
+\hypertarget{class_array_length_statement}{\section{Array\-Length\-Statement Class Reference}
+\label{class_array_length_statement}\index{Array\-Length\-Statement@{Array\-Length\-Statement}}
+}
+
+
+{\ttfamily \#include $<$Array\-Length\-Statement.\-hpp$>$}
+
+
+
+Inheritance diagram for Array\-Length\-Statement\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_array_length_statement__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Array\-Length\-Statement\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{class_array_length_statement__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_array_length_statement_ae4b5d4f1b7b2c1437e3bc1c416498e58}{Array\-Length\-Statement} (int line, std\-::string text, Safe\-Statement exp)
+\item 
+\hypertarget{class_array_length_statement_a2cd373624cdf8a6b3628dd90ba0ff0b7}{virtual void {\bfseries check\-Tree} (\hyperlink{class_type}{Type} $\ast$function\-Type)}\label{class_array_length_statement_a2cd373624cdf8a6b3628dd90ba0ff0b7}
+
+\item 
+\hypertarget{class_array_length_statement_afeab6ae19e8f90fb3aaa108aa4d9faf6}{virtual int {\bfseries generate\-Code} (int result\-Register, std\-::stringstream \&generated)}\label{class_array_length_statement_afeab6ae19e8f90fb3aaa108aa4d9faf6}
+
+\item 
+virtual \hyperlink{class_type}{Type} $\ast$ \hyperlink{class_array_length_statement_ae9d1262af8041ac185d73d26111cce7c}{type} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This statement takes a statement which returns an array and returns the length of that array. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_array_length_statement_ae4b5d4f1b7b2c1437e3bc1c416498e58}{\index{Array\-Length\-Statement@{Array\-Length\-Statement}!Array\-Length\-Statement@{Array\-Length\-Statement}}
+\index{Array\-Length\-Statement@{Array\-Length\-Statement}!ArrayLengthStatement@{Array\-Length\-Statement}}
+\subsubsection[{Array\-Length\-Statement}]{\setlength{\rightskip}{0pt plus 5cm}Array\-Length\-Statement\-::\-Array\-Length\-Statement (
+\begin{DoxyParamCaption}
+\item[{int}]{line, }
+\item[{std\-::string}]{text, }
+\item[{Safe\-Statement}]{exp}
+\end{DoxyParamCaption}
+)}}\label{class_array_length_statement_ae4b5d4f1b7b2c1437e3bc1c416498e58}
+Construct an array length statement. 
+\begin{DoxyParams}{Parameters}
+{\em line} & The line number on which the line occurs. \\
+\hline
+{\em text} & The The symbol in which this statement occurs. \\
+\hline
+{\em exp} & The array expression. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_array_length_statement_ae9d1262af8041ac185d73d26111cce7c}{\index{Array\-Length\-Statement@{Array\-Length\-Statement}!type@{type}}
+\index{type@{type}!ArrayLengthStatement@{Array\-Length\-Statement}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Array\-Length\-Statement\-::type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_array_length_statement_ae9d1262af8041ac185d73d26111cce7c}
+The type will be an integer. \begin{DoxyReturn}{Returns}
+The int type. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_statement}{Statement}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Scribble/\-Statement/Array\-Length\-Statement.\-hpp\item 
+Scribble/\-Statement/Array\-Length\-Statement.\-cpp\end{DoxyCompactItemize}

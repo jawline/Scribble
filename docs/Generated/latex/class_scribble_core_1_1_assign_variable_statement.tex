@@ -1,0 +1,90 @@
+\hypertarget{class_scribble_core_1_1_assign_variable_statement}{\section{Scribble\-Core\-:\-:Assign\-Variable\-Statement Class Reference}
+\label{class_scribble_core_1_1_assign_variable_statement}\index{Scribble\-Core\-::\-Assign\-Variable\-Statement@{Scribble\-Core\-::\-Assign\-Variable\-Statement}}
+}
+
+
+{\ttfamily \#include $<$Assign\-Variable.\-hpp$>$}
+
+
+
+Inheritance diagram for Scribble\-Core\-:\-:Assign\-Variable\-Statement\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{class_scribble_core_1_1_assign_variable_statement__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scribble\-Core\-:\-:Assign\-Variable\-Statement\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{class_scribble_core_1_1_assign_variable_statement__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scribble_core_1_1_assign_variable_statement_a4409d9bc843516435a02a9ce55041346}{Assign\-Variable\-Statement} (int line\-No, std\-::string sym, Smart\-Pointer$<$ \hyperlink{class_scribble_core_1_1_variable}{Variable} $>$ var, Safe\-Statement exp)
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_assign_variable_statement_a809f7220af1536d0912a68e6880e5c81}{type} ()
+\item 
+\hypertarget{class_scribble_core_1_1_assign_variable_statement_a9ad4d49c7f0691aad680cb30711cd149}{void {\bfseries check\-Tree} (\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$function\-Type)}\label{class_scribble_core_1_1_assign_variable_statement_a9ad4d49c7f0691aad680cb30711cd149}
+
+\item 
+\hypertarget{class_scribble_core_1_1_assign_variable_statement_a2cd7a3d55227d0feaf7b622c02b521cb}{int {\bfseries generate\-Code} (int result\-Register, std\-::stringstream \&generated)}\label{class_scribble_core_1_1_assign_variable_statement_a2cd7a3d55227d0feaf7b622c02b521cb}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Set the value of a given variable to the result of the given statement and also return it. ( So sys.\-Write(A \-:= \char`\"{}\-Hello\char`\"{}); is valid ) 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scribble_core_1_1_assign_variable_statement_a4409d9bc843516435a02a9ce55041346}{\index{Scribble\-Core\-::\-Assign\-Variable\-Statement@{Scribble\-Core\-::\-Assign\-Variable\-Statement}!Assign\-Variable\-Statement@{Assign\-Variable\-Statement}}
+\index{Assign\-Variable\-Statement@{Assign\-Variable\-Statement}!ScribbleCore::AssignVariableStatement@{Scribble\-Core\-::\-Assign\-Variable\-Statement}}
+\subsubsection[{Assign\-Variable\-Statement}]{\setlength{\rightskip}{0pt plus 5cm}Scribble\-Core\-::\-Assign\-Variable\-Statement\-::\-Assign\-Variable\-Statement (
+\begin{DoxyParamCaption}
+\item[{int}]{line\-No, }
+\item[{std\-::string}]{sym, }
+\item[{Smart\-Pointer$<$ {\bf Variable} $>$}]{var, }
+\item[{Safe\-Statement}]{exp}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_core_1_1_assign_variable_statement_a4409d9bc843516435a02a9ce55041346}
+Construct a \hyperlink{class_scribble_core_1_1_assign_variable_statement}{Assign\-Variable\-Statement}. 
+\begin{DoxyParams}{Parameters}
+{\em line\-No} & the line number which this occurs on. \\
+\hline
+{\em sym} & The symbol this was constructed from. \\
+\hline
+{\em var} & The variable to modify \\
+\hline
+{\em exp} & The expression which the variable is set to the result of. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scribble_core_1_1_assign_variable_statement_a809f7220af1536d0912a68e6880e5c81}{\index{Scribble\-Core\-::\-Assign\-Variable\-Statement@{Scribble\-Core\-::\-Assign\-Variable\-Statement}!type@{type}}
+\index{type@{type}!ScribbleCore::AssignVariableStatement@{Scribble\-Core\-::\-Assign\-Variable\-Statement}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type}$\ast$ Scribble\-Core\-::\-Assign\-Variable\-Statement\-::type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_scribble_core_1_1_assign_variable_statement_a809f7220af1536d0912a68e6880e5c81}
+Returns the type of the variable. \begin{DoxyReturn}{Returns}
+The type of the variable/expression. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_scribble_core_1_1_statement}{Scribble\-Core\-::\-Statement}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/Assign\-Variable.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/Assign\-Variable.\-cpp\end{DoxyCompactItemize}

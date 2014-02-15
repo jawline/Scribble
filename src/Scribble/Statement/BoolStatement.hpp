@@ -9,6 +9,8 @@
 #define BOOLSTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 /**
  * Returns a boolean value.
  */
@@ -41,5 +43,7 @@ public:
 	void checkTree(Type* functionType);
 	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* BOOLSTATEMENT_HPP_ */

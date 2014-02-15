@@ -21,9 +21,9 @@ public:
 
 	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
-	Type* getType();
+	ScribbleCore::Type* getType();
 	const unsigned int numArgs();
-	Type* argType(unsigned int arg);
+	ScribbleCore::Type* argType(unsigned int arg);
 
 };
 

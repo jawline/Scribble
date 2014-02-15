@@ -8,6 +8,8 @@
 #include "Type.hpp"
 #include <Scribble/Parser/TypeReference.hpp>
 
+namespace ScribbleCore {
+
 Type::Type(ValueType rawType, TypeReference subType) :
 		rawType_(rawType), subType_(subType) {
 
@@ -56,4 +58,6 @@ Type* Type::getSubtype() {
 
 TypeReference Type::getSubtypeReference() {
 	return subType_;
+}
+
 }

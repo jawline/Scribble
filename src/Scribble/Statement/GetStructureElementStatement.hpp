@@ -10,6 +10,8 @@
 #include "Statement.hpp"
 #include <string>
 
+namespace ScribbleCore {
+
 class GetStructureElementStatement: public Statement {
 private:
 
@@ -30,5 +32,7 @@ public:
 
 	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* GETSTRUCTUREELEMENTSTATEMENT_HPP_ */

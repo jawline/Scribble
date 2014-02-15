@@ -6,11 +6,10 @@
  */
 
 #include "IfStatement.hpp"
-#include <Scribble/Value/Bool.hpp>
-#include <Scribble/Value/Void.hpp>
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Statement/ReturnStatement.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 IfStatement::IfStatement(int lineNo, std::string sym, SmartPointer<Statement> condition,
 		std::vector<SmartPointer<Statement>> ifTrueStatements,
@@ -82,4 +81,6 @@ int IfStatement::generateCode(int resultRegister,
 	instrs += falseSize;
 
 	return instrs;
+}
+
 }

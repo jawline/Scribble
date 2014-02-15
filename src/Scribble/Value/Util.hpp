@@ -7,7 +7,6 @@
 
 #ifndef UTIL_HPP_
 #define UTIL_HPP_
-#include "Value.hpp"
 #include <string>
 
 /**
@@ -29,18 +28,6 @@ public:
 	virtual ~UtilException() throw ();
 
 	virtual const char* what() const throw ();
-
-};
-
-class ValueUtil {
-private:
-	ValueUtil();
-	virtual ~ValueUtil();
-
-public:
-
-	static Value* generateValue(Type* type);
-	static bool sameType(Value* a, Value* b);
 
 };
 

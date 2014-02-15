@@ -1,0 +1,107 @@
+\hypertarget{class_random_int}{\section{Random\-Int Class Reference}
+\label{class_random_int}\index{Random\-Int@{Random\-Int}}
+}
+
+
+{\ttfamily \#include $<$Random\-Int.\-hpp$>$}
+
+
+
+Inheritance diagram for Random\-Int\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{class_random_int__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Random\-Int\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{class_random_int__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_random_int_ab8956bd2784b585ec8c1575ba77dc4a7}{{\bfseries Random\-Int} (std\-::string ns)}\label{class_random_int_ab8956bd2784b585ec8c1575ba77dc4a7}
+
+\item 
+virtual \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-Value} \hyperlink{class_random_int_a781d73f929b3a12c5d1cda04e8bf043c}{execute} (\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} $\ast$values, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$virt)
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_random_int_a8a8d93f6faf6d6b402375c0e4ba6bf7b}{get\-Type} ()
+\item 
+const unsigned int \hyperlink{class_random_int_a10512d2cd058a3f46978511d0722a297}{num\-Args} ()
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_random_int_a49bb03bdbbfbe5c799017643e53f9d2f}{arg\-Type} (unsigned int arg)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Random integer implementation. Returns a random integer between zero and n 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_random_int_a49bb03bdbbfbe5c799017643e53f9d2f}{\index{Random\-Int@{Random\-Int}!arg\-Type@{arg\-Type}}
+\index{arg\-Type@{arg\-Type}!RandomInt@{Random\-Int}}
+\subsubsection[{arg\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Random\-Int\-::arg\-Type (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_random_int_a49bb03bdbbfbe5c799017643e53f9d2f}
+Get the expected type of the specified argument 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_random_int_a781d73f929b3a12c5d1cda04e8bf043c}{\index{Random\-Int@{Random\-Int}!execute@{execute}}
+\index{execute@{execute}!RandomInt@{Random\-Int}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\-P\-I\-Value} Random\-Int\-::execute (
+\begin{DoxyParamCaption}
+\item[{{\bf A\-P\-I\-::\-A\-P\-I\-Value} $\ast$}]{values, }
+\item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{virt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_random_int_a781d73f929b3a12c5d1cda04e8bf043c}
+This function executes the given \hyperlink{class_a_p_i_1_1_function}{A\-P\-I\-::\-Function} and returns it's result. It called by the more complex execute(\-V\-M\-::\-Virtual\-Machine$\ast$) after that function has converted all arguments into \hyperlink{namespace_a_p_i}{A\-P\-I} values. 
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments passed to the function \\
+\hline
+{\em virt} & The virtual machine this function is being run in the context of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting \hyperlink{namespace_a_p_i}{A\-P\-I} value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525ef181c4af}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_random_int_a8a8d93f6faf6d6b402375c0e4ba6bf7b}{\index{Random\-Int@{Random\-Int}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!RandomInt@{Random\-Int}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Random\-Int\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_random_int_a8a8d93f6faf6d6b402375c0e4ba6bf7b}
+Get the return type of the function 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a85b0b2ee88d3ac61a0e77f94e06445b1}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_random_int_a10512d2cd058a3f46978511d0722a297}{\index{Random\-Int@{Random\-Int}!num\-Args@{num\-Args}}
+\index{num\-Args@{num\-Args}!RandomInt@{Random\-Int}}
+\subsubsection[{num\-Args}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int Random\-Int\-::num\-Args (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_random_int_a10512d2cd058a3f46978511d0722a297}
+Return the number of arguments the function takes 
+
+Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77}{A\-P\-I\-::\-Function}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Random\-Int.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Random\-Int.\-cpp\end{DoxyCompactItemize}

@@ -1,0 +1,106 @@
+\hypertarget{class_v_m_1_1_v_m_entry_type}{\section{V\-M\-:\-:V\-M\-Entry\-Type Class Reference}
+\label{class_v_m_1_1_v_m_entry_type}\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_v_m_1_1_v_m_entry_type_af1c10a8b775cc7c0ab460662e98e1f5e}{{\bfseries V\-M\-Entry\-Type} (std\-::string name, unsigned int size, bool reference)}\label{class_v_m_1_1_v_m_entry_type_af1c10a8b775cc7c0ab460662e98e1f5e}
+
+\item 
+\hypertarget{class_v_m_1_1_v_m_entry_type_ab98d036a7d48fdb248ee6fad323b4b73}{{\bfseries V\-M\-Entry\-Type} (std\-::string name, Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} $>$ subtype)}\label{class_v_m_1_1_v_m_entry_type_ab98d036a7d48fdb248ee6fad323b4b73}
+
+\item 
+\hypertarget{class_v_m_1_1_v_m_entry_type_a78eced662845dcab02a51fb0380f0f07}{{\bfseries V\-M\-Entry\-Type} (std\-::string name, std\-::vector$<$ Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_structure_field}{V\-M\-Structure\-Field} $>$$>$ fields)}\label{class_v_m_1_1_v_m_entry_type_a78eced662845dcab02a51fb0380f0f07}
+
+\item 
+std\-::string \hyperlink{class_v_m_1_1_v_m_entry_type_ac4220642624d606264083b1ef60cca4f}{type\-Name} ()
+\item 
+unsigned int \hyperlink{class_v_m_1_1_v_m_entry_type_a98c2ca6402f1ad3068ed46f6138e905c}{get\-Element\-Size} ()
+\item 
+bool \hyperlink{class_v_m_1_1_v_m_entry_type_a284a434c44410a8474ee988502dd9bb0}{is\-Reference} ()
+\item 
+V\-M\-Entry\-Base\-Type \hyperlink{class_v_m_1_1_v_m_entry_type_a4ddbfa9120423d037e0577028e7d7eeb}{get\-Base\-Type} ()
+\item 
+Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} $>$ \hyperlink{class_v_m_1_1_v_m_entry_type_aba116868d3a2af6704c86c16f67f546e}{array\-Subtype} ()
+\item 
+std\-::string \hyperlink{class_v_m_1_1_v_m_entry_type_a239a745a61ac8051bb7ac72210bfee42}{debug\-Type} ()
+\item 
+std\-::vector$<$ Smart\-Pointer\\*
+$<$ \hyperlink{class_v_m_1_1_v_m_structure_field}{V\-M\-Structure\-Field} $>$ $>$ const \& \hyperlink{class_v_m_1_1_v_m_entry_type_a278f76fb711fbca0eafddad6a6342ece}{get\-Structure\-Fields} ()
+\item 
+int \hyperlink{class_v_m_1_1_v_m_entry_type_a20b457c5cdbfee3839b2cdf0213cba96}{get\-Structure\-Field\-Offset} (unsigned int id)
+\item 
+unsigned int \hyperlink{class_v_m_1_1_v_m_entry_type_affa37faa49a60b7b3f913bf1cc3f5730}{get\-Structure\-Size} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_v_m_1_1_v_m_entry_type_aba116868d3a2af6704c86c16f67f546e}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!array\-Subtype@{array\-Subtype}}
+\index{array\-Subtype@{array\-Subtype}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{array\-Subtype}]{\setlength{\rightskip}{0pt plus 5cm}Smart\-Pointer$<$ {\bf V\-M\-Entry\-Type} $>$ V\-M\-::\-V\-M\-Entry\-Type\-::array\-Subtype (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_v_m_entry_type_aba116868d3a2af6704c86c16f67f546e}
+If this object is of the base type V\-M\-Array then this function will return a \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} with the subtype of the array. \hypertarget{class_v_m_1_1_v_m_entry_type_a239a745a61ac8051bb7ac72210bfee42}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!debug\-Type@{debug\-Type}}
+\index{debug\-Type@{debug\-Type}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{debug\-Type}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string V\-M\-::\-V\-M\-Entry\-Type\-::debug\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_v_m_entry_type_a239a745a61ac8051bb7ac72210bfee42}
+Return a text description of the \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} \hypertarget{class_v_m_1_1_v_m_entry_type_a4ddbfa9120423d037e0577028e7d7eeb}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!get\-Base\-Type@{get\-Base\-Type}}
+\index{get\-Base\-Type@{get\-Base\-Type}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{get\-Base\-Type}]{\setlength{\rightskip}{0pt plus 5cm}V\-M\-Entry\-Base\-Type V\-M\-::\-V\-M\-Entry\-Type\-::get\-Base\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_v_m_1_1_v_m_entry_type_a4ddbfa9120423d037e0577028e7d7eeb}
+Return the base type of this \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} ( V\-M\-Structure, V\-M\-Primtive, V\-M\-Array ). \hypertarget{class_v_m_1_1_v_m_entry_type_a98c2ca6402f1ad3068ed46f6138e905c}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!get\-Element\-Size@{get\-Element\-Size}}
+\index{get\-Element\-Size@{get\-Element\-Size}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{get\-Element\-Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int V\-M\-::\-V\-M\-Entry\-Type\-::get\-Element\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_v_m_entry_type_a98c2ca6402f1ad3068ed46f6138e905c}
+Returns the size of the element. Will be either 1, 2, 4, or 8 \hypertarget{class_v_m_1_1_v_m_entry_type_a20b457c5cdbfee3839b2cdf0213cba96}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!get\-Structure\-Field\-Offset@{get\-Structure\-Field\-Offset}}
+\index{get\-Structure\-Field\-Offset@{get\-Structure\-Field\-Offset}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{get\-Structure\-Field\-Offset}]{\setlength{\rightskip}{0pt plus 5cm}int V\-M\-::\-V\-M\-Entry\-Type\-::get\-Structure\-Field\-Offset (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{id}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_v_m_entry_type_a20b457c5cdbfee3839b2cdf0213cba96}
+Return the offset in bytes of the start of a structure element or -\/1 if the id value is greater than the number of fields. \hypertarget{class_v_m_1_1_v_m_entry_type_a278f76fb711fbca0eafddad6a6342ece}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!get\-Structure\-Fields@{get\-Structure\-Fields}}
+\index{get\-Structure\-Fields@{get\-Structure\-Fields}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{get\-Structure\-Fields}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$Smart\-Pointer$<${\bf V\-M\-Structure\-Field}$>$ $>$ const\& V\-M\-::\-V\-M\-Entry\-Type\-::get\-Structure\-Fields (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_v_m_1_1_v_m_entry_type_a278f76fb711fbca0eafddad6a6342ece}
+Return the list of fields in a structure. \hypertarget{class_v_m_1_1_v_m_entry_type_affa37faa49a60b7b3f913bf1cc3f5730}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!get\-Structure\-Size@{get\-Structure\-Size}}
+\index{get\-Structure\-Size@{get\-Structure\-Size}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{get\-Structure\-Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int V\-M\-::\-V\-M\-Entry\-Type\-::get\-Structure\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_v_m_entry_type_affa37faa49a60b7b3f913bf1cc3f5730}
+Get the size in bytes of the structure. \hypertarget{class_v_m_1_1_v_m_entry_type_a284a434c44410a8474ee988502dd9bb0}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!is\-Reference@{is\-Reference}}
+\index{is\-Reference@{is\-Reference}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{is\-Reference}]{\setlength{\rightskip}{0pt plus 5cm}bool V\-M\-::\-V\-M\-Entry\-Type\-::is\-Reference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_v_m_entry_type_a284a434c44410a8474ee988502dd9bb0}
+If base type is V\-M\-Primitive and the V\-M\-Primitive is a heap reference then this will return true. \hypertarget{class_v_m_1_1_v_m_entry_type_ac4220642624d606264083b1ef60cca4f}{\index{V\-M\-::\-V\-M\-Entry\-Type@{V\-M\-::\-V\-M\-Entry\-Type}!type\-Name@{type\-Name}}
+\index{type\-Name@{type\-Name}!VM::VMEntryType@{V\-M\-::\-V\-M\-Entry\-Type}}
+\subsubsection[{type\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string V\-M\-::\-V\-M\-Entry\-Type\-::type\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_v_m_entry_type_ac4220642624d606264083b1ef60cca4f}
+Return the name of this \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} ( Such as array(int) or int ). 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/V\-M\-Entry\-Type.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/V\-M\-Entry\-Type.\-cpp\end{DoxyCompactItemize}

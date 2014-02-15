@@ -6,10 +6,10 @@
  */
 
 #include "StructureAssignElement.hpp"
-#include "Heap.hpp"
-#include <Scribble/Value/Structure.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 StructureAssignElement::StructureAssignElement(int line, std::string token,
 		SafeStatement lhs, SafeStatement rhs, std::string elem) :
@@ -80,4 +80,6 @@ int StructureAssignElement::generateCode(int result, std::stringstream& code) {
 	instrs++;
 
 	return instrs;
+}
+
 }

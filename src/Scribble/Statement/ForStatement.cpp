@@ -6,11 +6,10 @@
  */
 
 #include "ForStatement.hpp"
-#include <Scribble/Value/Bool.hpp>
-#include <Scribble/Value/Void.hpp>
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 ForStatement::ForStatement(int lineNo, std::string sym, SafeStatement initial,
 		SafeStatement condition, SafeStatement step,
@@ -101,4 +100,6 @@ int ForStatement::generateCode(int resultRegister,
 	generated << "#generated for statement " << instrs << " instructions\n";
 
 	return instrs;
+}
+
 }

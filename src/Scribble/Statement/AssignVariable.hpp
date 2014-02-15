@@ -4,6 +4,8 @@
 #include <Scribble/Value/Variable.hpp>
 #include <vector>
 
+namespace ScribbleCore {
+
 /**
  * Set the value of a given variable to the result of the given statement and also return it. ( So sys.Write(A := "Hello"); is valid )
  */
@@ -48,5 +50,7 @@ public:
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif //_ASSIGN_VARIABLE_DEF_H_

@@ -9,6 +9,8 @@
 #define ANDSTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 /**
  * The and statement returns true if the left and right hand expressions both
  * evaluate to true.
@@ -42,5 +44,7 @@ public:
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* ANDSTATEMENT_HPP_ */

@@ -11,6 +11,8 @@
 #include <string>
 #include <Scribble/Value/Type.hpp>
 
+namespace ScribbleCore {
+
 struct TypeReferenceCore {
 
 	TypeReferenceCore(std::string name, Type* type) {
@@ -33,5 +35,7 @@ struct TypeReferenceCore {
 };
 
 typedef SmartPointer<TypeReferenceCore> TypeReference;
+
+}
 
 #endif /* TYPEREFERENCE_HPP_ */

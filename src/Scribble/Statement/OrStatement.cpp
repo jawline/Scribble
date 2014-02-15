@@ -6,11 +6,11 @@
  */
 
 #include "OrStatement.hpp"
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
-#include <Scribble/Value/Bool.hpp>
 #include <VM/Constants.hpp>
 #include <sstream>
+
+namespace ScribbleCore {
 
 OrStatement::OrStatement(int lineNo, std::string sym,
 		SafeStatement leftHandSide, SafeStatement rightHandSide) :
@@ -78,4 +78,6 @@ int OrStatement::generateCode(int resultRegister,
 	generated << "#End of or test\n";
 
 	return instrs;
+}
+
 }

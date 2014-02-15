@@ -1,0 +1,5 @@
+<map id="Scribble::execute" name="Scribble::execute">
+<area shape="rect" id="node3" href="$class_scribble_core_1_1_parser.html#aa052d5111bdc10523060670714b409ab" title="ScribbleCore::Parser\l::getUniformPath" alt="" coords="177,5,319,51"/>
+<area shape="rect" id="node5" href="$class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="180,74,316,121"/>
+<area shape="rect" id="node7" href="$class_v_m_1_1_heap.html#ad4af8cf1e9b1b4801b03d94cb5344ee0" title="VM::Heap::allocate" alt="" coords="369,83,503,112"/>
+</map>

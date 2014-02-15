@@ -1,0 +1,137 @@
+\hypertarget{class_v_m_1_1_virtual_machine}{\section{V\-M\-:\-:Virtual\-Machine Class Reference}
+\label{class_v_m_1_1_virtual_machine}\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd}{virtual long {\bfseries stack\-Long} (int64\-\_\-t pos)}\label{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb}{virtual void {\bfseries stack\-Set\-Long} (int64\-\_\-t pos, int64\-\_\-t v)}\label{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348}{virtual void {\bfseries pop\-Stack\-Long} (int64\-\_\-t \&val, bool \&ref)}\label{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86}{virtual void {\bfseries push\-Stack\-Long} (int64\-\_\-t v)}\label{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5}{virtual void {\bfseries expand\-Stack} ()}\label{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5}
+
+\item 
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a16e26b2033eb8a2689a29759aa864c7a}{mark\-Stack\-Reference} ()
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d}{virtual void {\bfseries push\-Register} (uint8\-\_\-t reg)}\label{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb}{virtual void {\bfseries get\-Register} (uint8\-\_\-t reg, long \&val, bool \&is\-Reg)}\label{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31}{virtual void {\bfseries set\-Register} (uint8\-\_\-t reg, long val, bool ref)}\label{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8}{virtual \hyperlink{class_v_m_1_1_heap}{Heap} \& {\bfseries get\-Heap} ()}\label{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a8d4510cfe0d9b788966e1d775f5e9e0c}{virtual Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} $>$ {\bfseries find\-Type} (std\-::string \&name)}\label{class_v_m_1_1_virtual_machine_a8d4510cfe0d9b788966e1d775f5e9e0c}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1}{virtual void {\bfseries register\-Entry} (std\-::string name, \hyperlink{class_v_m_1_1_namespace_entry}{Namespace\-Entry} entry)}\label{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1}
+
+\item 
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7}{execute} (std\-::string function)
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db}{virtual void {\bfseries garbage\-Collection} ()}\label{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc}{virtual void {\bfseries print\-State} ()}\label{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1}{virtual void {\bfseries hit\-Gc} ()}\label{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1}
+
+\item 
+\hypertarget{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba}{virtual void {\bfseries log\-Message} (V\-M\-Log\-Level, std\-::string message)}\label{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!execute@{execute}}
+\index{execute@{execute}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::execute (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{function}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7}
+Loads the constant data at the specified constant index into the given register. Capable of loading elements into the heap and assigning their reference if their initial data is already known ( Such as pushing strings ).
+
+Copy whatever is in the target register into the destination register copying over whether it is a reference or not.
+
+Jump to a different instruction
+
+Add the left and right registers and place the result in the dest register.
+
+Subtract the left and right registers and place the result in the dest register.
+
+Multiply the left and right registers and place the result in the dest register.
+
+Divide the left and right registers and place the result in the dest register.
+
+Test if two registers are equal. If true then execute the next instruction else skip it.
+
+Test if one register is less than another. If true execute next instruction otherwise skip it.
+
+Op\-Push\-Registers Push registers, starting from the start register and pushing numregisters sequentially from it Start\-Register -\/ Offset 1 -\/ 1 byte Num\-Registers -\/ Offset 2 -\/ 1 byte
+
+Pop n registers starting from the start+nth register and the last pop acting on the start register
+
+Pop a long from the stack and ignore it ( Don't put it in any registers ).
+
+Test whether the register left's value is $<$= than the register right. If true execute the next instruction Else skip the next function.
+
+Set the specified element in the target array to the given data value.
+
+Set the data\-Registers value to be the value of the array at the specified index.
+
+Create a new array of the specified type ( Stored in constants ) and length ( The value of length\-Register ) and set its reference to the specified register.
+
+Set the value of dest register to be the length of the array pointed to by the value of the array length register.
+
+Call the specified function. Two modes Constant or \hyperlink{class_v_m_1_1_heap}{Heap}. If Constant mode name of function is stored in constant instruction set zone otherwise name of function is pointed to by string in heap specified by register.
+
+Return to the previous function that was running or exit.
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a16e26b2033eb8a2689a29759aa864c7a}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!mark\-Stack\-Reference@{mark\-Stack\-Reference}}
+\index{mark\-Stack\-Reference@{mark\-Stack\-Reference}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{mark\-Stack\-Reference}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::mark\-Stack\-Reference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a16e26b2033eb8a2689a29759aa864c7a}
+Mark the next entry pushed to the stack as a reference 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Virtual\-Machine.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Virtual\-Machine.\-cpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Virtual\-Machine\-\_\-\-Stack.\-cpp\end{DoxyCompactItemize}

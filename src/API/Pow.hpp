@@ -29,7 +29,7 @@ public:
 	 * Get the return type of the function.
 	 */
 
-	virtual Type* getType();
+	virtual ScribbleCore::Type* getType();
 
 	/**
 	 * Get the number of arguments (2)
@@ -41,7 +41,7 @@ public:
 	 * Get the arg type for a given argument ( Both Integer)
 	 */
 
-	virtual Type* argType(unsigned int arg);
+	virtual ScribbleCore::Type* argType(unsigned int arg);
 };
 
 class PowFloat32: public Function {
@@ -53,12 +53,6 @@ public:
 	virtual ~PowFloat32();
 
 	/**
-	 * Execute the function and return the result value.
-	 */
-
-	virtual Value* execute(std::vector<Value*> arguments);
-
-	/**
 	 * Returns the resulting modulo as an API value.
 	 */
 
@@ -68,7 +62,7 @@ public:
 	 * Get the return type of the function.
 	 */
 
-	virtual Type* getType();
+	virtual ScribbleCore::Type* getType();
 
 	/**
 	 * Get the number of arguments (2)
@@ -80,7 +74,7 @@ public:
 	 * Get the arg type for a given argument ( Both Integer)
 	 */
 
-	virtual Type* argType(unsigned int arg);
+	virtual ScribbleCore::Type* argType(unsigned int arg);
 };
 
 } /* namespace API */

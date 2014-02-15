@@ -8,6 +8,8 @@
 #include "StructureInfo.hpp"
 #include <VM/Constants.hpp>
 
+namespace ScribbleCore {
+
 StructureInfo::StructureInfo(std::string name) :
 		Type(StructureType, nullptr), name_(name), package_(
 				"__INVALID__NAMESPACE__") {
@@ -64,4 +66,6 @@ std::string StructureInfo::getTypeName() {
 
 std::string StructureInfo::getPackage() {
 	return package_;
+}
+
 }

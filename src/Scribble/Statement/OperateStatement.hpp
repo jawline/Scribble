@@ -9,6 +9,8 @@
 #define OPERATESTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 class OperateStatement: public Statement {
 private:
 	SafeStatement lhs_, rhs_;
@@ -24,5 +26,7 @@ public:
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* OPERATESTATEMENT_HPP_ */

@@ -7,6 +7,8 @@
 
 #include "NamespaceEntry.hpp"
 
+namespace ScribbleCore {
+
 NamespaceEntry::NamespaceEntry() {
 	type_ = EmptyEntry;
 }
@@ -39,4 +41,6 @@ TypeReference NamespaceEntry::getType() {
 
 void NamespaceEntry::addFunctionToSet(SafeFunction f) {
 	functionSet_.push_back(f);
+}
+
 }

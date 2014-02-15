@@ -6,10 +6,10 @@
  */
 
 #include "TestNilStatement.hpp"
-#include "Heap.hpp"
-#include <Scribble/Value/Array.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 TestNilStatement::TestNilStatement(int line, std::string sym, SafeStatement stmt) :
 		Statement(line, sym) {
@@ -51,4 +51,6 @@ int TestNilStatement::generateCode(int result, std::stringstream& code) {
 	}
 
 	return instrs;
+}
+
 }

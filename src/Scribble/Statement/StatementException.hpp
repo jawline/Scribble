@@ -5,6 +5,8 @@
 #include <exception>
 using namespace std;
 
+namespace ScribbleCore {
+
 class Statement;
 
 class StatementException : public exception
@@ -21,5 +23,7 @@ class StatementException : public exception
   	return error_.c_str();
   }
 };
+
+}
 
 #endif //_STATEMENT_EXCEPTION_H

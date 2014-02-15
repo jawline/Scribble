@@ -6,10 +6,10 @@
  */
 
 #include "BoolStatement.hpp"
-#include <Scribble/Value/Bool.hpp>
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) :
 		Statement(lineNo, sym) {
@@ -41,4 +41,6 @@ int BoolStatement::generateCode(int resultRegister,
 	}
 
 	return 1;
+}
+
 }

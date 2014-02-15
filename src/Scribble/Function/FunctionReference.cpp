@@ -7,6 +7,8 @@
 
 #include "FunctionReference.hpp"
 
+namespace ScribbleCore {
+
 FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
 		std::vector<SafeStatement> fnArgs, SmartPointer<Function> func) {
 	name_ = name;
@@ -54,4 +56,6 @@ std::string const& FunctionReference::getNamespace() {
 
 std::string const& FunctionReference::getResolveIssue() {
 	return resolveIssue_;
+}
+
 }

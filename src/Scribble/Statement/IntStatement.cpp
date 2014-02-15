@@ -1,6 +1,7 @@
 #include "IntStatement.hpp"
 #include <sstream>
-#include <Scribble/Statement/Heap.hpp>
+
+namespace ScribbleCore {
 
 IntStatement::IntStatement(int lineNo, std::string sym, int intValue) :
 		Statement(lineNo, sym) {
@@ -22,4 +23,6 @@ int IntStatement::generateCode(int resultRegister,
 	}
 
 	return 1;
+}
+
 }

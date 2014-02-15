@@ -9,6 +9,8 @@
 #define NEGATIVESTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 class NegativeStatement: public Statement {
 private:
 	SafeStatement exp_;
@@ -22,5 +24,7 @@ public:
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* NEGATIVESTATEMENT_HPP_ */

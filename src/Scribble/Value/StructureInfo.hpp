@@ -12,6 +12,8 @@
 #include <Scribble/Parser/TypeReference.hpp>
 #include "Type.hpp"
 
+namespace ScribbleCore {
+
 /**
  * StructureInfo contains the fields ( Name and type )  within a structure, its name and namespace.
  * The order in which fields are defined
@@ -62,5 +64,7 @@ public:
 };
 
 typedef StructureInfo SInfo;
+
+}
 
 #endif /* STRUCTUREINFO_HPP_ */

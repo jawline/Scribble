@@ -1,0 +1,123 @@
+\hypertarget{class_float32_to_string_function}{\section{Float32\-To\-String\-Function Class Reference}
+\label{class_float32_to_string_function}\index{Float32\-To\-String\-Function@{Float32\-To\-String\-Function}}
+}
+
+
+Inheritance diagram for Float32\-To\-String\-Function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{class_float32_to_string_function__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Float32\-To\-String\-Function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{class_float32_to_string_function__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_float32_to_string_function_a9286b5a1c7e0c7cafcb73fdd7baf8983}{{\bfseries Float32\-To\-String\-Function} (std\-::string ns)}\label{class_float32_to_string_function_a9286b5a1c7e0c7cafcb73fdd7baf8983}
+
+\item 
+virtual \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} \hyperlink{class_float32_to_string_function_a37af0d9a46e186a0ae48a589123fb433}{execute} (\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} $\ast$values, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$virt)
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_float32_to_string_function_ab4e27658631aa87aee707ac75fcdf2a1}{get\-Type} ()
+\item 
+const unsigned int \hyperlink{class_float32_to_string_function_a9eca24c6058235a540588ee7b1189c6a}{num\-Args} ()
+\item 
+\hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_float32_to_string_function_a55ae35ad951c4e85a5c41f92041e8ef4}{arg\-Type} (unsigned int arg)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_float32_to_string_function_a55ae35ad951c4e85a5c41f92041e8ef4}{\index{Float32\-To\-String\-Function@{Float32\-To\-String\-Function}!arg\-Type@{arg\-Type}}
+\index{arg\-Type@{arg\-Type}!Float32ToStringFunction@{Float32\-To\-String\-Function}}
+\subsubsection[{arg\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Float32\-To\-String\-Function\-::arg\-Type (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_float32_to_string_function_a55ae35ad951c4e85a5c41f92041e8ef4}
+Get the expected type of the specified argument 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b}{A\-P\-I\-::\-Function}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_float32_to_string_function_a55ae35ad951c4e85a5c41f92041e8ef4_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_float32_to_string_function_a37af0d9a46e186a0ae48a589123fb433}{\index{Float32\-To\-String\-Function@{Float32\-To\-String\-Function}!execute@{execute}}
+\index{execute@{execute}!Float32ToStringFunction@{Float32\-To\-String\-Function}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\-P\-I\-::\-A\-P\-I\-Value} Float32\-To\-String\-Function\-::execute (
+\begin{DoxyParamCaption}
+\item[{{\bf A\-P\-I\-::\-A\-P\-I\-Value} $\ast$}]{values, }
+\item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{virt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_float32_to_string_function_a37af0d9a46e186a0ae48a589123fb433}
+This function executes the given \hyperlink{class_a_p_i_1_1_function}{A\-P\-I\-::\-Function} and returns it's result. It called by the more complex execute(\-V\-M\-::\-Virtual\-Machine$\ast$) after that function has converted all arguments into \hyperlink{namespace_a_p_i}{A\-P\-I} values. 
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments passed to the function \\
+\hline
+{\em virt} & The virtual machine this function is being run in the context of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting \hyperlink{namespace_a_p_i}{A\-P\-I} value 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525ef181c4af}{A\-P\-I\-::\-Function}.
+
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_float32_to_string_function_a37af0d9a46e186a0ae48a589123fb433_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_float32_to_string_function_ab4e27658631aa87aee707ac75fcdf2a1}{\index{Float32\-To\-String\-Function@{Float32\-To\-String\-Function}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Float32ToStringFunction@{Float32\-To\-String\-Function}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Float32\-To\-String\-Function\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_float32_to_string_function_ab4e27658631aa87aee707ac75fcdf2a1}
+Get the return type of the function 
+
+Implements \hyperlink{class_a_p_i_1_1_function_a85b0b2ee88d3ac61a0e77f94e06445b1}{A\-P\-I\-::\-Function}.
+
+\hypertarget{class_float32_to_string_function_a9eca24c6058235a540588ee7b1189c6a}{\index{Float32\-To\-String\-Function@{Float32\-To\-String\-Function}!num\-Args@{num\-Args}}
+\index{num\-Args@{num\-Args}!Float32ToStringFunction@{Float32\-To\-String\-Function}}
+\subsubsection[{num\-Args}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int const Float32\-To\-String\-Function\-::num\-Args (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_float32_to_string_function_a9eca24c6058235a540588ee7b1189c6a}
+Return the number of arguments the function takes 
+
+Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77}{A\-P\-I\-::\-Function}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/String\-Function.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/String\-Function.\-cpp\end{DoxyCompactItemize}

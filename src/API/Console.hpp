@@ -9,6 +9,6 @@
 #define CONSOLE_PKG_H_
 #include <VM/VMNamespace.hpp>
 
-void generateConsolePackage(std::map<std::string, NamespaceType>& console);
+void generateConsolePackage(std::map<std::string, ScribbleCore::NamespaceType>& console);
 
 #endif /* CONSOLE_PKG_H_ */

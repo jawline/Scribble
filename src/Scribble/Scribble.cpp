@@ -14,7 +14,6 @@
 
 #include <Scribble/Statement/Statement.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Parser/Parser.hpp>
 #include <Scribble/Parser/ParserException.hpp>
 #include <Scribble/Value/TypeManager.hpp>
@@ -47,7 +46,7 @@ Scribble::~Scribble() {
 }
 
 SafeFunction findFunction(std::vector<API::APIValue> arguments,
-		FunctionSet set) {
+		ScribbleCore::FunctionSet set) {
 
 	for (int i = 0; i < set.size(); i++) {
 		SafeFunction iter = set[i];
@@ -76,10 +75,19 @@ SafeFunction findFunction(std::vector<API::APIValue> arguments,
 	return nullptr;
 }
 
+API::APIValue Scribble::execute(std::string function) {
+
+	//Make empty args list
+	std::vector<API::APIValue> args;
+
+	//Execute function();
+	return execute(function, args);
+}
+
 API::APIValue Scribble::execute(std::string function,
 		std::vector<API::APIValue> arguments) {
 
-	auto entry = compiledPackages[Parser::getUniformPath(packagePath)].find(
+	auto entry = compiledPackages[ScribbleCore::Parser::getUniformPath(packagePath)].find(
 			function);
 
 	/*
@@ -95,7 +103,7 @@ API::APIValue Scribble::execute(std::string function,
 	//Grab a reference to __init__.__init__ for execution
 	API::SafeFunction toExecute =
 			findFunction(arguments,
-					compiledPackages[Parser::getUniformPath(packagePath)][function].getFunctionSet());
+					compiledPackages[ScribbleCore::Parser::getUniformPath(packagePath)][function].getFunctionSet());
 
 	if (toExecute.get() == nullptr) {
 		printf("Function %s does not exist\n", function.c_str());
@@ -115,7 +123,7 @@ API::APIValue Scribble::execute(std::string function,
 
 	API::APIValue result;
 
-	if (!toExecute->getType()->Equals(getVoidType())) {
+	if (!toExecute->getType()->Equals(ScribbleCore::getVoidType())) {
 
 		long val = 0;
 		bool ref = 0;
@@ -152,11 +160,11 @@ void Scribble::load() {
 	if (sourceCode.length() == 0) {
 
 		//Compile the program
-		compiledPackages = Parser::compile(packagePath, compiledPackages);
+		compiledPackages = ScribbleCore::Parser::compile(packagePath, compiledPackages);
 
 	} else {
 
-		compiledPackages = Parser::compileText(sourceCode, packagePath,
+		compiledPackages = ScribbleCore::Parser::compileText(sourceCode, packagePath,
 				compiledPackages);
 
 	}

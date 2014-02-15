@@ -1,6 +1,8 @@
 #include "GetVariableStatement.hpp"
 #include <VM/Constants.hpp>
 
+namespace ScribbleCore {
+
 GetVariableStatement::GetVariableStatement(int lineNo, std::string sym,
 		SmartPointer<Variable> var) :
 		Statement(lineNo, sym) {
@@ -36,5 +38,7 @@ int GetVariableStatement::generateCode(int resultRegister,
 
 		return 1;
 	}
+
+}
 
 }

@@ -10,17 +10,17 @@
 #include <Scribble/Value/TypeManager.hpp>
 #include <Scribble/Parser/Parser.hpp>
 
-void generateConsolePackage(std::map<std::string, NamespaceType>& all) {
+void generateConsolePackage(std::map<std::string, ScribbleCore::NamespaceType>& all) {
 
-	NamespaceType console;
+	ScribbleCore::NamespaceType console;
 
 	std::vector<SafeFunction> log;
 	log.push_back(SmartPointer< Function > (new WriteFunction("console")));
-	console["Log"] = NamespaceEntry(log);
+	console["Log"] = ScribbleCore::NamespaceEntry(log);
 
 	std::vector<SafeFunction> readLine;
 	readLine.push_back(SmartPointer< Function > (new ReadLine("console")));
-	console["ReadLine"] = NamespaceEntry(readLine);
+	console["ReadLine"] = ScribbleCore::NamespaceEntry(readLine);
 
 	all["console"] = console;
 

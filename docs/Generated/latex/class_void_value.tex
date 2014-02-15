@@ -1,0 +1,94 @@
+\hypertarget{class_void_value}{\section{Void\-Value Class Reference}
+\label{class_void_value}\index{Void\-Value@{Void\-Value}}
+}
+
+
+{\ttfamily \#include $<$Void.\-hpp$>$}
+
+
+
+Inheritance diagram for Void\-Value\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=140pt]{class_void_value__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Void\-Value\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=140pt]{class_void_value__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_void_value_a014a99d46659fdb93e05f59bd58a0665}{apply\-Operator} (Value\-Operator, \hyperlink{class_value}{Value} $\ast$other)
+\item 
+virtual \hyperlink{class_type}{Type} $\ast$ \hyperlink{class_void_value_ab628d018d3b3041c42b96e5956039dc0}{type} ()
+\item 
+virtual \hyperlink{class_value}{Value} $\ast$ \hyperlink{class_void_value_a5b22b21d7d4280904656eabb5d5b4c68}{clone} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representation of a void value within the system. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_void_value_a014a99d46659fdb93e05f59bd58a0665}{\index{Void\-Value@{Void\-Value}!apply\-Operator@{apply\-Operator}}
+\index{apply\-Operator@{apply\-Operator}!VoidValue@{Void\-Value}}
+\subsubsection[{apply\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}void Void\-Value\-::apply\-Operator (
+\begin{DoxyParamCaption}
+\item[{Value\-Operator}]{, }
+\item[{{\bf Value} $\ast$}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_void_value_a014a99d46659fdb93e05f59bd58a0665}
+Other than assign there are no valid operators for voids. 
+
+Implements \hyperlink{class_value_a50f4e2d2466ab9405bc13e4881ea1888}{Value}.
+
+\hypertarget{class_void_value_a5b22b21d7d4280904656eabb5d5b4c68}{\index{Void\-Value@{Void\-Value}!clone@{clone}}
+\index{clone@{clone}!VoidValue@{Void\-Value}}
+\subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Value} $\ast$ Void\-Value\-::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_void_value_a5b22b21d7d4280904656eabb5d5b4c68}
+Clones the void. Just returns a standard void. 
+
+Implements \hyperlink{class_value_a9ae979752d769a6007656824211db2e5}{Value}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_void_value_a5b22b21d7d4280904656eabb5d5b4c68_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_void_value_ab628d018d3b3041c42b96e5956039dc0}{\index{Void\-Value@{Void\-Value}!type@{type}}
+\index{type@{type}!VoidValue@{Void\-Value}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Void\-Value\-::type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_void_value_ab628d018d3b3041c42b96e5956039dc0}
+\hyperlink{class_return}{Return} the void type. get\-Void\-Type() 
+
+Implements \hyperlink{class_value_a46b25d5bbded88a18de463f5a90d25c7}{Value}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Scribble/\-Value/Void.\-hpp\item 
+Scribble/\-Value/Void.\-cpp\end{DoxyCompactItemize}

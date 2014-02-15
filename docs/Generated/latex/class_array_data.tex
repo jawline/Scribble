@@ -1,0 +1,53 @@
+\hypertarget{class_array_data}{\section{Array\-Data Class Reference}
+\label{class_array_data}\index{Array\-Data@{Array\-Data}}
+}
+
+
+{\ttfamily \#include $<$Array\-Data.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_array_data_ae58c7062db37d1665a2601528738f874}{Array\-Data} (unsigned int length, \hyperlink{class_value}{Value} $\ast$$\ast$initial)
+\item 
+unsigned int \hyperlink{class_array_data_a7af9e20eee96983ceecc06800df2abf2}{data\-Length} ()
+\item 
+\hyperlink{class_value}{Value} $\ast$ \hyperlink{class_array_data_adf20e8776be4871c3f25c7375e576749}{index} (unsigned int i)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Array data is a structure which contains the actual array data which array values store references too. Exposes length and data and frees data upon destruction ( Which should happen when no more arrays have a reference to the array data ) 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_array_data_ae58c7062db37d1665a2601528738f874}{\index{Array\-Data@{Array\-Data}!Array\-Data@{Array\-Data}}
+\index{Array\-Data@{Array\-Data}!ArrayData@{Array\-Data}}
+\subsubsection[{Array\-Data}]{\setlength{\rightskip}{0pt plus 5cm}Array\-Data\-::\-Array\-Data (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{length, }
+\item[{{\bf Value} $\ast$$\ast$}]{initial}
+\end{DoxyParamCaption}
+)}}\label{class_array_data_ae58c7062db37d1665a2601528738f874}
+Initialise the array data with a length and set of initial values. (Note\-: It uses the initial pointer directly so do not destruct it) 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_array_data_a7af9e20eee96983ceecc06800df2abf2}{\index{Array\-Data@{Array\-Data}!data\-Length@{data\-Length}}
+\index{data\-Length@{data\-Length}!ArrayData@{Array\-Data}}
+\subsubsection[{data\-Length}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Array\-Data\-::data\-Length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_array_data_a7af9e20eee96983ceecc06800df2abf2}
+Get the total number of indexs in the array data ( Note, As arrays can be slices of a \hyperlink{class_array_data}{Array\-Data} this may be different from a pointing arrays length ) \hypertarget{class_array_data_adf20e8776be4871c3f25c7375e576749}{\index{Array\-Data@{Array\-Data}!index@{index}}
+\index{index@{index}!ArrayData@{Array\-Data}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Value}$\ast$ Array\-Data\-::index (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_array_data_adf20e8776be4871c3f25c7375e576749}
+\hyperlink{class_return}{Return} a pointer to the value of an array at a given index. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Scribble/\-Value/Array\-Data.\-hpp\item 
+Scribble/\-Value/Array\-Data.\-cpp\end{DoxyCompactItemize}

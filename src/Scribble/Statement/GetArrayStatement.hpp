@@ -9,6 +9,8 @@
 #define GETARRAYSTATEMENT_HPP_
 #include "Statement.hpp"
 
+namespace ScribbleCore {
+
 class GetArrayStatement: public Statement {
 private:
 	SafeStatement array_;
@@ -23,5 +25,7 @@ public:
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* GETARRAYSTATEMENT_HPP_ */

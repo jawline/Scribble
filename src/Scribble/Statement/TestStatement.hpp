@@ -10,6 +10,8 @@
 #include "Statement.hpp"
 #include <sstream>
 
+namespace ScribbleCore {
+
 enum TestType {
 	TestEquals,
 	TestNotEquals,
@@ -34,5 +36,7 @@ public:
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* TESTSTATEMENT_HPP_ */

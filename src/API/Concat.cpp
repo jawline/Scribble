@@ -6,7 +6,6 @@
  */
 
 #include "Concat.hpp"
-#include <Scribble/Value/String.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
 namespace API {
@@ -21,16 +20,16 @@ Concat::~Concat() {
 	// TODO Auto-generated destructor stub
 }
 
-Type* Concat::getType() {
-	return getTypeManager().getType(StringType);
+ScribbleCore::Type* Concat::getType() {
+	return ScribbleCore::getTypeManager().getType(ScribbleCore::StringType);
 }
 
 const unsigned int Concat::numArgs() {
 	return 2;
 }
 
-Type* Concat::argType(unsigned int arg) {
-	return getTypeManager().getType(StringType);
+ScribbleCore::Type* Concat::argType(unsigned int arg) {
+	return ScribbleCore::getTypeManager().getType(ScribbleCore::StringType);
 }
 
 API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {

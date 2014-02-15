@@ -6,11 +6,10 @@
  */
 
 #include "StructureStatement.hpp"
-#include "Heap.hpp"
-#include <Scribble/Value/Structure.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
-#include <Scribble/Value/StructureData.hpp>
 #include <VM/Constants.hpp>
+
+namespace ScribbleCore {
 
 StructureStatement::StructureStatement(int lineno, std::string token,
 		TypeReference type, std::vector<SafeStatement> statements) :
@@ -96,4 +95,6 @@ int StructureStatement::generateCode(int result, std::stringstream& code) {
 	}
 
 	return instrs;
+}
+
 }

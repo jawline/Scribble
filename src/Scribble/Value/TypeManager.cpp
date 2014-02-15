@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <Scribble/Parser/TypeReference.hpp>
 
+namespace ScribbleCore {
+
 Type* TypeManager::tFind(Type* desired) {
 
 	for (unsigned int i = 0; i < types_.size(); ++i) {
@@ -87,4 +89,6 @@ Type* float32Type = getTypeManager().getType(Float32);
 
 Type* getFloat32Type() {
 	return float32Type;
+}
+
 }

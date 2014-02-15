@@ -16,11 +16,9 @@ public:
 	IntToStringFunction(std::string ns);
 	virtual ~IntToStringFunction();
 
-	Value* execute(std::vector<Value*> arguments);
-
-	Type* getType();
+	ScribbleCore::Type* getType();
 	const unsigned int numArgs();
-	Type* argType(unsigned int arg);
+	ScribbleCore::Type* argType(unsigned int arg);
 
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
@@ -31,14 +29,12 @@ public:
 	Float32ToStringFunction(std::string ns);
 	virtual ~Float32ToStringFunction();
 
-	Value* execute(std::vector<Value*> arguments);
-
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 
-	Type* getType();
+	ScribbleCore::Type* getType();
 	const unsigned int numArgs();
-	Type* argType(unsigned int arg);
+	ScribbleCore::Type* argType(unsigned int arg);
 
 };
 
@@ -47,14 +43,12 @@ public:
 	BoolToStringFunction(std::string ns);
 	virtual ~BoolToStringFunction();
 
-	Value* execute(std::vector<Value*> arguments);
-
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 
-	Type* getType();
+	ScribbleCore::Type* getType();
 	const unsigned int numArgs();
-	Type* argType(unsigned int arg);
+	ScribbleCore::Type* argType(unsigned int arg);
 
 };
 

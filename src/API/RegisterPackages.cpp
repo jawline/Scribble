@@ -8,7 +8,7 @@
 #include "RegisterPackages.hpp"
 #include <Scribble/Value/StructureInfo.hpp>
 
-void registerPackages(std::map<std::string, NamespaceType>& allNames,
+void registerPackages(std::map<std::string, ScribbleCore::NamespaceType>& allNames,
 		VM::VirtualMachine& vm) {
 
 	std::vector < std::pair < std::string, SmartPointer<VM::VMStructureField>>>postResolveList;
@@ -22,14 +22,14 @@ void registerPackages(std::map<std::string, NamespaceType>& allNames,
 
 		VM::VMNamespace newSpace;
 
-		NamespaceType names = selectedNamespaceIter->second;
+		ScribbleCore::NamespaceType names = selectedNamespaceIter->second;
 
 		for (auto iterator = names.begin(); iterator != names.end();
 				iterator++) {
 
-			if (iterator->second.type() == FunctionSetEntry) {
+			if (iterator->second.type() == ScribbleCore::FunctionSetEntry) {
 
-				FunctionSet functionSet = iterator->second.getFunctionSet();
+				ScribbleCore::FunctionSet functionSet = iterator->second.getFunctionSet();
 
 				for (unsigned int i = 0; i < functionSet.size(); i++) {
 					SmartPointer<Function> function = functionSet[i];
@@ -44,23 +44,23 @@ void registerPackages(std::map<std::string, NamespaceType>& allNames,
 					vm.logMessage(VM::Log, std::string(" {\n") + code.str() + std::string("\n}\n"));
 				}
 
-			} else if (iterator->second.type() == TypeEntry) {
+			} else if (iterator->second.type() == ScribbleCore::TypeEntry) {
 
-				if (iterator->second.getType()->type->getType() == StructureType) {
+				if (iterator->second.getType()->type->getType() == ScribbleCore::StructureType) {
 					vm.logMessage(VM::Log, std::string("Registering Type ") + selectedNamespaceIter->first + VM::vmNamespaceSeperator + iterator->first + " {\n");
 
-					TypeReference type = iterator->second.getType();
-					StructureInfo* info = (StructureInfo*) iterator->second.getType()->type;
+					ScribbleCore::TypeReference type = iterator->second.getType();
+					ScribbleCore::StructureInfo* info = (ScribbleCore::StructureInfo*) iterator->second.getType()->type;
 
 					std::vector<SmartPointer<VM::VMStructureField>> fields;
 
 					for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
 
-						Type* fieldType = info->getIndex(i).second->type;
+						ScribbleCore::Type* fieldType = info->getIndex(i).second->type;
 
 						std::string fullTypeName = info->getIndex(i).second->type->getTypeName();
 
-						vm.logMessage(VM::Log, info->getIndex(i).first + " : " + ((StructureInfo*) info->getIndex(i).second->type)->getTypeName() + "\n");
+						vm.logMessage(VM::Log, info->getIndex(i).first + " : " + ((ScribbleCore::StructureInfo*) info->getIndex(i).second->type)->getTypeName() + "\n");
 
 						SmartPointer<VM::VMStructureField> newField = SmartPointer<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr));
 						postResolveList.push_back(std::pair<std::string, SmartPointer<VM::VMStructureField>>(fullTypeName, newField));

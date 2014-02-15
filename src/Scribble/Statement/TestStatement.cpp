@@ -8,12 +8,9 @@
 #include "TestStatement.hpp"
 #include <VM/Constants.hpp>
 #include <Scribble/Statement/StatementException.hpp>
-#include <Scribble/Value/Int.hpp>
-#include <Scribble/Value/Bool.hpp>
-#include <Scribble/Value/String.hpp>
-#include <Scribble/Value/Float32.hpp>
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
+
+namespace ScribbleCore {
 
 TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
 		SafeStatement leftHandSide, SafeStatement rightHandSide) :
@@ -213,4 +210,6 @@ int TestStatement::generateCode(int resultRegister,
 	generated << "#Test statement end. " << instrs << " instructions\n";
 
 	return instrs;
+}
+
 }

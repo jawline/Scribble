@@ -1,0 +1,151 @@
+\hypertarget{class_string_value}{\section{String\-Value Class Reference}
+\label{class_string_value}\index{String\-Value@{String\-Value}}
+}
+
+
+{\ttfamily \#include $<$String.\-hpp$>$}
+
+
+
+Inheritance diagram for String\-Value\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{class_string_value__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for String\-Value\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{class_string_value__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_string_value_ad80c7dc1134e4eb07264866ddae8dc06}{{\bfseries String\-Value} (std\-::string const value)}\label{class_string_value_ad80c7dc1134e4eb07264866ddae8dc06}
+
+\item 
+\hyperlink{class_type}{Type} $\ast$ \hyperlink{class_string_value_ac39aed50db93a8d742b7f30b545be437}{type} ()
+\item 
+\hyperlink{class_value}{Value} $\ast$ \hyperlink{class_string_value_ab8d7a8fc1b33e1b792241ac28d8670c2}{clone} ()
+\item 
+void \hyperlink{class_string_value_ac6e32f018ea629d6f65aa59c7dfac62d}{apply\-Operator} (Value\-Operator v, \hyperlink{class_value}{Value} $\ast$r)
+\item 
+std\-::string \hyperlink{class_string_value_ab36ab30305e3a1e535003ab6a16cfee5}{get\-Value} ()
+\item 
+void \hyperlink{class_string_value_a61576ddf44e871aeca7c4781d5d9a1de}{set\-Value} (std\-::string const \&ref)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Internal representation of a string within \hyperlink{class_scribble}{Scribble}. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_string_value_ac6e32f018ea629d6f65aa59c7dfac62d}{\index{String\-Value@{String\-Value}!apply\-Operator@{apply\-Operator}}
+\index{apply\-Operator@{apply\-Operator}!StringValue@{String\-Value}}
+\subsubsection[{apply\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}void String\-Value\-::apply\-Operator (
+\begin{DoxyParamCaption}
+\item[{Value\-Operator}]{v, }
+\item[{{\bf Value} $\ast$}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_string_value_ac6e32f018ea629d6f65aa59c7dfac62d}
+Apply a given operator to the string. Note that only = and + are implemented. 
+
+Implements \hyperlink{class_value_a50f4e2d2466ab9405bc13e4881ea1888}{Value}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_string_value_ac6e32f018ea629d6f65aa59c7dfac62d_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_string_value_ab8d7a8fc1b33e1b792241ac28d8670c2}{\index{String\-Value@{String\-Value}!clone@{clone}}
+\index{clone@{clone}!StringValue@{String\-Value}}
+\subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Value} $\ast$ String\-Value\-::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_string_value_ab8d7a8fc1b33e1b792241ac28d8670c2}
+Create an identical copy of the value 
+
+Implements \hyperlink{class_value_a9ae979752d769a6007656824211db2e5}{Value}.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_string_value_ab8d7a8fc1b33e1b792241ac28d8670c2_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_string_value_ab36ab30305e3a1e535003ab6a16cfee5}{\index{String\-Value@{String\-Value}!get\-Value@{get\-Value}}
+\index{get\-Value@{get\-Value}!StringValue@{String\-Value}}
+\subsubsection[{get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string String\-Value\-::get\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_string_value_ab36ab30305e3a1e535003ab6a16cfee5}
+Get the value of the string element. 
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_string_value_ab36ab30305e3a1e535003ab6a16cfee5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_string_value_a61576ddf44e871aeca7c4781d5d9a1de}{\index{String\-Value@{String\-Value}!set\-Value@{set\-Value}}
+\index{set\-Value@{set\-Value}!StringValue@{String\-Value}}
+\subsubsection[{set\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void String\-Value\-::set\-Value (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{ref}
+\end{DoxyParamCaption}
+)}}\label{class_string_value_a61576ddf44e871aeca7c4781d5d9a1de}
+Set the value of the string to a new value. 
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{class_string_value_a61576ddf44e871aeca7c4781d5d9a1de_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_string_value_ac39aed50db93a8d742b7f30b545be437}{\index{String\-Value@{String\-Value}!type@{type}}
+\index{type@{type}!StringValue@{String\-Value}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ String\-Value\-::type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_string_value_ac39aed50db93a8d742b7f30b545be437}
+Get the Value\-Type of the value 
+
+Implements \hyperlink{class_value_a46b25d5bbded88a18de463f5a90d25c7}{Value}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Scribble/\-Value/String.\-hpp\item 
+Scribble/\-Value/String.\-cpp\end{DoxyCompactItemize}

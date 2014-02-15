@@ -12,6 +12,8 @@
 #include <vector>
 #include <Scribble/Value/TypeManager.hpp>
 
+namespace ScribbleCore {
+
 class IfStatement: public Statement {
 private:
 	SmartPointer<Statement> condition_;
@@ -31,5 +33,7 @@ public:
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };
+
+}
 
 #endif /* IFSTATEMENT_HPP_ */

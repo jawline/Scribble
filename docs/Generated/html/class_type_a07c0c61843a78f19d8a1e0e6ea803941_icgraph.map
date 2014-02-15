@@ -1,0 +1,17 @@
+<map id="Type::getType" name="Type::getType">
+<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#ac52ce1c55cc0a808016b557d1fb74995" title="API::APIValue::getField" alt="" coords="181,5,341,35"/>
+<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#a1506f360a478ac864b76fec0409bc117" title="API::APIValue::getArrayLength" alt="" coords="160,59,363,88"/>
+<area shape="rect" id="node7" href="$class_parser.html#aa83e86cc330a85fdc487447bf81672d1" title="Parser::functionSetType" alt="" coords="180,112,343,141"/>
+<area shape="rect" id="node9" href="$class_type.html#a7eb8c41756b1c9047f1f02b5ea62aa71" title="Type::getTypeName" alt="" coords="191,189,332,219"/>
+<area shape="rect" id="node12" href="$class_value_heap.html#abacb4ffcf601a144308827e27a2dbc12" title="ValueHeap::make" alt="" coords="199,243,324,272"/>
+<area shape="rect" id="node32" href="$class_value_heap.html#a2b69af5d5e6606c3c87352a931614568" title="ValueHeap::free" alt="" coords="204,296,319,325"/>
+<area shape="rect" id="node14" href="$class_int_value.html#a1fcaead32e8f6f027d026efd35bd3bc6" title="IntValue::clone" alt="" coords="444,29,553,59"/>
+<area shape="rect" id="node16" href="$class_a_p_i_1_1_pow_float32.html#a6686a7ef9c9b8fa21557a372263ab112" title="API::PowFloat32::execute" alt="" coords="412,83,585,112"/>
+<area shape="rect" id="node18" href="$class_array_value.html#af34adfeb0870b39bba4614dc35ce704c" title="ArrayValue::clone" alt="" coords="436,136,561,165"/>
+<area shape="rect" id="node20" href="$class_bool_value.html#a89d85da1de60aea6e8c7563e2be0c7ca" title="BoolValue::clone" alt="" coords="439,189,559,219"/>
+<area shape="rect" id="node22" href="$class_float32_value.html#a00d8b8d6a8f9e6aeacd81f953aa1df21" title="Float32Value::clone" alt="" coords="431,243,567,272"/>
+<area shape="rect" id="node24" href="$class_string_value.html#ab8d7a8fc1b33e1b792241ac28d8670c2" title="StringValue::clone" alt="" coords="435,296,563,325"/>
+<area shape="rect" id="node26" href="$class_structure.html#a041c4e514905262552ba803fc079d1fa" title="Structure::clone" alt="" coords="441,349,556,379"/>
+<area shape="rect" id="node28" href="$class_value_heap.html#ac034dd8be168f7d45805c3c6d650c62d" title="ValueHeap::make" alt="" coords="436,403,561,432"/>
+<area shape="rect" id="node30" href="$class_void_value.html#a5b22b21d7d4280904656eabb5d5b4c68" title="VoidValue::clone" alt="" coords="439,456,559,485"/>
+</map>

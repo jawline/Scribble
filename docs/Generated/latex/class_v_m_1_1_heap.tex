@@ -1,0 +1,83 @@
+\hypertarget{class_v_m_1_1_heap}{\section{V\-M\-:\-:Heap Class Reference}
+\label{class_v_m_1_1_heap}\index{V\-M\-::\-Heap@{V\-M\-::\-Heap}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+long \hyperlink{class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0}{allocate} (Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} $>$ type, int size, uint8\-\_\-t $\ast$initial)
+\item 
+\hypertarget{class_v_m_1_1_heap_a55b3e734c3437a02620684466aa5bc8a}{bool {\bfseries valid\-Reference} (long entry)}\label{class_v_m_1_1_heap_a55b3e734c3437a02620684466aa5bc8a}
+
+\item 
+\hypertarget{class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954}{Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} $>$ {\bfseries get\-Type} (long entry)}\label{class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954}
+
+\item 
+\hypertarget{class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0}{Smart\-Pointer$<$ uint8\-\_\-t $>$ {\bfseries get\-Smart\-Pointer} (long entry)}\label{class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0}
+
+\item 
+\hypertarget{class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1}{uint8\-\_\-t $\ast$ {\bfseries get\-Address} (long entry)}\label{class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1}
+
+\item 
+\hypertarget{class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46}{int {\bfseries get\-Size} (long entry)}\label{class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46}
+
+\item 
+\hypertarget{class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271}{void {\bfseries flag} (long i)}\label{class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271}
+
+\item 
+\hypertarget{class_v_m_1_1_heap_a9ff0e85c497091139634a9c38d46fb72}{void {\bfseries lock} (long i)}\label{class_v_m_1_1_heap_a9ff0e85c497091139634a9c38d46fb72}
+
+\item 
+\hypertarget{class_v_m_1_1_heap_a0be6cc847754a25dacddb87784e9196b}{void {\bfseries unlock} (long i)}\label{class_v_m_1_1_heap_a0be6cc847754a25dacddb87784e9196b}
+
+\item 
+int \hyperlink{class_v_m_1_1_heap_ace7f82504bd848493b74eefde4489c7c}{process\-Unflagged} ()
+\item 
+std\-::string \hyperlink{class_v_m_1_1_heap_ace8a1c5e19d042f27f3b1754674c06fa}{debug\-State} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0}{\index{V\-M\-::\-Heap@{V\-M\-::\-Heap}!allocate@{allocate}}
+\index{allocate@{allocate}!VM::Heap@{V\-M\-::\-Heap}}
+\subsubsection[{allocate}]{\setlength{\rightskip}{0pt plus 5cm}long V\-M\-::\-Heap\-::allocate (
+\begin{DoxyParamCaption}
+\item[{Smart\-Pointer$<$ {\bf V\-M\-Entry\-Type} $>$}]{type, }
+\item[{int}]{size, }
+\item[{uint8\-\_\-t $\ast$}]{initial}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0}
+Returns a value $>$ 0 which acts as a reference to an element on the heap. If initial is null then null all values instead of copying
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_heap_ace8a1c5e19d042f27f3b1754674c06fa}{\index{V\-M\-::\-Heap@{V\-M\-::\-Heap}!debug\-State@{debug\-State}}
+\index{debug\-State@{debug\-State}!VM::Heap@{V\-M\-::\-Heap}}
+\subsubsection[{debug\-State}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string V\-M\-::\-Heap\-::debug\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_heap_ace8a1c5e19d042f27f3b1754674c06fa}
+for (auto iter = heap\-Map\-\_\-.\-begin(); iter != heap\-Map\-\_\-.\-end(); iter++) \{ dbg $<$$<$ \char`\"{}\-Entry\-: \char`\"{} $<$$<$ iter-\/$>$first $<$$<$ \char`\"{} type \char`\"{} $<$$<$ iter-\/$>$second.\-type-\/$>$type\-Name();
+
+if (iter-\/$>$second.\-type-\/$>$type\-Name().compare(\char`\"{}string\char`\"{}) == 0) \{ dbg $<$$<$ \char`\"{} string value\-: \char`\"{} $<$$<$ iter-\/$>$second.\-pointer; \}
+
+dbg $<$$<$ \char`\"{}\textbackslash{}n\char`\"{}; \} \hypertarget{class_v_m_1_1_heap_ace7f82504bd848493b74eefde4489c7c}{\index{V\-M\-::\-Heap@{V\-M\-::\-Heap}!process\-Unflagged@{process\-Unflagged}}
+\index{process\-Unflagged@{process\-Unflagged}!VM::Heap@{V\-M\-::\-Heap}}
+\subsubsection[{process\-Unflagged}]{\setlength{\rightskip}{0pt plus 5cm}int V\-M\-::\-Heap\-::process\-Unflagged (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_heap_ace7f82504bd848493b74eefde4489c7c}
+This function deletes any unflagged heap elements and then sets flag states for the next garbage collector run 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Heap.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Heap.\-cpp\end{DoxyCompactItemize}

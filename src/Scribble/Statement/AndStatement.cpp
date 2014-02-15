@@ -6,11 +6,11 @@
  */
 
 #include "AndStatement.hpp"
-#include <Scribble/Statement/Heap.hpp>
 #include <Scribble/Value/TypeManager.hpp>
-#include <Scribble/Value/Bool.hpp>
 #include <VM/Constants.hpp>
 #include <sstream>
+
+namespace ScribbleCore {
 
 AndStatement::AndStatement(int lineNo, std::string sym,
 		SafeStatement leftHandSide, SafeStatement rightHandSide) :
@@ -27,8 +27,12 @@ void AndStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->Equals(getTypeManager().getType(Boolean)) || !rhs_->type()->Equals(getTypeManager().getType(Boolean))) {
-		throw StatementException(this, std::string("And on types ") + lhs_->type()->getTypeName() + " and " + rhs_->type()->getTypeName() + " is not possible. And can only be performed on two booleans");
+	if (!lhs_->type()->Equals(getTypeManager().getType(Boolean))
+			|| !rhs_->type()->Equals(getTypeManager().getType(Boolean))) {
+		throw StatementException(this,
+				std::string("And on types ") + lhs_->type()->getTypeName()
+						+ " and " + rhs_->type()->getTypeName()
+						+ " is not possible. And can only be performed on two booleans");
 	}
 
 }
@@ -77,4 +81,6 @@ int AndStatement::generateCode(int resultRegister,
 	generated << "#End of and test\n";
 
 	return instrs;
+}
+
 }

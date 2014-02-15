@@ -1,0 +1,47 @@
+\hypertarget{class_scribble_core_1_1_function_reference}{\section{Scribble\-Core\-:\-:Function\-Reference Class Reference}
+\label{class_scribble_core_1_1_function_reference}\index{Scribble\-Core\-::\-Function\-Reference@{Scribble\-Core\-::\-Function\-Reference}}
+}
+
+
+{\ttfamily \#include $<$Function\-Reference.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a79bf4edbc9e885b8950d599fa87be039}{{\bfseries Function\-Reference} (std\-::string fn\-Namespace, std\-::string name, std\-::vector$<$ Safe\-Statement $>$ fn\-Args, Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ func)}\label{class_scribble_core_1_1_function_reference_a79bf4edbc9e885b8950d599fa87be039}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a3503eee3d549b5c6f414950f62bbca33}{std\-::string const \& {\bfseries get\-Name} ()}\label{class_scribble_core_1_1_function_reference_a3503eee3d549b5c6f414950f62bbca33}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a5a9260934ab22f221958f6f4e9741b1a}{std\-::string const \& {\bfseries get\-Namespace} ()}\label{class_scribble_core_1_1_function_reference_a5a9260934ab22f221958f6f4e9741b1a}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a29fad58add2d8262c02b842269046d37}{std\-::string const \& {\bfseries get\-Resolve\-Issue} ()}\label{class_scribble_core_1_1_function_reference_a29fad58add2d8262c02b842269046d37}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a84339654ac185758f59f759d0de3d74d}{std\-::string {\bfseries get\-Debug\-Name} ()}\label{class_scribble_core_1_1_function_reference_a84339654ac185758f59f759d0de3d74d}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a2972619b5377b0c600556523b9083c90}{std\-::vector$<$ Safe\-Statement $>$\\*
+ const \& {\bfseries get\-Args} ()}\label{class_scribble_core_1_1_function_reference_a2972619b5377b0c600556523b9083c90}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_ac081e81ae34f67451ae821b94f8a85d2}{void {\bfseries set\-Resolve\-Issue} (std\-::string issue)}\label{class_scribble_core_1_1_function_reference_ac081e81ae34f67451ae821b94f8a85d2}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a16a015b1d50b2d21431bf9e30e19e355}{Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ {\bfseries get\-Function} ()}\label{class_scribble_core_1_1_function_reference_a16a015b1d50b2d21431bf9e30e19e355}
+
+\item 
+\hypertarget{class_scribble_core_1_1_function_reference_a4e3f9133a8ec183ad68e8d2ddba059c7}{void {\bfseries set\-Function} (Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ func)}\label{class_scribble_core_1_1_function_reference_a4e3f9133a8ec183ad68e8d2ddba059c7}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A function reference used by the parser to provide a link between functions and the statements that call them. Without these all functions would have to be defined before they are referenced. with these however the function references can be evaluated post parsing making recursion possible and forward declaration unnecessary. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Function/Function\-Reference.\-hpp\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Function/Function\-Reference.\-cpp\end{DoxyCompactItemize}
