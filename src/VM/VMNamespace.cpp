@@ -8,20 +8,17 @@
 #include "VMNamespace.hpp"
 #include <VM/Constants.hpp>
 
-bool VM::NamespaceEntry::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& entry) {
-
-	printf("Searching namespace for %s\n", target.c_str());
+bool VM::NamespaceEntry::searchNamespace(VMNamespace space, std::string target,
+		NamespaceEntry& entry) {
 
 	size_t pos = target.find(VM::vmNamespaceSeperator);
 
 	if (pos == std::string::npos) {
 
-		printf("No seperator found\n");
-
 		NamespaceEntry spaceSearch = space.find(target);
 
 		if (spaceSearch.getType() == Invalid) {
-			printf("Could not find %s\n", target.c_str());
+			//	printf("Could not find %s\n", target.c_str());
 			return false;
 		}
 
@@ -30,14 +27,12 @@ bool VM::NamespaceEntry::searchNamespace(VMNamespace space, std::string target, 
 	} else {
 
 		std::string prefix = target.substr(0, pos);
-		target = target.substr(pos+1);
+		target = target.substr(pos + 1);
 
 		if (space.find(prefix).getType() != Namespace) {
-			printf("Could not find %s\n", target.c_str());
+			//	printf("Could not find %s\n", target.c_str());
 			return false;
 		}
-
-		printf("Searching %s\n", target.c_str());
 
 		return searchNamespace(space.find(prefix).getNamespace(), target, entry);
 	}
