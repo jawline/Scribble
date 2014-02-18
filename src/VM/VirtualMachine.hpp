@@ -120,7 +120,7 @@ public:
 		return heap_;
 	}
 
-	virtual SmartPointer<VMEntryType> findType(std::string& name);
+	virtual SmartPointer<VMEntryType> findType(std::string name);
 
 	virtual void registerEntry(std::string name, NamespaceEntry entry) {
 		namespace_.insert(name, entry);

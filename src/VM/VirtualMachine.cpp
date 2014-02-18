@@ -79,12 +79,16 @@ VirtualMachine::~VirtualMachine() {
 	// TODO Auto-generated destructor stub
 }
 
-SmartPointer<VMEntryType> VirtualMachine::findType(std::string& name) {
+SmartPointer<VMEntryType> VirtualMachine::findType(std::string name) {
 
 	NamespaceEntry entry;
 
+	VM_PRINTF_LOG("Searching for type %s\n", name.c_str());
+
 	//If the namespace entry is not found in the namespace
 	if (!VM::NamespaceEntry::searchNamespace(namespace_, name, entry)) {
+
+		VM_PRINTF_LOG("Type search not found, inspecting to check if array\n", name.c_str());
 
 		//If it starts with 'array(' try to generate it from existing types
 		char const* prefix = "array(";
@@ -93,6 +97,9 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string& name) {
 
 			std::string subtypeName = name.substr(strlen(prefix),
 					name.size() - strlen(prefix) - 1);
+
+			VM_PRINTF_LOG("Generating subtype %s\n", subtypeName.c_str());
+
 			SmartPointer<VMEntryType> subtype = findType(subtypeName);
 
 			if (subtype.get() == nullptr) {
@@ -105,6 +112,8 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string& name) {
 			registerEntry(name, entryType);
 			VM_PRINTF_LOG("Generating new type %s\n", name.c_str());
 			return entryType;
+		} else {
+			VM_PRINTF_LOG("Prefix of %s does not match with array(\n", name.c_str());
 		}
 
 		//If it does not start with array then return NULL so that the VM error handler can catch it
@@ -113,6 +122,7 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string& name) {
 
 	//If the entry in the namespace specified is not a type then return null
 	if (entry.getType() != Type) {
+		VM_PRINTF_LOG("Error searched type %s\n", name.c_str());
 		return nullptr;
 	}
 

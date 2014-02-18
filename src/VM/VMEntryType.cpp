@@ -46,6 +46,8 @@ VMEntryType::~VMEntryType() {
 		delete[] structureFieldOffsets_;
 	}
 
+	printf("Type %s destructed\n", typeName().c_str());
+
 }
 
 int VMEntryType::cacheFieldOffsets() {

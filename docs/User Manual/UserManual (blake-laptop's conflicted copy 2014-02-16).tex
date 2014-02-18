@@ -232,44 +232,9 @@ func main() {
 
 \section{Structures}
 
-The next example defines a structure User to hold a users information, it then defines a function which takes a user as an argument and prints it to the screen and a main function which creates and outputs a users data.
+The example below defines the structures Name and User and then creates instances of them and access their fields.
 
-\begin{verbatim}
-//Import the packages for console and system libraries
-package console := import("console");
-package sys := import("sys");
-
-//Define the user structure with name, email and age fields
-type User := struct {
- name : string,
- email : string,
- age : int
-}
-
-//Define the function PrintUser which writes 
-//the users name email address and age to stdout
-func PrintUser(user : User) {
- console.Log("Name: ");
- console.Log(user->name);
  
- console.Log("\nEmail: ");
- console.Log(user->email);
- 
- console.Log("\nAge: ");
- console.Log(sys.String(user->age));
- console.Log("\n");
-}
-
-func main() {
- 
- //Create a user for John Smith aged 32
- var user := User { "John Smith", "js@email.com", 32 };
-
- //Print the users details to the screen.
- PrintUser(user);
-
-}
-\end{verbatim}
 
 \section{Quick Sort}
 

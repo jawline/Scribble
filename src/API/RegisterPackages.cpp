@@ -70,6 +70,7 @@ void registerPackages(std::map<std::string, ScribbleCore::NamespaceType>& allNam
 					newSpace.insert(info->getName(), VM::NamespaceEntry(SmartPointer<VM::VMEntryType>(new VM::VMEntryType(info->getName(), fields))));
 
 					vm.logMessage(VM::Log, "}\n");
+					vm.logMessage(VM::Log, std::string("Registered type ") + info->getName() + " inside " + selectedNamespaceIter->first + "\n");
 				}
 
 			}
@@ -85,7 +86,8 @@ void registerPackages(std::map<std::string, ScribbleCore::NamespaceType>& allNam
 
 		auto resolvedType = vm.findType(iter->first);
 
-		if (resolvedType != nullptr) {
+		if (resolvedType.get() != nullptr) {
+			vm.logMessage(VM::Log, std::string("Resolved type ") + resolvedType->typeName() + "\n");
 			iter->second->setType(vm.findType(iter->first));
 		} else {
 			printf("FATAL ERROR: Type could not be resolved ( %s not registered )", iter->first.c_str());

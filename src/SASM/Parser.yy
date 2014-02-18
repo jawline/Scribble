@@ -46,6 +46,7 @@ void Set(uint8_t* inst, int& current, long lval) {
 }
 
 void Set(uint8_t* inst, int& current, char const* str) {
+	printf("set str %s\n", str);
 	int size = strlen(str) + 1;
 	memcpy(inst + current, str, size);
 	current += size;
