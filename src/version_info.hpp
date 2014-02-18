@@ -4,7 +4,7 @@
 #define PROJECT_NAME "Scribble"
 
 #define VERSION_MAJOR 0
-#define VERSION_MINOR 6
-#define VERSION_BUILD_NUMBER 5119
+#define VERSION_MINOR 7
+#define VERSION_BUILD_NUMBER 5121
 
 #endif //_VERSION_INFO_DEF_H_
