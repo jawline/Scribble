@@ -1,0 +1,7 @@
+\contentsline {chapter}{Abstract}{3}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
+\contentsline {chapter}{\numberline {2}Instruction Encoding}{5}{chapter.2}
+\contentsline {chapter}{\numberline {3}Type Inference}{7}{chapter.3}
+\contentsline {chapter}{\numberline {4}Package Handling}{8}{chapter.4}
+\contentsline {chapter}{\numberline {5}Garbage Collection}{9}{chapter.5}
+\contentsline {chapter}{Bibliography}{10}{chapter*.3}
