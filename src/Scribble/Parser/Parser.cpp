@@ -9,6 +9,8 @@
 #include <Scribble/Function/FunctionReference.hpp>
 #include <Scribble/Value/Util.hpp>
 
+#include <API/StringFunction.hpp>
+
 #include <SHA3/sha3.h>
 #include <limits.h> /* PATH_MAX */
 #include <stdio.h>
@@ -280,8 +282,8 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	}
 
 	//Store the loaded namespace
-
 	Namespace[currentNamespaceName] = Functions;
+
 	Functions = NamespaceType();
 
 	//Store the import list generated whilst parsing and then clear it so that imports don't already have imported libraries.

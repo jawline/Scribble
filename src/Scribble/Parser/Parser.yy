@@ -101,7 +101,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_FLOAT32 TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
-%token <token> END DO OR PACKAGE
+%token <token> CONCAT END DO OR PACKAGE
 
 %left PLUS MINUS
 %left TIMES DIVIDE
@@ -613,6 +613,19 @@ Expression: MINUS Expression {
 		//Free up string pointer.
 		delete $1;
 		
+	} | Expression CONCAT Expression {
+
+		std::vector<ScribbleCore::SafeStatement> args;
+		args.push_back(ScribbleCore::SafeStatement($1));
+		args.push_back(ScribbleCore::SafeStatement($3));
+	
+		SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("sys", "Concat", args, 0));
+	
+		ScribbleCore::ParserReference r(reference);
+		StatementReferences.push_back(r);
+		
+		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
+	
 	} | WORD INCREMENT {
 	
 		auto it = Variables.find(*$1);

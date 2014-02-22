@@ -24,6 +24,10 @@ package console := import("console");
  
 func main() {
 
+ console.Log( "The value is " $ sys.String(5) $ "\n");
+ console.Log( "This concat " $ " Operator " $ " is really useful\n");
+ console.Log( "I don't know why " $ " I didn't " $ " think of it before\n");
+
  loopsTest.Test();
  arraysTest.Test();
  variablesTest.Test();

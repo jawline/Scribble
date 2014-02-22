@@ -65,6 +65,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "-" return MINUS;
 "*" return TIMES;
 "/" return DIVIDE;
+"$" return CONCAT;
 
 ":=" return ASSIGN;
 "=" return EQUALS;
