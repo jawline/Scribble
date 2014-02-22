@@ -96,6 +96,7 @@ private:
 	static void printNamespace(NamespaceType const& ns);
 	static void printAllSpaces(std::map<std::string, NamespaceType> const& ns);
 	static void resolve(TypeReference reference, NamespaceType ns);
+	static void resetImportList();
 
 public:
 

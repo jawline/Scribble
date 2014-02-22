@@ -619,7 +619,7 @@ Expression: MINUS Expression {
 		args.push_back(ScribbleCore::SafeStatement($1));
 		args.push_back(ScribbleCore::SafeStatement($3));
 	
-		SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("sys", "Concat", args, 0));
+		SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("__system", "Concat", args, 0));
 	
 		ScribbleCore::ParserReference r(reference);
 		StatementReferences.push_back(r);

@@ -260,8 +260,19 @@ void Parser::resolve(TypeReference reference, NamespaceType ns) {
 	reference->type = ref->type;
 }
 
+void Parser::resetImportList() {
+
+	//Clear the import list
+	ImportList.clear();
+
+	//Make sure __system links to sys so that the compiler can use it for things like concat
+	ImportList["__system"] = "sys";
+}
+
 std::string Parser::includeText(std::string source, std::string const& filename,
 		std::string const& path) {
+
+	resetImportList();
 
 	currentNamespaceName = getUniformPath(path + filename);
 
@@ -289,7 +300,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	//Store the import list generated whilst parsing and then clear it so that imports don't already have imported libraries.
 
 	std::map<std::string, std::string> imports = ImportList;
-	ImportList.clear();
 
 	//Store the global lists of things to be resolved and then clear them ( As the import or include functions will use these ).
 
