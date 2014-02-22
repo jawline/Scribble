@@ -269,10 +269,18 @@ void Parser::resetImportList() {
 	ImportList["__system"] = "sys";
 }
 
+void Parser::resetReferences() {
+	StatementReferences.clear();
+	TypeReferences.clear();
+	VariableReferences.clear();
+}
+
 std::string Parser::includeText(std::string source, std::string const& filename,
 		std::string const& path) {
 
+	//Reset all the information generated in the last parse
 	resetImportList();
+	resetReferences();
 
 	currentNamespaceName = getUniformPath(path + filename);
 
@@ -305,12 +313,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
-	std::vector<SmartPointer< Variable >> variableReferences =
-	VariableReferences;
-
-	StatementReferences.clear();
-	TypeReferences.clear();
-	VariableReferences.clear();
+	std::vector<SmartPointer< Variable >> variableReferences = VariableReferences;
 
 	//Look at the list of requested imports and attempt to resolve them.
 	for (auto iter = imports.begin(); iter != imports.end(); iter++) {
