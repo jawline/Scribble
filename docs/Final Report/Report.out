@@ -1,8 +1,20 @@
 \BOOKMARK [0][-]{toc.0}{Table of Contents}{}% 1
 \BOOKMARK [0][-]{chapter*.2}{Abstract}{}% 2
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
-\BOOKMARK [0][-]{chapter.2}{Instruction Encoding}{}% 4
-\BOOKMARK [0][-]{chapter.3}{Type Inference}{}% 5
-\BOOKMARK [0][-]{chapter.4}{Package Handling}{}% 6
-\BOOKMARK [0][-]{chapter.5}{Garbage Collection}{}% 7
-\BOOKMARK [0][-]{chapter*.3}{Bibliography}{}% 8
+\BOOKMARK [0][-]{chapter.2}{User Manual}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Language Examples}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.2}{Lexical}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.3}{Identifiers}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.4}{Types}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.5}{Operators \046 Expressions}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.6}{Statements}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.7}{Functions}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.8}{Packages \046 Importing}{chapter.2}% 12
+\BOOKMARK [0][-]{chapter.3}{Instruction Encoding}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Instructions List}{chapter.3}% 14
+\BOOKMARK [0][-]{chapter.4}{Type Inference}{}% 15
+\BOOKMARK [0][-]{chapter.5}{Package Handling}{}% 16
+\BOOKMARK [0][-]{chapter.6}{Garbage Collection}{}% 17
+\BOOKMARK [0][-]{chapter.7}{Native Interface}{}% 18
+\BOOKMARK [1][-]{section.7.1}{Structure}{chapter.7}% 19
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 20

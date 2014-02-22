@@ -620,8 +620,6 @@ std::map<std::string, NamespaceType> Parser::compileText(
 
 	std::map<std::string, ScribbleCore::NamespaceType> result = Namespace;
 
-	parser_free_all();
-
 	return result;
 }
 
