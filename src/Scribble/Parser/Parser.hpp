@@ -98,6 +98,7 @@ private:
 	static void resolve(TypeReference reference, NamespaceType ns);
 	static void resetImportList();
 	static void resetReferences();
+	static void resetFunctions();
 
 public:
 

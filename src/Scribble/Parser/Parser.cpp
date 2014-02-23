@@ -275,11 +275,16 @@ void Parser::resetReferences() {
 	VariableReferences.clear();
 }
 
+void Parser::resetFunctions() {
+	Functions = NamespaceType();
+}
+
 std::string Parser::includeText(std::string source, std::string const& filename,
 		std::string const& path) {
 
 	//Reset all the information generated in the last parse
 	resetImportList();
+	resetFunctions();
 	resetReferences();
 
 	currentNamespaceName = getUniformPath(path + filename);
@@ -302,15 +307,12 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 	//Store the loaded namespace
 	Namespace[currentNamespaceName] = Functions;
-
-	Functions = NamespaceType();
+	resetFunctions();
 
 	//Store the import list generated whilst parsing and then clear it so that imports don't already have imported libraries.
-
 	std::map<std::string, std::string> imports = ImportList;
 
 	//Store the global lists of things to be resolved and then clear them ( As the import or include functions will use these ).
-
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
 	std::vector<SmartPointer< Variable >> variableReferences = VariableReferences;
@@ -344,9 +346,10 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 		//After each include change currentNamespaceName as it may have been changed by the include
 		currentNamespaceName = getUniformPath(path + filename);
 
-		Functions = NamespaceType();
+		resetFunctions();
 	}
 
+	//Restore the functions after all the other namespaces are done parsing
 	Functions = Namespace[currentNamespaceName];
 
 	//Loop through every function set and test for duplicates.
