@@ -138,10 +138,6 @@ Program: {
 		$$ = 0;
 	} | Program Function {
 		$$ = 0;
-	} | Program TYPE WORD ASSIGN Type {
-		Functions[*$3] = ScribbleCore::NamespaceEntry(*$5);
-		delete $3;
-		delete $5;
 	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
 		$7->setName(*$3);
 		$7->setPackage(currentNamespaceName);

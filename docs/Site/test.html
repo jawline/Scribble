@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/local.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -32,12 +33,32 @@
 
 
     <script>
-	var SERVER_PATH = 'https://chost1.parsed.co.uk:9760';
+	var SERVER_PATH = 'http://chost1.parsed.co.uk:9760';
 	var ARG_PATH = '/run?source=';
+	var loading = false;
+
+	function loadExample(examplePath) {
+
+		if (!loading) {
+
+			loading = true;
+
+			$.get(examplePath, function(data) {
+				$("#source-area").val(data); loading = false; }
+			).fail(function() {
+				alert('Issue loading example ' + examplePath);
+				loading = false;
+			});
+		}
+	}
 
 	function runTest() {
 		$.get(SERVER_PATH + ARG_PATH + encodeURIComponent($("#source-area").val()), function(d) { console.log("Success"); $("#result-area").val(d) }).fail(function() { console.log('Error'); $("#result-area").val("Server issues. Possible server down time"); });
 	}
+
+	$().ready(function() { 
+		loadExample('./examples/hello_world.sc');
+	});
     </script>
 
   </head>
@@ -92,23 +113,65 @@
 	
      <a name="content-start"></a>
 
-     <div class="row featurette" >
-        <div class="col-md-12" >
+     <div class="row featurette">
+
+        <div class="col-md-10" >
 
           <h2 class="featurette-heading" >Source</h2>
 
 	  <br/>
 		<textarea class="code-area" id="source-area" style="width: 100%; height: 400px; resize: none;" rows="20"></textarea>
-	  <br/><br/>
-
-	  <div style="text-align: center;">
-       	   <button class="col-md-3" style="float: none; margin: 0px auto;" onclick="runTest();">Execute</button>
-          </div>
+	  <br/>
 
         </div>
+
+        <div class="col-md-2" >
+    
+			<div class="centered">
+				<ul class="list-group">
+
+				  <a href="#" onclick="loadExample('./examples/hello_world.sc'); return false;"><li class="list-group-item">Hello World</li></a>
+
+				  <a href="#" onclick="loadExample('./examples/variables.sc'); return false;"><li class="list-group-item">Variables</li></a>
+
+				  <a href="#" onclick="loadExample('./examples/flow.sc'); return false;"><li class="list-group-item">Flow Control</li></a>
+
+				  <a href="#" onclick="loadExample('./examples/functions.sc'); return false;"><li class="list-group-item">Functions</li></a>
+
+				  <a href="#" onclick="loadExample('./examples/arrays.sc'); return false;"><li class="list-group-item">Arrays</li></a>
+
+				  <a href="#" onclick="loadExample('./examples/structures.sc'); return false;"><li class="list-group-item">Structures</li></a>
+
+				  <a href="#" onclick="loadExample('./examples/quicksort.sc'); return false;"><li class="list-group-item">Quicksort</li></a>
+
+				  <a href="#" onclick="loadExample('./examples/decision_maker.sc'); return false;"><li class="list-group-item">Decision Maker</li></a>
+
+				</ul>
+		    
+		</div>
+
+        </div>
+
       </div>
 
+
+<br/><br/>
       <hr class="featurette-divider">
+
+    <br/><br/>
+     <div class="row featurette">
+
+	<div class="col-md-12">
+		<div style="text-align: center;">
+	       	   <button class="col-md-3" style="float: none; margin: 0px auto;" onclick="runTest();">Execute</button>
+		</div>
+	</div>
+     </div>
+
+    <br/><br/>
+      <hr class="featurette-divider">
+
+    <br/><br/>
 
      <div class="row featurette">
         <div class="col-md-12" >

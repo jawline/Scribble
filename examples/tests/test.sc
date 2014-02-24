@@ -9,9 +9,7 @@ package console := import("console");
 
 func Fatal(error : string) {
 
- console.Log( "FATAL ERROR HANG: " );
- console.Log(error);
- console.Log("\n");
+ console.Log( "FATAL ERROR HANG: " $ error $ "\n" );
 
  while true do {
  }
@@ -48,12 +46,8 @@ func Assert(val : float32, target : float32, drift : float32, error : string) {
 
 func AssertBool(val : bool, target : bool, error : string) {
 
- if val != target then {	
-  console.Log("Assert failed ");
-  console.Log( sys.String(val) );
-  console.Log(" ");
-  console.Log( sys.String(target) );
-  console.Log("\n");	
+ if val != target then {
+  console.Log("Assert failed " $ sys.String(val) $ " " $ sys.String(target) $ "\n");
   Fatal(error);
  }
 
@@ -66,11 +60,7 @@ func AssertBool(val : bool, target : bool, error : string) {
 func AssertInt(val : int, target : int, error : string) {
 
  if val != target then {
-  console.Log("Assert failed ");
-  console.Log( sys.String(val) );
-  console.Log(" ");
-  console.Log( sys.String(target) );
-  console.Log("\n");
+  console.Log("Assert failed " $ sys.String(val) $ " " $ sys.String(target) $ "\n");
   test.Fatal(error);
  }
 
@@ -83,11 +73,7 @@ func AssertInt(val : int, target : int, error : string) {
 func AssertFloat(val : float32, target : float32, drift : float32, error : string) {
 
  if (val > (target + drift)) or (val < (target - drift)) then {
-  console.Log("Assert failed ");
-  console.Log( sys.String(val) );
-  console.Log(" ");
-  console.Log( sys.String(target) );
-  console.Log("\n");
+  console.Log("Assert failed " $ sys.String(val) $ " " $ sys.String(target) $ "\n");
   Fatal(error);
  }
 

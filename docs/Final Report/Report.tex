@@ -82,6 +82,8 @@ Due to the scope of the project it would be extremely difficult to try and appro
 
 \chapter{User Manual}
 
+The following user manual describes the core features of the language syntax and semantics as well as information on how to use features like package importing and type inference.
+
 \section{Language Examples}
 
 The following examples will outline some of the features of the language by showing them in use in small programs.
@@ -1069,6 +1071,19 @@ Expression AND Expression {
 }
 \end{verbatim}
 
+\subsection{String Concatenation}
+
+In Scribble the '\$' operator is used to concatenate two expressions of the type string.
+
+Writing "Hello" \$ " World\n" is equivalent to writing sys.Concat("Hello", " World"), this is the only syntax feature in Scribble that currently depends on the built in 'sys' package. If sys is removed then the \$ operator will not work and will have to be switched off or reimplemented.
+
+Note: While this feature relies on the sys library it does not rely on the user importing explicitly into a package and will be automatically imported by the compiler if required.
+
+\begin{verbatim}
+Expression '$' Expression {
+}
+\end{verbatim}
+
 \subsubsection{Assignment}
 
 Assignment in Scribble is done using the ':=' operator. It takes a variable ID and an expression and sets the value of that variable to the value given when the expression is evaluated.
@@ -1347,6 +1362,16 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions
 
 Every file in Scribble is seen as a separate package. These packages contain sets of functions and structures which can be used to perform some function, for example one package may contain a linked list structure and a set of functions for inserting and removing elements from said list. Scribble also defines syntax so that packages can import and use structures and functions from other packages.
 
+Packages in the grammar are defined as
+\begin{verbatim}
+Package: {
+	} | Package PACKAGE WORD ASSIGN IMPORT LPAREN STRING RPAREN END {
+	} | Package Function {
+	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
+	}
+;
+\end{verbatim}
+
 \subsection{Importing Packages}
 
 One package can be used from another by using the
@@ -1461,7 +1486,55 @@ enum OpCodes {
 
 \chapter{Type Inference}
 
-In a strictly typed language such as Scribble every expression, argument, variable, function or piece of data has a defined type. 
+In a strictly typed language such as Scribble every expression, argument, variable, function or piece of data has a defined type.
+
+The advantage of a strictly typed language is that is allows the language to avoid common errors which casting cause and also reduces the ambiguity over the type of a function or expression as every cast has to be explicit and everything has a defined type. For example when calling the function var val = doSomething(); in Javascript it is unclear what type of data val will contain after the function call. Within a strictly typed language this ambiguity is removed as the type of val will have to be declared before it is used as does the type which doSomething() would return.
+
+The downside of a strictly typed syntax is that it can lead to additional overhead for the programmer. Whilst it is reasonable to force that a function or structure field be given an explicit type because it makes programs much clearer, often when implementing a function the programmer does not want to have to explicitly specify the type of every variable that they create. In an attempt to reduce the time a programmer has to spend writing unnecessary definitions the type of a variable in Scribble can be inferred from the expression that it is being assigned to by omitting the type declaration. Therefore what was 
+\begin{verbatim}
+var j : int := 15;
+\end{verbatim}
+can become \begin{verbatim}
+var j := 15;
+\end{verbatim}
+
+This language feature is made much simpler type information is declared to the right of a deceleration in Scribble as it allows the use of the var Name := Expression; syntax which would not be possible if the definition was Type name = Expression. This issue is visible in the C++11 standard in which the confusing auto keyword was introduced to allow basic type inference.
+
+The following is an example of a piece of code written in C and an equivalent piece of code in Scribble.
+
+\begin{verbatim}
+struct ALongName {
+	int i;
+};
+
+int main() {
+
+ ALongName* names = new ALongName[100];
+ 
+ for (int i = 0; i < 100; i++) {
+  names[i] = ALongName();
+  names[i].i = 5;
+ }
+
+}
+\end{verbatim}
+And in Scribble
+\begin{verbatim}
+type ALongName := struct {
+ i : int
+}
+
+func main() {
+ var names := [100]ALongName;
+ for var i := 0; i < len(names); i++ do {
+  names[i] = ALongName{5};
+ }
+}
+\end{verbatim}
+
+The example above shows that the variable type inference makes the definition of the variable much simpler while it is still clear that 'names' is an array of structures and 'i' is an integer.
+
+One potential negative to this approach is that it will be difficult to immediately work out the type of a variable when the expression it is assigned to involves a function call which they do not know the type of. This issue is likely to be mitigated by good naming practices when naming functions, platform documentation and IDEs however it could cause issues in large poorly documented programs.
 
 \chapter{Package Handling}
 
