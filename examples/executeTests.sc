@@ -14,6 +14,7 @@ package floatsTest := import("tests/floats");
 package mathTest := import("tests/math");
 package structTest := import("tests/structures");
 package structQs := import("tests/structQuicksortTest");
+package refEqTest := import("tests/refEqualityTest");
 
 package sys := import("sys");
 package console := import("console");
@@ -35,5 +36,6 @@ func main() {
  mathTest.Test();
  structTest.Test();
  structQs.Test();
+ refEqTest.Test();
 
 }

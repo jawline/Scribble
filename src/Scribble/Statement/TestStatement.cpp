@@ -62,6 +62,16 @@ int TestStatement::generateCode(int resultRegister,
 
 	switch (lhs_->type()->getType()) {
 
+	/**
+	 * Strings, arrays and structures all have there reference tested
+	 * for equality rather than their contents.
+	 *
+	 * Boolean is primitive so has its contents checked.
+	 */
+
+	case StringType:
+	case Array:
+	case StructureType:
 	case Boolean: {
 		switch (tType_) {
 
