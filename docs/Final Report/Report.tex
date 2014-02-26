@@ -1075,7 +1075,7 @@ Expression AND Expression {
 
 In Scribble the '\$' operator is used to concatenate two expressions of the type string.
 
-Writing "Hello" \$ " World\n" is equivalent to writing sys.Concat("Hello", " World"), this is the only syntax feature in Scribble that currently depends on the built in 'sys' package. If sys is removed then the \$ operator will not work and will have to be switched off or reimplemented.
+Writing "Hello" \$ " World" is equivalent to writing sys.Concat("Hello", " World"), this is the only syntax feature in Scribble that currently depends on the built in 'sys' package. If sys is removed then the \$ operator will not work and will have to be switched off or reimplemented.
 
 Note: While this feature relies on the sys library it does not rely on the user importing explicitly into a package and will be automatically imported by the compiler if required.
 
@@ -1367,7 +1367,7 @@ Packages in the grammar are defined as
 Package: {
 	} | Package PACKAGE WORD ASSIGN IMPORT LPAREN STRING RPAREN END {
 	} | Package Function {
-	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
+	} | Package TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
 	}
 ;
 \end{verbatim}
@@ -1591,6 +1591,10 @@ package math := import("math/math");
 \end{verbatim}
 
 This method of package handling allows me the to almost completely avoid naming issues and have a useful way for developers to structure their programs as packages can be used by several different parts of a program to avoid having to rewrite code.
+
+Local package names are implemented by maintaining a mapping of local package names to global package identifiers for each package. Whenever a reference to a function or structure in another package occurs the resolve function first replaces the local package name with that packages global identifier by looking for the mapping and then resolves then continues to resolve the reference the way it would any other. 
+
+If no mapping between a local package identifier and a real package exists then an error will be detected during the parsing step where references are resolved, however line and symbol information on where the error occurs is not available at this point. Instead the reference is marked so that the statement tree can identify that there has been an error with resolution because there is no mapping and an error will be raised when the checkTree function is called. By doing this detailed information can be given on where the error occurs and also caused the issue.
 
 \chapter{Garbage Collection}
 
