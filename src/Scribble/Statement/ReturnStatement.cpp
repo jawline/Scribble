@@ -39,9 +39,16 @@ void ReturnStatement::checkTree(Type* functionType) {
 }
 
 int ReturnStatement::generateCode(int resultRegister, std::stringstream& generated) {
-	int num = stm_->generateCode(VM::vmReturnResultRegister, generated);
+	int num = 0;
+
+	if (stm_ != nullptr) {
+		num += stm_->generateCode(VM::vmReturnResultRegister, generated);
+	}
+
 	generated << "ret\n";
-	return 1 + num;
+	num++;
+
+	return num;
 }
 
 }

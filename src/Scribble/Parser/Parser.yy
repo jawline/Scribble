@@ -441,9 +441,6 @@ Statements: {
 	} | Statements Statement {
 		$$ = $1;
 		$$->push_back(ScribbleCore::SafeStatement($2));
-	} | Statements RETURN {
-		$$ = $1;
-		$$->push_back( ScribbleCore::SafeStatement( new ScribbleCore::ReturnStatement(scribble_lineno, scribble_text, nullptr)));
 	}
 ;
 
@@ -529,6 +526,8 @@ Statement: Expression END {
 		delete $5;
 	} | RETURN Expression END {	
 		$$ = new ScribbleCore::ReturnStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2));	
+	} | RETURN END {
+		$$ = new ScribbleCore::ReturnStatement(scribble_lineno, scribble_text, nullptr);
 	}
 ;
 

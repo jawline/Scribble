@@ -39,7 +39,7 @@ void StructureStatement::checkTree(Type* functionType) {
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
-		if (!statements_[i]->type()->Equals(info->getIndex(i).second->type)) {
+		if (!(statements_[i]->type()->Equals(info->getIndex(i).second->type) || statements_[i]->type()->getType() == NilType)) {
 			throw StatementException(this, "Invalid argument type");
 		}
 

@@ -14,6 +14,12 @@ namespace VM {
 
 Heap::Heap() {
 	lastFlagState_ = false;
+
+	VMHeapEntry entry;
+	entry.flagged = lastFlagState_;
+
+	//Pushing this entry stops the allocator giving entries a null (0) index
+	heapItems_.push_back( entry );
 }
 
 Heap::~Heap() {
@@ -125,7 +131,8 @@ int Heap::processUnflagged() {
 
 	std::vector<std::map<int, VMHeapEntry>::iterator> remove;
 
-	for (unsigned int id = 0; id < heapItems_.size(); id++) {
+	//Start from 1, do not ever free the 0th heap item
+	for (unsigned int id = 1; id < heapItems_.size(); id++) {
 
 		if (heapItems_[id].flagged == lastFlagState_
 				&& heapItems_[id].pointer != nullptr) {
