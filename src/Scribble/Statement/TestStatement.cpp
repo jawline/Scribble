@@ -33,8 +33,16 @@ void TestStatement::checkTree(Type* functionType) {
 	rhs_->checkTree(functionType);
 
 	if (!lhs_->type()->Equals(rhs_->type())) {
-		throw StatementException(this,
-				"Left hand side type should be the same as right hand side type");
+
+		if (lhs_->type()->getType() == NilType
+				|| rhs_->type()->getType() == NilType) {
+
+		} else {
+
+			throw StatementException(this,
+					"Left hand side type should be the same as right hand side type");
+
+		}
 	}
 
 }
@@ -69,6 +77,7 @@ int TestStatement::generateCode(int resultRegister,
 	 * Boolean is primitive so has its contents checked.
 	 */
 
+	case NilType:
 	case StringType:
 	case Array:
 	case StructureType:
@@ -117,25 +126,29 @@ int TestStatement::generateCode(int resultRegister,
 
 		case TestLess:
 			generated << "load -1 $" << VM::vmTempRegisterTwo << "\n";
-			generated << "eq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			generated << "eq $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << "\n";
 			instrs += 2;
 			break;
 
 		case TestLessOrEqual:
 			generated << "load 1 $" << VM::vmTempRegisterTwo << "\n";
-			generated << "lt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			generated << "lt $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << "\n";
 			instrs += 2;
 			break;
 
 		case TestGreater:
 			generated << "load 1 $" << VM::vmTempRegisterTwo << "\n";
-			generated << "eq $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			generated << "eq $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << "\n";
 			instrs += 2;
 			break;
 
 		case TestGreaterOrEqual:
 			generated << "load -1 $" << VM::vmTempRegisterTwo << "\n";
-			generated << "gt $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo << "\n";
+			generated << "gt $" << VM::vmTempRegisterOne << " $"
+					<< VM::vmTempRegisterTwo << "\n";
 			instrs += 2;
 			break;
 

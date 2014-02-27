@@ -412,9 +412,9 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
 
 		//Check whether the user has tried to assign the variable to a null type.
-		if (variableReferences[i]->getType()->getType() == Void) {
+		if (variableReferences[i]->getType()->getType() == NilType) {
 			throw ParserException(filename,
-					"cannot declare a variable as a void");
+					"cannot declare a variable of type nil");
 		}
 
 	}

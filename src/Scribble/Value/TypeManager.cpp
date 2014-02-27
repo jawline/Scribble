@@ -79,7 +79,7 @@ Type* getBooleanType() {
 	return boolType;
 }
 
-Type* voidType = getTypeManager().getType(Void);
+Type* voidType = getTypeManager().getType(NilType);
 
 Type* getVoidType() {
 	return voidType;

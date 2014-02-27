@@ -23,7 +23,7 @@
 #include <Scribble/Statement/IfStatement.hpp>
 #include <Scribble/Statement/OperateStatement.hpp>
 #include <Scribble/Statement/ReturnStatement.hpp>
-#include <Scribble/Statement/TestNilStatement.hpp>
+#include <Scribble/Statement/NilStatement.hpp>
 #include <Scribble/Statement/WhileStatement.hpp>
 #include <Scribble/Statement/IncrementStatement.hpp>
 #include <Scribble/Statement/ArrayStatement.hpp>
@@ -542,6 +542,8 @@ Expression: MINUS Expression {
 		$$ = new ScribbleCore::IntStatement(scribble_lineno, scribble_text, $1);
 	} | FLOAT32 {
 		$$ = new ScribbleCore::Float32Statement(scribble_lineno, scribble_text, $1);
+	} | NIL {
+		$$ = new ScribbleCore::NilStatement(scribble_lineno, scribble_text);
 	} | STRING {
 		$$ = new ScribbleCore::StringStatement(scribble_lineno, scribble_text, *$1);
 
@@ -578,10 +580,6 @@ Expression: MINUS Expression {
 		$$ = new ScribbleCore::OperateStatement(scribble_lineno, scribble_text, ScribbleCore::Multiply, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression DIVIDE Expression {
 		$$ = new ScribbleCore::OperateStatement(scribble_lineno, scribble_text, ScribbleCore::Divide, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
-	} | NIL EQUALS Expression {
-		$$ = new ScribbleCore::TestNilStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($3));
-	} | Expression EQUALS NIL {
-		$$ = new ScribbleCore::TestNilStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1));
 	} | Expression EQUALS Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestEquals, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression NOT EQUALS Expression {

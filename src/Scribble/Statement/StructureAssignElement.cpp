@@ -51,7 +51,7 @@ void StructureAssignElement::checkTree(Type* functionType) {
 		throw StatementException(this, errorText);
 	}
 
-	if (!elementType_->Equals(rhs_->type())) {
+	if (!(elementType_->Equals(rhs_->type()) || rhs_->type()->getType() == NilType)) {
 		throw StatementException(this, "Cannot assign to a different type");
 	}
 

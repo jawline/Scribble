@@ -22,7 +22,7 @@ public:
 
 	virtual void checkTree(Type* functionType);
 	virtual Type* type() {
-		return getTypeManager().getType(Void);
+		return getTypeManager().getType(NilType);
 	}
 
 	int generateCode(int resultRegister, std::stringstream& generated);

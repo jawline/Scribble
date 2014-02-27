@@ -25,6 +25,11 @@ package console := import("console");
  
 func main() {
 
+ if nil = nil then console.Log("Nil equals nil\n");
+ if [100]int = nil then console.Log("Oooo\n");
+ var j : array(int);
+ if j = nil then console.Log("Hahaha j\n");
+
  loopsTest.Test();
  arraysTest.Test();
  variablesTest.Test();

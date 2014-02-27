@@ -60,7 +60,7 @@ enum ValueType {
 	 * Void type, Null type.
 	 */
 
-	Void,
+	NilType,
 
 	/**
 	 * Primitive array type, always grouped with a subtype used to tell what it is an array of.
@@ -167,7 +167,7 @@ public:
 			return "bool";
 		case ValueType::StringType:
 			return "string";
-		case ValueType::Void:
+		case ValueType::NilType:
 			return "void";
 		case ValueType::Float32:
 			return "float32";

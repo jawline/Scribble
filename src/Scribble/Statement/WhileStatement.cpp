@@ -35,7 +35,7 @@ void WhileStatement::checkTree(Type* functionType) {
 }
 
 Type* WhileStatement::type() {
-	return getTypeManager().getType(Void);
+	return getTypeManager().getType(NilType);
 }
 
 int WhileStatement::generateCode(int resultRegister,

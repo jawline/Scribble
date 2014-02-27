@@ -27,7 +27,7 @@ ForStatement::~ForStatement() {
 }
 
 Type* ForStatement::type() {
-	return getTypeManager().getType(Void);
+	return getTypeManager().getType(NilType);
 }
 
 void ForStatement::checkTree(Type* functionType) {

@@ -42,7 +42,8 @@ void AssignArrayStatement::checkTree(Type* functionType) {
 						+ " cannot be used as an index. Index must be an integer");
 	}
 
-	if (!array_->type()->getSubtype()->Equals(toAssign_->type())) {
+	if (!(array_->type()->getSubtype()->Equals(toAssign_->type())
+			|| toAssign_->type()->getType() == NilType)) {
 		throw StatementException(this,
 				std::string("Value given is of type ")
 						+ toAssign_->type()->getTypeName()

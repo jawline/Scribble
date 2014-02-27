@@ -27,7 +27,7 @@ public:
 	virtual ~IfStatement();
 
 	Type* type() {
-		return getTypeManager().getType(Void);
+		return getTypeManager().getType(NilType);
 	}
 
 	void checkTree(Type* functionType);
