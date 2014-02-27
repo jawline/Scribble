@@ -38,7 +38,7 @@ func PrintJ(j : J) {
 func main() {
 
  var p := J{5, J { 10, J { 15, J { 20, nil } } } };
- PrintJ(p);
+ console.Log(sys.String(PrintJ(p)));
 
  loopsTest.Test();
  arraysTest.Test();

@@ -79,10 +79,16 @@ Type* getBooleanType() {
 	return boolType;
 }
 
-Type* voidType = getTypeManager().getType(NilType);
+Type* voidType = getTypeManager().getType(Void);
 
 Type* getVoidType() {
 	return voidType;
+}
+
+Type* nilType = getTypeManager().getType(NilType);
+
+Type* getNilType() {
+	return nilType;
 }
 
 Type* float32Type = getTypeManager().getType(Float32);

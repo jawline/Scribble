@@ -57,7 +57,13 @@ enum ValueType {
 	Float32,
 
 	/**
-	 * Void type, Null type.
+	 * Void type - Carries no data
+	 */
+
+	Void,
+
+	/**
+	 * Nil Type, Only auto cast type. Is equivilent to any other types initial state ( nilptr for references, 0 for numbers, false for booleans )
 	 */
 
 	NilType,
@@ -167,8 +173,10 @@ public:
 			return "bool";
 		case ValueType::StringType:
 			return "string";
-		case ValueType::NilType:
+		case ValueType::Void:
 			return "void";
+		case ValueType::NilType:
+			return "nil";
 		case ValueType::Float32:
 			return "float32";
 		case ValueType::ValueTypeMax:

@@ -24,7 +24,7 @@ void NilStatement::checkTree(Type* functionType) {
 }
 
 Type* NilStatement::type() {
-	return getVoidType();
+	return getNilType();
 }
 
 int NilStatement::generateCode(int resultRegister, std::stringstream& generated) {;
