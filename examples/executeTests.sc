@@ -18,25 +18,11 @@ package refEqTest := import("tests/refEqualityTest");
 package sys := import("sys");
 package console := import("console");
 
-type J := struct {
- payload : int,
- next : J
-}
-
-func PrintJ(j : J) {
- if j = nil then return;
-
- console.Log(sys.String(j->payload) $ "\n");
- PrintJ(j->next);
-}
-
 /**
  * The main function executes all of the Scribble unit tests.
  */
  
 func main() {
-
- PrintJ(J{5, nil});
 
  loopsTest.Test();
  arraysTest.Test();

@@ -11,6 +11,10 @@
 
 namespace HashMapUtils {
 
+/**
+ * The class that builds the linked list in each hasmap bucket.
+ */
+
 template<class T>
 class HashItemLink {
 private:
@@ -48,6 +52,10 @@ public:
 	}
 
 };
+
+/**
+ * The bucket class stores a linked list of things if the bucket is not empty
+ */
 
 template<class T>
 class HashBucket {
@@ -148,7 +156,7 @@ public:
 
 }
 
-const static unsigned int numBucketsDefault = 64;
+const static unsigned int numBucketsDefault = 128;
 
 template<class T>
 class HashMap {
