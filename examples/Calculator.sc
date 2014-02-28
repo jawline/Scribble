@@ -25,6 +25,23 @@ func Empty(s : Stack) : bool {
  return false;
 }
 
+func PrintStack(s : Stack) {
+
+ if s = nil then { 
+  console.Log("Stack Nil\n");
+  return;
+ }
+
+ console.Log( sys.String(Top(s)) $ " ");
+ 
+ if s->next != nil then {
+  PrintStack(s->next);
+ } else {
+  console.Log("\n");
+ }
+
+}
+
 func main() {
 
  // The initial stack is the values to be operated on. Each operation will do a thing and then place the result back ont othe stack ( So 5 + 5 + 4 is 5, 5, 4 with 1, 1 as ops
@@ -56,7 +73,8 @@ func main() {
   //Push the result back onto the stack
   stack := Pop(stack);
   stack := Push(f, stack);
-
  }
 
+ console.Log("Final stack state: ");
+ PrintStack(stack);
 }
