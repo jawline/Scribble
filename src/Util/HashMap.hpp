@@ -227,8 +227,7 @@ public:
 	    hash ^= (hash >> 11);
 	    hash += (hash << 15);
 
-		//printf("Hash %s %i\n", id.c_str(), hash % numBuckets_);
-	    return hash % numBuckets_;
+		return hash % numBuckets_;
 	}
 };
 

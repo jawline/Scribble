@@ -33,7 +33,7 @@ void FunctionStatement::checkTree(Type* functionType) {
 		SafeStatement arg = func_->getArgs()[i];
 		arg->checkTree(functionType);
 
-		if (!(func_->getFunction()->argType(i)->Equals(arg->type()))) {
+		if (!(func_->getFunction()->argType(i)->Equals(arg->type()) || arg->type()->Equals(getNilType()))) {
 			throw StatementException(this,
 					"Argument type does not match function type");
 		}

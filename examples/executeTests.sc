@@ -14,6 +14,7 @@ package mathTest := import("tests/math");
 package structTest := import("tests/structures");
 package structQs := import("tests/structQuicksortTest");
 package refEqTest := import("tests/refEqualityTest");
+package listTest := import("tests/LinkedList");
 
 package sys := import("sys");
 package console := import("console");
@@ -36,5 +37,6 @@ func main() {
  structTest.Test();
  structQs.Test();
  refEqTest.Test();
+ listTest.Test();
 
 }

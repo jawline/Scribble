@@ -31,14 +31,22 @@ void ReturnStatement::checkTree(Type* functionType) {
 
 		stm_->checkTree(functionType);
 
-		if (!functionType->Equals(stm_->type())) {
-			throw StatementException(this,
-					"Return type differs from function type");
+		if (!(functionType->Equals(stm_->type()))) {
+
+			if (!stm_->type()->Equals(getNilType())) {
+
+				throw StatementException(this,
+						std::string("Return type differs from function type ( ")
+								+ functionType->getTypeName() + ", "
+								+ stm_->type()->getTypeName() + " )");
+
+			}
 		}
 	}
 }
 
-int ReturnStatement::generateCode(int resultRegister, std::stringstream& generated) {
+int ReturnStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
 	int num = 0;
 
 	if (stm_ != nullptr) {
