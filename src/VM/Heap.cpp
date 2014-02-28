@@ -129,7 +129,7 @@ void Heap::flag(long i) {
 
 int Heap::processUnflagged() {
 
-	std::vector<std::map<int, VMHeapEntry>::iterator> remove;
+	int removed = 0;
 
 	//Start from 1, do not ever free the 0th heap item
 	for (unsigned int id = 1; id < heapItems_.size(); id++) {
@@ -139,6 +139,7 @@ int Heap::processUnflagged() {
 
 			heapItems_[id].pointer = nullptr;
 			unusedIndexs_.push(id);
+			removed++;
 
 		}
 	}
@@ -146,7 +147,7 @@ int Heap::processUnflagged() {
 	//Flip last flag state. This allows us to monitor which heap variables are used without constantly cycling through every garbage collected element each time this is run.
 	lastFlagState_ = !lastFlagState_;
 
-	return remove.size();
+	return removed;
 }
 
 std::string Heap::debugState() {
