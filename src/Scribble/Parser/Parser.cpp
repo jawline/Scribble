@@ -515,7 +515,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 }
 
-//Generate all the initial values for variables.
+	//Generate all the initial values for variables.
 	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
 
 		//Check whether the user has tried to assign the variable to a null type.
@@ -523,8 +523,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 				|| variableReferences[i]->getType()->Equals(getVoidType())) {
 			throw ParserException(filename,
 					"cannot declare a variable of type nil or void");
-		} else {
-			printf("%s\n", variableReferences[i]->getType()->getTypeName().c_str());
 		}
 
 	}
