@@ -247,6 +247,7 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 			ScribbleCore::SafeStatement sp = ScribbleCore::SafeStatement($4);
 		
 			SmartPointer<ScribbleCore::Variable> nVar = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(0, nullptr));
+			VariableReferences.push_back(nVar);
 			Variables[*$2] = nVar;
 			
 			ScribbleCore::ParserReference r(ScribbleCore::AutoVariablePair(nVar, sp));

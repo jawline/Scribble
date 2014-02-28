@@ -11,12 +11,9 @@
 namespace ScribbleCore {
 
 NilStatement::NilStatement(int lineNo, std::string symbol) : Statement(lineNo, symbol) {
-	// TODO Auto-generated constructor stub
-
 }
 
 NilStatement::~NilStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 void NilStatement::checkTree(Type* functionType) {

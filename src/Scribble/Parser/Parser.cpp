@@ -408,18 +408,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 		resolve(typeReferences[i], Functions);
 	}
 
-	//Generate all the initial values for variables.
-	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
-
-		//Check whether the user has tried to assign the variable to a null type.
-		if (variableReferences[i]->getType()->Equals(getNilType())
-				|| variableReferences[i]->getType()->Equals(getVoidType())) {
-			throw ParserException(filename,
-					"cannot declare a variable of type nil or void");
-		}
-
-	}
-
 	//Loop through all of the references and resolve them.
 	for (unsigned int i = 0; i < references.size(); ++i) {
 
@@ -526,6 +514,20 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	}
 
 }
+
+//Generate all the initial values for variables.
+	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
+
+		//Check whether the user has tried to assign the variable to a null type.
+		if (variableReferences[i]->getType()->Equals(getNilType())
+				|| variableReferences[i]->getType()->Equals(getVoidType())) {
+			throw ParserException(filename,
+					"cannot declare a variable of type nil or void");
+		} else {
+			printf("%s\n", variableReferences[i]->getType()->getTypeName().c_str());
+		}
+
+	}
 
 	try {
 
