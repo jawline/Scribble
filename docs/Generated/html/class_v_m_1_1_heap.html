@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>VM</b></li><li class="navelem"><a class="el" href="class_v_m_1_1_heap.html">Heap</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_v_m.html">VM</a></li><li class="navelem"><a class="el" href="class_v_m_1_1_heap.html">Heap</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,40 +95,91 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">VM::Heap Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_heap_8hpp_source.html">Heap.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for VM::Heap:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap__coll__graph.png" border="0" usemap="#_v_m_1_1_heap_coll__map" alt="Collaboration graph"/></div>
+<map name="_v_m_1_1_heap_coll__map" id="_v_m_1_1_heap_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad4af8cf1e9b1b4801b03d94cb5344ee0"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#ad4af8cf1e9b1b4801b03d94cb5344ee0">allocate</a> (SmartPointer&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt; type, int size, uint8_t *initial)</td></tr>
+<tr class="memitem:ad74fb4f284800f4729be3480bc396ccc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#ad74fb4f284800f4729be3480bc396ccc">Heap</a> ()</td></tr>
+<tr class="separator:ad74fb4f284800f4729be3480bc396ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30eb99e49c17b7c20a12125f0c33ba0d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#a30eb99e49c17b7c20a12125f0c33ba0d">~Heap</a> ()</td></tr>
+<tr class="separator:a30eb99e49c17b7c20a12125f0c33ba0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4af8cf1e9b1b4801b03d94cb5344ee0"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#ad4af8cf1e9b1b4801b03d94cb5344ee0">allocate</a> (<a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt; type, int size, uint8_t *initial)</td></tr>
 <tr class="separator:ad4af8cf1e9b1b4801b03d94cb5344ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55b3e734c3437a02620684466aa5bc8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55b3e734c3437a02620684466aa5bc8a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validReference</b> (long entry)</td></tr>
+<tr class="memitem:a55b3e734c3437a02620684466aa5bc8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a">validReference</a> (long entry)</td></tr>
 <tr class="separator:a55b3e734c3437a02620684466aa5bc8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0fc2201e52d83ce9d1a3f69528f2954"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0fc2201e52d83ce9d1a3f69528f2954"></a>
-SmartPointer&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> (long entry)</td></tr>
+<tr class="memitem:ac0fc2201e52d83ce9d1a3f69528f2954"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#ac0fc2201e52d83ce9d1a3f69528f2954">getType</a> (long entry)</td></tr>
 <tr class="separator:ac0fc2201e52d83ce9d1a3f69528f2954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd540e904508b10ce3a1e547386622c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd540e904508b10ce3a1e547386622c0"></a>
-SmartPointer&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSmartPointer</b> (long entry)</td></tr>
+<tr class="memitem:afd540e904508b10ce3a1e547386622c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#afd540e904508b10ce3a1e547386622c0">getSmartPointer</a> (long entry)</td></tr>
 <tr class="separator:afd540e904508b10ce3a1e547386622c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a111c75b74ccab7b481ec4c578a8a8cd1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a111c75b74ccab7b481ec4c578a8a8cd1"></a>
-uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>getAddress</b> (long entry)</td></tr>
+<tr class="memitem:a111c75b74ccab7b481ec4c578a8a8cd1"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#a111c75b74ccab7b481ec4c578a8a8cd1">getAddress</a> (long entry)</td></tr>
 <tr class="separator:a111c75b74ccab7b481ec4c578a8a8cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bf0adf9ed907280cfa1ac07a008da46"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1bf0adf9ed907280cfa1ac07a008da46"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getSize</b> (long entry)</td></tr>
+<tr class="memitem:a1bf0adf9ed907280cfa1ac07a008da46"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#a1bf0adf9ed907280cfa1ac07a008da46">getSize</a> (long entry)</td></tr>
 <tr class="separator:a1bf0adf9ed907280cfa1ac07a008da46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa816ee55074c8943b8c7055efd0bb271"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa816ee55074c8943b8c7055efd0bb271"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>flag</b> (long i)</td></tr>
+<tr class="memitem:aa816ee55074c8943b8c7055efd0bb271"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#aa816ee55074c8943b8c7055efd0bb271">flag</a> (long i)</td></tr>
 <tr class="separator:aa816ee55074c8943b8c7055efd0bb271"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ff0e85c497091139634a9c38d46fb72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ff0e85c497091139634a9c38d46fb72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>lock</b> (long i)</td></tr>
+<tr class="memitem:a9ff0e85c497091139634a9c38d46fb72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#a9ff0e85c497091139634a9c38d46fb72">lock</a> (long i)</td></tr>
 <tr class="separator:a9ff0e85c497091139634a9c38d46fb72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0be6cc847754a25dacddb87784e9196b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0be6cc847754a25dacddb87784e9196b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unlock</b> (long i)</td></tr>
+<tr class="memitem:a0be6cc847754a25dacddb87784e9196b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#a0be6cc847754a25dacddb87784e9196b">unlock</a> (long i)</td></tr>
 <tr class="separator:a0be6cc847754a25dacddb87784e9196b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace7f82504bd848493b74eefde4489c7c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#ace7f82504bd848493b74eefde4489c7c">processUnflagged</a> ()</td></tr>
 <tr class="separator:ace7f82504bd848493b74eefde4489c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace8a1c5e19d042f27f3b1754674c06fa"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_heap.html#ace8a1c5e19d042f27f3b1754674c06fa">debugState</a> ()</td></tr>
 <tr class="separator:ace8a1c5e19d042f27f3b1754674c06fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_heap_8hpp_source.html#l00020">20</a> of file <a class="el" href="_heap_8hpp_source.html">Heap.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ad74fb4f284800f4729be3480bc396ccc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VM::Heap::Heap </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00015">15</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a30eb99e49c17b7c20a12125f0c33ba0d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VM::Heap::~Heap </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00025">25</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ad4af8cf1e9b1b4801b03d94cb5344ee0"></a>
 <div class="memitem">
@@ -137,7 +188,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>unlock</b> (long i)</
         <tr>
           <td class="memname">long VM::Heap::allocate </td>
           <td>(</td>
-          <td class="paramtype">SmartPointer&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td>
           <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>
@@ -162,12 +213,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>unlock</b> (long i)</
 <p>Returns a value &gt; 0 which acts as a reference to an element on the heap. </p>
 <p>If initial is null then null all values instead of copying</p>
 
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00042">42</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0_icgraph" alt=""/></div>
 <map name="class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0_icgraph" id="class_v_m_1_1_heap_ad4af8cf1e9b1b4801b03d94cb5344ee0_icgraph">
-<area shape="rect" id="node3" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="189,5,325,51"/><area shape="rect" id="node5" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="373,13,496,43"/></map>
+<area shape="rect" id="node3" href="class_a_p_i_1_1_a_p_i_value.html#abc6491d068cfc443ef5cbbc83156e46e" title="API::APIValue::makeString" alt="" coords="189,155,371,184"/><area shape="rect" id="node15" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="212,242,348,289"/><area shape="rect" id="node5" href="class_a_p_i_1_1_concat.html#a8dbf36574a9a16077bff5bfd634669fd" title="API::Concat::execute" alt="" coords="428,5,575,35"/><area shape="rect" id="node7" href="class_read_line.html#af8556982e83b2417b4fad7ed3086a7de" title="ReadLine::execute" alt="" coords="436,59,567,88"/><area shape="rect" id="node9" href="class_int_to_string_function.html#adf8c1c3223ba53393a1d5fc0679e06d1" title="IntToStringFunction\l::execute" alt="" coords="433,111,569,158"/><area shape="rect" id="node11" href="class_bool_to_string_function.html#a4e74a7af474a601db96557e9ff5caffe" title="BoolToStringFunction\l::execute" alt="" coords="428,181,575,227"/><area shape="rect" id="node13" href="class_float32_to_string_function.html#a37af0d9a46e186a0ae48a589123fb433" title="Float32ToStringFunction\l::execute" alt="" coords="420,250,583,297"/><area shape="rect" id="node17" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="440,320,563,349"/></map>
 </div>
 </p>
 
@@ -189,6 +242,213 @@ Here is the caller graph for this function:</div>
 <p>if (iter-&gt;second.type-&gt;typeName().compare("string") == 0) { dbg &lt;&lt; " string value: " &lt;&lt; iter-&gt;second.pointer; }</p>
 <p>dbg &lt;&lt; "\n"; } </p>
 
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00153">153</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_ace8a1c5e19d042f27f3b1754674c06fa_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_ace8a1c5e19d042f27f3b1754674c06fa_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_ace8a1c5e19d042f27f3b1754674c06fa_icgraph" id="class_v_m_1_1_heap_ace8a1c5e19d042f27f3b1754674c06fa_icgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_virtual_machine.html#a3f19073759247713fb74a1f32f9c66cc" title="VM::VirtualMachine\l::printState" alt="" coords="208,49,344,95"/><area shape="rect" id="node5" href="class_a_p_i_1_1_concat.html#a8dbf36574a9a16077bff5bfd634669fd" title="API::Concat::execute" alt="" coords="393,5,540,35"/><area shape="rect" id="node7" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="589,88,712,117"/><area shape="rect" id="node9" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="399,109,535,155"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aa816ee55074c8943b8c7055efd0bb271"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VM::Heap::flag </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>i</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00119">119</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_cgraph.png" border="0" usemap="#class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_cgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_cgraph" id="class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_cgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="165,5,341,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_icgraph" id="class_v_m_1_1_heap_aa816ee55074c8943b8c7055efd0bb271_icgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="165,5,301,51"/><area shape="rect" id="node5" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="349,5,485,51"/><area shape="rect" id="node7" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="533,13,656,43"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a111c75b74ccab7b481ec4c578a8a8cd1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t * VM::Heap::getAddress </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>entry</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00083">83</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_cgraph.png" border="0" usemap="#class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_cgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_cgraph" id="class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_cgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="208,5,384,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_icgraph" id="class_v_m_1_1_heap_a111c75b74ccab7b481ec4c578a8a8cd1_icgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="392,5,528,51"/><area shape="rect" id="node7" href="class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="208,34,344,81"/><area shape="rect" id="node5" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="576,13,699,43"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a1bf0adf9ed907280cfa1ac07a008da46"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VM::Heap::getSize </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>entry</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00101">101</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_cgraph.png" border="0" usemap="#class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_cgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_cgraph" id="class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_cgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="187,5,363,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_icgraph" id="class_v_m_1_1_heap_a1bf0adf9ed907280cfa1ac07a008da46_icgraph">
+<area shape="rect" id="node3" href="class_a_p_i_1_1_a_p_i_value.html#a1506f360a478ac864b76fec0409bc117" title="API::APIValue::getArrayLength" alt="" coords="187,45,389,75"/><area shape="rect" id="node9" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="452,123,588,170"/><area shape="rect" id="node13" href="class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="220,149,356,195"/><area shape="rect" id="node5" href="class_a_p_i_1_1_a_p_i_value.html#a799ace497f1988f95af61d6796d67a19" title="API::APIValue::getIndex" alt="" coords="437,5,603,35"/><area shape="rect" id="node7" href="class_a_p_i_1_1_a_p_i_value.html#aa8a379bf602fc10523bfc4a4867dbc55" title="API::APIValue::setIndex" alt="" coords="437,59,603,88"/><area shape="rect" id="node11" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="651,132,773,161"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="afd540e904508b10ce3a1e547386622c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; uint8_t &gt; VM::Heap::getSmartPointer </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>entry</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00092">92</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_cgraph.png" border="0" usemap="#class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_cgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_cgraph" id="class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_cgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="237,5,413,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_icgraph" id="class_v_m_1_1_heap_afd540e904508b10ce3a1e547386622c0_icgraph">
+<area shape="rect" id="node3" href="class_a_p_i_1_1_function.html#a5acc2022cdbd5fe47c1a04769a1d8cf4" title="API::Function::execute" alt="" coords="251,5,405,35"/><area shape="rect" id="node5" href="class_a_p_i_1_1_a_p_i_value.html#ac52ce1c55cc0a808016b557d1fb74995" title="API::APIValue::getField" alt="" coords="248,59,408,88"/><area shape="rect" id="node7" href="class_a_p_i_1_1_a_p_i_value.html#a799ace497f1988f95af61d6796d67a19" title="API::APIValue::getIndex" alt="" coords="245,112,411,141"/><area shape="rect" id="node9" href="class_a_p_i_1_1_a_p_i_value.html#abc6491d068cfc443ef5cbbc83156e46e" title="API::APIValue::makeString" alt="" coords="237,165,419,195"/><area shape="rect" id="node21" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="267,219,389,248"/><area shape="rect" id="node11" href="class_a_p_i_1_1_concat.html#a8dbf36574a9a16077bff5bfd634669fd" title="API::Concat::execute" alt="" coords="476,51,623,80"/><area shape="rect" id="node13" href="class_read_line.html#af8556982e83b2417b4fad7ed3086a7de" title="ReadLine::execute" alt="" coords="484,104,615,133"/><area shape="rect" id="node15" href="class_int_to_string_function.html#adf8c1c3223ba53393a1d5fc0679e06d1" title="IntToStringFunction\l::execute" alt="" coords="481,157,617,203"/><area shape="rect" id="node17" href="class_bool_to_string_function.html#a4e74a7af474a601db96557e9ff5caffe" title="BoolToStringFunction\l::execute" alt="" coords="476,226,623,273"/><area shape="rect" id="node19" href="class_float32_to_string_function.html#a37af0d9a46e186a0ae48a589123fb433" title="Float32ToStringFunction\l::execute" alt="" coords="468,295,631,342"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ac0fc2201e52d83ce9d1a3f69528f2954"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt; VM::Heap::getType </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>entry</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00110">110</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_cgraph.png" border="0" usemap="#class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_cgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_cgraph" id="class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_cgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="189,5,365,35"/></map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_icgraph" id="class_v_m_1_1_heap_ac0fc2201e52d83ce9d1a3f69528f2954_icgraph">
+<area shape="rect" id="node3" href="class_a_p_i_1_1_function.html#a5acc2022cdbd5fe47c1a04769a1d8cf4" title="API::Function::execute" alt="" coords="191,5,345,35"/><area shape="rect" id="node5" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="579,88,701,117"/><area shape="rect" id="node7" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="395,109,531,155"/><area shape="rect" id="node10" href="class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="200,159,336,206"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a9ff0e85c497091139634a9c38d46fb72"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VM::Heap::lock </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>i</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 <a class="anchor" id="ace7f82504bd848493b74eefde4489c7c"></a>
@@ -205,16 +465,70 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <p>This function deletes any unflagged heap elements and then sets flag states for the next garbage collector run </p>
 
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00130">130</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_ace7f82504bd848493b74eefde4489c7c_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_ace7f82504bd848493b74eefde4489c7c_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_ace7f82504bd848493b74eefde4489c7c_icgraph" id="class_v_m_1_1_heap_ace7f82504bd848493b74eefde4489c7c_icgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="248,5,384,51"/><area shape="rect" id="node5" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="432,5,568,51"/><area shape="rect" id="node7" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="616,13,739,43"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a0be6cc847754a25dacddb87784e9196b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VM::Heap::unlock </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>i</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a55b3e734c3437a02620684466aa5bc8a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VM::Heap::validReference </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>entry</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_heap_8cpp_source.html#l00029">29</a> of file <a class="el" href="_heap_8cpp_source.html">Heap.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_heap_a55b3e734c3437a02620684466aa5bc8a_icgraph.png" border="0" usemap="#class_v_m_1_1_heap_a55b3e734c3437a02620684466aa5bc8a_icgraph" alt=""/></div>
+<map name="class_v_m_1_1_heap_a55b3e734c3437a02620684466aa5bc8a_icgraph" id="class_v_m_1_1_heap_a55b3e734c3437a02620684466aa5bc8a_icgraph">
+<area shape="rect" id="node3" href="class_v_m_1_1_heap.html#a111c75b74ccab7b481ec4c578a8a8cd1" title="VM::Heap::getAddress" alt="" coords="244,62,399,91"/><area shape="rect" id="node5" href="class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="727,141,863,188"/><area shape="rect" id="node9" href="class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="495,112,631,158"/><area shape="rect" id="node12" href="class_v_m_1_1_heap.html#afd540e904508b10ce3a1e547386622c0" title="VM::Heap::getSmartPointer" alt="" coords="231,464,412,494"/><area shape="rect" id="node33" href="class_v_m_1_1_heap.html#a1bf0adf9ed907280cfa1ac07a008da46" title="VM::Heap::getSize" alt="" coords="255,219,388,248"/><area shape="rect" id="node42" href="class_v_m_1_1_heap.html#ac0fc2201e52d83ce9d1a3f69528f2954" title="VM::Heap::getType" alt="" coords="253,272,389,302"/><area shape="rect" id="node48" href="class_v_m_1_1_heap.html#aa816ee55074c8943b8c7055efd0bb271" title="VM::Heap::flag" alt="" coords="267,166,376,195"/><area shape="rect" id="node7" href="class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="925,335,1048,364"/><area shape="rect" id="node14" href="class_a_p_i_1_1_function.html#a5acc2022cdbd5fe47c1a04769a1d8cf4" title="API::Function::execute" alt="" coords="485,387,640,416"/><area shape="rect" id="node16" href="class_a_p_i_1_1_a_p_i_value.html#ac52ce1c55cc0a808016b557d1fb74995" title="API::APIValue::getField" alt="" coords="483,648,643,678"/><area shape="rect" id="node18" href="class_a_p_i_1_1_a_p_i_value.html#a799ace497f1988f95af61d6796d67a19" title="API::APIValue::getIndex" alt="" coords="712,412,877,442"/><area shape="rect" id="node20" href="class_a_p_i_1_1_a_p_i_value.html#abc6491d068cfc443ef5cbbc83156e46e" title="API::APIValue::makeString" alt="" coords="472,595,653,624"/><area shape="rect" id="node22" href="class_a_p_i_1_1_concat.html#a8dbf36574a9a16077bff5bfd634669fd" title="API::Concat::execute" alt="" coords="721,542,868,571"/><area shape="rect" id="node24" href="class_read_line.html#af8556982e83b2417b4fad7ed3086a7de" title="ReadLine::execute" alt="" coords="729,595,860,624"/><area shape="rect" id="node26" href="class_int_to_string_function.html#adf8c1c3223ba53393a1d5fc0679e06d1" title="IntToStringFunction\l::execute" alt="" coords="727,648,863,694"/><area shape="rect" id="node28" href="class_bool_to_string_function.html#a4e74a7af474a601db96557e9ff5caffe" title="BoolToStringFunction\l::execute" alt="" coords="721,717,868,764"/><area shape="rect" id="node30" href="class_float32_to_string_function.html#a37af0d9a46e186a0ae48a589123fb433" title="Float32ToStringFunction\l::execute" alt="" coords="713,786,876,833"/><area shape="rect" id="node35" href="class_a_p_i_1_1_a_p_i_value.html#a1506f360a478ac864b76fec0409bc117" title="API::APIValue::getArrayLength" alt="" coords="461,283,664,312"/><area shape="rect" id="node38" href="class_a_p_i_1_1_a_p_i_value.html#aa8a379bf602fc10523bfc4a4867dbc55" title="API::APIValue::setIndex" alt="" coords="712,283,877,312"/></map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/VM/<a class="el" href="_heap_8hpp_source.html">Heap.hpp</a></li>
-<li>/home/blake/Dropbox/Current/Scribble/src/VM/Heap.cpp</li>
+<li>/home/blake/Dropbox/Current/Scribble/src/VM/<a class="el" href="_heap_8cpp_source.html">Heap.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

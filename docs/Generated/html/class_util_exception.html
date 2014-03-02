@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -97,32 +97,126 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Inheritance diagram for UtilException:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_util_exception__inherit__graph.png" border="0" usemap="#_util_exception_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<map name="_util_exception_inherit__map" id="_util_exception_inherit__map">
+</map>
+</div>
 <div class="dynheader">
 Collaboration diagram for UtilException:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_util_exception__coll__graph.png" border="0" usemap="#_util_exception_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<map name="_util_exception_coll__map" id="_util_exception_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a79e310454f8d14a0a2a5a11caa4aef1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79e310454f8d14a0a2a5a11caa4aef1e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UtilException</b> (std::string const &amp;reason)  throw ()</td></tr>
+<tr class="memitem:a79e310454f8d14a0a2a5a11caa4aef1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util_exception.html#a79e310454f8d14a0a2a5a11caa4aef1e">UtilException</a> (std::string const &amp;reason)  throw ()</td></tr>
 <tr class="separator:a79e310454f8d14a0a2a5a11caa4aef1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a619da93efa70bf33b1a50a830f5e63b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a619da93efa70bf33b1a50a830f5e63b9"></a>
-virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>what</b> () const   throw ()</td></tr>
+<tr class="memitem:addb88028e10d84b21bf5a03d6cb0a8a7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util_exception.html#addb88028e10d84b21bf5a03d6cb0a8a7">~UtilException</a> ()  throw ()</td></tr>
+<tr class="separator:addb88028e10d84b21bf5a03d6cb0a8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a619da93efa70bf33b1a50a830f5e63b9"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util_exception.html#a619da93efa70bf33b1a50a830f5e63b9">what</a> () const   throw ()</td></tr>
 <tr class="separator:a619da93efa70bf33b1a50a830f5e63b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This exception is thrown when the utility class is unable to create the specified type. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+
+<p>Definition at line <a class="el" href="_util_8hpp_source.html#l00016">16</a> of file <a class="el" href="_util_8hpp_source.html">Util.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a79e310454f8d14a0a2a5a11caa4aef1e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UtilException::UtilException </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>reason</em>)</td><td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_util_8cpp_source.html#l00012">12</a> of file <a class="el" href="_util_8cpp_source.html">Util.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="addb88028e10d84b21bf5a03d6cb0a8a7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UtilException::~UtilException </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_util_8cpp_source.html#l00017">17</a> of file <a class="el" href="_util_8cpp_source.html">Util.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a619da93efa70bf33b1a50a830f5e63b9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * UtilException::what </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td> const</td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_util_8cpp_source.html#l00021">21</a> of file <a class="el" href="_util_8cpp_source.html">Util.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/<a class="el" href="_util_8hpp_source.html">Util.hpp</a></li>
-<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/Util.cpp</li>
+<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/<a class="el" href="_util_8cpp_source.html">Util.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

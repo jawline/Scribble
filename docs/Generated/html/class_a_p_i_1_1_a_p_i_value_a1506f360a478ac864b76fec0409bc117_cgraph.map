@@ -1,5 +1,8 @@
 <map id="API::APIValue::getArrayLength" name="API::APIValue::getArrayLength">
 <area shape="rect" id="node3" href="$class_scribble_core_1_1_type.html#a7b465695c97c0e07457f46c7ac18a96c" title="ScribbleCore::Type\l::getType" alt="" coords="301,5,435,51"/>
 <area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#a8a97634f469ced8407f4ca6cdd0f9898" title="API::APIValue::isNull" alt="" coords="295,75,441,104"/>
-<area shape="rect" id="node7" href="$class_a_p_i_1_1_a_p_i_value.html#adffeaebde4496d5ee7e9944f1aa4bb76" title="API::APIValue::getReferenceType" alt="" coords="257,128,479,157"/>
+<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#a30fb1469c9f436093c06529b257abfb8" title="VM::VirtualMachine\l::getHeap" alt="" coords="300,127,436,174"/>
+<area shape="rect" id="node9" href="$class_v_m_1_1_heap.html#a1bf0adf9ed907280cfa1ac07a008da46" title="VM::Heap::getSize" alt="" coords="301,197,435,227"/>
+<area shape="rect" id="node13" href="$class_a_p_i_1_1_a_p_i_value.html#adffeaebde4496d5ee7e9944f1aa4bb76" title="API::APIValue::getReferenceType" alt="" coords="257,251,479,280"/>
+<area shape="rect" id="node11" href="$class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="528,197,704,227"/>
 </map>

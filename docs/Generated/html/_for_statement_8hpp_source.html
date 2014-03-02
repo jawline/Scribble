@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ForStatement.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_for_statement_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * ForStatement.hpp</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 13 Mar 2013</span></div>
@@ -98,28 +99,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef FORSTATEMENT_HPP_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define FORSTATEMENT_HPP_</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;Statement.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;Pointers/SmartPointer.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="_statement_8hpp.html">Statement.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_smart_pointer_8hpp.html">Pointers/SmartPointer.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>ScribbleCore {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_for_statement.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_scribble_core_1_1_for_statement.html">ForStatement</a>: <span class="keyword">public</span> <a class="code" href="class_scribble_core_1_1_statement.html">Statement</a> {</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    SafeStatement initial_;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    SafeStatement condition_;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    SafeStatement step_;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> initial_;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> condition_;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> step_;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    std::vector&lt;SafeStatement&gt; statements_;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_scribble_core_1_1_for_statement.html">ForStatement</a>(<span class="keywordtype">int</span> lineNo, std::string sym, SafeStatement initial, SafeStatement condition, SafeStatement step, std::vector&lt;SafeStatement&gt; statements);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_scribble_core_1_1_for_statement.html">ForStatement</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_scribble_core_1_1_for_statement.html#a3a1f10df3149454ad762a3ea291e8ade">ForStatement</a>(<span class="keywordtype">int</span> lineNo, std::string sym, <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> initial, <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> condition, <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> step, std::vector&lt;SafeStatement&gt; statements);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_scribble_core_1_1_for_statement.html#a1fab51c4535a1e11f65806cc81fbd588">~ForStatement</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">Type</a>* type();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> checkTree(<a class="code" href="class_scribble_core_1_1_type.html">Type</a>* functionType);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">Type</a>* <a class="code" href="class_scribble_core_1_1_for_statement.html#a386871e99b23b5f1244691d331c8135b">type</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scribble_core_1_1_for_statement.html#a91e40d9fd84d15bc28cd7fafa6be5aa2">checkTree</a>(<a class="code" href="class_scribble_core_1_1_type.html">Type</a>* functionType);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> generateBody(std::stringstream&amp; generated);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> generateCode(<span class="keywordtype">int</span> resultRegister, std::stringstream&amp; generated);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_scribble_core_1_1_for_statement.html#a0e5835e399600380f0b5485ca4e49f6e">generateBody</a>(std::stringstream&amp; generated);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_scribble_core_1_1_for_statement.html#a342b11d90c876e6c4da5364947b8f34d">generateCode</a>(<span class="keywordtype">int</span> resultRegister, std::stringstream&amp; generated);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
@@ -128,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

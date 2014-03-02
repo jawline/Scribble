@@ -1,0 +1,15 @@
+<map id="API::Function::execute" name="API::Function::execute">
+<area shape="rect" id="node3" href="$class_a_p_i_1_1_function.html#ae56761ad4c849c05e12cb4cd02583c77" title="API::Function::numArgs" alt="" coords="223,5,385,35"/>
+<area shape="rect" id="node5" href="$class_v_m_1_1_virtual_machine.html#a894cb6bba41d689f7efe9d96b1169348" title="VM::VirtualMachine\l::popStackLong" alt="" coords="236,58,372,105"/>
+<area shape="rect" id="node9" href="$class_a_p_i_1_1_function.html#a531806ea8476e8aa396eb98ce81e713b" title="API::Function::argType" alt="" coords="225,128,383,157"/>
+<area shape="rect" id="node11" href="$class_v_m_1_1_virtual_machine.html#a30fb1469c9f436093c06529b257abfb8" title="VM::VirtualMachine\l::getHeap" alt="" coords="236,181,372,227"/>
+<area shape="rect" id="node13" href="$class_v_m_1_1_heap.html#ac0fc2201e52d83ce9d1a3f69528f2954" title="VM::Heap::getType" alt="" coords="236,251,372,280"/>
+<area shape="rect" id="node17" href="$class_v_m_1_1_heap.html#afd540e904508b10ce3a1e547386622c0" title="VM::Heap::getSmartPointer" alt="" coords="213,304,395,333"/>
+<area shape="rect" id="node20" href="$class_a_p_i_1_1_function.html#ac3bc5de6ce095a4c8474525ef181c4af" title="API::Function::execute" alt="" coords="227,357,381,387"/>
+<area shape="rect" id="node22" href="$class_a_p_i_1_1_a_p_i_value.html#a9f5b34b9c70f6279dea8f556698ca1f6" title="API::APIValue::isReference" alt="" coords="212,411,396,440"/>
+<area shape="rect" id="node24" href="$class_v_m_1_1_virtual_machine.html#af4da2b5077db8bad2574b35bc1a2bb31" title="VM::VirtualMachine\l::setRegister" alt="" coords="236,463,372,510"/>
+<area shape="rect" id="node26" href="$class_a_p_i_1_1_a_p_i_value.html#ae56a74e043a259b1a219804cb77165d7" title="API::APIValue::getValue32" alt="" coords="215,533,393,563"/>
+<area shape="rect" id="node28" href="$class_v_m_1_1_virtual_machine.html#aadc8e41bda5ca137388e7dc6e34c48c1" title="VM::VirtualMachine\l::hitGc" alt="" coords="236,586,372,633"/>
+<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#a921410c92816e435c186ca5298b72bdd" title="VM::VirtualMachine\l::stackLong" alt="" coords="465,58,601,105"/>
+<area shape="rect" id="node15" href="$class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="445,277,621,307"/>
+</map>

@@ -54,6 +54,10 @@ void generateSystemPackage(std::map<std::string, ScribbleCore::NamespaceType>& b
 	string.push_back(SmartPointer< Function > (new Float32ToStringFunction("sys")));
 	builtinFunctions["String"] = ScribbleCore::NamespaceEntry(string);
 
+	std::vector<SafeFunction> compare;
+	compare.push_back(SmartPointer<Function>(new StringCompare("sys")));
+	builtinFunctions["Compare"] = ScribbleCore::NamespaceEntry(compare);
+
 	std::vector<SafeFunction> mod;
 	mod.push_back(SmartPointer< Function > (new Modulo("sys")));
 	builtinFunctions["Mod"] = ScribbleCore::NamespaceEntry(mod);

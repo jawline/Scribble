@@ -1,3 +1,5 @@
 <map id="WriteFunction::argType" name="WriteFunction::argType">
-<area shape="rect" id="node3" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="213,5,397,51"/>
+<area shape="rect" id="node3" href="$namespace_scribble_core.html#af3362f13a36274102e4270bdc508213a" title="ScribbleCore::getStringType" alt="" coords="221,5,408,35"/>
+<area shape="rect" id="node5" href="$namespace_scribble_core.html#a4042f9dc8c93e8d0e18d7ae614456024" title="ScribbleCore::getTypeManager" alt="" coords="213,59,416,88"/>
+<area shape="rect" id="node7" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="223,111,407,158"/>
 </map>

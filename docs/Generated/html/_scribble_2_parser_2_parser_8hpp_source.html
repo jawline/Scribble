@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,69 +90,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Parser.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _PARSER_DEF_H_</span></div>
+<a href="_scribble_2_parser_2_parser_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _PARSER_DEF_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _PARSER_DEF_H_</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;NamespaceEntry.hpp&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Pointers/SmartPointer.hpp&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="_namespace_entry_8hpp.html">NamespaceEntry.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_smart_pointer_8hpp.html">Pointers/SmartPointer.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;Scribble/Statement/Statement.hpp&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;API/Function.hpp&gt;</span> <span class="comment">// Function class</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;Scribble/Function/FunctionReference.hpp&gt;</span> <span class="comment">// Function ref class</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;Scribble/Statement/GetStructureElementStatement.hpp&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;Scribble/Statement/StructureAssignElement.hpp&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;Scribble/Value/Variable.hpp&gt;</span> <span class="comment">// Variable class</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_statement_8hpp.html">Scribble/Statement/Statement.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_function_8hpp.html">API/Function.hpp</a>&gt;</span> <span class="comment">// Function class</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_function_reference_8hpp.html">Scribble/Function/FunctionReference.hpp</a>&gt;</span> <span class="comment">// Function ref class</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_get_structure_element_statement_8hpp.html">Scribble/Statement/GetStructureElementStatement.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_structure_assign_element_8hpp.html">Scribble/Statement/StructureAssignElement.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_variable_8hpp.html">Scribble/Value/Variable.hpp</a>&gt;</span> <span class="comment">// Variable class</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>ScribbleCore {</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">typedef</span> std::vector&lt;SmartPointer&lt;Function&gt;&gt; FunctionSet;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">typedef</span> std::map&lt;std::string, NamespaceEntry&gt; NamespaceType;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">typedef</span> std::pair&lt;SmartPointer&lt;Variable&gt;, SafeStatement&gt; AutoVariablePair;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a9e40b3081eb67f0c92c1d1d5041495cf">   19</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;SmartPointer&lt;Function&gt;&gt; <a class="code" href="namespace_scribble_core.html#a9e40b3081eb67f0c92c1d1d5041495cf">FunctionSet</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acf9f6e70f7e422fafa73920c31cff3cb">   20</a></span>&#160;<span class="keyword">typedef</span> std::map&lt;std::string, NamespaceEntry&gt; <a class="code" href="namespace_scribble_core.html#acf9f6e70f7e422fafa73920c31cff3cb">NamespaceType</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">   21</a></span>&#160;<span class="keyword">typedef</span> std::pair&lt;SmartPointer&lt;Variable&gt;, <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a>&gt; <a class="code" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">AutoVariablePair</a>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">enum</span> ParserReferenceType {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    FunctionEvaluation,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    StructureElementTypeEvaluation,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    AssignElementTypeEvaluation,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    VariableTypeEvaluation</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980a">   23</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980a">ParserReferenceType</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aabb4b63d5449cb4d7d2ae23bdf7905580">   24</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aabb4b63d5449cb4d7d2ae23bdf7905580">FunctionEvaluation</a>,</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aafd9a39e5545f4c97f2fbaa3ad9709956">   25</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aafd9a39e5545f4c97f2fbaa3ad9709956">StructureElementTypeEvaluation</a>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aae262e73bce8b7ca0d92ccb5d06abdadc">   26</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aae262e73bce8b7ca0d92ccb5d06abdadc">AssignElementTypeEvaluation</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aa9f0ad8d208096876468c6888cdf3f882">   27</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aa9f0ad8d208096876468c6888cdf3f882">VariableTypeEvaluation</a></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_scribble_core_1_1_parser_reference.html">ParserReference</a> {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    ParserReferenceType type_;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980a">ParserReferenceType</a> type_;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html">ParserReference</a>(SmartPointer&lt;FunctionReference&gt; reference) {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        type_ = FunctionEvaluation;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        functionReference = reference;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#a40f2688a7edc2d9721af2919b4cb14f0">   36</a></span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html#a40f2688a7edc2d9721af2919b4cb14f0">ParserReference</a>(SmartPointer&lt;FunctionReference&gt; reference) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        type_ = <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aabb4b63d5449cb4d7d2ae23bdf7905580">FunctionEvaluation</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="class_scribble_core_1_1_parser_reference.html#ac1d91061b77ed79265e184e992b5dfe7">functionReference</a> = reference;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html">ParserReference</a>(<a class="code" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a>* elementType) {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        type_ = StructureElementTypeEvaluation;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        structureElementType = elementType;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#aaafa208d4520c88e59a4fa1771044aef">   41</a></span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html#aaafa208d4520c88e59a4fa1771044aef">ParserReference</a>(<a class="code" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a>* elementType) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        type_ = <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aafd9a39e5545f4c97f2fbaa3ad9709956">StructureElementTypeEvaluation</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="class_scribble_core_1_1_parser_reference.html#a637e85d515b38865bfaee3f3e0314d1b">structureElementType</a> = elementType;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html">ParserReference</a>(<a class="code" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a>* assign) {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        type_ = AssignElementTypeEvaluation;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        assignElementType = assign;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#a26eed5b755fdccfd1eb122166b0f0cf4">   46</a></span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html#a26eed5b755fdccfd1eb122166b0f0cf4">ParserReference</a>(<a class="code" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a>* assign) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        type_ = <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aae262e73bce8b7ca0d92ccb5d06abdadc">AssignElementTypeEvaluation</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="class_scribble_core_1_1_parser_reference.html#a8aa51bfc4b87577b0f99570828a4fb9e">assignElementType</a> = assign;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html">ParserReference</a>(AutoVariablePair pair) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        type_ = VariableTypeEvaluation;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        autoVariableType = pair;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#af40b981d02c3d768520fd4e03a9e4dec">   51</a></span>&#160;    <a class="code" href="class_scribble_core_1_1_parser_reference.html#af40b981d02c3d768520fd4e03a9e4dec">ParserReference</a>(<a class="code" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">AutoVariablePair</a> pair) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        type_ = <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980aa9f0ad8d208096876468c6888cdf3f882">VariableTypeEvaluation</a>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="class_scribble_core_1_1_parser_reference.html#ad076a03489530a2021aac5d8d7761eed">autoVariableType</a> = pair;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    ParserReferenceType type() {</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#a9b4f48269f65478479c6466fbecac0d4">   56</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980a">ParserReferenceType</a> <a class="code" href="class_scribble_core_1_1_parser_reference.html#a9b4f48269f65478479c6466fbecac0d4">type</a>() {</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> type_;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    SmartPointer&lt;FunctionReference&gt; functionReference;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a>* structureElementType;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a>* assignElementType;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    AutoVariablePair autoVariableType;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#ac1d91061b77ed79265e184e992b5dfe7">   60</a></span>&#160;    SmartPointer&lt;FunctionReference&gt; <a class="code" href="class_scribble_core_1_1_parser_reference.html#ac1d91061b77ed79265e184e992b5dfe7">functionReference</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#a637e85d515b38865bfaee3f3e0314d1b">   61</a></span>&#160;    <a class="code" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a>* <a class="code" href="class_scribble_core_1_1_parser_reference.html#a637e85d515b38865bfaee3f3e0314d1b">structureElementType</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#a8aa51bfc4b87577b0f99570828a4fb9e">   62</a></span>&#160;    <a class="code" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a>* <a class="code" href="class_scribble_core_1_1_parser_reference.html#a8aa51bfc4b87577b0f99570828a4fb9e">assignElementType</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_parser_reference.html#ad076a03489530a2021aac5d8d7761eed">   63</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">AutoVariablePair</a> <a class="code" href="class_scribble_core_1_1_parser_reference.html#ad076a03489530a2021aac5d8d7761eed">autoVariableType</a>;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">const</span> <span class="keyword">static</span> std::string ScribbleFileSuffix = <span class="stringliteral">&quot;.sc&quot;</span>;</div>
@@ -167,40 +168,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">static</span> std::string includeText(std::string source,</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            std::string <span class="keyword">const</span>&amp; filename, std::string <span class="keyword">const</span>&amp; path);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> printFunctionSet(std::string name, FunctionSet fs);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> printNamespace(NamespaceType <span class="keyword">const</span>&amp; ns);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> printFunctionSet(std::string name, <a class="code" href="namespace_scribble_core.html#a9e40b3081eb67f0c92c1d1d5041495cf">FunctionSet</a> fs);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> printNamespace(<a class="code" href="namespace_scribble_core.html#acf9f6e70f7e422fafa73920c31cff3cb">NamespaceType</a> <span class="keyword">const</span>&amp; ns);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> printAllSpaces(std::map&lt;std::string, NamespaceType&gt; <span class="keyword">const</span>&amp; ns);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> resolve(TypeReference reference, NamespaceType ns);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_scribble_core_1_1_parser.html#a6f3623acbf4ecf36d07d8e08393d5755">testFunctionEquivilence</a>(SmartPointer&lt;Function&gt; <span class="keyword">function</span>, SmartPointer&lt;Function&gt; other);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">static</span> SmartPointer&lt;Function&gt; <a class="code" href="class_scribble_core_1_1_parser.html#a4d9e4e3d19bad8b983cbff320ba40ad1">findFunctionInSet</a>(SmartPointer&lt;FunctionReference&gt; toFind,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            FunctionSet <span class="keyword">const</span>&amp; set);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_scribble_core_1_1_type.html">Type</a>* <a class="code" href="class_scribble_core_1_1_parser.html#a0e1829847a648294f57e634fa7b21782">functionSetType</a>(FunctionSet <span class="keyword">const</span>&amp; functionSet);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_scribble_core_1_1_parser.html#a13bb70c6085507b7dcd5fccc7f20d37c">listContains</a>(std::string target,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            std::vector&lt;std::string&gt; <span class="keyword">const</span>&amp; list);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">static</span> std::map&lt;std::string, NamespaceType&gt; <a class="code" href="class_scribble_core_1_1_parser.html#a6868988e45190dbb366f834b33505902">compile</a>(std::string <span class="keyword">const</span>&amp; file,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            std::map&lt;std::string, NamespaceType&gt; builtinNamespace);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">static</span> std::map&lt;std::string, NamespaceType&gt; compileText(std::string <span class="keyword">const</span>&amp;text, std::string <span class="keyword">const</span>&amp; packageName,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> resolve(<a class="code" href="namespace_scribble_core.html#a0e685a305b14aa5f0504df1369ba270b">TypeReference</a> reference, <a class="code" href="namespace_scribble_core.html#acf9f6e70f7e422fafa73920c31cff3cb">NamespaceType</a> ns);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> resetImportList();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> resetReferences();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> resetFunctions();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_scribble_core_1_1_parser.html#a6f3623acbf4ecf36d07d8e08393d5755">testFunctionEquivilence</a>(SmartPointer&lt;Function&gt; <span class="keyword">function</span>, SmartPointer&lt;Function&gt; other);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">static</span> SmartPointer&lt;Function&gt; <a class="code" href="class_scribble_core_1_1_parser.html#a4d9e4e3d19bad8b983cbff320ba40ad1">findFunctionInSet</a>(SmartPointer&lt;FunctionReference&gt; toFind,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <a class="code" href="namespace_scribble_core.html#a9e40b3081eb67f0c92c1d1d5041495cf">FunctionSet</a> <span class="keyword">const</span>&amp; set);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_scribble_core_1_1_type.html">Type</a>* <a class="code" href="class_scribble_core_1_1_parser.html#a0e1829847a648294f57e634fa7b21782">functionSetType</a>(<a class="code" href="namespace_scribble_core.html#a9e40b3081eb67f0c92c1d1d5041495cf">FunctionSet</a> <span class="keyword">const</span>&amp; functionSet);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_scribble_core_1_1_parser.html#a13bb70c6085507b7dcd5fccc7f20d37c">listContains</a>(std::string target,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            std::vector&lt;std::string&gt; <span class="keyword">const</span>&amp; list);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">static</span> std::map&lt;std::string, NamespaceType&gt; <a class="code" href="class_scribble_core_1_1_parser.html#a6868988e45190dbb366f834b33505902">compile</a>(std::string <span class="keyword">const</span>&amp; file,</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            std::map&lt;std::string, NamespaceType&gt; builtinNamespace);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_scribble_core_1_1_parser.html#aa052d5111bdc10523060670714b409ab">getUniformPath</a>(std::string <span class="keyword">const</span>&amp; path);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;};</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;}</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#endif //_PARSER_DEF_H_</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">static</span> std::map&lt;std::string, NamespaceType&gt; <a class="code" href="class_scribble_core_1_1_parser.html#a1aaaf22583e0bf60a1e27227bed9511b">compileText</a>(std::string <span class="keyword">const</span>&amp;text, std::string <span class="keyword">const</span>&amp; packageName,</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            std::map&lt;std::string, NamespaceType&gt; builtinNamespace);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_scribble_core_1_1_parser.html#aa052d5111bdc10523060670714b409ab">getUniformPath</a>(std::string <span class="keyword">const</span>&amp; path);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;};</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">#endif //_PARSER_DEF_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:00 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>HashMapUtils</b></li><li class="navelem"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashBucket</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_hash_map_utils.html">HashMapUtils</a></li><li class="navelem"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashBucket</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,29 +95,213 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">HashMapUtils::HashBucket&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for HashMapUtils::HashBucket&lt; T &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hash_map_utils_1_1_hash_bucket__coll__graph.png" border="0" usemap="#_hash_map_utils_1_1_hash_bucket_3_01_t_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="_hash_map_utils_1_1_hash_bucket_3_01_t_01_4_coll__map" id="_hash_map_utils_1_1_hash_bucket_3_01_t_01_4_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a939e10a16348fc29380553d9fd4e0f97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a939e10a16348fc29380553d9fd4e0f97"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>strEqual</b> (std::string const &amp;left, std::string const &amp;right)</td></tr>
+<tr class="memitem:ac7ba90f71701975bdd140b731e44f35d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html#ac7ba90f71701975bdd140b731e44f35d">HashBucket</a> ()</td></tr>
+<tr class="separator:ac7ba90f71701975bdd140b731e44f35d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a939e10a16348fc29380553d9fd4e0f97"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html#a939e10a16348fc29380553d9fd4e0f97">strEqual</a> (std::string const &amp;left, std::string const &amp;right)</td></tr>
 <tr class="separator:a939e10a16348fc29380553d9fd4e0f97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e6dd28092f6b4ce37061f33a991fd45"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e6dd28092f6b4ce37061f33a991fd45"></a>
-<a class="el" href="class_hash_map_utils_1_1_hash_item_link.html">HashItemLink</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>find</b> (std::string const &amp;id)</td></tr>
+<tr class="memitem:a2e6dd28092f6b4ce37061f33a991fd45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_hash_map_utils_1_1_hash_item_link.html">HashItemLink</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html#a2e6dd28092f6b4ce37061f33a991fd45">find</a> (std::string const &amp;id)</td></tr>
 <tr class="separator:a2e6dd28092f6b4ce37061f33a991fd45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8757599c44e952ccbb0a404238b34bfa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8757599c44e952ccbb0a404238b34bfa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (std::string const &amp;id)</td></tr>
+<tr class="memitem:a8757599c44e952ccbb0a404238b34bfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html#a8757599c44e952ccbb0a404238b34bfa">remove</a> (std::string const &amp;id)</td></tr>
 <tr class="separator:a8757599c44e952ccbb0a404238b34bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ea13c55db34d280fd16b70c17bb2a62"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ea13c55db34d280fd16b70c17bb2a62"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>insert</b> (std::string const &amp;id, T data)</td></tr>
+<tr class="memitem:a7ea13c55db34d280fd16b70c17bb2a62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html#a7ea13c55db34d280fd16b70c17bb2a62">insert</a> (std::string const &amp;id, T data)</td></tr>
 <tr class="separator:a7ea13c55db34d280fd16b70c17bb2a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class T&gt;<br/>
+class HashMapUtils::HashBucket&lt; T &gt;</h3>
+
+<p>The bucket class stores a linked list of things if the bucket is not empty </p>
+
+<p>Definition at line <a class="el" href="_hash_map_8hpp_source.html#l00061">61</a> of file <a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ac7ba90f71701975bdd140b731e44f35d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashMapUtils::HashBucket</a>&lt; T &gt;::<a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashBucket</a> </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_hash_map_8hpp_source.html#l00067">67</a> of file <a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a2e6dd28092f6b4ce37061f33a991fd45"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_hash_map_utils_1_1_hash_item_link.html">HashItemLink</a>&lt;T&gt;* <a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashMapUtils::HashBucket</a>&lt; T &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>id</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_hash_map_8hpp_source.html#l00075">75</a> of file <a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7ea13c55db34d280fd16b70c17bb2a62"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashMapUtils::HashBucket</a>&lt; T &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_hash_map_8hpp_source.html#l00119">119</a> of file <a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8757599c44e952ccbb0a404238b34bfa"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashMapUtils::HashBucket</a>&lt; T &gt;::remove </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>id</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_hash_map_8hpp_source.html#l00095">95</a> of file <a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a939e10a16348fc29380553d9fd4e0f97"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_hash_map_utils_1_1_hash_bucket.html">HashMapUtils::HashBucket</a>&lt; T &gt;::strEqual </td>
+          <td>(</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramname"><em>right</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_hash_map_8hpp_source.html#l00071">71</a> of file <a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_hash_map_utils_1_1_hash_bucket_a939e10a16348fc29380553d9fd4e0f97_icgraph.png" border="0" usemap="#class_hash_map_utils_1_1_hash_bucket_a939e10a16348fc29380553d9fd4e0f97_icgraph" alt=""/></div>
+<map name="class_hash_map_utils_1_1_hash_bucket_a939e10a16348fc29380553d9fd4e0f97_icgraph" id="class_hash_map_utils_1_1_hash_bucket_a939e10a16348fc29380553d9fd4e0f97_icgraph">
+<area shape="rect" id="node3" href="class_hash_map_utils_1_1_hash_bucket.html#a2e6dd28092f6b4ce37061f33a991fd45" title="HashMapUtils::HashBucket\l\&lt; NamespaceEntry \&gt;::find" alt="" coords="248,5,432,51"/><area shape="rect" id="node5" href="class_hash_map_utils_1_1_hash_bucket.html#a8757599c44e952ccbb0a404238b34bfa" title="HashMapUtils::HashBucket\l\&lt; NamespaceEntry \&gt;::remove" alt="" coords="241,74,439,121"/><area shape="rect" id="node7" href="class_hash_map_utils_1_1_hash_bucket.html#a7ea13c55db34d280fd16b70c17bb2a62" title="HashMapUtils::HashBucket\l\&lt; NamespaceEntry \&gt;::insert" alt="" coords="247,143,433,190"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Util/<a class="el" href="_hash_map_8hpp_source.html">HashMap.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Stack.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _STACK_DEF_H_</span></div>
+<a href="_stack_2_stack_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _STACK_DEF_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _STACK_DEF_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
@@ -129,14 +130,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_stack.html">Stack</a>() {</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_stack.html#abf4f763ab93fcb1fd22cd381f521a7e2">   41</a></span>&#160;    <a class="code" href="class_stack.html#abf4f763ab93fcb1fd22cd381f521a7e2">Stack</a>() {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        data_ = <span class="keyword">new</span> s_Type[cDefaultSize];</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        current_ = 0;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        max_ = cDefaultSize;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    ~<a class="code" href="class_stack.html">Stack</a>() {</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="class_stack.html#ac2ccdf42c9ae247ec99db786cdb7222f">   48</a></span>&#160;    <a class="code" href="class_stack.html#ac2ccdf42c9ae247ec99db786cdb7222f">~Stack</a>() {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">if</span> (data_ != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keyword">delete</span>[] data_;</div>
@@ -146,7 +147,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> push(s_Type a) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="class_stack.html#a458c3a1083e133a2bca0e5cb4aa8bcb9">   58</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_stack.html#a458c3a1083e133a2bca0e5cb4aa8bcb9">push</a>(s_Type a) {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">if</span> (current_ &gt;= max_) {</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            expand();</div>
@@ -156,7 +157,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        current_++;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    s_Type pop() {</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="class_stack.html#a78bb9fa57bd39e0e76bc5231870afa04">   68</a></span>&#160;    s_Type <a class="code" href="class_stack.html#a78bb9fa57bd39e0e76bc5231870afa04">pop</a>() {</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">if</span> (current_ == 0) {</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="class_stack_empty_exception.html">StackEmptyException</a>();</div>
@@ -166,15 +167,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">return</span> data_[current_];</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    s_Type <span class="keyword">get</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="class_stack.html#af2960e123bfbf1928b1d8058378dc81a">   78</a></span>&#160;    s_Type <span class="keyword">get</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i) {</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> data_[i];</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">size_t</span> size() {</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="code" href="class_stack.html#a41b54c9ef621409d6125b99fc566a659">   82</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="class_stack.html#a41b54c9ef621409d6125b99fc566a659">size</a>() {</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> current_;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> reset() {</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="code" href="class_stack.html#aeecf55b18f487aa18e278a5d9f3c3e7f">   86</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_stack.html#aeecf55b18f487aa18e278a5d9f3c3e7f">reset</a>() {</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        current_ = 0;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
@@ -183,7 +184,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

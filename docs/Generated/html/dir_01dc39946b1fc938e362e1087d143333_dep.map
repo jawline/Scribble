@@ -1,4 +1,13 @@
 <map id="/home/blake/Dropbox/Current/Scribble/src/Scribble/Value" name="/home/blake/Dropbox/Current/Scribble/src/Scribble/Value">
-<area shape="rect" id="node2" href="dir_01dc39946b1fc938e362e1087d143333.html" title="Value" alt="" coords="27,55,99,103"/>
-<area shape="rect" id="graph2" href="dir_07d7e977bf215240aea06a5921a8865c.html" title="Scribble" alt="" coords="16,16,109,113"/>
+<area shape="rect" id="node2" href="dir_01dc39946b1fc938e362e1087d143333.html" title="Value" alt="" coords="79,55,151,103"/>
+<area shape="rect" id="node3" href="dir_58b921201132471c95b71fbe52201958.html" title="Parser" alt="" coords="5,151,77,199"/>
+<area shape="rect" id="edge9" href="dir_000009_000006.html" title="4" alt="" coords="65,131,73,149"/>
+<area shape="rect" id="node4" href="dir_c5c110f5e32cde5cbc634015da529e2f.html" title="Pointers" alt="" coords="79,247,151,295"/>
+<area shape="rect" id="edge11" href="dir_000009_000003.html" title="2" alt="" coords="119,220,127,237"/>
+<area shape="rect" id="node5" href="dir_d7ba12b078e0605cc29384fa8278dbc6.html" title="VM" alt="" coords="152,151,224,199"/>
+<area shape="rect" id="edge13" href="dir_000009_000012.html" title="2" alt="" coords="161,122,169,139"/>
+<area shape="rect" id="edge5" href="dir_000006_000009.html" title="3" alt="" coords="83,104,91,122"/>
+<area shape="rect" id="edge3" href="dir_000006_000003.html" title="2" alt="" coords="88,218,96,235"/>
+<area shape="rect" id="edge7" href="dir_000012_000003.html" title="2" alt="" coords="147,228,155,246"/>
+<area shape="rect" id="graph2" href="dir_07d7e977bf215240aea06a5921a8865c.html" title="Scribble" alt="" coords="68,16,161,113"/>
 </map>

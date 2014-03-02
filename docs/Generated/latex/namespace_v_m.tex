@@ -1,0 +1,329 @@
+\hypertarget{namespace_v_m}{\section{V\-M Namespace Reference}
+\label{namespace_v_m}\index{V\-M@{V\-M}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_v_m_1_1_heap}{Heap}
+\item 
+class \hyperlink{class_v_m_1_1_instruction_set}{Instruction\-Set}
+\item 
+class \hyperlink{class_v_m_1_1_stack_empty_exception}{Stack\-Empty\-Exception}
+\item 
+class \hyperlink{class_v_m_1_1_v_m_stack}{V\-M\-Stack}
+\item 
+class \hyperlink{class_v_m_1_1_v_m_state}{V\-M\-State}
+\item 
+class \hyperlink{class_v_m_1_1_virtual_machine}{Virtual\-Machine}
+\item 
+class \hyperlink{class_v_m_1_1_v_m_structure_field}{V\-M\-Structure\-Field}
+\item 
+class \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type}
+\item 
+class \hyperlink{class_v_m_1_1_v_m_func}{V\-M\-Func}
+\item 
+struct \hyperlink{struct_v_m_1_1_v_m_heap_entry}{V\-M\-Heap\-Entry}
+\item 
+class \hyperlink{class_v_m_1_1_namespace_entry}{Namespace\-Entry}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{class_hash_map}{Hash\-Map}$<$ \hyperlink{class_v_m_1_1_namespace_entry}{Namespace\-Entry} $>$ \hyperlink{namespace_v_m_ae5114cdcbed0f8d77a2c87137e08895e}{V\-M\-Namespace}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820}{Call\-Type} \{ \hyperlink{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820a49848696c90794562361bf1dc78c3195}{Constant} = 0, 
+\hyperlink{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820a36709477febb42da8d5713f835711dfc}{Register}
+ \}
+\item 
+enum \hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7}{Constant\-Type} \{ \\*
+\hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a6f0da3a5f421121097cfb3d347392092}{C\-Byte} = 0, 
+\hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a9e7e2017bf81c79735196b7995f03c7b}{C\-Short}, 
+\hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a7b0b92f47b187eb0e6eb1484c445fe63}{C\-Int}, 
+\hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a5241446f86f4a1f7b5b9da028b23d04e}{C\-Long}, 
+\\*
+\hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a589a2bed6786578da2bff26887d46ab6}{C\-Float32}, 
+\hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7abbfec96a534b05eadabbbc7c6128cde0}{C\-Double}, 
+\hyperlink{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a7cc79257fc0b5c20e93871dd3a12e417}{C\-Array}
+ \}
+\item 
+enum \hyperlink{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725}{Jump\-Type} \{ \hyperlink{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725aabbae9fc01a29dfa9aebe97d9c82bbf3}{Direct\-Relative} = 0, 
+\hyperlink{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725aa3df2bb7be00c08679d968a4418f27ff}{Direct\-Exact}, 
+\hyperlink{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725af0b1a8b3903e97427ccca41055ed1d17}{Register\-Relative}, 
+\hyperlink{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725af832bb2575d66e296199e151132bcbe0}{Register\-Exact}
+ \}
+\item 
+enum \hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021}{Op\-Codes} \{ \\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021adb1c11424716645321b1a4a06dff7dd6}{Op\-Load\-Constant} = 0, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a04b55a990bff501fa3f783b5a5be11f7}{Op\-Move}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a23d4ae1359c9b25c2b03fa1fa5c6f8eb}{Op\-Jump}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a9f1806e6eca31cf3c6a53797a8db6264}{Op\-Add}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a2210abc4c468e30ed8324a2d95aa67e1}{Op\-Sub}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a1c817f65033d3cd4cb29da9cf9721002}{Op\-Mul}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae7d65e7b1e620c8322657ebc44ac6fa0}{Op\-Div}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a8ac235f6319f0fdd3c9d6c8f6dc2f4d9}{Op\-Inc}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a5aea690228336e719413d4434781a7c6}{Op\-Dec}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a779f2cf77d42fa148b636981c4d44335}{Op\-Add\-Float32}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a7116adc28e7e347e1f29f242d1e9319f}{Op\-Sub\-Float32}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021af8f85c3462633bccdd4ebbb6575d1f4c}{Op\-Mul\-Float32}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a7cadcd2cfb96394b099395bf27383c12}{Op\-Div\-Float32}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac090f4d05ca0e56540da169819fc02b4}{Op\-Cmp\-Float32}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac4175fdaf4385cecffb811ed23688be3}{Op\-Equal}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a1f35749cff83bb556c72669933d58968}{Op\-Not\-Equal}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ab63a66df37bda8891ae8649c72554fec}{Op\-Equal\-Zero}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a73b755010c5ab1082ad799565b94570e}{Op\-Less\-Than}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae004a06862bf5705bfa5fa4e4876ec62}{Op\-Less\-Than\-Or\-Equal}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021aff0660ee576d14502aaef1b47f915924}{Op\-Greater\-Than}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ad6394a09a0f0f210f9d6f3107eba835a}{Op\-Greater\-Than\-Or\-Equal}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a754cf4ccbe4590fcf2aebbf72280a639}{Op\-New\-Array}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a87a166178992539452e9cc3ac51a3533}{Op\-Array\-Set}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a3e3445bfd68c843fccaba56078336da0}{Op\-Array\-Get}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a656ca9efd98b5897030f951440556e62}{Op\-Array\-Length}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac193abef0b975beec0db918a658bf297}{Op\-New\-Struct}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a298194e6e8ca112aa39c4554d738285c}{Op\-Struct\-Set\-Field}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae9588ecfe47faa977e1a967ec3f89d9c}{Op\-Struct\-Get\-Field}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a441d30810ec57ddb941c4ac2922a1b20}{Op\-Push\-Registers}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a5af8eccc4479b142f7177002e6969a54}{Op\-Pop\-Nil}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a81a5e0134a36f1d412326a7d5e6e91e5}{Op\-Pop\-Registers}, 
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a575f7f340e06e036f5304c533e914510}{Op\-Call\-Fn}, 
+\\*
+\hyperlink{namespace_v_m_a1fe663a6cea049c842654fcac772d021a39d4dfd98cd2ae70d04e4e66c79c2901}{Op\-Return}
+ \}
+\item 
+enum \hyperlink{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027}{V\-M\-Log\-Level} \{ \hyperlink{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027abe769f8ddd4f1cdb1f413c6fc006cfb1}{Log}, 
+\hyperlink{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a7053632fa275c87a095334ad71cb7113}{Debug}, 
+\hyperlink{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a4b5c8959e889dd98d54e3154b734d5a1}{Warn}, 
+\hyperlink{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a62cb29fba67786703ba0ee46a4e4f3f5}{Fatal}
+ \}
+\item 
+enum \hyperlink{namespace_v_m_a827f5d8d480f2262d073c82260b1457f}{V\-M\-Entry\-Base\-Type} \{ \hyperlink{namespace_v_m_a827f5d8d480f2262d073c82260b1457fac49bd9d04d07a3468183d60c058bebe2}{V\-M\-Primitive}, 
+\hyperlink{namespace_v_m_a827f5d8d480f2262d073c82260b1457fafaa105ff5ec7a7adead65afca7deac1f}{V\-M\-Array}, 
+\hyperlink{namespace_v_m_a827f5d8d480f2262d073c82260b1457fa44f4c32b4f89d5f2745e9fdeef81bbd8}{V\-M\-Structure}
+ \}
+\item 
+enum \hyperlink{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9}{Namespace\-Entry\-Type} \{ \hyperlink{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aa5d3daf34bd35997ad2f88ec4f8c8565}{Invalid}, 
+\hyperlink{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aa2fd7530e3e8325145cda048f220cc6d}{Function}, 
+\hyperlink{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aecea703c0b89d3544e22017082a1b284}{Type}, 
+\hyperlink{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9a3b2d8aed77cb020d56fe931ec35ae295}{Namespace}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespace_v_m_ae5114cdcbed0f8d77a2c87137e08895e}{\index{V\-M@{V\-M}!V\-M\-Namespace@{V\-M\-Namespace}}
+\index{V\-M\-Namespace@{V\-M\-Namespace}!VM@{V\-M}}
+\subsubsection[{V\-M\-Namespace}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Hash\-Map}$<${\bf Namespace\-Entry}$>$ {\bf V\-M\-::\-V\-M\-Namespace}}}\label{namespace_v_m_ae5114cdcbed0f8d77a2c87137e08895e}
+
+
+Definition at line 22 of file V\-M\-Namespace.\-hpp.
+
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820}{\index{V\-M@{V\-M}!Call\-Type@{Call\-Type}}
+\index{Call\-Type@{Call\-Type}!VM@{V\-M}}
+\subsubsection[{Call\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf V\-M\-::\-Call\-Type}}}\label{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Constant@{Constant}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Constant@{Constant}}\item[{\em 
+\hypertarget{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820a49848696c90794562361bf1dc78c3195}{Constant}\label{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820a49848696c90794562361bf1dc78c3195}
+}]\index{Register@{Register}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Register@{Register}}\item[{\em 
+\hypertarget{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820a36709477febb42da8d5713f835711dfc}{Register}\label{namespace_v_m_a42ff6362ed7752213fde7f8ce1249820a36709477febb42da8d5713f835711dfc}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 13 of file Call\-Types.\-hpp.
+
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7}{\index{V\-M@{V\-M}!Constant\-Type@{Constant\-Type}}
+\index{Constant\-Type@{Constant\-Type}!VM@{V\-M}}
+\subsubsection[{Constant\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf V\-M\-::\-Constant\-Type}}}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{C\-Byte@{C\-Byte}!V\-M@{V\-M}}\index{V\-M@{V\-M}!C\-Byte@{C\-Byte}}\item[{\em 
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a6f0da3a5f421121097cfb3d347392092}{C\-Byte}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a6f0da3a5f421121097cfb3d347392092}
+}]\index{C\-Short@{C\-Short}!V\-M@{V\-M}}\index{V\-M@{V\-M}!C\-Short@{C\-Short}}\item[{\em 
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a9e7e2017bf81c79735196b7995f03c7b}{C\-Short}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a9e7e2017bf81c79735196b7995f03c7b}
+}]\index{C\-Int@{C\-Int}!V\-M@{V\-M}}\index{V\-M@{V\-M}!C\-Int@{C\-Int}}\item[{\em 
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a7b0b92f47b187eb0e6eb1484c445fe63}{C\-Int}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a7b0b92f47b187eb0e6eb1484c445fe63}
+}]\index{C\-Long@{C\-Long}!V\-M@{V\-M}}\index{V\-M@{V\-M}!C\-Long@{C\-Long}}\item[{\em 
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a5241446f86f4a1f7b5b9da028b23d04e}{C\-Long}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a5241446f86f4a1f7b5b9da028b23d04e}
+}]\index{C\-Float32@{C\-Float32}!V\-M@{V\-M}}\index{V\-M@{V\-M}!C\-Float32@{C\-Float32}}\item[{\em 
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a589a2bed6786578da2bff26887d46ab6}{C\-Float32}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a589a2bed6786578da2bff26887d46ab6}
+}]\index{C\-Double@{C\-Double}!V\-M@{V\-M}}\index{V\-M@{V\-M}!C\-Double@{C\-Double}}\item[{\em 
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7abbfec96a534b05eadabbbc7c6128cde0}{C\-Double}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7abbfec96a534b05eadabbbc7c6128cde0}
+}]\index{C\-Array@{C\-Array}!V\-M@{V\-M}}\index{V\-M@{V\-M}!C\-Array@{C\-Array}}\item[{\em 
+\hypertarget{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a7cc79257fc0b5c20e93871dd3a12e417}{C\-Array}\label{namespace_v_m_a68cf1a0e1ec593cc0f25c38e31691ff7a7cc79257fc0b5c20e93871dd3a12e417}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 13 of file Constant\-Types.\-hpp.
+
+\hypertarget{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725}{\index{V\-M@{V\-M}!Jump\-Type@{Jump\-Type}}
+\index{Jump\-Type@{Jump\-Type}!VM@{V\-M}}
+\subsubsection[{Jump\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf V\-M\-::\-Jump\-Type}}}\label{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Direct\-Relative@{Direct\-Relative}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Direct\-Relative@{Direct\-Relative}}\item[{\em 
+\hypertarget{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725aabbae9fc01a29dfa9aebe97d9c82bbf3}{Direct\-Relative}\label{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725aabbae9fc01a29dfa9aebe97d9c82bbf3}
+}]\index{Direct\-Exact@{Direct\-Exact}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Direct\-Exact@{Direct\-Exact}}\item[{\em 
+\hypertarget{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725aa3df2bb7be00c08679d968a4418f27ff}{Direct\-Exact}\label{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725aa3df2bb7be00c08679d968a4418f27ff}
+}]\index{Register\-Relative@{Register\-Relative}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Register\-Relative@{Register\-Relative}}\item[{\em 
+\hypertarget{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725af0b1a8b3903e97427ccca41055ed1d17}{Register\-Relative}\label{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725af0b1a8b3903e97427ccca41055ed1d17}
+}]\index{Register\-Exact@{Register\-Exact}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Register\-Exact@{Register\-Exact}}\item[{\em 
+\hypertarget{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725af832bb2575d66e296199e151132bcbe0}{Register\-Exact}\label{namespace_v_m_a08cb88cb0bdf6cf082b5068b9bf1b725af832bb2575d66e296199e151132bcbe0}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 13 of file Jump\-Types.\-hpp.
+
+\hypertarget{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9}{\index{V\-M@{V\-M}!Namespace\-Entry\-Type@{Namespace\-Entry\-Type}}
+\index{Namespace\-Entry\-Type@{Namespace\-Entry\-Type}!VM@{V\-M}}
+\subsubsection[{Namespace\-Entry\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf V\-M\-::\-Namespace\-Entry\-Type}}}\label{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Invalid@{Invalid}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Invalid@{Invalid}}\item[{\em 
+\hypertarget{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aa5d3daf34bd35997ad2f88ec4f8c8565}{Invalid}\label{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aa5d3daf34bd35997ad2f88ec4f8c8565}
+}]\index{Function@{Function}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Function@{Function}}\item[{\em 
+\hypertarget{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aa2fd7530e3e8325145cda048f220cc6d}{Function}\label{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aa2fd7530e3e8325145cda048f220cc6d}
+}]\index{Type@{Type}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Type@{Type}}\item[{\em 
+\hypertarget{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aecea703c0b89d3544e22017082a1b284}{Type}\label{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9aecea703c0b89d3544e22017082a1b284}
+}]\index{Namespace@{Namespace}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Namespace@{Namespace}}\item[{\em 
+\hypertarget{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9a3b2d8aed77cb020d56fe931ec35ae295}{Namespace}\label{namespace_v_m_ac5f99b11656e38dd2909b030a7a795c9a3b2d8aed77cb020d56fe931ec35ae295}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 18 of file V\-M\-Namespace.\-hpp.
+
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021}{\index{V\-M@{V\-M}!Op\-Codes@{Op\-Codes}}
+\index{Op\-Codes@{Op\-Codes}!VM@{V\-M}}
+\subsubsection[{Op\-Codes}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf V\-M\-::\-Op\-Codes}}}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Op\-Load\-Constant@{Op\-Load\-Constant}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Load\-Constant@{Op\-Load\-Constant}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021adb1c11424716645321b1a4a06dff7dd6}{Op\-Load\-Constant}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021adb1c11424716645321b1a4a06dff7dd6}
+}]\index{Op\-Move@{Op\-Move}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Move@{Op\-Move}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a04b55a990bff501fa3f783b5a5be11f7}{Op\-Move}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a04b55a990bff501fa3f783b5a5be11f7}
+}]\index{Op\-Jump@{Op\-Jump}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Jump@{Op\-Jump}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a23d4ae1359c9b25c2b03fa1fa5c6f8eb}{Op\-Jump}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a23d4ae1359c9b25c2b03fa1fa5c6f8eb}
+}]\index{Op\-Add@{Op\-Add}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Add@{Op\-Add}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a9f1806e6eca31cf3c6a53797a8db6264}{Op\-Add}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a9f1806e6eca31cf3c6a53797a8db6264}
+}]Arithmetic operations \index{Op\-Sub@{Op\-Sub}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Sub@{Op\-Sub}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a2210abc4c468e30ed8324a2d95aa67e1}{Op\-Sub}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a2210abc4c468e30ed8324a2d95aa67e1}
+}]\index{Op\-Mul@{Op\-Mul}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Mul@{Op\-Mul}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a1c817f65033d3cd4cb29da9cf9721002}{Op\-Mul}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a1c817f65033d3cd4cb29da9cf9721002}
+}]\index{Op\-Div@{Op\-Div}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Div@{Op\-Div}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae7d65e7b1e620c8322657ebc44ac6fa0}{Op\-Div}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae7d65e7b1e620c8322657ebc44ac6fa0}
+}]\index{Op\-Inc@{Op\-Inc}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Inc@{Op\-Inc}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a8ac235f6319f0fdd3c9d6c8f6dc2f4d9}{Op\-Inc}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a8ac235f6319f0fdd3c9d6c8f6dc2f4d9}
+}]\index{Op\-Dec@{Op\-Dec}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Dec@{Op\-Dec}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a5aea690228336e719413d4434781a7c6}{Op\-Dec}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a5aea690228336e719413d4434781a7c6}
+}]\index{Op\-Add\-Float32@{Op\-Add\-Float32}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Add\-Float32@{Op\-Add\-Float32}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a779f2cf77d42fa148b636981c4d44335}{Op\-Add\-Float32}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a779f2cf77d42fa148b636981c4d44335}
+}]Float operations \index{Op\-Sub\-Float32@{Op\-Sub\-Float32}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Sub\-Float32@{Op\-Sub\-Float32}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a7116adc28e7e347e1f29f242d1e9319f}{Op\-Sub\-Float32}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a7116adc28e7e347e1f29f242d1e9319f}
+}]\index{Op\-Mul\-Float32@{Op\-Mul\-Float32}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Mul\-Float32@{Op\-Mul\-Float32}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021af8f85c3462633bccdd4ebbb6575d1f4c}{Op\-Mul\-Float32}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021af8f85c3462633bccdd4ebbb6575d1f4c}
+}]\index{Op\-Div\-Float32@{Op\-Div\-Float32}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Div\-Float32@{Op\-Div\-Float32}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a7cadcd2cfb96394b099395bf27383c12}{Op\-Div\-Float32}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a7cadcd2cfb96394b099395bf27383c12}
+}]\index{Op\-Cmp\-Float32@{Op\-Cmp\-Float32}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Cmp\-Float32@{Op\-Cmp\-Float32}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac090f4d05ca0e56540da169819fc02b4}{Op\-Cmp\-Float32}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac090f4d05ca0e56540da169819fc02b4}
+}]\index{Op\-Equal@{Op\-Equal}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Equal@{Op\-Equal}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac4175fdaf4385cecffb811ed23688be3}{Op\-Equal}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac4175fdaf4385cecffb811ed23688be3}
+}]Tests \index{Op\-Not\-Equal@{Op\-Not\-Equal}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Not\-Equal@{Op\-Not\-Equal}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a1f35749cff83bb556c72669933d58968}{Op\-Not\-Equal}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a1f35749cff83bb556c72669933d58968}
+}]\index{Op\-Equal\-Zero@{Op\-Equal\-Zero}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Equal\-Zero@{Op\-Equal\-Zero}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ab63a66df37bda8891ae8649c72554fec}{Op\-Equal\-Zero}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ab63a66df37bda8891ae8649c72554fec}
+}]\index{Op\-Less\-Than@{Op\-Less\-Than}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Less\-Than@{Op\-Less\-Than}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a73b755010c5ab1082ad799565b94570e}{Op\-Less\-Than}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a73b755010c5ab1082ad799565b94570e}
+}]\index{Op\-Less\-Than\-Or\-Equal@{Op\-Less\-Than\-Or\-Equal}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Less\-Than\-Or\-Equal@{Op\-Less\-Than\-Or\-Equal}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae004a06862bf5705bfa5fa4e4876ec62}{Op\-Less\-Than\-Or\-Equal}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae004a06862bf5705bfa5fa4e4876ec62}
+}]\index{Op\-Greater\-Than@{Op\-Greater\-Than}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Greater\-Than@{Op\-Greater\-Than}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021aff0660ee576d14502aaef1b47f915924}{Op\-Greater\-Than}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021aff0660ee576d14502aaef1b47f915924}
+}]\index{Op\-Greater\-Than\-Or\-Equal@{Op\-Greater\-Than\-Or\-Equal}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Greater\-Than\-Or\-Equal@{Op\-Greater\-Than\-Or\-Equal}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ad6394a09a0f0f210f9d6f3107eba835a}{Op\-Greater\-Than\-Or\-Equal}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ad6394a09a0f0f210f9d6f3107eba835a}
+}]\index{Op\-New\-Array@{Op\-New\-Array}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-New\-Array@{Op\-New\-Array}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a754cf4ccbe4590fcf2aebbf72280a639}{Op\-New\-Array}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a754cf4ccbe4590fcf2aebbf72280a639}
+}]Array operators \index{Op\-Array\-Set@{Op\-Array\-Set}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Array\-Set@{Op\-Array\-Set}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a87a166178992539452e9cc3ac51a3533}{Op\-Array\-Set}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a87a166178992539452e9cc3ac51a3533}
+}]\index{Op\-Array\-Get@{Op\-Array\-Get}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Array\-Get@{Op\-Array\-Get}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a3e3445bfd68c843fccaba56078336da0}{Op\-Array\-Get}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a3e3445bfd68c843fccaba56078336da0}
+}]\index{Op\-Array\-Length@{Op\-Array\-Length}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Array\-Length@{Op\-Array\-Length}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a656ca9efd98b5897030f951440556e62}{Op\-Array\-Length}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a656ca9efd98b5897030f951440556e62}
+}]\index{Op\-New\-Struct@{Op\-New\-Struct}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-New\-Struct@{Op\-New\-Struct}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac193abef0b975beec0db918a658bf297}{Op\-New\-Struct}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ac193abef0b975beec0db918a658bf297}
+}]Structure operators \index{Op\-Struct\-Set\-Field@{Op\-Struct\-Set\-Field}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Struct\-Set\-Field@{Op\-Struct\-Set\-Field}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a298194e6e8ca112aa39c4554d738285c}{Op\-Struct\-Set\-Field}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a298194e6e8ca112aa39c4554d738285c}
+}]\index{Op\-Struct\-Get\-Field@{Op\-Struct\-Get\-Field}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Struct\-Get\-Field@{Op\-Struct\-Get\-Field}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae9588ecfe47faa977e1a967ec3f89d9c}{Op\-Struct\-Get\-Field}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021ae9588ecfe47faa977e1a967ec3f89d9c}
+}]\index{Op\-Push\-Registers@{Op\-Push\-Registers}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Push\-Registers@{Op\-Push\-Registers}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a441d30810ec57ddb941c4ac2922a1b20}{Op\-Push\-Registers}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a441d30810ec57ddb941c4ac2922a1b20}
+}]Function \& \hyperlink{class_stack}{Stack} operators \index{Op\-Pop\-Nil@{Op\-Pop\-Nil}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Pop\-Nil@{Op\-Pop\-Nil}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a5af8eccc4479b142f7177002e6969a54}{Op\-Pop\-Nil}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a5af8eccc4479b142f7177002e6969a54}
+}]\index{Op\-Pop\-Registers@{Op\-Pop\-Registers}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Pop\-Registers@{Op\-Pop\-Registers}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a81a5e0134a36f1d412326a7d5e6e91e5}{Op\-Pop\-Registers}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a81a5e0134a36f1d412326a7d5e6e91e5}
+}]\index{Op\-Call\-Fn@{Op\-Call\-Fn}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Call\-Fn@{Op\-Call\-Fn}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a575f7f340e06e036f5304c533e914510}{Op\-Call\-Fn}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a575f7f340e06e036f5304c533e914510}
+}]\index{Op\-Return@{Op\-Return}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Op\-Return@{Op\-Return}}\item[{\em 
+\hypertarget{namespace_v_m_a1fe663a6cea049c842654fcac772d021a39d4dfd98cd2ae70d04e4e66c79c2901}{Op\-Return}\label{namespace_v_m_a1fe663a6cea049c842654fcac772d021a39d4dfd98cd2ae70d04e4e66c79c2901}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 13 of file Op\-Codes.\-hpp.
+
+\hypertarget{namespace_v_m_a827f5d8d480f2262d073c82260b1457f}{\index{V\-M@{V\-M}!V\-M\-Entry\-Base\-Type@{V\-M\-Entry\-Base\-Type}}
+\index{V\-M\-Entry\-Base\-Type@{V\-M\-Entry\-Base\-Type}!VM@{V\-M}}
+\subsubsection[{V\-M\-Entry\-Base\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf V\-M\-::\-V\-M\-Entry\-Base\-Type}}}\label{namespace_v_m_a827f5d8d480f2262d073c82260b1457f}
+The base type of the V\-M\-Entry changes how the garbage collector sees it and what instructions can use it. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{V\-M\-Primitive@{V\-M\-Primitive}!V\-M@{V\-M}}\index{V\-M@{V\-M}!V\-M\-Primitive@{V\-M\-Primitive}}\item[{\em 
+\hypertarget{namespace_v_m_a827f5d8d480f2262d073c82260b1457fac49bd9d04d07a3468183d60c058bebe2}{V\-M\-Primitive}\label{namespace_v_m_a827f5d8d480f2262d073c82260b1457fac49bd9d04d07a3468183d60c058bebe2}
+}]\index{V\-M\-Array@{V\-M\-Array}!V\-M@{V\-M}}\index{V\-M@{V\-M}!V\-M\-Array@{V\-M\-Array}}\item[{\em 
+\hypertarget{namespace_v_m_a827f5d8d480f2262d073c82260b1457fafaa105ff5ec7a7adead65afca7deac1f}{V\-M\-Array}\label{namespace_v_m_a827f5d8d480f2262d073c82260b1457fafaa105ff5ec7a7adead65afca7deac1f}
+}]\index{V\-M\-Structure@{V\-M\-Structure}!V\-M@{V\-M}}\index{V\-M@{V\-M}!V\-M\-Structure@{V\-M\-Structure}}\item[{\em 
+\hypertarget{namespace_v_m_a827f5d8d480f2262d073c82260b1457fa44f4c32b4f89d5f2745e9fdeef81bbd8}{V\-M\-Structure}\label{namespace_v_m_a827f5d8d480f2262d073c82260b1457fa44f4c32b4f89d5f2745e9fdeef81bbd8}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 20 of file V\-M\-Entry\-Type.\-hpp.
+
+\hypertarget{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027}{\index{V\-M@{V\-M}!V\-M\-Log\-Level@{V\-M\-Log\-Level}}
+\index{V\-M\-Log\-Level@{V\-M\-Log\-Level}!VM@{V\-M}}
+\subsubsection[{V\-M\-Log\-Level}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf V\-M\-::\-V\-M\-Log\-Level}}}\label{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Log@{Log}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Log@{Log}}\item[{\em 
+\hypertarget{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027abe769f8ddd4f1cdb1f413c6fc006cfb1}{Log}\label{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027abe769f8ddd4f1cdb1f413c6fc006cfb1}
+}]\index{Debug@{Debug}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Debug@{Debug}}\item[{\em 
+\hypertarget{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a7053632fa275c87a095334ad71cb7113}{Debug}\label{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a7053632fa275c87a095334ad71cb7113}
+}]\index{Warn@{Warn}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Warn@{Warn}}\item[{\em 
+\hypertarget{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a4b5c8959e889dd98d54e3154b734d5a1}{Warn}\label{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a4b5c8959e889dd98d54e3154b734d5a1}
+}]\index{Fatal@{Fatal}!V\-M@{V\-M}}\index{V\-M@{V\-M}!Fatal@{Fatal}}\item[{\em 
+\hypertarget{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a62cb29fba67786703ba0ee46a4e4f3f5}{Fatal}\label{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027a62cb29fba67786703ba0ee46a4e4f3f5}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 22 of file Virtual\-Machine.\-hpp.
+

@@ -1,4 +1,10 @@
 <map id="VM::Heap::allocate" name="VM::Heap::allocate">
-<area shape="rect" id="node3" href="$class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="189,5,325,51"/>
-<area shape="rect" id="node5" href="$class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="373,13,496,43"/>
+<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#abc6491d068cfc443ef5cbbc83156e46e" title="API::APIValue::makeString" alt="" coords="189,155,371,184"/>
+<area shape="rect" id="node15" href="$class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="212,242,348,289"/>
+<area shape="rect" id="node5" href="$class_a_p_i_1_1_concat.html#a8dbf36574a9a16077bff5bfd634669fd" title="API::Concat::execute" alt="" coords="428,5,575,35"/>
+<area shape="rect" id="node7" href="$class_read_line.html#af8556982e83b2417b4fad7ed3086a7de" title="ReadLine::execute" alt="" coords="436,59,567,88"/>
+<area shape="rect" id="node9" href="$class_int_to_string_function.html#adf8c1c3223ba53393a1d5fc0679e06d1" title="IntToStringFunction\l::execute" alt="" coords="433,111,569,158"/>
+<area shape="rect" id="node11" href="$class_bool_to_string_function.html#a4e74a7af474a601db96557e9ff5caffe" title="BoolToStringFunction\l::execute" alt="" coords="428,181,575,227"/>
+<area shape="rect" id="node13" href="$class_float32_to_string_function.html#a37af0d9a46e186a0ae48a589123fb433" title="Float32ToStringFunction\l::execute" alt="" coords="420,250,583,297"/>
+<area shape="rect" id="node17" href="$class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="440,320,563,349"/>
 </map>

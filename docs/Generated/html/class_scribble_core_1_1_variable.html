@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>ScribbleCore</b></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_variable.html">Variable</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_scribble_core.html">ScribbleCore</a></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_variable.html">Variable</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -97,27 +97,97 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_variable_8hpp_source.html">Variable.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for ScribbleCore::Variable:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_scribble_core_1_1_variable__coll__graph.png" border="0" usemap="#_scribble_core_1_1_variable_coll__map" alt="Collaboration graph"/></div>
+<map name="_scribble_core_1_1_variable_coll__map" id="_scribble_core_1_1_variable_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9724b5d36cf8944a51ede6dfeee0dd66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9724b5d36cf8944a51ede6dfeee0dd66"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Variable</b> (int position, TypeReference type)</td></tr>
+<tr class="memitem:a9724b5d36cf8944a51ede6dfeee0dd66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_variable.html#a9724b5d36cf8944a51ede6dfeee0dd66">Variable</a> (int position, <a class="el" href="namespace_scribble_core.html#a0e685a305b14aa5f0504df1369ba270b">TypeReference</a> type)</td></tr>
 <tr class="separator:a9724b5d36cf8944a51ede6dfeee0dd66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b7563356d81e0235615ca822591b669"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_variable.html#a4b7563356d81e0235615ca822591b669">~Variable</a> ()</td></tr>
+<tr class="separator:a4b7563356d81e0235615ca822591b669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d57a13af1d015cba3ef0e28d828db29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_scribble_core_1_1_type.html">Type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_variable.html#a4d57a13af1d015cba3ef0e28d828db29">getType</a> ()</td></tr>
 <tr class="separator:a4d57a13af1d015cba3ef0e28d828db29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29f45e177ad71942908e691b3fe0fa1f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29f45e177ad71942908e691b3fe0fa1f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (<a class="el" href="class_scribble_core_1_1_type.html">Type</a> *type)</td></tr>
+<tr class="memitem:a29f45e177ad71942908e691b3fe0fa1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_variable.html#a29f45e177ad71942908e691b3fe0fa1f">setType</a> (<a class="el" href="class_scribble_core_1_1_type.html">Type</a> *type)</td></tr>
 <tr class="separator:a29f45e177ad71942908e691b3fe0fa1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68827f8ea0b4d415ca6b149de66556a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68827f8ea0b4d415ca6b149de66556a2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPosition</b> (int pos)</td></tr>
+<tr class="memitem:a68827f8ea0b4d415ca6b149de66556a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_variable.html#a68827f8ea0b4d415ca6b149de66556a2">setPosition</a> (int pos)</td></tr>
 <tr class="separator:a68827f8ea0b4d415ca6b149de66556a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75795407003815016a7ac4680247d9c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a75795407003815016a7ac4680247d9c2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getPosition</b> ()</td></tr>
+<tr class="memitem:a75795407003815016a7ac4680247d9c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_variable.html#a75795407003815016a7ac4680247d9c2">getPosition</a> ()</td></tr>
 <tr class="separator:a75795407003815016a7ac4680247d9c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The variable class is used to store meta data about a variable when it is defined in a package function ( It's type and position in registers ) </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+
+<p>Definition at line <a class="el" href="_variable_8hpp_source.html#l00015">15</a> of file <a class="el" href="_variable_8hpp_source.html">Variable.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a9724b5d36cf8944a51ede6dfeee0dd66"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::Variable::Variable </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_scribble_core.html#a0e685a305b14aa5f0504df1369ba270b">TypeReference</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_variable_8cpp_source.html#l00006">6</a> of file <a class="el" href="_variable_8cpp_source.html">Variable.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4b7563356d81e0235615ca822591b669"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::Variable::~Variable </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_variable_8cpp_source.html#l00010">10</a> of file <a class="el" href="_variable_8cpp_source.html">Variable.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a75795407003815016a7ac4680247d9c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ScribbleCore::Variable::getPosition </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_variable_8cpp_source.html#l00042">42</a> of file <a class="el" href="_variable_8cpp_source.html">Variable.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a4d57a13af1d015cba3ef0e28d828db29"></a>
 <div class="memitem">
 <div class="memproto">
@@ -132,25 +202,63 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getPosition</b> ()</td
 </div><div class="memdoc">
 <p>if (getValue()) { return getValue()-&gt;type(); } </p>
 
+<p>Definition at line <a class="el" href="_variable_8cpp_source.html#l00014">14</a> of file <a class="el" href="_variable_8cpp_source.html">Variable.cpp</a>.</p>
+
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scribble_core_1_1_variable_a4d57a13af1d015cba3ef0e28d828db29_cgraph.png" border="0" usemap="#class_scribble_core_1_1_variable_a4d57a13af1d015cba3ef0e28d828db29_cgraph" alt=""/></div>
 <map name="class_scribble_core_1_1_variable_a4d57a13af1d015cba3ef0e28d828db29_cgraph" id="class_scribble_core_1_1_variable_a4d57a13af1d015cba3ef0e28d828db29_cgraph">
-<area shape="rect" id="node3" href="class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="205,5,389,51"/></map>
+<area shape="rect" id="node3" href="namespace_scribble_core.html#a4042f9dc8c93e8d0e18d7ae614456024" title="ScribbleCore::getTypeManager" alt="" coords="205,5,408,35"/><area shape="rect" id="node5" href="class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="215,58,399,105"/></map>
 </div>
 </p>
 
 </div>
 </div>
+<a class="anchor" id="a68827f8ea0b4d415ca6b149de66556a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScribbleCore::Variable::setPosition </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pos</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_variable_8cpp_source.html#l00038">38</a> of file <a class="el" href="_variable_8cpp_source.html">Variable.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a29f45e177ad71942908e691b3fe0fa1f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScribbleCore::Variable::setType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scribble_core_1_1_type.html">Type</a> *&#160;</td>
+          <td class="paramname"><em>type</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_variable_8cpp_source.html#l00028">28</a> of file <a class="el" href="_variable_8cpp_source.html">Variable.cpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/<a class="el" href="_variable_8hpp_source.html">Variable.hpp</a></li>
-<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/Variable.cpp</li>
+<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/<a class="el" href="_variable_8cpp_source.html">Variable.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

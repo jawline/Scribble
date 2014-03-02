@@ -1,0 +1,98 @@
+\hypertarget{_virtual_machine___debug_8hpp}{\section{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/\-Virtual\-Machine\-\_\-\-Debug.hpp File Reference}
+\label{_virtual_machine___debug_8hpp}\index{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/\-Virtual\-Machine\-\_\-\-Debug.\-hpp@{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/\-Virtual\-Machine\-\_\-\-Debug.\-hpp}}
+}
+{\ttfamily \#include \char`\"{}Constants.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+Include dependency graph for Virtual\-Machine\-\_\-\-Debug.\-hpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_virtual_machine___debug_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_virtual_machine___debug_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_virtual_machine___debug_8hpp_a422dd0825a652b4aa5b0f93841560f1c}{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-F\-A\-T\-A\-L}(fmt,...)~fprintf(stderr, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); \hyperlink{_virtual_machine___debug_8hpp_aa4c5fda0a76ffdcd9e35c8341e0baa31}{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G}(fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); this-\/$>$print\-State(); do \{ \} while (1)
+\item 
+\#define \hyperlink{_virtual_machine___debug_8hpp_aeaaf9c94296fc51b559df904d15a127e}{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-D\-B\-G}(fmt,...)~fprintf(\hyperlink{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{flog}, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); fflush(\hyperlink{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{flog})
+\item 
+\#define \hyperlink{_virtual_machine___debug_8hpp_af0b12c90825c17e63639465b84178bf7}{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-W\-A\-R\-N}(fmt,...)~fprintf(\hyperlink{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{flog}, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); fflush(\hyperlink{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{flog})
+\item 
+\#define \hyperlink{_virtual_machine___debug_8hpp_aa4c5fda0a76ffdcd9e35c8341e0baa31}{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G}(fmt,...)~fprintf(\hyperlink{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{flog}, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); fflush(\hyperlink{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{flog})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+F\-I\-L\-E $\ast$ \hyperlink{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{flog}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_virtual_machine___debug_8hpp_aeaaf9c94296fc51b559df904d15a127e}{\index{Virtual\-Machine\-\_\-\-Debug.\-hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}!V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-D\-B\-G@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-D\-B\-G}}
+\index{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-D\-B\-G@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-D\-B\-G}!VirtualMachine_Debug.hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}}
+\subsubsection[{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-D\-B\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-D\-B\-G(
+\begin{DoxyParamCaption}
+\item[{}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~fprintf({\bf flog}, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); fflush({\bf flog})}}\label{_virtual_machine___debug_8hpp_aeaaf9c94296fc51b559df904d15a127e}
+
+
+Definition at line 20 of file Virtual\-Machine\-\_\-\-Debug.\-hpp.
+
+\hypertarget{_virtual_machine___debug_8hpp_a422dd0825a652b4aa5b0f93841560f1c}{\index{Virtual\-Machine\-\_\-\-Debug.\-hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}!V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-F\-A\-T\-A\-L@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-F\-A\-T\-A\-L}}
+\index{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-F\-A\-T\-A\-L@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-F\-A\-T\-A\-L}!VirtualMachine_Debug.hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}}
+\subsubsection[{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-F\-A\-T\-A\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-F\-A\-T\-A\-L(
+\begin{DoxyParamCaption}
+\item[{}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~fprintf(stderr, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); {\bf V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G}(fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); this-\/$>$print\-State(); do \{ \} while (1)}}\label{_virtual_machine___debug_8hpp_a422dd0825a652b4aa5b0f93841560f1c}
+
+
+Definition at line 13 of file Virtual\-Machine\-\_\-\-Debug.\-hpp.
+
+\hypertarget{_virtual_machine___debug_8hpp_aa4c5fda0a76ffdcd9e35c8341e0baa31}{\index{Virtual\-Machine\-\_\-\-Debug.\-hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}!V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G}}
+\index{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G}!VirtualMachine_Debug.hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}}
+\subsubsection[{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-L\-O\-G(
+\begin{DoxyParamCaption}
+\item[{}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~fprintf({\bf flog}, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); fflush({\bf flog})}}\label{_virtual_machine___debug_8hpp_aa4c5fda0a76ffdcd9e35c8341e0baa31}
+
+
+Definition at line 22 of file Virtual\-Machine\-\_\-\-Debug.\-hpp.
+
+\hypertarget{_virtual_machine___debug_8hpp_af0b12c90825c17e63639465b84178bf7}{\index{Virtual\-Machine\-\_\-\-Debug.\-hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}!V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-W\-A\-R\-N@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-W\-A\-R\-N}}
+\index{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-W\-A\-R\-N@{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-W\-A\-R\-N}!VirtualMachine_Debug.hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}}
+\subsubsection[{V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-W\-A\-R\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-W\-A\-R\-N(
+\begin{DoxyParamCaption}
+\item[{}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~fprintf({\bf flog}, fmt, \-\_\-\-\_\-\-V\-A\-\_\-\-A\-R\-G\-S\-\_\-\-\_\-); fflush({\bf flog})}}\label{_virtual_machine___debug_8hpp_af0b12c90825c17e63639465b84178bf7}
+
+
+Definition at line 21 of file Virtual\-Machine\-\_\-\-Debug.\-hpp.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}{\index{Virtual\-Machine\-\_\-\-Debug.\-hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}!flog@{flog}}
+\index{flog@{flog}!VirtualMachine_Debug.hpp@{Virtual\-Machine\-\_\-\-Debug.\-hpp}}
+\subsubsection[{flog}]{\setlength{\rightskip}{0pt plus 5cm}F\-I\-L\-E$\ast$ flog}}\label{_virtual_machine___debug_8hpp_a124fb35b6a498a5b2a566cbc525af8d7}
+If a debug flag is set then open the log file for writing. Used by the V\-M\-\_\-\-P\-R\-I\-N\-T\-F\-\_\-\-X macros 
+
+Definition at line 16 of file Virtual\-Machine\-\_\-\-Debug.\-cpp.
+

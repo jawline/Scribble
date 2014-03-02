@@ -25,8 +25,6 @@
 
 namespace API {
 
-static std::string cStringTypename = "string";
-
 /**
  * The APIValue class contains the arguments for or return value from a
  * virtual machine function.
@@ -356,11 +354,11 @@ public:
 	static API::APIValue makeString(std::string const& text, VM::VirtualMachine* vm) {
 
 		//Create the new heap entry
-		long heapEntry = vm->getHeap().allocate(vm->findType(cStringTypename),
+		long heapEntry = vm->getHeap().allocate(vm->findType(ScribbleCore::getStringType()->getTypeName()),
 				text.length() + 1, (uint8_t*) text.c_str());
 
 		//Make a new API value from it
-		return API::APIValue(ScribbleCore::getStringType(), vm->findType(cStringTypename),
+		return API::APIValue(ScribbleCore::getStringType(), vm->findType(ScribbleCore::getStringType()->getTypeName()),
 				vm->getHeap().getSmartPointer(heapEntry), heapEntry);
 	}
 };

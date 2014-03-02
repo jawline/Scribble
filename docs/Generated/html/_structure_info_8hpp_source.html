@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">StructureInfo.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_structure_info_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * StructureInfo.hpp</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 25 May 2013</span></div>
@@ -100,8 +101,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define STRUCTUREINFO_HPP_</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;Scribble/Parser/TypeReference.hpp&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;Type.hpp&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_type_reference_8hpp.html">Scribble/Parser/TypeReference.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_type_8hpp.html">Type.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>ScribbleCore {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
@@ -115,29 +116,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::vector&lt;std::pair&lt;std::string, TypeReference&gt;&gt; dataIndexs_;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_scribble_core_1_1_structure_info.html">StructureInfo</a>(std::string name);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_scribble_core_1_1_structure_info.html">StructureInfo</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_scribble_core_1_1_structure_info.html#a1c721c66301d3669baa7bdf6f86b4ce8">StructureInfo</a>(std::string name);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_scribble_core_1_1_structure_info.html#a6f3c90da4640ae898b1419b1775d4b93">~StructureInfo</a>();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> addInfo(std::string name, TypeReference type);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    std::pair&lt;std::string, TypeReference&gt; getIndex(<span class="keywordtype">int</span> i);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scribble_core_1_1_structure_info.html#aabff56fd1c8718de21cdf48fe2a8b6e2">addInfo</a>(std::string name, <a class="code" href="namespace_scribble_core.html#a0e685a305b14aa5f0504df1369ba270b">TypeReference</a> type);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    std::pair&lt;std::string, TypeReference&gt; <a class="code" href="class_scribble_core_1_1_structure_info.html#a3908314d044d793bedc22dbd859f3c18">getIndex</a>(<span class="keywordtype">int</span> i);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">Type</a>* <a class="code" href="class_scribble_core_1_1_type.html#a7b465695c97c0e07457f46c7ac18a96c">getType</a>(std::string <span class="keyword">const</span>&amp; name);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> getIndex(std::string <span class="keyword">const</span>&amp; name);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getNumIndexs();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scribble_core_1_1_structure_info.html#a3908314d044d793bedc22dbd859f3c18">getIndex</a>(std::string <span class="keyword">const</span>&amp; name);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_scribble_core_1_1_structure_info.html#a3ad5e3e1f898a544eead94dfab83dbec">getNumIndexs</a>();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> setName(std::string <span class="keyword">const</span>&amp; name);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> setPackage(std::string <span class="keyword">const</span>&amp; name);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scribble_core_1_1_structure_info.html#a6c8395d0e3a8a2c26ab15df4439e13e4">setName</a>(std::string <span class="keyword">const</span>&amp; name);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scribble_core_1_1_structure_info.html#a77e7bc5dff5c89c0f765c25280e2b9d7">setPackage</a>(std::string <span class="keyword">const</span>&amp; name);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    std::string getName() {</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_structure_info.html#a7fef6a1f12ee3d1edfb568c5e8bd36f1">   52</a></span>&#160;    std::string <a class="code" href="class_scribble_core_1_1_structure_info.html#a7fef6a1f12ee3d1edfb568c5e8bd36f1">getName</a>() {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;__struct(&quot;</span> + name_ + <span class="stringliteral">&quot;)&quot;</span>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> std::string <a class="code" href="class_scribble_core_1_1_structure_info.html#aaef936b2d4bde471cc701d0096f32710">getTypeName</a>();</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::string getPackage();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::string <a class="code" href="class_scribble_core_1_1_structure_info.html#a66e2264485a7efe6293af2df1349d332">getPackage</a>();</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">typedef</span> <a class="code" href="class_scribble_core_1_1_structure_info.html">StructureInfo</a> <a class="code" href="class_scribble_core_1_1_structure_info.html">SInfo</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#a3a14a97bb67cd5efa082d8dda7595cca">   66</a></span>&#160;<span class="keyword">typedef</span> <a class="code" href="class_scribble_core_1_1_structure_info.html">StructureInfo</a> <a class="code" href="namespace_scribble_core.html#a3a14a97bb67cd5efa082d8dda7595cca">SInfo</a>;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
@@ -145,7 +146,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

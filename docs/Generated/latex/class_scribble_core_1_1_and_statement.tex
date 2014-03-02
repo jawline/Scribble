@@ -7,35 +7,36 @@
 
 
 
-Inheritance diagram for Scribble\-Core\-:\-:And\-Statement\-:\nopagebreak
+Inheritance diagram for Scribble\-Core\-:\-:And\-Statement\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=220pt]{class_scribble_core_1_1_and_statement__inherit__graph}
+\includegraphics[width=226pt]{class_scribble_core_1_1_and_statement__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for Scribble\-Core\-:\-:And\-Statement\-:\nopagebreak
+Collaboration diagram for Scribble\-Core\-:\-:And\-Statement\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=220pt]{class_scribble_core_1_1_and_statement__coll__graph}
+\includegraphics[width=226pt]{class_scribble_core_1_1_and_statement__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_scribble_core_1_1_and_statement_a46efe1fa7d7668c486ef12269f9e40bc}{{\bfseries And\-Statement} (int line\-No, std\-::string sym, Safe\-Statement left\-Hand\-Side, Safe\-Statement right\-Hand\-Side)}\label{class_scribble_core_1_1_and_statement_a46efe1fa7d7668c486ef12269f9e40bc}
-
+\hyperlink{class_scribble_core_1_1_and_statement_a46efe1fa7d7668c486ef12269f9e40bc}{And\-Statement} (int line\-No, std\-::string sym, \hyperlink{namespace_scribble_core_a2ad5bf236bc9164cb56f564685f15a11}{Safe\-Statement} left\-Hand\-Side, \hyperlink{namespace_scribble_core_a2ad5bf236bc9164cb56f564685f15a11}{Safe\-Statement} right\-Hand\-Side)
 \item 
-\hypertarget{class_scribble_core_1_1_and_statement_a1c5599274c07acc22593b5d46ce13067}{virtual void {\bfseries check\-Tree} (\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$function\-Type)}\label{class_scribble_core_1_1_and_statement_a1c5599274c07acc22593b5d46ce13067}
-
+virtual \hyperlink{class_scribble_core_1_1_and_statement_a491c2d0fef506f2001a669d4b900c133}{$\sim$\-And\-Statement} ()
+\item 
+virtual void \hyperlink{class_scribble_core_1_1_and_statement_a1c5599274c07acc22593b5d46ce13067}{check\-Tree} (\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$function\-Type)
 \item 
 virtual \hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_and_statement_a957b93b036c51ac746c18ad7fbfcda71}{type} ()
 \item 
-\hypertarget{class_scribble_core_1_1_and_statement_a314da1cf611fd6ae02f126e12a80307d}{int {\bfseries generate\-Code} (int result\-Register, std\-::stringstream \&generated)}\label{class_scribble_core_1_1_and_statement_a314da1cf611fd6ae02f126e12a80307d}
-
+int \hyperlink{class_scribble_core_1_1_and_statement_a314da1cf611fd6ae02f126e12a80307d}{generate\-Code} (int result\-Register, std\-::stringstream \&generated)
 \end{DoxyCompactItemize}
 
 
@@ -44,7 +45,82 @@ The and statement returns true if the left and right hand expressions both evalu
 
 If the left side is false then the right side will not be checked. 
 
+Definition at line 21 of file And\-Statement.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scribble_core_1_1_and_statement_a46efe1fa7d7668c486ef12269f9e40bc}{\index{Scribble\-Core\-::\-And\-Statement@{Scribble\-Core\-::\-And\-Statement}!And\-Statement@{And\-Statement}}
+\index{And\-Statement@{And\-Statement}!ScribbleCore::AndStatement@{Scribble\-Core\-::\-And\-Statement}}
+\subsubsection[{And\-Statement}]{\setlength{\rightskip}{0pt plus 5cm}Scribble\-Core\-::\-And\-Statement\-::\-And\-Statement (
+\begin{DoxyParamCaption}
+\item[{int}]{line\-No, }
+\item[{std\-::string}]{sym, }
+\item[{{\bf Safe\-Statement}}]{left\-Hand\-Side, }
+\item[{{\bf Safe\-Statement}}]{right\-Hand\-Side}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_core_1_1_and_statement_a46efe1fa7d7668c486ef12269f9e40bc}
+
+
+Definition at line 15 of file And\-Statement.\-cpp.
+
+\hypertarget{class_scribble_core_1_1_and_statement_a491c2d0fef506f2001a669d4b900c133}{\index{Scribble\-Core\-::\-And\-Statement@{Scribble\-Core\-::\-And\-Statement}!$\sim$\-And\-Statement@{$\sim$\-And\-Statement}}
+\index{$\sim$\-And\-Statement@{$\sim$\-And\-Statement}!ScribbleCore::AndStatement@{Scribble\-Core\-::\-And\-Statement}}
+\subsubsection[{$\sim$\-And\-Statement}]{\setlength{\rightskip}{0pt plus 5cm}Scribble\-Core\-::\-And\-Statement\-::$\sim$\-And\-Statement (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_and_statement_a491c2d0fef506f2001a669d4b900c133}
+
+
+Definition at line 22 of file And\-Statement.\-cpp.
+
+
+
 \subsection{Member Function Documentation}
+\hypertarget{class_scribble_core_1_1_and_statement_a1c5599274c07acc22593b5d46ce13067}{\index{Scribble\-Core\-::\-And\-Statement@{Scribble\-Core\-::\-And\-Statement}!check\-Tree@{check\-Tree}}
+\index{check\-Tree@{check\-Tree}!ScribbleCore::AndStatement@{Scribble\-Core\-::\-And\-Statement}}
+\subsubsection[{check\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}void Scribble\-Core\-::\-And\-Statement\-::check\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Type} $\ast$}]{function\-Type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_and_statement_a1c5599274c07acc22593b5d46ce13067}
+
+
+Implements \hyperlink{class_scribble_core_1_1_statement_a894e4f8d8b35279bb9ea87f20afdb978}{Scribble\-Core\-::\-Statement}.
+
+
+
+Definition at line 26 of file And\-Statement.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scribble_core_1_1_and_statement_a1c5599274c07acc22593b5d46ce13067_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_core_1_1_and_statement_a314da1cf611fd6ae02f126e12a80307d}{\index{Scribble\-Core\-::\-And\-Statement@{Scribble\-Core\-::\-And\-Statement}!generate\-Code@{generate\-Code}}
+\index{generate\-Code@{generate\-Code}!ScribbleCore::AndStatement@{Scribble\-Core\-::\-And\-Statement}}
+\subsubsection[{generate\-Code}]{\setlength{\rightskip}{0pt plus 5cm}int Scribble\-Core\-::\-And\-Statement\-::generate\-Code (
+\begin{DoxyParamCaption}
+\item[{int}]{result\-Register, }
+\item[{std\-::stringstream \&}]{generated}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_and_statement_a314da1cf611fd6ae02f126e12a80307d}
+
+
+Reimplemented from \hyperlink{class_scribble_core_1_1_statement_aa3951ffef06ca195054a0bdfc8a4c8de}{Scribble\-Core\-::\-Statement}.
+
+
+
+Definition at line 44 of file And\-Statement.\-cpp.
+
 \hypertarget{class_scribble_core_1_1_and_statement_a957b93b036c51ac746c18ad7fbfcda71}{\index{Scribble\-Core\-::\-And\-Statement@{Scribble\-Core\-::\-And\-Statement}!type@{type}}
 \index{type@{type}!ScribbleCore::AndStatement@{Scribble\-Core\-::\-And\-Statement}}
 \subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scribble\-Core\-::\-And\-Statement\-::type (
@@ -54,11 +130,16 @@ If the left side is false then the right side will not be checked.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_and_statement_a957b93b036c51ac746c18ad7fbfcda71}
 And\-Statements type is boolean. 
 
-Implements \hyperlink{class_scribble_core_1_1_statement}{Scribble\-Core\-::\-Statement}.
+Implements \hyperlink{class_scribble_core_1_1_statement_a532ed5a44ec49873dc191dae7ddc8b00}{Scribble\-Core\-::\-Statement}.
 
 
 
-Here is the call graph for this function\-:\nopagebreak
+Definition at line 40 of file And\-Statement.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -71,5 +152,5 @@ Here is the call graph for this function\-:\nopagebreak
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/And\-Statement.\-hpp\item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/And\-Statement.\-cpp\end{DoxyCompactItemize}
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/\hyperlink{_and_statement_8hpp}{And\-Statement.\-hpp}\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/\hyperlink{_and_statement_8cpp}{And\-Statement.\-cpp}\end{DoxyCompactItemize}

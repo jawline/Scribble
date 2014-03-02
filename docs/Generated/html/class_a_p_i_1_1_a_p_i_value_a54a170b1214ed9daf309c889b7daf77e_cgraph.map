@@ -1,0 +1,7 @@
+<map id="API::APIValue::pushToVM" name="API::APIValue::pushToVM">
+<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#a9f5b34b9c70f6279dea8f556698ca1f6" title="API::APIValue::isReference" alt="" coords="233,5,417,35"/>
+<area shape="rect" id="node5" href="$class_v_m_1_1_virtual_machine.html#a16e26b2033eb8a2689a29759aa864c7a" title="VM::VirtualMachine\l::markStackReference" alt="" coords="249,58,401,105"/>
+<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#a2e71b42c4b71774c38c068fac038ce86" title="VM::VirtualMachine\l::pushStackLong" alt="" coords="257,127,393,174"/>
+<area shape="rect" id="node9" href="$class_v_m_1_1_virtual_machine.html#a823add4bb2eb056811ab17cdae1840e5" title="VM::VirtualMachine\l::expandStack" alt="" coords="467,93,603,139"/>
+<area shape="rect" id="node11" href="$class_v_m_1_1_virtual_machine.html#a59e82138e4b6ffcaa63ba24948e463fb" title="VM::VirtualMachine\l::stackSetLong" alt="" coords="467,162,603,209"/>
+</map>

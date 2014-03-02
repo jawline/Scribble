@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>ScribbleCore</b></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_get_variable_statement.html">GetVariableStatement</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_scribble_core.html">ScribbleCore</a></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_get_variable_statement.html">GetVariableStatement</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,51 +95,200 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ScribbleCore::GetVariableStatement Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_get_variable_statement_8hpp_source.html">GetVariableStatement.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ScribbleCore::GetVariableStatement:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scribble_core_1_1_get_variable_statement__inherit__graph.png" border="0" usemap="#_scribble_core_1_1_get_variable_statement_inherit__map" alt="Inheritance graph"/></div>
 <map name="_scribble_core_1_1_get_variable_statement_inherit__map" id="_scribble_core_1_1_get_variable_statement_inherit__map">
-<area shape="rect" id="node2" href="class_scribble_core_1_1_statement.html" title="ScribbleCore::Statement" alt="" coords="9,5,175,35"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<area shape="rect" id="node2" href="class_scribble_core_1_1_statement.html" title="{ScribbleCore::Statement\n||+ Statement()\l+ ~Statement()\l+ generateDebugInformation()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="5,6,200,178"/></map>
+</div>
 <div class="dynheader">
 Collaboration diagram for ScribbleCore::GetVariableStatement:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scribble_core_1_1_get_variable_statement__coll__graph.png" border="0" usemap="#_scribble_core_1_1_get_variable_statement_coll__map" alt="Collaboration graph"/></div>
 <map name="_scribble_core_1_1_get_variable_statement_coll__map" id="_scribble_core_1_1_get_variable_statement_coll__map">
-<area shape="rect" id="node2" href="class_scribble_core_1_1_statement.html" title="ScribbleCore::Statement" alt="" coords="9,5,175,35"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<area shape="rect" id="node2" href="class_scribble_core_1_1_statement.html" title="{ScribbleCore::Statement\n||+ Statement()\l+ ~Statement()\l+ generateDebugInformation()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="5,6,200,178"/></map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2dd1671cca524e106bfa0ee6f6066aee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2dd1671cca524e106bfa0ee6f6066aee"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GetVariableStatement</b> (int lineNo, std::string sym, SmartPointer&lt; <a class="el" href="class_scribble_core_1_1_variable.html">Variable</a> &gt; var)</td></tr>
+<tr class="memitem:a2dd1671cca524e106bfa0ee6f6066aee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_get_variable_statement.html#a2dd1671cca524e106bfa0ee6f6066aee">GetVariableStatement</a> (int lineNo, std::string sym, <a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_scribble_core_1_1_variable.html">Variable</a> &gt; var)</td></tr>
 <tr class="separator:a2dd1671cca524e106bfa0ee6f6066aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2b6ae50fac383c27217c6660c9826dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2b6ae50fac383c27217c6660c9826dc"></a>
-<a class="el" href="class_scribble_core_1_1_type.html">Type</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> ()</td></tr>
+<tr class="memitem:aa3d16c305e77a385f38f5ffd2ac9ae97"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_get_variable_statement.html#aa3d16c305e77a385f38f5ffd2ac9ae97">~GetVariableStatement</a> ()</td></tr>
+<tr class="separator:aa3d16c305e77a385f38f5ffd2ac9ae97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b6ae50fac383c27217c6660c9826dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_scribble_core_1_1_type.html">Type</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_get_variable_statement.html#ad2b6ae50fac383c27217c6660c9826dc">type</a> ()</td></tr>
 <tr class="separator:ad2b6ae50fac383c27217c6660c9826dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade323d3f4af74fb2b94e077afaa7aadd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade323d3f4af74fb2b94e077afaa7aadd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>checkTree</b> (<a class="el" href="class_scribble_core_1_1_type.html">Type</a> *functionType)</td></tr>
+<tr class="memitem:ade323d3f4af74fb2b94e077afaa7aadd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_get_variable_statement.html#ade323d3f4af74fb2b94e077afaa7aadd">checkTree</a> (<a class="el" href="class_scribble_core_1_1_type.html">Type</a> *functionType)</td></tr>
 <tr class="separator:ade323d3f4af74fb2b94e077afaa7aadd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4951a090b1ba4209c0ec310a9f7f48b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4951a090b1ba4209c0ec310a9f7f48b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>generateCode</b> (int resultRegister, std::stringstream &amp;generated)</td></tr>
+<tr class="memitem:ad4951a090b1ba4209c0ec310a9f7f48b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_get_variable_statement.html#ad4951a090b1ba4209c0ec310a9f7f48b">generateCode</a> (int resultRegister, std::stringstream &amp;generated)</td></tr>
 <tr class="separator:ad4951a090b1ba4209c0ec310a9f7f48b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_scribble_core_1_1_statement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_scribble_core_1_1_statement')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_scribble_core_1_1_statement.html">ScribbleCore::Statement</a></td></tr>
-<tr class="memitem:a50ba2a4800bfeabd185a6028d1636743 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50ba2a4800bfeabd185a6028d1636743"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Statement</b> (int lineNumber, std::string symbol)</td></tr>
+<tr class="memitem:a50ba2a4800bfeabd185a6028d1636743 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_statement.html#a50ba2a4800bfeabd185a6028d1636743">Statement</a> (int lineNumber, std::string symbol)</td></tr>
 <tr class="separator:a50ba2a4800bfeabd185a6028d1636743 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ce617dcee68fdbad33c7e84becc71c3 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ce617dcee68fdbad33c7e84becc71c3"></a>
-virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>generateDebugInformation</b> ()</td></tr>
+<tr class="memitem:ab6d1e6a8defba385598e21061082ff74 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_statement.html#ab6d1e6a8defba385598e21061082ff74">~Statement</a> ()</td></tr>
+<tr class="separator:ab6d1e6a8defba385598e21061082ff74 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ce617dcee68fdbad33c7e84becc71c3 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_statement.html#a6ce617dcee68fdbad33c7e84becc71c3">generateDebugInformation</a> ()</td></tr>
 <tr class="separator:a6ce617dcee68fdbad33c7e84becc71c3 inherit pub_methods_class_scribble_core_1_1_statement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_get_variable_statement_8hpp_source.html#l00008">8</a> of file <a class="el" href="_get_variable_statement_8hpp_source.html">GetVariableStatement.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a2dd1671cca524e106bfa0ee6f6066aee"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::GetVariableStatement::GetVariableStatement </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lineNo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>sym</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_scribble_core_1_1_variable.html">Variable</a> &gt;&#160;</td>
+          <td class="paramname"><em>var</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_get_variable_statement_8cpp_source.html#l00006">6</a> of file <a class="el" href="_get_variable_statement_8cpp_source.html">GetVariableStatement.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa3d16c305e77a385f38f5ffd2ac9ae97"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::GetVariableStatement::~GetVariableStatement </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_get_variable_statement_8cpp_source.html#l00012">12</a> of file <a class="el" href="_get_variable_statement_8cpp_source.html">GetVariableStatement.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ade323d3f4af74fb2b94e077afaa7aadd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScribbleCore::GetVariableStatement::checkTree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scribble_core_1_1_type.html">Type</a> *&#160;</td>
+          <td class="paramname"><em>functionType</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_scribble_core_1_1_statement.html#a894e4f8d8b35279bb9ea87f20afdb978">ScribbleCore::Statement</a>.</p>
+
+<p>Definition at line <a class="el" href="_get_variable_statement_8cpp_source.html#l00019">19</a> of file <a class="el" href="_get_variable_statement_8cpp_source.html">GetVariableStatement.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad4951a090b1ba4209c0ec310a9f7f48b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ScribbleCore::GetVariableStatement::generateCode </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>resultRegister</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::stringstream &amp;&#160;</td>
+          <td class="paramname"><em>generated</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_scribble_core_1_1_statement.html#aa3951ffef06ca195054a0bdfc8a4c8de">ScribbleCore::Statement</a>.</p>
+
+<p>Definition at line <a class="el" href="_get_variable_statement_8cpp_source.html#l00027">27</a> of file <a class="el" href="_get_variable_statement_8cpp_source.html">GetVariableStatement.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad2b6ae50fac383c27217c6660c9826dc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_scribble_core_1_1_type.html">Type</a> * ScribbleCore::GetVariableStatement::type </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_scribble_core_1_1_statement.html#a532ed5a44ec49873dc191dae7ddc8b00">ScribbleCore::Statement</a>.</p>
+
+<p>Definition at line <a class="el" href="_get_variable_statement_8cpp_source.html#l00015">15</a> of file <a class="el" href="_get_variable_statement_8cpp_source.html">GetVariableStatement.cpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Statement/<a class="el" href="_get_variable_statement_8hpp_source.html">GetVariableStatement.hpp</a></li>
-<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Statement/GetVariableStatement.cpp</li>
+<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Statement/<a class="el" href="_get_variable_statement_8cpp_source.html">GetVariableStatement.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -3,43 +3,179 @@
 }
 
 
-Inheritance diagram for Scribble\-Core\-:\-:For\-Statement\-:\nopagebreak
+{\ttfamily \#include $<$For\-Statement.\-hpp$>$}
+
+
+
+Inheritance diagram for Scribble\-Core\-:\-:For\-Statement\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=218pt]{class_scribble_core_1_1_for_statement__inherit__graph}
+\includegraphics[width=226pt]{class_scribble_core_1_1_for_statement__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for Scribble\-Core\-:\-:For\-Statement\-:\nopagebreak
+Collaboration diagram for Scribble\-Core\-:\-:For\-Statement\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=218pt]{class_scribble_core_1_1_for_statement__coll__graph}
+\includegraphics[width=226pt]{class_scribble_core_1_1_for_statement__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_scribble_core_1_1_for_statement_a3a1f10df3149454ad762a3ea291e8ade}{{\bfseries For\-Statement} (int line\-No, std\-::string sym, Safe\-Statement initial, Safe\-Statement condition, Safe\-Statement step, std\-::vector$<$ Safe\-Statement $>$ statements)}\label{class_scribble_core_1_1_for_statement_a3a1f10df3149454ad762a3ea291e8ade}
-
+\hyperlink{class_scribble_core_1_1_for_statement_a3a1f10df3149454ad762a3ea291e8ade}{For\-Statement} (int line\-No, std\-::string sym, \hyperlink{namespace_scribble_core_a2ad5bf236bc9164cb56f564685f15a11}{Safe\-Statement} initial, \hyperlink{namespace_scribble_core_a2ad5bf236bc9164cb56f564685f15a11}{Safe\-Statement} condition, \hyperlink{namespace_scribble_core_a2ad5bf236bc9164cb56f564685f15a11}{Safe\-Statement} step, std\-::vector$<$ \hyperlink{namespace_scribble_core_a2ad5bf236bc9164cb56f564685f15a11}{Safe\-Statement} $>$ statements)
 \item 
-\hypertarget{class_scribble_core_1_1_for_statement_a386871e99b23b5f1244691d331c8135b}{\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ {\bfseries type} ()}\label{class_scribble_core_1_1_for_statement_a386871e99b23b5f1244691d331c8135b}
-
+virtual \hyperlink{class_scribble_core_1_1_for_statement_a1fab51c4535a1e11f65806cc81fbd588}{$\sim$\-For\-Statement} ()
 \item 
-\hypertarget{class_scribble_core_1_1_for_statement_a91e40d9fd84d15bc28cd7fafa6be5aa2}{void {\bfseries check\-Tree} (\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$function\-Type)}\label{class_scribble_core_1_1_for_statement_a91e40d9fd84d15bc28cd7fafa6be5aa2}
-
+\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_for_statement_a386871e99b23b5f1244691d331c8135b}{type} ()
 \item 
-\hypertarget{class_scribble_core_1_1_for_statement_a0e5835e399600380f0b5485ca4e49f6e}{virtual int {\bfseries generate\-Body} (std\-::stringstream \&generated)}\label{class_scribble_core_1_1_for_statement_a0e5835e399600380f0b5485ca4e49f6e}
-
+void \hyperlink{class_scribble_core_1_1_for_statement_a91e40d9fd84d15bc28cd7fafa6be5aa2}{check\-Tree} (\hyperlink{class_scribble_core_1_1_type}{Type} $\ast$function\-Type)
 \item 
-\hypertarget{class_scribble_core_1_1_for_statement_a342b11d90c876e6c4da5364947b8f34d}{virtual int {\bfseries generate\-Code} (int result\-Register, std\-::stringstream \&generated)}\label{class_scribble_core_1_1_for_statement_a342b11d90c876e6c4da5364947b8f34d}
-
+virtual int \hyperlink{class_scribble_core_1_1_for_statement_a0e5835e399600380f0b5485ca4e49f6e}{generate\-Body} (std\-::stringstream \&generated)
+\item 
+virtual int \hyperlink{class_scribble_core_1_1_for_statement_a342b11d90c876e6c4da5364947b8f34d}{generate\-Code} (int result\-Register, std\-::stringstream \&generated)
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 16 of file For\-Statement.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scribble_core_1_1_for_statement_a3a1f10df3149454ad762a3ea291e8ade}{\index{Scribble\-Core\-::\-For\-Statement@{Scribble\-Core\-::\-For\-Statement}!For\-Statement@{For\-Statement}}
+\index{For\-Statement@{For\-Statement}!ScribbleCore::ForStatement@{Scribble\-Core\-::\-For\-Statement}}
+\subsubsection[{For\-Statement}]{\setlength{\rightskip}{0pt plus 5cm}Scribble\-Core\-::\-For\-Statement\-::\-For\-Statement (
+\begin{DoxyParamCaption}
+\item[{int}]{line\-No, }
+\item[{std\-::string}]{sym, }
+\item[{{\bf Safe\-Statement}}]{initial, }
+\item[{{\bf Safe\-Statement}}]{condition, }
+\item[{{\bf Safe\-Statement}}]{step, }
+\item[{std\-::vector$<$ {\bf Safe\-Statement} $>$}]{statements}
+\end{DoxyParamCaption}
+)}}\label{class_scribble_core_1_1_for_statement_a3a1f10df3149454ad762a3ea291e8ade}
+
+
+Definition at line 14 of file For\-Statement.\-cpp.
+
+\hypertarget{class_scribble_core_1_1_for_statement_a1fab51c4535a1e11f65806cc81fbd588}{\index{Scribble\-Core\-::\-For\-Statement@{Scribble\-Core\-::\-For\-Statement}!$\sim$\-For\-Statement@{$\sim$\-For\-Statement}}
+\index{$\sim$\-For\-Statement@{$\sim$\-For\-Statement}!ScribbleCore::ForStatement@{Scribble\-Core\-::\-For\-Statement}}
+\subsubsection[{$\sim$\-For\-Statement}]{\setlength{\rightskip}{0pt plus 5cm}Scribble\-Core\-::\-For\-Statement\-::$\sim$\-For\-Statement (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_for_statement_a1fab51c4535a1e11f65806cc81fbd588}
+
+
+Definition at line 25 of file For\-Statement.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scribble_core_1_1_for_statement_a91e40d9fd84d15bc28cd7fafa6be5aa2}{\index{Scribble\-Core\-::\-For\-Statement@{Scribble\-Core\-::\-For\-Statement}!check\-Tree@{check\-Tree}}
+\index{check\-Tree@{check\-Tree}!ScribbleCore::ForStatement@{Scribble\-Core\-::\-For\-Statement}}
+\subsubsection[{check\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}void Scribble\-Core\-::\-For\-Statement\-::check\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Type} $\ast$}]{function\-Type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_for_statement_a91e40d9fd84d15bc28cd7fafa6be5aa2}
+
+
+Implements \hyperlink{class_scribble_core_1_1_statement_a894e4f8d8b35279bb9ea87f20afdb978}{Scribble\-Core\-::\-Statement}.
+
+
+
+Definition at line 33 of file For\-Statement.\-cpp.
+
+\hypertarget{class_scribble_core_1_1_for_statement_a0e5835e399600380f0b5485ca4e49f6e}{\index{Scribble\-Core\-::\-For\-Statement@{Scribble\-Core\-::\-For\-Statement}!generate\-Body@{generate\-Body}}
+\index{generate\-Body@{generate\-Body}!ScribbleCore::ForStatement@{Scribble\-Core\-::\-For\-Statement}}
+\subsubsection[{generate\-Body}]{\setlength{\rightskip}{0pt plus 5cm}int Scribble\-Core\-::\-For\-Statement\-::generate\-Body (
+\begin{DoxyParamCaption}
+\item[{std\-::stringstream \&}]{generated}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_for_statement_a0e5835e399600380f0b5485ca4e49f6e}
+
+
+Definition at line 50 of file For\-Statement.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scribble_core_1_1_for_statement_a0e5835e399600380f0b5485ca4e49f6e_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_core_1_1_for_statement_a342b11d90c876e6c4da5364947b8f34d}{\index{Scribble\-Core\-::\-For\-Statement@{Scribble\-Core\-::\-For\-Statement}!generate\-Code@{generate\-Code}}
+\index{generate\-Code@{generate\-Code}!ScribbleCore::ForStatement@{Scribble\-Core\-::\-For\-Statement}}
+\subsubsection[{generate\-Code}]{\setlength{\rightskip}{0pt plus 5cm}int Scribble\-Core\-::\-For\-Statement\-::generate\-Code (
+\begin{DoxyParamCaption}
+\item[{int}]{result\-Register, }
+\item[{std\-::stringstream \&}]{generated}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_for_statement_a342b11d90c876e6c4da5364947b8f34d}
+
+
+Reimplemented from \hyperlink{class_scribble_core_1_1_statement_aa3951ffef06ca195054a0bdfc8a4c8de}{Scribble\-Core\-::\-Statement}.
+
+
+
+Definition at line 67 of file For\-Statement.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scribble_core_1_1_for_statement_a342b11d90c876e6c4da5364947b8f34d_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_core_1_1_for_statement_a386871e99b23b5f1244691d331c8135b}{\index{Scribble\-Core\-::\-For\-Statement@{Scribble\-Core\-::\-For\-Statement}!type@{type}}
+\index{type@{type}!ScribbleCore::ForStatement@{Scribble\-Core\-::\-For\-Statement}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scribble\-Core\-::\-For\-Statement\-::type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_scribble_core_1_1_for_statement_a386871e99b23b5f1244691d331c8135b}
+
+
+Implements \hyperlink{class_scribble_core_1_1_statement_a532ed5a44ec49873dc191dae7ddc8b00}{Scribble\-Core\-::\-Statement}.
+
+
+
+Definition at line 29 of file For\-Statement.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_scribble_core_1_1_for_statement_a386871e99b23b5f1244691d331c8135b_cgraph}
+\end{center}
+\end{figure}
+
+
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/For\-Statement.\-hpp\item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/For\-Statement.\-cpp\end{DoxyCompactItemize}
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/\hyperlink{_for_statement_8hpp}{For\-Statement.\-hpp}\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Statement/\hyperlink{_for_statement_8cpp}{For\-Statement.\-cpp}\end{DoxyCompactItemize}

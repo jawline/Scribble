@@ -52,4 +52,17 @@ public:
 
 };
 
+class StringCompare: public Function {
+public:
+	StringCompare(std::string ns);
+	virtual ~StringCompare();
+
+	virtual API::APIValue execute(API::APIValue* values,
+			VM::VirtualMachine* virt);
+
+	ScribbleCore::Type* getType();
+	const unsigned int numArgs();
+	ScribbleCore::Type* argType(unsigned int arg);
+};
+
 #endif /* STRINGFUNCTION_HPP_ */

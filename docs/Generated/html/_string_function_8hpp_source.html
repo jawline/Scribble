@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">StringFunction.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_string_function_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * StringFunction.hpp</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 10 Mar 2013</span></div>
@@ -98,14 +99,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef STRINGFUNCTION_HPP_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define STRINGFUNCTION_HPP_</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;Function.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;Scribble/Value/TypeManager.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="_function_8hpp.html">Function.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_type_manager_8hpp.html">Scribble/Value/TypeManager.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="code" href="class_int_to_string_function.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_int_to_string_function.html">IntToStringFunction</a>: <span class="keyword">public</span> <a class="code" href="class_a_p_i_1_1_function.html">Function</a> {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_int_to_string_function.html">IntToStringFunction</a>(std::string ns);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_int_to_string_function.html">IntToStringFunction</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_int_to_string_function.html#a067ccd3dbb164832ce90dce9a51bdba7">IntToStringFunction</a>(std::string ns);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_int_to_string_function.html#a160223036521432b4bdf6591deccad8c">~IntToStringFunction</a>();</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">ScribbleCore::Type</a>* <a class="code" href="class_int_to_string_function.html#a6b24a237472ee14fc28ab33e614f56cb">getType</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_int_to_string_function.html#aa215f827fde3ddc2ef00f84a1cc99453">numArgs</a>();</div>
@@ -117,8 +118,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="class_float32_to_string_function.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_float32_to_string_function.html">Float32ToStringFunction</a>: <span class="keyword">public</span> <a class="code" href="class_a_p_i_1_1_function.html">Function</a> {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_float32_to_string_function.html">Float32ToStringFunction</a>(std::string ns);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_float32_to_string_function.html">Float32ToStringFunction</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_float32_to_string_function.html#a9286b5a1c7e0c7cafcb73fdd7baf8983">Float32ToStringFunction</a>(std::string ns);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_float32_to_string_function.html#aa8984d8353e113c8ffb63803ca0e2644">~Float32ToStringFunction</a>();</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a> <a class="code" href="class_float32_to_string_function.html#a37af0d9a46e186a0ae48a589123fb433">execute</a>(<a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>* values,</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <a class="code" href="class_v_m_1_1_virtual_machine.html">VM::VirtualMachine</a>* virt);</div>
@@ -131,8 +132,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="class_bool_to_string_function.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_bool_to_string_function.html">BoolToStringFunction</a>: <span class="keyword">public</span> <a class="code" href="class_a_p_i_1_1_function.html">Function</a> {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_bool_to_string_function.html">BoolToStringFunction</a>(std::string ns);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_bool_to_string_function.html">BoolToStringFunction</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_bool_to_string_function.html#a9a8da1c0053f40bd06eb3c8a9e243631">BoolToStringFunction</a>(std::string ns);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_bool_to_string_function.html#a2b75b41ac8e41de00ebc770fb62d264b">~BoolToStringFunction</a>();</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a> <a class="code" href="class_bool_to_string_function.html#a4e74a7af474a601db96557e9ff5caffe">execute</a>(<a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>* values,</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="class_v_m_1_1_virtual_machine.html">VM::VirtualMachine</a>* virt);</div>
@@ -143,11 +144,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* STRINGFUNCTION_HPP_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="class_string_compare.html">   55</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_string_compare.html">StringCompare</a>: <span class="keyword">public</span> <a class="code" href="class_a_p_i_1_1_function.html">Function</a> {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_string_compare.html#a15377e5b3d9097b1741d4fa83f6c7088">StringCompare</a>(std::string ns);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_string_compare.html#a4b5991631776cc82724bdc43b0ae36b8">~StringCompare</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a> <a class="code" href="class_string_compare.html#a6a901a2673154898ec8719489693ce92">execute</a>(<a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>* values,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="class_v_m_1_1_virtual_machine.html">VM::VirtualMachine</a>* virt);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">ScribbleCore::Type</a>* <a class="code" href="class_string_compare.html#a05f48854b4a9568bf91d200a9dd84338">getType</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_string_compare.html#a77a56b8591d226bf30a4ae3a91feab32">numArgs</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">ScribbleCore::Type</a>* <a class="code" href="class_string_compare.html#a9d9d35842beead78a0130f68012ac378">argType</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> arg);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* STRINGFUNCTION_HPP_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:00 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

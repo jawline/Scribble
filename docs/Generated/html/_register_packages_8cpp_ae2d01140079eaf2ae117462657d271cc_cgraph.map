@@ -1,0 +1,15 @@
+<map id="registerPackages" name="registerPackages">
+<area shape="rect" id="node3" href="$class_v_m_1_1_virtual_machine.html#a3b45f03fa8a5898a19b1afde2e6f68ba" title="VM::VirtualMachine\l::logMessage" alt="" coords="224,5,360,51"/>
+<area shape="rect" id="node5" href="$class_hash_map.html#a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d" title="HashMap::insert" alt="" coords="703,235,820,264"/>
+<area shape="rect" id="node7" href="$class_a_p_i_1_1_function.html#ab4a91d8ac33c5bfa3332a634c853962d" title="API::Function::generateVMFunction" alt="" coords="177,125,407,155"/>
+<area shape="rect" id="node9" href="$class_scribble_core_1_1_structure_info.html#af323b69f12f56ad5efbf6dd6041a9f6f" title="ScribbleCore::StructureInfo\l::getType" alt="" coords="203,178,381,225"/>
+<area shape="rect" id="node11" href="$class_scribble_core_1_1_structure_info.html#a3908314d044d793bedc22dbd859f3c18" title="ScribbleCore::StructureInfo\l::getIndex" alt="" coords="457,207,636,254"/>
+<area shape="rect" id="node13" href="$class_scribble_core_1_1_structure_info.html#a3ad5e3e1f898a544eead94dfab83dbec" title="ScribbleCore::StructureInfo\l::getNumIndexs" alt="" coords="203,298,381,345"/>
+<area shape="rect" id="node16" href="$class_scribble_core_1_1_structure_info.html#a7fef6a1f12ee3d1edfb568c5e8bd36f1" title="ScribbleCore::StructureInfo\l::getName" alt="" coords="203,367,381,414"/>
+<area shape="rect" id="node18" href="$class_v_m_1_1_virtual_machine.html#afe501e1ac466c1799cbbc32db282fdf1" title="VM::VirtualMachine\l::registerEntry" alt="" coords="479,387,615,434"/>
+<area shape="rect" id="node21" href="$class_v_m_1_1_virtual_machine.html#a7b26ef866e71358c8ffd4ea133bd15c6" title="VM::VirtualMachine\l::findType" alt="" coords="224,487,360,534"/>
+<area shape="rect" id="node23" href="$class_v_m_1_1_namespace_entry.html#ad60d6ff4c19fdcd7ed3bf36ff6874bcf" title="VM::NamespaceEntry\l::searchNamespace" alt="" coords="472,457,621,503"/>
+<area shape="rect" id="node27" href="$class_v_m_1_1_namespace_entry.html#a64e7528f2d8403acc86ec3a249a07cf4" title="VM::NamespaceEntry\l::getType" alt="" coords="687,517,836,563"/>
+<area shape="rect" id="node31" href="$class_v_m_1_1_namespace_entry.html#a64c19caa303f4c34786e32b18b0d3449" title="VM::NamespaceEntry\l::getTypeReference" alt="" coords="472,577,621,623"/>
+<area shape="rect" id="node25" href="$class_hash_map.html#a2b444615edc86733e39fcfc239cba3eb" title="HashMap::find" alt="" coords="708,464,815,493"/>
+</map>

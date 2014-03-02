@@ -1,3 +1,5 @@
 <map id="BoolToStringFunction::argType" name="BoolToStringFunction::argType">
-<area shape="rect" id="node3" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="200,5,384,51"/>
+<area shape="rect" id="node3" href="$namespace_scribble_core.html#af8df5817c55f0b9d419755816950d0ae" title="ScribbleCore::getBooleanType" alt="" coords="203,5,400,35"/>
+<area shape="rect" id="node5" href="$namespace_scribble_core.html#a4042f9dc8c93e8d0e18d7ae614456024" title="ScribbleCore::getTypeManager" alt="" coords="200,59,403,88"/>
+<area shape="rect" id="node7" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="209,111,393,158"/>
 </map>

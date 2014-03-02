@@ -1,0 +1,9 @@
+<map id="ScribbleCore::StructureInfo::getIndex" name="ScribbleCore::StructureInfo::getIndex">
+<area shape="rect" id="node3" href="$_register_packages_8hpp.html#ae2d01140079eaf2ae117462657d271cc" title="registerPackages" alt="" coords="521,23,644,53"/>
+<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#ac52ce1c55cc0a808016b557d1fb74995" title="API::APIValue::getField" alt="" coords="503,210,663,239"/>
+<area shape="rect" id="node7" href="$class_a_p_i_1_1_a_p_i_value.html#aa516e6d20f842e2dfd60c1c59a697312" title="API::APIValue::setField" alt="" coords="264,114,424,143"/>
+<area shape="rect" id="node9" href="$class_scribble_core_1_1_get_structure_element_statement.html#a956597b81888a8a23e7fe0b7fb6efe0b" title="ScribbleCore::GetStructure\lElementStatement::fix" alt="" coords="255,167,433,213"/>
+<area shape="rect" id="node11" href="$class_scribble_core_1_1_structure_assign_element.html#ac805dce2630461602792ce2302092c11" title="ScribbleCore::StructureAssign\lElement::fix" alt="" coords="245,236,443,283"/>
+<area shape="rect" id="node13" href="$class_scribble_core_1_1_structure_statement.html#ae0d146e460d4e98800ff3d676bd9d53e" title="ScribbleCore::StructureStatement\l::checkTree" alt="" coords="235,305,453,352"/>
+<area shape="rect" id="node15" href="$class_scribble_core_1_1_structure_info.html#af323b69f12f56ad5efbf6dd6041a9f6f" title="ScribbleCore::StructureInfo\l::getType" alt="" coords="255,44,433,91"/>
+</map>

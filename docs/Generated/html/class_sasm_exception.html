@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,34 +91,125 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">SasmException Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_sasm_exception_8hpp_source.html">SasmException.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SasmException:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_sasm_exception__inherit__graph.png" border="0" usemap="#_sasm_exception_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<map name="_sasm_exception_inherit__map" id="_sasm_exception_inherit__map">
+</map>
+</div>
 <div class="dynheader">
 Collaboration diagram for SasmException:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_sasm_exception__coll__graph.png" border="0" usemap="#_sasm_exception_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<map name="_sasm_exception_coll__map" id="_sasm_exception_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8dc2efb5bb0228356e8133667d1fa412"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8dc2efb5bb0228356e8133667d1fa412"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SasmException</b> (std::string error)</td></tr>
+<tr class="memitem:a8dc2efb5bb0228356e8133667d1fa412"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sasm_exception.html#a8dc2efb5bb0228356e8133667d1fa412">SasmException</a> (std::string error)</td></tr>
 <tr class="separator:a8dc2efb5bb0228356e8133667d1fa412"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa83c903b08e11cc8b633f8b118f2ab5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa83c903b08e11cc8b633f8b118f2ab5a"></a>
-virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>what</b> () const   throw ()</td></tr>
+<tr class="memitem:a3cf355d4084865629f55dabd99acf367"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sasm_exception.html#a3cf355d4084865629f55dabd99acf367">~SasmException</a> ()  throw ()</td></tr>
+<tr class="separator:a3cf355d4084865629f55dabd99acf367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa83c903b08e11cc8b633f8b118f2ab5a"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sasm_exception.html#aa83c903b08e11cc8b633f8b118f2ab5a">what</a> () const   throw ()</td></tr>
 <tr class="separator:aa83c903b08e11cc8b633f8b118f2ab5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_sasm_exception_8hpp_source.html#l00008">8</a> of file <a class="el" href="_sasm_exception_8hpp_source.html">SasmException.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a8dc2efb5bb0228356e8133667d1fa412"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SasmException::SasmException </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>error</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sasm_exception_8cpp_source.html#l00003">3</a> of file <a class="el" href="_sasm_exception_8cpp_source.html">SasmException.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3cf355d4084865629f55dabd99acf367"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SasmException::~SasmException </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sasm_exception_8cpp_source.html#l00007">7</a> of file <a class="el" href="_sasm_exception_8cpp_source.html">SasmException.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aa83c903b08e11cc8b633f8b118f2ab5a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* SasmException::what </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td> const</td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_sasm_exception_8hpp_source.html#l00016">16</a> of file <a class="el" href="_sasm_exception_8hpp_source.html">SasmException.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/SASM/<a class="el" href="_sasm_exception_8hpp_source.html">SasmException.hpp</a></li>
-<li>/home/blake/Dropbox/Current/Scribble/src/SASM/SasmException.cpp</li>
+<li>/home/blake/Dropbox/Current/Scribble/src/SASM/<a class="el" href="_sasm_exception_8cpp_source.html">SasmException.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

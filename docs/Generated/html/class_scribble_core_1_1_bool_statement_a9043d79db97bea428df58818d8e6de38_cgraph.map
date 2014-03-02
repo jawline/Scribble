@@ -1,3 +1,4 @@
 <map id="ScribbleCore::BoolStatement::type" name="ScribbleCore::BoolStatement::type">
-<area shape="rect" id="node3" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="245,5,429,51"/>
+<area shape="rect" id="node3" href="$namespace_scribble_core.html#a4042f9dc8c93e8d0e18d7ae614456024" title="ScribbleCore::getTypeManager" alt="" coords="245,5,448,35"/>
+<area shape="rect" id="node5" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="255,58,439,105"/>
 </map>

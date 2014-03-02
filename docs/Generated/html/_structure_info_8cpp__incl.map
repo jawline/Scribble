@@ -1,0 +1,12 @@
+<map id="/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/StructureInfo.cpp" name="/home/blake/Dropbox/Current/Scribble/src/Scribble/Value/StructureInfo.cpp">
+<area shape="rect" id="node3" href="$_structure_info_8hpp.html" title="StructureInfo.hpp" alt="" coords="328,117,451,147"/>
+<area shape="rect" id="node33" href="$_constants_8hpp.html" title="VM/Constants.hpp" alt="" coords="595,117,725,147"/>
+<area shape="rect" id="node9" href="$_type_reference_8hpp.html" title="Scribble/Parser/TypeReference.hpp" alt="" coords="123,195,352,224"/>
+<area shape="rect" id="node24" href="$_type_8hpp.html" title="Scribble/Value/Type.hpp" alt="" coords="243,272,405,301"/>
+<area shape="rect" id="node11" href="$_smart_pointer_8hpp.html" title="Pointers/SmartPointer.hpp" alt="" coords="212,427,385,456"/>
+<area shape="rect" id="node13" href="$_reference_counter_8hpp.html" title="ReferenceCounter.hpp" alt="" coords="5,504,157,533"/>
+<area shape="rect" id="node27" href="$_v_m_entry_type_8hpp.html" title="VM/VMEntryType.hpp" alt="" coords="224,349,373,379"/>
+<area shape="rect" id="node35" href="$_constant_registers_8hpp.html" title="ConstantRegisters.hpp" alt="" coords="499,195,653,224"/>
+<area shape="rect" id="node37" href="$_constant_types_8hpp.html" title="ConstantTypes.hpp" alt="" coords="677,195,813,224"/>
+<area shape="rect" id="node39" href="$_call_types_8hpp.html" title="CallTypes.hpp" alt="" coords="837,195,944,224"/>
+</map>

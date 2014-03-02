@@ -1,0 +1,143 @@
+\hypertarget{_scribble_2_parser_2_parser_8cpp}{\section{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Parser/\-Parser.cpp File Reference}
+\label{_scribble_2_parser_2_parser_8cpp}\index{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Parser/\-Parser.\-cpp@{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Parser/\-Parser.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}Parser.\-hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Parser\-Exception.\-hpp\char`\"{}}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$Scribble/\-Function/\-Scripted\-Function.\-hpp$>$}\\*
+{\ttfamily \#include $<$Scribble/\-Function/\-Function\-Reference.\-hpp$>$}\\*
+{\ttfamily \#include $<$Scribble/\-Value/\-Util.\-hpp$>$}\\*
+{\ttfamily \#include $<$A\-P\-I/\-String\-Function.\-hpp$>$}\\*
+{\ttfamily \#include $<$S\-H\-A3/sha3.\-h$>$}\\*
+{\ttfamily \#include $<$limits.\-h$>$}\\*
+Include dependency graph for Parser.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_scribble_2_parser_2_parser_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_scribble_core}{Scribble\-Core}
+\end{DoxyCompactItemize}
+\subsection*{Constant Groups}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_scribble_core}{Scribble\-Core}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{_scribble_2_parser_2_parser_8cpp_a6def496ef05385efee0db4db1be796d7}{scribble\-\_\-parse} ()
+\item 
+void \hyperlink{_scribble_2_parser_2_parser_8cpp_a6e502150b6acb92ecd785ef37c7952ba}{scribble\-\_\-\-\_\-scan\-\_\-string} (char const $\ast$)
+\item 
+void \hyperlink{_scribble_2_parser_2_parser_8cpp_a626d24d817c0794e811f587f633a3080}{scribble\-\_\-lex\-\_\-destroy} ()
+\item 
+void \hyperlink{_scribble_2_parser_2_parser_8cpp_a9d26ab4f4f725eaafdd6f354cee2076a}{parser\-\_\-free\-\_\-all} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\-::map$<$ std\-::string, \\*
+\hyperlink{namespace_scribble_core_acf9f6e70f7e422fafa73920c31cff3cb}{Scribble\-Core\-::\-Namespace\-Type} $>$ \hyperlink{_scribble_2_parser_2_parser_8cpp_a2464963fb1de951b0baa608cef3b101f}{Namespace}
+\item 
+\hyperlink{namespace_scribble_core_acf9f6e70f7e422fafa73920c31cff3cb}{Scribble\-Core\-::\-Namespace\-Type} \hyperlink{_scribble_2_parser_2_parser_8cpp_a64428ada25b0585932fa4b20f1f438e9}{Functions}
+\item 
+std\-::string \hyperlink{_scribble_2_parser_2_parser_8cpp_a6db153fcdf8bc02c53a21590d53f839d}{current\-Namespace\-Name}
+\item 
+map$<$ std\-::string, std\-::string $>$ \hyperlink{_scribble_2_parser_2_parser_8cpp_a2f1546e610f3b4773672ce8ee574f610}{Import\-List}
+\item 
+std\-::vector\\*
+$<$ \hyperlink{class_scribble_core_1_1_parser_reference}{Scribble\-Core\-::\-Parser\-Reference} $>$ \hyperlink{_scribble_2_parser_2_parser_8cpp_ac5f065504979d116aa107b7b50c9118e}{Statement\-References}
+\item 
+std\-::vector$<$ \hyperlink{_smart_pointer_8hpp_afdd8d4ba81c3fcbdeacf1dafba2accfb}{Smart\-Pointer}\\*
+$<$ \hyperlink{class_scribble_core_1_1_variable}{Scribble\-Core\-::\-Variable} $>$ $>$ \hyperlink{_scribble_2_parser_2_parser_8cpp_ac4971d3ad47efb8d6761362a53f65489}{Variable\-References}
+\item 
+std\-::vector\\*
+$<$ \hyperlink{namespace_scribble_core_a0e685a305b14aa5f0504df1369ba270b}{Scribble\-Core\-::\-Type\-Reference} $>$ \hyperlink{_scribble_2_parser_2_parser_8cpp_a7780f5ee3f8b4beea6cb7d8981bb5149}{Type\-References}
+\item 
+bool \hyperlink{_scribble_2_parser_2_parser_8cpp_a76129627057905e7df32b845200a779b}{Parsing\-Error}
+\item 
+int \hyperlink{_scribble_2_parser_2_parser_8cpp_a7bb090f98a12ffd1aeb340d8628218be}{lastuid}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a9d26ab4f4f725eaafdd6f354cee2076a}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!parser\-\_\-free\-\_\-all@{parser\-\_\-free\-\_\-all}}
+\index{parser\-\_\-free\-\_\-all@{parser\-\_\-free\-\_\-all}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{parser\-\_\-free\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}void parser\-\_\-free\-\_\-all (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_scribble_2_parser_2_parser_8cpp_a9d26ab4f4f725eaafdd6f354cee2076a}
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{_scribble_2_parser_2_parser_8cpp_a9d26ab4f4f725eaafdd6f354cee2076a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a6e502150b6acb92ecd785ef37c7952ba}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!scribble\-\_\-\-\_\-scan\-\_\-string@{scribble\-\_\-\-\_\-scan\-\_\-string}}
+\index{scribble\-\_\-\-\_\-scan\-\_\-string@{scribble\-\_\-\-\_\-scan\-\_\-string}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{scribble\-\_\-\-\_\-scan\-\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}void scribble\-\_\-\-\_\-scan\-\_\-string (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{_scribble_2_parser_2_parser_8cpp_a6e502150b6acb92ecd785ef37c7952ba}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a626d24d817c0794e811f587f633a3080}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!scribble\-\_\-lex\-\_\-destroy@{scribble\-\_\-lex\-\_\-destroy}}
+\index{scribble\-\_\-lex\-\_\-destroy@{scribble\-\_\-lex\-\_\-destroy}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{scribble\-\_\-lex\-\_\-destroy}]{\setlength{\rightskip}{0pt plus 5cm}void scribble\-\_\-lex\-\_\-destroy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_scribble_2_parser_2_parser_8cpp_a626d24d817c0794e811f587f633a3080}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a6def496ef05385efee0db4db1be796d7}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!scribble\-\_\-parse@{scribble\-\_\-parse}}
+\index{scribble\-\_\-parse@{scribble\-\_\-parse}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{scribble\-\_\-parse}]{\setlength{\rightskip}{0pt plus 5cm}void scribble\-\_\-parse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_scribble_2_parser_2_parser_8cpp_a6def496ef05385efee0db4db1be796d7}
+
+
+\subsection{Variable Documentation}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a6db153fcdf8bc02c53a21590d53f839d}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!current\-Namespace\-Name@{current\-Namespace\-Name}}
+\index{current\-Namespace\-Name@{current\-Namespace\-Name}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{current\-Namespace\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string current\-Namespace\-Name}}\label{_scribble_2_parser_2_parser_8cpp_a6db153fcdf8bc02c53a21590d53f839d}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a64428ada25b0585932fa4b20f1f438e9}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!Functions@{Functions}}
+\index{Functions@{Functions}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{Functions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Namespace\-Type} Functions}}\label{_scribble_2_parser_2_parser_8cpp_a64428ada25b0585932fa4b20f1f438e9}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a2f1546e610f3b4773672ce8ee574f610}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!Import\-List@{Import\-List}}
+\index{Import\-List@{Import\-List}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{Import\-List}]{\setlength{\rightskip}{0pt plus 5cm}map$<$std\-::string, std\-::string$>$ Import\-List}}\label{_scribble_2_parser_2_parser_8cpp_a2f1546e610f3b4773672ce8ee574f610}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a7bb090f98a12ffd1aeb340d8628218be}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!lastuid@{lastuid}}
+\index{lastuid@{lastuid}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{lastuid}]{\setlength{\rightskip}{0pt plus 5cm}int lastuid}}\label{_scribble_2_parser_2_parser_8cpp_a7bb090f98a12ffd1aeb340d8628218be}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a2464963fb1de951b0baa608cef3b101f}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!Namespace@{Namespace}}
+\index{Namespace@{Namespace}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{Namespace}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, {\bf Scribble\-Core\-::\-Namespace\-Type}$>$ Namespace}}\label{_scribble_2_parser_2_parser_8cpp_a2464963fb1de951b0baa608cef3b101f}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a76129627057905e7df32b845200a779b}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!Parsing\-Error@{Parsing\-Error}}
+\index{Parsing\-Error@{Parsing\-Error}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{Parsing\-Error}]{\setlength{\rightskip}{0pt plus 5cm}bool Parsing\-Error}}\label{_scribble_2_parser_2_parser_8cpp_a76129627057905e7df32b845200a779b}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_ac5f065504979d116aa107b7b50c9118e}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!Statement\-References@{Statement\-References}}
+\index{Statement\-References@{Statement\-References}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{Statement\-References}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Scribble\-Core\-::\-Parser\-Reference}$>$ Statement\-References}}\label{_scribble_2_parser_2_parser_8cpp_ac5f065504979d116aa107b7b50c9118e}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_a7780f5ee3f8b4beea6cb7d8981bb5149}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!Type\-References@{Type\-References}}
+\index{Type\-References@{Type\-References}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{Type\-References}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Scribble\-Core\-::\-Type\-Reference}$>$ Type\-References}}\label{_scribble_2_parser_2_parser_8cpp_a7780f5ee3f8b4beea6cb7d8981bb5149}
+\hypertarget{_scribble_2_parser_2_parser_8cpp_ac4971d3ad47efb8d6761362a53f65489}{\index{Scribble/\-Parser/\-Parser.\-cpp@{Scribble/\-Parser/\-Parser.\-cpp}!Variable\-References@{Variable\-References}}
+\index{Variable\-References@{Variable\-References}!Scribble/Parser/Parser.cpp@{Scribble/\-Parser/\-Parser.\-cpp}}
+\subsubsection[{Variable\-References}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Smart\-Pointer}$<${\bf Scribble\-Core\-::\-Variable}$>$ $>$ Variable\-References}}\label{_scribble_2_parser_2_parser_8cpp_ac4971d3ad47efb8d6761362a53f65489}

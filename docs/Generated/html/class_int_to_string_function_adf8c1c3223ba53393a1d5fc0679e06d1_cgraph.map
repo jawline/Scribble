@@ -1,3 +1,16 @@
 <map id="IntToStringFunction::execute" name="IntToStringFunction::execute">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#ae56a74e043a259b1a219804cb77165d7" title="API::APIValue::getValue32" alt="" coords="191,13,369,43"/>
+<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#ae56a74e043a259b1a219804cb77165d7" title="API::APIValue::getValue32" alt="" coords="191,83,369,112"/>
+<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#abc6491d068cfc443ef5cbbc83156e46e" title="API::APIValue::makeString" alt="" coords="189,136,371,165"/>
+<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#a30fb1469c9f436093c06529b257abfb8" title="VM::VirtualMachine\l::getHeap" alt="" coords="444,5,580,51"/>
+<area shape="rect" id="node9" href="$class_v_m_1_1_heap.html#ad4af8cf1e9b1b4801b03d94cb5344ee0" title="VM::Heap::allocate" alt="" coords="445,75,579,104"/>
+<area shape="rect" id="node11" href="$class_v_m_1_1_virtual_machine.html#a7b26ef866e71358c8ffd4ea133bd15c6" title="VM::VirtualMachine\l::findType" alt="" coords="444,127,580,174"/>
+<area shape="rect" id="node26" href="$namespace_scribble_core.html#af3362f13a36274102e4270bdc508213a" title="ScribbleCore::getStringType" alt="" coords="419,197,605,227"/>
+<area shape="rect" id="node28" href="$class_v_m_1_1_heap.html#afd540e904508b10ce3a1e547386622c0" title="VM::Heap::getSmartPointer" alt="" coords="421,259,603,288"/>
+<area shape="rect" id="node13" href="$class_v_m_1_1_namespace_entry.html#ad60d6ff4c19fdcd7ed3bf36ff6874bcf" title="VM::NamespaceEntry\l::searchNamespace" alt="" coords="667,7,816,54"/>
+<area shape="rect" id="node17" href="$class_v_m_1_1_namespace_entry.html#a64e7528f2d8403acc86ec3a249a07cf4" title="VM::NamespaceEntry\l::getType" alt="" coords="879,67,1028,114"/>
+<area shape="rect" id="node19" href="$class_v_m_1_1_virtual_machine.html#afe501e1ac466c1799cbbc32db282fdf1" title="VM::VirtualMachine\l::registerEntry" alt="" coords="673,127,809,174"/>
+<area shape="rect" id="node24" href="$class_v_m_1_1_namespace_entry.html#a64c19caa303f4c34786e32b18b0d3449" title="VM::NamespaceEntry\l::getTypeReference" alt="" coords="667,197,816,243"/>
+<area shape="rect" id="node15" href="$class_hash_map.html#a2b444615edc86733e39fcfc239cba3eb" title="HashMap::find" alt="" coords="900,15,1007,44"/>
+<area shape="rect" id="node21" href="$class_hash_map.html#a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d" title="HashMap::insert" alt="" coords="895,137,1012,167"/>
+<area shape="rect" id="node30" href="$class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="653,267,829,296"/>
 </map>

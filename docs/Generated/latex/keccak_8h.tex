@@ -1,0 +1,110 @@
+\hypertarget{keccak_8h}{\section{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-S\-H\-A3/keccak.h File Reference}
+\label{keccak_8h}\index{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-S\-H\-A3/keccak.\-h@{/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-S\-H\-A3/keccak.\-h}}
+}
+{\ttfamily \#include $<$types.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+Include dependency graph for keccak.\-h\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{keccak_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{keccak_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{keccak_8h_aaf66c2daa0f1fe906b80b79969f67424}{K\-E\-C\-C\-A\-K\-\_\-\-R\-O\-U\-N\-D\-S}~24
+\item 
+\#define \hyperlink{keccak_8h_a612c70207b96b27f06eff614e3b9ffd9}{R\-O\-T\-L64}(x, y)~(((x) $<$$<$ (y)) $|$ ((x) $>$$>$ (64 -\/ (y))))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{keccak_8h_af67e48d95e1f2ee407032248b7a8c496}{keccak} (const uint8\-\_\-t $\ast$in, int inlen, uint8\-\_\-t $\ast$md, int mdlen)
+\item 
+void \hyperlink{keccak_8h_ac4b2e24003519303a16410a633502808}{keccakf} (uint64\-\_\-t st\mbox{[}25\mbox{]}, int norounds)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{keccak_8h_aaf66c2daa0f1fe906b80b79969f67424}{\index{keccak.\-h@{keccak.\-h}!K\-E\-C\-C\-A\-K\-\_\-\-R\-O\-U\-N\-D\-S@{K\-E\-C\-C\-A\-K\-\_\-\-R\-O\-U\-N\-D\-S}}
+\index{K\-E\-C\-C\-A\-K\-\_\-\-R\-O\-U\-N\-D\-S@{K\-E\-C\-C\-A\-K\-\_\-\-R\-O\-U\-N\-D\-S}!keccak.h@{keccak.\-h}}
+\subsubsection[{K\-E\-C\-C\-A\-K\-\_\-\-R\-O\-U\-N\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define K\-E\-C\-C\-A\-K\-\_\-\-R\-O\-U\-N\-D\-S~24}}\label{keccak_8h_aaf66c2daa0f1fe906b80b79969f67424}
+
+
+Definition at line 11 of file keccak.\-h.
+
+\hypertarget{keccak_8h_a612c70207b96b27f06eff614e3b9ffd9}{\index{keccak.\-h@{keccak.\-h}!R\-O\-T\-L64@{R\-O\-T\-L64}}
+\index{R\-O\-T\-L64@{R\-O\-T\-L64}!keccak.h@{keccak.\-h}}
+\subsubsection[{R\-O\-T\-L64}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-O\-T\-L64(
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)~(((x) $<$$<$ (y)) $|$ ((x) $>$$>$ (64 -\/ (y))))}}\label{keccak_8h_a612c70207b96b27f06eff614e3b9ffd9}
+
+
+Definition at line 15 of file keccak.\-h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{keccak_8h_af67e48d95e1f2ee407032248b7a8c496}{\index{keccak.\-h@{keccak.\-h}!keccak@{keccak}}
+\index{keccak@{keccak}!keccak.h@{keccak.\-h}}
+\subsubsection[{keccak}]{\setlength{\rightskip}{0pt plus 5cm}int keccak (
+\begin{DoxyParamCaption}
+\item[{const uint8\-\_\-t $\ast$}]{in, }
+\item[{int}]{inlen, }
+\item[{uint8\-\_\-t $\ast$}]{md, }
+\item[{int}]{mdlen}
+\end{DoxyParamCaption}
+)}}\label{keccak_8h_af67e48d95e1f2ee407032248b7a8c496}
+
+
+Definition at line 74 of file keccak.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{keccak_8h_af67e48d95e1f2ee407032248b7a8c496_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{keccak_8h_ac4b2e24003519303a16410a633502808}{\index{keccak.\-h@{keccak.\-h}!keccakf@{keccakf}}
+\index{keccakf@{keccakf}!keccak.h@{keccak.\-h}}
+\subsubsection[{keccakf}]{\setlength{\rightskip}{0pt plus 5cm}void keccakf (
+\begin{DoxyParamCaption}
+\item[{uint64\-\_\-t}]{st\mbox{[}25\mbox{]}, }
+\item[{int}]{norounds}
+\end{DoxyParamCaption}
+)}}\label{keccak_8h_ac4b2e24003519303a16410a633502808}
+
+
+Definition at line 33 of file keccak.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{keccak_8h_ac4b2e24003519303a16410a633502808_icgraph}
+\end{center}
+\end{figure}
+
+

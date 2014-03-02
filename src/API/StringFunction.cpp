@@ -132,3 +132,35 @@ API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
 	//Return a new API string from the resulting string
 	return API::APIValue::makeString(resultString, virt);
 }
+
+StringCompare::StringCompare(std::string ns) :
+		Function("StringCompare", ns) {
+
+}
+
+StringCompare::~StringCompare() {
+
+}
+
+API::APIValue StringCompare::execute(API::APIValue* values,
+		VM::VirtualMachine* virt) {
+	return API::APIValue::makeInt32(
+			strcmp(values[0].getValueString(), values[1].getValueString()));
+}
+
+ScribbleCore::Type* StringCompare::getType() {
+ return ScribbleCore::getIntType();
+}
+
+const unsigned int StringCompare::numArgs() {
+ return 2;
+}
+
+ScribbleCore::Type* StringCompare::argType(unsigned int arg) {
+
+ if (arg < 2) {
+  return ScribbleCore::getStringType();
+ }
+
+
+}

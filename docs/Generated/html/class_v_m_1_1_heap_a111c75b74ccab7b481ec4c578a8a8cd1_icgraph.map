@@ -1,0 +1,5 @@
+<map id="VM::Heap::getAddress" name="VM::Heap::getAddress">
+<area shape="rect" id="node3" href="$class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="392,5,528,51"/>
+<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="208,34,344,81"/>
+<area shape="rect" id="node5" href="$class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="576,13,699,43"/>
+</map>

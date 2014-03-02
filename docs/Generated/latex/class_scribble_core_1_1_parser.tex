@@ -5,23 +5,32 @@
 
 {\ttfamily \#include $<$Parser.\-hpp$>$}
 
+
+
+Collaboration diagram for Scribble\-Core\-:\-:Parser\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{class_scribble_core_1_1_parser__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static bool \hyperlink{class_scribble_core_1_1_parser_a6f3623acbf4ecf36d07d8e08393d5755}{test\-Function\-Equivilence} (Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ function, Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ other)
+static bool \hyperlink{class_scribble_core_1_1_parser_a6f3623acbf4ecf36d07d8e08393d5755}{test\-Function\-Equivilence} (\hyperlink{_smart_pointer_8hpp_afdd8d4ba81c3fcbdeacf1dafba2accfb}{Smart\-Pointer}$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ function, \hyperlink{_smart_pointer_8hpp_afdd8d4ba81c3fcbdeacf1dafba2accfb}{Smart\-Pointer}$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ other)
 \item 
-static Smart\-Pointer$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ \hyperlink{class_scribble_core_1_1_parser_a4d9e4e3d19bad8b983cbff320ba40ad1}{find\-Function\-In\-Set} (Smart\-Pointer$<$ \hyperlink{class_scribble_core_1_1_function_reference}{Function\-Reference} $>$ to\-Find, Function\-Set const \&set)
+static \hyperlink{_smart_pointer_8hpp_afdd8d4ba81c3fcbdeacf1dafba2accfb}{Smart\-Pointer}$<$ \hyperlink{class_a_p_i_1_1_function}{Function} $>$ \hyperlink{class_scribble_core_1_1_parser_a4d9e4e3d19bad8b983cbff320ba40ad1}{find\-Function\-In\-Set} (\hyperlink{_smart_pointer_8hpp_afdd8d4ba81c3fcbdeacf1dafba2accfb}{Smart\-Pointer}$<$ \hyperlink{class_scribble_core_1_1_function_reference}{Function\-Reference} $>$ to\-Find, \hyperlink{namespace_scribble_core_a9e40b3081eb67f0c92c1d1d5041495cf}{Function\-Set} const \&set)
 \item 
-static \hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_parser_a0e1829847a648294f57e634fa7b21782}{function\-Set\-Type} (Function\-Set const \&function\-Set)
+static \hyperlink{class_scribble_core_1_1_type}{Type} $\ast$ \hyperlink{class_scribble_core_1_1_parser_a0e1829847a648294f57e634fa7b21782}{function\-Set\-Type} (\hyperlink{namespace_scribble_core_a9e40b3081eb67f0c92c1d1d5041495cf}{Function\-Set} const \&function\-Set)
 \item 
 static bool \hyperlink{class_scribble_core_1_1_parser_a13bb70c6085507b7dcd5fccc7f20d37c}{list\-Contains} (std\-::string target, std\-::vector$<$ std\-::string $>$ const \&list)
 \item 
 static std\-::map$<$ std\-::string, \\*
-Namespace\-Type $>$ \hyperlink{class_scribble_core_1_1_parser_a6868988e45190dbb366f834b33505902}{compile} (std\-::string const \&file, std\-::map$<$ std\-::string, Namespace\-Type $>$ builtin\-Namespace)
+\hyperlink{namespace_scribble_core_acf9f6e70f7e422fafa73920c31cff3cb}{Namespace\-Type} $>$ \hyperlink{class_scribble_core_1_1_parser_a6868988e45190dbb366f834b33505902}{compile} (std\-::string const \&file, std\-::map$<$ std\-::string, \hyperlink{namespace_scribble_core_acf9f6e70f7e422fafa73920c31cff3cb}{Namespace\-Type} $>$ builtin\-Namespace)
 \item 
-\hypertarget{class_scribble_core_1_1_parser_a1aaaf22583e0bf60a1e27227bed9511b}{static std\-::map$<$ std\-::string, \\*
-Namespace\-Type $>$ {\bfseries compile\-Text} (std\-::string const \&text, std\-::string const \&package\-Name, std\-::map$<$ std\-::string, Namespace\-Type $>$ builtin\-Namespace)}\label{class_scribble_core_1_1_parser_a1aaaf22583e0bf60a1e27227bed9511b}
-
+static std\-::map$<$ std\-::string, \\*
+\hyperlink{namespace_scribble_core_acf9f6e70f7e422fafa73920c31cff3cb}{Namespace\-Type} $>$ \hyperlink{class_scribble_core_1_1_parser_a1aaaf22583e0bf60a1e27227bed9511b}{compile\-Text} (std\-::string const \&text, std\-::string const \&package\-Name, std\-::map$<$ std\-::string, \hyperlink{namespace_scribble_core_acf9f6e70f7e422fafa73920c31cff3cb}{Namespace\-Type} $>$ builtin\-Namespace)
 \item 
 static std\-::string \hyperlink{class_scribble_core_1_1_parser_aa052d5111bdc10523060670714b409ab}{get\-Uniform\-Path} (std\-::string const \&path)
 \end{DoxyCompactItemize}
@@ -30,33 +39,87 @@ static std\-::string \hyperlink{class_scribble_core_1_1_parser_aa052d5111bdc1052
 \subsection{Detailed Description}
 \hyperlink{class_scribble_core_1_1_parser}{Parser} facade, hides the \hyperlink{class_scribble_core_1_1_parser}{Parser} implementation and provides function to convert between files and returns low level code. 
 
+Definition at line 72 of file Parser.\-hpp.
+
+
+
 \subsection{Member Function Documentation}
 \hypertarget{class_scribble_core_1_1_parser_a6868988e45190dbb366f834b33505902}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!compile@{compile}}
 \index{compile@{compile}!ScribbleCore::Parser@{Scribble\-Core\-::\-Parser}}
-\subsubsection[{compile}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, Namespace\-Type $>$ Scribble\-Core\-::\-Parser\-::compile (
+\subsubsection[{compile}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, {\bf Namespace\-Type} $>$ Scribble\-Core\-::\-Parser\-::compile (
 \begin{DoxyParamCaption}
 \item[{std\-::string const \&}]{file, }
-\item[{std\-::map$<$ std\-::string, Namespace\-Type $>$}]{builtin\-Namespace}
+\item[{std\-::map$<$ std\-::string, {\bf Namespace\-Type} $>$}]{builtin\-Namespace}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{class_scribble_core_1_1_parser_a6868988e45190dbb366f834b33505902}
-Static function which will return the resulting namespace of the parsing of a given file. \hypertarget{class_scribble_core_1_1_parser_a4d9e4e3d19bad8b983cbff320ba40ad1}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!find\-Function\-In\-Set@{find\-Function\-In\-Set}}
-\index{find\-Function\-In\-Set@{find\-Function\-In\-Set}!ScribbleCore::Parser@{Scribble\-Core\-::\-Parser}}
-\subsubsection[{find\-Function\-In\-Set}]{\setlength{\rightskip}{0pt plus 5cm}Smart\-Pointer$<$ {\bf Function} $>$ Scribble\-Core\-::\-Parser\-::find\-Function\-In\-Set (
+Static function which will return the resulting namespace of the parsing of a given file. 
+
+Definition at line 598 of file Parser.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{class_scribble_core_1_1_parser_a6868988e45190dbb366f834b33505902_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_core_1_1_parser_a1aaaf22583e0bf60a1e27227bed9511b}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!compile\-Text@{compile\-Text}}
+\index{compile\-Text@{compile\-Text}!ScribbleCore::Parser@{Scribble\-Core\-::\-Parser}}
+\subsubsection[{compile\-Text}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, {\bf Namespace\-Type} $>$ Scribble\-Core\-::\-Parser\-::compile\-Text (
 \begin{DoxyParamCaption}
-\item[{Smart\-Pointer$<$ {\bf Function\-Reference} $>$}]{to\-Find, }
-\item[{Function\-Set const \&}]{set}
+\item[{std\-::string const \&}]{text, }
+\item[{std\-::string const \&}]{package\-Name, }
+\item[{std\-::map$<$ std\-::string, {\bf Namespace\-Type} $>$}]{builtin\-Namespace}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_scribble_core_1_1_parser_a1aaaf22583e0bf60a1e27227bed9511b}
+
+
+Definition at line 622 of file Parser.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{class_scribble_core_1_1_parser_a1aaaf22583e0bf60a1e27227bed9511b_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_scribble_core_1_1_parser_a4d9e4e3d19bad8b983cbff320ba40ad1}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!find\-Function\-In\-Set@{find\-Function\-In\-Set}}
+\index{find\-Function\-In\-Set@{find\-Function\-In\-Set}!ScribbleCore::Parser@{Scribble\-Core\-::\-Parser}}
+\subsubsection[{find\-Function\-In\-Set}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Smart\-Pointer}$<$ {\bf Function} $>$ Scribble\-Core\-::\-Parser\-::find\-Function\-In\-Set (
+\begin{DoxyParamCaption}
+\item[{{\bf Smart\-Pointer}$<$ {\bf Function\-Reference} $>$}]{to\-Find, }
+\item[{{\bf Function\-Set} const \&}]{set}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{class_scribble_core_1_1_parser_a4d9e4e3d19bad8b983cbff320ba40ad1}
-Attempt to find a function that meets the criteria of a reference within a function set. \hypertarget{class_scribble_core_1_1_parser_a0e1829847a648294f57e634fa7b21782}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!function\-Set\-Type@{function\-Set\-Type}}
+Attempt to find a function that meets the criteria of a reference within a function set. 
+
+Definition at line 55 of file Parser.\-cpp.
+
+\hypertarget{class_scribble_core_1_1_parser_a0e1829847a648294f57e634fa7b21782}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!function\-Set\-Type@{function\-Set\-Type}}
 \index{function\-Set\-Type@{function\-Set\-Type}!ScribbleCore::Parser@{Scribble\-Core\-::\-Parser}}
 \subsubsection[{function\-Set\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} $\ast$ Scribble\-Core\-::\-Parser\-::function\-Set\-Type (
 \begin{DoxyParamCaption}
-\item[{Function\-Set const \&}]{function\-Set}
+\item[{{\bf Function\-Set} const \&}]{function\-Set}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{class_scribble_core_1_1_parser_a0e1829847a648294f57e634fa7b21782}
 Get the return type of a function set 
 
-Here is the call graph for this function\-:\nopagebreak
+Definition at line 237 of file Parser.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -76,7 +139,12 @@ Return an internal uniform path of a given file ( For example ../src/\-Test and 
 
 This function should return the uniform relative path to a file ( For example test/dog and ./test/dog should both evaluate to test/dog ) 
 
-Here is the caller graph for this function\-:\nopagebreak
+Definition at line 44 of file Parser.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -93,17 +161,25 @@ Here is the caller graph for this function\-:\nopagebreak
 \item[{std\-::vector$<$ std\-::string $>$ const \&}]{list}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{class_scribble_core_1_1_parser_a13bb70c6085507b7dcd5fccc7f20d37c}
-Search a list of strings and return true if it contains the target string \hypertarget{class_scribble_core_1_1_parser_a6f3623acbf4ecf36d07d8e08393d5755}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!test\-Function\-Equivilence@{test\-Function\-Equivilence}}
+Search a list of strings and return true if it contains the target string 
+
+Definition at line 186 of file Parser.\-cpp.
+
+\hypertarget{class_scribble_core_1_1_parser_a6f3623acbf4ecf36d07d8e08393d5755}{\index{Scribble\-Core\-::\-Parser@{Scribble\-Core\-::\-Parser}!test\-Function\-Equivilence@{test\-Function\-Equivilence}}
 \index{test\-Function\-Equivilence@{test\-Function\-Equivilence}!ScribbleCore::Parser@{Scribble\-Core\-::\-Parser}}
 \subsubsection[{test\-Function\-Equivilence}]{\setlength{\rightskip}{0pt plus 5cm}bool Scribble\-Core\-::\-Parser\-::test\-Function\-Equivilence (
 \begin{DoxyParamCaption}
-\item[{Smart\-Pointer$<$ {\bf Function} $>$}]{function, }
-\item[{Smart\-Pointer$<$ {\bf Function} $>$}]{other}
+\item[{{\bf Smart\-Pointer}$<$ {\bf Function} $>$}]{function, }
+\item[{{\bf Smart\-Pointer}$<$ {\bf Function} $>$}]{other}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{class_scribble_core_1_1_parser_a6f3623acbf4ecf36d07d8e08393d5755}
 Check whether the set already contains an equivalent function 
 
+Definition at line 201 of file Parser.\-cpp.
+
+
+
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Parser/Parser.\-hpp\item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Parser/Parser.\-cpp\end{DoxyCompactItemize}
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Parser/\hyperlink{_scribble_2_parser_2_parser_8hpp}{Parser.\-hpp}\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Scribble/\-Parser/\hyperlink{_scribble_2_parser_2_parser_8cpp}{Parser.\-cpp}\end{DoxyCompactItemize}

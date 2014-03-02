@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>VM</b></li><li class="navelem"><a class="el" href="struct_v_m_1_1_v_m_heap_entry.html">VMHeapEntry</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_v_m.html">VM</a></li><li class="navelem"><a class="el" href="struct_v_m_1_1_v_m_heap_entry.html">VMHeapEntry</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,29 +95,94 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">VM::VMHeapEntry Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_v_m_heap_entry_8hpp_source.html">VMHeapEntry.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for VM::VMHeapEntry:</div>
+<div class="dyncontent">
+<div class="center"><img src="struct_v_m_1_1_v_m_heap_entry__coll__graph.png" border="0" usemap="#_v_m_1_1_v_m_heap_entry_coll__map" alt="Collaboration graph"/></div>
+<map name="_v_m_1_1_v_m_heap_entry_coll__map" id="_v_m_1_1_v_m_heap_entry_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a8f26d4d459965e613e8d16834fefb0fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f26d4d459965e613e8d16834fefb0fb"></a>
-SmartPointer&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="memitem:a8f26d4d459965e613e8d16834fefb0fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_v_m_1_1_v_m_heap_entry.html#a8f26d4d459965e613e8d16834fefb0fb">type</a></td></tr>
 <tr class="separator:a8f26d4d459965e613e8d16834fefb0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add1ede23c9111ec87cdaa0d4376c9705"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add1ede23c9111ec87cdaa0d4376c9705"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>sizeBytes</b></td></tr>
+<tr class="memitem:add1ede23c9111ec87cdaa0d4376c9705"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_v_m_1_1_v_m_heap_entry.html#add1ede23c9111ec87cdaa0d4376c9705">sizeBytes</a></td></tr>
 <tr class="separator:add1ede23c9111ec87cdaa0d4376c9705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72120cd58ce16845b5e42c1085d9ed7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72120cd58ce16845b5e42c1085d9ed7e"></a>
-SmartPointer&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b></td></tr>
+<tr class="memitem:a72120cd58ce16845b5e42c1085d9ed7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_v_m_1_1_v_m_heap_entry.html#a72120cd58ce16845b5e42c1085d9ed7e">pointer</a></td></tr>
 <tr class="separator:a72120cd58ce16845b5e42c1085d9ed7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add28c938f66af42411e53299d4254742"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add28c938f66af42411e53299d4254742"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>flagged</b></td></tr>
+<tr class="memitem:add28c938f66af42411e53299d4254742"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_v_m_1_1_v_m_heap_entry.html#add28c938f66af42411e53299d4254742">flagged</a></td></tr>
 <tr class="separator:add28c938f66af42411e53299d4254742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_v_m_heap_entry_8hpp_source.html#l00014">14</a> of file <a class="el" href="_v_m_heap_entry_8hpp_source.html">VMHeapEntry.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="add28c938f66af42411e53299d4254742"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VM::VMHeapEntry::flagged</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_heap_entry_8hpp_source.html#l00018">18</a> of file <a class="el" href="_v_m_heap_entry_8hpp_source.html">VMHeapEntry.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a72120cd58ce16845b5e42c1085d9ed7e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt;uint8_t&gt; VM::VMHeapEntry::pointer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_heap_entry_8hpp_source.html#l00017">17</a> of file <a class="el" href="_v_m_heap_entry_8hpp_source.html">VMHeapEntry.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="add1ede23c9111ec87cdaa0d4376c9705"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int VM::VMHeapEntry::sizeBytes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_heap_entry_8hpp_source.html#l00016">16</a> of file <a class="el" href="_v_m_heap_entry_8hpp_source.html">VMHeapEntry.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8f26d4d459965e613e8d16834fefb0fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt;<a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a>&gt; VM::VMHeapEntry::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_heap_entry_8hpp_source.html#l00015">15</a> of file <a class="el" href="_v_m_heap_entry_8hpp_source.html">VMHeapEntry.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/VM/<a class="el" href="_v_m_heap_entry_8hpp_source.html">VMHeapEntry.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

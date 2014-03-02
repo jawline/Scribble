@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">OpCodes.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_op_codes_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * OpCodes.hpp</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 28 May 2013</span></div>
@@ -101,47 +102,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>VM {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">enum</span> OpCodes {</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021">   13</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021">OpCodes</a> {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    OpLoadConstant = 0,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    OpMove,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    OpJump,</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021adb1c11424716645321b1a4a06dff7dd6">   15</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021adb1c11424716645321b1a4a06dff7dd6">OpLoadConstant</a> = 0,</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a04b55a990bff501fa3f783b5a5be11f7">   16</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a04b55a990bff501fa3f783b5a5be11f7">OpMove</a>,</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a23d4ae1359c9b25c2b03fa1fa5c6f8eb">   17</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a23d4ae1359c9b25c2b03fa1fa5c6f8eb">OpJump</a>,</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    OpAdd,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    OpSub,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    OpMul,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    OpDiv,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    OpInc,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    OpDec,</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a9f1806e6eca31cf3c6a53797a8db6264">   23</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a9f1806e6eca31cf3c6a53797a8db6264">OpAdd</a>,</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a2210abc4c468e30ed8324a2d95aa67e1">   24</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a2210abc4c468e30ed8324a2d95aa67e1">OpSub</a>,</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a1c817f65033d3cd4cb29da9cf9721002">   25</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a1c817f65033d3cd4cb29da9cf9721002">OpMul</a>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ae7d65e7b1e620c8322657ebc44ac6fa0">   26</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ae7d65e7b1e620c8322657ebc44ac6fa0">OpDiv</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a8ac235f6319f0fdd3c9d6c8f6dc2f4d9">   27</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a8ac235f6319f0fdd3c9d6c8f6dc2f4d9">OpInc</a>,</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a5aea690228336e719413d4434781a7c6">   28</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a5aea690228336e719413d4434781a7c6">OpDec</a>,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    OpAddFloat32,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    OpSubFloat32,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    OpMulFloat32,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    OpDivFloat32,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    OpCmpFloat32,</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a779f2cf77d42fa148b636981c4d44335">   34</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a779f2cf77d42fa148b636981c4d44335">OpAddFloat32</a>,</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a7116adc28e7e347e1f29f242d1e9319f">   35</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a7116adc28e7e347e1f29f242d1e9319f">OpSubFloat32</a>,</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021af8f85c3462633bccdd4ebbb6575d1f4c">   36</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021af8f85c3462633bccdd4ebbb6575d1f4c">OpMulFloat32</a>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a7cadcd2cfb96394b099395bf27383c12">   37</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a7cadcd2cfb96394b099395bf27383c12">OpDivFloat32</a>,</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ac090f4d05ca0e56540da169819fc02b4">   38</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ac090f4d05ca0e56540da169819fc02b4">OpCmpFloat32</a>,</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    OpEqual,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    OpNotEqual,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    OpEqualZero,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    OpLessThan,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    OpLessThanOrEqual,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    OpGreaterThan,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    OpGreaterThanOrEqual,</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ac4175fdaf4385cecffb811ed23688be3">   44</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ac4175fdaf4385cecffb811ed23688be3">OpEqual</a>,</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a1f35749cff83bb556c72669933d58968">   45</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a1f35749cff83bb556c72669933d58968">OpNotEqual</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ab63a66df37bda8891ae8649c72554fec">   46</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ab63a66df37bda8891ae8649c72554fec">OpEqualZero</a>,</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a73b755010c5ab1082ad799565b94570e">   47</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a73b755010c5ab1082ad799565b94570e">OpLessThan</a>,</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ae004a06862bf5705bfa5fa4e4876ec62">   48</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ae004a06862bf5705bfa5fa4e4876ec62">OpLessThanOrEqual</a>,</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021aff0660ee576d14502aaef1b47f915924">   49</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021aff0660ee576d14502aaef1b47f915924">OpGreaterThan</a>,</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ad6394a09a0f0f210f9d6f3107eba835a">   50</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ad6394a09a0f0f210f9d6f3107eba835a">OpGreaterThanOrEqual</a>,</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    OpNewArray,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    OpArraySet,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    OpArrayGet,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    OpArrayLength,</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a754cf4ccbe4590fcf2aebbf72280a639">   56</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a754cf4ccbe4590fcf2aebbf72280a639">OpNewArray</a>,</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a87a166178992539452e9cc3ac51a3533">   57</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a87a166178992539452e9cc3ac51a3533">OpArraySet</a>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a3e3445bfd68c843fccaba56078336da0">   58</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a3e3445bfd68c843fccaba56078336da0">OpArrayGet</a>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a656ca9efd98b5897030f951440556e62">   59</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a656ca9efd98b5897030f951440556e62">OpArrayLength</a>,</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    OpNewStruct,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    OpStructSetField,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    OpStructGetField,</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ac193abef0b975beec0db918a658bf297">   65</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ac193abef0b975beec0db918a658bf297">OpNewStruct</a>,</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a298194e6e8ca112aa39c4554d738285c">   66</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a298194e6e8ca112aa39c4554d738285c">OpStructSetField</a>,</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ae9588ecfe47faa977e1a967ec3f89d9c">   67</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021ae9588ecfe47faa977e1a967ec3f89d9c">OpStructGetField</a>,</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    OpPushRegisters,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    OpPopNil,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    OpPopRegisters,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    OpCallFn,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    OpReturn</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a441d30810ec57ddb941c4ac2922a1b20">   73</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a441d30810ec57ddb941c4ac2922a1b20">OpPushRegisters</a>,</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a5af8eccc4479b142f7177002e6969a54">   74</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a5af8eccc4479b142f7177002e6969a54">OpPopNil</a>,</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a81a5e0134a36f1d412326a7d5e6e91e5">   75</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a81a5e0134a36f1d412326a7d5e6e91e5">OpPopRegisters</a>,</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a575f7f340e06e036f5304c533e914510">   76</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a575f7f340e06e036f5304c533e914510">OpCallFn</a>,</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a39d4dfd98cd2ae70d04e4e66c79c2901">   77</a></span>&#160;    <a class="code" href="namespace_v_m.html#a1fe663a6cea049c842654fcac772d021a39d4dfd98cd2ae70d04e4e66c79c2901">OpReturn</a></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
@@ -150,7 +151,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

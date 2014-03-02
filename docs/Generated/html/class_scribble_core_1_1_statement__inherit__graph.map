@@ -1,27 +1,27 @@
 <map id="ScribbleCore::Statement" name="ScribbleCore::Statement">
-<area shape="rect" id="node3" href="$class_scribble_core_1_1_and_statement.html" title="ScribbleCore::AndStatement" alt="" coords="237,5,424,35"/>
-<area shape="rect" id="node5" href="$class_scribble_core_1_1_array_length_statement.html" title="ScribbleCore::ArrayLength\lStatement" alt="" coords="244,58,417,105"/>
-<area shape="rect" id="node7" href="$class_scribble_core_1_1_array_statement.html" title="ScribbleCore::ArrayStatement" alt="" coords="233,128,428,157"/>
-<area shape="rect" id="node9" href="$class_scribble_core_1_1_assign_array_statement.html" title="ScribbleCore::AssignArray\lStatement" alt="" coords="243,181,419,227"/>
-<area shape="rect" id="node11" href="$class_scribble_core_1_1_assign_variable_statement.html" title="ScribbleCore::AssignVariable\lStatement" alt="" coords="235,250,427,297"/>
-<area shape="rect" id="node13" href="$class_scribble_core_1_1_bool_statement.html" title="ScribbleCore::BoolStatement" alt="" coords="236,320,425,349"/>
-<area shape="rect" id="node15" href="$class_scribble_core_1_1_float32_statement.html" title="ScribbleCore::Float32Statement" alt="" coords="227,373,435,403"/>
-<area shape="rect" id="node17" href="$class_scribble_core_1_1_for_statement.html" title="ScribbleCore::ForStatement" alt="" coords="239,427,423,456"/>
-<area shape="rect" id="node19" href="$class_scribble_core_1_1_function_statement.html" title="ScribbleCore::FunctionStatement" alt="" coords="224,480,437,509"/>
-<area shape="rect" id="node21" href="$class_scribble_core_1_1_get_array_statement.html" title="ScribbleCore::GetArrayStatement" alt="" coords="223,533,439,563"/>
-<area shape="rect" id="node23" href="$class_scribble_core_1_1_get_structure_element_statement.html" title="ScribbleCore::GetStructure\lElementStatement" alt="" coords="241,586,420,633"/>
-<area shape="rect" id="node25" href="$class_scribble_core_1_1_get_variable_statement.html" title="ScribbleCore::GetVariable\lStatement" alt="" coords="244,655,417,702"/>
-<area shape="rect" id="node27" href="$class_scribble_core_1_1_if_statement.html" title="ScribbleCore::IfStatement" alt="" coords="244,725,417,755"/>
-<area shape="rect" id="node29" href="$class_scribble_core_1_1_increment_statement.html" title="ScribbleCore::IncrementStatement" alt="" coords="220,779,441,808"/>
-<area shape="rect" id="node31" href="$class_scribble_core_1_1_int_statement.html" title="ScribbleCore::IntStatement" alt="" coords="241,832,420,861"/>
-<area shape="rect" id="node33" href="$class_scribble_core_1_1_negative_statement.html" title="ScribbleCore::NegativeStatement" alt="" coords="223,885,439,915"/>
-<area shape="rect" id="node35" href="$class_scribble_core_1_1_operate_statement.html" title="ScribbleCore::OperateStatement" alt="" coords="225,939,436,968"/>
-<area shape="rect" id="node37" href="$class_scribble_core_1_1_or_statement.html" title="ScribbleCore::OrStatement" alt="" coords="241,992,420,1021"/>
-<area shape="rect" id="node39" href="$class_scribble_core_1_1_return_statement.html" title="ScribbleCore::ReturnStatement" alt="" coords="229,1045,432,1075"/>
-<area shape="rect" id="node41" href="$class_scribble_core_1_1_string_statement.html" title="ScribbleCore::StringStatement" alt="" coords="232,1099,429,1128"/>
-<area shape="rect" id="node43" href="$class_scribble_core_1_1_structure_assign_element.html" title="ScribbleCore::StructureAssign\lElement" alt="" coords="232,1151,429,1198"/>
-<area shape="rect" id="node45" href="$class_scribble_core_1_1_structure_statement.html" title="ScribbleCore::StructureStatement" alt="" coords="221,1221,440,1251"/>
-<area shape="rect" id="node47" href="$class_scribble_core_1_1_test_nil_statement.html" title="ScribbleCore::TestNilStatement" alt="" coords="228,1275,433,1304"/>
-<area shape="rect" id="node49" href="$class_scribble_core_1_1_test_statement.html" title="ScribbleCore::TestStatement" alt="" coords="236,1328,425,1357"/>
-<area shape="rect" id="node51" href="$class_scribble_core_1_1_while_statement.html" title="ScribbleCore::WhileStatement" alt="" coords="232,1381,429,1411"/>
+<area shape="rect" id="node3" href="$class_scribble_core_1_1_and_statement.html" title="{ScribbleCore::AndStatement\n||+ AndStatement()\l+ ~AndStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="5,244,192,399"/>
+<area shape="rect" id="node5" href="$class_scribble_core_1_1_array_length_statement.html" title="{ScribbleCore::ArrayLength\lStatement\n||+ ArrayLengthStatement()\l+ ~ArrayLengthStatement()\l+ checkTree()\l+ generateCode()\l+ type()\l}" alt="" coords="216,235,395,407"/>
+<area shape="rect" id="node7" href="$class_scribble_core_1_1_array_statement.html" title="{ScribbleCore::ArrayStatement\n||+ ArrayStatement()\l+ ~ArrayStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="419,244,613,399"/>
+<area shape="rect" id="node9" href="$class_scribble_core_1_1_assign_array_statement.html" title="{ScribbleCore::AssignArray\lStatement\n||+ AssignArrayStatement()\l+ ~AssignArrayStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="637,235,819,407"/>
+<area shape="rect" id="node11" href="$class_scribble_core_1_1_assign_variable_statement.html" title="{ScribbleCore::AssignVariable\lStatement\n||+ AssignVariableStatement()\l+ ~AssignVariableStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="843,235,1040,407"/>
+<area shape="rect" id="node13" href="$class_scribble_core_1_1_bool_statement.html" title="{ScribbleCore::BoolStatement\n||+ BoolStatement()\l+ ~BoolStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="1064,244,1253,399"/>
+<area shape="rect" id="node15" href="$class_scribble_core_1_1_float32_statement.html" title="{ScribbleCore::Float32Statement\n||+ Float32Statement()\l+ ~Float32Statement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="1277,244,1485,399"/>
+<area shape="rect" id="node17" href="$class_scribble_core_1_1_for_statement.html" title="{ScribbleCore::ForStatement\n||+ ForStatement()\l+ ~ForStatement()\l+ type()\l+ checkTree()\l+ generateBody()\l+ generateCode()\l}" alt="" coords="1509,235,1693,407"/>
+<area shape="rect" id="node19" href="$class_scribble_core_1_1_function_statement.html" title="{ScribbleCore::FunctionStatement\n||+ FunctionStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="1717,253,1931,390"/>
+<area shape="rect" id="node21" href="$class_scribble_core_1_1_get_array_statement.html" title="{ScribbleCore::GetArrayStatement\n||+ GetArrayStatement()\l+ ~GetArrayStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="1955,244,2171,399"/>
+<area shape="rect" id="node23" href="$class_scribble_core_1_1_get_structure_element_statement.html" title="{ScribbleCore::GetStructure\lElementStatement\n||+ GetStructureElementStatement()\l+ ~GetStructureElementStatement()\l+ checkTree()\l+ type()\l+ fix()\l+ generateCode()\l}" alt="" coords="2195,227,2427,416"/>
+<area shape="rect" id="node25" href="$class_scribble_core_1_1_get_variable_statement.html" title="{ScribbleCore::GetVariable\lStatement\n||+ GetVariableStatement()\l+ ~GetVariableStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="2451,235,2629,407"/>
+<area shape="rect" id="node27" href="$class_scribble_core_1_1_if_statement.html" title="{ScribbleCore::IfStatement\n||+ IfStatement()\l+ ~IfStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="2653,244,2827,399"/>
+<area shape="rect" id="node29" href="$class_scribble_core_1_1_increment_statement.html" title="{ScribbleCore::IncrementStatement\n||+ IncrementStatement()\l+ ~IncrementStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="2851,244,3072,399"/>
+<area shape="rect" id="node31" href="$class_scribble_core_1_1_int_statement.html" title="{ScribbleCore::IntStatement\n||+ IntStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="3096,253,3275,390"/>
+<area shape="rect" id="node33" href="$class_scribble_core_1_1_negative_statement.html" title="{ScribbleCore::NegativeStatement\n||+ NegativeStatement()\l+ ~NegativeStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="3299,244,3515,399"/>
+<area shape="rect" id="node35" href="$class_scribble_core_1_1_nil_statement.html" title="{ScribbleCore::NilStatement\n||+ NilStatement()\l+ ~NilStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="3539,244,3720,399"/>
+<area shape="rect" id="node37" href="$class_scribble_core_1_1_operate_statement.html" title="{ScribbleCore::OperateStatement\n||+ OperateStatement()\l+ ~OperateStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="3744,244,3955,399"/>
+<area shape="rect" id="node39" href="$class_scribble_core_1_1_or_statement.html" title="{ScribbleCore::OrStatement\n||+ OrStatement()\l+ ~OrStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="3979,244,4157,399"/>
+<area shape="rect" id="node41" href="$class_scribble_core_1_1_return_statement.html" title="{ScribbleCore::ReturnStatement\n||+ ReturnStatement()\l+ ~ReturnStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="4181,244,4384,399"/>
+<area shape="rect" id="node43" href="$class_scribble_core_1_1_string_statement.html" title="{ScribbleCore::StringStatement\n||+ StringStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="4408,253,4605,390"/>
+<area shape="rect" id="node45" href="$class_scribble_core_1_1_structure_assign_element.html" title="{ScribbleCore::StructureAssign\lElement\n||+ StructureAssignElement()\l+ ~StructureAssignElement()\l+ fix()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="4629,227,4827,416"/>
+<area shape="rect" id="node47" href="$class_scribble_core_1_1_structure_statement.html" title="{ScribbleCore::StructureStatement\n||+ StructureStatement()\l+ ~StructureStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="4851,244,5069,399"/>
+<area shape="rect" id="node49" href="$class_scribble_core_1_1_test_statement.html" title="{ScribbleCore::TestStatement\n||+ TestStatement()\l+ ~TestStatement()\l+ type()\l+ checkTree()\l+ generateCode()\l}" alt="" coords="5093,244,5283,399"/>
+<area shape="rect" id="node51" href="$class_scribble_core_1_1_while_statement.html" title="{ScribbleCore::WhileStatement\n||+ WhileStatement()\l+ ~WhileStatement()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="5307,244,5504,399"/>
 </map>

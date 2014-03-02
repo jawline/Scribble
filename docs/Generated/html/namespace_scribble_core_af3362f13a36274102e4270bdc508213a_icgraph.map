@@ -1,0 +1,14 @@
+<map id="ScribbleCore::getStringType" name="ScribbleCore::getStringType">
+<area shape="rect" id="node3" href="$class_read_line.html#a4d3200e2e4a782723a05c7ef46c54c41" title="ReadLine::getType" alt="" coords="265,5,396,35"/>
+<area shape="rect" id="node5" href="$class_int_to_string_function.html#a6b24a237472ee14fc28ab33e614f56cb" title="IntToStringFunction\l::getType" alt="" coords="263,58,399,105"/>
+<area shape="rect" id="node7" href="$class_bool_to_string_function.html#a3372750cab22e2ebebde6f1cd4ad3159" title="BoolToStringFunction\l::getType" alt="" coords="257,127,404,174"/>
+<area shape="rect" id="node9" href="$class_float32_to_string_function.html#ab4e27658631aa87aee707ac75fcdf2a1" title="Float32ToStringFunction\l::getType" alt="" coords="249,197,412,243"/>
+<area shape="rect" id="node11" href="$class_string_compare.html#a9d9d35842beead78a0130f68012ac378" title="StringCompare::argType" alt="" coords="249,267,412,296"/>
+<area shape="rect" id="node13" href="$class_a_p_i_1_1_a_p_i_value.html#abc6491d068cfc443ef5cbbc83156e46e" title="API::APIValue::makeString" alt="" coords="240,320,421,349"/>
+<area shape="rect" id="node25" href="$class_write_function.html#a223f1c9a6f2d88ca561409fa21af3d86" title="WriteFunction::argType" alt="" coords="252,373,409,403"/>
+<area shape="rect" id="node15" href="$class_a_p_i_1_1_concat.html#a8dbf36574a9a16077bff5bfd634669fd" title="API::Concat::execute" alt="" coords="479,205,625,235"/>
+<area shape="rect" id="node17" href="$class_read_line.html#af8556982e83b2417b4fad7ed3086a7de" title="ReadLine::execute" alt="" coords="487,259,617,288"/>
+<area shape="rect" id="node19" href="$class_int_to_string_function.html#adf8c1c3223ba53393a1d5fc0679e06d1" title="IntToStringFunction\l::execute" alt="" coords="484,311,620,358"/>
+<area shape="rect" id="node21" href="$class_bool_to_string_function.html#a4e74a7af474a601db96557e9ff5caffe" title="BoolToStringFunction\l::execute" alt="" coords="479,381,625,427"/>
+<area shape="rect" id="node23" href="$class_float32_to_string_function.html#a37af0d9a46e186a0ae48a589123fb433" title="Float32ToStringFunction\l::execute" alt="" coords="471,450,633,497"/>
+</map>

@@ -1,5 +1,5 @@
 <map id="ScribbleCore::ParserReference" name="ScribbleCore::ParserReference">
-<area shape="rect" id="node2" href="$class_scribble_core_1_1_get_structure_element_statement.html" title="ScribbleCore::GetStructure\lElementStatement" alt="" coords="5,86,184,133"/>
-<area shape="rect" id="node4" href="$class_scribble_core_1_1_statement.html" title="ScribbleCore::Statement" alt="" coords="140,5,305,35"/>
-<area shape="rect" id="node6" href="$class_scribble_core_1_1_structure_assign_element.html" title="ScribbleCore::StructureAssign\lElement" alt="" coords="208,86,405,133"/>
+<area shape="rect" id="node2" href="$class_scribble_core_1_1_get_structure_element_statement.html" title="{ScribbleCore::GetStructure\lElementStatement\n||+ GetStructureElementStatement()\l+ ~GetStructureElementStatement()\l+ checkTree()\l+ type()\l+ fix()\l+ generateCode()\l}" alt="" coords="5,229,237,419"/>
+<area shape="rect" id="node4" href="$class_scribble_core_1_1_statement.html" title="{ScribbleCore::Statement\n||+ Statement()\l+ ~Statement()\l+ generateDebugInformation()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="168,6,363,178"/>
+<area shape="rect" id="node6" href="$class_scribble_core_1_1_structure_assign_element.html" title="{ScribbleCore::StructureAssign\lElement\n||+ StructureAssignElement()\l+ ~StructureAssignElement()\l+ fix()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="261,229,459,419"/>
 </map>

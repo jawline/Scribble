@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,14 +90,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Function.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _FUNCTION_H_</span></div>
+<a href="_function_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _FUNCTION_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _FUNCTION_H_</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;Pointers/SmartPointer.hpp&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;<a class="code" href="_smart_pointer_8hpp.html">Pointers/SmartPointer.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;VM/Constants.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;VM/VMFunc.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;VM/VirtualMachine.hpp&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;API/Value/APIValue.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_constants_8hpp.html">VM/Constants.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_v_m_func_8hpp.html">VM/VMFunc.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_virtual_machine_8hpp.html">VM/VirtualMachine.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_a_p_i_value_8hpp.html">API/Value/APIValue.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>API {</div>
@@ -108,19 +109,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_a_p_i_1_1_function.html">Function</a>(std::string name, std::string ns) :</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#a1e90ad6e08814d4035864f490d72feeb">   25</a></span>&#160;    <a class="code" href="class_a_p_i_1_1_function.html#a1e90ad6e08814d4035864f490d72feeb">Function</a>(std::string name, std::string ns) :</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            name_(name), namespace_(ns) {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_a_p_i_1_1_function.html">Function</a>() {</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#ad5db4630dd3517764272b171e1531443">   30</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_a_p_i_1_1_function.html#ad5db4630dd3517764272b171e1531443">~Function</a>() {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#ac3bc5de6ce095a4c8474525ef181c4af">   40</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">APIValue</a> <a class="code" href="class_a_p_i_1_1_function.html#ac3bc5de6ce095a4c8474525ef181c4af">execute</a>(<a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>* values, <a class="code" href="class_v_m_1_1_virtual_machine.html">VM::VirtualMachine</a>* virt) {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>();</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_p_i_1_1_function.html#ac3bc5de6ce095a4c8474525ef181c4af">execute</a>(<a class="code" href="class_v_m_1_1_virtual_machine.html">VM::VirtualMachine</a>* virt) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#a5acc2022cdbd5fe47c1a04769a1d8cf4">   44</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_a_p_i_1_1_function.html#a5acc2022cdbd5fe47c1a04769a1d8cf4">execute</a>(<a class="code" href="class_v_m_1_1_virtual_machine.html">VM::VirtualMachine</a>* virt) {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">APIValue</a>* vals = <span class="keyword">new</span> <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">APIValue</a>[<a class="code" href="class_a_p_i_1_1_function.html#ae56761ad4c849c05e12cb4cd02583c77">numArgs</a>()];</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
@@ -129,11 +130,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            int64_t val;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordtype">bool</span> ref;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            virt-&gt;popStackLong(val, ref);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            virt-&gt;<a class="code" href="class_v_m_1_1_virtual_machine.html#a894cb6bba41d689f7efe9d96b1169348">popStackLong</a>(val, ref);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span> (ref) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                vals[i] = <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>(<a class="code" href="class_a_p_i_1_1_function.html#a531806ea8476e8aa396eb98ce81e713b">argType</a>(i), virt-&gt;getHeap().getType(val),</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        virt-&gt;getHeap().getSmartPointer(val), val);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                vals[i] = <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>(<a class="code" href="class_a_p_i_1_1_function.html#a531806ea8476e8aa396eb98ce81e713b">argType</a>(i), virt-&gt;<a class="code" href="class_v_m_1_1_virtual_machine.html#a30fb1469c9f436093c06529b257abfb8">getHeap</a>().<a class="code" href="class_v_m_1_1_heap.html#ac0fc2201e52d83ce9d1a3f69528f2954">getType</a>(val),</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        virt-&gt;<a class="code" href="class_v_m_1_1_virtual_machine.html#a30fb1469c9f436093c06529b257abfb8">getHeap</a>().<a class="code" href="class_v_m_1_1_heap.html#afd540e904508b10ce3a1e547386622c0">getSmartPointer</a>(val), val);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                vals[i] = <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">API::APIValue</a>(<a class="code" href="class_a_p_i_1_1_function.html#a531806ea8476e8aa396eb98ce81e713b">argType</a>(i), val);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
@@ -143,11 +144,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="class_a_p_i_1_1_a_p_i_value.html">APIValue</a> returnVal = <a class="code" href="class_a_p_i_1_1_function.html#ac3bc5de6ce095a4c8474525ef181c4af">execute</a>(vals, virt);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">if</span> (returnVal.<a class="code" href="class_a_p_i_1_1_a_p_i_value.html#a9f5b34b9c70f6279dea8f556698ca1f6">isReference</a>()) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            virt-&gt;setRegister(VM::vmReturnResultRegister, returnVal.<a class="code" href="class_a_p_i_1_1_a_p_i_value.html#ae56a74e043a259b1a219804cb77165d7">getValue32</a>(),</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            virt-&gt;<a class="code" href="class_v_m_1_1_virtual_machine.html#af4da2b5077db8bad2574b35bc1a2bb31">setRegister</a>(VM::vmReturnResultRegister, returnVal.<a class="code" href="class_a_p_i_1_1_a_p_i_value.html#ae56a74e043a259b1a219804cb77165d7">getValue32</a>(),</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            virt-&gt;hitGc();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            virt-&gt;<a class="code" href="class_v_m_1_1_virtual_machine.html#aadc8e41bda5ca137388e7dc6e34c48c1">hitGc</a>();</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            virt-&gt;setRegister(VM::vmReturnResultRegister, returnVal.<a class="code" href="class_a_p_i_1_1_a_p_i_value.html#ae56a74e043a259b1a219804cb77165d7">getValue32</a>(),</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            virt-&gt;<a class="code" href="class_v_m_1_1_virtual_machine.html#af4da2b5077db8bad2574b35bc1a2bb31">setRegister</a>(VM::vmReturnResultRegister, returnVal.<a class="code" href="class_a_p_i_1_1_a_p_i_value.html#ae56a74e043a259b1a219804cb77165d7">getValue32</a>(),</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    <span class="keyword">false</span>);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
@@ -158,16 +159,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_scribble_core_1_1_type.html">ScribbleCore::Type</a>* <a class="code" href="class_a_p_i_1_1_function.html#a531806ea8476e8aa396eb98ce81e713b">argType</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> arg) = 0;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> debugCode(std::stringstream&amp; gen) {</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#a1d90140ae782b05a9ffd63ffb96d8909">   94</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="class_a_p_i_1_1_function.html#a1d90140ae782b05a9ffd63ffb96d8909">debugCode</a>(std::stringstream&amp; gen) {</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        gen &lt;&lt; std::string(<span class="stringliteral">&quot;#NativeFunction&quot;</span>);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">virtual</span> std::string getNamespace() {</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#a5e873f1585e43b8b94fb94632875b586">   99</a></span>&#160;    <span class="keyword">virtual</span> std::string <a class="code" href="class_a_p_i_1_1_function.html#a5e873f1585e43b8b94fb94632875b586">getNamespace</a>() {</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">return</span> namespace_;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">virtual</span> std::string getName() {</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#a201d120f73276bcc59bd2590195a5f4e">  103</a></span>&#160;    <span class="keyword">virtual</span> std::string <a class="code" href="class_a_p_i_1_1_function.html#a201d120f73276bcc59bd2590195a5f4e">getName</a>() {</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> name_;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
@@ -179,7 +180,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">return</span> SmartPointer&lt;VM::VMFunc&gt;(<span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">static</span> SmartPointer&lt;VM::VMFunc&gt; generateVMFunction(SmartPointer&lt;Function&gt; func) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="code" href="class_a_p_i_1_1_function.html#ab4a91d8ac33c5bfa3332a634c853962d">  123</a></span>&#160;    <span class="keyword">static</span> SmartPointer&lt;VM::VMFunc&gt; <a class="code" href="class_a_p_i_1_1_function.html#ab4a91d8ac33c5bfa3332a634c853962d">generateVMFunction</a>(SmartPointer&lt;Function&gt; func) {</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">if</span> (func-&gt;isNativeFunction()) {</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordflow">return</span> SmartPointer&lt;VM::VMFunc&gt;(<span class="keyword">new</span> <a class="code" href="class_v_m_1_1_v_m_func.html">VM::VMFunc</a>(func-&gt;getName(), func));</div>
@@ -190,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;};</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keyword">typedef</span> SmartPointer&lt;Function&gt; SafeFunction;</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="code" href="namespace_a_p_i.html#a45cf1fb9660efbbc53fb7634b0cbd25f">  134</a></span>&#160;<span class="keyword">typedef</span> SmartPointer&lt;Function&gt; <a class="code" href="namespace_a_p_i.html#a45cf1fb9660efbbc53fb7634b0cbd25f">SafeFunction</a>;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
@@ -198,7 +199,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:00 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

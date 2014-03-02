@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">InstructionSet.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_instruction_set_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * InstructionSet.hpp</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 10 Jun 2013</span></div>
@@ -98,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef INSTRUCTIONSET_HPP_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define INSTRUCTIONSET_HPP_</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;types.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;<a class="code" href="types_8h.html">types.h</a>&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
@@ -116,47 +117,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> start_;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_v_m_1_1_instruction_set.html">InstructionSet</a>() : numInstructions_(0), numConstants_(0), start_(0)  { }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_v_m_1_1_instruction_set.html">InstructionSet</a>(uint8_t* instructions, <span class="keywordtype">size_t</span> numInstructions, uint8_t* constants, <span class="keywordtype">size_t</span> numConstants, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> start);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_v_m_1_1_instruction_set.html">InstructionSet</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#a52d8e54cabf468b389c620b21ce60563">   28</a></span>&#160;    <a class="code" href="class_v_m_1_1_instruction_set.html#a52d8e54cabf468b389c620b21ce60563">InstructionSet</a>() : numInstructions_(0), numConstants_(0), start_(0)  { }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_v_m_1_1_instruction_set.html#a52d8e54cabf468b389c620b21ce60563">InstructionSet</a>(uint8_t* <a class="code" href="class_v_m_1_1_instruction_set.html#a708ef53450099fae3f61d1a1c3602a45">instructions</a>, <span class="keywordtype">size_t</span> <a class="code" href="class_v_m_1_1_instruction_set.html#af1fa310822cc58d475761c1cb9ef9b3d">numInstructions</a>, uint8_t* <a class="code" href="class_v_m_1_1_instruction_set.html#abda042ab822309d8dab88606c3cf7e78">constants</a>, <span class="keywordtype">size_t</span> numConstants, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> start);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_v_m_1_1_instruction_set.html#a0c5380b080f3117b9a8c5c1213f6f56b">~InstructionSet</a>();</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> startInstruction();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numInstructions();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_v_m_1_1_instruction_set.html#a25b73973708552f8fa9b9085345275d9">startInstruction</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_v_m_1_1_instruction_set.html#af1fa310822cc58d475761c1cb9ef9b3d">numInstructions</a>();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    uint8_t getInst(<span class="keywordtype">size_t</span> i) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#ace5b6c7eccd511c0cbdcc9ab4a37bcee">   35</a></span>&#160;    uint8_t <a class="code" href="class_v_m_1_1_instruction_set.html#ace5b6c7eccd511c0cbdcc9ab4a37bcee">getInst</a>(<span class="keywordtype">size_t</span> i) {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> instructions_[i];</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">int</span> getInt(<span class="keywordtype">size_t</span> i) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#a25a498b927a5991bd08b73dc6aa913f8">   39</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_v_m_1_1_instruction_set.html#a25a498b927a5991bd08b73dc6aa913f8">getInt</a>(<span class="keywordtype">size_t</span> i) {</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> *(<span class="keywordtype">int</span>*)(instructions_ + i);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">long</span> getLong(<span class="keywordtype">size_t</span> i) {</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#aa75d28a6360445428f36c035d2a06ecf">   43</a></span>&#160;    <span class="keywordtype">long</span> <a class="code" href="class_v_m_1_1_instruction_set.html#aa75d28a6360445428f36c035d2a06ecf">getLong</a>(<span class="keywordtype">size_t</span> i) {</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> *(<span class="keywordtype">long</span>*)(instructions_ + i);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">inline</span> uint8_t getConstantByte(<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#a991a1e003eb1c8c94ba4c916bd1eaa45">   47</a></span>&#160;    <span class="keyword">inline</span> uint8_t <a class="code" href="class_v_m_1_1_instruction_set.html#a991a1e003eb1c8c94ba4c916bd1eaa45">getConstantByte</a>(<span class="keywordtype">size_t</span> index) {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> constants_[index];</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">int</span> getConstantInt(<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#a270ddf1df2370a0ae5ae5d2c82a97dea">   51</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_v_m_1_1_instruction_set.html#a270ddf1df2370a0ae5ae5d2c82a97dea">getConstantInt</a>(<span class="keywordtype">size_t</span> index) {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> *(<span class="keywordtype">int</span>*)(constants_ + index);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">long</span> getConstantLong(<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#a0f2b7bd3d04346c3c4775b8a1b4e17f7">   55</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">long</span> <a class="code" href="class_v_m_1_1_instruction_set.html#a0f2b7bd3d04346c3c4775b8a1b4e17f7">getConstantLong</a>(<span class="keywordtype">size_t</span> index) {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> *(<span class="keywordtype">long</span>*)(constants_ + index);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">inline</span> float32_t getConstantFloat32(<span class="keywordtype">size_t</span> index) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span> *(float32_t*)(constants_+index);</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#aee27dbf63468869fe15259a9c4529de1">   59</a></span>&#160;    <span class="keyword">inline</span> <a class="code" href="types_8h.html#a4611b605e45ab401f02cab15c5e38715">float32_t</a> <a class="code" href="class_v_m_1_1_instruction_set.html#aee27dbf63468869fe15259a9c4529de1">getConstantFloat32</a>(<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span> *(<a class="code" href="types_8h.html#a4611b605e45ab401f02cab15c5e38715">float32_t</a>*)(constants_+index);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">char</span>* getConstantString(<span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="class_v_m_1_1_instruction_set.html#a1ab7146f65458110c9478b6af855551e">   63</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">char</span>* <a class="code" href="class_v_m_1_1_instruction_set.html#a1ab7146f65458110c9478b6af855551e">getConstantString</a>(<span class="keywordtype">size_t</span> index) {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">char</span>*)(constants_ + index);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    uint8_t* instructions();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    uint8_t* constants();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    uint8_t* <a class="code" href="class_v_m_1_1_instruction_set.html#a708ef53450099fae3f61d1a1c3602a45">instructions</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    uint8_t* <a class="code" href="class_v_m_1_1_instruction_set.html#abda042ab822309d8dab88606c3cf7e78">constants</a>();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;} <span class="comment">/* namespace VM */</span></div>
@@ -164,7 +165,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

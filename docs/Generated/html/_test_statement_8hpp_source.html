@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">TestStatement.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_test_statement_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * TestStatement.hpp</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 11 Mar 2013</span></div>
@@ -98,34 +99,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef TESTSTATEMENT_HPP_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define TESTSTATEMENT_HPP_</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;Statement.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="_statement_8hpp.html">Statement.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>ScribbleCore {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">enum</span> TestType {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    TestEquals,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    TestNotEquals,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    TestGreater,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    TestLess,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    TestLessOrEqual,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    TestGreaterOrEqual</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5c">   15</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5c">TestType</a> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caee9a080277b4c7b2781d97a23e8f4c03">   16</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caee9a080277b4c7b2781d97a23e8f4c03">TestEquals</a>,</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caecebaff664522b0fa470fa45d20d42d6">   17</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caecebaff664522b0fa470fa45d20d42d6">TestNotEquals</a>,</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caf585cb750e8cf43b587283b3e983a23b">   18</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caf585cb750e8cf43b587283b3e983a23b">TestGreater</a>,</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caeb2d7ecca17332ff99ab18a7ad411d22">   19</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caeb2d7ecca17332ff99ab18a7ad411d22">TestLess</a>,</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caf93f81f19e6e4ae2ded7e4a2b7b213f8">   20</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5caf93f81f19e6e4ae2ded7e4a2b7b213f8">TestLessOrEqual</a>,</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5ca260834bf1a85deceabedd8e2e1c72a31">   21</a></span>&#160;    <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5ca260834bf1a85deceabedd8e2e1c72a31">TestGreaterOrEqual</a></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="class_scribble_core_1_1_test_statement.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_scribble_core_1_1_test_statement.html">TestStatement</a>: <span class="keyword">public</span> <a class="code" href="class_scribble_core_1_1_statement.html">Statement</a> {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    TestType tType_;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    SafeStatement lhs_;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    SafeStatement rhs_;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5c">TestType</a> tType_;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> lhs_;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> rhs_;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_scribble_core_1_1_test_statement.html">TestStatement</a>(<span class="keywordtype">int</span> lineNo, std::string sym, TestType testType,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            SafeStatement leftHandSide, SafeStatement rightHandSide);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_scribble_core_1_1_test_statement.html">TestStatement</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_scribble_core_1_1_test_statement.html#a60fca3989943a31b91ca2d1b6d8aede7">TestStatement</a>(<span class="keywordtype">int</span> lineNo, std::string sym, <a class="code" href="namespace_scribble_core.html#acda463325956ca73becab2f94f6c9c5c">TestType</a> testType,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> leftHandSide, <a class="code" href="namespace_scribble_core.html#a2ad5bf236bc9164cb56f564685f15a11">SafeStatement</a> rightHandSide);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_scribble_core_1_1_test_statement.html#a93f3bf33b2be195449d3cc1cdeb8d374">~TestStatement</a>();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">Type</a>* type();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> checkTree(<a class="code" href="class_scribble_core_1_1_type.html">Type</a>* functionType);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span> generateCode(<span class="keywordtype">int</span> resultRegister, std::stringstream&amp; generated);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_scribble_core_1_1_type.html">Type</a>* <a class="code" href="class_scribble_core_1_1_test_statement.html#a4460d4d4d0167f81dabdcc29aa75271d">type</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scribble_core_1_1_test_statement.html#a26bad2e7c3f0ac61349e7c634a50ed62">checkTree</a>(<a class="code" href="class_scribble_core_1_1_type.html">Type</a>* functionType);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_scribble_core_1_1_test_statement.html#ab66075eb5fceaa849ba4bd5a7b059180">generateCode</a>(<span class="keywordtype">int</span> resultRegister, std::stringstream&amp; generated);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
@@ -134,7 +135,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

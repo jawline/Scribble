@@ -1,0 +1,6 @@
+<map id="ScribbleCore::StructureStatement::generateCode" name="ScribbleCore::StructureStatement::generateCode">
+<area shape="rect" id="node3" href="$class_scribble_core_1_1_structure_statement.html#af079e625c1bfe690339c0b4922dd152c" title="ScribbleCore::StructureStatement\l::type" alt="" coords="272,5,491,51"/>
+<area shape="rect" id="node5" href="$class_scribble_core_1_1_type.html#aa3eeef0216f910c6a2ae8047336b51f1" title="ScribbleCore::Type\l::getTypeName" alt="" coords="315,98,448,145"/>
+<area shape="rect" id="node7" href="$class_scribble_core_1_1_type.html#a7b465695c97c0e07457f46c7ac18a96c" title="ScribbleCore::Type\l::getType" alt="" coords="540,63,673,110"/>
+<area shape="rect" id="node9" href="$class_scribble_core_1_1_type.html#a65ef83531886c3aba0f7f7e89caaeaf1" title="ScribbleCore::Type\l::getSubtype" alt="" coords="540,133,673,179"/>
+</map>

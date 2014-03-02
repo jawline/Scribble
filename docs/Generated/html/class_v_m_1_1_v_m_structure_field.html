@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>VM</b></li><li class="navelem"><a class="el" href="class_v_m_1_1_v_m_structure_field.html">VMStructureField</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_v_m.html">VM</a></li><li class="navelem"><a class="el" href="class_v_m_1_1_v_m_structure_field.html">VMStructureField</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,29 +95,151 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">VM::VMStructureField Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_v_m_entry_type_8hpp_source.html">VMEntryType.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for VM::VMStructureField:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_v_m_1_1_v_m_structure_field__coll__graph.png" border="0" usemap="#_v_m_1_1_v_m_structure_field_coll__map" alt="Collaboration graph"/></div>
+<map name="_v_m_1_1_v_m_structure_field_coll__map" id="_v_m_1_1_v_m_structure_field_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a44d42e3f26403a7d9b909f215a1f6f19"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44d42e3f26403a7d9b909f215a1f6f19"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>VMStructureField</b> (std::string name, SmartPointer&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt; type)</td></tr>
+<tr class="memitem:a44d42e3f26403a7d9b909f215a1f6f19"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_v_m_structure_field.html#a44d42e3f26403a7d9b909f215a1f6f19">VMStructureField</a> (std::string name, <a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt; type)</td></tr>
 <tr class="separator:a44d42e3f26403a7d9b909f215a1f6f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaad2973e28ce448112892125df2994c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaaad2973e28ce448112892125df2994c"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr class="memitem:aaaad2973e28ce448112892125df2994c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_v_m_structure_field.html#aaaad2973e28ce448112892125df2994c">getName</a> ()</td></tr>
 <tr class="separator:aaaad2973e28ce448112892125df2994c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad686a68c733805ba1ed330886ef78b43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad686a68c733805ba1ed330886ef78b43"></a>
-SmartPointer&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+<tr class="memitem:ad686a68c733805ba1ed330886ef78b43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_v_m_structure_field.html#ad686a68c733805ba1ed330886ef78b43">getType</a> ()</td></tr>
 <tr class="separator:ad686a68c733805ba1ed330886ef78b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e05c782e52de8e3ed8ecb7b96fc4cf3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e05c782e52de8e3ed8ecb7b96fc4cf3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (SmartPointer&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt; type)</td></tr>
+<tr class="memitem:a0e05c782e52de8e3ed8ecb7b96fc4cf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_m_1_1_v_m_structure_field.html#a0e05c782e52de8e3ed8ecb7b96fc4cf3">setType</a> (<a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt; type)</td></tr>
 <tr class="separator:a0e05c782e52de8e3ed8ecb7b96fc4cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_v_m_entry_type_8hpp_source.html#l00030">30</a> of file <a class="el" href="_v_m_entry_type_8hpp_source.html">VMEntryType.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a44d42e3f26403a7d9b909f215a1f6f19"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VM::VMStructureField::VMStructureField </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_entry_type_8hpp_source.html#l00037">37</a> of file <a class="el" href="_v_m_entry_type_8hpp_source.html">VMEntryType.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aaaad2973e28ce448112892125df2994c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string VM::VMStructureField::getName </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_entry_type_8hpp_source.html#l00040">40</a> of file <a class="el" href="_v_m_entry_type_8hpp_source.html">VMEntryType.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad686a68c733805ba1ed330886ef78b43"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt;<a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a>&gt; VM::VMStructureField::getType </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_entry_type_8hpp_source.html#l00044">44</a> of file <a class="el" href="_v_m_entry_type_8hpp_source.html">VMEntryType.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0e05c782e52de8e3ed8ecb7b96fc4cf3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VM::VMStructureField::setType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_v_m_1_1_v_m_entry_type.html">VMEntryType</a> &gt;&#160;</td>
+          <td class="paramname"><em>type</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_m_entry_type_8hpp_source.html#l00048">48</a> of file <a class="el" href="_v_m_entry_type_8hpp_source.html">VMEntryType.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/VM/<a class="el" href="_v_m_entry_type_8hpp_source.html">VMEntryType.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

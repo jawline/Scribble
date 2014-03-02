@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,32 +91,239 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Stack&lt; s_Type &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Stack&lt; s_Type &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_stack__coll__graph.png" border="0" usemap="#_stack_3_01s___type_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="_stack_3_01s___type_01_4_coll__map" id="_stack_3_01s___type_01_4_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a458c3a1083e133a2bca0e5cb4aa8bcb9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a458c3a1083e133a2bca0e5cb4aa8bcb9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>push</b> (s_Type a)</td></tr>
+<tr class="memitem:abf4f763ab93fcb1fd22cd381f521a7e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#abf4f763ab93fcb1fd22cd381f521a7e2">Stack</a> ()</td></tr>
+<tr class="separator:abf4f763ab93fcb1fd22cd381f521a7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ccdf42c9ae247ec99db786cdb7222f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#ac2ccdf42c9ae247ec99db786cdb7222f">~Stack</a> ()</td></tr>
+<tr class="separator:ac2ccdf42c9ae247ec99db786cdb7222f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a458c3a1083e133a2bca0e5cb4aa8bcb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#a458c3a1083e133a2bca0e5cb4aa8bcb9">push</a> (s_Type a)</td></tr>
 <tr class="separator:a458c3a1083e133a2bca0e5cb4aa8bcb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78bb9fa57bd39e0e76bc5231870afa04"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78bb9fa57bd39e0e76bc5231870afa04"></a>
-s_Type&#160;</td><td class="memItemRight" valign="bottom"><b>pop</b> ()</td></tr>
+<tr class="memitem:a78bb9fa57bd39e0e76bc5231870afa04"><td class="memItemLeft" align="right" valign="top">s_Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#a78bb9fa57bd39e0e76bc5231870afa04">pop</a> ()</td></tr>
 <tr class="separator:a78bb9fa57bd39e0e76bc5231870afa04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2960e123bfbf1928b1d8058378dc81a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af2960e123bfbf1928b1d8058378dc81a"></a>
-s_Type&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (unsigned int i)</td></tr>
+<tr class="memitem:af2960e123bfbf1928b1d8058378dc81a"><td class="memItemLeft" align="right" valign="top">s_Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#af2960e123bfbf1928b1d8058378dc81a">get</a> (unsigned int i)</td></tr>
 <tr class="separator:af2960e123bfbf1928b1d8058378dc81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41b54c9ef621409d6125b99fc566a659"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a41b54c9ef621409d6125b99fc566a659"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></tr>
+<tr class="memitem:a41b54c9ef621409d6125b99fc566a659"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#a41b54c9ef621409d6125b99fc566a659">size</a> ()</td></tr>
 <tr class="separator:a41b54c9ef621409d6125b99fc566a659"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeecf55b18f487aa18e278a5d9f3c3e7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeecf55b18f487aa18e278a5d9f3c3e7f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="memitem:aeecf55b18f487aa18e278a5d9f3c3e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stack.html#aeecf55b18f487aa18e278a5d9f3c3e7f">reset</a> ()</td></tr>
 <tr class="separator:aeecf55b18f487aa18e278a5d9f3c3e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class s_Type&gt;<br/>
+class Stack&lt; s_Type &gt;</h3>
+
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00016">16</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="abf4f763ab93fcb1fd22cd381f521a7e2"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class s_Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_stack.html">Stack</a>&lt; s_Type &gt;::<a class="el" href="class_stack.html">Stack</a> </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00041">41</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac2ccdf42c9ae247ec99db786cdb7222f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class s_Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_stack.html">Stack</a>&lt; s_Type &gt;::~<a class="el" href="class_stack.html">Stack</a> </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00048">48</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af2960e123bfbf1928b1d8058378dc81a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class s_Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_Type <a class="el" href="class_stack.html">Stack</a>&lt; s_Type &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>i</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00078">78</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a78bb9fa57bd39e0e76bc5231870afa04"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class s_Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">s_Type <a class="el" href="class_stack.html">Stack</a>&lt; s_Type &gt;::pop </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00068">68</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a458c3a1083e133a2bca0e5cb4aa8bcb9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class s_Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_stack.html">Stack</a>&lt; s_Type &gt;::push </td>
+          <td>(</td>
+          <td class="paramtype">s_Type&#160;</td>
+          <td class="paramname"><em>a</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00058">58</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aeecf55b18f487aa18e278a5d9f3c3e7f"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class s_Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_stack.html">Stack</a>&lt; s_Type &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00086">86</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a41b54c9ef621409d6125b99fc566a659"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class s_Type &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="class_stack.html">Stack</a>&lt; s_Type &gt;::size </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_stack_2_stack_8hpp_source.html#l00082">82</a> of file <a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Stack/<a class="el" href="_stack_2_stack_8hpp_source.html">Stack.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_a_p_i_1_1_function.html" title="API::Function" alt="" coords="7,352,108,381"/>
+<area shape="rect" id="node1" href="$class_a_p_i_1_1_function.html" title="API::Function" alt="" coords="7,379,108,408"/>
 <area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_function.html" title="API::APIFunction" alt="" coords="197,5,320,35"/>
 <area shape="rect" id="node5" href="$class_a_p_i_1_1_concat.html" title="API::Concat" alt="" coords="212,59,305,88"/>
 <area shape="rect" id="node7" href="$class_a_p_i_1_1_float32_from_int.html" title="API::Float32FromInt" alt="" coords="189,112,328,141"/>
@@ -13,5 +13,6 @@
 <area shape="rect" id="node23" href="$class_random_int.html" title="RandomInt" alt="" coords="216,539,301,568"/>
 <area shape="rect" id="node25" href="$class_read_line.html" title="ReadLine" alt="" coords="220,592,297,621"/>
 <area shape="rect" id="node27" href="$class_scribble_core_1_1_scripted_function.html" title="ScribbleCore::ScriptedFunction" alt="" coords="157,645,360,675"/>
-<area shape="rect" id="node29" href="$class_write_function.html" title="WriteFunction" alt="" coords="208,699,309,728"/>
+<area shape="rect" id="node29" href="$class_string_compare.html" title="StringCompare" alt="" coords="204,699,313,728"/>
+<area shape="rect" id="node31" href="$class_write_function.html" title="WriteFunction" alt="" coords="208,752,309,781"/>
 </map>

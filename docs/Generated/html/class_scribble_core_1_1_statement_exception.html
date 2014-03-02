@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>ScribbleCore</b></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_statement_exception.html">StatementException</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_scribble_core.html">ScribbleCore</a></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_statement_exception.html">StatementException</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -95,34 +95,144 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ScribbleCore::StatementException Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_statement_exception_8hpp_source.html">StatementException.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ScribbleCore::StatementException:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scribble_core_1_1_statement_exception__inherit__graph.png" border="0" usemap="#_scribble_core_1_1_statement_exception_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<map name="_scribble_core_1_1_statement_exception_inherit__map" id="_scribble_core_1_1_statement_exception_inherit__map">
+</map>
+</div>
 <div class="dynheader">
 Collaboration diagram for ScribbleCore::StatementException:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scribble_core_1_1_statement_exception__coll__graph.png" border="0" usemap="#_scribble_core_1_1_statement_exception_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<map name="_scribble_core_1_1_statement_exception_coll__map" id="_scribble_core_1_1_statement_exception_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6dadbce104fa804c5874d6f5ee221d26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6dadbce104fa804c5874d6f5ee221d26"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>StatementException</b> (<a class="el" href="class_scribble_core_1_1_statement.html">Statement</a> *statement, std::string error)</td></tr>
+<tr class="memitem:a6dadbce104fa804c5874d6f5ee221d26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_statement_exception.html#a6dadbce104fa804c5874d6f5ee221d26">StatementException</a> (<a class="el" href="class_scribble_core_1_1_statement.html">Statement</a> *statement, std::string error)</td></tr>
 <tr class="separator:a6dadbce104fa804c5874d6f5ee221d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6755a02d6cbca86a0b61916f35d7e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b6755a02d6cbca86a0b61916f35d7e8"></a>
-virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><b>what</b> () const   throw ()</td></tr>
+<tr class="memitem:ab474181cc0681479e20c0876fe922e17"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_statement_exception.html#ab474181cc0681479e20c0876fe922e17">~StatementException</a> ()  throw ()</td></tr>
+<tr class="separator:ab474181cc0681479e20c0876fe922e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6755a02d6cbca86a0b61916f35d7e8"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_statement_exception.html#a6b6755a02d6cbca86a0b61916f35d7e8">what</a> () const   throw ()</td></tr>
 <tr class="separator:a6b6755a02d6cbca86a0b61916f35d7e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_statement_exception_8hpp_source.html#l00012">12</a> of file <a class="el" href="_statement_exception_8hpp_source.html">StatementException.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a6dadbce104fa804c5874d6f5ee221d26"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::StatementException::StatementException </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scribble_core_1_1_statement.html">Statement</a> *&#160;</td>
+          <td class="paramname"><em>statement</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>error</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_statement_exception_8cpp_source.html#l00006">6</a> of file <a class="el" href="_statement_exception_8cpp_source.html">StatementException.cpp</a>.</p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_scribble_core_1_1_statement_exception_a6dadbce104fa804c5874d6f5ee221d26_cgraph.png" border="0" usemap="#class_scribble_core_1_1_statement_exception_a6dadbce104fa804c5874d6f5ee221d26_cgraph" alt=""/></div>
+<map name="class_scribble_core_1_1_statement_exception_a6dadbce104fa804c5874d6f5ee221d26_cgraph" id="class_scribble_core_1_1_statement_exception_a6dadbce104fa804c5874d6f5ee221d26_cgraph">
+<area shape="rect" id="node3" href="class_scribble_core_1_1_statement.html#a6ce617dcee68fdbad33c7e84becc71c3" title="ScribbleCore::Statement\l::generateDebugInformation" alt="" coords="279,5,460,51"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ab474181cc0681479e20c0876fe922e17"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::StatementException::~StatementException </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_statement_exception_8cpp_source.html#l00016">16</a> of file <a class="el" href="_statement_exception_8cpp_source.html">StatementException.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a6b6755a02d6cbca86a0b61916f35d7e8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* ScribbleCore::StatementException::what </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td> const</td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_statement_exception_8hpp_source.html#l00021">21</a> of file <a class="el" href="_statement_exception_8hpp_source.html">StatementException.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Statement/<a class="el" href="_statement_exception_8hpp_source.html">StatementException.hpp</a></li>
-<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Statement/StatementException.cpp</li>
+<li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Statement/<a class="el" href="_statement_exception_8cpp_source.html">StatementException.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,23 +91,112 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ReferenceCounter Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_reference_counter_8hpp_source.html">ReferenceCounter.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for ReferenceCounter:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_reference_counter__coll__graph.png" border="0" usemap="#_reference_counter_coll__map" alt="Collaboration graph"/></div>
+<map name="_reference_counter_coll__map" id="_reference_counter_coll__map">
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac4e6dbe4b538bf8c0e280c2a2ade1448"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4e6dbe4b538bf8c0e280c2a2ade1448"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Attach</b> ()</td></tr>
+<tr class="memitem:a6389ca70c8a41c4d2f1a4e72d42e9780"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reference_counter.html#a6389ca70c8a41c4d2f1a4e72d42e9780">ReferenceCounter</a> ()</td></tr>
+<tr class="separator:a6389ca70c8a41c4d2f1a4e72d42e9780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4e6dbe4b538bf8c0e280c2a2ade1448"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reference_counter.html#ac4e6dbe4b538bf8c0e280c2a2ade1448">Attach</a> ()</td></tr>
 <tr class="separator:ac4e6dbe4b538bf8c0e280c2a2ade1448"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3644ba7521524403601096215945eb2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3644ba7521524403601096215945eb2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Release</b> ()</td></tr>
+<tr class="memitem:ab3644ba7521524403601096215945eb2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reference_counter.html#ab3644ba7521524403601096215945eb2">Release</a> ()</td></tr>
 <tr class="separator:ab3644ba7521524403601096215945eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_reference_counter_8hpp_source.html#l00004">4</a> of file <a class="el" href="_reference_counter_8hpp_source.html">ReferenceCounter.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a6389ca70c8a41c4d2f1a4e72d42e9780"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ReferenceCounter::ReferenceCounter </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_reference_counter_8hpp_source.html#l00010">10</a> of file <a class="el" href="_reference_counter_8hpp_source.html">ReferenceCounter.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ac4e6dbe4b538bf8c0e280c2a2ade1448"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ReferenceCounter::Attach </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_reference_counter_8hpp_source.html#l00014">14</a> of file <a class="el" href="_reference_counter_8hpp_source.html">ReferenceCounter.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab3644ba7521524403601096215945eb2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ReferenceCounter::Release </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_reference_counter_8hpp_source.html#l00018">18</a> of file <a class="el" href="_reference_counter_8hpp_source.html">ReferenceCounter.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Pointers/<a class="el" href="_reference_counter_8hpp_source.html">ReferenceCounter.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

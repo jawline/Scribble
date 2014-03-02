@@ -1,32 +1,194 @@
 \hypertarget{class_hash_map}{\section{Hash\-Map$<$ T $>$ Class Template Reference}
 \label{class_hash_map}\index{Hash\-Map$<$ T $>$@{Hash\-Map$<$ T $>$}}
 }
+
+
+{\ttfamily \#include $<$Hash\-Map.\-hpp$>$}
+
+
+
+Collaboration diagram for Hash\-Map$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=162pt]{class_hash_map__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_hash_map_a1c094bc1e51d732ac542ecd1502942b7}{{\bfseries Hash\-Map} (int num\-Buckets)}\label{class_hash_map_a1c094bc1e51d732ac542ecd1502942b7}
-
+\hyperlink{class_hash_map_ade0749c82229d4055e6d7657cc5315e1}{Hash\-Map} ()
 \item 
-\hypertarget{class_hash_map_a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d}{void {\bfseries insert} (std\-::string const \&id, T data)}\label{class_hash_map_a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d}
-
+\hyperlink{class_hash_map_a1c094bc1e51d732ac542ecd1502942b7}{Hash\-Map} (int num\-Buckets)
 \item 
-\hypertarget{class_hash_map_a7ab3442f1c4926e12bbabfaf81d058d8}{void {\bfseries remove} (std\-::string const \&id)}\label{class_hash_map_a7ab3442f1c4926e12bbabfaf81d058d8}
-
+virtual \hyperlink{class_hash_map_ae4dce4f8d3b714af9e57558c14353c11}{$\sim$\-Hash\-Map} ()
 \item 
-\hypertarget{class_hash_map_acff0cebde7c1336375288c1f5e385a0f}{bool {\bfseries exists} (std\-::string const \&id)}\label{class_hash_map_acff0cebde7c1336375288c1f5e385a0f}
-
+void \hyperlink{class_hash_map_a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d}{insert} (std\-::string const \&id, T data)
 \item 
-\hypertarget{class_hash_map_a46d88f4743bc0b902b9445ffe5ea7b28}{\hyperlink{class_hash_map_utils_1_1_hash_item_link}{Hash\-Map\-Utils\-::\-Hash\-Item\-Link}$<$ T $>$ $\ast$ {\bfseries get} (std\-::string id)}\label{class_hash_map_a46d88f4743bc0b902b9445ffe5ea7b28}
-
+void \hyperlink{class_hash_map_a7ab3442f1c4926e12bbabfaf81d058d8}{remove} (std\-::string const \&id)
 \item 
-\hypertarget{class_hash_map_a2b444615edc86733e39fcfc239cba3eb}{T {\bfseries find} (std\-::string const \&id)}\label{class_hash_map_a2b444615edc86733e39fcfc239cba3eb}
-
+bool \hyperlink{class_hash_map_acff0cebde7c1336375288c1f5e385a0f}{exists} (std\-::string const \&id)
 \item 
-\hypertarget{class_hash_map_a8c7dc4e82eef162d05ef816f7e7dacb2}{int {\bfseries hash} (std\-::string const \&id)}\label{class_hash_map_a8c7dc4e82eef162d05ef816f7e7dacb2}
-
+\hyperlink{class_hash_map_utils_1_1_hash_item_link}{Hash\-Map\-Utils\-::\-Hash\-Item\-Link}$<$ T $>$ $\ast$ \hyperlink{class_hash_map_a46d88f4743bc0b902b9445ffe5ea7b28}{get} (std\-::string id)
+\item 
+T \hyperlink{class_hash_map_a2b444615edc86733e39fcfc239cba3eb}{find} (std\-::string const \&id)
+\item 
+int \hyperlink{class_hash_map_a8c7dc4e82eef162d05ef816f7e7dacb2}{hash} (std\-::string const \&id)
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$class Hash\-Map$<$ T $>$}
+
+
+
+Definition at line 162 of file Hash\-Map.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_hash_map_ade0749c82229d4055e6d7657cc5315e1}{\index{Hash\-Map@{Hash\-Map}!Hash\-Map@{Hash\-Map}}
+\index{Hash\-Map@{Hash\-Map}!HashMap@{Hash\-Map}}
+\subsubsection[{Hash\-Map}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ {\bf Hash\-Map}$<$ T $>$\-::{\bf Hash\-Map} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_ade0749c82229d4055e6d7657cc5315e1}
+
+
+Definition at line 169 of file Hash\-Map.\-hpp.
+
+\hypertarget{class_hash_map_a1c094bc1e51d732ac542ecd1502942b7}{\index{Hash\-Map@{Hash\-Map}!Hash\-Map@{Hash\-Map}}
+\index{Hash\-Map@{Hash\-Map}!HashMap@{Hash\-Map}}
+\subsubsection[{Hash\-Map}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ {\bf Hash\-Map}$<$ T $>$\-::{\bf Hash\-Map} (
+\begin{DoxyParamCaption}
+\item[{int}]{num\-Buckets}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_a1c094bc1e51d732ac542ecd1502942b7}
+
+
+Definition at line 174 of file Hash\-Map.\-hpp.
+
+\hypertarget{class_hash_map_ae4dce4f8d3b714af9e57558c14353c11}{\index{Hash\-Map@{Hash\-Map}!$\sim$\-Hash\-Map@{$\sim$\-Hash\-Map}}
+\index{$\sim$\-Hash\-Map@{$\sim$\-Hash\-Map}!HashMap@{Hash\-Map}}
+\subsubsection[{$\sim$\-Hash\-Map}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ virtual {\bf Hash\-Map}$<$ T $>$\-::$\sim${\bf Hash\-Map} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_hash_map_ae4dce4f8d3b714af9e57558c14353c11}
+
+
+Definition at line 179 of file Hash\-Map.\-hpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_hash_map_acff0cebde7c1336375288c1f5e385a0f}{\index{Hash\-Map@{Hash\-Map}!exists@{exists}}
+\index{exists@{exists}!HashMap@{Hash\-Map}}
+\subsubsection[{exists}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ bool {\bf Hash\-Map}$<$ T $>$\-::exists (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_acff0cebde7c1336375288c1f5e385a0f}
+
+
+Definition at line 190 of file Hash\-Map.\-hpp.
+
+\hypertarget{class_hash_map_a2b444615edc86733e39fcfc239cba3eb}{\index{Hash\-Map@{Hash\-Map}!find@{find}}
+\index{find@{find}!HashMap@{Hash\-Map}}
+\subsubsection[{find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T {\bf Hash\-Map}$<$ T $>$\-::find (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_a2b444615edc86733e39fcfc239cba3eb}
+
+
+Definition at line 203 of file Hash\-Map.\-hpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_hash_map_a2b444615edc86733e39fcfc239cba3eb_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_hash_map_a46d88f4743bc0b902b9445ffe5ea7b28}{\index{Hash\-Map@{Hash\-Map}!get@{get}}
+\index{get@{get}!HashMap@{Hash\-Map}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ {\bf Hash\-Map\-Utils\-::\-Hash\-Item\-Link}$<$T$>$$\ast$ {\bf Hash\-Map}$<$ T $>$\-::get (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_a46d88f4743bc0b902b9445ffe5ea7b28}
+
+
+Definition at line 199 of file Hash\-Map.\-hpp.
+
+\hypertarget{class_hash_map_a8c7dc4e82eef162d05ef816f7e7dacb2}{\index{Hash\-Map@{Hash\-Map}!hash@{hash}}
+\index{hash@{hash}!HashMap@{Hash\-Map}}
+\subsubsection[{hash}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ int {\bf Hash\-Map}$<$ T $>$\-::hash (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_a8c7dc4e82eef162d05ef816f7e7dacb2}
+
+
+Definition at line 213 of file Hash\-Map.\-hpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_hash_map_a8c7dc4e82eef162d05ef816f7e7dacb2_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_hash_map_a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d}{\index{Hash\-Map@{Hash\-Map}!insert@{insert}}
+\index{insert@{insert}!HashMap@{Hash\-Map}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ void {\bf Hash\-Map}$<$ T $>$\-::insert (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{id, }
+\item[{T}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d}
+
+
+Definition at line 182 of file Hash\-Map.\-hpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_hash_map_a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_hash_map_a7ab3442f1c4926e12bbabfaf81d058d8}{\index{Hash\-Map@{Hash\-Map}!remove@{remove}}
+\index{remove@{remove}!HashMap@{Hash\-Map}}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ void {\bf Hash\-Map}$<$ T $>$\-::remove (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_hash_map_a7ab3442f1c4926e12bbabfaf81d058d8}
+
+
+Definition at line 186 of file Hash\-Map.\-hpp.
+
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Util/Hash\-Map.\-hpp\end{DoxyCompactItemize}
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-Util/\hyperlink{_hash_map_8hpp}{Hash\-Map.\-hpp}\end{DoxyCompactItemize}

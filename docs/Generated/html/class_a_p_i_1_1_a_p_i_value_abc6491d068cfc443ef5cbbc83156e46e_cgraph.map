@@ -1,0 +1,14 @@
+<map id="API::APIValue::makeString" name="API::APIValue::makeString">
+<area shape="rect" id="node3" href="$class_v_m_1_1_virtual_machine.html#a30fb1469c9f436093c06529b257abfb8" title="VM::VirtualMachine\l::getHeap" alt="" coords="260,5,396,51"/>
+<area shape="rect" id="node5" href="$class_v_m_1_1_heap.html#ad4af8cf1e9b1b4801b03d94cb5344ee0" title="VM::Heap::allocate" alt="" coords="261,75,395,104"/>
+<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#a7b26ef866e71358c8ffd4ea133bd15c6" title="VM::VirtualMachine\l::findType" alt="" coords="260,127,396,174"/>
+<area shape="rect" id="node22" href="$namespace_scribble_core.html#af3362f13a36274102e4270bdc508213a" title="ScribbleCore::getStringType" alt="" coords="235,197,421,227"/>
+<area shape="rect" id="node24" href="$class_v_m_1_1_heap.html#afd540e904508b10ce3a1e547386622c0" title="VM::Heap::getSmartPointer" alt="" coords="237,259,419,288"/>
+<area shape="rect" id="node9" href="$class_v_m_1_1_namespace_entry.html#ad60d6ff4c19fdcd7ed3bf36ff6874bcf" title="VM::NamespaceEntry\l::searchNamespace" alt="" coords="483,7,632,54"/>
+<area shape="rect" id="node13" href="$class_v_m_1_1_namespace_entry.html#a64e7528f2d8403acc86ec3a249a07cf4" title="VM::NamespaceEntry\l::getType" alt="" coords="695,67,844,114"/>
+<area shape="rect" id="node15" href="$class_v_m_1_1_virtual_machine.html#afe501e1ac466c1799cbbc32db282fdf1" title="VM::VirtualMachine\l::registerEntry" alt="" coords="489,127,625,174"/>
+<area shape="rect" id="node20" href="$class_v_m_1_1_namespace_entry.html#a64c19caa303f4c34786e32b18b0d3449" title="VM::NamespaceEntry\l::getTypeReference" alt="" coords="483,197,632,243"/>
+<area shape="rect" id="node11" href="$class_hash_map.html#a2b444615edc86733e39fcfc239cba3eb" title="HashMap::find" alt="" coords="716,15,823,44"/>
+<area shape="rect" id="node17" href="$class_hash_map.html#a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d" title="HashMap::insert" alt="" coords="711,137,828,167"/>
+<area shape="rect" id="node26" href="$class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="469,267,645,296"/>
+</map>

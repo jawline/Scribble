@@ -1,58 +1,105 @@
 \hypertarget{class_v_m_1_1_virtual_machine}{\section{V\-M\-:\-:Virtual\-Machine Class Reference}
 \label{class_v_m_1_1_virtual_machine}\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}}
 }
+
+
+{\ttfamily \#include $<$Virtual\-Machine.\-hpp$>$}
+
+
+
+Collaboration diagram for V\-M\-:\-:Virtual\-Machine\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{class_v_m_1_1_virtual_machine__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd}{virtual long {\bfseries stack\-Long} (int64\-\_\-t pos)}\label{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd}
-
+\hyperlink{class_v_m_1_1_virtual_machine_a599190c44c7f389f00161ac0b7c967be}{Virtual\-Machine} ()
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb}{virtual void {\bfseries stack\-Set\-Long} (int64\-\_\-t pos, int64\-\_\-t v)}\label{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb}
-
+virtual \hyperlink{class_v_m_1_1_virtual_machine_a9fa555bfe2a4f5e21f527252a6d2aafa}{$\sim$\-Virtual\-Machine} ()
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348}{virtual void {\bfseries pop\-Stack\-Long} (int64\-\_\-t \&val, bool \&ref)}\label{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348}
-
+virtual long \hyperlink{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd}{stack\-Long} (int64\-\_\-t pos)
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86}{virtual void {\bfseries push\-Stack\-Long} (int64\-\_\-t v)}\label{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb}{stack\-Set\-Long} (int64\-\_\-t pos, int64\-\_\-t v)
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5}{virtual void {\bfseries expand\-Stack} ()}\label{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348}{pop\-Stack\-Long} (int64\-\_\-t \&val, bool \&ref)
+\item 
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86}{push\-Stack\-Long} (int64\-\_\-t v)
+\item 
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5}{expand\-Stack} ()
 \item 
 virtual void \hyperlink{class_v_m_1_1_virtual_machine_a16e26b2033eb8a2689a29759aa864c7a}{mark\-Stack\-Reference} ()
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d}{virtual void {\bfseries push\-Register} (uint8\-\_\-t reg)}\label{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d}{push\-Register} (uint8\-\_\-t reg)
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb}{virtual void {\bfseries get\-Register} (uint8\-\_\-t reg, long \&val, bool \&is\-Reg)}\label{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb}{get\-Register} (uint8\-\_\-t reg, long \&val, bool \&is\-Reg)
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31}{virtual void {\bfseries set\-Register} (uint8\-\_\-t reg, long val, bool ref)}\label{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31}{set\-Register} (uint8\-\_\-t reg, long val, bool ref)
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8}{virtual \hyperlink{class_v_m_1_1_heap}{Heap} \& {\bfseries get\-Heap} ()}\label{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8}
-
+virtual \hyperlink{class_v_m_1_1_heap}{Heap} \& \hyperlink{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8}{get\-Heap} ()
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a7b26ef866e71358c8ffd4ea133bd15c6}{virtual Smart\-Pointer$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} $>$ {\bfseries find\-Type} (std\-::string name)}\label{class_v_m_1_1_virtual_machine_a7b26ef866e71358c8ffd4ea133bd15c6}
-
+virtual \hyperlink{_smart_pointer_8hpp_afdd8d4ba81c3fcbdeacf1dafba2accfb}{Smart\-Pointer}$<$ \hyperlink{class_v_m_1_1_v_m_entry_type}{V\-M\-Entry\-Type} $>$ \hyperlink{class_v_m_1_1_virtual_machine_a7b26ef866e71358c8ffd4ea133bd15c6}{find\-Type} (std\-::string name)
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1}{virtual void {\bfseries register\-Entry} (std\-::string name, \hyperlink{class_v_m_1_1_namespace_entry}{Namespace\-Entry} entry)}\label{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1}{register\-Entry} (std\-::string name, \hyperlink{class_v_m_1_1_namespace_entry}{Namespace\-Entry} entry)
 \item 
 virtual void \hyperlink{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7}{execute} (std\-::string function)
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db}{virtual void {\bfseries garbage\-Collection} ()}\label{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db}{garbage\-Collection} ()
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc}{virtual void {\bfseries print\-State} ()}\label{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc}{print\-State} ()
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1}{virtual void {\bfseries hit\-Gc} ()}\label{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1}{hit\-Gc} ()
 \item 
-\hypertarget{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba}{virtual void {\bfseries log\-Message} (V\-M\-Log\-Level, std\-::string message)}\label{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba}
-
+virtual void \hyperlink{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba}{log\-Message} (\hyperlink{namespace_v_m_a134aed7f2848be6abf48aaf4253a4027}{V\-M\-Log\-Level}, std\-::string message)
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 43 of file Virtual\-Machine.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_v_m_1_1_virtual_machine_a599190c44c7f389f00161ac0b7c967be}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!Virtual\-Machine@{Virtual\-Machine}}
+\index{Virtual\-Machine@{Virtual\-Machine}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{Virtual\-Machine}]{\setlength{\rightskip}{0pt plus 5cm}V\-M\-::\-Virtual\-Machine\-::\-Virtual\-Machine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_v_m_1_1_virtual_machine_a599190c44c7f389f00161ac0b7c967be}
+
+
+Definition at line 18 of file Virtual\-Machine.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a599190c44c7f389f00161ac0b7c967be_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a9fa555bfe2a4f5e21f527252a6d2aafa}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!$\sim$\-Virtual\-Machine@{$\sim$\-Virtual\-Machine}}
+\index{$\sim$\-Virtual\-Machine@{$\sim$\-Virtual\-Machine}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{$\sim$\-Virtual\-Machine}]{\setlength{\rightskip}{0pt plus 5cm}V\-M\-::\-Virtual\-Machine\-::$\sim$\-Virtual\-Machine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a9fa555bfe2a4f5e21f527252a6d2aafa}
+
+
+Definition at line 78 of file Virtual\-Machine.\-cpp.
+
 
 
 \subsection{Member Function Documentation}
@@ -101,22 +148,216 @@ Call the specified function. Two modes Constant or \hyperlink{class_v_m_1_1_heap
 
 Return to the previous function that was running or exit.
 
-Here is the call graph for this function\-:\nopagebreak
+Definition at line 150 of file Virtual\-Machine.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=320pt]{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7_cgraph}
+\includegraphics[height=550pt]{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7_cgraph}
 \end{center}
 \end{figure}
 
 
 
 
-Here is the caller graph for this function\-:\nopagebreak
+Here is the caller graph for this function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=310pt]{class_v_m_1_1_virtual_machine_addc13d6dc68198f867b7ff8e21746af7_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!expand\-Stack@{expand\-Stack}}
+\index{expand\-Stack@{expand\-Stack}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{expand\-Stack}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::expand\-Stack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5}
+
+
+Definition at line 63 of file Virtual\-Machine\-\_\-\-Stack.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a823add4bb2eb056811ab17cdae1840e5_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a7b26ef866e71358c8ffd4ea133bd15c6}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!find\-Type@{find\-Type}}
+\index{find\-Type@{find\-Type}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{find\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Smart\-Pointer}$<$ {\bf V\-M\-Entry\-Type} $>$ V\-M\-::\-Virtual\-Machine\-::find\-Type (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a7b26ef866e71358c8ffd4ea133bd15c6}
+
+
+Definition at line 82 of file Virtual\-Machine.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a7b26ef866e71358c8ffd4ea133bd15c6_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a7b26ef866e71358c8ffd4ea133bd15c6_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!garbage\-Collection@{garbage\-Collection}}
+\index{garbage\-Collection@{garbage\-Collection}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{garbage\-Collection}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::garbage\-Collection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db}
+
+
+Definition at line 1229 of file Virtual\-Machine.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a8853383f555a506d8ee35b68683e18db_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!get\-Heap@{get\-Heap}}
+\index{get\-Heap@{get\-Heap}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{get\-Heap}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Heap}\& V\-M\-::\-Virtual\-Machine\-::get\-Heap (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8}
+
+
+Definition at line 119 of file Virtual\-Machine.\-hpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a30fb1469c9f436093c06529b257abfb8_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!get\-Register@{get\-Register}}
+\index{get\-Register@{get\-Register}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{get\-Register}]{\setlength{\rightskip}{0pt plus 5cm}virtual void V\-M\-::\-Virtual\-Machine\-::get\-Register (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{reg, }
+\item[{long \&}]{val, }
+\item[{bool \&}]{is\-Reg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb}
+
+
+Definition at line 109 of file Virtual\-Machine.\-hpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{class_v_m_1_1_virtual_machine_a3a756619c328ac943a982bdfc6a31aeb_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!hit\-Gc@{hit\-Gc}}
+\index{hit\-Gc@{hit\-Gc}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{hit\-Gc}]{\setlength{\rightskip}{0pt plus 5cm}virtual void V\-M\-::\-Virtual\-Machine\-::hit\-Gc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1}
+
+
+Definition at line 133 of file Virtual\-Machine.\-hpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_v_m_1_1_virtual_machine_aadc8e41bda5ca137388e7dc6e34c48c1_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!log\-Message@{log\-Message}}
+\index{log\-Message@{log\-Message}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{log\-Message}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::log\-Message (
+\begin{DoxyParamCaption}
+\item[{{\bf V\-M\-Log\-Level}}]{level, }
+\item[{std\-::string}]{message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba}
+
+
+Definition at line 1365 of file Virtual\-Machine.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{class_v_m_1_1_virtual_machine_a3b45f03fa8a5898a19b1afde2e6f68ba_icgraph}
 \end{center}
 \end{figure}
 
@@ -130,8 +371,273 @@ Here is the caller graph for this function\-:\nopagebreak
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a16e26b2033eb8a2689a29759aa864c7a}
 Mark the next entry pushed to the stack as a reference 
 
+Definition at line 85 of file Virtual\-Machine\-\_\-\-Stack.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a16e26b2033eb8a2689a29759aa864c7a_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!pop\-Stack\-Long@{pop\-Stack\-Long}}
+\index{pop\-Stack\-Long@{pop\-Stack\-Long}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{pop\-Stack\-Long}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::pop\-Stack\-Long (
+\begin{DoxyParamCaption}
+\item[{int64\-\_\-t \&}]{val, }
+\item[{bool \&}]{ref}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348}
+
+
+Definition at line 27 of file Virtual\-Machine\-\_\-\-Stack.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a894cb6bba41d689f7efe9d96b1169348_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!print\-State@{print\-State}}
+\index{print\-State@{print\-State}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{print\-State}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::print\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc}
+
+
+Definition at line 1333 of file Virtual\-Machine.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a3f19073759247713fb74a1f32f9c66cc_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!push\-Register@{push\-Register}}
+\index{push\-Register@{push\-Register}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{push\-Register}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::push\-Register (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{reg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d}
+
+
+Definition at line 1220 of file Virtual\-Machine.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a5bf3b52879bae8c9199733031840a74d_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!push\-Stack\-Long@{push\-Stack\-Long}}
+\index{push\-Stack\-Long@{push\-Stack\-Long}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{push\-Stack\-Long}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::push\-Stack\-Long (
+\begin{DoxyParamCaption}
+\item[{int64\-\_\-t}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86}
+
+
+Definition at line 47 of file Virtual\-Machine\-\_\-\-Stack.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a2e71b42c4b71774c38c068fac038ce86_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!register\-Entry@{register\-Entry}}
+\index{register\-Entry@{register\-Entry}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{register\-Entry}]{\setlength{\rightskip}{0pt plus 5cm}virtual void V\-M\-::\-Virtual\-Machine\-::register\-Entry (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf Namespace\-Entry}}]{entry}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1}
+
+
+Definition at line 125 of file Virtual\-Machine.\-hpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_afe501e1ac466c1799cbbc32db282fdf1_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!set\-Register@{set\-Register}}
+\index{set\-Register@{set\-Register}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{set\-Register}]{\setlength{\rightskip}{0pt plus 5cm}virtual void V\-M\-::\-Virtual\-Machine\-::set\-Register (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{reg, }
+\item[{long}]{val, }
+\item[{bool}]{ref}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31}
+
+
+Definition at line 114 of file Virtual\-Machine.\-hpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_v_m_1_1_virtual_machine_af4da2b5077db8bad2574b35bc1a2bb31_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!stack\-Long@{stack\-Long}}
+\index{stack\-Long@{stack\-Long}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{stack\-Long}]{\setlength{\rightskip}{0pt plus 5cm}long V\-M\-::\-Virtual\-Machine\-::stack\-Long (
+\begin{DoxyParamCaption}
+\item[{int64\-\_\-t}]{pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd}
+
+
+Definition at line 13 of file Virtual\-Machine\-\_\-\-Stack.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a921410c92816e435c186ca5298b72bdd_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb}{\index{V\-M\-::\-Virtual\-Machine@{V\-M\-::\-Virtual\-Machine}!stack\-Set\-Long@{stack\-Set\-Long}}
+\index{stack\-Set\-Long@{stack\-Set\-Long}!VM::VirtualMachine@{V\-M\-::\-Virtual\-Machine}}
+\subsubsection[{stack\-Set\-Long}]{\setlength{\rightskip}{0pt plus 5cm}void V\-M\-::\-Virtual\-Machine\-::stack\-Set\-Long (
+\begin{DoxyParamCaption}
+\item[{int64\-\_\-t}]{pos, }
+\item[{int64\-\_\-t}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb}
+
+
+Definition at line 21 of file Virtual\-Machine\-\_\-\-Stack.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_v_m_1_1_virtual_machine_a59e82138e4b6ffcaa63ba24948e463fb_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Virtual\-Machine.\-hpp\item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Virtual\-Machine.\-cpp\item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/Virtual\-Machine\-\_\-\-Stack.\-cpp\end{DoxyCompactItemize}
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/\hyperlink{_virtual_machine_8hpp}{Virtual\-Machine.\-hpp}\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/\hyperlink{_virtual_machine_8cpp}{Virtual\-Machine.\-cpp}\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-V\-M/\hyperlink{_virtual_machine___stack_8cpp}{Virtual\-Machine\-\_\-\-Stack.\-cpp}\end{DoxyCompactItemize}

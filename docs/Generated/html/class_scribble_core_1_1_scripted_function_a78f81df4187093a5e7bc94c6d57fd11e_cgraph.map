@@ -1,4 +1,5 @@
 <map id="ScribbleCore::ScriptedFunction::argType" name="ScribbleCore::ScriptedFunction::argType">
 <area shape="rect" id="node3" href="$class_scribble_core_1_1_scripted_function.html#a43340a1cf723f2862124eef8d92039f7" title="ScribbleCore::ScriptedFunction\l::numArgs" alt="" coords="256,5,459,51"/>
-<area shape="rect" id="node5" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="265,74,449,121"/>
+<area shape="rect" id="node5" href="$namespace_scribble_core.html#a4042f9dc8c93e8d0e18d7ae614456024" title="ScribbleCore::getTypeManager" alt="" coords="256,75,459,104"/>
+<area shape="rect" id="node7" href="$class_scribble_core_1_1_type_manager.html#af8c5c47c0b35d90522cf8ce8ab136097" title="ScribbleCore::TypeManager\l::getType" alt="" coords="265,127,449,174"/>
 </map>

@@ -3,27 +3,34 @@
 }
 
 
-Inheritance diagram for Bool\-To\-String\-Function\-:\nopagebreak
+{\ttfamily \#include $<$String\-Function.\-hpp$>$}
+
+
+
+Inheritance diagram for Bool\-To\-String\-Function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=190pt]{class_bool_to_string_function__inherit__graph}
+\includegraphics[width=210pt]{class_bool_to_string_function__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for Bool\-To\-String\-Function\-:\nopagebreak
+Collaboration diagram for Bool\-To\-String\-Function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=190pt]{class_bool_to_string_function__coll__graph}
+\includegraphics[width=210pt]{class_bool_to_string_function__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_bool_to_string_function_a9a8da1c0053f40bd06eb3c8a9e243631}{{\bfseries Bool\-To\-String\-Function} (std\-::string ns)}\label{class_bool_to_string_function_a9a8da1c0053f40bd06eb3c8a9e243631}
-
+\hyperlink{class_bool_to_string_function_a9a8da1c0053f40bd06eb3c8a9e243631}{Bool\-To\-String\-Function} (std\-::string ns)
+\item 
+virtual \hyperlink{class_bool_to_string_function_a2b75b41ac8e41de00ebc770fb62d264b}{$\sim$\-Bool\-To\-String\-Function} ()
 \item 
 virtual \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} \hyperlink{class_bool_to_string_function_a4e74a7af474a601db96557e9ff5caffe}{execute} (\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} $\ast$values, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$virt)
 \item 
@@ -34,6 +41,38 @@ const unsigned int \hyperlink{class_bool_to_string_function_a82bdbb122bdaa504615
 \hyperlink{class_scribble_core_1_1_type}{Scribble\-Core\-::\-Type} $\ast$ \hyperlink{class_bool_to_string_function_affe0b7e270045bfa7fdbd7fa65c9174b}{arg\-Type} (unsigned int arg)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 41 of file String\-Function.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_bool_to_string_function_a9a8da1c0053f40bd06eb3c8a9e243631}{\index{Bool\-To\-String\-Function@{Bool\-To\-String\-Function}!Bool\-To\-String\-Function@{Bool\-To\-String\-Function}}
+\index{Bool\-To\-String\-Function@{Bool\-To\-String\-Function}!BoolToStringFunction@{Bool\-To\-String\-Function}}
+\subsubsection[{Bool\-To\-String\-Function}]{\setlength{\rightskip}{0pt plus 5cm}Bool\-To\-String\-Function\-::\-Bool\-To\-String\-Function (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{ns}
+\end{DoxyParamCaption}
+)}}\label{class_bool_to_string_function_a9a8da1c0053f40bd06eb3c8a9e243631}
+
+
+Definition at line 56 of file String\-Function.\-cpp.
+
+\hypertarget{class_bool_to_string_function_a2b75b41ac8e41de00ebc770fb62d264b}{\index{Bool\-To\-String\-Function@{Bool\-To\-String\-Function}!$\sim$\-Bool\-To\-String\-Function@{$\sim$\-Bool\-To\-String\-Function}}
+\index{$\sim$\-Bool\-To\-String\-Function@{$\sim$\-Bool\-To\-String\-Function}!BoolToStringFunction@{Bool\-To\-String\-Function}}
+\subsubsection[{$\sim$\-Bool\-To\-String\-Function}]{\setlength{\rightskip}{0pt plus 5cm}Bool\-To\-String\-Function\-::$\sim$\-Bool\-To\-String\-Function (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_bool_to_string_function_a2b75b41ac8e41de00ebc770fb62d264b}
+
+
+Definition at line 62 of file String\-Function.\-cpp.
+
 
 
 \subsection{Member Function Documentation}
@@ -50,7 +89,12 @@ Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b
 
 
 
-Here is the call graph for this function\-:\nopagebreak
+Definition at line 74 of file String\-Function.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -67,7 +111,7 @@ Here is the call graph for this function\-:\nopagebreak
 \item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{virt}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_bool_to_string_function_a4e74a7af474a601db96557e9ff5caffe}
-This function executes the given \hyperlink{class_a_p_i_1_1_function}{A\-P\-I\-::\-Function} and returns it's result. It called by the more complex execute(\-V\-M\-::\-Virtual\-Machine$\ast$) after that function has converted all arguments into \hyperlink{namespace_a_p_i}{A\-P\-I} values. 
+This function executes the given \hyperlink{class_a_p_i_1_1_function}{A\-P\-I\-::\-Function} and returns it's result. It called by the more complex \hyperlink{class_a_p_i_1_1_function_a5acc2022cdbd5fe47c1a04769a1d8cf4}{execute(\-V\-M\-::\-Virtual\-Machine$\ast$)} after that function has converted all arguments into \hyperlink{namespace_a_p_i}{A\-P\-I} values. 
 \begin{DoxyParams}{Parameters}
 {\em args} & The arguments passed to the function \\
 \hline
@@ -81,6 +125,22 @@ The resulting \hyperlink{namespace_a_p_i}{A\-P\-I} value
 
 Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525ef181c4af}{A\-P\-I\-::\-Function}.
 
+
+
+Definition at line 83 of file String\-Function.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bool_to_string_function_a4e74a7af474a601db96557e9ff5caffe_cgraph}
+\end{center}
+\end{figure}
+
+
 \hypertarget{class_bool_to_string_function_a3372750cab22e2ebebde6f1cd4ad3159}{\index{Bool\-To\-String\-Function@{Bool\-To\-String\-Function}!get\-Type@{get\-Type}}
 \index{get\-Type@{get\-Type}!BoolToStringFunction@{Bool\-To\-String\-Function}}
 \subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Bool\-To\-String\-Function\-::get\-Type (
@@ -91,6 +151,22 @@ Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525e
 Get the return type of the function 
 
 Implements \hyperlink{class_a_p_i_1_1_function_a85b0b2ee88d3ac61a0e77f94e06445b1}{A\-P\-I\-::\-Function}.
+
+
+
+Definition at line 66 of file String\-Function.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bool_to_string_function_a3372750cab22e2ebebde6f1cd4ad3159_cgraph}
+\end{center}
+\end{figure}
+
 
 \hypertarget{class_bool_to_string_function_a82bdbb122bdaa5046158981dfc5211aa}{\index{Bool\-To\-String\-Function@{Bool\-To\-String\-Function}!num\-Args@{num\-Args}}
 \index{num\-Args@{num\-Args}!BoolToStringFunction@{Bool\-To\-String\-Function}}
@@ -105,7 +181,11 @@ Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77
 
 
 
+Definition at line 70 of file String\-Function.\-cpp.
+
+
+
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/String\-Function.\-hpp\item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/String\-Function.\-cpp\end{DoxyCompactItemize}
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/\hyperlink{_string_function_8hpp}{String\-Function.\-hpp}\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/\hyperlink{_string_function_8cpp}{String\-Function.\-cpp}\end{DoxyCompactItemize}

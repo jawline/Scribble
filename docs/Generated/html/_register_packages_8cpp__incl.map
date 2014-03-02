@@ -1,0 +1,33 @@
+<map id="/home/blake/Dropbox/Current/Scribble/src/API/RegisterPackages.cpp" name="/home/blake/Dropbox/Current/Scribble/src/API/RegisterPackages.cpp">
+<area shape="rect" id="node3" href="$_register_packages_8hpp.html" title="RegisterPackages.hpp" alt="" coords="900,117,1055,147"/>
+<area shape="rect" id="node97" href="$_structure_info_8hpp.html" title="Scribble/Value/Structure\lInfo.hpp" alt="" coords="1923,542,2085,589"/>
+<area shape="rect" id="node5" href="$_scribble_2_parser_2_parser_8hpp.html" title="Scribble/Parser/Parser.hpp" alt="" coords="619,195,797,224"/>
+<area shape="rect" id="node47" href="$_virtual_machine_8hpp.html" title="VM/VirtualMachine.hpp" alt="" coords="1197,551,1355,580"/>
+<area shape="rect" id="node77" href="$_v_m_namespace_8hpp.html" title="VMNamespace.hpp" alt="" coords="715,647,851,676"/>
+<area shape="rect" id="node7" href="$_namespace_entry_8hpp.html" title="NamespaceEntry.hpp" alt="" coords="1299,281,1445,311"/>
+<area shape="rect" id="node9" href="$_function_8hpp.html" title="API/Function.hpp" alt="" coords="1280,377,1403,407"/>
+<area shape="rect" id="node11" href="$_smart_pointer_8hpp.html" title="Pointers/SmartPointer.hpp" alt="" coords="1888,888,2061,917"/>
+<area shape="rect" id="node120" href="$_statement_8hpp.html" title="Scribble/Statement\l/Statement.hpp" alt="" coords="349,638,483,685"/>
+<area shape="rect" id="node133" href="$_function_reference_8hpp.html" title="Scribble/Function/Function\lReference.hpp" alt="" coords="557,273,733,319"/>
+<area shape="rect" id="node139" href="$_get_structure_element_statement_8hpp.html" title="Scribble/Statement\l/GetStructureElementStatement.hpp" alt="" coords="93,542,325,589"/>
+<area shape="rect" id="node143" href="$_structure_assign_element_8hpp.html" title="Scribble/Statement\l/StructureAssignElement.hpp" alt="" coords="291,369,483,415"/>
+<area shape="rect" id="node146" href="$_variable_8hpp.html" title="Scribble/Value/Variable.hpp" alt="" coords="2517,551,2699,580"/>
+<area shape="rect" id="node101" href="$_type_reference_8hpp.html" title="Scribble/Parser/TypeReference.hpp" alt="" coords="2493,647,2723,676"/>
+<area shape="rect" id="node25" href="$_constants_8hpp.html" title="VM/Constants.hpp" alt="" coords="2109,551,2240,580"/>
+<area shape="rect" id="node33" href="$_v_m_func_8hpp.html" title="VM/VMFunc.hpp" alt="" coords="832,733,952,763"/>
+<area shape="rect" id="node86" href="$_a_p_i_value_8hpp.html" title="API/Value/APIValue.hpp" alt="" coords="1803,464,1968,493"/>
+<area shape="rect" id="node13" href="$_reference_counter_8hpp.html" title="ReferenceCounter.hpp" alt="" coords="1767,965,1919,995"/>
+<area shape="rect" id="node27" href="$_constant_registers_8hpp.html" title="ConstantRegisters.hpp" alt="" coords="2024,647,2179,676"/>
+<area shape="rect" id="node29" href="$_constant_types_8hpp.html" title="ConstantTypes.hpp" alt="" coords="2203,647,2339,676"/>
+<area shape="rect" id="node31" href="$_call_types_8hpp.html" title="CallTypes.hpp" alt="" coords="2363,647,2469,676"/>
+<area shape="rect" id="node38" href="$_instruction_set_8hpp.html" title="InstructionSet.hpp" alt="" coords="1188,811,1316,840"/>
+<area shape="rect" id="node40" href="$types_8h.html" title="types.h" alt="" coords="1623,888,1687,917"/>
+<area shape="rect" id="node56" href="$_v_m_2_stack_8hpp.html" title="Stack.hpp" alt="" coords="983,811,1063,840"/>
+<area shape="rect" id="node64" href="$_heap_8hpp.html" title="Heap.hpp" alt="" coords="1331,647,1408,676"/>
+<area shape="rect" id="node68" href="$_v_m_entry_type_8hpp.html" title="VMEntryType.hpp" alt="" coords="1391,811,1516,840"/>
+<area shape="rect" id="node66" href="$_v_m_heap_entry_8hpp.html" title="VMHeapEntry.hpp" alt="" coords="1299,733,1427,763"/>
+<area shape="rect" id="node80" href="$_hash_map_8hpp.html" title="Util/HashMap.hpp" alt="" coords="580,811,705,840"/>
+<area shape="rect" id="node93" href="$_type_8hpp.html" title="Scribble/Value/Type.hpp" alt="" coords="1832,733,1995,763"/>
+<area shape="rect" id="node107" href="$_type_manager_8hpp.html" title="Scribble/Value/TypeManager.hpp" alt="" coords="1635,647,1848,676"/>
+<area shape="rect" id="node122" href="$_statement_exception_8hpp.html" title="StatementException.hpp" alt="" coords="93,811,259,840"/>
+</map>

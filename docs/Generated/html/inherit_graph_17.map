@@ -16,13 +16,13 @@
 <area shape="rect" id="node29" href="$class_scribble_core_1_1_increment_statement.html" title="ScribbleCore::IncrementStatement" alt="" coords="220,779,441,808"/>
 <area shape="rect" id="node31" href="$class_scribble_core_1_1_int_statement.html" title="ScribbleCore::IntStatement" alt="" coords="241,832,420,861"/>
 <area shape="rect" id="node33" href="$class_scribble_core_1_1_negative_statement.html" title="ScribbleCore::NegativeStatement" alt="" coords="223,885,439,915"/>
-<area shape="rect" id="node35" href="$class_scribble_core_1_1_operate_statement.html" title="ScribbleCore::OperateStatement" alt="" coords="225,939,436,968"/>
-<area shape="rect" id="node37" href="$class_scribble_core_1_1_or_statement.html" title="ScribbleCore::OrStatement" alt="" coords="241,992,420,1021"/>
-<area shape="rect" id="node39" href="$class_scribble_core_1_1_return_statement.html" title="ScribbleCore::ReturnStatement" alt="" coords="229,1045,432,1075"/>
-<area shape="rect" id="node41" href="$class_scribble_core_1_1_string_statement.html" title="ScribbleCore::StringStatement" alt="" coords="232,1099,429,1128"/>
-<area shape="rect" id="node43" href="$class_scribble_core_1_1_structure_assign_element.html" title="ScribbleCore::StructureAssign\lElement" alt="" coords="232,1151,429,1198"/>
-<area shape="rect" id="node45" href="$class_scribble_core_1_1_structure_statement.html" title="ScribbleCore::StructureStatement" alt="" coords="221,1221,440,1251"/>
-<area shape="rect" id="node47" href="$class_scribble_core_1_1_test_nil_statement.html" title="ScribbleCore::TestNilStatement" alt="" coords="228,1275,433,1304"/>
+<area shape="rect" id="node35" href="$class_scribble_core_1_1_nil_statement.html" title="ScribbleCore::NilStatement" alt="" coords="240,939,421,968"/>
+<area shape="rect" id="node37" href="$class_scribble_core_1_1_operate_statement.html" title="ScribbleCore::OperateStatement" alt="" coords="225,992,436,1021"/>
+<area shape="rect" id="node39" href="$class_scribble_core_1_1_or_statement.html" title="ScribbleCore::OrStatement" alt="" coords="241,1045,420,1075"/>
+<area shape="rect" id="node41" href="$class_scribble_core_1_1_return_statement.html" title="ScribbleCore::ReturnStatement" alt="" coords="229,1099,432,1128"/>
+<area shape="rect" id="node43" href="$class_scribble_core_1_1_string_statement.html" title="ScribbleCore::StringStatement" alt="" coords="232,1152,429,1181"/>
+<area shape="rect" id="node45" href="$class_scribble_core_1_1_structure_assign_element.html" title="ScribbleCore::StructureAssign\lElement" alt="" coords="232,1205,429,1251"/>
+<area shape="rect" id="node47" href="$class_scribble_core_1_1_structure_statement.html" title="ScribbleCore::StructureStatement" alt="" coords="221,1275,440,1304"/>
 <area shape="rect" id="node49" href="$class_scribble_core_1_1_test_statement.html" title="ScribbleCore::TestStatement" alt="" coords="236,1328,425,1357"/>
 <area shape="rect" id="node51" href="$class_scribble_core_1_1_while_statement.html" title="ScribbleCore::WhileStatement" alt="" coords="232,1381,429,1411"/>
 </map>

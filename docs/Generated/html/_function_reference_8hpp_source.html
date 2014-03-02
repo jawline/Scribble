@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -70,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">FunctionReference.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<a href="_function_reference_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * FunctionReference.hpp</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *  Created on: 16 Mar 2013</span></div>
@@ -98,9 +99,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef FUNCTIONREFERENCE_HPP_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define FUNCTIONREFERENCE_HPP_</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;Pointers/SmartPointer.hpp&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;Scribble/Statement/Statement.hpp&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;API/Function.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;<a class="code" href="_smart_pointer_8hpp.html">Pointers/SmartPointer.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_statement_8hpp.html">Scribble/Statement/Statement.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_function_8hpp.html">API/Function.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>ScribbleCore {</div>
@@ -120,18 +121,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    SmartPointer&lt;Function&gt; func_;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a>(std::string fnNamespace, std::string name,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_scribble_core_1_1_function_reference.html#a79bf4edbc9e885b8950d599fa87be039">FunctionReference</a>(std::string fnNamespace, std::string name,</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            std::vector&lt;SafeStatement&gt; fnArgs, SmartPointer&lt;Function&gt; func);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_scribble_core_1_1_function_reference.html#ad242511d83228261b66e12803057ac21">~FunctionReference</a>();</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::string <span class="keyword">const</span>&amp; getName();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::string <span class="keyword">const</span>&amp; getNamespace();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::string <span class="keyword">const</span>&amp; getResolveIssue();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::string getDebugName();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::vector&lt;SafeStatement&gt; <span class="keyword">const</span>&amp; getArgs();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> setResolveIssue(std::string issue);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    SmartPointer&lt;Function&gt; getFunction();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> setFunction(SmartPointer&lt;Function&gt; func);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::string <span class="keyword">const</span>&amp; <a class="code" href="class_scribble_core_1_1_function_reference.html#a3503eee3d549b5c6f414950f62bbca33">getName</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::string <span class="keyword">const</span>&amp; <a class="code" href="class_scribble_core_1_1_function_reference.html#a5a9260934ab22f221958f6f4e9741b1a">getNamespace</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::string <span class="keyword">const</span>&amp; <a class="code" href="class_scribble_core_1_1_function_reference.html#a29fad58add2d8262c02b842269046d37">getResolveIssue</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::string <a class="code" href="class_scribble_core_1_1_function_reference.html#a84339654ac185758f59f759d0de3d74d">getDebugName</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::vector&lt;SafeStatement&gt; <span class="keyword">const</span>&amp; <a class="code" href="class_scribble_core_1_1_function_reference.html#a2972619b5377b0c600556523b9083c90">getArgs</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scribble_core_1_1_function_reference.html#ac081e81ae34f67451ae821b94f8a85d2">setResolveIssue</a>(std::string issue);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    SmartPointer&lt;Function&gt; <a class="code" href="class_scribble_core_1_1_function_reference.html#a16a015b1d50b2d21431bf9e30e19e355">getFunction</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scribble_core_1_1_function_reference.html#a4e3f9133a8ec183ad68e8d2ddba059c7">setFunction</a>(SmartPointer&lt;Function&gt; func);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
@@ -140,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:24 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

@@ -7,27 +7,30 @@
 
 
 
-Inheritance diagram for Random\-Int\-:\nopagebreak
+Inheritance diagram for Random\-Int\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=156pt]{class_random_int__inherit__graph}
+\includegraphics[width=206pt]{class_random_int__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for Random\-Int\-:\nopagebreak
+Collaboration diagram for Random\-Int\-:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=156pt]{class_random_int__coll__graph}
+\includegraphics[width=206pt]{class_random_int__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_random_int_ab8956bd2784b585ec8c1575ba77dc4a7}{{\bfseries Random\-Int} (std\-::string ns)}\label{class_random_int_ab8956bd2784b585ec8c1575ba77dc4a7}
-
+\hyperlink{class_random_int_ab8956bd2784b585ec8c1575ba77dc4a7}{Random\-Int} (std\-::string ns)
+\item 
+virtual \hyperlink{class_random_int_a826ae66ce1ac48a7b30d1a676a9112e8}{$\sim$\-Random\-Int} ()
 \item 
 virtual \hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-Value} \hyperlink{class_random_int_a781d73f929b3a12c5d1cda04e8bf043c}{execute} (\hyperlink{class_a_p_i_1_1_a_p_i_value}{A\-P\-I\-::\-A\-P\-I\-Value} $\ast$values, \hyperlink{class_v_m_1_1_virtual_machine}{V\-M\-::\-Virtual\-Machine} $\ast$virt)
 \item 
@@ -43,6 +46,35 @@ const unsigned int \hyperlink{class_random_int_a10512d2cd058a3f46978511d0722a297
 \subsection{Detailed Description}
 Random integer implementation. Returns a random integer between zero and n 
 
+Definition at line 15 of file Random\-Int.\-hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_random_int_ab8956bd2784b585ec8c1575ba77dc4a7}{\index{Random\-Int@{Random\-Int}!Random\-Int@{Random\-Int}}
+\index{Random\-Int@{Random\-Int}!RandomInt@{Random\-Int}}
+\subsubsection[{Random\-Int}]{\setlength{\rightskip}{0pt plus 5cm}Random\-Int\-::\-Random\-Int (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{ns}
+\end{DoxyParamCaption}
+)}}\label{class_random_int_ab8956bd2784b585ec8c1575ba77dc4a7}
+
+
+Definition at line 12 of file Random\-Int.\-cpp.
+
+\hypertarget{class_random_int_a826ae66ce1ac48a7b30d1a676a9112e8}{\index{Random\-Int@{Random\-Int}!$\sim$\-Random\-Int@{$\sim$\-Random\-Int}}
+\index{$\sim$\-Random\-Int@{$\sim$\-Random\-Int}!RandomInt@{Random\-Int}}
+\subsubsection[{$\sim$\-Random\-Int}]{\setlength{\rightskip}{0pt plus 5cm}Random\-Int\-::$\sim$\-Random\-Int (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_random_int_a826ae66ce1ac48a7b30d1a676a9112e8}
+
+
+Definition at line 16 of file Random\-Int.\-cpp.
+
+
+
 \subsection{Member Function Documentation}
 \hypertarget{class_random_int_a49bb03bdbbfbe5c799017643e53f9d2f}{\index{Random\-Int@{Random\-Int}!arg\-Type@{arg\-Type}}
 \index{arg\-Type@{arg\-Type}!RandomInt@{Random\-Int}}
@@ -55,6 +87,22 @@ Get the expected type of the specified argument
 
 Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b}{A\-P\-I\-::\-Function}.
 
+
+
+Definition at line 28 of file Random\-Int.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_random_int_a49bb03bdbbfbe5c799017643e53f9d2f_cgraph}
+\end{center}
+\end{figure}
+
+
 \hypertarget{class_random_int_a781d73f929b3a12c5d1cda04e8bf043c}{\index{Random\-Int@{Random\-Int}!execute@{execute}}
 \index{execute@{execute}!RandomInt@{Random\-Int}}
 \subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}{\bf A\-P\-I\-Value} Random\-Int\-::execute (
@@ -63,7 +111,7 @@ Implements \hyperlink{class_a_p_i_1_1_function_a531806ea8476e8aa396eb98ce81e713b
 \item[{{\bf V\-M\-::\-Virtual\-Machine} $\ast$}]{virt}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_random_int_a781d73f929b3a12c5d1cda04e8bf043c}
-This function executes the given \hyperlink{class_a_p_i_1_1_function}{A\-P\-I\-::\-Function} and returns it's result. It called by the more complex execute(\-V\-M\-::\-Virtual\-Machine$\ast$) after that function has converted all arguments into \hyperlink{namespace_a_p_i}{A\-P\-I} values. 
+This function executes the given \hyperlink{class_a_p_i_1_1_function}{A\-P\-I\-::\-Function} and returns it's result. It called by the more complex \hyperlink{class_a_p_i_1_1_function_a5acc2022cdbd5fe47c1a04769a1d8cf4}{execute(\-V\-M\-::\-Virtual\-Machine$\ast$)} after that function has converted all arguments into \hyperlink{namespace_a_p_i}{A\-P\-I} values. 
 \begin{DoxyParams}{Parameters}
 {\em args} & The arguments passed to the function \\
 \hline
@@ -77,6 +125,22 @@ The resulting \hyperlink{namespace_a_p_i}{A\-P\-I} value
 
 Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525ef181c4af}{A\-P\-I\-::\-Function}.
 
+
+
+Definition at line 32 of file Random\-Int.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_random_int_a781d73f929b3a12c5d1cda04e8bf043c_cgraph}
+\end{center}
+\end{figure}
+
+
 \hypertarget{class_random_int_a8a8d93f6faf6d6b402375c0e4ba6bf7b}{\index{Random\-Int@{Random\-Int}!get\-Type@{get\-Type}}
 \index{get\-Type@{get\-Type}!RandomInt@{Random\-Int}}
 \subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scribble\-Core\-::\-Type} $\ast$ Random\-Int\-::get\-Type (
@@ -87,6 +151,22 @@ Reimplemented from \hyperlink{class_a_p_i_1_1_function_ac3bc5de6ce095a4c8474525e
 Get the return type of the function 
 
 Implements \hyperlink{class_a_p_i_1_1_function_a85b0b2ee88d3ac61a0e77f94e06445b1}{A\-P\-I\-::\-Function}.
+
+
+
+Definition at line 20 of file Random\-Int.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_random_int_a8a8d93f6faf6d6b402375c0e4ba6bf7b_cgraph}
+\end{center}
+\end{figure}
+
 
 \hypertarget{class_random_int_a10512d2cd058a3f46978511d0722a297}{\index{Random\-Int@{Random\-Int}!num\-Args@{num\-Args}}
 \index{num\-Args@{num\-Args}!RandomInt@{Random\-Int}}
@@ -101,7 +181,11 @@ Implements \hyperlink{class_a_p_i_1_1_function_ae56761ad4c849c05e12cb4cd02583c77
 
 
 
+Definition at line 24 of file Random\-Int.\-cpp.
+
+
+
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Random\-Int.\-hpp\item 
-/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/Random\-Int.\-cpp\end{DoxyCompactItemize}
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/\hyperlink{_random_int_8hpp}{Random\-Int.\-hpp}\item 
+/home/blake/\-Dropbox/\-Current/\-Scribble/src/\-A\-P\-I/\hyperlink{_random_int_8cpp}{Random\-Int.\-cpp}\end{DoxyCompactItemize}

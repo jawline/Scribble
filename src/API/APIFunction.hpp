@@ -14,7 +14,11 @@
 
 namespace API {
 
-class APIFunction : public Function {
+/**
+ * The APIFunction class can be used to register a function pointer instead of a Function wrapper class.
+ */
+
+class APIFunction: public Function {
 private:
 	ScribbleCore::Type* returnType_;
 	std::vector<ScribbleCore::Type*> types_;
@@ -22,7 +26,9 @@ private:
 
 public:
 
-	APIFunction(std::string name, std::string package, ScribbleCore::Type* returnType, std::vector<ScribbleCore::Type*> types,
+	APIFunction(std::string name, std::string package,
+			ScribbleCore::Type* returnType,
+			std::vector<ScribbleCore::Type*> types,
 			API::APIValue (*fn)(API::APIValue*, VM::VirtualMachine* virt));
 
 	virtual ~APIFunction();

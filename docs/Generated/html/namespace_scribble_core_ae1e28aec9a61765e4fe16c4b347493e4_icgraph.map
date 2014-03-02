@@ -1,0 +1,5 @@
+<map id="ScribbleCore::getNilType" name="ScribbleCore::getNilType">
+<area shape="rect" id="node3" href="$class_scribble_core_1_1_function_statement.html#ac9cf13bb2f9f5de5a111bd0e724b4796" title="ScribbleCore::FunctionStatement\l::checkTree" alt="" coords="223,5,436,51"/>
+<area shape="rect" id="node5" href="$class_scribble_core_1_1_nil_statement.html#a0a2ef65936abfe643a9cb554673d52a9" title="ScribbleCore::NilStatement\l::type" alt="" coords="239,74,420,121"/>
+<area shape="rect" id="node7" href="$class_scribble_core_1_1_return_statement.html#a4f93dfa382b64c53a404d9c381552670" title="ScribbleCore::ReturnStatement\l::checkTree" alt="" coords="228,143,431,190"/>
+</map>

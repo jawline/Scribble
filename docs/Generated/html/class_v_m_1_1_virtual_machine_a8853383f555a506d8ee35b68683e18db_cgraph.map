@@ -1,0 +1,9 @@
+<map id="VM::VirtualMachine::garbageCollection" name="VM::VirtualMachine::garbageCollection">
+<area shape="rect" id="node3" href="$class_v_m_1_1_heap.html#a55b3e734c3437a02620684466aa5bc8a" title="VM::Heap::validReference" alt="" coords="432,168,608,197"/>
+<area shape="rect" id="node5" href="$class_v_m_1_1_heap.html#aa816ee55074c8943b8c7055efd0bb271" title="VM::Heap::flag" alt="" coords="232,45,341,74"/>
+<area shape="rect" id="node8" href="$class_v_m_1_1_virtual_machine.html#a921410c92816e435c186ca5298b72bdd" title="VM::VirtualMachine\l::stackLong" alt="" coords="219,98,355,144"/>
+<area shape="rect" id="node10" href="$class_v_m_1_1_heap.html#ac0fc2201e52d83ce9d1a3f69528f2954" title="VM::Heap::getType" alt="" coords="219,168,355,197"/>
+<area shape="rect" id="node13" href="$class_v_m_1_1_heap.html#a111c75b74ccab7b481ec4c578a8a8cd1" title="VM::Heap::getAddress" alt="" coords="209,221,364,250"/>
+<area shape="rect" id="node16" href="$class_v_m_1_1_heap.html#a1bf0adf9ed907280cfa1ac07a008da46" title="VM::Heap::getSize" alt="" coords="220,274,353,304"/>
+<area shape="rect" id="node19" href="$class_v_m_1_1_heap.html#ace7f82504bd848493b74eefde4489c7c" title="VM::Heap::processUnflagged" alt="" coords="189,328,384,357"/>
+</map>

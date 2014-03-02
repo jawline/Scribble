@@ -50,6 +50,9 @@ func main() {
  // The initial ops is the list of operations 1 is add, 2 is sub, 3 is multiply and 4 is divide
  var ops := Stack{1, Stack { 2, Stack { 3, Stack { 4, Stack { 5, nil } } } } };
 
+ sys.Compare("Hello", "Hello");
+ console.Log( sys.String( sys.Compare("Hello", "ello") ) );
+
  //While there are still operations to do
  while Empty(ops) = false do {
 

@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>ScribbleCore</b></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_parser_reference.html">ParserReference</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespace_scribble_core.html">ScribbleCore</a></li><li class="navelem"><a class="el" href="class_scribble_core_1_1_parser_reference.html">ParserReference</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -96,54 +96,238 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ScribbleCore::ParserReference Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for ScribbleCore::ParserReference:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_scribble_core_1_1_parser_reference__coll__graph.png" border="0" usemap="#_scribble_core_1_1_parser_reference_coll__map" alt="Collaboration graph"/></div>
 <map name="_scribble_core_1_1_parser_reference_coll__map" id="_scribble_core_1_1_parser_reference_coll__map">
-<area shape="rect" id="node2" href="class_scribble_core_1_1_get_structure_element_statement.html" title="ScribbleCore::GetStructure\lElementStatement" alt="" coords="5,86,184,133"/><area shape="rect" id="node4" href="class_scribble_core_1_1_statement.html" title="ScribbleCore::Statement" alt="" coords="140,5,305,35"/><area shape="rect" id="node6" href="class_scribble_core_1_1_structure_assign_element.html" title="ScribbleCore::StructureAssign\lElement" alt="" coords="208,86,405,133"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<area shape="rect" id="node2" href="class_scribble_core_1_1_get_structure_element_statement.html" title="{ScribbleCore::GetStructure\lElementStatement\n||+ GetStructureElementStatement()\l+ ~GetStructureElementStatement()\l+ checkTree()\l+ type()\l+ fix()\l+ generateCode()\l}" alt="" coords="5,229,237,419"/><area shape="rect" id="node4" href="class_scribble_core_1_1_statement.html" title="{ScribbleCore::Statement\n||+ Statement()\l+ ~Statement()\l+ generateDebugInformation()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="168,6,363,178"/><area shape="rect" id="node6" href="class_scribble_core_1_1_structure_assign_element.html" title="{ScribbleCore::StructureAssign\lElement\n||+ StructureAssignElement()\l+ ~StructureAssignElement()\l+ fix()\l+ checkTree()\l+ type()\l+ generateCode()\l}" alt="" coords="261,229,459,419"/></map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a40f2688a7edc2d9721af2919b4cb14f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40f2688a7edc2d9721af2919b4cb14f0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ParserReference</b> (SmartPointer&lt; <a class="el" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a> &gt; reference)</td></tr>
+<tr class="memitem:a40f2688a7edc2d9721af2919b4cb14f0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#a40f2688a7edc2d9721af2919b4cb14f0">ParserReference</a> (<a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a> &gt; reference)</td></tr>
 <tr class="separator:a40f2688a7edc2d9721af2919b4cb14f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaafa208d4520c88e59a4fa1771044aef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaafa208d4520c88e59a4fa1771044aef"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ParserReference</b> (<a class="el" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a> *elementType)</td></tr>
+<tr class="memitem:aaafa208d4520c88e59a4fa1771044aef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#aaafa208d4520c88e59a4fa1771044aef">ParserReference</a> (<a class="el" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a> *elementType)</td></tr>
 <tr class="separator:aaafa208d4520c88e59a4fa1771044aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26eed5b755fdccfd1eb122166b0f0cf4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26eed5b755fdccfd1eb122166b0f0cf4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ParserReference</b> (<a class="el" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a> *assign)</td></tr>
+<tr class="memitem:a26eed5b755fdccfd1eb122166b0f0cf4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#a26eed5b755fdccfd1eb122166b0f0cf4">ParserReference</a> (<a class="el" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a> *assign)</td></tr>
 <tr class="separator:a26eed5b755fdccfd1eb122166b0f0cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af40b981d02c3d768520fd4e03a9e4dec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af40b981d02c3d768520fd4e03a9e4dec"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ParserReference</b> (AutoVariablePair pair)</td></tr>
+<tr class="memitem:af40b981d02c3d768520fd4e03a9e4dec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#af40b981d02c3d768520fd4e03a9e4dec">ParserReference</a> (<a class="el" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">AutoVariablePair</a> pair)</td></tr>
 <tr class="separator:af40b981d02c3d768520fd4e03a9e4dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b4f48269f65478479c6466fbecac0d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b4f48269f65478479c6466fbecac0d4"></a>
-ParserReferenceType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b> ()</td></tr>
+<tr class="memitem:a9b4f48269f65478479c6466fbecac0d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980a">ParserReferenceType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#a9b4f48269f65478479c6466fbecac0d4">type</a> ()</td></tr>
 <tr class="separator:a9b4f48269f65478479c6466fbecac0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ac1d91061b77ed79265e184e992b5dfe7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1d91061b77ed79265e184e992b5dfe7"></a>
-SmartPointer&lt; <a class="el" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>functionReference</b></td></tr>
+<tr class="memitem:ac1d91061b77ed79265e184e992b5dfe7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#ac1d91061b77ed79265e184e992b5dfe7">functionReference</a></td></tr>
 <tr class="separator:ac1d91061b77ed79265e184e992b5dfe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a637e85d515b38865bfaee3f3e0314d1b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a637e85d515b38865bfaee3f3e0314d1b"></a>
-<a class="el" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>structureElementType</b></td></tr>
+<tr class="memitem:a637e85d515b38865bfaee3f3e0314d1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#a637e85d515b38865bfaee3f3e0314d1b">structureElementType</a></td></tr>
 <tr class="separator:a637e85d515b38865bfaee3f3e0314d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8aa51bfc4b87577b0f99570828a4fb9e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8aa51bfc4b87577b0f99570828a4fb9e"></a>
-<a class="el" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>assignElementType</b></td></tr>
+<tr class="memitem:a8aa51bfc4b87577b0f99570828a4fb9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#a8aa51bfc4b87577b0f99570828a4fb9e">assignElementType</a></td></tr>
 <tr class="separator:a8aa51bfc4b87577b0f99570828a4fb9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad076a03489530a2021aac5d8d7761eed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad076a03489530a2021aac5d8d7761eed"></a>
-AutoVariablePair&#160;</td><td class="memItemRight" valign="bottom"><b>autoVariableType</b></td></tr>
+<tr class="memitem:ad076a03489530a2021aac5d8d7761eed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">AutoVariablePair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scribble_core_1_1_parser_reference.html#ad076a03489530a2021aac5d8d7761eed">autoVariableType</a></td></tr>
 <tr class="separator:ad076a03489530a2021aac5d8d7761eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00030">30</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a40f2688a7edc2d9721af2919b4cb14f0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::ParserReference::ParserReference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt; <a class="el" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a> &gt;&#160;</td>
+          <td class="paramname"><em>reference</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00036">36</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaafa208d4520c88e59a4fa1771044aef"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::ParserReference::ParserReference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a> *&#160;</td>
+          <td class="paramname"><em>elementType</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00041">41</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a26eed5b755fdccfd1eb122166b0f0cf4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::ParserReference::ParserReference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a> *&#160;</td>
+          <td class="paramname"><em>assign</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00046">46</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af40b981d02c3d768520fd4e03a9e4dec"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ScribbleCore::ParserReference::ParserReference </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">AutoVariablePair</a>&#160;</td>
+          <td class="paramname"><em>pair</em>)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00051">51</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9b4f48269f65478479c6466fbecac0d4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_scribble_core.html#a09019d631eedc703900d447f6965980a">ParserReferenceType</a> ScribbleCore::ParserReference::type </td>
+          <td>(</td>
+          <td class="paramname">)</td><td></td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00056">56</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a8aa51bfc4b87577b0f99570828a4fb9e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_scribble_core_1_1_structure_assign_element.html">StructureAssignElement</a>* ScribbleCore::ParserReference::assignElementType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00062">62</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad076a03489530a2021aac5d8d7761eed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_scribble_core.html#a6c19e97eb8a6427c1f921de9e13fd534">AutoVariablePair</a> ScribbleCore::ParserReference::autoVariableType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00063">63</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac1d91061b77ed79265e184e992b5dfe7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_smart_pointer_8hpp.html#afdd8d4ba81c3fcbdeacf1dafba2accfb">SmartPointer</a>&lt;<a class="el" href="class_scribble_core_1_1_function_reference.html">FunctionReference</a>&gt; ScribbleCore::ParserReference::functionReference</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00060">60</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a637e85d515b38865bfaee3f3e0314d1b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_scribble_core_1_1_get_structure_element_statement.html">GetStructureElementStatement</a>* ScribbleCore::ParserReference::structureElementType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html#l00061">61</a> of file <a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/blake/Dropbox/Current/Scribble/src/Scribble/Parser/<a class="el" href="_scribble_2_parser_2_parser_8hpp_source.html">Parser.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 21 2014 12:42:01 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 2 2014 13:04:25 for Scribble by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.4
 </small></address>

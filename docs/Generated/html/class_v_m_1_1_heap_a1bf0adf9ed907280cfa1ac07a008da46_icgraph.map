@@ -1,0 +1,8 @@
+<map id="VM::Heap::getSize" name="VM::Heap::getSize">
+<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#a1506f360a478ac864b76fec0409bc117" title="API::APIValue::getArrayLength" alt="" coords="187,45,389,75"/>
+<area shape="rect" id="node9" href="$class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="452,123,588,170"/>
+<area shape="rect" id="node13" href="$class_v_m_1_1_virtual_machine.html#a8853383f555a506d8ee35b68683e18db" title="VM::VirtualMachine\l::garbageCollection" alt="" coords="220,149,356,195"/>
+<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#a799ace497f1988f95af61d6796d67a19" title="API::APIValue::getIndex" alt="" coords="437,5,603,35"/>
+<area shape="rect" id="node7" href="$class_a_p_i_1_1_a_p_i_value.html#aa8a379bf602fc10523bfc4a4867dbc55" title="API::APIValue::setIndex" alt="" coords="437,59,603,88"/>
+<area shape="rect" id="node11" href="$class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="651,132,773,161"/>
+</map>

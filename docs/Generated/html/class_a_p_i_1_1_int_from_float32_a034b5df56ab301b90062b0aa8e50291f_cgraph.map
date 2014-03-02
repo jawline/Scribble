@@ -1,3 +1,4 @@
 <map id="API::IntFromFloat32::execute" name="API::IntFromFloat32::execute">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#a2374ba437041f0c57514be649825312b" title="API::APIValue::getValueFloat32" alt="" coords="196,13,404,43"/>
+<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#a2374ba437041f0c57514be649825312b" title="API::APIValue::getValueFloat32" alt="" coords="196,5,404,35"/>
+<area shape="rect" id="node5" href="$namespace_scribble_core.html#ac2c1a79ca525acb1fc51da7c986ea3b9" title="ScribbleCore::getIntType" alt="" coords="217,59,383,88"/>
 </map>
