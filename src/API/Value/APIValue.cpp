@@ -22,4 +22,161 @@ APIValue::~APIValue() {
 
 }
 
+APIValue APIValue::getIndex(unsigned int index, VM::VirtualMachine* vm) {
+
+	if (cType_->getType() != ScribbleCore::Array) {
+		return API::APIValue();
+	}
+
+	if (index > getArrayLength(vm)) {
+		return API::APIValue();
+	}
+
+	int offset = getReferenceType()->arraySubtype()->getElementSize() * index;
+
+	unsigned char* elementData = data_.get() + offset;
+	//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
+
+	int64_t res = 0;
+
+	switch (getReferenceType()->arraySubtype()->getElementSize()) {
+	case 1:
+		res = (int64_t) (*elementData);
+		break;
+	case 2:
+		res = (int64_t) (*((int16_t*) elementData));
+		break;
+	case 4:
+		res = (int64_t) (*((int32_t*) elementData));
+		break;
+	case 8:
+		res = (int64_t) (*((int64_t*) elementData));
+		break;
+	default:
+		printf("Issues");
+		return API::APIValue();
+		break;
+	}
+
+	if (getReferenceType()->arraySubtype()->isReference()) {
+		return API::APIValue(cType_->getSubtype(),
+				getReferenceType()->arraySubtype(),
+				vm->getHeap().getSmartPointer(res), res);
+	} else {
+		return API::APIValue(cType_->getSubtype(), res);
+	}
+
+}
+
+void APIValue::setField(std::string const& name, API::APIValue val,
+		VM::VirtualMachine* vm) {
+
+	if (cType_->getType() != ScribbleCore::StructureType) {
+		return;
+	}
+
+	ScribbleCore::StructureInfo* info = (ScribbleCore::StructureInfo*) cType_;
+
+	int index = info->getIndex(name);
+
+	if (index == -1) {
+		return;
+	}
+
+	int offset = getReferenceType()->getStructureFieldOffset(index);
+
+	unsigned char* elementData = data_.get() + offset;
+	//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
+
+	switch (getReferenceType()->getStructureFields()[index]->getType()->getElementSize()) {
+	case 1:
+		(*(int8_t*) elementData) = val.getValue64();
+		break;
+	case 2:
+		(*(int16_t*) elementData) = val.getValue64();
+		break;
+	case 4:
+		(*(int32_t*) elementData) = val.getValue64();
+		break;
+	case 8:
+		(*(int64_t*) elementData) = val.getValue64();
+		break;
+	default:
+		printf("Issues");
+		return;
+		break;
+	}
+
+}
+
+void APIValue::setIndex(unsigned int index, API::APIValue val,
+		VM::VirtualMachine* vm) {
+
+	if (cType_->getType() != ScribbleCore::Array) {
+		return;
+	}
+
+	if (index > getArrayLength(vm)) {
+		return;
+	}
+
+	//TODO: Check against array length
+
+	int offset = getReferenceType()->arraySubtype()->getElementSize() * index;
+
+	unsigned char* elementData = data_.get() + offset;
+	//TODO: Find somewhere to consolidate all the various switch statements (4 in the VM, 2 outside of it, if I ever change the byte sizes of primitives it could be an issue)
+
+	switch (getReferenceType()->arraySubtype()->getElementSize()) {
+	case 1:
+		(*(int8_t*) elementData) = val.getValue64();
+		break;
+	case 2:
+		(*(int16_t*) elementData) = val.getValue64();
+		break;
+	case 4:
+		(*(int32_t*) elementData) = val.getValue64();
+		break;
+	case 8:
+		(*(int64_t*) elementData) = val.getValue64();
+		break;
+	default:
+		printf("Issues");
+		return;
+		break;
+	}
+
+}
+
+void APIValue::pushToVM(VM::VirtualMachine* virt) {
+
+	if (isReference()) {
+		virt->markStackReference();
+	}
+
+	virt->pushStackLong(val_);
+}
+
+API::APIValue APIValue::makeString(std::string const& text,
+		VM::VirtualMachine* vm) {
+
+	//Create the new heap entry
+	long heapEntry = vm->getHeap().allocate(
+			vm->findType(ScribbleCore::getStringType()->getTypeName()),
+			text.length() + 1, (uint8_t*) text.c_str());
+
+	//Make a new API value from it
+	return API::APIValue(ScribbleCore::getStringType(),
+			vm->findType(ScribbleCore::getStringType()->getTypeName()),
+			vm->getHeap().getSmartPointer(heapEntry), heapEntry);
+}
+
+API::APIValue APIValue::makeInt32(int val) {
+	return API::APIValue(ScribbleCore::getIntType(), val);
+}
+
+API::APIValue APIValue::makeFloat32(float32_t val) {
+	return API::APIValue(ScribbleCore::getFloat32Type(), *((long*) &val));
+}
+
 } /* namespace API */

@@ -68,8 +68,10 @@
 \contentsline {chapter}{\numberline {3}Instruction Encoding}{33}{chapter.3}
 \contentsline {section}{\numberline {3.1}Instructions List}{34}{section.3.1}
 \contentsline {chapter}{\numberline {4}Type Inference}{36}{chapter.4}
-\contentsline {chapter}{\numberline {5}Package Handling}{38}{chapter.5}
-\contentsline {chapter}{\numberline {6}Garbage Collection}{40}{chapter.6}
-\contentsline {chapter}{\numberline {7}Native Interface}{42}{chapter.7}
-\contentsline {section}{\numberline {7.1}Structure}{42}{section.7.1}
-\contentsline {chapter}{Bibliography}{45}{chapter*.26}
+\contentsline {section}{\numberline {4.1}Expression type inference in function matching}{37}{section.4.1}
+\contentsline {section}{\numberline {4.2}Expression type inference in error checking}{38}{section.4.2}
+\contentsline {chapter}{\numberline {5}Package Handling}{40}{chapter.5}
+\contentsline {chapter}{\numberline {6}Garbage Collection}{42}{chapter.6}
+\contentsline {chapter}{\numberline {7}Native Interface}{44}{chapter.7}
+\contentsline {section}{\numberline {7.1}Structure}{44}{section.7.1}
+\contentsline {chapter}{Bibliography}{48}{chapter*.26}

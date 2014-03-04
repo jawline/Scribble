@@ -182,6 +182,7 @@ public:
 		case ValueType::ValueTypeMax:
 			return "invalid";
 		case ValueType::TypeUnresolved:
+		default:
 			return "unresolved";
 		}
 

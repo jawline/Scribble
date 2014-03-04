@@ -1406,7 +1406,6 @@ The instructions in Scribble are 64 bits wide, the first 8 bits always represent
 
 \includegraphics{"Instruction"}
 
-
 Fig 1. Scribble Instruction
 
 In order to make the virtual machine useful I had to ensure that there where enough instructions available to achieve anything that was valid within the higher level language. This involved looking at each of the language features and working out a way of expressing them as a set of instructions, for example the for loop is achieved by using assign, compare and jump operators in order to iterate until a condition is met. The number and complexity of the instructions that a virtual machine can perform can have a significant impact on its performance. If the instructions are to specialized then a larger number of possible instructions will be needed which could potentially slow down the virtual machine as it has to spend more time with each instruction or increase the size required to store the part of the instruction that tells the virtual machine what to do. Alternatively having less complex instructions will increase the number of instructions that need to be executed to perform each task which  and could potentially lead to the virtual machine not being able to complete a task or support a feature later on.
@@ -1536,6 +1535,62 @@ The example above shows that the variable type inference makes the definition of
 
 One potential negative to this approach is that it will be difficult to immediately work out the type of a variable when the expression it is assigned to involves a function call which they do not know the type of. This issue is likely to be mitigated by good naming practices when naming functions, platform documentation and IDEs however it could cause issues in large poorly documented programs.
 
+\section{Expression type inference in function matching}
+
+Scribble ability to infer the type of expressions is also extremely useful when used with matching a function call with the appropriate function. In Scribble a function name may be used to call several functions which accept different parameters removing the need for confusing naming conventions to differentiate between types such as functions like sqrt and sqrtf in the C standard library. One example of this is the sys.String function, for which there is a definition which takes each of the primitive types in Scribble and returns it as a string.
+
+\begin{verbatim}
+String ( int ) : string
+String ( float32 ) : string
+String ( bool ) : string
+\end{verbatim}
+
+Each definition of a function is an independent function which can be identified by using its signature, a combination of its name, the number and type of parameters and the type of the value that it returns.
+
+This feature requires the compiler to be able to be able to identify the correct function signature from a function call. In Scribble this can be achieved because the type of each of the arguments can be inferred by inspecting the tree and a function with the correct signature will be selected.
+
+\section{Expression type inference in error checking}
+
+Scribble enforces a strictly typed syntax in an attempt to avoid many of the common issues that arise and can go undetected when a language implicitly converts values between two types.
+
+One very simple example of these issues would be the issues that arise when performing arithmetic on values of different types in C.
+
+\begin{verbatim}
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+ int i = 5.0 / 2.0;
+ printf("%i", i);
+}
+\end{verbatim}
+
+In this example the program would print the value 2 to the screen. Though issues arising from this example seem unlikely ( And a good compiler is also likely to warn a developer about it) when there are complex expressions of several different types which involve large amounts of arithmetic this can lead to extremely cryptic issues which are incredibly hard to debug.
+
+In Scribble operations which compare or modify values can only be performed on expressions of the same type, this makes issues with type conversion less likely as no cast is implicit. 
+
+This adds complexity to the compiler as it has to compute and compare the type of the expressions involved in many operations, additionally as some type or function references are resolved after the file is parsed. In Scribble this problem is solved by combining the same expression type inference functionality used to infer the type of variables and combining it with a recursive descent algorithm which verifies there are no issues with each node in the programs statement tree.
+
+\begin{verbatim}
+function CheckTree(Tree* root) {
+ 
+ For each child i of root do {
+
+   if CheckTree(i) throws an exception then 
+   exit and return to the try catch handler 
+   around the initial call to CheckTree
+   
+ }
+ 
+ if CheckForIssues() finds an error then throw an exception 
+ 					 detailing the error and where it occurs 
+ 					 in the program.
+
+}
+\end{verbatim}
+Above is an example of the CheckTree function in pseudo code.
+
+By using the function detailed above each node in the statement tree can be checked. The CheckForIssues function will be overloaded for each type of node on the tree, for instance a node of type AddStatement's CheckForIssues function would use type inference to ensure that it was adding two expressions of the same type, and also to check that the type of the expressions being added together was valid ( So nobody tried to add together two references or booleans ) whereas the CheckForIssues function in an array assignment node would check that the type of the expression to be assigned to  was the same as the type of data stored in the array, whilst also checking that the index expression was an integer.
+
 \chapter{Package Handling}
 
 There are two common approaches to handling multiple source code files within a program. Languages such as C tend to include anything loaded from an external file into the existing namespace, for example if file A includes file B which defines the function hello\_world then the function hello\_world would be usable from A. This approach often leads to naming conflicts, especially when middleware or libraries are being used as several developers will often choose the same name for different functions or classes. C++ attempts to avoid this problem with the concept of namespaces, however they add additional complexity to the code and can lead to names becoming confusing within complex systems.
@@ -1647,6 +1702,10 @@ There is one other common technique when trying to automatically free memory tha
 \chapter{Native Interface}
 
 The native interface is the way that a scripting language such as Scribble, LUA or V8 interact with the program which is executing them. The native interface is an extremely important part of the programming language as the functionality that is provides dictates what a user can do with the language. The native interface should expose any parts of the programming language that the developer could need, for example if the native interface did not allow a developer to get elements from an array then the usefulness of arrays within the language would be severely diminished. The interface should also aim to be as abstract as possible and avoid as much coupling to the underlying implementation. There are two reasons for this, a developer does not want to have to understand how ScribbleVM actually executes the program in order to extract useful information from it and you want to be able to maintain a backwards compatible native interface indefinitely, if a developer has to rewrite their native code for every version of Scribble then they will not use the language.
+
+This interface is provided in the form of a C++ application programming interface (API). The Scribble API specifies how to add native code functions to Scribble, call Scribble functions and also provides a class which allows you to more easily work with function arguments and return values. In addition to this the API also provides a set of helper functions to make some of the more complex issues like allocating memory on the heap or checking for compilation errors simpler.
+
+One downside to writing the API in C++ is that many languages do not have easy ways to wrap around C++ code which would reduce the number of languages which Scribble would be compatible with. One way in which this could be improved would be by implementing a version of the API in standard C as most languages provide a way of using or writing a wrapper which can call code which has been written in C.
 
 \section{Structure}
 
