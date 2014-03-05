@@ -1410,6 +1410,16 @@ Fig 1. Scribble Instruction
 
 In order to make the virtual machine useful I had to ensure that there where enough instructions available to achieve anything that was valid within the higher level language. This involved looking at each of the language features and working out a way of expressing them as a set of instructions, for example the for loop is achieved by using assign, compare and jump operators in order to iterate until a condition is met. The number and complexity of the instructions that a virtual machine can perform can have a significant impact on its performance. If the instructions are to specialized then a larger number of possible instructions will be needed which could potentially slow down the virtual machine as it has to spend more time with each instruction or increase the size required to store the part of the instruction that tells the virtual machine what to do. Alternatively having less complex instructions will increase the number of instructions that need to be executed to perform each task which  and could potentially lead to the virtual machine not being able to complete a task or support a feature later on.
 
+\section{Potential Improvements}
+
+One way in which the instruction encoding in Scribbles virtual machine could be improved would be to allow the storage of function variables on the stack rather than in registers.
+
+The benefit of this is that it would free some registers which could then be used to store temporary or intermediate values when calculating expressions, reducing the number of push, pop and move instructions which would need to be executed. It would also allow an unlimited number of variables per function ( currently each function is limited to 32 local variables ).
+
+This could be achieved by allocating stack space for each variable at the start of a function and introducing OpCodes allow the the getting and setting of specific locations on the stack ( Currently the only stack op codes are Push and Pop ).
+
+The reason I did not implement this was because it introduced an issue with my method of detection of references within the stack required for garbage collection. This issue could have been sold by dedicated set variable and get variable op codes as variables do not change type however I did not realize this when I was implementing the statements regarding to the storage, getting and setting of variables.
+
 \section{Instructions List}
 
 The code below lists all of the possible instructions that are compatible with ScribbleVM. These OpCodes form the first 8 bits of every instruction and are used to tell the VM how to handle the instruction.

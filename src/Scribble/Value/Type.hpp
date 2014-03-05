@@ -179,11 +179,11 @@ public:
 			return "nil";
 		case ValueType::Float32:
 			return "float32";
-		case ValueType::ValueTypeMax:
-			return "invalid";
 		case ValueType::TypeUnresolved:
+			return "unresolved-type";
+		case ValueType::ValueTypeMax:
 		default:
-			return "unresolved";
+			return "invalid";
 		}
 
 	}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.2)  4 MAR 2014 12:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.2)  5 MAR 2014 00:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -441,71 +441,80 @@ Package pdftex.def Info: "Instruction".png used on input line 1407.
 
 [33
 
-] [34 <./Instruction.png>] [35]
+] [34 <./Instruction.png>] [35] [36]
 Chapter 4.
-[36
+[37
 
-] [37] [38] [39]
+] [38] [39] [40]
 Chapter 5.
-[40
+[41
 
-] [41]
+] [42]
 Chapter 6.
-[42
+[43
 
-] [43]
+] [44]
 Chapter 7.
-[44
+[45
 
 ]
-Overfull \hbox (18.87729pt too wide) in paragraph at lines 1729--1729
+Overfull \hbox (18.87729pt too wide) in paragraph at lines 1739--1739
 []\OT1/cmtt/m/n/10.95 virtual API::APIValue execute(API::APIValue* values, VM::
 VirtualMachine* virt) {[] 
  []
 
-<"function_class_diagram".png, id=379, 366.36874pt x 735.74875pt>
+<"function_class_diagram".png, id=384, 366.36874pt x 735.74875pt>
 File: "function_class_diagram".png Graphic file (type png)
 
 <use "function_class_diagram".png>
-Package pdftex.def Info: "function_class_diagram".png used on input line 1745.
+Package pdftex.def Info: "function_class_diagram".png used on input line 1755.
 (pdftex.def)             Requested size: 146.54489pt x 294.29428pt.
- [45]
-Overfull \hbox (18.87729pt too wide) in paragraph at lines 1760--1760
+ [46]
+Overfull \hbox (18.87729pt too wide) in paragraph at lines 1770--1770
 []\OT1/cmtt/m/n/10.95 virtual API::APIValue execute(API::APIValue* values, VM::
 VirtualMachine* virt) {[] 
  []
 
-[46 <./function_class_diagram.png>] [47]
+[47 <./function_class_diagram.png>] [48]
 
-LaTeX Warning: Empty `thebibliography' environment on input line 1775.
+LaTeX Warning: Empty `thebibliography' environment on input line 1785.
 
 
-Overfull \hbox (109.05193pt too wide) in paragraph at lines 1774--1775
+Overfull \hbox (109.05193pt too wide) in paragraph at lines 1784--1785
 \OT1/cmr/m/n/10.95 JVM Garbage Col-lec-tion - http://www.oracle.com/webfolder/t
 echnetwork/tutorials/obe/java/gc01/index.html 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1780.
-[48
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1790.
+[49
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1780.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1790.
  (./Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1780.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1780.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1790.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1790.
 
-Package rerunfilecheck Info: File `Report.out' has not changed.
-(rerunfilecheck)             Checksum: C924AD0CF4939F0CD4C62CA5B22A3113;1281.
 
+
+Package rerunfilecheck Warning: File `Report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Report.out':
+(rerunfilecheck)             Before: C924AD0CF4939F0CD4C62CA5B22A3113;1281
+(rerunfilecheck)             After:  AA153145BF1203D1863D0BA15EB32DAA;1350.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1780.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1790.
  ) 
 Here is how much of TeX's memory you used:
- 6107 strings out of 495031
- 89726 string characters out of 6181532
+ 6109 strings out of 495031
+ 89744 string characters out of 6181532
  177900 words of memory out of 5000000
  9141 multiletter control sequences out of 15000+600000
  12019 words of font info for 42 fonts, out of 8000000 for 9000
@@ -519,10 +528,10 @@ r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
 fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Report.pdf (49 pages, 457289 bytes).
+Output written on Report.pdf (50 pages, 458693 bytes).
 PDF statistics:
- 456 PDF objects out of 1000 (max. 8388607)
- 387 compressed objects within 4 object streams
- 129 named destinations out of 1000 (max. 500000)
+ 461 PDF objects out of 1000 (max. 8388607)
+ 391 compressed objects within 4 object streams
+ 131 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
