@@ -30,8 +30,6 @@ int maxBuf;
 
 void GrowConstant(int size) {
 
- printf("GROWING CONSTANT BY %i to %i\n", size, maxConst + size);
-
  uint8_t* nc = new uint8_t[maxConst + size];
 
  memcpy(nc, constant, maxConst);
@@ -43,8 +41,6 @@ void GrowConstant(int size) {
 }
 
 void GrowBuffer(int size) {
-
- printf("GROWING BUFFER BY %i to %i\n", size, maxBuf + size);
  
  uint8_t* nb = new uint8_t[maxBuf + size];
  memcpy(nb, buffer, maxBuf);

@@ -36,10 +36,13 @@ VM::InstructionSet Parser::parse(std::string text) {
 	//Free all the data allocated during parsing and reset all values to 0
    	delete[] buffer;
 	buffer = 0;
-    delete[] constant;
+
+	delete[] constant;
 	constant = 0;
+
 	currentConstant = 0;
 	current = 0;
+
 	maxBuf = 0;
 	maxConst = 0;
 
