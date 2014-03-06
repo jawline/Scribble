@@ -162,5 +162,5 @@ ScribbleCore::Type* StringCompare::argType(unsigned int arg) {
   return ScribbleCore::getStringType();
  }
 
-
+ return nullptr;
 }

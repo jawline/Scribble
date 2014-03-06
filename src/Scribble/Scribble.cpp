@@ -87,20 +87,6 @@ API::APIValue Scribble::execute(std::string function) {
 API::APIValue Scribble::execute(std::string function,
 		std::vector<API::APIValue> arguments) {
 
-	auto entry = compiledPackages[ScribbleCore::Parser::getUniformPath(packagePath)].find(
-			function);
-
-	/*
-	 //Check that the __init__ code has compiled properly.
-	 if (entry == compiledPackages["__init__"].end()
-	 || entry->second.type() != FunctionSetEntry
-	 || entry->second.getFunctionSet().size() != 1
-	 || entry->second.getFunctionSet()[0]->numArgs() != 0) {
-	 printf("Function %s does not exist\n", function.c_str());
-	 return API::APIValue();
-	 }*/
-
-	//Grab a reference to __init__.__init__ for execution
 	API::SafeFunction toExecute =
 			findFunction(arguments,
 					compiledPackages[ScribbleCore::Parser::getUniformPath(packagePath)][function].getFunctionSet());

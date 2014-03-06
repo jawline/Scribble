@@ -58,9 +58,9 @@ void registerPackages(std::map<std::string, ScribbleCore::NamespaceType>& allNam
 
 						ScribbleCore::Type* fieldType = info->getIndex(i).second->type;
 
-						std::string fullTypeName = info->getIndex(i).second->type->getTypeName();
+						std::string fullTypeName = fieldType->getTypeName();
 
-						vm.logMessage(VM::Log, info->getIndex(i).first + " : " + ((ScribbleCore::StructureInfo*) info->getIndex(i).second->type)->getTypeName() + "\n");
+						vm.logMessage(VM::Log, info->getIndex(i).first + " : " + fullTypeName + "\n");
 
 						SmartPointer<VM::VMStructureField> newField = SmartPointer<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr));
 						postResolveList.push_back(std::pair<std::string, SmartPointer<VM::VMStructureField>>(fullTypeName, newField));
