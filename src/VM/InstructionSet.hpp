@@ -10,16 +10,17 @@
 #include <types.h>
 #include <iostream>
 #include <vector>
+#include <Pointers/SmartPointer.hpp>
 
 namespace VM {
 
 class InstructionSet {
 private:
 
-	uint8_t* instructions_;
+	SmartPointer<uint8_t> instructions_;
 	size_t numInstructions_;
 
-	uint8_t* constants_;
+	SmartPointer<uint8_t> constants_;
 	size_t numConstants_;
 
 	unsigned int start_;
@@ -33,35 +34,35 @@ public:
 	unsigned int numInstructions();
 
 	uint8_t getInst(size_t i) {
-		return instructions_[i];
+		return instructions()[i];
 	}
 
 	int getInt(size_t i) {
-		return *(int*)(instructions_ + i);
+		return *(int*)(instructions() + i);
 	}
 
 	long getLong(size_t i) {
-		return *(long*)(instructions_ + i);
+		return *(long*)(instructions() + i);
 	}
 
 	inline uint8_t getConstantByte(size_t index) {
-		return constants_[index];
+		return constants()[index];
 	}
 
 	inline int getConstantInt(size_t index) {
-		return *(int*)(constants_ + index);
+		return *(int*)(constants() + index);
 	}
 
 	inline long getConstantLong(size_t index) {
-		return *(long*)(constants_ + index);
+		return *(long*)(constants() + index);
 	}
 
 	inline float32_t getConstantFloat32(size_t index) {
-		return *(float32_t*)(constants_+index);
+		return *(float32_t*)(constants() + index);
 	}
 
 	inline char* getConstantString(size_t index) {
-		return (char*)(constants_ + index);
+		return (char*)(constants() + index);
 	}
 
 	uint8_t* instructions();

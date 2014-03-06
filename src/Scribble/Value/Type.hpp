@@ -14,7 +14,19 @@ namespace ScribbleCore {
 
 class TypeReferenceCore;
 
+/**
+ * The TypeReference class is a reference counted pointer to a reference of a type. This is used
+ * because the compiler allows for the use of types before they are defined. These references are
+ * resolved after the packages are parsed and allow the linking between a reference to a type and
+ * its defined type.
+ */
+
 typedef SmartPointer<TypeReferenceCore> TypeReference;
+
+/**
+ * The value operator is an enum that defines the basic operations that can be
+ * applied to a numeric value.
+ */
 
 enum ValueOperator {
 	Add, Subtract, Divide, Multiply
@@ -152,6 +164,10 @@ public:
 	 * Test whether this type is equivalent to a given type.
 	 */
 	bool Equals(Type* other);
+
+	/**
+	 * If this type is an array then this will return a reference to its subtype.
+	 */
 
 	TypeReference getSubtypeReference();
 
