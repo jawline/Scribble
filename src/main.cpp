@@ -14,10 +14,10 @@
 #include <Scribble/Scribble.hpp>
 
 /**
- * Defines getCPUTime
+ * Defines clock
  */
 
-#include <cputime.hpp>
+#include <time.h>
 
 /**
  * In this case that the program files to compile ParserException will be thrown.
@@ -64,16 +64,16 @@ int main(int argc, char* argv[]) {
 		Scribble environment(targetFile);
 
 		//Get the current time
-		double vmStart = getCPUTime();
+		clock_t start = clock();
 
 		//Execute func main()
 		API::APIValue val = environment.execute("main");
 
 		//Get the new current time
-		double vmEnd = getCPUTime();
+		clock_t end = clock();
 
 		//Print out the time the execution took
-		printf("VM execution took time %f\n", vmEnd - vmStart);
+		printf("VM execution took time %f\n", ((double)(end - start)) / (double)CLOCKS_PER_SEC);
 
 	} catch (ScribbleCore::ParserException& ex) {
 		printf("Error: %s\n", ex.what());
