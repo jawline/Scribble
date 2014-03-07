@@ -26,47 +26,81 @@ private:
 	unsigned int start_;
 
 public:
-	InstructionSet() : numInstructions_(0), numConstants_(0), start_(0)  { }
+	InstructionSet() : numInstructions_(0), numConstants_(0), start_(0) {}
 	InstructionSet(uint8_t* instructions, size_t numInstructions, uint8_t* constants, size_t numConstants, unsigned int start);
 	virtual ~InstructionSet();
 
-	unsigned int startInstruction();
-	unsigned int numInstructions();
+	/**
+	 * Returns the index of the first instruction to execute ( In bytes ).
+	 */
 
-	uint8_t getInst(size_t i) {
-		return instructions()[i];
-	}
+	unsigned int getStartLocation();
 
-	int getInt(size_t i) {
-		return *(int*)(instructions() + i);
-	}
+	/**
+	 * Return the size of the instruction set in bytes.
+	 */
 
-	long getLong(size_t i) {
-		return *(long*)(instructions() + i);
-	}
+	unsigned int getSizeInBytes();
 
-	inline uint8_t getConstantByte(size_t index) {
-		return constants()[index];
-	}
+	/**
+	 * Return the byte from instructions at the given index i.
+	 */
 
-	inline int getConstantInt(size_t index) {
-		return *(int*)(constants() + index);
-	}
+	uint8_t getByte(size_t i);
 
-	inline long getConstantLong(size_t index) {
-		return *(long*)(constants() + index);
-	}
+	/**
+	 * Return the integer from instructions at the given index i.
+	 */
 
-	inline float32_t getConstantFloat32(size_t index) {
-		return *(float32_t*)(constants() + index);
-	}
+	int getInt(size_t i);
 
-	inline char* getConstantString(size_t index) {
-		return (char*)(constants() + index);
-	}
+	/**
+	 * Return the long ( 8 bytes ) from instructions at given index i.
+	 */
 
-	uint8_t* instructions();
-	uint8_t* constants();
+	long getLong(size_t i);
+
+	/**
+	 * Return a byte from the constant memory for this instruction set at index i.
+	 */
+
+	uint8_t getConstantByte(size_t index);
+
+	/**
+	 * Return a int from the constant memory for this instruction set at index i.
+	 */
+
+	int getConstantInt(size_t index);
+
+	/**
+	 * Return a long from the constant memory for this instruction set at index i.
+	 */
+
+	long getConstantLong(size_t index);
+
+	/**
+	 * Return a 32 bit float from the constant memory for this instruction set at index i.
+	 */
+
+	float32_t getConstantFloat32(size_t index);
+
+	/**
+	 * Return a string from this constant memory for this instruction set at index i.
+	 */
+
+	char* getConstantString(size_t index);
+
+	/**
+	 * Return a pointer to the instruction sets memory.
+	 */
+
+	uint8_t* getInstructionsPointer();
+
+	/**
+	 * Return a pointer to the constant memory for a instruction set.
+	 */
+
+	uint8_t* getConstantsPointer();
 };
 
 } /* namespace VM */

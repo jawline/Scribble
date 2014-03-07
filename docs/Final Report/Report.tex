@@ -1778,6 +1778,12 @@ virtual API::APIValue execute(API::APIValue target,
 
 This technique would provide a more intuitive interface and is used in more developed native interfaces such as the Java native interface, however it adds additional complexity to the Function class as defining a function with a variable number of arguments without using the complex and confusing virtual arguments syntax is not easily achieved in C++.
 
+\chapter{Intermediate Code}
+
+The Scribble compiler generates Scribble assembly (SASM). SASM is a language capable of representing every valid function in Scribble at a much lower level than the high level Scribble syntax. The generated SASM code is converted into bytecode which is compatible with ScribbleVM before execution.
+
+Using an intermediate language over direct translation to bytecode is not necissary however it does have several advantages.
+
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 \begin{thebibliography}{99}

@@ -27,20 +27,53 @@ InstructionSet::~InstructionSet() {
 	//delete[] constants_;
 }
 
-uint8_t* InstructionSet::instructions() {
+uint8_t* InstructionSet::getInstructionsPointer() {
 	return instructions_.get();
 }
 
-uint8_t* InstructionSet::constants() {
+uint8_t* InstructionSet::getConstantsPointer() {
 	return constants_.get();
 }
 
-unsigned int InstructionSet::startInstruction() {
+unsigned int InstructionSet::getStartLocation() {
 	return start_;
 }
 
-unsigned int InstructionSet::numInstructions() {
+unsigned int InstructionSet::getSizeInBytes() {
 	return numInstructions_;
+}
+
+
+uint8_t InstructionSet::getByte(size_t i) {
+	return getInstructionsPointer()[i];
+}
+
+int InstructionSet::getInt(size_t i) {
+	return *(int*)(getInstructionsPointer() + i);
+}
+
+long InstructionSet::getLong(size_t i) {
+	return *(long*)(getInstructionsPointer() + i);
+}
+
+uint8_t InstructionSet::getConstantByte(size_t index) {
+	return getConstantsPointer()[index];
+}
+
+int InstructionSet::getConstantInt(size_t index) {
+	return *(int*)(getConstantsPointer() + index);
+}
+
+long InstructionSet::getConstantLong(size_t index) {
+	return *(long*)(getConstantsPointer() + index);
+}
+
+float32_t InstructionSet::getConstantFloat32(size_t index) {
+	return *(float32_t*)(getConstantsPointer() + index);
+}
+
+char* InstructionSet::getConstantString(size_t index) {
+	return (char*)(getConstantsPointer() + index);
 }
 
 } /* namespace VM */

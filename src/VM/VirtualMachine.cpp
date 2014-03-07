@@ -166,14 +166,14 @@ void VirtualMachine::execute(std::string function) {
 
 	InstructionSet instructionSet = currentFunction->getInstructions();
 
-	currentInstruction = instructionSet.startInstruction();
+	currentInstruction = instructionSet.getStartLocation();
 
 	bool shouldReturn = false;
 
 	while (!shouldReturn) {
 
 		//If the current PC is above the number of instructions in this function then attempt to return. Else execute the instruction at the PC.
-		if (currentInstruction >= instructionSet.numInstructions()) {
+		if (currentInstruction >= instructionSet.getSizeInBytes()) {
 
 			if (!returnToPreviousFunction(currentFunction, instructionSet)) {
 				shouldReturn = true;
@@ -181,7 +181,7 @@ void VirtualMachine::execute(std::string function) {
 
 		} else {
 
-			switch (instructionSet.getInst(currentInstruction)) {
+			switch (instructionSet.getByte(currentInstruction)) {
 
 			/**
 			 *  Loads the constant data at the specified constant index into the given register.
@@ -192,7 +192,7 @@ void VirtualMachine::execute(std::string function) {
 
 				int constantDataStart = instructionSet.getInt(
 						currentInstruction + 1);
-				uint8_t destinationRegister = instructionSet.getInst(
+				uint8_t destinationRegister = instructionSet.getByte(
 						currentInstruction + 5);
 
 //			VM_PRINTF_LOG("Loading constant into %i\n", destinationRegister);
@@ -281,8 +281,8 @@ void VirtualMachine::execute(std::string function) {
 				 */
 
 			case OpMove: {
-				uint8_t target = instructionSet.getInst(currentInstruction + 1);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 2);
+				uint8_t target = instructionSet.getByte(currentInstruction + 1);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 2);
 				registers_[dest] = registers_[target];
 				registerReference_[dest] = registerReference_[target];
 				currentInstruction += vmOpCodeSize;
@@ -295,7 +295,7 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpJump: {
 
-				uint8_t mode = instructionSet.getInst(currentInstruction + 1);
+				uint8_t mode = instructionSet.getByte(currentInstruction + 1);
 				int dest = instructionSet.getInt(currentInstruction + 2);
 
 				switch (mode) {
@@ -335,9 +335,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpAdd: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
 				//			left, right, dest);
@@ -355,9 +355,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpSub: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//VM_PRINTF_LOG(
 				//	"Subtracted registers %i and %i. Placing result in %i\n",
@@ -376,9 +376,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpMul: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//VM_PRINTF_LOG(
 				//		"Multiplied registers %i and %i. Placing result in %i\n",
@@ -397,9 +397,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpDiv: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
 				//		left, right, dest);
@@ -412,14 +412,14 @@ void VirtualMachine::execute(std::string function) {
 			}
 
 			case OpInc: {
-				uint8_t dst = instructionSet.getInst(currentInstruction + 1);
+				uint8_t dst = instructionSet.getByte(currentInstruction + 1);
 				registers_[dst] = registers_[dst] + 1;
 				currentInstruction += vmOpCodeSize;
 				break;
 			}
 
 			case OpDec: {
-				uint8_t dst = instructionSet.getInst(currentInstruction + 1);
+				uint8_t dst = instructionSet.getByte(currentInstruction + 1);
 				registers_[dst] = registers_[dst] - 1;
 				currentInstruction += vmOpCodeSize;
 				break;
@@ -427,9 +427,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpAddFloat32: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//	VM_PRINTF_LOG("Added registers %i and %i. Placing result in %i\n",
 				//			left, right, dest);
@@ -448,9 +448,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpSubFloat32: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//VM_PRINTF_LOG(
 				//	"Subtracted registers %i and %i. Placing result in %i\n",
@@ -469,9 +469,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpMulFloat32: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//VM_PRINTF_LOG(
 				//		"Multiplied registers %i and %i. Placing result in %i\n",
@@ -490,9 +490,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpDivFloat32: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				//VM_PRINTF_LOG("Divided registers %i and %i. Placing result in %i\n",
 				//		left, right, dest);
@@ -510,9 +510,9 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpCmpFloat32: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 3);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 3);
 
 				float32_t* leftR = (float32_t*) &registers_[left];
 				float32_t* rightR = (float32_t*) &registers_[right];
@@ -537,8 +537,8 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpEqual: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
 
 				if (registers_[left] == registers_[right]) {
 					currentInstruction += vmOpCodeSize;
@@ -551,8 +551,8 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpNotEqual: {
 
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
 
 				if (registers_[left] != registers_[right]) {
 					currentInstruction += vmOpCodeSize;
@@ -564,7 +564,7 @@ void VirtualMachine::execute(std::string function) {
 			}
 
 			case OpEqualZero: {
-				uint8_t tReg = instructionSet.getInst(currentInstruction + 1);
+				uint8_t tReg = instructionSet.getByte(currentInstruction + 1);
 
 				if (registers_[tReg] == 0) {
 					currentInstruction += vmOpCodeSize;
@@ -580,8 +580,8 @@ void VirtualMachine::execute(std::string function) {
 				 */
 
 			case OpLessThan: {
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
 
 				if (registers_[left] < registers_[right]) {
 					currentInstruction += vmOpCodeSize;
@@ -593,8 +593,8 @@ void VirtualMachine::execute(std::string function) {
 			}
 
 			case OpGreaterThan: {
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
 
 				if (registers_[left] > registers_[right]) {
 					currentInstruction += vmOpCodeSize;
@@ -606,8 +606,8 @@ void VirtualMachine::execute(std::string function) {
 			}
 
 			case OpGreaterThanOrEqual: {
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
 
 				if (registers_[left] >= registers_[right]) {
 					currentInstruction += vmOpCodeSize;
@@ -625,9 +625,9 @@ void VirtualMachine::execute(std::string function) {
 				 * NumRegisters - Offset 2 - 1 byte
 				 */
 			case OpPushRegisters: {
-				uint8_t startRegister = instructionSet.getInst(
+				uint8_t startRegister = instructionSet.getByte(
 						currentInstruction + 1);
-				uint8_t numRegisters = instructionSet.getInst(
+				uint8_t numRegisters = instructionSet.getByte(
 						currentInstruction + 2);
 
 				//printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
@@ -645,9 +645,9 @@ void VirtualMachine::execute(std::string function) {
 				 * Pop n registers starting from the start+nth register and the last pop acting on the start register
 				 */
 			case OpPopRegisters: {
-				uint8_t startRegister = instructionSet.getInst(
+				uint8_t startRegister = instructionSet.getByte(
 						currentInstruction + 1);
-				uint8_t numRegisters = instructionSet.getInst(
+				uint8_t numRegisters = instructionSet.getByte(
 						currentInstruction + 2);
 
 //				VM_PRINTF_LOG("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
@@ -683,8 +683,8 @@ void VirtualMachine::execute(std::string function) {
 				 */
 
 			case OpLessThanOrEqual: {
-				uint8_t left = instructionSet.getInst(currentInstruction + 1);
-				uint8_t right = instructionSet.getInst(currentInstruction + 2);
+				uint8_t left = instructionSet.getByte(currentInstruction + 1);
+				uint8_t right = instructionSet.getByte(currentInstruction + 2);
 
 				if (registers_[left] <= registers_[right]) {
 					currentInstruction += vmOpCodeSize;
@@ -697,11 +697,11 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpStructGetField: {
 
-				uint8_t tgtArray = instructionSet.getInst(
+				uint8_t tgtArray = instructionSet.getByte(
 						currentInstruction + 1);
-				uint8_t indexReg = instructionSet.getInst(
+				uint8_t indexReg = instructionSet.getByte(
 						currentInstruction + 2);
-				uint8_t dataReg = instructionSet.getInst(
+				uint8_t dataReg = instructionSet.getByte(
 						currentInstruction + 3);
 
 				//Check that the target array is a valid reference
@@ -763,11 +763,11 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpStructSetField: {
 
-				uint8_t tgtArray = instructionSet.getInst(
+				uint8_t tgtArray = instructionSet.getByte(
 						currentInstruction + 1);
-				uint8_t indexReg = instructionSet.getInst(
+				uint8_t indexReg = instructionSet.getByte(
 						currentInstruction + 2);
-				uint8_t dataReg = instructionSet.getInst(
+				uint8_t dataReg = instructionSet.getByte(
 						currentInstruction + 3);
 
 				//Check that the target array is a valid reference
@@ -831,10 +831,10 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpArraySet: {
 
-				uint8_t data = instructionSet.getInst(currentInstruction + 1);
-				uint8_t tgtArray = instructionSet.getInst(
+				uint8_t data = instructionSet.getByte(currentInstruction + 1);
+				uint8_t tgtArray = instructionSet.getByte(
 						currentInstruction + 2);
-				uint8_t index = instructionSet.getInst(currentInstruction + 3);
+				uint8_t index = instructionSet.getByte(currentInstruction + 3);
 
 				if (!registerReference_[tgtArray]) {
 					VM_PRINTF_FATAL(
@@ -901,10 +901,10 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpArrayGet: {
 
-				uint8_t tgtArray = instructionSet.getInst(
+				uint8_t tgtArray = instructionSet.getByte(
 						currentInstruction + 1);
-				uint8_t index = instructionSet.getInst(currentInstruction + 2);
-				uint8_t dataRegister = instructionSet.getInst(
+				uint8_t index = instructionSet.getByte(currentInstruction + 2);
+				uint8_t dataRegister = instructionSet.getByte(
 						currentInstruction + 3);
 
 				if (!registerReference_[tgtArray]) {
@@ -977,7 +977,7 @@ void VirtualMachine::execute(std::string function) {
 
 				int constantLocation = instructionSet.getInt(
 						currentInstruction + 1);
-				uint8_t dest = instructionSet.getInst(currentInstruction + 5);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 5);
 
 				//Get the type
 				std::string type =
@@ -1019,10 +1019,10 @@ void VirtualMachine::execute(std::string function) {
 			case OpNewArray: {
 
 				//Get the arguments
-				uint8_t lengthRegister = instructionSet.getInst(
+				uint8_t lengthRegister = instructionSet.getByte(
 						currentInstruction + 1);
 
-				uint8_t destinationRegister = instructionSet.getInst(
+				uint8_t destinationRegister = instructionSet.getByte(
 						currentInstruction + 2);
 
 				int constantLocation = instructionSet.getInt(
@@ -1085,11 +1085,11 @@ void VirtualMachine::execute(std::string function) {
 			case OpArrayLength: {
 
 				//Get the register which has the reference to the array.
-				uint8_t arrayRegister = instructionSet.getInst(
+				uint8_t arrayRegister = instructionSet.getByte(
 						currentInstruction + 1);
 
 				//Get the register in which the length should be put
-				uint8_t dest = instructionSet.getInst(currentInstruction + 2);
+				uint8_t dest = instructionSet.getByte(currentInstruction + 2);
 
 				//Check it's a valid reference
 				if (!registerReference_[arrayRegister]
@@ -1121,7 +1121,7 @@ void VirtualMachine::execute(std::string function) {
 
 			case OpCallFn: {
 
-				uint8_t modeRegister = instructionSet.getInst(
+				uint8_t modeRegister = instructionSet.getByte(
 						currentInstruction + 1);
 				std::string name;
 
@@ -1168,7 +1168,7 @@ void VirtualMachine::execute(std::string function) {
 					currentFunction = functionEntry.getFunction();
 
 					instructionSet = currentFunction->getInstructions();
-					currentInstruction = instructionSet.startInstruction();
+					currentInstruction = instructionSet.getStartLocation();
 
 				}
 
@@ -1193,7 +1193,7 @@ void VirtualMachine::execute(std::string function) {
 
 			default: {
 				VM_PRINTF_FATAL("Invalid instruction %li. %ii\n",
-						currentInstruction, instructionSet.getInst(currentInstruction));
+						currentInstruction, instructionSet.getByte(currentInstruction));
 				return;
 			}
 
