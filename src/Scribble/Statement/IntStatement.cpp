@@ -16,10 +16,7 @@ int IntStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
 	if (resultRegister != -1) {
-
-		generated << "load " << intValue_ << " $" << resultRegister << " #"
-				<< resultRegister << "\n";
-
+		generated << "load " << intValue_ << " $" << resultRegister << "\n";
 	}
 
 	return 1;

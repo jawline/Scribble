@@ -7,20 +7,52 @@
 
 #include "RegisterPackages.hpp"
 #include <Scribble/Value/StructureInfo.hpp>
+#include <SASM/Parser.hpp>
 
-void registerPackages(std::map<std::string, ScribbleCore::NamespaceType>& allNames,
+std::string outputCode(ScribbleCore::NamespaceType names,
 		VM::VirtualMachine& vm) {
 
-	std::vector < std::pair < std::string, SmartPointer<VM::VMStructureField>>>postResolveList;
+	std::stringstream packageCode;
+
+	for (auto iterator = names.begin(); iterator != names.end(); iterator++) {
+
+		if (iterator->second.type() == ScribbleCore::FunctionSetEntry) {
+
+			ScribbleCore::FunctionSet functionSet =
+					iterator->second.getFunctionSet();
+
+			for (unsigned int i = 0; i < functionSet.size(); i++) {
+				SmartPointer<Function> function = functionSet[i];
+
+				if (!function->isNativeFunction()) {
+					packageCode << function->getName() << " {\n";
+					function->debugCode(packageCode);
+					packageCode << "}\n\n";
+				}
+
+			}
+
+		}
+
+	}
+
+	return packageCode.str();
+}
+
+void registerPackages(
+		std::map<std::string, ScribbleCore::NamespaceType>& allNames,
+		VM::VirtualMachine& vm) {
+
+	std::vector<std::pair<std::string, SmartPointer<VM::VMStructureField>>>postResolveList;
 
 	for (auto selectedNamespaceIter = allNames.begin();
 			selectedNamespaceIter != allNames.end(); selectedNamespaceIter++) {
 
-		vm.logMessage(VM::Log,
-				std::string("Registering namespace ")
-				+ selectedNamespaceIter->first + std::string("\n"));
+		std::string packageCode = outputCode(selectedNamespaceIter->second, vm);
 
-		VM::VMNamespace newSpace;
+		vm.logMessage(VM::Log, std::string("----BEGIN NAMESPACE ") + selectedNamespaceIter->first + "----\n" + packageCode + "\n----END NAMESPACE----\n\n");
+
+		VM::VMNamespace newSpace = SimpleASM::Parser::parse(packageCode);
 
 		ScribbleCore::NamespaceType names = selectedNamespaceIter->second;
 
@@ -32,16 +64,13 @@ void registerPackages(std::map<std::string, ScribbleCore::NamespaceType>& allNam
 				ScribbleCore::FunctionSet functionSet = iterator->second.getFunctionSet();
 
 				for (unsigned int i = 0; i < functionSet.size(); i++) {
+
 					SmartPointer<Function> function = functionSet[i];
 
-					std::stringstream code;
-					function->debugCode(code);
+					if (function->isNativeFunction()) {
+						newSpace.insert(function->getName(), VM::NamespaceEntry(API::Function::getNativeFunction(function)));
+					}
 
-					newSpace.insert(function->getName(), VM::NamespaceEntry(API::Function::generateVMFunction(function)));
-
-					vm.logMessage(VM::Log, std::string("Registered string ") + function->getName());
-
-					vm.logMessage(VM::Log, std::string(" {\n") + code.str() + std::string("\n}\n"));
 				}
 
 			} else if (iterator->second.type() == ScribbleCore::TypeEntry) {

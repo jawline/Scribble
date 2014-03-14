@@ -58,16 +58,16 @@ int IfStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	generated << "#if statement test\n";
+	generated << "--if statement test\n";
 	instrs += condition_->generateCode(VM::vmTempRegisterThree, generated);
 
-	generated << "#if check test result\n";
+	generated << "--if check test result\n";
 
 	generated << "neq $" << VM::vmTempRegisterThree << " 1\n";
 	generated << "jmpr " << (trueSize + 2) << "\n";
 	instrs += 3;
 
-	generated << "#if statement body\n";
+	generated << "--if statement body\n";
 
 	generated << trueBody.str();
 	instrs += trueSize;
@@ -75,7 +75,7 @@ int IfStatement::generateCode(int resultRegister,
 	generated << "jmpr " << (falseSize + 1) << "\n";
 	instrs += 1;
 
-	generated << "#if statement false body\n";
+	generated << "--if statement false body\n";
 
 	generated << falseBody.str();
 	instrs += falseSize;

@@ -20,7 +20,7 @@
 #include <time.h>
 
 /**
- * In this case that the program files to compile ParserException will be thrown.
+ * In this case that the Function files to compile ParserException will be thrown.
  */
 
 #include <Scribble/Parser/ParserException.hpp>

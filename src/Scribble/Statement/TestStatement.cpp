@@ -52,7 +52,7 @@ int TestStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	generated << "#Test statement\n";
+	generated << "--Test statement\n";
 
 	instrs += lhs_->generateCode(VM::vmTempRegisterOne, generated);
 
@@ -87,7 +87,7 @@ int TestStatement::generateCode(int resultRegister,
 		case TestEquals:
 			//2
 			generated << "eq $" << VM::vmTempRegisterOne << " $"
-					<< VM::vmTempRegisterTwo << " #test lhs rhs\n";
+					<< VM::vmTempRegisterTwo << " --test lhs rhs\n";
 			instrs += 1;
 			break;
 
@@ -165,7 +165,7 @@ int TestStatement::generateCode(int resultRegister,
 		case TestEquals:
 			//2
 			generated << "eq $" << VM::vmTempRegisterOne << " $"
-					<< VM::vmTempRegisterTwo << " #test lhs rhs\n";
+					<< VM::vmTempRegisterTwo << " --test lhs rhs\n";
 			instrs += 1;
 			break;
 
@@ -177,26 +177,26 @@ int TestStatement::generateCode(int resultRegister,
 
 		case TestLess:
 			generated << "lt $" << VM::vmTempRegisterOne << " $"
-					<< VM::vmTempRegisterTwo << " #test less than lhs rhs\n";
+					<< VM::vmTempRegisterTwo << " --test less than lhs rhs\n";
 			instrs += 1;
 			break;
 
 		case TestLessOrEqual:
 			generated << "le $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo
-					<< " #tess less or equal lhs rhs\n";
+					<< " --test less or equal lhs rhs\n";
 			instrs += 1;
 			break;
 
 		case TestGreater:
 			generated << "gt $" << VM::vmTempRegisterOne << " $"
-					<< VM::vmTempRegisterTwo << " #test greater\n";
+					<< VM::vmTempRegisterTwo << " --test greater\n";
 			instrs += 1;
 			break;
 
 		case TestGreaterOrEqual:
 			generated << "ge $" << VM::vmTempRegisterOne << " $"
-					<< VM::vmTempRegisterTwo << " #test greater or equal\n";
+					<< VM::vmTempRegisterTwo << " --test greater or equal\n";
 			instrs += 1;
 			break;
 
@@ -230,7 +230,7 @@ int TestStatement::generateCode(int resultRegister,
 		instrs++;
 	}
 
-	generated << "#Test statement end. " << instrs << " instructions\n";
+	generated << "--Test statement end. " << instrs << " instructions\n";
 
 	return instrs;
 }

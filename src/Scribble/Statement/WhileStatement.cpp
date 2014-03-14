@@ -45,17 +45,17 @@ int WhileStatement::generateCode(int resultRegister,
 	int numInstr = 0;
 	int numBodyInstrs = 0;
 
-	body << "#while body\n";
+	body << "--while body\n";
 
 	for (unsigned int i = 0; i < statements_.size(); i++) {
 		numBodyInstrs += statements_[i]->generateCode(-1, body);
 	}
 
 
-	generated << "#while conditions\n";
+	generated << "--while conditions\n";
 	numInstr += condition_->generateCode(VM::vmTempRegisterThree, generated);
 
-	generated << "#while test condition result\n";
+	generated << "--while test condition result\n";
 
 	generated << "eq $" << VM::vmTempRegisterThree << " 0\n";
 	numInstr += 2;
@@ -66,7 +66,7 @@ int WhileStatement::generateCode(int resultRegister,
 	generated << body.str();
 	numInstr += numBodyInstrs;
 
-	generated << "#return to sender\n";
+	generated << "--return to sender\n";
 	generated << "jmpr -" << (numInstr) << "\n";
 
 	numInstr++;

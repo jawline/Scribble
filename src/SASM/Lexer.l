@@ -34,12 +34,12 @@ long {integer}L
 real {integer}("."{integer})*
 register ${integer}
 string \"[^\"]*\"
-word [_|a-z|A-Z][a-z|A-Z|0-9]*
+word [_|a-z|A-Z|#][a-z|A-Z|0-9|#]*
 float32 {real}f
 
 %%
 
-"#"            { BEGIN(C_COMMENT); }
+"--"            { BEGIN(C_COMMENT); }
 <C_COMMENT>"\n" { BEGIN(INITIAL); }
 <C_COMMENT>.    { }
 {white} { }
@@ -57,6 +57,8 @@ float32 {real}f
 "divf32" return DIVIDE_FLOAT32;
 "cmpf32" return COMPARE_FLOAT32;
 
+"{" return LBRACKET;
+"}" return RBRACKET;
 "call" return CALL_FN;
 "move" return MOVE;
 "popn" return POP_NIL;

@@ -72,6 +72,10 @@ int ScriptedFunction::debugCode(std::stringstream& gen) {
 		script += statements_[i]->generateCode(5, gen);
 	}
 
+
+	gen << "load 0 $" << VM::vmReturnResultRegister << "\n";
+	gen << "ret\n";
+
 	return script;
 }
 

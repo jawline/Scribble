@@ -9,13 +9,14 @@
 #define SASM_HPP_
 #include <VM/InstructionSet.hpp>
 #include <string>
+#include <VM/VMNamespace.hpp>
 
 namespace SimpleASM {
 
 class Parser {
 public:
 
-	static VM::InstructionSet parse(std::string text);
+	static VM::VMNamespace parse(std::string text);
 };
 
 } /* namespace SimpleASM */

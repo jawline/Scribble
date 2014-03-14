@@ -120,7 +120,7 @@ public:
 		return SmartPointer<VM::VMFunc>(nullptr);
 	}
 
-	static SmartPointer<VM::VMFunc> generateVMFunction(SmartPointer<Function> func) {
+	static SmartPointer<VM::VMFunc> getNativeFunction(SmartPointer<Function> func) {
 
 		if (func->isNativeFunction()) {
 			return SmartPointer<VM::VMFunc>(new VM::VMFunc(func->getName(), func));

@@ -49,7 +49,7 @@ void ForStatement::checkTree(Type* functionType) {
 
 int ForStatement::generateBody(std::stringstream& generated) {
 
-	generated << "#FOR BODY\n";
+	generated << "--FOR BODY\n";
 
 	int instrs = 0;
 
@@ -58,7 +58,7 @@ int ForStatement::generateBody(std::stringstream& generated) {
 	}
 
 	//Add the final step to the body
-	generated << "#FOR STEP\n";
+	generated << "--FOR STEP\n";
 	instrs += step_->generateCode(-1, generated);
 
 	return instrs;
@@ -68,14 +68,14 @@ int ForStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
 	//Generate the for setup (Run the initialising statement)
-	generated << "#FOR Setup\n";
+	generated << "--FOR Setup\n";
 	int instrs = initial_->generateCode(-1, generated);
 
 	//Store the number of instrs the setup has
 	int setupOffset = instrs;
 
 	//Generate the for test condition
-	generated << "#FOR CONDITION\n";
+	generated << "--FOR CONDITION\n";
 	instrs += condition_->generateCode(VM::vmTempRegisterThree, generated);
 
 	//Generate the for body in a seperate stringstream
@@ -83,7 +83,7 @@ int ForStatement::generateCode(int resultRegister,
 	int bodyInstrs = generateBody(forbody);
 
 	//Check whether that condition is true
-	generated << "#FOR CONTINUE TEST\n";
+	generated << "--FOR CONTINUE TEST\n";
 	generated << "neq $" << VM::vmTempRegisterThree << " 1\n";
 	generated << "jmpr " << (bodyInstrs + 2) << "\n";
 	instrs += 3;
@@ -91,13 +91,13 @@ int ForStatement::generateCode(int resultRegister,
 	//Insert the body of the for into the code
 	generated << forbody.str();
 	instrs += bodyInstrs;
-	generated << "#body " << bodyInstrs << " instructions\n";
+	generated << "--BODY " << bodyInstrs << " INSTRS\n";
 
 	//Add the return jump
 	generated << "jmpr " << -((instrs - setupOffset)) << "\n";
 	instrs++;
 
-	generated << "#generated for statement " << instrs << " instructions\n";
+	generated << "--generated for statement " << instrs << " instructions\n";
 
 	return instrs;
 }

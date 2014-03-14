@@ -41,6 +41,7 @@ public:
 
 	int debugCode(std::stringstream& gen);
 
+	/**
 	SmartPointer<VM::VMFunc> generateScriptedFunc() {
 
 		std::stringstream code;
@@ -53,7 +54,7 @@ public:
 				code.str().c_str());
 
 		return SmartPointer<VM::VMFunc>( new VM::VMFunc(getName(), instructions) );
-	}
+	}*/
 
 	bool isNativeFunction() {
 		return false;

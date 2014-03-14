@@ -53,7 +53,7 @@ int AndStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	generated << "#And test\n";
+	generated << "--And test\n";
 
 	std::stringstream firstStatement;
 	int firstInstrs = lhs_->generateCode(resultRegister, firstStatement);
@@ -78,7 +78,7 @@ int AndStatement::generateCode(int resultRegister,
 
 	//TODO: Needs to be verified
 
-	generated << "#End of and test\n";
+	generated << "--End of and test\n";
 
 	return instrs;
 }

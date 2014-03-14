@@ -11,6 +11,7 @@
 #include <VM/Constants.hpp>
 #include <VM/InstructionSet.hpp>
 #include <VM/ConstantTypes.hpp>
+#include <VM/VMNamespace.hpp>
 #include <VM/JumpTypes.hpp>
 #include <SASM/SasmException.hpp>
 
@@ -27,6 +28,8 @@ int maxConst;
 uint8_t* buffer;
 int current;
 int maxBuf;
+
+VM::VMNamespace CurrentNamespace;
 
 void GrowConstant(int size) {
 
@@ -440,15 +443,29 @@ void TestEqualNil(uint8_t left) {
 %token <float32> FLOAT32
 %token <integer> INT REG
 %token <lval> LONG
-%token STRUCTURE_GET STRUCTURE_SET NEW_STRUCT COMPARE_FLOAT32 INCREMENT DECREMENT ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
+%token LBRACKET RBRACKET STRUCTURE_GET STRUCTURE_SET NEW_STRUCT COMPARE_FLOAT32 INCREMENT DECREMENT ADD_FLOAT32 SUBTRACT_FLOAT32 MULTIPLY_FLOAT32 DIVIDE_FLOAT32 PUSH_REGISTERS POP_REGISTERS TEST_EQUAL_NIL POP_NIL JUMP_RELATIVE CALL_FN LOAD ADD PUSH POP MOVE TEST_EQUAL ARRAY_LENGTH TEST_NOT_EQUAL JUMP RETURN LESS_THAN LESS_THAN_OR_EQUAL ARRAY_SET ARRAY_GET GREATER_THAN GREATER_THAN_OR_EQUAL SUBTRACT MULTIPLY DIVIDE NEW_ARRAY
 
-%type <int> Program
+%type <int> SASMFunction SASMProgram
 
-%start Program
+%start SASMProgram
 
 %%
 
-Program: {
+SASMProgram: {
+	CurrentNamespace = VM::VMNamespace();
+} | SASMProgram WORD LBRACKET SASMFunction RBRACKET {
+	CurrentNamespace.insert(*$2, VM::NamespaceEntry(SmartPointer<VM::VMFunc>(new VM::VMFunc(*$2, VM::InstructionSet(buffer, current, constant, currentConstant, 0)))));
+	delete $2;
+	
+	//Free all the data allocated during parsing and reset all values to 0
+   	delete[] buffer;
+	buffer = 0;
+
+	delete[] constant;
+	constant = 0;
+};
+
+SASMFunction: {
 		
 		constant = new uint8_t[128];
 		currentConstant = 0;
@@ -458,105 +475,105 @@ Program: {
 		current = 0;
 		maxBuf = 128;
 		
-	} | Program CALL_FN STRING {
+	} | SASMFunction CALL_FN STRING {
 		CallFunction($3->c_str());
 		delete $3;
-	} | Program RETURN {
+	} | SASMFunction RETURN {
 		Return();
-	} | Program ARRAY_SET REG REG REG {
+	} | SASMFunction ARRAY_SET REG REG REG {
 		ArraySet($3, $4, $5);
-	} | Program ARRAY_GET REG REG REG {
+	} | SASMFunction ARRAY_GET REG REG REG {
 		ArrayGet($3, $4, $5);
-	} | Program ARRAY_LENGTH REG REG {
+	} | SASMFunction ARRAY_LENGTH REG REG {
 		ArrayLength($3, $4);
-	} | Program NEW_ARRAY STRING REG REG {
+	} | SASMFunction NEW_ARRAY STRING REG REG {
 		Array(*$3, $4, $5);
 		delete $3;
-	} | Program NEW_STRUCT STRING REG {
+	} | SASMFunction NEW_STRUCT STRING REG {
 		Structure(*$3, $4);
 		delete $3;
-	} | Program STRUCTURE_SET REG REG REG {
+	} | SASMFunction STRUCTURE_SET REG REG REG {
 		StructureFieldSet($3, $4, $5);
-	} | Program STRUCTURE_GET REG REG REG {
+	} | SASMFunction STRUCTURE_GET REG REG REG {
 		StructureFieldGet($3, $4, $5);
-	} | Program PUSH_REGISTERS REG INT {
+	} | SASMFunction PUSH_REGISTERS REG INT {
 		PushRegisters($3, $4);
-	} | Program POP_REGISTERS REG INT {
+	} | SASMFunction POP_REGISTERS REG INT {
 		PopRegisters($3, $4);
-	} | Program POP_NIL {
+	} | SASMFunction POP_NIL {
 		PopNil();
-	}| Program LOAD INT REG {
+	} | SASMFunction LOAD INT REG {
 		LoadInt($3, $4);
-	} | Program LOAD FLOAT32 REG {
+	} | SASMFunction LOAD FLOAT32 REG {
 		LoadFloat32($3, $4);
-	} | Program LOAD LONG REG {
+	} | SASMFunction LOAD LONG REG {
 		LoadLong($3, $4);
-	} | Program LOAD STRING REG {
+	} | SASMFunction LOAD STRING REG {
 		LoadString($3->c_str(), $4);
 		delete $3;
-	} | Program MOVE REG REG {
+	} | SASMFunction MOVE REG REG {
 		Move($3, $4);
-	} | Program INCREMENT REG {
+	} | SASMFunction INCREMENT REG {
 		Increment($3);
-	} | Program DECREMENT REG {
+	} | SASMFunction DECREMENT REG {
 		Decrement($3);
-	} | Program ADD_FLOAT32 REG REG REG {
+	} | SASMFunction ADD_FLOAT32 REG REG REG {
 		AddFloat32($3, $4, $5);
-	} | Program SUBTRACT_FLOAT32 REG REG REG {
+	} | SASMFunction SUBTRACT_FLOAT32 REG REG REG {
 		SubtractFloat32($3, $4, $5);
-	} | Program MULTIPLY_FLOAT32 REG REG REG {
+	} | SASMFunction MULTIPLY_FLOAT32 REG REG REG {
 		MultiplyFloat32($3, $4, $5);
-	} | Program DIVIDE_FLOAT32 REG REG REG {
+	} | SASMFunction DIVIDE_FLOAT32 REG REG REG {
 		DivideFloat32($3, $4, $5);
-	} | Program COMPARE_FLOAT32 REG REG REG {
+	} | SASMFunction COMPARE_FLOAT32 REG REG REG {
 		CompareFloat32($3, $4, $5);
-	} | Program ADD REG REG REG {
+	} | SASMFunction ADD REG REG REG {
 		Add($3, $4, $5);
-	} | Program SUBTRACT REG REG REG {
+	} | SASMFunction SUBTRACT REG REG REG {
 		Subtract($3, $4, $5);
-	} | Program MULTIPLY REG REG REG {
+	} | SASMFunction MULTIPLY REG REG REG {
 		Multiply($3, $4, $5);
-	} | Program DIVIDE REG REG REG {
+	} | SASMFunction DIVIDE REG REG REG {
 		Divide($3, $4, $5);
-	} | Program TEST_EQUAL_NIL REG {
+	} | SASMFunction TEST_EQUAL_NIL REG {
 		TestEqualNil($3);
-	} | Program TEST_EQUAL REG REG {
+	} | SASMFunction TEST_EQUAL REG REG {
 		TestEqual($3, $4);
-	} | Program TEST_EQUAL REG INT {
+	} | SASMFunction TEST_EQUAL REG INT {
 		LoadInt($4, VM::vmTempRegisterOne);
 		TestEqual($3, VM::vmTempRegisterOne);
-	} | Program TEST_NOT_EQUAL REG REG {
+	} | SASMFunction TEST_NOT_EQUAL REG REG {
 		TestNotEqual($3, $4);
-	} | Program TEST_NOT_EQUAL REG INT {
+	} | SASMFunction TEST_NOT_EQUAL REG INT {
 		LoadInt($4, VM::vmTempRegisterOne);
 		TestNotEqual($3, VM::vmTempRegisterOne);
-	} | Program LESS_THAN REG REG {
+	} | SASMFunction LESS_THAN REG REG {
 		LessThan($3, $4);
-	} | Program LESS_THAN REG INT {
+	} | SASMFunction LESS_THAN REG INT {
 		LoadInt($4, VM::vmTempRegisterOne);
 		LessThan($3, VM::vmTempRegisterOne);
-	} | Program GREATER_THAN REG REG {
+	} | SASMFunction GREATER_THAN REG REG {
 		GreaterThan($3, $4);
-	} | Program GREATER_THAN REG INT {
+	} | SASMFunction GREATER_THAN REG INT {
 		LoadInt($4, VM::vmTempRegisterOne);
 		GreaterThan($3, VM::vmTempRegisterOne);
-	} | Program LESS_THAN_OR_EQUAL REG REG {
+	} | SASMFunction LESS_THAN_OR_EQUAL REG REG {
 		LessThanOrEqual($3, $4);
-	} | Program LESS_THAN_OR_EQUAL REG INT {
+	} | SASMFunction LESS_THAN_OR_EQUAL REG INT {
 		LoadInt($4, VM::vmTempRegisterOne);
 		LessThanOrEqual($3, VM::vmTempRegisterOne);
-	} | Program GREATER_THAN_OR_EQUAL REG REG {
+	} | SASMFunction GREATER_THAN_OR_EQUAL REG REG {
 		GreaterThanOrEqual($3, $4);
-	} | Program GREATER_THAN_OR_EQUAL REG INT {
+	} | SASMFunction GREATER_THAN_OR_EQUAL REG INT {
 		LoadInt($4, VM::vmTempRegisterOne);
 		GreaterThanOrEqual($3, VM::vmTempRegisterOne);
-	} | Program JUMP INT {
+	} | SASMFunction JUMP INT {
 		JumpDirect($3);
-	} | Program JUMP_RELATIVE INT {
+	} | SASMFunction JUMP_RELATIVE INT {
 		JumpDirectRelative($3);
-	} | Program JUMP REG {
+	} | SASMFunction JUMP REG {
 		JumpRegister($3);
-	} | Program JUMP_RELATIVE REG {
+	} | SASMFunction JUMP_RELATIVE REG {
 		JumpRegisterRelative($3);
 	}
 ;

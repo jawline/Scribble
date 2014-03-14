@@ -145,7 +145,7 @@ void Scribble::load() {
 
 	if (sourceCode.length() == 0) {
 
-		//Compile the program
+		//Compile the Function
 		compiledPackages = ScribbleCore::Parser::compile(packagePath, compiledPackages);
 
 	} else {

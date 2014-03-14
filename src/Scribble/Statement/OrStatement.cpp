@@ -50,7 +50,7 @@ int OrStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	generated << "#Or test\n";
+	generated << "--Or test\n";
 
 	std::stringstream firstStatement;
 	int firstInstrs = lhs_->generateCode(resultRegister, firstStatement);
@@ -75,7 +75,7 @@ int OrStatement::generateCode(int resultRegister,
 
 	//TODO: Needs to be verified
 
-	generated << "#End of or test\n";
+	generated << "--End of or test\n";
 
 	return instrs;
 }
