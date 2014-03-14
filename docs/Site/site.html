@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Scribble Programming Language</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="scribble.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+
+    <div class="container header">
+
+	    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+		      <!-- Indicators -->
+		      <ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+		      </ol>
+
+		      <div class="carousel-inner">
+
+			<div class="item active">
+			  <div class="container">
+			    <div class="carousel-caption">
+				<h2 class="featurette-heading">Scribble Programming Language</h2>
+				<p class="lead">Scroll down for more information</p>
+			    </div>
+			  </div>
+			</div>
+
+			<div class="item">
+			  <div class="container">
+			    <div class="carousel-caption">
+				<h2 class="featurette-heading">Strict</h2>
+			  	<p class="lead">Strictly typed functions help reduce ambiguity and encourage readable source code.</p>
+			    </div>
+			  </div>
+			</div>
+
+			<div class="item">
+			  <div class="container">
+			    <div class="carousel-caption">
+					  <h2 class="featurette-heading">Structured</h2>
+			  		  <p class="lead">A simple package import system allows for structured source trees without all the hassle of header files or preprocessor declerations.</p>
+			    </div>
+			  </div>
+			</div>
+
+			<div class="item">
+			  <div class="container">
+			    <div class="carousel-caption">
+				<h2 class="featurette-heading">Open Source</h2>
+			  	<p class="lead">Scribble will be released under an open source license allowing anybody to use it in their own projects or modify it to suit their needs.</p>
+			    </div>
+			  </div>
+			</div>
+
+		      </div>
+	    </div><!-- /.carousel -->
+
+
+    <div style="width: 100%; color: white; position: absolute; bottom: 0px;" align="center"> 
+	<a href="#content-start">
+		<span class="glyphicon glyphicon-chevron-down glyphicon-adjust" style="font-size: 64px;"></span>
+	</a>
+    </div>
+
+    </div>
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+	
+	<a name="content-start"></a>
+
+          <p style="padding: 1em; "class="lead">Scribble is a programming language which can be embedded into a larger application to allow customization of easy extension of existing functionality. The language has been designed with a focus on usefulness in games however it would be useful in many scenarios.</p>
+
+      <hr class="featurette-divider">
+
+     <div class="row featurette">
+        <div class="col-md-12" >
+          <h2 class="featurette-heading" >Variables & Types</h2>
+          <p class="lead">A slightly different approach is taken to variable decleration.</p>
+
+	  <p>For starters Scribble uses a right handed type decleration, what this means in practice is that you give your variables their type on the right of the declaration not the left. For example to declare the variable i to be of type integer you would write <code>var i : int := 0;</code> instead of <code>int i := 0;</code> in a language which uses a left handed system.</p>
+
+	  <p>As the previous example may have suggested, Scribble moves away from using = for variable assignment and instead uses := to handle assignment.</p>
+
+	  <p>To avoid excessively verbose code, you can ask the compiler to infer ( work out ) the type of a variable when it is declared by looking at what it is being assigned too. For example to declare a variable i and infer its type to be int you can write <code>var i := 0;</code> the compiler would then look at the expression on the right hand side of the decleration and would use the type of that to decide that variable i was an integer. Note: The compiler cannot infer type if you are not assigning the right hand side so <code>var j : int;</code> is valid and <code>var j := 0;</code> is valid but <code>var j;</code> is not.</p>
+
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+     <div class="row featurette">
+        <div class="col-md-12" >
+          <h2 class="featurette-heading" >Flow Control</h2>
+          <p class="lead">If it ain't broke.</p>
+
+	  <p>Scribble has flow control similar to most conventional languages. It offers flow control through if statements, for loops and while loops.</p>
+
+
+	  <h3>If</h3>
+	  <p>If statements are executed if a given boolean expression evaluates to true in the form 
+	  <code> if Condition then { Code }</code>
+	  For example 
+
+	  <code>if true then { Do Something. }</code>
+	  will always execute the code in it. They can be chained together using the else keyword for example 
+
+	   <code>if someExression then { Code. } else if someExpression then { Else code. }</code>
+	</p>
+
+	  <h3>For</h3>
+	  
+	  <p>For loops in written take an initializer, a condition and a step. They are written in the form <code>for Initial; Condition; Step do { Code }</code>. The loop will keep executing until the condition expression is false.</p>
+
+
+	  <p>An example of a for loop would be <br/>
+		<code>
+			for var i := 0; i < 100; i++ do {
+			<br/>&nbsp;console.Log("Hello World");
+			<br/>}
+		</code>
+	  </p>
+
+	  <h3>While</h3>
+	  <p>While loops continously execute their body until a condition is false, they are written like <code>while Expression do { Code. }</code><br/><br/>
+
+
+	  An example:
+	  <code>var i := 0;<br/><br/>while i < 100 do {<br/>&nbsp;i++;<br/>}</code>
+	  </p>
+
+        </div>
+      </div>
+
+     <hr class="featurette-divider">
+
+     <div class="row featurette">
+        <div class="col-md-12" >
+          <h2 class="featurette-heading" >Arrays</h2>
+          <p class="lead">Arrays & How they work</p>
+
+	  <p>All arrays in Scribble reside in a garbage collected heap. The heap uses a deferred garbage collection routine to periodicly delete any memory that is no longer being used. This implementation have several implications when programming in Scribble ( which Java programmers will be familiar with ) <code>TODO: Add implications</code> however it removes the responsibility of memory allocation from a programmers list of tasks. </p>
+
+	  <p>An arrays type is written as <code>array(IndexType)</code>, for instance to create a nil reference to an array of integers you would write <code>var j : array(int);</code>. The variable j could then be used as a reference to an array of integers on the heap.</p>
+	  <p>When you define a variable of an array type ( <code>var j : array(Anything)</code> ) it is initialized as a nil reference ( The equivilent in C would be a null pointer ) to actually create an array you use the <code>[NumberOfElements]BaseType</code> syntax. For example to create an array of 100 integers you would write <code>var j := [100]int;</code>. The number of elements specified has to be an integer expression</p>
+	  <p>To access an element within the array the <code>[IndexNumber]</code> syntax is used.</p>
+	  <p>The <code>len(Array)</code> function will return the number of elements in an array. E.g. <code>len([100]int) = 100</code></p>
+	  <p>An example of creating an array of integers and assigning each element to be the numeric value of its index and then printing it out to the screen.<br/><br/><code>var j := [100]int;<br>for var i := 0; i < len(j); i++ do {<br/>&nbsp;j[i] := i;<br/>&nbsp;console.Log(sys.String(j[i]));<br/>}</code></p>
+
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+     <div class="row featurette">
+        <div class="col-md-12" >
+          <h2 class="featurette-heading" >Functions</h2>
+          <p class="lead">Scribble programs are procedural, built up around sets of functions.</p>
+	  <p>Functions can be defined multiple times for different inputs. The compiler will select the correct one to use at runtime from the types of the arguments ( See Abs or Diff in examples/math/math.sc for a good example of this ). If a function is not defined with an explicit return type then is assumed to be of type Void ( That it does not return any value ).</p>
+	  <br/>
+
+	  <p>An example of a function to compute the n'th member of the fibonacci sequence. <br/><br/>
+	  <code>func Fibs(n : int) : int {<br/>&nbsp;if n = 1 then<br/>&nbsp;&nbsp;return 0;<br/>&nbsp;if n = 1 then <br/>&nbsp;&nbsp;return 1;<br/>&nbsp;return Fibs(n-1) + Fibs(n-2); <br/>}<br/><br/>func main() {<br/>&nbsp;var j := Fibs(30);<br/>}</code></p>
+        </div>
+      </div>
+
+     <hr class="featurette-divider">
+
+     <div class="row featurette">
+        <div class="col-md-12" >
+          <h2 class="featurette-heading" >Structures</h2>
+          <p class="lead">Scribble allows the definition of structures to represent complex types.</p>
+
+	  <p>Unlike most modern languages, Scribble omits classes in favor of C style structures. Structures are defined by writing</p><br/>
+	  <code>type Name := struct { <br/>&nbsp;Fields <br/>}</code><br/><br/>
+	  <p>where 'Name' is the name of the new structure and 'Fields' are the names and types of elements within a structure, seperated with a comma.</p>
+	  <p>An example of a structure would be </p>
+	  <code>
+		type User := struct {<br/>
+			&nbsp;username : string,<br/>
+			&nbsp;passwordHash : string,<br/>
+			&nbsp;age : int,<br/>
+			&nbsp;email : string,<br/>
+			&nbsp;address : string<br/>
+		}
+	  </code><br/><br/>
+	  <p>To create a new instance of a structure you can write </p>
+	  <code>
+	  var TheUser := User { "test",<br/>
+		  &nbsp;"SomeHash",<br/>
+		  &nbsp;32,<br/>
+		  &nbsp;"test@test.net",<br/>
+		  &nbsp;"Test street, Testington" <br/>
+		};
+	  </code>
+	  <br/><br/>
+	  <p>To access elements from a structure you use the -> operator. For example to access the username of the User defined you would write 'TheUser->username'. To assign it you would write 'TheUser->username := "NewString"'.</p>
+	  <code></code>
+
+        </div>
+      </div>
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+
+        <div class="col-md-12" >
+
+          <h2 class="featurette-heading" >Packages</h2>
+          <p class="lead">Every file is seen as a package, a package is comprised of methods and structures.<p> <br/><p>One example of this would be using a method inside the math library to return the absolute value of an integer.</p><br/><code>package math := import("math/math");<br/><br/>func main() {<br/>&nbsp;var i := math.Abs(-15);<br/>}</code></p>
+        </div>
+
+      </div>
+
+      <hr class="featurette-divider">
+
+            <div align="center">
+              <h1>Test Scribble</h1>
+              <p>An early version of Scribble can be executed in your browser</p>
+             <p><a class="btn btn-lg btn-primary" href="./test.html" role="button">Here</a></p>
+            </div>
+
+
+      <hr class="featurette-divider">
+
+            <div align="center">
+              <h1>Download Scribble</h1>
+              <p>To get a copy of Scribble please contact Blake Loring at </p><p><a href="mailto:blake_l@imclueless.co.uk">blake_l@imclueless.co.uk</a></p>
+              <!-- <p><a class="btn btn-lg btn-primary" href="http://github.com/mmjack/Scribble/" role="button">Visit Github</a></p> -->
+            </div>
+
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2013 Blake Loring, Imclueless Software.</p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+

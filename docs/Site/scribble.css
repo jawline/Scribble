@@ -3,7 +3,6 @@
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-bottom: 40px;
   color: #5a5a5a;
 }
 
@@ -19,7 +18,6 @@ body {
 /* Carousel base class */
 .carousel {
   height: auto;
-  margin-bottom: 60px;
   margin-top: 20vh;
 }
 
@@ -30,7 +28,8 @@ body {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 45vh;
+  height: 50vh;
+  min-height: 300px;
   background: none;
 }
 .carousel-inner > .item > img {
@@ -69,7 +68,8 @@ body {
 .header {
 	margin: 0px;
 	padding: 0px;
-	min-height: 100vh;
+	min-height: 400px;
+	height: 100vh;
 	background: rgb(169,3,41); /* Old browsers */
 	background: -moz-radial-gradient(center, ellipse cover, rgba(169,3,41,1) 0%, rgba(109,0,25,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(169,3,41,1)), color-stop(100%,rgba(109,0,25,1))); /* Chrome,Safari4+ */
@@ -79,7 +79,6 @@ body {
 	background: radial-gradient(ellipse at center, rgba(169,3,41,1) 0%,rgba(109,0,25,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	min-width: 100%;
-	margin-bottom: 1em;
 }
 
 
