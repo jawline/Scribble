@@ -50,7 +50,7 @@ void registerPackages(
 
 		std::string packageCode = outputCode(selectedNamespaceIter->second, vm);
 
-		vm.logMessage(VM::Log, std::string("----BEGIN NAMESPACE ") + selectedNamespaceIter->first + "----\n" + packageCode + "\n----END NAMESPACE----\n\n");
+		vm.logMessage(VM::Log, std::string("----BEGIN NAMESPACE ") + selectedNamespaceIter->first + "----\n\n" + packageCode + "\n----END NAMESPACE----\n\n");
 
 		VM::VMNamespace newSpace = SimpleASM::Parser::parse(packageCode);
 

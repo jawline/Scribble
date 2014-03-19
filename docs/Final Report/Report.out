@@ -10,26 +10,28 @@
 \BOOKMARK [1][-]{section.2.6}{Statements}{chapter.2}% 10
 \BOOKMARK [1][-]{section.2.7}{Functions}{chapter.2}% 11
 \BOOKMARK [1][-]{section.2.8}{Packages \046 Importing}{chapter.2}% 12
-\BOOKMARK [0][-]{chapter.3}{Instruction Encoding}{}% 13
-\BOOKMARK [1][-]{section.3.1}{The Constants Table}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.2}{Potential Improvements}{chapter.3}% 15
-\BOOKMARK [1][-]{section.3.3}{Instructions List}{chapter.3}% 16
-\BOOKMARK [0][-]{chapter.4}{Type Inference}{}% 17
-\BOOKMARK [1][-]{section.4.1}{Expression type inference in function matching}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.2}{Expression type inference in error checking}{chapter.4}% 19
-\BOOKMARK [0][-]{chapter.5}{Package Handling}{}% 20
-\BOOKMARK [0][-]{chapter.6}{Garbage Collection}{}% 21
-\BOOKMARK [0][-]{chapter.7}{Native Interface}{}% 22
-\BOOKMARK [1][-]{section.7.1}{Structure}{chapter.7}% 23
-\BOOKMARK [0][-]{chapter.8}{Intermediate Code}{}% 24
-\BOOKMARK [1][-]{section.8.1}{Design}{chapter.8}% 25
-\BOOKMARK [1][-]{section.8.2}{Implementation}{chapter.8}% 26
-\BOOKMARK [0][-]{chapter.9}{Professional Issues}{}% 27
-\BOOKMARK [1][-]{section.9.1}{Parser Licenses}{chapter.9}% 28
-\BOOKMARK [1][-]{section.9.2}{Licenses of third party libraries}{chapter.9}% 29
-\BOOKMARK [1][-]{section.9.3}{Licensing Scribble}{chapter.9}% 30
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 31
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 32
+\BOOKMARK [0][-]{chapter.3}{Design Methodology \046 Development}{}% 13
+\BOOKMARK [0][-]{chapter.4}{Instruction Encoding}{}% 14
+\BOOKMARK [1][-]{section.4.1}{ScribbleVM Instructions}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.2}{The Constants Table}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.3}{Potential Improvements}{chapter.4}% 17
+\BOOKMARK [0][-]{chapter.5}{Type Inference}{}% 18
+\BOOKMARK [1][-]{section.5.1}{Type inference in Scribble}{chapter.5}% 19
+\BOOKMARK [1][-]{section.5.2}{Expression type inference in function matching}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.3}{Expression type inference in error checking}{chapter.5}% 21
+\BOOKMARK [0][-]{chapter.6}{Package Handling}{}% 22
+\BOOKMARK [0][-]{chapter.7}{Garbage Collection}{}% 23
+\BOOKMARK [0][-]{chapter.8}{Native Interface}{}% 24
+\BOOKMARK [1][-]{section.8.1}{Structure}{chapter.8}% 25
+\BOOKMARK [0][-]{chapter.9}{Intermediate Code}{}% 26
+\BOOKMARK [1][-]{section.9.1}{Design}{chapter.9}% 27
+\BOOKMARK [1][-]{section.9.2}{Implementation}{chapter.9}% 28
+\BOOKMARK [0][-]{chapter.10}{Professional Issues}{}% 29
+\BOOKMARK [1][-]{section.10.1}{Parser Licenses}{chapter.10}% 30
+\BOOKMARK [1][-]{section.10.2}{Licenses of third party libraries}{chapter.10}% 31
+\BOOKMARK [1][-]{section.10.3}{Licensing Scribble}{chapter.10}% 32
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 33
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 34
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 35
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 36
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 37

@@ -11,13 +11,13 @@
 \contentsline {subsection}{\numberline {2.1.7}Structures}{10}{subsection.2.1.7}
 \contentsline {subsection}{\numberline {2.1.8}Quick Sort}{11}{subsection.2.1.8}
 \contentsline {section}{\numberline {2.2}Lexical}{13}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Identifiers}{14}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}Identifiers}{13}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Value Constants}{14}{subsection.2.2.2}
 \contentsline {subsubsection}{Integer}{14}{section*.3}
 \contentsline {subsubsection}{Floats}{14}{section*.4}
 \contentsline {subsubsection}{Boolean}{14}{section*.5}
 \contentsline {subsubsection}{String}{14}{section*.6}
-\contentsline {subsection}{\numberline {2.2.3}Operators List}{15}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}Operators List}{14}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Comments}{15}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Keywords List}{15}{subsection.2.2.5}
 \contentsline {section}{\numberline {2.3}Identifiers}{16}{section.2.3}
@@ -26,7 +26,7 @@
 \contentsline {subsection}{\numberline {2.4.1}Primitive Types}{18}{subsection.2.4.1}
 \contentsline {subsubsection}{bool}{18}{section*.7}
 \contentsline {subsubsection}{int}{18}{section*.8}
-\contentsline {subsubsection}{float32}{19}{section*.9}
+\contentsline {subsubsection}{float32}{18}{section*.9}
 \contentsline {subsection}{\numberline {2.4.2}Reference Types}{19}{subsection.2.4.2}
 \contentsline {subsubsection}{string}{20}{section*.10}
 \contentsline {subsubsection}{Arrays}{20}{section*.11}
@@ -66,26 +66,28 @@
 \contentsline {section}{\numberline {2.7}Functions}{30}{section.2.7}
 \contentsline {section}{\numberline {2.8}Packages \& Importing}{32}{section.2.8}
 \contentsline {subsection}{\numberline {2.8.1}Importing Packages}{33}{subsection.2.8.1}
-\contentsline {chapter}{\numberline {3}Instruction Encoding}{34}{chapter.3}
-\contentsline {section}{\numberline {3.1}The Constants Table}{35}{section.3.1}
-\contentsline {section}{\numberline {3.2}Potential Improvements}{36}{section.3.2}
-\contentsline {section}{\numberline {3.3}Instructions List}{36}{section.3.3}
-\contentsline {chapter}{\numberline {4}Type Inference}{38}{chapter.4}
-\contentsline {section}{\numberline {4.1}Expression type inference in function matching}{39}{section.4.1}
-\contentsline {section}{\numberline {4.2}Expression type inference in error checking}{40}{section.4.2}
-\contentsline {chapter}{\numberline {5}Package Handling}{42}{chapter.5}
-\contentsline {chapter}{\numberline {6}Garbage Collection}{44}{chapter.6}
-\contentsline {chapter}{\numberline {7}Native Interface}{46}{chapter.7}
-\contentsline {section}{\numberline {7.1}Structure}{46}{section.7.1}
-\contentsline {chapter}{\numberline {8}Intermediate Code}{50}{chapter.8}
-\contentsline {section}{\numberline {8.1}Design}{51}{section.8.1}
-\contentsline {section}{\numberline {8.2}Implementation}{51}{section.8.2}
-\contentsline {chapter}{\numberline {9}Professional Issues}{53}{chapter.9}
-\contentsline {section}{\numberline {9.1}Parser Licenses}{53}{section.9.1}
-\contentsline {section}{\numberline {9.2}Licenses of third party libraries}{53}{section.9.2}
-\contentsline {section}{\numberline {9.3}Licensing Scribble}{54}{section.9.3}
-\contentsline {chapter}{Bibliography}{55}{chapter*.26}
-\contentsline {chapter}{Bibliography}{55}{chapter*.26}
-\contentsline {chapter}{Bibliography}{55}{chapter*.26}
-\contentsline {chapter}{Bibliography}{55}{chapter*.26}
-\contentsline {chapter}{Bibliography}{55}{chapter*.26}
+\contentsline {chapter}{\numberline {3}Design Methodology \& Development}{34}{chapter.3}
+\contentsline {chapter}{\numberline {4}Instruction Encoding}{35}{chapter.4}
+\contentsline {section}{\numberline {4.1}ScribbleVM Instructions}{35}{section.4.1}
+\contentsline {section}{\numberline {4.2}The Constants Table}{36}{section.4.2}
+\contentsline {section}{\numberline {4.3}Potential Improvements}{37}{section.4.3}
+\contentsline {chapter}{\numberline {5}Type Inference}{38}{chapter.5}
+\contentsline {section}{\numberline {5.1}Type inference in Scribble}{39}{section.5.1}
+\contentsline {section}{\numberline {5.2}Expression type inference in function matching}{40}{section.5.2}
+\contentsline {section}{\numberline {5.3}Expression type inference in error checking}{42}{section.5.3}
+\contentsline {chapter}{\numberline {6}Package Handling}{44}{chapter.6}
+\contentsline {chapter}{\numberline {7}Garbage Collection}{46}{chapter.7}
+\contentsline {chapter}{\numberline {8}Native Interface}{48}{chapter.8}
+\contentsline {section}{\numberline {8.1}Structure}{48}{section.8.1}
+\contentsline {chapter}{\numberline {9}Intermediate Code}{52}{chapter.9}
+\contentsline {section}{\numberline {9.1}Design}{53}{section.9.1}
+\contentsline {section}{\numberline {9.2}Implementation}{54}{section.9.2}
+\contentsline {chapter}{\numberline {10}Professional Issues}{56}{chapter.10}
+\contentsline {section}{\numberline {10.1}Parser Licenses}{56}{section.10.1}
+\contentsline {section}{\numberline {10.2}Licenses of third party libraries}{56}{section.10.2}
+\contentsline {section}{\numberline {10.3}Licensing Scribble}{57}{section.10.3}
+\contentsline {chapter}{Bibliography}{58}{chapter*.26}
+\contentsline {chapter}{Bibliography}{58}{chapter*.26}
+\contentsline {chapter}{Bibliography}{58}{chapter*.26}
+\contentsline {chapter}{Bibliography}{58}{chapter*.26}
+\contentsline {chapter}{Bibliography}{58}{chapter*.26}

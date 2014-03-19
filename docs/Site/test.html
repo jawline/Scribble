@@ -65,54 +65,24 @@
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <!--<div class="navbar-wrapper">
-      <div class="container">
 
-        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Project name</a>
-            </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div> -->
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
-    <div class="container marketing">
+    <div class="container marketing" >
 
 	
      <a name="content-start"></a>
 
+     <div class="row featurette" style="padding-top: 20px;">
+	<div class="col-md-12">
+		<div style="text-align: center;">
+			<a class="btn btn-lg btn-default col-md-3" style="float: none; margin: 0px auto;" href="./index.html" role="button">Home</a>
+     			<a class="btn btn-lg btn-default col-md-3" style="float: none; margin: 0px auto;" href="./guide.html" role="button">Guide (WIP)</a>
+     		</div>
+	</div>
+     </div>
+
+     </br>
+
+     <hr class="featurette-divider">
      
      <div class="row featurette" style="text-align: center;font-size: 20px;padding: 10px;">
 	Use this tool to test single package Scribble programs. A set of examples are provided.<br/>
@@ -171,7 +141,7 @@
 
 	<div class="col-md-12">
 		<div style="text-align: center;">
-	       	   <button class="col-md-3" style="float: none; margin: 0px auto;" onclick="runTest();">Execute</button>
+		   <a class="btn btn-lg btn-primary col-md-3" style="float: none; margin: 0px auto;" href="#" onclick="runTest(); return false;" role="button">Execute</a>
 		</div>
 	</div>
      </div>
