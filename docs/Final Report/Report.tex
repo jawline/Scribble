@@ -1438,6 +1438,20 @@ In order to use the constants table the instructions which required extra memory
 
 One potential improvement here would be to reduce the size of each constant index down from 32 bits to 16 bits. Having 32 bit indices allows for \begin{math}2^{32} - 1\end{math} unique entries into the constants table for each instruction set. It was designed this way as the additional constant region was setup as flat memory rather than a table and since that change the large amount of space per index is unnecessary. By choosing a 16 bit integer for constant indices each function would be left with a maximum 65535 per instruction set which is more than enough as each function has its own instruction set. This change would reduce the size of the constants and potentially allow a reduction in the size of each instruction for the program.
 
+\section{Performance}
+
+The way in which instructions are encoded has a direct impact upon the performance of the virtual machine. If an instruction encoding is complex then it will require more computation to extract the op code and arguments. As the instruction decoding is performed each time an instruction is executed this additional computation could have an impact on performance.
+
+The instruction encoding in Scribble requires that all arguments are aligned on byte boundaries. The minimum size for an argument is 8 bits and every argument will start at an offset which is multiple of 8 bits from the instruction start. The benefit of this is that it is extremely easy to efficiently extract the argument from the instruction by either treating the instruction as an array of bytes. If arguments where not aligned with byte boundaries then bit shifts and bit masking would have to be used which would require more computation.
+
+The reason why byte aligned arguments requires less computation than bit shifting and masking is because processor architectures have been developed to offer extremely fast move instructions for byte aligned of a variety of sizes. The process of extracting a byte from an instruction therefore is as simple as using a processor move instruction offset from a certain number of bytes from the address of the instruction. This requires very few instructions in order to work.
+
+The downside to byte aligned arguments is that it can increase the instruction size as not every instruction will require a multiple of 8 bits to represent its data, for some 4 or 12 bits would be more appropriate and the larger 8 or 16 bit widths would lead to wasted space.
+
+Currently the main hit on the virtual machine performance is not the instruction encoding as it is easy to extract the required parts of the instruction, but is instead the large switch statement used to select the action that should be taken for the decoded op code. Currently the virtual machine will loop through all the possible instructions one by one until it finds the correct action to take and then execute it, this is all within a large switch statement. The performance cost of this massively outweighs the complexity of decoding the instruction.
+
+The reason why I had more of a focus on making sure that the instructions could be decoded easily rather than the performance of the op code lookup was because it is much harder to change the instruction format later. While the op code lookup has a much greater impact on performance it could be modified to use a function pointer lookup array or another method with changes to only one source file. A change to the instruction encoding on the other hand would mandate changes not only to the virtual machine but also to the SASM intermediate language and anything that generated code for it would to have to be updated.
+
 \section{Potential Improvements}
 
 One way in which the instruction encoding in Scribbles virtual machine could be improved would be to allow the storage of function variables on the stack rather than in registers.

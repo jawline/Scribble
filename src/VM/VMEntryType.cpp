@@ -11,13 +11,13 @@
 namespace VM {
 
 VMEntryType::VMEntryType(std::string name, unsigned int size, bool reference) :
-		name_(name), size_(size), reference_(reference), structureFieldOffsets_(
-				nullptr), baseType_(VMPrimitive) {
+		name_(name), size_(size), reference_(reference), baseType_(VMPrimitive), structureFieldOffsets_(
+				nullptr) {
 
 }
 
 VMEntryType::VMEntryType(std::string name, SmartPointer<VMEntryType> subtype) :
-name_(name), size_(8), reference_(true), structureFieldOffsets_(nullptr),baseType_(VMArray), arraySubtype_(subtype) {
+name_(name), size_(8), reference_(true), baseType_(VMArray), arraySubtype_(subtype), structureFieldOffsets_(nullptr) {
 }
 
 VMEntryType::VMEntryType(std::string name, std::vector<SmartPointer<VMStructureField>> fields) : name_(name), size_(8), reference_(true), baseType_(VMStructure) {
@@ -54,12 +54,14 @@ int VMEntryType::cacheFieldOffsets() {
 
 	int count = 0;
 
-	for (int id = 0; id < structureFields_.size(); ++id) {
+	for (unsigned int id = 0; id < structureFields_.size(); ++id) {
 
 		structureFieldOffsets_[id] = count;
 		count += structureFields_[id]->getType()->getElementSize();
 
 	}
+
+	return count;
 }
 
 std::string VMEntryType::typeName() {

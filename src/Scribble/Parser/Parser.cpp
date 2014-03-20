@@ -77,7 +77,7 @@ SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference>
 	}
 
 	//Otherwise search through each function.
-	for (int i = 0; i < set.size(); ++i) {
+	for (unsigned int i = 0; i < set.size(); ++i) {
 
 		SmartPointer<Function> fn = set[i];
 
@@ -537,7 +537,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 				if (it->second.type() == FunctionSetEntry) {
 					std::vector<SafeFunction> set = it->second.getFunctionSet();
 
-					for (int i = 0; i < set.size(); ++i) {
+					for (unsigned int i = 0; i < set.size(); ++i) {
 						((ScriptedFunction *) set[i].get())->check();
 					}
 				}

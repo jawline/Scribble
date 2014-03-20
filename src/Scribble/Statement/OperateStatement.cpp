@@ -89,8 +89,15 @@ int OperateStatement::generateCode(int resultRegister,
 			break;
 		}
 
+		default: {
+			throw StatementException(this, "Cannot generate int operation instruction");
+			break;
+		}
+
 		}
 		break;
+
+
 	}
 	case Float32: {
 		instrs = lhs_->generateCode(VM::vmTempRegisterOne, generated);
@@ -133,9 +140,20 @@ int OperateStatement::generateCode(int resultRegister,
 			break;
 		}
 
+		default: {
+			throw StatementException(this, "Cannot generate float32 operation instruction");
+			break;
+		}
+
 		}
 		break;
 	}
+
+
+	default: {
+		throw StatementException(this, "Operate statement cannot generate instruction for this type");
+	}
+
 	}
 
 	return instrs;

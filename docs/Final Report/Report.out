@@ -14,24 +14,25 @@
 \BOOKMARK [0][-]{chapter.4}{Instruction Encoding}{}% 14
 \BOOKMARK [1][-]{section.4.1}{ScribbleVM Instructions}{chapter.4}% 15
 \BOOKMARK [1][-]{section.4.2}{The Constants Table}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.3}{Potential Improvements}{chapter.4}% 17
-\BOOKMARK [0][-]{chapter.5}{Type Inference}{}% 18
-\BOOKMARK [1][-]{section.5.1}{Type inference in Scribble}{chapter.5}% 19
-\BOOKMARK [1][-]{section.5.2}{Expression type inference in function matching}{chapter.5}% 20
-\BOOKMARK [1][-]{section.5.3}{Expression type inference in error checking}{chapter.5}% 21
-\BOOKMARK [0][-]{chapter.6}{Package Handling}{}% 22
-\BOOKMARK [0][-]{chapter.7}{Garbage Collection}{}% 23
-\BOOKMARK [0][-]{chapter.8}{Native Interface}{}% 24
-\BOOKMARK [1][-]{section.8.1}{Structure}{chapter.8}% 25
-\BOOKMARK [0][-]{chapter.9}{Intermediate Code}{}% 26
-\BOOKMARK [1][-]{section.9.1}{Design}{chapter.9}% 27
-\BOOKMARK [1][-]{section.9.2}{Implementation}{chapter.9}% 28
-\BOOKMARK [0][-]{chapter.10}{Professional Issues}{}% 29
-\BOOKMARK [1][-]{section.10.1}{Parser Licenses}{chapter.10}% 30
-\BOOKMARK [1][-]{section.10.2}{Licenses of third party libraries}{chapter.10}% 31
-\BOOKMARK [1][-]{section.10.3}{Licensing Scribble}{chapter.10}% 32
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 33
+\BOOKMARK [1][-]{section.4.3}{Performance}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.4}{Potential Improvements}{chapter.4}% 18
+\BOOKMARK [0][-]{chapter.5}{Type Inference}{}% 19
+\BOOKMARK [1][-]{section.5.1}{Type inference in Scribble}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.2}{Expression type inference in function matching}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.3}{Expression type inference in error checking}{chapter.5}% 22
+\BOOKMARK [0][-]{chapter.6}{Package Handling}{}% 23
+\BOOKMARK [0][-]{chapter.7}{Garbage Collection}{}% 24
+\BOOKMARK [0][-]{chapter.8}{Native Interface}{}% 25
+\BOOKMARK [1][-]{section.8.1}{Structure}{chapter.8}% 26
+\BOOKMARK [0][-]{chapter.9}{Intermediate Code}{}% 27
+\BOOKMARK [1][-]{section.9.1}{Design}{chapter.9}% 28
+\BOOKMARK [1][-]{section.9.2}{Implementation}{chapter.9}% 29
+\BOOKMARK [0][-]{chapter.10}{Professional Issues}{}% 30
+\BOOKMARK [1][-]{section.10.1}{Parser Licenses}{chapter.10}% 31
+\BOOKMARK [1][-]{section.10.2}{Licenses of third party libraries}{chapter.10}% 32
+\BOOKMARK [1][-]{section.10.3}{Licensing Scribble}{chapter.10}% 33
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 34
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 35
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 36
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 37
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 38

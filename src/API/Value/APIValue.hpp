@@ -36,10 +36,10 @@ namespace API {
 
 class APIValue {
 private:
+	ScribbleCore::Type* cType_;
 	SmartPointer<VM::VMEntryType> vType_;
 	SmartPointer<uint8_t> data_;
 	int64_t val_;
-	ScribbleCore::Type* cType_;
 
 public:
 	APIValue() {cType_ = ScribbleCore::getVoidType(); val_ = 0; vType_ = nullptr; data_ = nullptr;}

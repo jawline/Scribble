@@ -30,7 +30,7 @@ int GetVariableStatement::generateCode(int resultRegister,
 	//If the result register is -1 ( The result is to be discarded ) then do not move. If the statement is something like j := j; then don't generate the move.
 	if (resultRegister != -1
 			|| resultRegister
-					!= var_->getPosition() + VM::vmNumReservedRegisters) {
+					!= (int) (var_->getPosition() + VM::vmNumReservedRegisters)) {
 
 		generated << "move $"
 				<< (var_->getPosition() + VM::vmNumReservedRegisters) << " $"
@@ -39,6 +39,7 @@ int GetVariableStatement::generateCode(int resultRegister,
 		return 1;
 	}
 
+	return 0;
 }
 
 }
