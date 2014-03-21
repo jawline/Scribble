@@ -1,16 +1,16 @@
 \BOOKMARK [0][-]{toc.0}{Table of Contents}{}% 1
 \BOOKMARK [0][-]{chapter*.2}{Abstract}{}% 2
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
-\BOOKMARK [0][-]{chapter.2}{User Manual}{}% 4
-\BOOKMARK [1][-]{section.2.1}{Language Examples}{chapter.2}% 5
-\BOOKMARK [1][-]{section.2.2}{Lexical}{chapter.2}% 6
-\BOOKMARK [1][-]{section.2.3}{Identifiers}{chapter.2}% 7
-\BOOKMARK [1][-]{section.2.4}{Types}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.5}{Operators \046 Expressions}{chapter.2}% 9
-\BOOKMARK [1][-]{section.2.6}{Statements}{chapter.2}% 10
-\BOOKMARK [1][-]{section.2.7}{Functions}{chapter.2}% 11
-\BOOKMARK [1][-]{section.2.8}{Packages \046 Importing}{chapter.2}% 12
-\BOOKMARK [0][-]{chapter.3}{Design Methodology \046 Development}{}% 13
+\BOOKMARK [0][-]{chapter.2}{Design \046 Development}{}% 4
+\BOOKMARK [0][-]{chapter.3}{User Manual}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Language Examples}{chapter.3}% 6
+\BOOKMARK [1][-]{section.3.2}{Lexical}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.3}{Identifiers}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.4}{Types}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.5}{Operators \046 Expressions}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.6}{Statements}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.7}{Functions}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.8}{Packages \046 Importing}{chapter.3}% 13
 \BOOKMARK [0][-]{chapter.4}{Instruction Encoding}{}% 14
 \BOOKMARK [1][-]{section.4.1}{ScribbleVM Instructions}{chapter.4}% 15
 \BOOKMARK [1][-]{section.4.2}{The Constants Table}{chapter.4}% 16

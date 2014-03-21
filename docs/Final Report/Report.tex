@@ -78,7 +78,9 @@ I decided to create a scripting language because they are an increasingly import
 
 My choices when defining syntax are the result of a desire to take what I consider to be the better parts of imperative programming languages such as C and Go. The Go developers compelling arguments against object orientation also made me very interested in seeing whether a syntax could be defined so that non object oriented language was functional and readable when writing equivalent programs as its object oriented alternatives (in this case Javascript would likely be the closest comparison) and many of my design choices reflect this desire to avoid a traditional object oriented paradigm.
 
-For this report I have produced a user manual and details about the language implementation. Due to the scope of the project it would be difficult to appropriately explain the entire implementation, So I have chosen to detail several important parts of the implementation in detail.
+For this report I have produced a user manual and details about the language implementation. Due to the scope of the project it would be difficult to appropriately explain the entire implementation, so I have instead chosen to produce a user manual as well as documentation on the theory and implementation several important parts of the implementation in detail as well as a user manual describing the syntax and semantics of the language.
+
+\chapter{Design \& Development}
 
 \chapter{User Manual}
 
@@ -1393,8 +1395,6 @@ To use a function or structure from a different package you first write the pack
 \begin{verbatim}
 console.Write("Hello World");
 \end{verbatim}
-
-\chapter{Design Methodology \& Development}
 
 \chapter{Instruction Encoding}
 
