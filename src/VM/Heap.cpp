@@ -28,7 +28,7 @@ Heap::~Heap() {
 
 bool Heap::validReference(long entry) {
 
-	if (entry > heapItems_.size()) {
+	if (entry > (long) heapItems_.size()) {
 		return false;
 	}
 

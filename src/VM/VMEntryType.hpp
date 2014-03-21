@@ -29,8 +29,7 @@ class VMEntryType;
 
 class VMStructureField {
 private:
-	std::string name_;
-	SmartPointer<VMEntryType> type_;
+	std::string name_;SmartPointer<VMEntryType> type_;
 
 public:
 
@@ -140,6 +139,7 @@ public:
 
 };
 
-} /* namespace VM */
+}
+/* namespace VM */
 
 #endif /* VMENTRYTYPE_HPP_ */

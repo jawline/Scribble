@@ -70,6 +70,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 ":=" return ASSIGN;
 "=" return EQUALS;
 
+"?" return TERNARY;
+
 "(" return LPAREN;
 ")" return RPAREN;
 "{" return LBRACKET;

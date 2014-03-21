@@ -94,6 +94,8 @@ private:
 
 	bool returnToPreviousFunction(SmartPointer<VMFunc>& fn, InstructionSet& set);
 
+	void opLoadConstant(InstructionSet& instructionSet);
+
 public:
 	VirtualMachine();
 	virtual ~VirtualMachine();
@@ -106,15 +108,8 @@ public:
 	virtual void markStackReference();
 	virtual void pushRegister(uint8_t reg);
 
-	virtual void getRegister(uint8_t reg, long& val, bool& isReg) {
-		val = registers_[reg];
-		isReg = registerReference_[reg];
-	}
-
-	virtual void setRegister(uint8_t reg, long val, bool ref) {
-		registers_[reg] = val;
-		registerReference_[reg] = ref;
-	}
+	void getRegister(uint8_t reg, int64_t& val, bool& isReg);
+	void setRegister(uint8_t reg, int64_t val, bool ref);
 
 	virtual Heap& getHeap() {
 		return heap_;

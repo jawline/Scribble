@@ -48,7 +48,7 @@ Scribble::~Scribble() {
 SafeFunction findFunction(std::vector<API::APIValue> arguments,
 		ScribbleCore::FunctionSet set) {
 
-	for (int i = 0; i < set.size(); i++) {
+	for (unsigned int i = 0; i < set.size(); i++) {
 		SafeFunction iter = set[i];
 
 		if (iter->numArgs() == arguments.size()) {
