@@ -20,7 +20,7 @@ TernaryStatement::~TernaryStatement() {
 }
 
 Type* TernaryStatement::type() {
- return lhs_->type();
+	return lhs_->type();
 }
 
 void TernaryStatement::checkTree(Type* functionType) {
@@ -30,16 +30,19 @@ void TernaryStatement::checkTree(Type* functionType) {
 	rhs_->checkTree(functionType);
 
 	if (test_->type()->getType() != Boolean) {
-		throw StatementException(this, "Ternary test should be a boolean expression");
+		throw StatementException(this,
+				"Ternary test should be a boolean expression");
 	}
 
 	if (!lhs_->type()->Equals(rhs_->type())) {
-		throw StatementException(this, "Ternary options have to be the same type");
+		throw StatementException(this,
+				"Ternary options have to be the same type");
 	}
 
 }
 
-int TernaryStatement::generateCode(int resultRegister, std::stringstream& generated) {
+int TernaryStatement::generateCode(int resultRegister,
+		std::stringstream& generated) {
 
 	std::stringstream lhsCode;
 	int lhsNum = lhs_->generateCode(resultRegister, lhsCode);
@@ -59,7 +62,7 @@ int TernaryStatement::generateCode(int resultRegister, std::stringstream& genera
 	instrs += lhsNum;
 
 	generated << "jmpr " << rhsNum + 1 << "\n";
-	instrs ++;
+	instrs++;
 
 	generated << rhsCode.str();
 	instrs += rhsNum;

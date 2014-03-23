@@ -113,6 +113,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "do" return DO;
 "array" return TYPE_ARRAY;
 "len" return LENGTH;
+"is" return IS;
 
 {integer} { SAVE_INT;
  return INT;

@@ -102,7 +102,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_FLOAT32 TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
-%token <token> TERNARY CONCAT END DO OR PACKAGE
+%token <token> TERNARY CONCAT END DO OR PACKAGE IS
 
 %left PLUS MINUS
 %left TIMES DIVIDE
@@ -562,8 +562,8 @@ Expression: MINUS Expression {
 		delete $1;
 	} | AutoVariable {
 		$$ = $1;
-	} | Expression TERNARY Expression COLON Expression {
-		$$ = new ScribbleCore::TernaryStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3), ScribbleCore::SafeStatement($5));
+	} | IS Expression TERNARY Expression COLON Expression {
+		$$ = new ScribbleCore::TernaryStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), ScribbleCore::SafeStatement($4), ScribbleCore::SafeStatement($6));
 	} | LENGTH LPAREN Expression RPAREN {
 		$$ = new ScribbleCore::ArrayLengthStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($3));
 	} | LSQBRACKET Expression RSQBRACKET Type {

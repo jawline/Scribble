@@ -2,37 +2,41 @@
 \BOOKMARK [0][-]{chapter*.2}{Abstract}{}% 2
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
 \BOOKMARK [0][-]{chapter.2}{Design \046 Development}{}% 4
-\BOOKMARK [0][-]{chapter.3}{User Manual}{}% 5
-\BOOKMARK [1][-]{section.3.1}{Language Examples}{chapter.3}% 6
-\BOOKMARK [1][-]{section.3.2}{Lexical}{chapter.3}% 7
-\BOOKMARK [1][-]{section.3.3}{Identifiers}{chapter.3}% 8
-\BOOKMARK [1][-]{section.3.4}{Types}{chapter.3}% 9
-\BOOKMARK [1][-]{section.3.5}{Operators \046 Expressions}{chapter.3}% 10
-\BOOKMARK [1][-]{section.3.6}{Statements}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.7}{Functions}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.8}{Packages \046 Importing}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Instruction Encoding}{}% 14
-\BOOKMARK [1][-]{section.4.1}{ScribbleVM Instructions}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{The Constants Table}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.3}{Performance}{chapter.4}% 17
-\BOOKMARK [1][-]{section.4.4}{Potential Improvements}{chapter.4}% 18
-\BOOKMARK [0][-]{chapter.5}{Type Inference}{}% 19
-\BOOKMARK [1][-]{section.5.1}{Type inference in Scribble}{chapter.5}% 20
-\BOOKMARK [1][-]{section.5.2}{Expression type inference in function matching}{chapter.5}% 21
-\BOOKMARK [1][-]{section.5.3}{Expression type inference in error checking}{chapter.5}% 22
-\BOOKMARK [0][-]{chapter.6}{Package Handling}{}% 23
-\BOOKMARK [0][-]{chapter.7}{Garbage Collection}{}% 24
-\BOOKMARK [0][-]{chapter.8}{Native Interface}{}% 25
-\BOOKMARK [1][-]{section.8.1}{Structure}{chapter.8}% 26
-\BOOKMARK [0][-]{chapter.9}{Intermediate Code}{}% 27
-\BOOKMARK [1][-]{section.9.1}{Design}{chapter.9}% 28
-\BOOKMARK [1][-]{section.9.2}{Implementation}{chapter.9}% 29
-\BOOKMARK [0][-]{chapter.10}{Professional Issues}{}% 30
-\BOOKMARK [1][-]{section.10.1}{Parser Licenses}{chapter.10}% 31
-\BOOKMARK [1][-]{section.10.2}{Licenses of third party libraries}{chapter.10}% 32
-\BOOKMARK [1][-]{section.10.3}{Licensing Scribble}{chapter.10}% 33
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 34
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 35
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 36
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 37
+\BOOKMARK [1][-]{section.2.1}{The Compiler}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.2}{Scribble ASM}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.3}{The Virtual Machine}{chapter.2}% 7
+\BOOKMARK [0][-]{chapter.3}{User Manual}{}% 8
+\BOOKMARK [1][-]{section.3.1}{Language Examples}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.2}{Lexical}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.3}{Identifiers}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.4}{Types}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.5}{Operators \046 Expressions}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.6}{Statements}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.7}{Functions}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.8}{Packages \046 Importing}{chapter.3}% 16
+\BOOKMARK [0][-]{chapter.4}{Instruction Encoding}{}% 17
+\BOOKMARK [1][-]{section.4.1}{ScribbleVM Instructions}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.2}{The Constants Table}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.3}{Performance}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.4}{Potential Improvements}{chapter.4}% 21
+\BOOKMARK [0][-]{chapter.5}{Type Inference}{}% 22
+\BOOKMARK [1][-]{section.5.1}{Type inference for variables}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.2}{Type inference in function matching}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.3}{Type inference in error checking}{chapter.5}% 25
+\BOOKMARK [0][-]{chapter.6}{Package Handling}{}% 26
+\BOOKMARK [0][-]{chapter.7}{Garbage Collection}{}% 27
+\BOOKMARK [0][-]{chapter.8}{Application programming interface}{}% 28
+\BOOKMARK [1][-]{section.8.1}{Structure}{chapter.8}% 29
+\BOOKMARK [0][-]{chapter.9}{Intermediate Code}{}% 30
+\BOOKMARK [1][-]{section.9.1}{Design}{chapter.9}% 31
+\BOOKMARK [1][-]{section.9.2}{Implementation}{chapter.9}% 32
+\BOOKMARK [0][-]{chapter.10}{Literature Review}{}% 33
+\BOOKMARK [0][-]{chapter.11}{Professional Issues}{}% 34
+\BOOKMARK [1][-]{section.11.1}{Parser Licenses}{chapter.11}% 35
+\BOOKMARK [1][-]{section.11.2}{Licenses of third party libraries}{chapter.11}% 36
+\BOOKMARK [1][-]{section.11.3}{Licensing Scribble}{chapter.11}% 37
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 38
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 39
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 40
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 41
+\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 42
