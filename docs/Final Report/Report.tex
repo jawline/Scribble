@@ -1989,6 +1989,8 @@ VM::VMNamespace Parser::parse(std::string text);
 
 This is repeated for the source code which is output for each package compiled until every package is loaded into the compiler.
 
+To pass information between the generated parser and the C code which has executed it I have to use the C 'extern' keyword.
+
 \chapter{Literature Review}
 
 Throughout the project I used various different resources in order to gain the knowledge required to develop Scribble.

@@ -5,23 +5,11 @@ package console := import("console");
 package sys := import("sys");
 
 func Even(n : int) : bool {
-
- //If n = 0 then it is a base case return true
- if n = 0 then {
-  return true;
- }
- 
- return Odd(n-1);
+ return is n=0? true : Odd(n-1);
 }
 
 func Odd(n : int) : bool {
-
- //If base case then return false
- if n = 0 then {
-  return false;
- }
- 
- return Even(n-1);
+ return is n=0? false : Even(n-1);
 }
 
 func main() {

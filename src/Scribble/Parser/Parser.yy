@@ -562,8 +562,8 @@ Expression: MINUS Expression {
 		delete $1;
 	} | AutoVariable {
 		$$ = $1;
-	} | Expression TERNARY Expression COLON Expression {
-		$$ = new ScribbleCore::TernaryStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3), ScribbleCore::SafeStatement($5));
+	} | IS Expression TERNARY Expression COLON Expression {
+		$$ = new ScribbleCore::TernaryStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), ScribbleCore::SafeStatement($4), ScribbleCore::SafeStatement($6));
 	} | LENGTH LPAREN Expression RPAREN {
 		$$ = new ScribbleCore::ArrayLengthStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($3));
 	} | LSQBRACKET Expression RSQBRACKET Type {
