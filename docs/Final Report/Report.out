@@ -1,7 +1,7 @@
 \BOOKMARK [0][-]{toc.0}{Table of Contents}{}% 1
 \BOOKMARK [0][-]{chapter*.2}{Abstract}{}% 2
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
-\BOOKMARK [0][-]{chapter.2}{Design \046 Development}{}% 4
+\BOOKMARK [0][-]{chapter.2}{Design and Development}{}% 4
 \BOOKMARK [1][-]{section.2.1}{The Compiler}{chapter.2}% 5
 \BOOKMARK [1][-]{section.2.2}{Scribble ASM}{chapter.2}% 6
 \BOOKMARK [1][-]{section.2.3}{The Virtual Machine}{chapter.2}% 7
@@ -13,7 +13,7 @@
 \BOOKMARK [1][-]{section.3.5}{Operators \046 Expressions}{chapter.3}% 13
 \BOOKMARK [1][-]{section.3.6}{Statements}{chapter.3}% 14
 \BOOKMARK [1][-]{section.3.7}{Functions}{chapter.3}% 15
-\BOOKMARK [1][-]{section.3.8}{Packages \046 Importing}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.8}{Packages and Importing}{chapter.3}% 16
 \BOOKMARK [0][-]{chapter.4}{Instruction Encoding}{}% 17
 \BOOKMARK [1][-]{section.4.1}{ScribbleVM Instructions}{chapter.4}% 18
 \BOOKMARK [1][-]{section.4.2}{The Constants Table}{chapter.4}% 19
@@ -31,12 +31,10 @@
 \BOOKMARK [1][-]{section.9.1}{Design}{chapter.9}% 31
 \BOOKMARK [1][-]{section.9.2}{Implementation}{chapter.9}% 32
 \BOOKMARK [0][-]{chapter.10}{Literature Review}{}% 33
-\BOOKMARK [0][-]{chapter.11}{Professional Issues}{}% 34
-\BOOKMARK [1][-]{section.11.1}{Parser Licenses}{chapter.11}% 35
-\BOOKMARK [1][-]{section.11.2}{Licenses of third party libraries}{chapter.11}% 36
-\BOOKMARK [1][-]{section.11.3}{Licensing Scribble}{chapter.11}% 37
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 38
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 39
+\BOOKMARK [1][-]{section.10.1}{Parsing}{chapter.10}% 34
+\BOOKMARK [1][-]{section.10.2}{Virtual Machine}{chapter.10}% 35
+\BOOKMARK [0][-]{chapter.11}{Professional Issues}{}% 36
+\BOOKMARK [1][-]{section.11.1}{Parser Licenses}{chapter.11}% 37
+\BOOKMARK [1][-]{section.11.2}{Licenses of third party libraries}{chapter.11}% 38
+\BOOKMARK [1][-]{section.11.3}{Licensing Scribble}{chapter.11}% 39
 \BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 40
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 41
-\BOOKMARK [0][-]{chapter*.26}{Bibliography}{}% 42

@@ -1,6 +1,6 @@
 \contentsline {chapter}{Abstract}{4}{chapter*.2}
 \contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}
-\contentsline {chapter}{\numberline {2}Design \& Development}{6}{chapter.2}
+\contentsline {chapter}{\numberline {2}Design and Development}{6}{chapter.2}
 \contentsline {section}{\numberline {2.1}The Compiler}{6}{section.2.1}
 \contentsline {section}{\numberline {2.2}Scribble ASM}{6}{section.2.2}
 \contentsline {section}{\numberline {2.3}The Virtual Machine}{7}{section.2.3}
@@ -21,7 +21,7 @@
 \contentsline {subsubsection}{Floats}{16}{section*.4}
 \contentsline {subsubsection}{Boolean}{16}{section*.5}
 \contentsline {subsubsection}{String}{16}{section*.6}
-\contentsline {subsection}{\numberline {3.2.3}Operators List}{16}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.3}Operators List}{17}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Comments}{17}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}Keywords List}{17}{subsection.3.2.5}
 \contentsline {section}{\numberline {3.3}Identifiers}{18}{section.3.3}
@@ -30,14 +30,14 @@
 \contentsline {subsection}{\numberline {3.4.1}Primitive Types}{20}{subsection.3.4.1}
 \contentsline {subsubsection}{bool}{20}{section*.7}
 \contentsline {subsubsection}{int}{20}{section*.8}
-\contentsline {subsubsection}{float32}{20}{section*.9}
+\contentsline {subsubsection}{float32}{21}{section*.9}
 \contentsline {subsection}{\numberline {3.4.2}Reference Types}{21}{subsection.3.4.2}
 \contentsline {subsubsection}{string}{22}{section*.10}
 \contentsline {subsubsection}{Arrays}{22}{section*.11}
 \contentsline {subsubsection}{Structures}{22}{section*.12}
-\contentsline {subsection}{\numberline {3.4.3}Type Inference}{22}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.3}Type Inference}{23}{subsection.3.4.3}
 \contentsline {subsection}{\numberline {3.4.4}Types in the grammar}{23}{subsection.3.4.4}
-\contentsline {section}{\numberline {3.5}Operators \& Expressions}{23}{section.3.5}
+\contentsline {section}{\numberline {3.5}Operators \& Expressions}{24}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Constant Expressions}{24}{subsection.3.5.1}
 \contentsline {subsubsection}{Booleans}{24}{section*.13}
 \contentsline {subsubsection}{Integers}{24}{section*.14}
@@ -53,7 +53,7 @@
 \contentsline {subsubsection}{Arithmetic}{27}{section*.17}
 \contentsline {subsubsection}{Minus Expression}{27}{section*.18}
 \contentsline {subsubsection}{Increment \& Decrement}{27}{section*.19}
-\contentsline {subsubsection}{Comparison}{27}{section*.20}
+\contentsline {subsubsection}{Comparison}{28}{section*.20}
 \contentsline {subsubsection}{Logical Operators}{28}{section*.21}
 \contentsline {subsection}{\numberline {3.5.9}String Concatenation}{28}{subsection.3.5.9}
 \contentsline {subsubsection}{Assignment}{29}{section*.22}
@@ -63,12 +63,12 @@
 \contentsline {section}{\numberline {3.6}Statements}{31}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}Flow Control}{31}{subsection.3.6.1}
 \contentsline {subsubsection}{If}{31}{section*.23}
-\contentsline {subsubsection}{For}{31}{section*.24}
+\contentsline {subsubsection}{For}{32}{section*.24}
 \contentsline {subsubsection}{While}{32}{section*.25}
 \contentsline {subsection}{\numberline {3.6.2}Expression Statements}{32}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Return Statements}{32}{subsection.3.6.3}
-\contentsline {section}{\numberline {3.7}Functions}{32}{section.3.7}
-\contentsline {section}{\numberline {3.8}Packages \& Importing}{34}{section.3.8}
+\contentsline {section}{\numberline {3.7}Functions}{33}{section.3.7}
+\contentsline {section}{\numberline {3.8}Packages and Importing}{34}{section.3.8}
 \contentsline {subsection}{\numberline {3.8.1}Importing Packages}{35}{subsection.3.8.1}
 \contentsline {chapter}{\numberline {4}Instruction Encoding}{36}{chapter.4}
 \contentsline {section}{\numberline {4.1}ScribbleVM Instructions}{36}{section.4.1}
@@ -87,12 +87,10 @@
 \contentsline {section}{\numberline {9.1}Design}{56}{section.9.1}
 \contentsline {section}{\numberline {9.2}Implementation}{57}{section.9.2}
 \contentsline {chapter}{\numberline {10}Literature Review}{59}{chapter.10}
-\contentsline {chapter}{\numberline {11}Professional Issues}{60}{chapter.11}
-\contentsline {section}{\numberline {11.1}Parser Licenses}{60}{section.11.1}
-\contentsline {section}{\numberline {11.2}Licenses of third party libraries}{60}{section.11.2}
-\contentsline {section}{\numberline {11.3}Licensing Scribble}{61}{section.11.3}
-\contentsline {chapter}{Bibliography}{62}{chapter*.26}
-\contentsline {chapter}{Bibliography}{62}{chapter*.26}
-\contentsline {chapter}{Bibliography}{62}{chapter*.26}
-\contentsline {chapter}{Bibliography}{62}{chapter*.26}
-\contentsline {chapter}{Bibliography}{62}{chapter*.26}
+\contentsline {section}{\numberline {10.1}Parsing}{59}{section.10.1}
+\contentsline {section}{\numberline {10.2}Virtual Machine}{60}{section.10.2}
+\contentsline {chapter}{\numberline {11}Professional Issues}{62}{chapter.11}
+\contentsline {section}{\numberline {11.1}Parser Licenses}{62}{section.11.1}
+\contentsline {section}{\numberline {11.2}Licenses of third party libraries}{62}{section.11.2}
+\contentsline {section}{\numberline {11.3}Licensing Scribble}{63}{section.11.3}
+\contentsline {chapter}{Bibliography}{64}{chapter*.26}

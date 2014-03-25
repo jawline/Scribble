@@ -11,7 +11,7 @@
 \def\supervisorname{Adrian Johnstone}
 \def\degree{BSc (Hons) in Computer Science}
 \def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
-\def\finalOrInterim{Interim Report} % indicate if this document is your Final Report or Interim Report
+\def\finalOrInterim{Final Report} % indicate if this document is your Final Report or Interim Report
 
 \begin{document}
 
@@ -26,7 +26,7 @@ This report has been prepared on the basis of my own work. Where other published
 
 \vskip3em
 
-Word Count: 8,674
+Word Count: 20,597
 
 \vskip3em
 
@@ -34,7 +34,7 @@ Student Name: \studentname
 
 \vskip3em
 
-Date of Submission: 
+Date of Submission: Wednesday, 26 March
 
 \vskip3em
 
@@ -70,41 +70,45 @@ The aim of the project is to create a platform independent programming language,
 
 The aim of my project was to create a programming language which could be used within C++ applications to make the development process easier and allow the extension of existing functionality. The main purpose of Scribble is to provide developers with a way to allow a program's users to extend or modify their program in an easy way without having to release the entire source code of the program. It was also designed with the intention of speeding up development, as a script can be recompiled and executed without having to recompile the entire program, often without even requiring the program to restart.
 
-This approach is most commonly taken within the games industry with languages like LUA, UnrealScript, TorqueScript and JavaScript being used to let developers create a scene or manipulate a virtual world without needing to directly interact with the substantially more complex C or C++ source code in which these engines are usually written.
+This approach is most commonly taken within the games industry with languages such as LUA, UnrealScript, TorqueScript and JavaScript being used to let developers create a scene or manipulate a virtual world without needing to directly interact with the substantially more complex C or C++ source code in which these engines are usually written.
 
-The design of my project was split into three key sections: 1) the compiler which handles the process of turning the input source into executable code using the syntax I have defined, 2) the intermediate language which represents byte code instruction sets in a human readable form, and 3) the virtual machine which executes compiled programs.
+The design of my project was split into three key sections: 1) the compiler, which handles the process of turning the input source into executable code using the syntax that I have defined, 2) the intermediate language, which represents byte code instruction sets in a human readable form, and 3) the virtual machine, which executes compiled programs.
 
 I decided to create a scripting language because they are an increasingly important part of software engineering. Scripting languages have a large number of uses in a wide variety of applications, such as enabling user add-ons within Microsoft's Office suite, or allowing modifications to virtual reality software. I have used scripting languages like LUA and Javascript (using Google's V8) in previous projects and have wanted to experiment with my own ideas about how a language should be written based on my experiences. 
 
-My choices when defining syntax are the result of a desire to take what I consider to be the better parts of imperative programming languages such as C and Go. The Go developers compelling arguments against object orientation also made me very interested in seeing whether a syntax could be defined so that non object oriented language was functional and readable when writing equivalent programs as its object oriented alternatives (in this case Javascript would likely be the closest comparison) and many of my design choices reflect this desire to avoid a traditional object oriented paradigm.
+My choices when defining the syntax of Scribble are the result of a desire to take what I consider to be the better parts of imperative programming languages such as C and Go. The Go developers' compelling arguments against object orientation also made me very interested in seeing whether a syntax could be defined so that a non object oriented language was functional and readable when writing equivalent programs, as its object oriented alternatives (in this case Javascript would likely be the closest comparison) and many of my design choices reflect this desire to avoid a traditional object oriented paradigm.
 
-For this report I have produced a user manual and details about the language implementation. Due to the scope of the project it would be difficult to appropriately explain the entire implementation, so I have instead chosen to briefly cover the overall design and development of Scribble as well as documentation on the theory and implementation several important parts of the implementation in detail as well and produce user manual describing the syntax and semantics of the language.
+For this report I have produced a user manual and details about the language implementation. Due to the scope of the project it would be difficult to appropriately explain the entire implementation, so I have instead chosen to briefly cover the overall design and development of Scribble, as well as providing documentation on the theory and implementation of several important parts of the Scribble language. I have also provided a user manual which outlines the syntax and semantics of the action, as well as explaining how things like function matching and type inference should be used.
 
-\chapter{Design \& Development}
+\chapter{Design and Development}
 
-The design of Scribble was split into three sections, the compiler, the virtual machine and the intermediate language. The aim of this design was to make each of these three sections independent of one another so that they could be deployed as separate programs which produce output for each other.
+The design of Scribble was split into three sections: the compiler, the virtual machine and the intermediate language. The aim of this design was to make each of these three sections independent of one another so that they could be deployed as separate programs which produce output for each other.
 
 \section{The Compiler}
 
 The compiler is the part of the project which takes the high level Scribble source code and turns it into a set of simple instructions which a computer is capable of executing. 
 
-The first step of this process is to parse the source text using a parser generated from a grammar and a lexical rules. This parser takes a single piece of source text and generates statement trees for each function and structure type information from structure definitions as well as marking all of the packages which are imported by the source text. The parser runs recursively on any imported packages, though it checks whether a package has been parsed before to avoid infinite recursion and unnecessary computation. During this step the parser will detect any syntax errors in the source code and if one occurs it will exit with a message informing the user of which line it occurs on.
+The first step of this process is to parse the source text using a parser generated from a grammar and  lexical rules. This parser takes a single piece of source text and generates statement trees for each function and structure type information from structure definitions, as well as marking all of the packages which are imported by the source text. The parser runs recursively on any imported packages, however it checks whether a package has been parsed before to avoid infinite recursion and unnecessary computation. During this step the parser will detect any syntax errors in the source code and if one occurs it will exit with a message informing the user of which line it occurs on.
 
-Once all of the source files for a program have been parsed the compiler attempts to resolve and function and type references found. The reason why the compiler has to resolve references after the entire program has been parsed is because in Scribble a function does not have to be defined before it is used, this requires extra computation when compiling but makes the language much easier to use.
+Once all of the source files for a program have been parsed the compiler attempts to resolve and function and type references found. The reason why the compiler has to resolve references after the entire program has been parsed is because in Scribble a function does not have to be defined before it is used. This requires extra computation when compiling but makes the language much easier to use.
 
-The compiler will then verify the program is correctly typed and that all references have been resolved properly. This is achieved by the checkTree function which recursively descends down the generated tree using post-order tree traversal and for each statement in the tree checking that all of its children are the correct type for the program.
+The compiler will then verify that the program is correctly typed and that all references have been resolved properly. This is achieved by the checkTree function which recursively descends down the generated tree using post-order tree traversal, and for each statement in the tree checking that all of its children are the correct type for the program.
 
-Finally the compiler will generate a set of intermediate code which represents the original source code as a set of low level instructions. This intermediate code is written to a std::stringstream using the generateCode function. This function recursively descends down the statement tree similarly to the checkTree function however instead of verifying the statements it generates a low level equivalent in the Scribble ASM language.
+Finally, the compiler will generate a set of intermediate code which represents the original source code as a set of low level instructions. This intermediate code is written to a std::stringstream using the generateCode function. This function recursively descends down the statement tree similarly to the checkTree function. However, instead of verifying the statements it generates a low level equivalent in the Scribble ASM language.
 
 \section{Scribble ASM}
 
-Scribble ASM is an intermediate low level language which is able to represent the program in a low level form which is much closer to the virtual machine code. The Scribble ASM compiler has a simple design and requires only a basic single file parser. The job of the compiler is to take intermediate code and generate bytecode instructions which are specific to the virtual machine. It is explained in more detail in chapter 9.
+Scribble ASM is an intermediate low level language which is able to represent the program in a low level form which is much closer to the virtual machine code. The Scribble ASM compiler has a simple design and requires only a basic single file parser. The job of the compiler is to take intermediate code and generate bytecode instructions which are specific to the virtual machine. This is explained in more detail in Chapter 9.
 
 \section{The Virtual Machine}
 
-The Scribble virtual machine is the part of the program which executes the compiled source code. Scribble's virtual machine is a garbage collected virtual machine which requires type information on every registered type. 
+The job of the Scribble virtual machines is to take the compiled bytecode produced by the Scribble ASM compiler and execute it. To be able to execute the program, the virtual machine must be capable of doing several things.
 
-The virtual machine takes the compiled bytecode produced by the Scribble ASM compiler and 
+The core functionality of the virtual machine is the execution of sets of instructions. Each Scribble instruction is encoded into 8 bytes of memory which stores the opcode, which is used to identify which operation is meant to be performed, and the operands, which give the virtual machine the information required to carry out the instruction. These sets of instructions are represented by an InstructionList class which stores the instructions and constant values required for each part of a program. This is covered in more detail in Chapter 4 on instruction encoding.
+
+In addition to the basic execution of instructions, the virtual machine has to be capable of dynamically allocating memory onto a heap at run time and freeing it when it is no longer used. In order to do this the virtual machine needs to know the amount of memory required, as well as having some way to reference a piece of allocated memory. Instead of allowing the allocator to specify the amount of memory in bytes, It is required that every piece of allocated memory has a type which dictates its size, for example an array(int) of size 4 would have a size of 16 bytes in memory. Memory allocation requires type information in order to enable the virtual machine to inspect dynamically allocated memory at run time. Without this additional type information it would be impossible to work out whether a piece of memory referenced another, and garbage collection would be impossible.
+
+The virtual machine also has to be able to store all of the instruction sets it will execute, and all of the registered types. To do this the VMFunc and VMType classes were devices. The VMFunc class represents a function within a virtual machine and stores its instruction set as well as an identifier (currently the name is stored as a string, however this will likely be replaced with an integer identifier later). The VMType class represents a type within the virtual machine. This type can be one of the primitives types, a structure, or an array, and it stores information on whether it is a reference, what its subtype is and information about a structure's fields. This information is used by the garbage collector to perform reference counting and could also be expanded to allow for something like Java's object reflection whereby type information can be gathered from a structure at run time. Finally, the VMNamespace class provides a method of storing VMFunc and VMType instances in a manner which allows the virtual machine to identify them.
 
 \chapter{User Manual}
 
@@ -161,7 +165,7 @@ func main() {
 
 \subsection{Flow Control}
 
-The next example uses if statements to control the flow of execution, generating a random value between 0 and 2000 and then executing different code depending on whether the value is greater than 1000
+The next example uses if statements to control the flow of execution, generating a random value between 0 and 2000 and then executing different code depending on whether the value is greater than 1000.
 
 \begin{verbatim}
 //Import the console package allowing us to write to stdout
@@ -248,7 +252,8 @@ func main() {
 
 \subsection{Functions}
 
-In the following example two mutually recursive functions will be defined to check whether a value is odd or even. It also uses if statements to detect base cases for the recursive functions.
+In the following example,
+ two mutually recursive functions will be defined to check whether a value is odd or even. It also uses if statements to detect base cases for the recursive functions.
 
 \begin{verbatim}
 //Import the console package allowing us to write to stdout
@@ -300,7 +305,7 @@ func main() {
 
 \subsection{Arrays}
 
-This example will populate an array with values from 0 to 100 and then print out all of its elements to the screen in reverse order ( starting at index 99 and going until index 0 )
+This example will populate an array with values from 0 to 100 and then print out all of its elements to the screen in reverse order (starting at index 99 and going until index 0)
 
 \begin{verbatim}
 //Import the console package allowing us to write to stdout
@@ -388,7 +393,7 @@ type User := struct {
  * another, used by the QuickSort function when comparing users
  */
 
-func Younger( left : User, right : User) : bool {
+func Younger(left : User, right : User) : bool {
 
  if left->age < right->age then {
   return true;
@@ -402,7 +407,7 @@ func Younger( left : User, right : User) : bool {
  * another, used by the QuickSort function when comparing users
  */
 
-func Older( left : User, right : User) : bool {
+func Older(left : User, right : User) : bool {
 
  if left->age > right->age then {
   return true;
@@ -449,7 +454,7 @@ func PrintUsers(users : array(User)) {
  * the pivot value until the array is sorted.
  */
 
-func QuickSort( n:array(User), low : int, high : int) {
+func QuickSort(n:array(User), low : int, high : int) {
 
  var i := low;
  var j := high;
@@ -518,7 +523,7 @@ The lexical chapter outlines all of the important language features defined in t
 
 \subsection{Identifiers}
 
-In Scribble the lexical analyser defines an identifier (or ID) as one or more characters, underscores and digits starting with a character that is not a digit. It is defined by the regular expression
+In Scribble, the lexical analyser defines an identifier (or ID) as one or more characters, underscores and digits starting with a character that is not a digit. Identifiers are defined by the regular expression:
 \begin{verbatim}
 id [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 \end{verbatim}
@@ -529,20 +534,23 @@ There are several constant values which are identified by the lexical analyser.
 
 \subsubsection{Integer}
 
-In Scribble a integer constant is a string of digits with no decimal place, prefix or suffix. it is defined in Scribble by the regular expression 
+In Scribble an integer constant is a string of digits with no decimal place, prefix or suffix. 
 
+Integers are defined in Scribble by the regular expression:
 \begin{verbatim}
 digit [0-9]
 integer {digit}+
 \end{verbatim}
 
-which will accept strings of the digits 0-9.
+which will accept strings of digits between 0 and 9.
 
 For example, 5 would be identified an integer but 5f, 5.0 or i5 would not be.
 
 \subsubsection{Floats}
 
-A float constant is a string of digits, optionally followed up with a second string of digits with the character 'f' as a suffix to identify it from other types which have decimal places. It is defined by the regular expression
+A float constant is a string of digits, optionally followed up with a second string of digits with the character 'f' as a suffix to identify it from other types which have decimal places. 
+
+Floating point numbers are defined by the regular expression:
 \begin{verbatim}
 real {integer}("."{integer})*
 float {real}f
@@ -556,7 +564,9 @@ A boolean is defined in Scribble by the two keywords true or false.
 
 \subsubsection{String}
 
-A string is a string of characters within two sets of '"'. It is defined by the regular expression \begin{verbatim}
+A string is an array of characters within two double quotation marks. 
+
+Strings are defined by the regular expression: \begin{verbatim}
 string \"[^\"\n]*\"
 \end{verbatim}.
 
@@ -587,7 +597,7 @@ Scribble uses the //Comment Line and /* Block of text */ notation for comments.
 
 This means that when you write // the rest of the current line will be seen as a comment and ignored. This is how single line comments are achieved.
 
-It also means that anything in between /* and */ will be ignored, allowing multi line comments.
+It also means that anything in between /* and */ will be ignored, allowing multi-line comments.
 
 \subsection{Keywords List}
 
@@ -625,9 +635,9 @@ It also means that anything in between /* and */ will be ignored, allowing multi
 
 An identifier in Scribble is either the local package name, the name of a function, a type or a variable.
 
-No two identifiers should have the same name ( Regardless of what they are identifying or their scope ) and this will raise a parsing error.
+No two identifiers should have the same name (regardless of what they are identifying or their scope) and this will raise a parsing error.
 
-Identifiers are always local to the package and are not accessible from other packages except for functions and types using an explicit syntax.
+Identifiers are always local to the package and are not accessible from other packages, except for functions and types using an explicit syntax.
 
 \subsection{Scope}
 
@@ -635,7 +645,7 @@ Scribble currently has a simple very scoping system.
 
 Package, function and type identifiers are all global and their names are shared across all functions within a package.
 
-Variable names are always local to the function that they are defined in from that line onwards. Variable redefinition is not allowed and statement blocks ( Such as declaring it inside a flow control statement ) will not effect this.
+Variable names are always local to the function that they are defined in from that line onwards. Variable redefinition is not allowed and statement blocks (such as declaring it inside a flow control statement) will not affect this.
 
 For example:
 \begin{verbatim}
@@ -659,7 +669,7 @@ func main() {
  j := 10;
 }
 \end{verbatim}
-are valid, however
+are valid, however:
 \begin{verbatim}
 func main() {
  var j := 15;
@@ -674,14 +684,14 @@ would cause a parsing error.
 
 \section{Types}
 
-Scribble is a strictly typed language. This means that every variable, function and value has a specific type. Unlike other languages Scribble will never implicitly cast another object. A programmer will have to use one of the casting functions provided or write their own to cast between types, even the basic primitive types such as integers and floats.
+Scribble is a strictly typed language. This means that every variable, function and value has a specific type. Unlike other languages, Scribble will never implicitly cast another object. A programmer will have to use one of the casting functions provided or write their own to cast between types, even the basic primitive types such as integers and floats.
 
-For example
+For example:
 \begin{verbatim}
 var j : int := 5;
 var k : float32 := j;
 \end{verbatim}
-would cause a parsing error but
+would cause a parsing error but:
 \begin{verbatim}
 var j : int := 5;
 var k : float32 := sys.Float32(j);
@@ -716,11 +726,11 @@ func main() {
 
 \subsection{Primitive Types}
 
-There are several primitive types in Scribble. Primitive types are the building blocks of a program, representing fixed size pieces of data within the language giving them a fixed range.
+There are several primitive types in Scribble. Primitive types are the building blocks of a program, representing fixed size pieces of data within the language, giving them a fixed range.
 
 Primitive types are passed around as values and not references. This means that if you create a primitive variable like var j : int and pass it to a function which modifies the copy of j in the calling function will not be affected.
 
-For example \begin{verbatim}
+For example: \begin{verbatim}
 func Hello() {
  var j := 10;
  World(j);
@@ -756,7 +766,7 @@ The float32 type represents 32 bit floating point numbers allowing approximation
 
 \subsection{Reference Types}
 
-A reference type are types of a variable size which are stored on the heap, an area in memory which allows for dynamic memory allocation.
+A reference type represents a piece of data which is stored on the heap, an area in memory which allows for dynamic memory allocation.
 
 Reference types are garbage collected. This means that, like Java, the data is automatically destructed when a reference to it no longer exists.
 
@@ -779,7 +789,7 @@ func DoStuff() {
 \end{verbatim}
 In this case the value of j[0] after ModifyArray has been called would be 5 and not the initial value 0.
 
-However in the case
+However in the case:
 \begin{verbatim}
 func ModifyArray(arr : array(int)) {
 
@@ -801,17 +811,17 @@ the value of j[0] in DoStuff would remain unchanged, as the reference arr in the
 
 \subsubsection{string}
 
-The string type represents a string of characters. It is really syntax sugar for an array of characters. When a string constant is written in Scribble the expression generated will be to create a new item on he heap and then load that data into it, so "Hello World" would make a new array of 12 characters ( Including the null terminator ) and then load the string into it as initial values.
+The string type represents a string of characters. It is really syntactic sugar for an array of characters. When a string constant is written in Scribble, the expression generated will create a new array on the heap and then load the string data into it, so "Hello World" would make a new array of 12 characters (including the null terminator) and then load the string into it as initial values.
 
-Strings are immutable. Any operation on them using the functions provided will not change the memory of the string and will instead create a new string with which to place the result of the operations, this can have some performance implications as repeated string manipulations cause the heap and garbage collector to perform a lot of expensive operations.
+Strings are immutable. Any operation on them using the functions provided will not change the memory of the string, and will instead create a new string with which to place the result of the operations. This can have some performance implications as repeated string manipulations cause the heap and garbage collector to perform a lot of expensive operations.
 
 The string keyword identifies this type.
 
 \subsubsection{Arrays}
 
-Arrays are capable of containing a set number of values of the same type, including reference types. Two arrays which represent different types are not equivalent (so you couldn't assign an array of integers to a variable which is mean to store an array of booleans).
+Arrays are capable of containing a set number of values of the same type, including reference types. Two arrays which represent different types are not equivalent (so you couldn't assign an array of integers to a variable which is meant to store an array of booleans).
 
-Arrays are written in Scribble as array(subType), this differs from the subtype[] syntax often used in other languages. The changes where made in order to make type information clearer especially when dealing with a right handed type system.
+Arrays are written in Scribble as array(subType). This differs from the subtype[] syntax often used in other languages. The changes were made in order to make type information more clear, especially when dealing with a right handed type system.
 
 The length of an array can also be obtained after it is declared by writing len(arrayValue). This will return the number of elements in the array, not the size in bytes.
 
@@ -819,7 +829,15 @@ The length of an array can also be obtained after it is declared by writing len(
 
 Structures are a predefined collection of fields with specific types. They are used to build complex types from collections of primitive data.
 
-A structure is defined by writing
+A structure can have a with its own type, so a Tree could be represented by writing something like:\begin{verbatim}
+type Tree := struct {
+ payload : int, 
+ left : Tree
+ right : Tree
+};
+\end{verbatim}
+
+A structure is defined by writing:
 \begin{verbatim}
 type Name := struct {
  FieldName : Type,
@@ -829,17 +847,17 @@ type Name := struct {
 
 \subsection{Type Inference}
 
-Scribble allows for a variables type to be inferred when it is declared instead of explicitly typed. This reduces some of the typed overhead caused by strict languages without allowing the issues which lazy typing systems can cause (such as being unable to easily identify the type of a value as well as errors caused by casting).
+Scribble allows for a variable's type to be inferred when it is declared, instead of explicitly requiring that it be typed. This reduces some of the typed overhead caused by strict languages, without introducing some of the issues which lazy typing systems can experience (such as being unable to easily identify the type of a value as well as rounding errors due to implicit casting).
 
 The type is inferred from the type of the expression that it is being assigned to. The type of the expression is identified by the recursive inspection of the generated statement tree. Each element on the tree's type is inferred from the type of its children down to the basic constant values.
 
-For example the expression 5 + 5 will be inferred to be of type integer as the two constant values are of type int and the addition expression will produce a value of the same type as the values it is adding, additionally 5f + 5f would be inferred to be float32.
+For example, the expression 5 + 5 will be inferred to be of type integer as the two constant values are of type int and the addition expression will produce a value of the same type as the values it is adding. Alternatively 5f + 5f would be inferred to be a float32.
 
-If the type of an expression is inferred to be 'Void' (Scribble's keyword for expressions or functions which have no type) then it cannot be used in variable type inference and a parser error will be raised.
+If the type of an expression is inferred to be 'Void' (Scribble's identifier for expressions or functions which have no type) then it cannot be used in variable type inference and a parser error will be raised.
 
 \subsection{Types in the grammar}
 
-The types defined above are expressed in the grammar as
+The types defined above are expressed in the grammar as:
 \begin{verbatim}
 Type: TYPE_INT {
 	} | TYPE_STRING {
@@ -877,13 +895,13 @@ The next section covers the operators and expressions that drive Scribble and en
 
 \subsection{Constant Expressions}
 
-Constant expressions in Scribble are the basic building blocks of the language. These allow you to enter constant values into the language so that they can be used in calculations or assigned to variables.
+Constant expressions in Scribble are the basic building blocks of the language. These allow a developer to enter constant values into the language so that they can be used in calculations or assigned to variables.
 
 \subsubsection{Booleans}
 
-A boolean constant is expressed using the keywords 'true' or 'false'.
+A boolean constant expression occurs whenever the keywords 'true' or 'false' are used.
 
-It is defined in the grammar as
+Boolean expressions are defined in the grammar as:
 \begin{verbatim}
 TRUE {
 } | FALSE {
@@ -891,9 +909,9 @@ TRUE {
 
 \subsubsection{Integers}
 
-A integer constant is expressed whenever the lexical analyser recognizes an integer using the regular expression defined in the lexical analysis chapter.
+An integer constant expression occur whenever the lexical analyser recognizes an integer using the regular expression defined in the lexical analysis chapter.
 
-It is defined in the grammar as
+integer expressions are defined in the grammar as:
 \begin{verbatim}
 INT {
 }
@@ -901,9 +919,9 @@ INT {
 
 \subsubsection{Floats}
 
-A floating point constant is expressed whenever the lexical analyser recognizes an float using the regular expression defined in the lexical analysis chapter.
+A floating point constant expression occurs whenever the lexical analyser recognizes a float using the regular expression defined in the lexical analysis chapter.
 
-It is defined in the grammar as
+float expressions are defined in the grammar as:
 \begin{verbatim}
 FLOAT32 {
 }
@@ -911,9 +929,9 @@ FLOAT32 {
 
 \subsubsection{Strings}
 
-A string constant is expressed whenever the lexical analyser recognizes a string using the regular expression defined in the lexical analysis chapter.
+A string constant expression occurs whenever the lexical analyser recognizes a string using the regular expression defined in the lexical analysis chapter.
 
-As string a not a primitive type, when a string constant expression is executed it will create a new string on the heap and return a reference to it. This differs from all of the other constant types which are all primitives and have no effect on the heap.
+As a string is not a primitive type. W1hen a string constant expression is executed it will create a new string on the heap and return a reference to it. This differs from all of the other constant types which are all primitives and have no effect on the heap.
 
 \begin{verbatim}
 STRING {
@@ -926,16 +944,16 @@ A variable can be defined in Scribble either with an explicit type or with its t
 
 To explicitly specify the type of a variable you write var Name : Type;
 
-Using type inference allows you to automatically set the type of a created variable based on the expression that it being signed to initially. You do this by writing var Name := Expression; If no expression is supplied or the expression is Void then a parser error will be thrown, otherwise the type of the new variable will be set to the type of the expression.
+Using type inference allows you to automatically set the type of a created variable based on the type of the expression that is assigned to. This is done by writing var Name := Expression; If no expression is supplied or the expression is Void then a parser error will be thrown, otherwise the type of the new variable will be set to the type of the expression.
 
-examples:
+Examples:
 \begin{verbatim}
 var j := 5; //Create a new variable of type int
 var j : int := 5; //Explicitly create a new variable of type int.
 var j := (5 + 5) * 2; //Create a variable of type int from a more complex expression
 \end{verbatim}
 
-variable definition is defined in the grammar as
+Variable definition is defined in the grammar as:
 \begin{verbatim}
 Variable {
 } | Variable ASSIGN Expression {
@@ -947,7 +965,7 @@ Variable {
 
 A variable expression will evaluate to the value of the specified variable.
 
-This is defined in the grammar as \begin{verbatim}
+This is defined in the grammar as: \begin{verbatim}
 ID {
 }
 \end{verbatim}
@@ -960,7 +978,7 @@ Examples:
 [100]int will construct an array of 100 integers.
 [100]array(int) will construct an array of 100 integer arrays.
 
-It is defined in the grammar as
+Array construction expressions are defined in the grammar as:
 \begin{verbatim}
 LSQBRACKET Expression RSQBRACKET Type {
 }
@@ -980,7 +998,7 @@ type Hello {
 var J := Hello{ "Bobby", 18 };
 Will create a variable J which is an instance of the structure Hello with the name "Bobby" and the age 18.
 
-It is defined in the grammar as
+Structure construction expressions are defined in the grammar as:
 \begin{verbatim}
 Arguments: {
 } | Arguments_2 {
@@ -996,18 +1014,18 @@ Type LBRACKET Arguments RBRACKET {
 
 \subsection{Array Index Expression}
 
-An array index expression evaluates to the value of an array at a given index written in the notation ArrayExpression[IndexExpression].
+An array index expression returns the value of an array at a given index, written using the notation ArrayExpression[IndexExpression].
 
-This is defined in the grammar as \begin{verbatim}
+This is defined in the grammar as: \begin{verbatim}
 Expression LSQBRACKET Expression RSQBRACKET {
 }
 \end{verbatim}
 
 \subsection{Structure Field Expression}
 
-A structure field expression evaluates to a specified field within a given Structure expression ( An expression which evaluates to the type struct(Something))
+A structure field expression evaluates to a specified field within a given Structure expression (an expression which evaluates to the type struct(Something))
 
-It is defined in the grammar as
+Structure field expressions are defined in the grammar as:
 \begin{verbatim}
 Expression '->' ID {
 }
@@ -1027,7 +1045,7 @@ Examples:
 
 If the expressions are not numeric or not of the same type then a parsing exception will occur. For example 5 * 5 would be valid but "Hello" + "World" or 5f + 5 would not be.
 
-It is defined in the syntax as
+Arithmetic expressions are in the grammar as:
 \begin{verbatim}
 Expression PLUS Expression {
 } | Expression MINUS Expression {
@@ -1038,7 +1056,9 @@ Expression PLUS Expression {
 
 \subsubsection{Minus Expression}
 
-In addition to these arithmetic operators -Expression is also allowed to allow negative expressions like -5 or -x to be constructed. It is the same as writing 0 - 5 or 0 - x and is valid for any numeric type. It is defined in the grammar as 
+In addition to these arithmetic operators -Expression is also allowed to allow negative expressions like -5 or -x to be constructed. It is the same as writing 0 - 5 or 0 - x and is valid for any numeric type. 
+
+A minus expression is defined in the grammar as:
 
 \begin{verbatim}
 MINUS Expression {
@@ -1047,7 +1067,7 @@ MINUS Expression {
 
 \subsubsection{Increment \& Decrement}
 
-In addition to the basic arithmetic operators you can also use the '++' and '--' operators to increment or decrement a integer variable by 1. An increment or decrement expression also returns the value of the variable. If the operator is placed before the variable name then it will return the value of the variable after it is modified and if it is placed after the id of the variable then it will return the value of the variable before it is modified.
+In addition to the basic arithmetic operators developers can also use the '++' and '--' operators to increment or decrement a integer variable by 1. An increment or decrement expression also returns the value of the variable. If the operator is placed before the variable name then it will return the value of the variable after it is modified and if it is placed after the ID of the variable then it will return the value of the variable before it is modified.
 
 Examples:
 var i := 0;
@@ -1056,7 +1076,7 @@ i++ = 0 is true
 var j := 0;
 ++i = 1 is true
 
-These operators are defined in the grammar as
+These operators are defined in the grammar as:
 \begin{verbatim}
 ID INCREMENT {
 } | INCREMENT ID {
@@ -1069,11 +1089,11 @@ ID INCREMENT {
 
 There are six basic comparison operators in Scribble. Equal '=', Not equal '!=', greater than '>', less than '<', less than or equal to '<=' and greater than or equal to '>='. These operators allow a comparison between two expressions. All primitive types can be compared using the = and != operators however only numerical types can be compared using the <, >, <=, >= operators.
 
-One difference from C and many of the languages based of it is that assignment is done using the ':=' operator and a single '=' is now used for comparison instead of '=='.
+One difference between Scribble and C is that assignment is done using the ':=' operator and a single '=' is now used for comparison instead of '=='.
 
 These operators are only capable of comparing expressions of the same type. Mixing two different types, even numerical types, will cause a parsing error.
 
-They are defined in the grammar as \begin{verbatim}
+They are defined in the grammar as:\begin{verbatim}
 Expression EQUALS Expression {
 } | Expression NOT EQUALS Expression {
 } | Expression GREATER Expression {
@@ -1096,7 +1116,7 @@ true and true will return true.
 true and false, false and false, false and true will all return false.
 5 = 1 and 6 = 2 - The right hand side expression would never be checked because 5 does not equal 1.
 
-It is defined in the grammar as
+Logical operator expressions are defined in the grammar as:
 \begin{verbatim}
 Expression AND Expression {
 } | Expression OR Expression {
@@ -1107,9 +1127,9 @@ Expression AND Expression {
 
 In Scribble the '\$' operator is used to concatenate two expressions of the type string.
 
-Writing "Hello" \$ " World" is equivalent to writing sys.Concat("Hello", " World"), this is the only syntax feature in Scribble that currently depends on the built in 'sys' package. If sys is removed then the \$ operator will not work and will have to be switched off or reimplemented.
+Writing "Hello" \$ " World" is equivalent to writing sys.Concat("Hello", " World"). This is the only syntax feature in Scribble that currently depends on the built in 'sys' package. If sys is removed then the \$ operator will not work and will have to be switched off or reimplemented.
 
-Note: While this feature relies on the sys library it does not rely on the user importing explicitly into a package and will be automatically imported by the compiler if required.
+Note: while this feature relies on the sys library it does not rely on the user importing explicitly into a package and will be automatically imported by the compiler if required.
 
 \begin{verbatim}
 Expression '$' Expression {
@@ -1120,7 +1140,7 @@ Expression '$' Expression {
 
 Assignment in Scribble is done using the ':=' operator. It takes a variable ID and an expression and sets the value of that variable to the value given when the expression is evaluated.
 
-Assignment will only take place of the expression to be assigned is exactly the same type as the variable being assigned to. Any other values will have to be cast using a custom or built in function.
+Assignment will only take place if the expression to be assigned is the same type as the variable being assigned to. Any other values will have to be cast using a custom or built in function.
 
 Assignments can be done on the index's of an array by using the Expression[IndexExpression] := Expression notation.
 
@@ -1131,14 +1151,14 @@ var j := 65;
 j := 192;
 \end{verbatim}
 
-Would create a variable j, set j's value to 65 and then set j's value to 192.
+would create a variable j, set j's value to 65 and then set j's value to 192.
 
 \begin{verbatim}
 var arr := [10]int;
 arr[0] := 5;
 \end{verbatim}
 
-Would create the array arr with 10 integers and then assign arr's 0th index to the value 5.
+would create the array arr with 10 integers and then assign arr's 0th index to the value 5.
 
 \begin{verbatim}
 type J := struct {
@@ -1148,11 +1168,11 @@ type J := struct {
 var j := J{"Hello"};
 j->name := "Hello World";
 \end{verbatim}
-Will result in a structure of type J being created with the name field set to "Hello" and then the name field of j being set to "Hello World"
+will result in a structure of type J being created with the name field set to "Hello" and then the name field of j being set to "Hello World"
 
 If the variable and expression types differ then a parsing error will occur.
 
-Assignment is defined in the grammar as
+Assignment is defined in the grammar as:
 \begin{verbatim}
 LPAREN Expression RPAREN {
 } | ID  Expression {
@@ -1165,8 +1185,12 @@ LPAREN Expression RPAREN {
 
 The length of an array can be obtained by using the len(ArrayExpression) notation.
 
-examples:
-len([100]int) = 100 and len([50]int) = 50
+Examples:
+\begin{verbatim}
+len([100]int) = 100
+len([50]int) = 50
+\end{verbatim}
+would both be true.
 
 \begin{verbatim}LENGTH LPAREN Expression RPAREN {
 }
@@ -1174,11 +1198,11 @@ len([100]int) = 100 and len([50]int) = 50
 
 \subsection{Parenthesis Expressions}
 
-Parenthesis to control the order in which expressions are evaluated. This is helpful in large or complex expressions.
+Parenthesis are used to control the order in which expressions are evaluated. This is helpful in large or complex expressions.
 
 Examples: (5 + 5) * (5 + 5) would evaluate to 10 * 10 which would be 100. 5 + 5 * 5 + 5 would evaluate to 10 * 5 + 5 which would be 55.
 
-defined in the grammar as
+This is defined in the grammar as:
 \begin{verbatim}
 '(' Expression ')' {
 }
@@ -1186,7 +1210,7 @@ defined in the grammar as
 
 \subsection{Function Call Expressions}
 
-A function call is written as FunctionName(Arguments) or PackageName.FunctionName(Arguments). The type of a function call is the type of the function that is being called, for example sys.String(15) is of type string and sys.Log("Hello World"); is of type void.
+A function call is written as FunctionName(Arguments) or PackageName.FunctionName(Arguments). The type of a function call is the type of the function that is being called. For example sys.String(15) is of type string and sys.Log("Hello World"); is of type void.
 
 Examples:
 
@@ -1194,7 +1218,7 @@ sys.Log(sys.String(15)); will print the number 15 to the screen.
 
 sys.Pow(2, 4); will return 16.
 
-defined in the grammar as
+Function call expressions are defined in the grammar as:
 \begin{verbatim}
 Arguments: {
 } | Arguments_2 {
@@ -1236,7 +1260,7 @@ if Expression then {
 }
 \end{verbatim}
 
-Is is defined in the grammar by
+If statements are defined in the grammar as:
 \begin{verbatim}
 IfStatements: 
 Statement {
@@ -1258,7 +1282,7 @@ for Initializer ; Condition ; Step do {
 }
 \end{verbatim}
 
-It is defined in the grammar by \begin{verbatim}
+For statements are defined in the grammar as: \begin{verbatim}
 FOR Expression ';' Expression ';' Expression DO IfStatements {
 }
 \end{verbatim}
@@ -1272,7 +1296,7 @@ while Expression do {
 }
 \end{verbatim}
 
-It is defined in the grammar by \begin{verbatim}
+While statements are defined in the grammar as: \begin{verbatim}
 WHILE Expression DO LBRACKET Statements RBRACKET {
 } 
 \end{verbatim}
@@ -1283,13 +1307,16 @@ An expression statement is a statement such as console.Log("Hello World"); or j 
 
 The syntax: \begin{verbatim}Expression;\end{verbatim}
 
-It is defined in the grammar as \begin{verbatim}Expression ';' {}\end{verbatim}
+Expression statements are defined in the grammar as:
+\begin{verbatim}
+Expression ';' {}
+\end{verbatim}
 
 \subsection{Return Statements}
 
 The return statement exits the current function and returns a given expression value. 
 
-It is defined in the grammar as
+Return statements are defined in the grammar as:
 \begin{verbatim}
 'return' ';' | 'return' Expression ';'
 \end{verbatim}
@@ -1354,7 +1381,7 @@ func PrintTrue(i : int) {
 
 this would compile successfully and upon any call to PrintTrue the compiler would resolve the correct function to be executed.
 
-Functions are defined in the grammar as 
+Functions are defined in the grammar as:
 
 \begin{verbatim}
 
@@ -1390,11 +1417,11 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions
 ;
 \end{verbatim}
 
-\section{Packages \& Importing}
+\section{Packages and Importing}
 
 Every file in Scribble is seen as a separate package. These packages contain sets of functions and structures which can be used to perform some function, for example one package may contain a linked list structure and a set of functions for inserting and removing elements from said list. Scribble also defines syntax so that packages can import and use structures and functions from other packages.
 
-Packages in the grammar are defined as
+Packages are defined in the grammar as:
 \begin{verbatim}
 Package: {
 	} | Package PACKAGE WORD ASSIGN IMPORT LPAREN STRING RPAREN END {
@@ -1412,7 +1439,7 @@ package LocalName := import("Package/Path");
 \end{verbatim}
 syntax.
 
-This syntax allows you to import a package from a given path and give it a local identifier which can be used to reference it. The local identifier allows the avoidance of package naming conflicts, as a importing package can give two packages of the same name ( Such as /tests/math.sc and /math/math.sc ) different local names to be identified by.
+This syntax allows you to import a package from a given path and give it a local identifier which can be used to reference it. The local identifier allows the avoidance of package naming conflicts, as a importing package can give two packages of the same name (such as /tests/math.sc and /math/math.sc) different local names to be identified by.
 
 To use a function or structure from a different package you first write the packages local name then a '.' and then the name of the function or structure you wish to use. For example to print some output to the screen you write.
 
@@ -1442,23 +1469,25 @@ It has also been argued that register based instruction encodings translate bett
 
 Scribble uses a register based virtual machine, I decided to use a register based virtual machine over a stack based virtual machine as I was more familiar with register based environments.
 
-The instructions in Scribble are 64 bits wide, the first 8 bits always represent the operation to be perform ( For example OpAdd, OpNewArray, etc ) and the purpose rest of the data will vary depending on the instruction. This much space per instruction is probably not necessary and the wasted space will result in an increased size of compiled programs over equivalent programs in other languages such as LUA however when I was developing the instruction set I did not know what constraints on instructions I would find acceptable and decided to give myself as much overhead as seemed reasonable.
+The instructions in Scribble are 64 bits wide, the first 8 bits always represent the operation to be perform (for example OpAdd, OpNewArray, etc) and the purpose rest of the data will vary depending on the instruction. This much space per instruction is probably not necessary and the wasted space will result in an increased size of compiled programs over equivalent programs in other languages such as LUA however when I was developing the instruction set I did not know what constraints on instructions I would find acceptable and decided to give myself as much overhead as seemed reasonable.
 
+\begin{center}
 \includegraphics{"Instruction"}
+\end{center}
 
 Fig 1. Scribble Instruction
 
-In order to make the virtual machine useful I had to ensure that there where enough instructions available to achieve anything that was valid within the higher level language. This involved looking at each of the language features and working out a way of expressing them as a set of instructions, for example the for loop is achieved by using assign, compare and jump operators in order to iterate until a condition is met. 
+In order to make the virtual machine useful I had to ensure that there were enough instructions available to achieve anything that was valid within the higher level language. This involved looking at each of the language features and working out a way of expressing them as a set of instructions, for example the for loop is achieved by using assign, compare and jump operators in order to iterate until a condition is met. 
 
 The number and complexity of the instructions that a virtual machine can perform can have a significant impact on its performance. If the instructions are to specialized then a larger number of possible instructions will be needed which could potentially slow down the virtual machine as it has to spend more time with each instruction or increase the size required to store the part of the instruction that tells the virtual machine what to do. Alternatively having less complex instructions will increase the number of instructions that need to be executed to perform each task.
 
 \section{The Constants Table}
 
-Some instructions in Scribble such as the load string instruction need more than 56 bits of space or a variable amount of space in order to perform there desired function. To allow for this I created a table which accompanies every instruction set and provides a mapping between a small ( 32 bit ) integer and a location in the table.
+Some instructions in Scribble such as the load string instruction need more than 56 bits of space or a variable amount of space in order to perform there desired function. To allow for this I created a table which accompanies every instruction set and provides a mapping between a small (32 bit) integer and a location in the table.
 
 With this table in place the extra information an instruction needs to execute can be stored in the constant table and the instruction can encode the index required to access the correct constant entry with its instruction. One example of this is the load constant instruction, as the load constant instruction can load values 8, 16, 32 or 64 bits wide instead of encoding the value into the instruction instead it encodes a byte which represents the type of the value as well as the actual value into the constant region. When the VM encounters a load instruction it looks at the constant table entry referenced and uses the data stored in that entry in order to load the desired value.
 
-In order to use the constants table the instructions which required extra memory each had to be modified so that they used constant indices instead of storing the data. In addition to this the Scribble ASM ( SASM ) compiler had to be modified so that it is capable of adding entries to the constant table whenever it encounters an instruction that requires it.
+In order to use the constants table the instructions which required extra memory each had to be modified so that they used constant indices instead of storing the data. In addition to this the Scribble ASM (SASM) compiler had to be modified so that it is capable of adding entries to the constant table whenever it encounters an instruction that requires it.
 
 One potential improvement here would be to reduce the size of each constant index down from 32 bits to 16 bits. Having 32 bit indices allows for \begin{math}2^{32} - 1\end{math} unique entries into the constants table for each instruction set. It was designed this way as the additional constant region was setup as flat memory rather than a table and since that change the large amount of space per index is unnecessary. By choosing a 16 bit integer for constant indices each function would be left with a maximum 65535 per instruction set which is more than enough as each function has its own instruction set. This change would reduce the size of the constants and potentially allow a reduction in the size of each instruction for the program.
 
@@ -1480,9 +1509,9 @@ The reason why I had more of a focus on making sure that the instructions could 
 
 One way in which the instruction encoding in Scribbles virtual machine could be improved would be to allow the storage of function variables on the stack rather than in registers.
 
-The benefit of this is that it would free some registers which could then be used to store temporary or intermediate values when calculating expressions, reducing the number of push, pop and move instructions which would need to be executed. It would also allow an unlimited number of variables per function ( currently each function is limited to 32 local variables ).
+The benefit of this is that it would free some registers which could then be used to store temporary or intermediate values when calculating expressions, reducing the number of push, pop and move instructions which would need to be executed. It would also allow an unlimited number of variables per function (currently each function is limited to 32 local variables).
 
-This could be achieved by allocating stack space for each variable at the start of a function and introducing OpCodes allow the the getting and setting of specific locations on the stack ( Currently the only stack op codes are Push and Pop ).
+This could be achieved by allocating stack space for each variable at the start of a function and introducing OpCodes allow the the getting and setting of specific locations on the stack (Currently the only stack op codes are Push and Pop).
 
 The reason I did not implement this was because it introduced an issue with my method of detection of references within the stack required for garbage collection. This issue could have been sold by dedicated set variable and get variable op codes as variables do not change type however I did not realize this when I was implementing the statements regarding to the storage, getting and setting of variables.
 
@@ -1618,7 +1647,7 @@ func main() {
 
 The pseudo code shows an ambiguous variable expression var j := Test(5) as the variable j looks to the expression it is being assigned to to define its type however without explicit type information for the variable j it would be impossible to know which version of the function Test should be selected.
 
-While I could have supported both features and added a method which would allow the compiler to check and throw errors whenever such an ambiguity occurred it could have potentially led to some cryptic error messages and programs which where hard to debug - something I wished to avoid with my type inference. Supporting this type of matching would have also led to other confusing inference rules which could lead to confusing code such as which functions would be selected with the expression 'Test(5) = Test(5)'.
+While I could have supported both features and added a method which would allow the compiler to check and throw errors whenever such an ambiguity occurred it could have potentially led to some cryptic error messages and programs which were hard to debug - something I wished to avoid with my type inference. Supporting this type of matching would have also led to other confusing inference rules which could lead to confusing code such as which functions would be selected with the expression 'Test(5) = Test(5)'.
 
 \section{Type inference in error checking}
 
@@ -1813,15 +1842,15 @@ garbageCollection() {
 \end{verbatim}
 Above is a example of the garbage collection routine is pseudo code.
 
-One way that Scribbles garbage collection could be improved is by separating allocated memory into categories based on how long they have existed. Analysis of programs shows that most of the memory allocations within a program are only used for a short period of time, from this we can infer that the younger objects should be checked more often while the older memory allocations need to be inspected less often. If a garbage collector where to separate its memory into two or more sets each representing objects of a certain age then a program could garbage collect the younger objects more often with less of an impact on performance whilst only checking the older objects occasionally. This is the approach taken by the programming language Java which executed 'minor' garbage collection, which inspects recently created objects, often whilst only executing 'major' garbage collection, which looks at older objects, rarely. This is described in the 'JVM Garbage Collection' article listed in the bibliography.
+One way that Scribbles garbage collection could be improved is by separating allocated memory into categories based on how long they have existed. Analysis of programs shows that most of the memory allocations within a program are only used for a short period of time, from this we can infer that the younger objects should be checked more often while the older memory allocations need to be inspected less often. If a garbage collector were to separate its memory into two or more sets each representing objects of a certain age then a program could garbage collect the younger objects more often with less of an impact on performance whilst only checking the older objects occasionally. This is the approach taken by the programming language Java which executed 'minor' garbage collection, which inspects recently created objects, often whilst only executing 'major' garbage collection, which looks at older objects, rarely\cite{JVMGC}.
 
 There is one other common technique when trying to automatically free memory. This technique is called reference counting, in a reference counted virtual machine every piece of allocated memory has a counter which records the number of current references to that memory exist. This approach is much simpler than the approach that Scribble uses and results in memory being immediately freed when it is no longer used however it has the downside of every operation on dynamic data taking an increased amount of time and potential issues regarding objects which have references to themselves, as if three pieces of memory reference each other but are no longer within the scope of the program then they will never be deallocated.
 
 \chapter{Application programming interface}
 
-The Application programming interface (API) is the way that a scripting language such as Scribble, LUA or V8 interact with the program which is executing them.
+The application programming interface (API) is the way that a scripting language such as Scribble, LUA or V8 interact with the program which is executing them.
 
-The API is an extremely important part of the programming language as the methods which it provides define how a developer can interact with Scribble programs. An API should expose any parts of the programming language that the developer could need, for example if the API did not allow a developer to get elements from an array then the usefulness of arrays within the language would be severely diminished. The interface should also aim to be as abstract as possible and avoid as much coupling to the underlying implementation. There are two reasons for this, a developer does not want to have to understand how ScribbleVM actually executes the program in order to extract useful information from it and you want to be able to maintain a backwards compatible API for as long as possible, if a developer has to rewrite their native code for every version of Scribble then they will not use the language within their program.
+The API is an extremely important part of the programming language, as the methods which it provides define how a developer can interact with Scribble programs. An API should expose any parts of the programming language that the developer could need, for example if the API did not allow a developer to get elements from an array then the usefulness of arrays within the language would be severely diminished. The interface should also aim to be as abstract as possible and avoid as much coupling to the underlying implementation. There are two reasons for this, a developer does not want to have to understand how ScribbleVM actually executes the program in order to extract useful information from it and the abstraction helps maintain a backwards compatible API for as long as possible which is useful because developers will not adopt a language which breaks every time there is an update.
 
 This interface is provided in the form of a C++ application programming interface (API). The Scribble API specifies how to make native functions visible to the language, call functions which are visible to the language and also provides a class which allows you to more easily work with function arguments and return values. In addition to this the API also provides a set of helper functions to make some of the more complex issues like allocating memory on the heap or checking for compilation errors simpler.
 
@@ -1864,7 +1893,7 @@ Finally there is the Function class, this class provides a way for a developer t
 
 Fig 1. The Class hierarchy of from API::Function showing all of the built in native functions as well as the ScriptedFunction which represents Scribble methods in C++. Generated using graphviz
 
-Functions which are written in Scribble are also instances of the Function parent class ( Created from instances of ScribbleCore::ScriptedFunction ) and can be executed in the same way that a native function could. This provides a standard interface with which to access any function that is visible to the Scribble virtual machine.
+Functions which are written in Scribble are also instances of the Function parent class (Created from instances of ScribbleCore::ScriptedFunction) and can be executed in the same way that a native function could. This provides a standard interface with which to access any function that is visible to the Scribble virtual machine.
 
 This approach gives every function which is visible to Scribble a common interface which can be extremely useful in complex systems as it means a developer can execute a function and get the result without knowing or caring about whether it is executing within Scribble or is executing in native code.
 
@@ -1898,7 +1927,7 @@ Another benefit of this approach is that the SASM compiler could be modified to 
 
 While SASM can be used as a intermediate for conversion to other languages it may not produce good results as the language is tailored toward the virtual machine that it was designed with and conversions could lead to the generation of inefficient code for other platforms. While SASM instruction set is based on a register based virtual machines and could be converted easily to machines which used register based architectures there are many potential issues converting it to other architectures such as stack based machines like the Java virtual machine. If Scribble did begin to use other virtual machines or compile into a different language SASM would first need to be modified to be more abstract so that it could be converted to virtual machines which had fundamentally different designs.
 
-One example of this type of conversion in practice is ASM.js. The project aims to enable the advantages in both speed and syntax of many compiled languages on a browser by taking the intermediate code generated by a compiler which uses the LLVM architecture and translating it into equivalent Javascript. This project shows the wealth of possibilities which a well designed intermediate code architecture could provide, in a small amount of time they have allowed any of the many LLVM compatible languages to execute within a web browser without requiring a custom compiler or even detailed knowledge of the languages being converted.
+One example of this type of conversion in practice is ASM.js. The project aims to enable the advantages in both speed and syntax of many compiled languages on a browser by taking the intermediate code generated by a compiler which uses the LLVM architecture and translating it into equivalent Javascript\cite{ASMJSSPEC}. This project shows the wealth of possibilities which a well designed intermediate code architecture could provide, in a small amount of time they have allowed any of the many LLVM compatible languages to execute within a web browser without requiring a custom compiler or even detailed knowledge of the languages being converted.
 
 The downside to having an intermediate language is that it adds an additional overhead to the process of compiling and executing code. Compiling SASM into a bytecode language that can be executed requires the execution of another, albeit simpler, parser and this increases both the amount of memory and processing power required to take a piece of source code and prepare it for execution. This additional overhead may cause issues with the viability of the language on low powered systems such as robots of televisions. The performance issues could be fixed with custom compilers for those systems or with pre compiled code, these features however would require an investment in both time and resources which make the language less viable.
 
@@ -1944,15 +1973,15 @@ sub $0, $1, $2
 \end{verbatim}
 is equivalent to the expression 5 - 10 and not 10 - 5. By specifying this convention across all applicable instructions it makes the semantics of instructions much more predictable without having to double check it's specification, this makes writing code generators easier.
 
-To write a comment in SASM code the -- prefix can be used. This will tell the lexical analyser to ignore the rest of the line. Multi line comments are possible only through repeated use of the -- prefix and there is no equivalent to the Scribble multi line /* */ comment. This approach was chosen because the low level language has been designed to be generated by a machine and comments are only used as a method of identifying specific blocks of code while debugging or looking for potential optimizations, therefore allowing for multi line comments would add extra complexity to the parser while having no real benefits.
+To write a comment in SASM code the -- prefix can be used. This will tell the lexical analyser to ignore the rest of the line. Multi-line comments are possible only through repeated use of the -- prefix and there is no equivalent to the Scribble multi-line /* */ comment. This approach was chosen because the low level language has been designed to be generated by a machine and comments are only used as a method of identifying specific blocks of code while debugging or looking for potential optimizations, therefore allowing for multi-line comments would add extra complexity to the parser while having no real benefits.
 
 One area in which my design should be improved in the future is regarding type definition. Currently there is no formal specification in SASM for type definition and type information is passed directly from the high level language to the virtual machine. The major drawback of this is that compiler will need to use some non standard method to pass type information instead of SASM to the virtual machine, confusing the code and unnecessarily tying components together. This drawback is currently the reason why Scribbles compiler and virtual machine have to be within the same executable and why code cannot be pre compiled before a programs execution to speed up load times.
 
 \section{Implementation}
 
-SASM is parsed using a lexical analyser and parser generated using the tools flex and bison. These tools take a lex file which defines regular expressions that identify blocks of text as specific data types (such as integers, identifiers or registers) and a grammar file which defines the syntax and semantic actions of the language.
+SASM is parsed using a lexical analyser and parser generated using the tools Flex and Bison. These tools take a lex file which defines regular expressions that identify blocks of text as specific data types (such as integers, identifiers or registers) and a grammar file which defines the syntax and semantic actions of the language.
 
-In order to take some code written in SASM and compile it into Scribble bytecode the source code must first be loaded into a temporary buffer, that buffer is passed to the generated parser using the sasm\_scan\_string function. The parser is then executed using the sasm\_parse function. The parser will then take the source code and return an instance of VM::VMNamespace which is populated with all of the functions that where defined within the intermediate file. This is all done by the Parser::parse function which is defined as the following within SASM/Parser.hpp.
+In order to take some code written in SASM and compile it into Scribble bytecode the source code must first be loaded into a temporary buffer, that buffer is passed to the generated parser using the sasm\_scan\_string function. The parser is then executed using the sasm\_parse function. The parser will then take the source code and return an instance of VM::VMNamespace which is populated with all of the functions that were defined within the intermediate file. This is all done by the Parser::parse function which is defined as the following within SASM/Parser.hpp.
 
 \begin{verbatim}
 VM::VMNamespace Parser::parse(std::string text);
@@ -1962,27 +1991,61 @@ This is repeated for the source code which is output for each package compiled u
 
 \chapter{Literature Review}
 
+Throughout the project I used various different resources in order to gain the knowledge required to develop Scribble.
+
+\section{Parsing}
+
+While developing the parser I used several resources such as the Lan Gao's Bison calculator\cite{BISONTUT} example and the Aquamentus Flex and Bison tutorial\cite{AQBISON} in order to learn how to construct a grammar for the language that I wanted to create.
+
+When initially approaching the project I had little knowledge regarding the process of making a parser, nor did I have any experience with Bison or Flex. The Bison and Flex files which were provided by Lan Gao served as a reference during my initial attempts to construct simple parsers. The files include a simple grammar, a lexical analysis file and a c file which uses the parser, for a simple calculator.
+
+I used the grammar provided to gain an understanding of what Bison grammar rules looked like, how to apply semantic actions onto the grammar and how to structure a Bison grammar appropriately. This knowledge was useful throughout the project, as whenever I wished to add to or modify the syntax a modification of the Scribble grammar was required.
+
+The lexical analysis file provided gave examples of the format in which regular expressions are interpreted by Flex and how to take data which has been returned by the lexical analyser and pass it to the grammar. This Flex file was used as a template for my initial parsing attempts and my final lex file follows a very similar structure, albeit with more operators, keywords and regular expressions, as well as support for comments.
+
+The example main.cc file provided showed how to use the parser generated by Flex and Bison from C. This proved useful as a starting point when developing my parser, although the way in which Scribble interacts with the parser uses a slightly different set of functions now so that text strings can be used for input as well as files.
+
+The Aquamentus Flex and Bison guide\cite{AQBISON} provided a good set of examples covering a range of uses for the tools. I used this document as a reference often throughout development whenever I was trying to implement additions to the syntax which required more advanced features of Bison or Flex. A good example of when I used this resource was when I had to implement single and multi-line comments in the language. When the lexical analyser encounters a language comment it should ignore it and continue analysing from the end of the comment, however the Flex tool does not provide any simple syntax to ignore source code, which meant that with my understanding of Flex I could not allow multi-line comments in Scribble. This is when I turned to the guide and found the Flex "start states" feature which allowed me to match regular expressions only when the lexical analyser was in a specific state. This feature enabled multi-line comments as I could then specify two separate comment states, the single line state which is entered with a // and exited with a new line and the multi-line state which is entered with a /* and exited with a */.
+
+Later during the parser's development I used information from the CS3470 lecture notes\cite{CS3470} as well as knowledge I had learned on the course to modify the grammar in an attempt to remove any ambiguities. While initially developing the language I had little understanding of what an ambiguous grammar was and this led to many mistakes, such as not requiring a ';' at the end of the line, which could cause an incorrect derivation tree to be constructed. The information provided regarding ambiguity on Elizabeth Scott's Compilers And Code Generation course allowed me to spot these issues and adjust the syntax of the language so that they would no longer occur.
+
+\section{Virtual Machine}
+
+When designing my virtual machine I had a hard time deciding on how to represent instructions. From past experiments and a knowledge of Intel x86 assembly language I had a rough ideas about how an instruction set was devised however I had very little knowledge regarding how they were commonly encoded, whether they are fixed size or how things like jumps are handled.
+
+I used the reference guide \emph{A No-Frills Guide to LUA 5.1 VM Instructions}\cite{NOFRILLLUA} while considering how to design the instruction set for my own virtual machine. The guide covers the instruction encoding and virtual machine implementation used in the popular LUA scripting language. This guide contains information regarding not only how the instruction encoding in the LUA virtual machine works but also how these instructions were displayed as text and how the virtual machine worked overall.
+
+This guide gave me a better understanding of how the instruction encoding would effect the overall performance and functionality of the virtual machine. The explanation of how each instruction modifies the state of the virtual machine and how the programs variables are represented on a stack frame were the most useful parts of the document as they gave me a reference on what mechanism would work in practice when I began prototyping my initial virtual machine. Though the Scribble virtual machine differs greatly from the LUA VM structurally the explanations given about how the LUA VM stores and differentiates between registered functions were also helpful as having knowledge of an existing system to separate out code within the virtual machine helped me to make informed decisions when designing my own.
+
+I used \emph{The Java Virtual Machine Instruction Set}\cite{JVMBYTECODE} and \emph{Java Garbage Collection Basics}\cite{JVMGC} documents  much later in the development of my virtual machine when I was beginning to think about how to handle the dynamic allocation and automatic garbage collection of memory. 
+
+The methods and constraints regarding how a language allocates and manages memory have a significant impact on every programming language, affecting both performance and syntax. There are two common approaches to memory allocation, unmanaged and managed. In an unmanaged system all dynamic memory has to be allocated and freed by the memory. A good example of this style of memory allocation is the language C in which the malloc and free functions are used to perform all memory allocation. Alternatively, in a managed system there will be some form of automatic garbage collection which can detect when memory is no longer used and automatically free it. 
+
+I planned for Scribble to have a managed memory model from the outset, however when faced with the challenge of implementing my own garbage collection routines I found that I did not have the required technical knowledge to design an appropriate system. By reading through the \emph{The Java Virtual Machine Instruction Set}\cite{JVMBYTECODE} document I gained an understanding of how memory was allocated by the instruction set within a strictly typed and managed language similar to Scribble. This helped me design a set of instructions which allow for the allocation and modification of dynamically allocated memory.
+
+Scribble is executed in a managed environment with predefined types, similar to the Java virtual machine, and so the description of Java's method of garbage collection in the \emph{Java Garbage Collection Basics}\cite{JVMGC} document gave me a good understanding of the technical issues I was going to face and one method of overcoming them. The document also introduced me to the idea that a garbage collector could be made faster by separating the allocations into generations based on their age, a feature which could dramatically improve the performance of the Scribble virtual machine. 
+
 \chapter{Professional Issues}
 
 There were several issues that arose regarding licensing during development which had to be reviewed.
 
 \section{Parser Licenses}
 
-A portion of the source code which goes into a Scribble build is automatically generated using two tools called bison and flex. These tools where released under the GPL license and this causes potential issues as a standard GPL license requires that any modifications to source code must be released under the GPL license and this would by default extend to the generated parser.
+A portion of the source code which goes into a Scribble build is automatically generated using two tools called Bison and Flex. These tools were released under the GPL license and this causes potential issues as a standard GPL license requires that any modifications to source code must be released under the GPL license and this would by default extend to the generated parser.
 
-The developers of the tools wanted developers to be able to produce proprietary software using generated using flex \& bison and so they added the exception "The output from running a covered work is covered by this License only if the output, given its content, constitutes a covered work." into the version of the GPL license for these tools. This exception permits the distribution of a the source code which these tools generated without the GPL license or the release of the source code and solves the issue covered above.
+The developers of the tools wanted developers to be able to produce proprietary software using generated using Flex and Bison and so they added the exception "The output from running a covered work is covered by this License only if the output, given its content, constitutes a covered work." into the version of the GPL license for these tools. This exception permits the distribution of a the source code which these tools generated without the GPL license or the release of the source code and solves the issue covered above\cite{BISONGPL}.
 
-Some older versions of bison \& flex where not completely covered by this exception however as they used the 'yyparse' from their standard GPL predecessor called yacc. If the developers where to compile their program using one of these older versions then portions of their source code would be subject to the GPL license which could be an issue if Scribble was ever used within a proprietary application.
+Some older versions of Bison \& Flex were not completely covered by this exception, however, as they used the 'yyparse' from their standard GPL predecessor called yacc. If the developers were to compile their program using one of these older versions then portions of their source code would be subject to the GPL license which could be an issue if Scribble was ever used within a proprietary application.
 
-To mitigate the potential license issue covered above, and also make the grammar easier to change, Scribble automatically generates the bison and flex files every time it is compiled and none of the generated output is stored within the repository. By removing the generated output I can ensure that there is no risk of running into licensing issues regarding what is in the repository, even if I was using older versions of the bison or flex tools on my development machine. This also solves a potential licensing issue regarding the publishing of my source code under a open source license later on as the GPL license stipulates that any source code must be distributed in "the preferred form of the work for making modifications to it". As the grammar is the preferred form for making modifications to a bison based parser I would be required to distribute it with the source code if Scribble was released under the GPL.
+To mitigate the potential license issue covered above, and also make the grammar easier to change, Scribble automatically generates the Bison and Flex files every time it is compiled and none of the generated output is stored within the repository. By removing the generated output I can ensure that there is no risk of running into licensing issues regarding what is in the repository, even if I was using older versions of the Bison or Flex tools on my development machine. This also solves a potential licensing issue regarding the publishing of my source code under a open source license later on as the GPL license stipulates that any source code must be distributed in "the preferred form of the work for making modifications to it". As the grammar is the preferred form for making modifications to a Bison based parser I would be required to distribute it with the source code if Scribble was released under the GPL.
 
 \section{Licenses of third party libraries}
 
 Scribble relies on one third party library, the C++11 standard library. Scribble has been developed using the GNU G++ compiler and the GNU packaged libstd++ and the following licensing details may not be true for  versions of libstd++ from other sources.
 
-Because the C++ standard library makes heavy use of templating and inline functions it cannot be linked with an executable without including any source code in the way that programs would be in C. This raises several licensing issues as, while a program written in C can rely on a standard library without actually having to distribute parts of it, a program written with the C++ standard library will often have parts of the standard library embedded into it during compilation. This makes the licensing of the C++ library you are using extremely important as there could be clauses which stop the distribution of the application.
+Because the C++ standard library makes heavy use of templating and inline functions it cannot be linked with an executable without including any source code in the way that programs would be in C. This raises several licensing issues as, while a program written in C can rely on a standard library without actually having to distribute parts of it, a program written with the C++ standard library will often have parts of the standard library embedded into it during compilation. This makes the licensing of the C++ library the developer is using extremely important as there could be clauses which stop the distribution of the application.
 
-The GNU C++ standard library has been released with a version of the GPL license which adds an exception to allow for proprietary executables to be distributed without making the source code public as long as that program does not make changes to the GNU library it is being compiled with. Scribble falls into this category and therefore there will be no issues with using the GNU g++ compiler to generate a proprietary binary for Scribble. If Scribble was compiled using a different version of libstd++ then there could potentially be licensing issues, this should be looked into by anybody wishing to distribute Scribble in situations where using g++ is not possible.
+The GNU C++ standard library has been released with a version of the GPL license which adds an exception to allow for proprietary executables to be distributed without making the source code public as long as that program does not make changes to the GNU library it is being compiled with\cite{GCCGPL}. Scribble falls into this category and therefore there will be no issues with using the GNU g++ compiler to generate a proprietary binary for Scribble. If Scribble was compiled using a different version of libstd++ then there could potentially be licensing issues. This should be looked into by anybody wishing to distribute Scribble in situations where using g++ is not possible.
 
 \section{Licensing Scribble}
 
@@ -1994,18 +2057,35 @@ One drawback of a GPL license is that by requiring any changes to the original s
 
 There is a divide amongst the developers of open source compiler software over whether proprietary third party plug-ins should be allowed or whether they should also be covered by the open source license. By allowing proprietary plug-ins businesses can come in and build closed source tools which use that platform. This could improve the quality of the project as the developers would likely also contribute to the open source portions of the project however it also encourages third party "walled gardens", where a business could come along and attempt to make their variant of the software incompatible with the open source projects through the use of proprietary additions or tools because they believe it will increase market share or profit.
 
-In practice there are often compilers for a language which do accept proprietary plug ins and those which don't. For example in the case of C and C++ the GNU GCC and G++ compilers do not accept proprietary plug ins due to the copy left requirement in the GPL license however Clang/LLVM does.
+In practice a language will usually have compilers which allow proprietary plugins, and compilers which do not. For example in the case of C and C++ the GNU GCC and G++ compilers do not accept proprietary plug ins due to the copy left requirement in the GPL license however Clang/LLVM does.
 
-It would probably be best to initially use a license which does not allow these proprietary additions initially for Scribble, though this could always be revised later if there was a compelling reason to.
+It would probably be best to initially use a license which does not allow these proprietary additions initially for Scribble, although this could always be revised later if there was a compelling reason to.
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 \begin{thebibliography}{99}
-\addcontentsline{toc}{chapter}{Bibliography}JVM Garbage Collection - http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html
-\addcontentsline{toc}{chapter}{Bibliography}Bison GPL license - http://www.gnu.org/software/bison/manual/bison.html\#Copying
-\addcontentsline{toc}{chapter}{Bibliography}GCC GPL license - http://gcc.gnu.org/onlinedocs/gcc-3.1/gcc/Copying.html\#Copying
-\addcontentsline{toc}{chapter}{Bibliography}ASM.js - http://asmjs.org/
-\addcontentsline{toc}{chapter}{Bibliography}LLVM - http://llvm.org/
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\bibitem{BISONTUT}Lan Gao \emph{Bison calculator tutorial} - \url{http://alumni.cs.ucr.edu/~lgao/teaching/bison.html}
+
+\bibitem{AQBISON}Aquamentus \emph{Flex and Bison tutorial} - \url{http://aquamentus.com/flex\_bison.html}
+
+\bibitem{CS3470}Elizabeth Scott \emph{CS3470 Lecture Notes}
+
+\bibitem{JVMGC}Oracle \emph{Java Garbage Collection Basics} - \url{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html}
+
+\bibitem{JVMBYTECODE}Oracle \emph{The Java Virtual Machine Instruction Set} - \url{http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html\#jvms-6.2}
+
+\bibitem{BISONGPL}Free Software Foundation, Inc \emph{Bison GPL license} - \url{http://www.gnu.org/software/bison/manual/bison.html\#Copying}
+
+\bibitem{GCCGPL}Free Software Foundation, Inc \emph{GCC GPL license} - \url{http://gcc.gnu.org/onlinedocs/gcc-3.1/gcc/Copying.html\#Copying}
+
+\bibitem{LLVM}\emph{LLVM Language Reference Manual} - \url{http://llvm.org/docs/LangRef.html}
+
+\bibitem{NOFRILLLUA}Kein-Hong Man \emph{A No-Frills Guide to LUA 5.1 VM Instructions} - \url{http://luaforge.net/docman/83/98/ANoFrillsIntroToLua51VMInstructions}
+
+\bibitem{ASMJSSPEC} \emph{ASM.js Specification} - \url{http://asmjs.org/spec/latest}
+
 \end{thebibliography}
 \label{endpage}
 
