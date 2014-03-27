@@ -2,6 +2,8 @@
 #define _WRITE_FUNCTION_H_
 #include "Function.hpp"
 
+
+
 /**
  * WriteFunction writes a given string to the command line.
  */
@@ -9,16 +11,10 @@
 class WriteFunction: public Function {
 public:
 
-	WriteFunction(std::string ns) :
-			Function("Write", ns) {
-
-	}
+	WriteFunction(std::string ns);
 
 	virtual API::APIValue execute(API::APIValue* values,
-			VM::VirtualMachine* virt) {
-		printf("%s", (char*) values[0].getReferencePointer());
-		return API::APIValue();
-	}
+			VM::VirtualMachine* virt);
 
 	ScribbleCore::Type* getType();
 	const unsigned int numArgs();

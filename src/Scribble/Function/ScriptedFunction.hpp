@@ -18,18 +18,15 @@ namespace ScribbleCore {
 
 class ScriptedFunction: public Function {
 private:
-	TypeReference fType_;SmartPointer<Variable> templateReturn_;
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variableTemplates_;
-	std::vector<SmartPointer<Variable>> arguments_;
+	FunctionSignature signature_;
 
 public:
 
-	ScriptedFunction(std::string name, int version, std::string nameSpace, TypeReference functionType,
-			SmartPointer<Variable> templateReturn,
+	ScriptedFunction(std::string name, int version, std::string nameSpace,
 			std::vector<SmartPointer<Statement>> statements,
-			std::vector<SmartPointer<Variable>> variableTemplates,
-			std::vector<SmartPointer<Variable>> variables);
+			std::vector<SmartPointer<Variable>> variableTemplates, FunctionSignature signature);
 
 	virtual ~ScriptedFunction();
 
@@ -41,26 +38,11 @@ public:
 
 	int debugCode(std::stringstream& gen);
 
-	/**
-	SmartPointer<VM::VMFunc> generateScriptedFunc() {
-
-		std::stringstream code;
-
-		debugCode(code);
-		code << "load 0 $" << VM::vmReturnResultRegister << "\n";
-		code << "ret\n";
-
-		VM::InstructionSet instructions = SimpleASM::Parser::parse(
-				code.str().c_str());
-
-		return SmartPointer<VM::VMFunc>( new VM::VMFunc(getName(), instructions) );
-	}*/
-
 	bool isNativeFunction() {
 		return false;
 	}
 };
 
-}
+		}
 
 #endif /* SCRIPTEDFUNCTION_HPP_ */

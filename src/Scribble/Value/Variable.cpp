@@ -3,12 +3,16 @@
 
 namespace ScribbleCore {
 
-Variable::Variable(int position, TypeReference type) :
-		type_(type), position_(position) {
+Variable::Variable(std::string name, int position, TypeReference type) :
+		name_(name), type_(type), position_(position) {
 }
 
 Variable::~Variable() {
 
+}
+
+std::string Variable::getName() {
+	return name_;
 }
 
 Type* Variable::getType() {
@@ -23,6 +27,10 @@ Type* Variable::getType() {
 	 }*/
 
 	return getTypeManager().getType(TypeUnresolved);
+}
+
+TypeReference Variable::getTypeReference() {
+	return type_;
 }
 
 void Variable::setType(Type* type) {

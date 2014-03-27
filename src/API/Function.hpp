@@ -7,6 +7,7 @@
 #include <VM/VirtualMachine.hpp>
 #include <API/Value/APIValue.hpp>
 #include <sstream>
+#include <Scribble/Function/FunctionSignature.hpp>
 
 namespace API {
 
@@ -19,6 +20,13 @@ class Function {
 private:
 	std::string name_;
 	std::string namespace_;
+
+protected:
+	ScribbleCore::FunctionSignature signature_;
+
+	void setSignature(ScribbleCore::FunctionSignature sig) {
+		signature_ = sig;
+	}
 
 public:
 

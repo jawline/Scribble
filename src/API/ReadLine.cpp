@@ -9,7 +9,14 @@
 
 ReadLine::ReadLine(std::string ns) :
 		Function("ReadLine", ns) {
-	// TODO Auto-generated constructor stub
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::StringType));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 

@@ -13,8 +13,22 @@ namespace API {
 
 Pow::Pow(std::string ns) :
 		Function("PowIntToInt", ns) {
-	// TODO Auto-generated constructor stub
 
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Int)));
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Int)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::Int));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 }
 
 Pow::~Pow() {
@@ -44,7 +58,22 @@ ScribbleCore::Type* Pow::argType(unsigned int arg) {
 
 PowFloat32::PowFloat32(std::string ns) :
 		Function("PowFloat32ToFloat32", ns) {
-	// TODO Auto-generated constructor stub
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Float32)));
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Float32)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::Float32));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 

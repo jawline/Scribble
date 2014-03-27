@@ -12,8 +12,21 @@ namespace API {
 
 Concat::Concat(std::string ns) :
 		Function("StringConcat", ns) {
-	// TODO Auto-generated constructor stub
 
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::StringType)));
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::StringType)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::StringType));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 }
 
 Concat::~Concat() {

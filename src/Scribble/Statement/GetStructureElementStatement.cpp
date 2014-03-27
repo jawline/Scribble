@@ -60,14 +60,17 @@ int GetStructureElementStatement::generateCode(int resultRegister,
 		std::stringstream& code) {
 	int instrs = 0;
 
-	instrs += statement_->generateCode(VM::vmTempRegisterOne, code);
+	if (resultRegister != -1) {
+		instrs += statement_->generateCode(VM::vmTempRegisterOne, code);
 
-	code << "load " << elementIndex_ << " $" << VM::vmTempRegisterTwo << "\n";
-	instrs++;
+		code << "load " << elementIndex_ << " $" << VM::vmTempRegisterTwo
+				<< "\n";
+		instrs++;
 
-	code << "sget $" << VM::vmTempRegisterOne << " $" << VM::vmTempRegisterTwo
-			<< " $" << resultRegister << "\n";
-	instrs++;
+		code << "sget $" << VM::vmTempRegisterOne << " $"
+				<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+		instrs++;
+	}
 
 	return instrs;
 }

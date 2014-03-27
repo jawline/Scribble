@@ -26,9 +26,7 @@ private:
 
 public:
 
-	APIFunction(std::string name, std::string package,
-			ScribbleCore::Type* returnType,
-			std::vector<ScribbleCore::Type*> types,
+	APIFunction(std::string name, std::string package, ScribbleCore::FunctionSignature signature,
 			API::APIValue (*fn)(API::APIValue*, VM::VirtualMachine* virt));
 
 	virtual ~APIFunction();

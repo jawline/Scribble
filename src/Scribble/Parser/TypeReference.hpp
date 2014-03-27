@@ -36,6 +36,8 @@ struct TypeReferenceCore {
 
 typedef SmartPointer<TypeReferenceCore> TypeReference;
 
+TypeReference makeTypeReference(Type* type);
+
 }
 
 #endif /* TYPEREFERENCE_HPP_ */

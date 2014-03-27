@@ -51,7 +51,7 @@ void scribble_error(const char* s);
 
 bool ParsingError;
 std::map<std::string, std::string> ImportList;
-std::map<std::string, SmartPointer<ScribbleCore::Variable>> Variables;
+std::vector<SmartPointer<ScribbleCore::Variable>> Variables;
 
 std::string currentNamespaceName;
 
@@ -74,6 +74,19 @@ void parser_free_all() {
 	VariableReferences.clear();
 	ParsingError = false;
 	lastuid = 0;
+}
+
+SmartPointer<ScribbleCore::Variable> findVariable(std::string name) {
+
+	for (unsigned int i = 0; i < Variables.size(); i++) {
+		
+		if (name.compare(Variables[i]->getName()) == 0) {
+			return Variables[i];
+		}
+		
+	}
+
+	return SmartPointer<ScribbleCore::Variable>(nullptr);
 }
 
 extern int scribble_lineno;	// defined and maintained in lex.c
@@ -215,15 +228,15 @@ Variable:  VARIABLE WORD COLON Type {
 
 		//Check if the variable is already defined. If it isn't then create a new one and add a reference to the list of variables so any extra data can be resolved.
 		
-		auto it = Variables.find(*$2);
+		auto it = findVariable(*$2);
 			
-		if (it != Variables.end()) {
+		if (it.get() != nullptr) {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
-			SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(0, *$4));
+			SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, *$4));
 			VariableReferences.push_back(*nVar);
-			Variables[*$2] = *nVar;
+			Variables.push_back(*nVar);
 			$$ = nVar;
 		}
 		
@@ -238,18 +251,18 @@ Variable:  VARIABLE WORD COLON Type {
 
 AutoVariable: VARIABLE WORD ASSIGN Expression {
 
-		auto it = Variables.find(*$2);
+		auto it = findVariable(*$2);
 				
-		if (it != Variables.end()) {
+		if (it.get() != nullptr) {
 			yyerror("Variable already defined.");
 			return -1;
 		} else {
 		
 			ScribbleCore::SafeStatement sp = ScribbleCore::SafeStatement($4);
 		
-			SmartPointer<ScribbleCore::Variable> nVar = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(0, nullptr));
+			SmartPointer<ScribbleCore::Variable> nVar = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, nullptr));
 			VariableReferences.push_back(nVar);
-			Variables[*$2] = nVar;
+			Variables.push_back(nVar);
 			
 			ScribbleCore::ParserReference r(ScribbleCore::AutoVariablePair(nVar, sp));
 			StatementReferences.push_back(r);
@@ -267,15 +280,15 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 
 ArgumentDefinition: WORD COLON Type {
 
-		auto it = Variables.find(*$1);
+		auto it = findVariable(*$1);
 
-		if (it != Variables.end()) {
-			yyerror("Variable already defined.");
+		if (it.get() != nullptr) {
+			yyerror("Argument with the same name already defined.");
 			return -1;
 		} else {
-			SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(0, *$3));
+			SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$1, 0, *$3));
 			VariableReferences.push_back(*nVar);
-			Variables[*$1] = *nVar;
+			Variables.push_back(*nVar);
 			$$ = nVar;
 		}
 		
@@ -319,17 +332,22 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBR
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
 		int pos = 0;
-		for (auto it = Variables.begin(); it != Variables.end(); it++) {
-			it->second->setPosition(pos);
-			values.push_back(it->second);
+		for (unsigned int i = 0; i < Variables.size(); i++) {
+			Variables[i]->setPosition(i);
+			values.push_back(Variables[i]);
 			pos++;
 		}
 
-
-		SmartPointer<ScribbleCore::Variable> returnTemplate = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(0, *$7));
-		VariableReferences.push_back(returnTemplate);
+		//Generate the function signature with all the type info about the fn
+		std::vector<ScribbleCore::TypeReference> arguments;
 		
-		SmartPointer<API::Function> fn = SmartPointer<API::Function>( new ScribbleCore::ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, returnTemplate, *$9, values, *$4));
+		for (unsigned int i = 0; i < $4->size(); i++) {
+		 arguments.push_back($4->at(i)->getTypeReference());
+		}
+		
+		ScribbleCore::FunctionSignature signature(arguments, *$7);
+		
+		SmartPointer<API::Function> fn = SmartPointer<API::Function>( new ScribbleCore::ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$9, values, signature));
 		
 		if (Functions[*$2].type() == ScribbleCore::EmptyEntry) {
 		
@@ -368,17 +386,24 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBR
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
 		int pos = 0;
-		for (auto it = Variables.begin(); it != Variables.end(); it++) {
-			it->second->setPosition(pos);
-			values.push_back(it->second);
+		for (unsigned int i = 0; i < Variables.size(); i++) {
+			Variables[i]->setPosition(i);
+			values.push_back(Variables[i]);
 			pos++;
 		}
 
+		//Generate the function signature
 		ScribbleCore::TypeReference voidReference = ScribbleCore::TypeReference( new ScribbleCore::TypeReferenceCore ( "", ScribbleCore::getVoidType() ) );
 
-		SmartPointer<ScribbleCore::Variable> returnTemplate = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(0, voidReference));
+		std::vector<ScribbleCore::TypeReference> arguments;
 		
-		SmartPointer<API::Function> fn = SmartPointer<API::Function>(new ScribbleCore::ScriptedFunction(*$2, lastuid++, currentNamespaceName, voidReference, returnTemplate, *$7, values, *$4));
+		for (unsigned int i = 0; i < $4->size(); i++) {
+		 arguments.push_back($4->at(i)->getTypeReference());
+		}
+		
+		ScribbleCore::FunctionSignature signature(arguments, voidReference);
+		
+		SmartPointer<API::Function> fn = SmartPointer<API::Function>(new ScribbleCore::ScriptedFunction(*$2, lastuid++, currentNamespaceName, *$7, values, signature));
 		
 		if (Functions[*$2].type() == ScribbleCore::EmptyEntry) {
 		
@@ -599,12 +624,12 @@ Expression: MINUS Expression {
 		$$ = $2;
 	} | WORD ASSIGN Expression {
 		
-		auto it = Variables.find(*$1);
+		auto it = findVariable(*$1);
 
-		if (it == Variables.end()) {
+		if (it.get() == nullptr) {
 			scribble_error((std::string(*$1) + " is not defined").c_str());
 		} else {
-			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it->second, ScribbleCore::SafeStatement($3));
+			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($3));
 		}
 		
 		//Free up string pointer.
@@ -625,12 +650,12 @@ Expression: MINUS Expression {
 	
 	} | WORD INCREMENT {
 	
-		auto it = Variables.find(*$1);
-		
-		if (it == Variables.end()) {
+		auto it = findVariable(*$1);
+
+		if (it.get() == nullptr) {
 			scribble_error((std::string(*$1) + " is not defined").c_str());
 		} else {
-			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it->second, ScribbleCore::Increment, false);
+			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, false);
 		}
 		
 		//Free name pointer
@@ -638,12 +663,12 @@ Expression: MINUS Expression {
 		
 	} | INCREMENT WORD {
 		
-		auto it = Variables.find(*$2);
-		
-		if (it == Variables.end()) {
+		auto it = findVariable(*$2);
+
+		if (it.get() == nullptr) {
 			scribble_error((std::string(*$2) + " is not defined").c_str());
 		} else {
-			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it->second, ScribbleCore::Increment, true);
+			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, true);
 		}
 		
 		//Free name pointer
@@ -651,12 +676,12 @@ Expression: MINUS Expression {
 		
 	} | WORD DECREMENT {
 		
-		auto it = Variables.find(*$1);
-		
-		if (it == Variables.end()) {
+		auto it = findVariable(*$1);
+
+		if (it.get() == nullptr) {
 			scribble_error((std::string(*$1) + " is not defined").c_str());
 		} else {
-			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it->second, ScribbleCore::Decrement, false);
+			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Decrement, false);
 		}
 		
 		//Free name pointer
@@ -664,12 +689,12 @@ Expression: MINUS Expression {
 		
 	} | DECREMENT WORD {
 		
-		auto it = Variables.find(*$2);
-		
-		if (it == Variables.end()) {
+		auto it = findVariable(*$2);
+
+		if (it.get() == nullptr) {
 			scribble_error((std::string(*$2) + " is not defined").c_str());
 		} else {
-			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it->second, ScribbleCore::Decrement, true);
+			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Decrement, true);
 		}
 		
 		//Free name pointer
@@ -696,13 +721,14 @@ Expression: MINUS Expression {
 		delete $3;
 	} | WORD {
 
-		auto it = Variables.find(*$1);
+		
+		auto it = findVariable(*$1);
 
-		if (it == Variables.end()) {
+		if (it.get() == nullptr) {
 			scribble_error((std::string("Variable '") + std::string(*$1) + "' is not defined").c_str());
 			return -1;
 		} else {
-			$$ = new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it->second);
+			$$ = new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it);
 		}
 
 		//Free name pointer

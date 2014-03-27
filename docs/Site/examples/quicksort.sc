@@ -13,12 +13,7 @@ type User := struct {
  */
 
 func Younger( left : User, right : User) : bool {
-
- if left->age < right->age then {
-  return true;
- }
-
- return false;
+ return is left->age < right->age? true : false;
 }
 
 /**
@@ -27,12 +22,7 @@ func Younger( left : User, right : User) : bool {
  */
 
 func Older( left : User, right : User) : bool {
-
- if left->age > right->age then {
-  return true;
- }
-
- return false;
+ return is left->age > right->age? true : false;
 }
 
 /**

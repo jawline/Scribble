@@ -34,7 +34,7 @@ int GetVariableStatement::generateCode(int resultRegister,
 
 		generated << "move $"
 				<< (var_->getPosition() + VM::vmNumReservedRegisters) << " $"
-				<< resultRegister << "\n";
+				<< resultRegister << "--get variable " << var_->getName() << "\n";
 
 		return 1;
 	}

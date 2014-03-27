@@ -9,7 +9,22 @@
 #include <Scribble/Value/TypeManager.hpp>
 
 Modulo::Modulo(std::string names) : Function("NativeModulo", names) {
-	// TODO Auto-generated constructor stub
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Int)));
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Int)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::Int));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 

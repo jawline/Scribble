@@ -21,11 +21,8 @@ func main() {
  console.Log("Checking if " $ sys.String(random) $ " is even\n");
  
  var even := Even(random);
- 
- if even then {
-  console.Log("The value is even\n");
- } else {
-  console.Log("The value is odd\n");
- } 
+
+ console.Log("The value is " $ (is even? "even" : "odd") $ "\n");
+
 
 }

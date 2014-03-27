@@ -12,7 +12,18 @@
 
 IntToStringFunction::IntToStringFunction(std::string ns) :
 		Function("IntToString", ns) {
-	// TODO Auto-generated constructor stub
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Int)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::StringType));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 
@@ -55,8 +66,19 @@ API::APIValue IntToStringFunction::execute(API::APIValue* values,
 
 BoolToStringFunction::BoolToStringFunction(std::string ns) :
 		Function("BoolToString", ns) {
-	// TODO Auto-generated constructor stub
 
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Boolean)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::StringType));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 }
 
 BoolToStringFunction::~BoolToStringFunction() {
@@ -92,7 +114,18 @@ API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 
 Float32ToStringFunction::Float32ToStringFunction(std::string ns) :
 		Function("BoolToString", ns) {
-	// TODO Auto-generated constructor stub
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Float32)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::StringType));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 
@@ -135,6 +168,22 @@ API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
 
 StringCompare::StringCompare(std::string ns) :
 		Function("StringCompare", ns) {
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::StringType)));
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::StringType)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::StringType));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 

@@ -11,6 +11,19 @@
 
 RandomInt::RandomInt(std::string ns) :
 		Function("RandomInt", ns) {
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Int)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::Int));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
+
 }
 
 RandomInt::~RandomInt() {

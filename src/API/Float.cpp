@@ -12,7 +12,18 @@
 namespace API {
 
 Float32FromInt::Float32FromInt(std::string ns) : Function("Float", ns) {
-	// TODO Auto-generated constructor stub
+
+
+	std::vector<ScribbleCore::TypeReference> refs;
+	refs.push_back(
+			ScribbleCore::makeTypeReference(
+					ScribbleCore::getTypeManager().getType(
+							ScribbleCore::Int)));
+
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+			ScribbleCore::getTypeManager().getType(ScribbleCore::Float32));
+
+	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 

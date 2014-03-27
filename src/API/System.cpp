@@ -23,9 +23,9 @@ void generateSystemPackage(std::map<std::string, ScribbleCore::NamespaceType>& b
 
 	std::vector<SafeFunction> sqrt;
 
-	std::vector<ScribbleCore::Type*> sqrtf32Args;
-	sqrtf32Args.push_back(ScribbleCore::getFloat32Type());
-	sqrt.push_back(SmartPointer<Function> ( new APIFunction("Sqrt", "sys", ScribbleCore::getFloat32Type(), sqrtf32Args, SquareRootFloat32) ));
+	std::vector<ScribbleCore::TypeReference> sqrtf32Args;
+	sqrtf32Args.push_back(ScribbleCore::makeTypeReference(ScribbleCore::getFloat32Type()));
+	sqrt.push_back(SmartPointer<Function> ( new APIFunction("Sqrt", "sys", ScribbleCore::FunctionSignature(sqrtf32Args, ScribbleCore::makeTypeReference(ScribbleCore::getFloat32Type())), SquareRootFloat32) ));
 	builtinFunctions["Sqrt"] = ScribbleCore::NamespaceEntry(sqrt);
 
 	std::vector<SafeFunction> concat;
