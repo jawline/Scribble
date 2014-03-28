@@ -55,10 +55,20 @@ public:
 	std::string const& getName();
 	std::string const& getNamespace();
 	std::string const& getResolveIssue();
+
 	std::string getDebugName();
+
+	/**
+	 * Get the arguments to be matched against when looking for the function.
+	 */
+
+	std::vector<Type*> getTargetArguments();
+
 	std::vector<SafeStatement> const& getArgs();
-	void setResolveIssue(std::string issue);
+
 	SmartPointer<Function> getFunction();
+
+	void setResolveIssue(std::string issue);
 	void setFunction(SmartPointer<Function> func);
 };
 

@@ -8,6 +8,7 @@
 #include <API/Value/APIValue.hpp>
 #include <sstream>
 #include <Scribble/Function/FunctionSignature.hpp>
+#include <Scribble/Value/Type.hpp>
 
 namespace API {
 
@@ -31,7 +32,8 @@ protected:
 public:
 
 	Function(std::string name, std::string ns) :
-			name_(name), namespace_(ns) {
+			name_(name), namespace_(ns), signature_(
+					std::vector<ScribbleCore::TypeReference>(), ScribbleCore::makeTypeReference(ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved))) {
 
 	}
 
@@ -51,9 +53,9 @@ public:
 
 	virtual void execute(VM::VirtualMachine* virt) {
 
-		APIValue* vals = new APIValue[numArgs()];
+		APIValue* vals = new APIValue[getSignature().getArguments().size()];
 
-		for (int i = numArgs() - 1; i > -1; --i) {
+		for (int i = getSignature().getArguments().size() - 1; i > -1; --i) {
 
 			int64_t val;
 			bool ref;
@@ -61,10 +63,12 @@ public:
 			virt->popStackLong(val, ref);
 
 			if (ref) {
-				vals[i] = API::APIValue(argType(i), virt->getHeap().getType(val),
+				vals[i] = API::APIValue(getSignature().getArguments()[i]->type,
+						virt->getHeap().getType(val),
 						virt->getHeap().getSmartPointer(val), val);
 			} else {
-				vals[i] = API::APIValue(argType(i), val);
+				vals[i] = API::APIValue(getSignature().getArguments()[i]->type,
+						val);
 			}
 
 		}
@@ -72,32 +76,14 @@ public:
 		APIValue returnVal = execute(vals, virt);
 
 		if (returnVal.isReference()) {
-			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
-					true);
+			virt->setRegister(VM::vmReturnResultRegister,
+					returnVal.getValue32(), true);
 			virt->hitGc();
 		} else {
-			virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
-					false);
+			virt->setRegister(VM::vmReturnResultRegister,
+					returnVal.getValue32(), false);
 		}
 	}
-
-	/**
-	 * Get the return type of the function
-	 */
-
-	virtual ScribbleCore::Type* getType() = 0;
-
-	/**
-	 * Return the number of arguments the function takes
-	 */
-
-	virtual const unsigned int numArgs() = 0;
-
-	/**
-	 * Get the expected type of the specified argument
-	 */
-
-	virtual ScribbleCore::Type* argType(unsigned int arg) = 0;
 
 	virtual int debugCode(std::stringstream& gen) {
 		gen << std::string("#NativeFunction");
@@ -135,6 +121,10 @@ public:
 		}
 
 		return func->generateScriptedFunc();
+	}
+
+	ScribbleCore::FunctionSignature getSignature() {
+		return signature_;
 	}
 
 };

@@ -332,6 +332,7 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBR
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
 		int pos = 0;
+
 		for (unsigned int i = 0; i < Variables.size(); i++) {
 			Variables[i]->setPosition(i);
 			values.push_back(Variables[i]);

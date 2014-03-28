@@ -58,4 +58,14 @@ std::string const& FunctionReference::getResolveIssue() {
 	return resolveIssue_;
 }
 
+std::vector<Type*> FunctionReference::getTargetArguments() {
+    std::vector<Type*> args;
+
+	for (unsigned int i = 0; i < getArgs().size(); i++) {
+        args.push_back(getArgs()[i]->type());
+	}
+
+    return args;
+}
+
 }

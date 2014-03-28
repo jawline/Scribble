@@ -23,13 +23,13 @@ private:
 	TypeReference returnType_;
 
 public:
-	FunctionSignature();
 	FunctionSignature(std::vector<TypeReference> arguments, TypeReference returnType);
 	virtual ~FunctionSignature();
 
 	std::vector<TypeReference> getArguments();
 	TypeReference getReturnType();
-	bool equalTo(FunctionSignature& other);
+	bool equalTo(FunctionSignature other);
+	bool argumentsEqual(std::vector<Type*> args);
 
 };
 

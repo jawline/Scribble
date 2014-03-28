@@ -48,26 +48,19 @@ Scribble::~Scribble() {
 SafeFunction findFunction(std::vector<API::APIValue> arguments,
 		ScribbleCore::FunctionSet set) {
 
+	std::vector<ScribbleCore::Type*> types;
+
+	for (unsigned int i = 0; i < arguments.size(); i++) {
+		types.push_back(arguments[i].getType());
+	}
+
 	for (unsigned int i = 0; i < set.size(); i++) {
 		SafeFunction iter = set[i];
 
-		if (iter->numArgs() == arguments.size()) {
+		bool matched = iter->getSignature().argumentsEqual(types);
 
-			bool matched = true;
-
-			for (unsigned int j = 0; j < iter->numArgs(); j++) {
-
-				if (!iter->argType(j)->Equals(arguments[j].getType())) {
-					matched = false;
-					break;
-				}
-
-			}
-
-			if (matched) {
-				return set[i];
-			}
-
+		if (matched) {
+			return set[i];
 		}
 
 	}
@@ -89,7 +82,8 @@ API::APIValue Scribble::execute(std::string function,
 
 	API::SafeFunction toExecute =
 			findFunction(arguments,
-					compiledPackages[ScribbleCore::Parser::getUniformPath(packagePath)][function].getFunctionSet());
+					compiledPackages[ScribbleCore::Parser::getUniformPath(
+							packagePath)][function].getFunctionSet());
 
 	if (toExecute.get() == nullptr) {
 		printf("Function %s does not exist\n", function.c_str());
@@ -109,7 +103,7 @@ API::APIValue Scribble::execute(std::string function,
 
 	API::APIValue result;
 
-	if (!toExecute->getType()->Equals(ScribbleCore::getVoidType())) {
+	if (!toExecute->getSignature().getReturnType()->type->Equals(ScribbleCore::getVoidType())) {
 
 		long val = 0;
 		bool ref = 0;
@@ -118,13 +112,13 @@ API::APIValue Scribble::execute(std::string function,
 
 		if (ref) {
 
-			result = API::APIValue(toExecute->getType(),
+			result = API::APIValue(toExecute->getSignature().getReturnType()->type,
 					environment.getHeap().getType(val),
 					environment.getHeap().getSmartPointer(val), val);
 
 		} else {
 
-			result = API::APIValue(toExecute->getType(), val);
+			result = API::APIValue(toExecute->getSignature().getReturnType()->type, val);
 
 		}
 
@@ -146,12 +140,13 @@ void Scribble::load() {
 	if (sourceCode.length() == 0) {
 
 		//Compile the Function
-		compiledPackages = ScribbleCore::Parser::compile(packagePath, compiledPackages);
+		compiledPackages = ScribbleCore::Parser::compile(packagePath,
+				compiledPackages);
 
 	} else {
 
-		compiledPackages = ScribbleCore::Parser::compileText(sourceCode, packagePath,
-				compiledPackages);
+		compiledPackages = ScribbleCore::Parser::compileText(sourceCode,
+				packagePath, compiledPackages);
 
 	}
 

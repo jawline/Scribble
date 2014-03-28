@@ -9,10 +9,6 @@
 
 namespace ScribbleCore {
 
-FunctionSignature::FunctionSignature() {
-
-}
-
 FunctionSignature::FunctionSignature(std::vector<TypeReference> args, TypeReference returnType) : arguments_(args), returnType_(returnType) {
 }
 
@@ -27,11 +23,24 @@ TypeReference FunctionSignature::getReturnType() {
  return returnType_;
 }
 
-bool FunctionSignature::equalTo(FunctionSignature& other) {
+bool FunctionSignature::argumentsEqual(std::vector<Type*> args) {
 
-	if (!returnType_->type->Equals(other.getReturnType()->type)) {
-		return false;
+    if (arguments_.size() != args.size()) {
+        return false;
+    }
+
+	for (unsigned int i = 0; i < args.size(); i++) {
+
+		if (!args[i]->Equals(arguments_[i]->type)) {
+			return false;
+		}
+
 	}
+
+	return true;
+}
+
+bool FunctionSignature::equalTo(FunctionSignature other) {
 
 	if (getArguments().size() != other.getArguments().size()) {
 		return false;
@@ -45,7 +54,12 @@ bool FunctionSignature::equalTo(FunctionSignature& other) {
 
 	}
 
+	if (!getReturnType()->type->Equals(other.getReturnType()->type)) {
+		return false;
+	}
+
 	return true;
 }
+
 
 } /* namespace ScribbleCore */

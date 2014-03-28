@@ -20,7 +20,6 @@ class ScriptedFunction: public Function {
 private:
 	std::vector<SmartPointer<Statement>> statements_;
 	std::vector<SmartPointer<Variable>> variableTemplates_;
-	FunctionSignature signature_;
 
 public:
 
@@ -30,10 +29,6 @@ public:
 
 	virtual ~ScriptedFunction();
 
-	Type* getType();
-
-	const unsigned int numArgs();
-	Type* argType(unsigned int arg);
 	void check();
 
 	int debugCode(std::stringstream& gen);

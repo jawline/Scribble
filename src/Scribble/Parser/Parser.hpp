@@ -115,11 +115,6 @@ public:
 	static SmartPointer<Function> findFunctionInSet(SmartPointer<FunctionReference> toFind,
 			FunctionSet const& set);
 
-	/**
-	 * Get the return type of a function set
-	 */
-
-	static Type* functionSetType(FunctionSet const& functionSet);
 
 	/**
 	 * Search a list of strings and return true if it contains the target string

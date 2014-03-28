@@ -25,19 +25,9 @@ void FunctionStatement::checkTree(Type* functionType) {
 						+ func_->getResolveIssue());
 	}
 
-	if (func_->getFunction()->numArgs() != func_->getArgs().size()) {
-		throw StatementException(this, "Invalid number of arguments");
-	}
-
-	for (unsigned int i = 0; i < func_->getArgs().size(); ++i) {
-		SafeStatement arg = func_->getArgs()[i];
-		arg->checkTree(functionType);
-
-		if (!(func_->getFunction()->argType(i)->Equals(arg->type()) || arg->type()->Equals(getNilType()))) {
-			throw StatementException(this,
-					"Argument type does not match function type");
-		}
-
+    //Double check the args have been resolved properly
+    if (!func_->getFunction()->getSignature().argumentsEqual(func_->getTargetArguments())) {
+		throw StatementException(this, "The resolved function has incorrect arguments. This is an internal compiler issue.");
 	}
 
 }
@@ -48,7 +38,7 @@ Type* FunctionStatement::type() {
 		return getTypeManager().getType(TypeUnresolved);
 	}
 
-	return func_->getFunction()->getType();
+	return func_->getFunction()->getSignature().getReturnType()->type;
 }
 
 int FunctionStatement::generateCode(int resultRegister,

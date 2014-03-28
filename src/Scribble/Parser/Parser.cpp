@@ -1,20 +1,16 @@
 #include "Parser.hpp"
 #include "ParserException.hpp"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
 #include <Scribble/Function/ScriptedFunction.hpp>
 #include <Scribble/Function/FunctionReference.hpp>
 #include <Scribble/Value/Util.hpp>
 
 #include <API/StringFunction.hpp>
-
-#include <SHA3/sha3.h>
 #include <limits.h> /* PATH_MAX */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <iostream>
+#include <string>
 
 extern std::map<std::string, ScribbleCore::NamespaceType> Namespace;
 extern ScribbleCore::NamespaceType Functions;
@@ -61,44 +57,20 @@ SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference>
 	}
 
 	//Grab a reference to the functions arguments.
-	std::vector<SafeStatement> const& args = toFind->getArgs();
+	std::vector<Type*> args = toFind->getTargetArguments();
 
-	//If the function takes zero arguments then there can only be one option.
-	if (args.size() == 0) {
 
-		SmartPointer<Function> fn = set[0];
-
-		if (fn->numArgs() == 0) {
-			return fn;
-		} else {
-			return 0;
-		}
-
-	}
-
-	//Otherwise search through each function.
 	for (unsigned int i = 0; i < set.size(); ++i) {
 
 		SmartPointer<Function> fn = set[i];
 
-		if (fn->numArgs() == args.size()) {
-
-			for (unsigned int i = 0; i < args.size(); ++i) {
-
-				SafeStatement arg = args[i];
-
-				if (fn->argType(i) != arg->type()) {
-					break;
-				}
-
-				return fn;
-			}
-
-		}
+		if (fn->getSignature().argumentsEqual(args)) {
+            return fn;
+        }
 
 	}
 
-	return 0;
+	return nullptr;
 }
 
 void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
@@ -107,17 +79,17 @@ void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
 
 		printf("%s(", fnName.c_str());
 
-		for (unsigned int j = 0; j < fs[i]->numArgs(); j++) {
+		for (unsigned int j = 0; j < fs[i]->getSignature().getArguments().size(); j++) {
 
 			if (j != 0) {
 				printf(", ");
 			}
 
-			printf("%s", fs[i]->argType(j)->getTypeName().c_str());
+			printf("%s", fs[i]->getSignature().getArguments()[i]->type->getTypeName().c_str());
 
 		}
 
-		printf(") : %s\n", fs[i]->getType()->getTypeName().c_str());
+		printf(") : %s\n", fs[i]->getSignature().getReturnType()->type->getTypeName().c_str());
 	}
 
 }
@@ -199,44 +171,7 @@ bool Parser::listContains(std::string target,
 }
 
 bool Parser::testFunctionEquivilence(SmartPointer<Function> function, SmartPointer<Function> compared) {
-
-	bool duplicate = false;
-
-	if (compared.get() == function.get()) {
-		return true;
-	} else {
-
-		if (function->numArgs() != compared->numArgs()) {
-			return false;
-		}
-
-		if (!function->getType()->Equals(compared->getType())) {
-			duplicate = false;
-		}
-
-		duplicate = true;
-
-		for (unsigned int j = 0; j < function->numArgs(); ++j) {
-
-			if (function->argType(j) != compared->argType(j)) {
-				duplicate = false;
-				break;
-			}
-
-		}
-
-		if (duplicate) {
-			return true;
-		}
-
-	}
-
-	return false;
-}
-
-Type* Parser::functionSetType(FunctionSet const& functionSet) {
-	SmartPointer<Function> fn = functionSet[0];
-	return fn->getType();
+	return function->getSignature().equalTo(compared->getSignature());
 }
 
 void Parser::resolve(TypeReference reference, NamespaceType ns) {

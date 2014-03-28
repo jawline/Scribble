@@ -7,7 +7,7 @@
 package sys := import("sys");
 package console := import("console");
 
-func Fatal(error : string) {
+func Fatal(error:string) {
 
  console.Log( "FATAL ERROR HANG: " $ error $ "\n" );
 
@@ -20,7 +20,7 @@ func Fatal(error : string) {
  * Fatal error if val differs from target
  */
 
-func Assert(val : bool, target : bool, error : string) {
+func Assert(val:bool, target:bool, error:string) {
  AssertBool(val, target, error);
 }
 
@@ -28,7 +28,7 @@ func Assert(val : bool, target : bool, error : string) {
  * Fatal error if val differs from target
  */
 
-func Assert(val : int, target : int, error : string) {
+func Assert(val:int, target:int, error:string) {
  AssertInt(val, target, error);
 }
 
@@ -36,7 +36,7 @@ func Assert(val : int, target : int, error : string) {
  * Fatal error if the value given is more then drift apart from the target value
  */
 
-func Assert(val : float32, target : float32, drift : float32, error : string) {
+func Assert(val:float32, target:float32, drift:float32, error:string) {
  AssertFloat(val, target, drift, error);
 }
 
@@ -44,7 +44,7 @@ func Assert(val : float32, target : float32, drift : float32, error : string) {
  * Fatal error if val differs from target
  */
 
-func AssertBool(val : bool, target : bool, error : string) {
+func AssertBool(val:bool, target:bool, error:string) {
 
  if val != target then {
   console.Log("Assert failed " $ sys.String(val) $ " " $ sys.String(target) $ "\n");
