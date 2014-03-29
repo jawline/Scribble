@@ -35,15 +35,3 @@ Modulo::~Modulo() {
 APIValue Modulo::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 	return API::APIValue(ScribbleCore::getIntType(), values[0].getValue32() % values[1].getValue32());
 }
-
-ScribbleCore::Type* Modulo::getType() {
-	return ScribbleCore::getIntType();
-}
-
-const unsigned int Modulo::numArgs() {
-	return 2;
-}
-
-ScribbleCore::Type* Modulo::argType(unsigned int arg) {
-	return ScribbleCore::getIntType();
-}

@@ -103,7 +103,6 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "float32" return TYPE_FLOAT32;
 "nil" return NIL;
 "string" return TYPE_STRING;
-"void" return TYPE_VOID;
 "return" return RETURN;
 "while" return WHILE;
 "import" return IMPORT;

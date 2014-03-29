@@ -27,23 +27,6 @@ public:
 
 	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
-	/**
-	 * Get the return type of the function.
-	 */
-
-	virtual ScribbleCore::Type* getType();
-
-	/**
-	 * Get the number of arguments (2)
-	 */
-
-	virtual const unsigned int numArgs();
-
-	/**
-	 * Get the arg type for a given argument ( Both Integer)
-	 */
-
-	virtual ScribbleCore::Type* argType(unsigned int arg);
 
 };
 

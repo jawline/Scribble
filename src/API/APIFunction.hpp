@@ -31,18 +31,6 @@ public:
 
 	virtual ~APIFunction();
 
-	ScribbleCore::Type* getType() {
-		return returnType_;
-	}
-
-	const unsigned int numArgs() {
-		return types_.size();
-	}
-
-	ScribbleCore::Type* argType(unsigned int arg) {
-		return types_[arg];
-	}
-
 	APIValue execute(API::APIValue* values, VM::VirtualMachine* virt) {
 		return fn_(values, virt);
 	}

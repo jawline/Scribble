@@ -33,18 +33,6 @@ Concat::~Concat() {
 	// TODO Auto-generated destructor stub
 }
 
-ScribbleCore::Type* Concat::getType() {
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::StringType);
-}
-
-const unsigned int Concat::numArgs() {
-	return 2;
-}
-
-ScribbleCore::Type* Concat::argType(unsigned int arg) {
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::StringType);
-}
-
 API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {
 
 	char* lhs = values[0].getValueString();

@@ -19,21 +19,6 @@ public:
 
 	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
-	/**
-	 * Get the return type of the function.
-	 */
-	virtual ScribbleCore::Type* getType() {
-		return ScribbleCore::getStringType();
-	}
-
-	virtual const unsigned int numArgs() {
-		return 0;
-	}
-
-	virtual ScribbleCore::Type* argType(unsigned int arg) {
-		return nullptr;
-	}
-
 };
 
 #endif /* READLINE_HPP_ */

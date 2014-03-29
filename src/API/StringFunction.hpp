@@ -16,10 +16,6 @@ public:
 	IntToStringFunction(std::string ns);
 	virtual ~IntToStringFunction();
 
-	ScribbleCore::Type* getType();
-	const unsigned int numArgs();
-	ScribbleCore::Type* argType(unsigned int arg);
-
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 };
@@ -32,10 +28,6 @@ public:
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 
-	ScribbleCore::Type* getType();
-	const unsigned int numArgs();
-	ScribbleCore::Type* argType(unsigned int arg);
-
 };
 
 class BoolToStringFunction: public Function {
@@ -45,10 +37,6 @@ public:
 
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
-
-	ScribbleCore::Type* getType();
-	const unsigned int numArgs();
-	ScribbleCore::Type* argType(unsigned int arg);
 
 };
 
@@ -60,9 +48,6 @@ public:
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 
-	ScribbleCore::Type* getType();
-	const unsigned int numArgs();
-	ScribbleCore::Type* argType(unsigned int arg);
 };
 
 #endif /* STRINGFUNCTION_HPP_ */

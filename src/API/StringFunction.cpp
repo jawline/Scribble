@@ -31,23 +31,6 @@ IntToStringFunction::~IntToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-ScribbleCore::Type* IntToStringFunction::getType() {
-	return ScribbleCore::getStringType();
-}
-
-unsigned int const IntToStringFunction::numArgs() {
-	return 1;
-}
-
-ScribbleCore::Type* IntToStringFunction::argType(unsigned int arg) {
-
-	if (arg == 0) {
-		return ScribbleCore::getIntType();
-	}
-
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
-}
-
 API::APIValue IntToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 
@@ -85,23 +68,6 @@ BoolToStringFunction::~BoolToStringFunction() {
 	// TODO Auto-generated destructor stub
 }
 
-ScribbleCore::Type* BoolToStringFunction::getType() {
-	return ScribbleCore::getStringType();
-}
-
-unsigned int const BoolToStringFunction::numArgs() {
-	return 1;
-}
-
-ScribbleCore::Type* BoolToStringFunction::argType(unsigned int arg) {
-
-	if (arg == 0) {
-		return ScribbleCore::getBooleanType();
-	}
-
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
-}
-
 API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 
@@ -131,23 +97,6 @@ Float32ToStringFunction::Float32ToStringFunction(std::string ns) :
 
 Float32ToStringFunction::~Float32ToStringFunction() {
 	// TODO Auto-generated destructor stub
-}
-
-ScribbleCore::Type* Float32ToStringFunction::getType() {
-	return ScribbleCore::getStringType();
-}
-
-unsigned int const Float32ToStringFunction::numArgs() {
-	return 1;
-}
-
-ScribbleCore::Type* Float32ToStringFunction::argType(unsigned int arg) {
-
-	if (arg == 0) {
-		return ScribbleCore::getFloat32Type();
-	}
-
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
 }
 
 API::APIValue Float32ToStringFunction::execute(API::APIValue* values,
@@ -195,21 +144,4 @@ API::APIValue StringCompare::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 	return API::APIValue::makeInt32(
 			strcmp(values[0].getValueString(), values[1].getValueString()));
-}
-
-ScribbleCore::Type* StringCompare::getType() {
- return ScribbleCore::getIntType();
-}
-
-const unsigned int StringCompare::numArgs() {
- return 2;
-}
-
-ScribbleCore::Type* StringCompare::argType(unsigned int arg) {
-
- if (arg < 2) {
-  return ScribbleCore::getStringType();
- }
-
- return nullptr;
 }

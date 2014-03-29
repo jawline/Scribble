@@ -16,10 +16,6 @@ public:
 	virtual API::APIValue execute(API::APIValue* values,
 			VM::VirtualMachine* virt);
 
-	ScribbleCore::Type* getType();
-	const unsigned int numArgs();
-	ScribbleCore::Type* argType(unsigned int arg);
-
 	virtual std::string getName() {
 		return "NativeWriteString";
 	}

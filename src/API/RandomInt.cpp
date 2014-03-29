@@ -30,18 +30,6 @@ RandomInt::~RandomInt() {
 	// TODO Auto-generated destructor stub
 }
 
-ScribbleCore::Type* RandomInt::getType() {
-	return ScribbleCore::getIntType();
-}
-
-const unsigned int RandomInt::numArgs() {
-	return 1;
-}
-
-ScribbleCore::Type* RandomInt::argType(unsigned int arg) {
-	return ScribbleCore::getIntType();
-}
-
 APIValue RandomInt::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 	return API::APIValue(ScribbleCore::getIntType(), rand() % values[0].getValue32());

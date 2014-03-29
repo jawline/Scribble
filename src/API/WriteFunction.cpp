@@ -25,20 +25,3 @@ API::APIValue WriteFunction::execute(API::APIValue* values,
 	printf("%s", (char*) values[0].getReferencePointer());
 	return API::APIValue();
 }
-
-ScribbleCore::Type* WriteFunction::argType(unsigned int arg) {
-
-	if (arg == 0) {
-		return ScribbleCore::getStringType();
-	}
-
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
-}
-
-const unsigned int WriteFunction::numArgs() {
-	return 1;
-}
-
-ScribbleCore::Type* WriteFunction::getType() {
-	return ScribbleCore::getVoidType();
-}

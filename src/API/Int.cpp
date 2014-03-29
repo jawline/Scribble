@@ -31,23 +31,6 @@ IntFromFloat32::~IntFromFloat32() {
 	// TODO Auto-generated destructor stub
 }
 
-ScribbleCore::Type* IntFromFloat32::getType() {
-	return ScribbleCore::getIntType();
-}
-
-const unsigned int IntFromFloat32::numArgs() {
-	return 1;
-}
-
-ScribbleCore::Type* IntFromFloat32::argType(unsigned int arg) {
-
-	if (arg == 0) {
-		return ScribbleCore::getFloat32Type();
-	}
-
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
-}
-
 API::APIValue IntFromFloat32::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
 	int val = values[0].getValueFloat32();

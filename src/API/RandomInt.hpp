@@ -21,10 +21,6 @@ public:
 
 	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
-	ScribbleCore::Type* getType();
-	const unsigned int numArgs();
-	ScribbleCore::Type* argType(unsigned int arg);
-
 };
 
 #endif /* RANDOMINT_HPP_ */

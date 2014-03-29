@@ -92,6 +92,10 @@ func QuickSort( n:array(User), low : int, high : int) {
  	QuickSort(n, i, high);
 }
 
+func QuickSort(n:array(User)) {
+ QuickSort(n, 0, len(n)-1);
+}
+
 func main() {
 
  //Create an array of 5 user references
@@ -109,7 +113,7 @@ func main() {
  PrintUsers(users);
 
  //User the QuickSort defined above to sort the list of users by age
- QuickSort(users, 0, 4);
+ QuickSort(users);
  
  console.Log("---------------------------------------------\nUsers after sort: \n\n");
  

@@ -36,21 +36,4 @@ API::APIValue Float32FromInt::execute(API::APIValue* values,
 	return API::APIValue(ScribbleCore::getIntType(), values[0].getValueFloat32());
 }
 
-ScribbleCore::Type* Float32FromInt::getType() {
-	return ScribbleCore::getFloat32Type();
-}
-
-const unsigned int Float32FromInt::numArgs() {
-	return 1;
-}
-
-ScribbleCore::Type* Float32FromInt::argType(unsigned int arg) {
-
-	if (arg == 0) {
-		return ScribbleCore::getIntType();
-	}
-
-	return ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved);
-}
-
 } /* namespace API */
