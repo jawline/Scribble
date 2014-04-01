@@ -31,12 +31,16 @@ public:
 	/**
 	 * Get a given primitive type (Int, Bool, etc)
 	 */
+
 	Type* getType(ValueType base);
 
 	/**
 	 * Get a given complex type. (Array, Reference)
 	 */
+
 	Type* getType(ValueType base, TypeReference subType);
+
+	Type* getType(std::vector<TypeReference> argumentTypes, TypeReference returnType);
 };
 
 /**

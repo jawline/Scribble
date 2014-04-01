@@ -24,7 +24,6 @@ extern std::vector<SmartPointer<ScribbleCore::Variable>> VariableReferences;
 extern std::vector<ScribbleCore::TypeReference> TypeReferences;
 
 extern bool ParsingError;
-extern int lastuid;
 
 extern void scribble_parse();
 extern void scribble__scan_string(char const*);

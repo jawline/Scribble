@@ -7,8 +7,7 @@
 
 #ifndef FUNCTIONSIGNATURE_HPP_
 #define FUNCTIONSIGNATURE_HPP_
-
-#include "../Parser/TypeReference.hpp"
+#include <Scribble/Parser/TypeReference.hpp>
 
 namespace ScribbleCore {
 
@@ -32,6 +31,7 @@ public:
 	bool argumentsEqual(std::vector<Type*> args);
 
 };
+
 
 } /* namespace ScribbleCore */
 #endif /* FUNCTIONSIGNATURE_HPP_ */

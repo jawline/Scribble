@@ -48,6 +48,7 @@ public:
 
 	void setName(std::string const& name);
 	void setPackage(std::string const& name);
+	bool Equals(Type* other);
 
 	std::string getName() {
 		return "__struct(" + name_ + ")";

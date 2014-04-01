@@ -92,6 +92,8 @@ enum ValueType {
 
 	StructureType,
 
+	FunctionReferenceType,
+
 	/**
 	 * Max hint used so that heaps can allocate arrays of the correct number of buckets.
 	 */
@@ -118,6 +120,9 @@ private:
 	 */
 
 	TypeReference subType_;
+
+	TypeReference referenceReturnType_;
+	std::vector<TypeReference> referenceArgumentTypes_;
 
 public:
 
@@ -163,7 +168,7 @@ public:
 	/**
 	 * Test whether this type is equivalent to a given type.
 	 */
-	bool Equals(Type* other);
+	virtual bool Equals(Type* other);
 
 	/**
 	 * If this type is an array then this will return a reference to its subtype.

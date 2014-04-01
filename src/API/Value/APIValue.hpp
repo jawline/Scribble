@@ -19,6 +19,7 @@
 
 #include <VM/VirtualMachine.hpp>
 #include <Pointers/SmartPointer.hpp>
+#include <Scribble/Function/FunctionSignature.hpp>
 #include <Scribble/Value/Type.hpp>
 #include <Scribble/Value/StructureInfo.hpp>
 #include <Scribble/Value/TypeManager.hpp>

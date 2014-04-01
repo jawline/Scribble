@@ -39,6 +39,10 @@ int StructureInfo::getIndex(std::string const& name) {
 	return -1;
 }
 
+bool StructureInfo::Equals(Type* other) {
+		return (other == this);
+}
+
 Type* StructureInfo::getType(std::string const& name) {
 
 	if (getIndex(name) != -1) {

@@ -7,8 +7,8 @@
 #include <VM/VirtualMachine.hpp>
 #include <API/Value/APIValue.hpp>
 #include <sstream>
-#include <Scribble/Function/FunctionSignature.hpp>
 #include <Scribble/Value/Type.hpp>
+#include <Scribble/Function/FunctionSignature.hpp>
 
 namespace API {
 

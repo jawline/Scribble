@@ -7,6 +7,7 @@
 
 #include "Type.hpp"
 #include <Scribble/Parser/TypeReference.hpp>
+#include <Scribble/Function/FunctionSignature.hpp>
 
 namespace ScribbleCore {
 
@@ -26,27 +27,61 @@ bool Type::Equals(Type* other) {
 
 	//TODO: Probably needs cleaning up. Sleepy
 
-	if (subType_.get() != nullptr) {
+	//Check if the array is the same
+	if (rawType_ == Array) {
 
-		if (other->subType_.get() == nullptr) {
-			return false;
-		}
+		if (subType_.get() != nullptr) {
 
-		if (subType_->type == nullptr && other->subType_->type != nullptr) {
-			return false;
-		}
-
-		if (subType_->type != nullptr) {
-
-			if (other->subType_->type == nullptr) {
+			if (other->subType_.get() == nullptr) {
 				return false;
 			}
 
-			return subType_->type->Equals(other->subType_->type);
+			if (subType_->type != nullptr) {
+
+				if (other->subType_->type == nullptr) {
+					return false;
+				}
+
+				return subType_->type->Equals(other->subType_->type);
+			}
+
+			printf(
+					"TODO: Subtypes %s %s have not been resolved. Find out why\n",
+					subType_->name.c_str(), other->subType_->name.c_str());
+			printf(
+					"WARNING: Currently assuming structures with the same resolve name are referencing the same thing. Fix this\n");
+
+			return subType_->name == other->subType_->name;
 		}
 
-		return subType_->name == other->subType_->name;
-		//return subType_->Equals(other->subType_);
+	} else if (rawType_ == FunctionReferenceType) {
+
+		if (!referenceReturnType_->type->Equals(
+				other->referenceReturnType_->type)) {
+			return false;
+		}
+
+		if (referenceArgumentTypes_.size()
+				!= other->referenceArgumentTypes_.size()) {
+			return false;
+		}
+
+		for (unsigned int i = 0; i < referenceArgumentTypes_.size(); i++) {
+
+			if (!referenceArgumentTypes_[i]->type->Equals(
+					other->referenceArgumentTypes_[i]->type)) {
+				return false;
+			}
+
+		}
+
+	} else if (rawType_ == StructureType) {
+
+		//Structure check is overloaded in StructureInfo
+		printf("ERR SHOULD NOT BE HERE\n");
+		for (;;) {
+		}
+
 	}
 
 	return true;
