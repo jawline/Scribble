@@ -101,6 +101,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 	ScribbleCore::Statement* statement;
 	Function* function;
 	SmartPointer<ScribbleCore::Variable>* variable;
+	std::vector<ScribbleCore::TypeReference>* types;
 	std::string* string;
 	
 	float32_t float32;
@@ -137,6 +138,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <structureinfo> BaseStructureInfo;
 %type <statements> IfStatements
 %type <statement> Expression;
+%type <types> MultipleTypes;
 
 %start Program
 %%
@@ -188,15 +190,15 @@ BaseStructureInfo: WORD COLON Type {
  */
 
 Type: TYPE_INT {
-		$$ = new ScribbleCore::TypeReference( new ScribbleCore::TypeReferenceCore ( "", ScribbleCore::getTypeManager().getType(ScribbleCore::Int) ) );
+		$$ = new ScribbleCore::TypeReference( new ScribbleCore::TypeReferenceCore ( "int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int) ) );
 	} | TYPE_STRING {
-		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "", ScribbleCore::getTypeManager().getType(ScribbleCore::StringType) ) );
+		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "string", ScribbleCore::getTypeManager().getType(ScribbleCore::StringType) ) );
 	} | TYPE_FLOAT32 {
-		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "", ScribbleCore::getTypeManager().getType(ScribbleCore::Float32)));
+		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "float32", ScribbleCore::getTypeManager().getType(ScribbleCore::Float32)));
 	} | TYPE_BOOL {
-		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "", ScribbleCore::getTypeManager().getType(ScribbleCore::Boolean) ) );
+		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "bool", ScribbleCore::getTypeManager().getType(ScribbleCore::Boolean) ) );
 	} | TYPE_ARRAY LPAREN Type RPAREN {
-		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "", ScribbleCore::getTypeManager().getType(ScribbleCore::Array, *$3) ) );
+		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "array", ScribbleCore::getTypeManager().getType(ScribbleCore::Array, *$3) ) );
 		delete $3;
 	} | WORD {
 		
@@ -217,8 +219,25 @@ Type: TYPE_INT {
 		delete $1;
 		delete $3;
 		
+	} | FUNCTION LPAREN MultipleTypes RPAREN {
+		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "function", ScribbleCore::getTypeManager().getType(*$3, ScribbleCore::makeTypeReference(ScribbleCore::getVoidType())) ) );
+		delete $3;
+	} | FUNCTION LPAREN MultipleTypes RPAREN COLON Type {
+		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "function", ScribbleCore::getTypeManager().getType(*$3, *$6) ) );
+		delete $3;
+		delete $6;
 	}
 ;
+
+MultipleTypes: Type {
+	$$ = new std::vector<ScribbleCore::TypeReference>;
+	$$->push_back(*$1);
+	delete $1;
+} | MultipleTypes COMMA Type {
+	$$ = $1;
+	$$->push_back(*$3);
+	delete $3;
+};
 
 /**
  * The definition of a variable with an explicit type ( var Name : Type )

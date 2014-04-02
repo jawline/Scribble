@@ -25,6 +25,15 @@ package console := import("console");
  
 func main() {
 
+ var area : func(int,int):int;
+ var log : func(string);
+
+ log := nil;
+
+ if log = nil then {
+  console.Log("Nil\n");
+ }
+
  loopsTest.Test();
  arraysTest.Test();
  variablesTest.Test();

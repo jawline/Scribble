@@ -55,6 +55,22 @@ Type* TypeManager::getType(ValueType base, TypeReference subType) {
 	return desired;
 }
 
+Type* TypeManager::getType(std::vector<TypeReference> argumentTypes, TypeReference returnType) {
+
+	Type* desired = new Type(argumentTypes, returnType);
+	Type* found = tFind(desired);
+
+	//If already exists
+	if (found != nullptr) {
+		delete desired;
+		return found;
+	}
+
+	//Else add
+	types_.push_back(desired);
+	return desired;
+}
+
 TypeManager typeInstance;
 
 TypeManager& getTypeManager() {

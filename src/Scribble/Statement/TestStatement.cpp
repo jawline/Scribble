@@ -81,6 +81,7 @@ int TestStatement::generateCode(int resultRegister,
 	case StringType:
 	case Array:
 	case StructureType:
+	case FunctionReferenceType:
 	case Boolean: {
 		switch (tType_) {
 

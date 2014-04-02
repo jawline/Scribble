@@ -121,8 +121,8 @@ private:
 
 	TypeReference subType_;
 
-	TypeReference referenceReturnType_;
 	std::vector<TypeReference> referenceArgumentTypes_;
+	TypeReference referenceReturnType_;
 
 public:
 
@@ -131,6 +131,8 @@ public:
 	 */
 
 	Type(ValueType rawType, TypeReference subType);
+	Type(std::vector<TypeReference> argumentTypes, TypeReference returnType);
+
 	virtual ~Type();
 
 	/**

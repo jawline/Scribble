@@ -13,7 +13,11 @@ namespace ScribbleCore {
 
 Type::Type(ValueType rawType, TypeReference subType) :
 		rawType_(rawType), subType_(subType) {
+}
 
+Type::Type(std::vector<TypeReference> argumentTypes, TypeReference returnType) :
+		rawType_(FunctionReferenceType), referenceArgumentTypes_(argumentTypes), referenceReturnType_(
+				returnType) {
 }
 
 Type::~Type() {
