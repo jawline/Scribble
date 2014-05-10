@@ -24,17 +24,17 @@ ArrayLengthStatement::~ArrayLengthStatement() {
 void ArrayLengthStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	if (exp_->type()->getType() != Array) {
+	if (exp_->type()->type->getType() != Array) {
 		throw StatementException(this,
 				std::string("Cannot get length of ")
-						+ exp_->type()->getTypeName()
+						+ exp_->type()->type->getTypeName()
 						+ ". Can only get the length of an array");
 	}
 
 }
 
-Type* ArrayLengthStatement::type() {
-	return getIntType();
+TypeReference ArrayLengthStatement::type() {
+	return makeTypeReference(getIntType());
 }
 
 int ArrayLengthStatement::generateCode(int resultRegister,

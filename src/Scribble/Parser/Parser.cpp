@@ -403,8 +403,8 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 						std::string types = "(";
 
-						for (unsigned int i = 0; i < ref->getArgs().size(); i++) {
-							types += ref->getArgs()[i]->type()->getTypeName();
+						for (unsigned int i = 0; i < ref->getTargetArguments().size(); i++) {
+							types += ref->getTargetArguments()[i]->getTypeName();
 
 							if (i != 0) {
 								types += ", ";
@@ -436,12 +436,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 		case AssignElementTypeEvaluation: {
 			references[i].assignElementType->fix();
-			break;
-		}
-
-		case VariableTypeEvaluation: {
-			AutoVariablePair p = references[i].autoVariableType;
-			p.first->setType(p.second->type());
 			break;
 		}
 

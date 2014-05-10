@@ -23,7 +23,7 @@ public:
 	TernaryStatement(int line, std::string sym, SafeStatement test, SafeStatement lhs, SafeStatement rhs);
 	virtual ~TernaryStatement();
 
-	Type* type();
+	TypeReference type();
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };

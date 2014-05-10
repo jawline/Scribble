@@ -20,10 +20,9 @@ OperateStatement::OperateStatement(int lineNo, std::string sym,
 }
 
 OperateStatement::~OperateStatement() {
-	// TODO Auto-generated destructor stub
 }
 
-Type* OperateStatement::type() {
+TypeReference OperateStatement::type() {
 	return lhs_->type();
 }
 
@@ -31,12 +30,12 @@ void OperateStatement::checkTree(Type* type) {
 	lhs_->checkTree(type);
 	rhs_->checkTree(type);
 
-	if (!(lhs_->type()->Equals(rhs_->type()))) {
+	if (!(lhs_->type()->type->Equals(rhs_->type()->type))) {
 		throw StatementException(this,
 				"Cannot add variables of different types");
 	}
 
-	if (!(lhs_->type()->isPrimitive())) {
+	if (!(lhs_->type()->type->isPrimitive())) {
 		throw StatementException(this, "Cannot perform on non primitives");
 	}
 }
@@ -46,7 +45,7 @@ int OperateStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	switch (lhs_->type()->getType()) {
+	switch (lhs_->type()->type->getType()) {
 	case Int: {
 
 		instrs = lhs_->generateCode(VM::vmTempRegisterOne, generated);

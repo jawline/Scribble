@@ -20,7 +20,7 @@ public:
 	GetArrayStatement(int line, std::string sym, SafeStatement array, SafeStatement index);
 	virtual ~GetArrayStatement();
 
-	Type* type();
+	TypeReference type();
 
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);

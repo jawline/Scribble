@@ -18,7 +18,7 @@ private:
 
 	std::string elementName_;
 	int elementIndex_;
-	Type* elementType_;
+	TypeReference elementType_;
 
 public:
 	StructureAssignElement(int line, std::string tkn,
@@ -27,7 +27,7 @@ public:
 
 	virtual void fix();
 	virtual void checkTree(Type* functionType);
-	virtual Type* type();
+	virtual TypeReference type();
 
 
 	virtual int generateCode(int result, std::stringstream& code);

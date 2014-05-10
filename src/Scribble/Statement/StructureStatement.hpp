@@ -22,7 +22,7 @@ public:
 	virtual ~StructureStatement();
 
 	virtual void checkTree(Type* functionType);
-	virtual Type* type();
+	virtual TypeReference type();
 	virtual int generateCode(int result, std::stringstream& code);
 };
 

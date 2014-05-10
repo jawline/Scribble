@@ -12,7 +12,7 @@ private:
 public:
 	GetVariableStatement(int lineNo, std::string sym, SmartPointer<Variable> var);
 	~GetVariableStatement();
-	Type* type();
+	TypeReference type();
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };

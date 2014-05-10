@@ -20,7 +20,7 @@ AssignArrayStatement::AssignArrayStatement(int lineno, std::string text,
 AssignArrayStatement::~AssignArrayStatement() {
 }
 
-Type* AssignArrayStatement::type() {
+TypeReference AssignArrayStatement::type() {
 	return array_->type();
 }
 
@@ -29,26 +29,26 @@ void AssignArrayStatement::checkTree(Type* functionType) {
 	toAssign_->checkTree(functionType);
 	position_->checkTree(functionType);
 
-	if (array_->type()->getType() != Array) {
+	if (array_->type()->type->getType() != Array) {
 		throw StatementException(this,
 				std::string("Not an array, Type ")
-						+ array_->type()->getTypeName()
+						+ array_->type()->type->getTypeName()
 						+ " given when an array was expected.");
 	}
 
-	if (position_->type()->getType() != Int) {
+	if (position_->type()->type->getType() != Int) {
 		throw StatementException(this,
-				std::string("Type ") + position_->type()->getTypeName()
+				std::string("Type ") + position_->type()->type->getTypeName()
 						+ " cannot be used as an index. Index must be an integer");
 	}
 
-	if (!(array_->type()->getSubtype()->Equals(toAssign_->type())
-			|| toAssign_->type()->getType() == NilType)) {
+	if (!(array_->type()->type->getSubtype()->Equals(toAssign_->type()->type)
+			|| toAssign_->type()->type->getType() == NilType)) {
 		throw StatementException(this,
 				std::string("Value given is of type ")
-						+ toAssign_->type()->getTypeName()
+						+ toAssign_->type()->type->getTypeName()
 						+ " which differs from expected type "
-						+ array_->type()->getSubtype()->getTypeName());
+						+ array_->type()->type->getSubtype()->getTypeName());
 	}
 }
 

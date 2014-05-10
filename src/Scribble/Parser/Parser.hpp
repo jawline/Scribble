@@ -18,13 +18,11 @@ namespace ScribbleCore {
 
 typedef std::vector<SmartPointer<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
-typedef std::pair<SmartPointer<Variable>, SafeStatement> AutoVariablePair;
 
 enum ParserReferenceType {
 	FunctionEvaluation,
 	StructureElementTypeEvaluation,
-	AssignElementTypeEvaluation,
-	VariableTypeEvaluation
+	AssignElementTypeEvaluation
 };
 
 class ParserReference {
@@ -48,11 +46,6 @@ public:
 		assignElementType = assign;
 	}
 
-	ParserReference(AutoVariablePair pair) {
-		type_ = VariableTypeEvaluation;
-		autoVariableType = pair;
-	}
-
 	ParserReferenceType type() {
 		return type_;
 	}
@@ -60,7 +53,6 @@ public:
 	SmartPointer<FunctionReference> functionReference;
 	GetStructureElementStatement* structureElementType;
 	StructureAssignElement* assignElementType;
-	AutoVariablePair autoVariableType;
 };
 
 const static std::string ScribbleFileSuffix = ".sc";

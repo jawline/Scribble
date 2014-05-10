@@ -44,7 +44,7 @@ public:
 	 * @return The int type.
 	 */
 
-	virtual Type* type();
+	virtual TypeReference type();
 };
 
 }

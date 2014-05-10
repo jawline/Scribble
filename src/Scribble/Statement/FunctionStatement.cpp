@@ -4,6 +4,13 @@
 
 namespace ScribbleCore {
 
+FunctionStatement::FunctionStatement(int lineNo, std::string sym,
+			SmartPointer<FunctionReference> function, std::vector<SafeStatement> args, int numDeclaredVariables) :
+			Statement(lineNo, sym), numDeclaredVariables_(numDeclaredVariables) {
+	func_ = function;
+	args_ = args;
+}
+
 void FunctionStatement::checkTree(Type* functionType) {
 
 	if (func_->getFunction().get() == nullptr) {
@@ -32,13 +39,8 @@ void FunctionStatement::checkTree(Type* functionType) {
 
 }
 
-Type* FunctionStatement::type() {
-
-	if (func_->getFunction().get() == nullptr) {
-		return getTypeManager().getType(TypeUnresolved);
-	}
-
-	return func_->getFunction()->getSignature().getReturnType()->type;
+TypeReference FunctionStatement::type() {
+	return func_->getReturnType();
 }
 
 int FunctionStatement::generateCode(int resultRegister,
@@ -48,11 +50,12 @@ int FunctionStatement::generateCode(int resultRegister,
 
 	generated << "pushr $" << VM::vmReturnResultRegister << " "
 			<< VM::vmNumReservedRegisters + numDeclaredVariables_ << "\n";
+
 	numInstructions++;
 
-	for (unsigned int i = 0; i < func_->getArgs().size(); i++) {
+	for (unsigned int i = 0; i < args_.size(); i++) {
 
-		SafeStatement arg = func_->getArgs()[i];
+		SafeStatement arg = args_[i];
 
 		numInstructions += arg->generateCode(VM::vmTempRegisterThree,
 				generated);

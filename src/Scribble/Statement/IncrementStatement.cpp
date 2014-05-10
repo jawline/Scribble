@@ -27,8 +27,8 @@ void IncrementStatement::checkTree(Type* functionType) {
 
 }
 
-Type* IncrementStatement::type() {
-	return getTypeManager().getType(Int);
+TypeReference IncrementStatement::type() {
+	return makeTypeReference(getTypeManager().getType(Int));
 }
 
 int IncrementStatement::generateCode(int resultRegister,

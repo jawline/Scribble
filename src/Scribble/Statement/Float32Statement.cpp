@@ -13,16 +13,14 @@ namespace ScribbleCore {
 Float32Statement::Float32Statement(int yylineno, std::string yysym,
 		float32_t val) :
 		Statement(yylineno, yysym), val_(val) {
-	// TODO Auto-generated constructor stub
 
 }
 
 Float32Statement::~Float32Statement() {
-	// TODO Auto-generated destructor stub
 }
 
-Type* Float32Statement::type() {
-	return getFloat32Type();
+TypeReference Float32Statement::type() {
+	return makeTypeReference(getFloat32Type());
 }
 
 void Float32Statement::checkTree(Type* functionType) {

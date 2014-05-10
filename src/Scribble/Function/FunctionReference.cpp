@@ -13,12 +13,30 @@ FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
 		std::vector<SafeStatement> fnArgs, SmartPointer<Function> func) {
 	name_ = name;
 	fnNamespace_ = fnNamespace;
-	fnArgs_ = fnArgs;
 	func_ = func;
+
+	for (unsigned int i = 0; i < fnArgs.size(); i++) {
+
+		if (fnArgs[i]->type() == nullptr) {
+			printf("Error: Creating a function reference with a null arg ref %s\n", fnArgs[i]->generateDebugInformation().c_str());
+		}
+
+		fnArgs_.push_back(fnArgs[i]->type());
+	}
+
+    returnType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
+}
+
+FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
+		std::vector<TypeReference> fnArgs, SmartPointer<Function> func) {
+	name_ = name;
+	fnNamespace_ = fnNamespace;
+	func_ = func;
+	fnArgs_ = fnArgs;
+    returnType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
 }
 
 FunctionReference::~FunctionReference() {
-	// TODO Auto-generated destructor stub
 }
 
 std::string FunctionReference::getDebugName() {
@@ -29,7 +47,7 @@ std::string FunctionReference::getDebugName() {
 	}
 }
 
-std::vector<SafeStatement> const& FunctionReference::getArgs() {
+std::vector<TypeReference> const& FunctionReference::getArgTypes() {
 	return fnArgs_;
 }
 
@@ -43,8 +61,12 @@ SmartPointer<Function> FunctionReference::getFunction() {
 
 void FunctionReference::setFunction(SmartPointer<Function> func) {
 	func_ = func;
+    returnType_->type = func_->getSignature().getReturnType()->type;
 }
 
+TypeReference FunctionReference::getReturnType() {
+    return returnType_;
+}
 
 std::string const& FunctionReference::getName() {
 	return name_;
@@ -59,10 +81,17 @@ std::string const& FunctionReference::getResolveIssue() {
 }
 
 std::vector<Type*> FunctionReference::getTargetArguments() {
+
     std::vector<Type*> args;
 
-	for (unsigned int i = 0; i < getArgs().size(); i++) {
-        args.push_back(getArgs()[i]->type());
+	for (unsigned int i = 0; i < getArgTypes().size(); i++) {
+
+		if (getArgTypes()[i].get() == nullptr) {
+			args.push_back(getTypeManager().getType(TypeUnresolved));
+		} else {
+	        args.push_back(getArgTypes()[i]->type);
+		}
+
 	}
 
     return args;

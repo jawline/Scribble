@@ -23,7 +23,7 @@ public:
 	virtual ~WhileStatement();
 
 	void checkTree(Type* functionType);
-	Type* type();
+	TypeReference type();
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };

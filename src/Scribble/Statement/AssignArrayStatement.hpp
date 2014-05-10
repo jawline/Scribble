@@ -52,7 +52,7 @@ public:
 	 * @return array_'s type.
 	 */
 
-	Type* type();
+	TypeReference type();
 
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);

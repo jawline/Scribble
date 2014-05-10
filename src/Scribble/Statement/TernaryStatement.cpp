@@ -19,7 +19,7 @@ TernaryStatement::TernaryStatement(int line, std::string sym,
 TernaryStatement::~TernaryStatement() {
 }
 
-Type* TernaryStatement::type() {
+TypeReference TernaryStatement::type() {
 	return lhs_->type();
 }
 
@@ -29,12 +29,12 @@ void TernaryStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (test_->type()->getType() != Boolean) {
+	if (test_->type()->type->getType() != Boolean) {
 		throw StatementException(this,
 				"Ternary test should be a boolean expression");
 	}
 
-	if (!lhs_->type()->Equals(rhs_->type())) {
+	if (!lhs_->type()->type->Equals(rhs_->type()->type)) {
 		throw StatementException(this,
 				"Ternary options have to be the same type");
 	}

@@ -21,8 +21,8 @@ public:
 	virtual ~ReturnStatement();
 
 	virtual void checkTree(Type* functionType);
-	virtual Type* type() {
-		return getTypeManager().getType(NilType);
+	virtual TypeReference type() {
+		return makeTypeReference(getTypeManager().getType(Void));
 	}
 
 	int generateCode(int resultRegister, std::stringstream& generated);

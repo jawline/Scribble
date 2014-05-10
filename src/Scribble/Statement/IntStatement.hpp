@@ -12,8 +12,9 @@ private:
 
 public:
 	IntStatement(int lineNo, std::string sym, int intValue);
-	Type* type() {
-		return getTypeManager().getType(Int);
+
+	TypeReference type() {
+		return makeTypeReference(getTypeManager().getType(Int));
 	}
 
 	void checkTree(Type* functionType);

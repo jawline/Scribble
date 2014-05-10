@@ -20,10 +20,7 @@
 namespace VM {
 
 enum VMLogLevel {
-	Log,
-	Debug,
-	Warn,
-	Fatal
+	Log, Debug, Warn, Fatal
 };
 
 class VMState {
@@ -94,7 +91,20 @@ private:
 
 	bool returnToPreviousFunction(SmartPointer<VMFunc>& fn, InstructionSet& set);
 
+	void opMove(InstructionSet& instructionSet);
+	void opJump(InstructionSet& instructionSet);
+	void opAdd(InstructionSet& instructionSet);
 	void opLoadConstant(InstructionSet& instructionSet);
+	void opSub(InstructionSet& instructionSet);
+	void opMul(InstructionSet& instructionSet);
+	void opDiv(InstructionSet& instructionSet);
+	void opInc(InstructionSet& instructionSet);
+	void opDec(InstructionSet& instructionSet);
+	void opAddFloat32(InstructionSet& instructionSet);
+	void opSubFloat32(InstructionSet& instructionSet);
+	void opMulFloat32(InstructionSet& instructionSet);
+	void opDivFloat32(InstructionSet& instructionSet);
+	void opCmpFloat32(InstructionSet& instructionSet);
 
 public:
 	VirtualMachine();

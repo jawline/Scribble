@@ -20,8 +20,8 @@ void NilStatement::checkTree(Type* functionType) {
 
 }
 
-Type* NilStatement::type() {
-	return getNilType();
+TypeReference NilStatement::type() {
+	return makeTypeReference(getNilType());
 }
 
 int NilStatement::generateCode(int resultRegister, std::stringstream& generated) {;

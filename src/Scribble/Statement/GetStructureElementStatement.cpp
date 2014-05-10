@@ -24,11 +24,11 @@ GetStructureElementStatement::~GetStructureElementStatement() {
 void GetStructureElementStatement::checkTree(Type* functionType) {
 	statement_->checkTree(functionType);
 
-	if (statement_->type()->getType() != StructureType) {
+	if (statement_->type()->type->getType() != StructureType) {
 
 		char errorText[256];
 		sprintf(errorText, "type %i is not a structure",
-				statement_->type()->getType());
+				statement_->type()->type->getType());
 
 		throw StatementException(this, errorText);
 	}
@@ -36,11 +36,11 @@ void GetStructureElementStatement::checkTree(Type* functionType) {
 
 void GetStructureElementStatement::fix() {
 
-	if (statement_->type()->getType() != StructureType) {
+	if (statement_->type()->type->getType() != StructureType) {
 		return;
 	}
 
-	StructureInfo* type = (StructureInfo*) statement_->type();
+	StructureInfo* type = (StructureInfo*) statement_->type()->type;
 
 	elementIndex_ = type->getIndex(elementName_);
 
@@ -48,11 +48,10 @@ void GetStructureElementStatement::fix() {
 		throw StatementException(this, "Does not exist in structure");
 	}
 
-	elementType_ = type->getIndex(elementIndex_).second->type;
-
+	elementType_ = type->getIndex(elementIndex_).second;
 }
 
-Type* GetStructureElementStatement::type() {
+TypeReference GetStructureElementStatement::type() {
 	return elementType_;
 }
 

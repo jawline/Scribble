@@ -12,8 +12,8 @@ GetVariableStatement::GetVariableStatement(int lineNo, std::string sym,
 GetVariableStatement::~GetVariableStatement() {
 }
 
-Type* GetVariableStatement::type() {
-	return var_->getType();
+TypeReference GetVariableStatement::type() {
+	return var_->getTypeReference();
 }
 
 void GetVariableStatement::checkTree(Type* functionType) {
@@ -27,7 +27,7 @@ void GetVariableStatement::checkTree(Type* functionType) {
 int GetVariableStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
-	//If the result register is -1 ( The result is to be discarded ) then do not move. If the statement is something like j := j; then don't generate the move.
+	//If the result register is -1 (there is no destination) then do not move. If the statement is something like j := j; then don't generate the move.
 	if (resultRegister != -1
 			|| resultRegister
 					!= (int) (var_->getPosition() + VM::vmNumReservedRegisters)) {

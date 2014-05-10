@@ -15,30 +15,28 @@ namespace ScribbleCore {
 AndStatement::AndStatement(int lineNo, std::string sym,
 		SafeStatement leftHandSide, SafeStatement rightHandSide) :
 		Statement(lineNo, sym), lhs_(leftHandSide), rhs_(rightHandSide) {
-	// TODO Auto-generated constructor stub
 
 }
 
 AndStatement::~AndStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 void AndStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->Equals(getTypeManager().getType(Boolean))
-			|| !rhs_->type()->Equals(getTypeManager().getType(Boolean))) {
+	if (!lhs_->type()->type->Equals(getTypeManager().getType(Boolean))
+			|| !rhs_->type()->type->Equals(getTypeManager().getType(Boolean))) {
 		throw StatementException(this,
-				std::string("And on types ") + lhs_->type()->getTypeName()
-						+ " and " + rhs_->type()->getTypeName()
+				std::string("And on types ") + lhs_->type()->type->getTypeName()
+						+ " and " + rhs_->type()->type->getTypeName()
 						+ " is not possible. And can only be performed on two booleans");
 	}
 
 }
 
-Type* AndStatement::type() {
-	return getTypeManager().getType(Boolean);
+TypeReference AndStatement::type() {
+	return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
 int AndStatement::generateCode(int resultRegister,

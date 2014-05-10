@@ -32,7 +32,7 @@ public:
 			SafeStatement leftHandSide, SafeStatement rightHandSide);
 	virtual ~TestStatement();
 
-	Type* type();
+	TypeReference type();
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
 };

@@ -21,7 +21,7 @@ public:
 			SafeStatement rhs);
 	virtual ~OperateStatement();
 
-	Type* type();
+	TypeReference type();
 	void checkTree(Type* functionType);
 
 	int generateCode(int resultRegister, std::stringstream& generated);

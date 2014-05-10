@@ -29,7 +29,7 @@ public:
 	virtual ~IncrementStatement();
 
 	virtual void checkTree(Type* functionType);
-	virtual Type* type();
+	virtual TypeReference type();
 	virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 

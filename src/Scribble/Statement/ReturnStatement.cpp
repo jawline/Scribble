@@ -31,14 +31,14 @@ void ReturnStatement::checkTree(Type* functionType) {
 
 		stm_->checkTree(functionType);
 
-		if (!(functionType->Equals(stm_->type()))) {
+		if (!(functionType->Equals(stm_->type()->type))) {
 
-			if (!stm_->type()->Equals(getNilType())) {
+			if (!stm_->type()->type->Equals(getNilType())) {
 
 				throw StatementException(this,
 						std::string("Return type differs from function type ( ")
 								+ functionType->getTypeName() + ", "
-								+ stm_->type()->getTypeName() + " )");
+								+ stm_->type()->type->getTypeName() + " )");
 
 			}
 		}

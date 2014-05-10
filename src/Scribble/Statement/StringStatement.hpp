@@ -12,8 +12,8 @@ private:
 public:
 	StringStatement(int lineNo, std::string sym, std::string stringValue);
 
-	Type* type() {
-		return getTypeManager().getType(StringType);
+	TypeReference type() {
+		return makeTypeReference(getTypeManager().getType(StringType));
 	}
 
 	void checkTree(Type* functionType);

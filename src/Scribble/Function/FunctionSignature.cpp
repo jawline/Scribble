@@ -31,6 +31,11 @@ bool FunctionSignature::argumentsEqual(std::vector<Type*> args) {
 
 	for (unsigned int i = 0; i < args.size(); i++) {
 
+		if (args[i] == nullptr || arguments_[i].get() == nullptr || arguments_[i]->type == nullptr) {
+			printf("Error. Function Signature cannot evaluate nullptr\n");
+			return false;
+		}
+
 		if (!args[i]->Equals(arguments_[i]->type)) {
 			return false;
 		}

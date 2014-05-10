@@ -16,12 +16,12 @@ AssignVariableStatement::~AssignVariableStatement() {
 void AssignVariableStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	if (!(var_->getType()->Equals(exp_->type())
-			|| exp_->type()->getType() == NilType)) {
+	if (!(var_->getType()->Equals(exp_->type()->type)
+			|| exp_->type()->type->getType() == NilType)) {
 
 		throw StatementException(this,
 				std::string("Cannot assign value of type ")
-						+ exp_->type()->getTypeName() + " to variable of type "
+						+ exp_->type()->type->getTypeName() + " to variable of type "
 						+ var_->getType()->getTypeName());
 
 	}

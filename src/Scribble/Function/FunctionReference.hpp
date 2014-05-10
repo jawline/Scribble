@@ -36,10 +36,11 @@ private:
 	/**
 	 * Contains the issue if the function could not be resolved (like function x does not exist in the given namespace).
 	 */
+
 	std::string resolveIssue_;
 
 
-	std::vector<SafeStatement> fnArgs_;
+	std::vector<TypeReference> fnArgs_;
 
 	/**
 	 * A smart pointer to the function in question, SmartPointer to nullptr if it has not been resolved.
@@ -47,9 +48,16 @@ private:
 
 	SmartPointer<Function> func_;
 
+    TypeReference returnType_;
+
 public:
+
 	FunctionReference(std::string fnNamespace, std::string name,
 			std::vector<SafeStatement> fnArgs, SmartPointer<Function> func);
+
+	FunctionReference(std::string fnNamespace, std::string name,
+			std::vector<TypeReference> fnArgs, SmartPointer<Function> func);
+
 	virtual ~FunctionReference();
 
 	std::string const& getName();
@@ -64,9 +72,10 @@ public:
 
 	std::vector<Type*> getTargetArguments();
 
-	std::vector<SafeStatement> const& getArgs();
+	std::vector<TypeReference> const& getArgTypes();
 
 	SmartPointer<Function> getFunction();
+    TypeReference getReturnType();
 
 	void setResolveIssue(std::string issue);
 	void setFunction(SmartPointer<Function> func);

@@ -26,8 +26,8 @@ ForStatement::~ForStatement() {
 	// TODO Auto-generated destructor stub
 }
 
-Type* ForStatement::type() {
-	return getTypeManager().getType(NilType);
+TypeReference ForStatement::type() {
+	return makeTypeReference(getTypeManager().getType(Void));
 }
 
 void ForStatement::checkTree(Type* functionType) {
@@ -40,9 +40,9 @@ void ForStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (condition_->type()->getType() != Boolean) {
+	if (condition_->type()->type->getType() != Boolean) {
 
-		throw StatementException(this, std::string("For condition cannot be a ") + condition_->type()->getTypeName() + ", has to be a boolean");
+		throw StatementException(this, std::string("For condition cannot be a ") + condition_->type()->type->getTypeName() + ", has to be a boolean");
 
 	}
 }

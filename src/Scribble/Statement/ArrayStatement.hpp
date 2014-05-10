@@ -22,7 +22,7 @@ private:
 	 * The type of array being generated.
 	 */
 
-	Type* type_;
+	TypeReference type_;
 
 	/**
 	 * Statement which returns the length of the new array.
@@ -40,7 +40,7 @@ public:
 	 * @param length The statement which returns the length.
 	 */
 
-	ArrayStatement(int line, std::string text, Type* type, SafeStatement length);
+	ArrayStatement(int line, std::string text, TypeReference type, SafeStatement length);
 	virtual ~ArrayStatement();
 
 	/**
@@ -48,7 +48,7 @@ public:
 	 * @return Array.
 	 */
 
-	Type* type();
+	TypeReference type();
 
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);

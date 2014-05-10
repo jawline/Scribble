@@ -43,7 +43,7 @@ public:
 	 * @return The type of the variable/expression.
 	 */
 
-	Type* type() {
+	TypeReference type() {
 		return exp_->type();
 	}
 

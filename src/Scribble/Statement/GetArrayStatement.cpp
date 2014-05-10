@@ -7,6 +7,8 @@
 
 #include "GetArrayStatement.hpp"
 #include <VM/Constants.hpp>
+#include <Scribble/Value/TypeManager.hpp>
+
 
 namespace ScribbleCore {
 
@@ -19,19 +21,24 @@ GetArrayStatement::GetArrayStatement(int line, std::string sym,
 GetArrayStatement::~GetArrayStatement() {
 }
 
-Type* GetArrayStatement::type() {
-	return array_->type()->getSubtype();
+TypeReference GetArrayStatement::type() {
+
+	if (array_.get() == nullptr || array_->type().get() == nullptr || array_->type()->type == nullptr) {
+		return makeTypeReference(getTypeManager().getType(TypeUnresolved));
+	}
+
+	return array_->type()->type->getSubtypeReference();
 }
 
 void GetArrayStatement::checkTree(Type* functionType) {
 	array_->checkTree(functionType);
 	index_->checkTree(functionType);
 
-	if (array_->type()->getType() != Array) {
+	if (array_->type()->type->getType() != Array) {
 		throw StatementException(this, "This supplied value is not an array");
 	}
 
-	if (index_->type()->getType() != Int) {
+	if (index_->type()->type->getType() != Int) {
 		throw StatementException(this, "Expected integer index");
 	}
 }
@@ -40,7 +47,7 @@ int GetArrayStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
 	//If the result is not going anywhere ( Like the expression a[0]; )
-	//then optimize it out by not generating the aget statement.
+	//then optimise it out by not generating the aget statement.
 	if (resultRegister != -1) {
 
 		//Place a reference to the array in register slot 1

@@ -28,14 +28,14 @@ void WhileStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (condition_->type()->getType() != Boolean) {
+	if (condition_->type()->type->getType() != Boolean) {
 		throw StatementException(this,
 				"While condition must evaluate to a boolean");
 	}
 }
 
-Type* WhileStatement::type() {
-	return getTypeManager().getType(NilType);
+TypeReference WhileStatement::type() {
+	return makeTypeReference(getTypeManager().getType(Void));
 }
 
 int WhileStatement::generateCode(int resultRegister,

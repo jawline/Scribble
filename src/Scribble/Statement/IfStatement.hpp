@@ -26,8 +26,8 @@ public:
 			std::vector<SmartPointer<Statement>> ifFalseStatements);
 	virtual ~IfStatement();
 
-	Type* type() {
-		return getTypeManager().getType(NilType);
+	TypeReference type() {
+		return makeTypeReference(getTypeManager().getType(Void));
 	}
 
 	void checkTree(Type* functionType);

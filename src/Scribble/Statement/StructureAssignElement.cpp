@@ -22,11 +22,11 @@ StructureAssignElement::~StructureAssignElement() {
 
 void StructureAssignElement::fix() {
 
-	if (lhs_->type()->getType() != StructureType) {
+	if (lhs_->type()->type->getType() != StructureType) {
 		return;
 	}
 
-	StructureInfo* type = (StructureInfo*) lhs_->type();
+	StructureInfo* type = (StructureInfo*) lhs_->type()->type;
 
 	elementIndex_ = type->getIndex(elementName_);
 
@@ -34,30 +34,29 @@ void StructureAssignElement::fix() {
 		throw StatementException(this, "Does not exist in structure");
 	}
 
-	elementType_ = type->getIndex(elementIndex_).second->type;
-
+	elementType_ = type->getIndex(elementIndex_).second;
 }
 
 void StructureAssignElement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (lhs_->type()->getType() != StructureType) {
+	if (lhs_->type()->type->getType() != StructureType) {
 
 		char errorText[256];
 		sprintf(errorText, "type %i is not a structure",
-				lhs_->type()->getType());
+				lhs_->type()->type->getType());
 
 		throw StatementException(this, errorText);
 	}
 
-	if (!(elementType_->Equals(rhs_->type()) || rhs_->type()->getType() == NilType)) {
+	if (!(elementType_->type->Equals(rhs_->type()->type) || rhs_->type()->type->getType() == NilType)) {
 		throw StatementException(this, "Cannot assign to a different type");
 	}
 
 }
 
-Type* StructureAssignElement::type() {
+TypeReference StructureAssignElement::type() {
 	return elementType_;
 }
 

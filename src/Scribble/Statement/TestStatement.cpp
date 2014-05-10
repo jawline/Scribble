@@ -24,18 +24,18 @@ TestStatement::TestStatement(int lineNo, std::string sym, TestType testType,
 TestStatement::~TestStatement() {
 }
 
-Type* TestStatement::type() {
-	return getTypeManager().getType(Boolean);
+TypeReference TestStatement::type() {
+	return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
 void TestStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->Equals(rhs_->type())) {
+	if (!lhs_->type()->type->Equals(rhs_->type()->type)) {
 
-		if (lhs_->type()->getType() == NilType
-				|| rhs_->type()->getType() == NilType) {
+		if (lhs_->type()->type->getType() == NilType
+				|| rhs_->type()->type->getType() == NilType) {
 
 		} else {
 
@@ -68,7 +68,7 @@ int TestStatement::generateCode(int resultRegister,
 	generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
 	instrs++;
 
-	switch (lhs_->type()->getType()) {
+	switch (lhs_->type()->type->getType()) {
 
 	/**
 	 * Strings, arrays and structures all have there reference tested

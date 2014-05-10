@@ -24,7 +24,7 @@ public:
 	ForStatement(int lineNo, std::string sym, SafeStatement initial, SafeStatement condition, SafeStatement step, std::vector<SafeStatement> statements);
 	virtual ~ForStatement();
 
-	Type* type();
+	TypeReference type();
 	void checkTree(Type* functionType);
 
 	virtual int generateBody(std::stringstream& generated);

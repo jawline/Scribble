@@ -26,7 +26,7 @@ IfStatement::~IfStatement() {
 void IfStatement::checkTree(Type* functionType) {
 	condition_->checkTree(functionType);
 
-	if (condition_->type()->getType() != Boolean) {
+	if (condition_->type()->type->getType() != Boolean) {
 		throw StatementException(this, "If statement needs boolean condition");
 	}
 

@@ -19,7 +19,7 @@ private:
 
 	std::string elementName_;
 	int elementIndex_;
-	Type* elementType_;
+	TypeReference elementType_;
 
 public:
 	GetStructureElementStatement(int yylineno, std::string sym,
@@ -27,7 +27,7 @@ public:
 	virtual ~GetStructureElementStatement();
 
 	virtual void checkTree(Type* functionType);
-	virtual Type* type();
+	virtual TypeReference type();
 	virtual void fix();
 
 	virtual int generateCode(int resultRegister, std::stringstream& generated);

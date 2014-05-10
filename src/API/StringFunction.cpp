@@ -65,7 +65,6 @@ BoolToStringFunction::BoolToStringFunction(std::string ns) :
 }
 
 BoolToStringFunction::~BoolToStringFunction() {
-	// TODO Auto-generated destructor stub
 }
 
 API::APIValue BoolToStringFunction::execute(API::APIValue* values,
@@ -79,7 +78,7 @@ API::APIValue BoolToStringFunction::execute(API::APIValue* values,
 }
 
 Float32ToStringFunction::Float32ToStringFunction(std::string ns) :
-		Function("BoolToString", ns) {
+		Function("Float32ToString", ns) {
 
 
 	std::vector<ScribbleCore::TypeReference> refs;

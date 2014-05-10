@@ -19,7 +19,7 @@ public:
 	NegativeStatement(int line, std::string text, SafeStatement exp);
 	virtual ~NegativeStatement();
 	virtual void checkTree(Type* functionType);
-	virtual Type* type();
+	virtual TypeReference type();
 
 
 	int generateCode(int resultRegister, std::stringstream& generated);

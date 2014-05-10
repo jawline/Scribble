@@ -38,7 +38,7 @@ public:
 	 * Returns a boolean
 	 * @return Boolean
 	 */
-	Type* type();
+	TypeReference type();
 
 	void checkTree(Type* functionType);
 	virtual int generateCode(int resultRegister, std::stringstream& generated);

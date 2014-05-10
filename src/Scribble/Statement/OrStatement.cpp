@@ -19,7 +19,6 @@ OrStatement::OrStatement(int lineNo, std::string sym,
 }
 
 OrStatement::~OrStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 void OrStatement::checkTree(Type* functionType) {
@@ -27,18 +26,18 @@ void OrStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->Equals(getTypeManager().getType(Boolean))) {
+	if (!lhs_->type()->type->Equals(getTypeManager().getType(Boolean))) {
 		throw StatementException(this, "And can only be performed on booleans");
 	}
 
-	if (!rhs_->type()->Equals(getTypeManager().getType(Boolean))) {
+	if (!rhs_->type()->type->Equals(getTypeManager().getType(Boolean))) {
 		throw StatementException(this, "And can only be performed on booleans");
 	}
 
 }
 
-Type* OrStatement::type() {
-	return getTypeManager().getType(Boolean);
+TypeReference OrStatement::type() {
+	return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
 int OrStatement::generateCode(int resultRegister,

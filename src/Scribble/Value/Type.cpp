@@ -25,6 +25,10 @@ Type::~Type() {
 
 bool Type::Equals(Type* other) {
 
+	if (other == nullptr) {
+		printf("Equality check on nullptr\n");
+	}
+
 	if (other->rawType_ != rawType_) {
 		return false;
 	}

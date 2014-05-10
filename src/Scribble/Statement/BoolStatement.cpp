@@ -19,8 +19,8 @@ BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) :
 BoolStatement::~BoolStatement() {
 }
 
-Type* BoolStatement::type() {
-	return getTypeManager().getType(Boolean);
+TypeReference BoolStatement::type() {
+	return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
 void BoolStatement::checkTree(Type* functionType) {

@@ -40,7 +40,7 @@ public:
 	 * AndStatements type is boolean.
 	 */
 
-	virtual Type* type();
+	virtual TypeReference type();
 
 	int generateCode(int resultRegister, std::stringstream& generated);
 };

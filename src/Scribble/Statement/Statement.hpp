@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "../Value/Type.hpp"
+#include "../Parser/TypeReference.hpp"
 
 namespace ScribbleCore {
 
@@ -35,7 +35,12 @@ public:
 	}
 
 	virtual void checkTree(Type* functionType) = 0;
-	virtual Type* type() = 0;
+
+	/**
+	 * The type function has to return a type reference so that signatures for function calls & references.
+	 */
+
+	virtual TypeReference type() = 0;
 
 	virtual int generateCode(int resultRegister, std::stringstream& generated) {
 		printf("Unimplemented statement %s!!\n", symbolName_.c_str());

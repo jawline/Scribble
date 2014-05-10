@@ -18,7 +18,6 @@ StructureStatement::StructureStatement(int lineno, std::string token,
 }
 
 StructureStatement::~StructureStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 void StructureStatement::checkTree(Type* functionType) {
@@ -27,11 +26,11 @@ void StructureStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (type()->getType() != StructureType) {
+	if (type()->type->getType() != StructureType) {
 		throw StatementException(this, "Expected type to be structure.");
 	}
 
-	StructureInfo* info = (StructureInfo*) type();
+	StructureInfo* info = (StructureInfo*) type()->type;
 
 	if (info->getNumIndexs() != statements_.size()) {
 		throw StatementException(this, "Invalid number of arguments");
@@ -39,7 +38,7 @@ void StructureStatement::checkTree(Type* functionType) {
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
-		if (!(statements_[i]->type()->Equals(info->getIndex(i).second->type) || statements_[i]->type()->getType() == NilType)) {
+		if (!(statements_[i]->type()->type->Equals(info->getIndex(i).second->type) || statements_[i]->type()->type->getType() == NilType)) {
 			throw StatementException(this, "Invalid argument type");
 		}
 
@@ -47,8 +46,8 @@ void StructureStatement::checkTree(Type* functionType) {
 
 }
 
-Type* StructureStatement::type() {
-	return type_->type;
+TypeReference StructureStatement::type() {
+	return type_;
 }
 
 int StructureStatement::generateCode(int result, std::stringstream& code) {
@@ -56,7 +55,7 @@ int StructureStatement::generateCode(int result, std::stringstream& code) {
 	int instrs = 0;
 
 	//Create the structure reference
-	code << "newstruct \"" << type()->getTypeName() << "\" $"
+	code << "newstruct \"" << type()->type->getTypeName() << "\" $"
 			<< VM::vmTempRegisterOne << "\n";
 	instrs += 1;
 

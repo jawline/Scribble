@@ -31,6 +31,7 @@
 #include <Scribble/Statement/AssignArrayStatement.hpp>
 #include <Scribble/Statement/GetArrayStatement.hpp>
 #include <Scribble/Statement/ArrayLengthStatement.hpp>
+#include <Scribble/Statement/FunctionReferenceStatement.hpp>
 #include <Scribble/Statement/AndStatement.hpp>
 #include <Scribble/Statement/OrStatement.hpp>
 #include <Scribble/Statement/NegativeStatement.hpp>
@@ -138,6 +139,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <structureinfo> BaseStructureInfo;
 %type <statements> IfStatements
 %type <statement> Expression;
+%type <statement> FunctionReference;
 %type <types> MultipleTypes;
 
 %start Program
@@ -245,7 +247,9 @@ MultipleTypes: Type {
 
 Variable:  VARIABLE WORD COLON Type {
 
-		//Check if the variable is already defined. If it isn't then create a new one and add a reference to the list of variables so any extra data can be resolved.
+		//Check if the variable is already defined.
+		//If it isn't then create a new one and add a
+		//reference to the list of variables so any extra data can be resolved.
 		
 		auto it = findVariable(*$2);
 			
@@ -279,13 +283,10 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 		
 			ScribbleCore::SafeStatement sp = ScribbleCore::SafeStatement($4);
 		
-			SmartPointer<ScribbleCore::Variable> nVar = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, nullptr));
+			SmartPointer<ScribbleCore::Variable> nVar = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, sp->type()));
 			VariableReferences.push_back(nVar);
 			Variables.push_back(nVar);
 			
-			ScribbleCore::ParserReference r(ScribbleCore::AutoVariablePair(nVar, sp));
-			StatementReferences.push_back(r);
-
 			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, nVar, sp);
 		}
 		
@@ -492,6 +493,25 @@ Statements: {
 ;
 
 /**
+ * Defines a function reference as Name(Type,Type,Type)
+ */
+ 
+FunctionReference: '*' WORD LPAREN MultipleTypes RPAREN {
+	std::vector<ScribbleCore::TypeReference> argTypes = *$4;
+	
+	SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("", *$2, argTypes, 0));
+	ScribbleCore::ParserReference r(reference);
+	StatementReferences.push_back(r);
+	
+	$$ = new ScribbleCore::FunctionReferenceStatement(scribble_lineno, scribble_text, reference);
+	
+	delete $4;
+} | '*' WORD LINK WORD LPAREN MultipleTypes RPAREN {
+	std::vector<ScribbleCore::TypeReference> argTypes = *$6;
+	delete $6;
+}
+
+/**
  * Defines a functional call as either Name ( Args ) or Package.Name ( Args ).
  */
 
@@ -510,7 +530,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		StatementReferences.push_back(r);
 		
 		
-		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
+		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, args, Variables.size());
 		
 		//Free the name pointer
 		delete $1;
@@ -530,7 +550,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		ScribbleCore::ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
+		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, args, Variables.size());
 	
 		//Free the name pointers
 		delete $1;
@@ -612,7 +632,7 @@ Expression: MINUS Expression {
 	} | LENGTH LPAREN Expression RPAREN {
 		$$ = new ScribbleCore::ArrayLengthStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($3));
 	} | LSQBRACKET Expression RSQBRACKET Type {
-		$$ = new ScribbleCore::ArrayStatement(scribble_lineno, scribble_text, ScribbleCore::getTypeManager().getType(ScribbleCore::Array, *$4), ScribbleCore::SafeStatement($2));
+		$$ = new ScribbleCore::ArrayStatement(scribble_lineno, scribble_text, ScribbleCore::makeTypeReference(ScribbleCore::getTypeManager().getType(ScribbleCore::Array, *$4)), ScribbleCore::SafeStatement($2));
 		delete $4;
 	} | Expression LSQBRACKET Expression RSQBRACKET ASSIGN Expression {
 		$$ = new ScribbleCore::AssignArrayStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($6), ScribbleCore::SafeStatement($3));
@@ -666,7 +686,7 @@ Expression: MINUS Expression {
 		ScribbleCore::ParserReference r(reference);
 		StatementReferences.push_back(r);
 		
-		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, Variables.size());
+		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, args, Variables.size());
 	
 	} | WORD INCREMENT {
 	
