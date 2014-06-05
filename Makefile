@@ -55,13 +55,13 @@ $(OBJ_DIR)/%.o: %.cpp
 	-@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $< -o $@
 
-#The preprocess rules will generate the source files from the grammar and perform any operations that need to be performed before the compiler is run ( Such as version numbering )
-
-preprocess: gen bison sasm_bison
-	@sh scripts/build_number_increment.sh 
+#The preprocess rules will update the build number
+preprocess:
 	-@mkdir -p $(OUTPUT_DIR)
+	-@sh scripts/build_number_increment.sh 
 
-gen:
+generate_parser: generate_parser_folder bison sasm_bison
+generate_parser_folder:
 	-@mkdir -p $(GEN_DIR)
 
 

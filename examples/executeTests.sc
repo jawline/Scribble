@@ -20,6 +20,14 @@ package listTest := import("tests/LinkedList");
 package sys := import("sys");
 package console := import("console");
 
+func R():int{
+ return 5;
+}
+
+func R(x:int):bool {
+ if x > 5 then return true; else return false;
+}
+
 /**
  * The main function executes all of the Scribble unit tests.
  */
@@ -40,4 +48,6 @@ func main() {
  refEqTest.Test();
  listTest.Test();
 
+ var j := &R();
+ var q := j;
 }

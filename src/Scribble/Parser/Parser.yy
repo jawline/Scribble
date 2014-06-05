@@ -496,7 +496,7 @@ Statements: {
  * Defines a function reference as Name(Type,Type,Type)
  */
  
-FunctionReference: '*' WORD LPAREN MultipleTypes RPAREN {
+FunctionReference: '&' WORD LPAREN MultipleTypes RPAREN {
 	std::vector<ScribbleCore::TypeReference> argTypes = *$4;
 	
 	SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("", *$2, argTypes, 0));
@@ -506,7 +506,7 @@ FunctionReference: '*' WORD LPAREN MultipleTypes RPAREN {
 	$$ = new ScribbleCore::FunctionReferenceStatement(scribble_lineno, scribble_text, reference);
 	
 	delete $4;
-} | '*' WORD LINK WORD LPAREN MultipleTypes RPAREN {
+} | '&' WORD LINK WORD LPAREN MultipleTypes RPAREN {
 	std::vector<ScribbleCore::TypeReference> argTypes = *$6;
 	delete $6;
 }
@@ -615,6 +615,8 @@ Expression: MINUS Expression {
 
 		//Free string pointer
 		delete $1;
+	} | FunctionReference {
+		$$ = $1;
 	} | Type LBRACKET Arguments RBRACKET {
 		$$ = new ScribbleCore::StructureStatement(scribble_lineno, scribble_text, *$1, *$3);
 		delete $3;
