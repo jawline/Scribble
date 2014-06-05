@@ -30,25 +30,31 @@ void AssignArrayStatement::checkTree(Type* functionType) {
 	position_->checkTree(functionType);
 
 	if (array_->type()->type->getType() != Array) {
+
 		throw StatementException(this,
 				std::string("Not an array, Type ")
 						+ array_->type()->type->getTypeName()
 						+ " given when an array was expected.");
+
 	}
 
 	if (position_->type()->type->getType() != Int) {
+
 		throw StatementException(this,
 				std::string("Type ") + position_->type()->type->getTypeName()
 						+ " cannot be used as an index. Index must be an integer");
+
 	}
 
 	if (!(array_->type()->type->getSubtype()->Equals(toAssign_->type()->type)
 			|| toAssign_->type()->type->getType() == NilType)) {
+
 		throw StatementException(this,
 				std::string("Value given is of type ")
 						+ toAssign_->type()->type->getTypeName()
 						+ " which differs from expected type "
 						+ array_->type()->type->getSubtype()->getTypeName());
+
 	}
 }
 
@@ -74,6 +80,13 @@ int AssignArrayStatement::generateCode(int resultRegister,
 	generated << "aset $" << VM::vmTempRegisterOne << " $"
 			<< VM::vmTempRegisterTwo << " $" << VM::vmTempRegisterThree << "\n";
 	instrs++;
+
+	//If necessary move the array reference to the results register
+	if (resultRegister != -1 && VM::vmTempRegisterOne != resultRegister) {
+		generated << "mov $" << VM::vmTempRegisterOne << " $" << resultRegister
+				<< "\n";
+		instrs++;
+	}
 
 	return instrs;
 }

@@ -72,6 +72,8 @@ private:
 	long stackBasePointer;
 	long stackCurrentPointer;
 
+	bool shouldReturn;
+
 	int64_t* registers_;
 	bool* registerReference_;
 
@@ -86,6 +88,8 @@ private:
 	 */
 
 	VMNamespace namespace_;
+
+	SmartPointer<VMFunc> currentFunction;
 
 	unsigned int gcStat_;
 
@@ -105,6 +109,25 @@ private:
 	void opMulFloat32(InstructionSet& instructionSet);
 	void opDivFloat32(InstructionSet& instructionSet);
 	void opCmpFloat32(InstructionSet& instructionSet);
+	void opEqual(InstructionSet& instructionSet);
+	void opNotEqual(InstructionSet& instructionSet);
+	void opEqualZero(InstructionSet& instructionSet);
+	void opLessThan(InstructionSet& instructionSet);
+	void opGreaterThan(InstructionSet& instructionSet);
+	void opGreaterThanOrEqual(InstructionSet& instructionSet);
+	void opPushRegisters(InstructionSet& instructionSet);
+	void opPopRegisters(InstructionSet& instructionSet);
+	void opPopNil(InstructionSet& instructionSet);
+	void opLessThanOrEqual(InstructionSet& instructionSet);
+	void opStructGetField(InstructionSet& instructionSet);
+	void opStructSetField(InstructionSet& instructionSet);
+	void opArraySet(InstructionSet& instructionSet);
+	void opArrayGet(InstructionSet& instructionSet);
+	void opNewStruct(InstructionSet& instructionSet);
+	void opNewArray(InstructionSet& instructionSet);
+	void opArrayLength(InstructionSet& instructionSet);
+	void opCallFn(InstructionSet& instructionSet);
+	void opReturn(InstructionSet& instructionSet);
 
 public:
 	VirtualMachine();

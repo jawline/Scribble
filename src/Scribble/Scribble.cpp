@@ -27,7 +27,6 @@
 
 #include <API/System.hpp>
 #include <API/Console.hpp>
-
 #include <API/RegisterPackages.hpp>
 
 Scribble::Scribble(std::string const& package) :

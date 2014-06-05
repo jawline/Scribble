@@ -15,6 +15,7 @@ class GetArrayStatement: public Statement {
 private:
 	SafeStatement array_;
 	SafeStatement index_;
+	TypeReference type_;
 
 public:
 	GetArrayStatement(int line, std::string sym, SafeStatement array, SafeStatement index);
@@ -24,6 +25,7 @@ public:
 
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
+	void fix();
 };
 
 }

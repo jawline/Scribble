@@ -39,7 +39,6 @@ private:
 
 	std::string resolveIssue_;
 
-
 	std::vector<TypeReference> fnArgs_;
 
 	/**
@@ -48,7 +47,7 @@ private:
 
 	SmartPointer<Function> func_;
 
-    TypeReference returnType_;
+	TypeReference returnType_;
 
 public:
 
@@ -75,7 +74,7 @@ public:
 	std::vector<TypeReference> const& getArgTypes();
 
 	SmartPointer<Function> getFunction();
-    TypeReference getReturnType();
+	TypeReference getReturnType();
 
 	void setResolveIssue(std::string issue);
 	void setFunction(SmartPointer<Function> func);

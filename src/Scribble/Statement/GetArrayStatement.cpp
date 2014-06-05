@@ -9,13 +9,12 @@
 #include <VM/Constants.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
-
 namespace ScribbleCore {
 
 GetArrayStatement::GetArrayStatement(int line, std::string sym,
 		SafeStatement array, SafeStatement index) :
 		Statement(line, sym), array_(array), index_(index) {
-
+	type_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
 }
 
 GetArrayStatement::~GetArrayStatement() {
@@ -23,14 +22,22 @@ GetArrayStatement::~GetArrayStatement() {
 
 TypeReference GetArrayStatement::type() {
 
-	if (array_.get() == nullptr || array_->type().get() == nullptr || array_->type()->type == nullptr) {
-		return makeTypeReference(getTypeManager().getType(TypeUnresolved));
+	return type_;
+}
+
+void GetArrayStatement::fix() {
+
+	if (array_->type()->type->getSubtypeReference()->type != nullptr) {
+		type_->type = array_->type()->type->getSubtypeReference()->type;
+
+	} else {
+		printf("COULD NOT FIX GET ARRAY STATEMENT\n");
 	}
 
-	return array_->type()->type->getSubtypeReference();
 }
 
 void GetArrayStatement::checkTree(Type* functionType) {
+
 	array_->checkTree(functionType);
 	index_->checkTree(functionType);
 
@@ -41,6 +48,7 @@ void GetArrayStatement::checkTree(Type* functionType) {
 	if (index_->type()->type->getType() != Int) {
 		throw StatementException(this, "Expected integer index");
 	}
+
 }
 
 int GetArrayStatement::generateCode(int resultRegister,

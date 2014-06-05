@@ -18,8 +18,8 @@ GEN_FILES = $(GEN_DIR)/ScribbleLexer.cpp $(GEN_DIR)/ScribbleParser.cpp $(GEN_DIR
 
 #Compiler settings
 CC=g++
-CFLAGS=-c -Wall -I $(SOURCE_DIR) -I $(GEN_DIR) -std=c++0x -fPIC
-LDFLAGS=-pthread -lpthread -fPIC
+CFLAGS=-c -Wall -I $(SOURCE_DIR) -I $(GEN_DIR) -std=c++0x -fPIC -g
+LDFLAGS=-pthread -lpthread -fPIC -g
 
 #Rules to find source code - NOTE: Look for a better way to scan directories. Nonrecursive works but is a bit ugly
 SOURCES=$(GEN_FILES) $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp) $(wildcard $(SOURCE_DIR)/**/**/*.cpp)

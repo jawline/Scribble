@@ -73,7 +73,8 @@ int main(int argc, char* argv[]) {
 		clock_t end = clock();
 
 		//Print out the time the execution took
-		printf("VM execution took time %f\n", ((double)(end - start)) / (double)CLOCKS_PER_SEC);
+		printf("VM execution took time %f\n",
+				((double) (end - start)) / (double) CLOCKS_PER_SEC);
 
 	} catch (ScribbleCore::ParserException& ex) {
 		printf("Error: %s\n", ex.what());

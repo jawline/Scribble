@@ -8,6 +8,8 @@
 #include "GetStructureElementStatement.hpp"
 #include <Scribble/Value/StructureInfo.hpp>
 #include <VM/Constants.hpp>
+#include "../Value/TypeManager.hpp"
+
 
 namespace ScribbleCore {
 
@@ -15,10 +17,10 @@ GetStructureElementStatement::GetStructureElementStatement(int yylineno,
 		std::string sym, SafeStatement stmt, std::string name) :
 		Statement(yylineno, sym), statement_(stmt), elementName_(name), elementIndex_(
 				0) {
+	elementType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
 }
 
 GetStructureElementStatement::~GetStructureElementStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 void GetStructureElementStatement::checkTree(Type* functionType) {
@@ -48,7 +50,7 @@ void GetStructureElementStatement::fix() {
 		throw StatementException(this, "Does not exist in structure");
 	}
 
-	elementType_ = type->getIndex(elementIndex_).second;
+	elementType_->type = type->getIndex(elementIndex_).second->type;
 }
 
 TypeReference GetStructureElementStatement::type() {

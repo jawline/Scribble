@@ -5,7 +5,7 @@ package console := import("console");
 
 func main() {
 
-	var worstCaseList := populate.PopulateWorstCase([1000]int);
+	var worstCaseList := populate.PopulateWorstCase([15000]int);
 
 	console.Log("Worst Case: ");
 	populate.PrintList(worstCaseList);

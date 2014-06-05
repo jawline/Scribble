@@ -42,11 +42,20 @@ public:
 
 	virtual TypeReference type() = 0;
 
+	/**
+	 * Extended by Statements which need 'fixing' later (Have type information added after other data has been evaluated).
+	 * Only called if the statement is added to the parsers Fixable references list
+	 */
+
+	virtual void fix() {
+	}
+
 	virtual int generateCode(int resultRegister, std::stringstream& generated) {
 		printf("Unimplemented statement %s!!\n", symbolName_.c_str());
 		generated << std::string("#") + symbolName_ + " UNIMP\n";
 
-		throw StatementException(this, "generate code is not implemented for this statement");
+		throw StatementException(this,
+				"generate code is not implemented for this statement");
 
 		return 1;
 	}

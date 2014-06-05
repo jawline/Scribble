@@ -526,10 +526,10 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		delete $3;
 		
 		SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("", *$1, args, 0));
+		
 		ScribbleCore::ParserReference r(reference);
 		StatementReferences.push_back(r);
-		
-		
+
 		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, args, Variables.size());
 		
 		//Free the name pointer
@@ -637,7 +637,11 @@ Expression: MINUS Expression {
 	} | Expression LSQBRACKET Expression RSQBRACKET ASSIGN Expression {
 		$$ = new ScribbleCore::AssignArrayStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($6), ScribbleCore::SafeStatement($3));
 	} | Expression LSQBRACKET Expression RSQBRACKET {
-		$$ = new ScribbleCore::GetArrayStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3)); 
+		$$ = new ScribbleCore::GetArrayStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
+		
+		ScribbleCore::ParserReference r($$);
+		StatementReferences.push_back(r);
+		
 	} | FunctionCall {
 		$$ = $1;
 	} | Expression PLUS Expression {
@@ -747,7 +751,7 @@ Expression: MINUS Expression {
 		
 		$$ = new ScribbleCore::GetStructureElementStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), *$3);
 		
-		ScribbleCore::ParserReference r((ScribbleCore::GetStructureElementStatement*) $$);
+		ScribbleCore::ParserReference r($$);
 		StatementReferences.push_back(r);
 		
 		delete $3;
@@ -755,7 +759,7 @@ Expression: MINUS Expression {
 	
 		$$ = new ScribbleCore::StructureAssignElement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($5), *$3);
 		
-		ScribbleCore::ParserReference r((ScribbleCore::StructureAssignElement*) $$);
+		ScribbleCore::ParserReference r($$);
 		StatementReferences.push_back(r);
 	
 		delete $3;

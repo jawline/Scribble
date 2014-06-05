@@ -185,8 +185,13 @@ public:
 	virtual std::string getTypeName() {
 
 		switch (getType()) {
-		case Array:
-			return std::string("array(") + getSubtype()->getTypeName() + ")";
+		case Array: {
+			if (getSubtype() != nullptr) {
+				return std::string("array(") + getSubtype()->getTypeName() + ")";
+			} else {
+				return "array(unresolved-type)";
+			}
+		}
 		case StructureType:
 			//StructureType overrides getTypeName. This should never execute.
 			return "INVALID-SHOULD-HAVE-BEEN-OVERWRITTEN";

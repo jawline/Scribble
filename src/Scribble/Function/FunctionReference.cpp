@@ -11,6 +11,7 @@ namespace ScribbleCore {
 
 FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
 		std::vector<SafeStatement> fnArgs, SmartPointer<Function> func) {
+
 	name_ = name;
 	fnNamespace_ = fnNamespace;
 	func_ = func;

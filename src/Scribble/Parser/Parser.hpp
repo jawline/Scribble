@@ -13,47 +13,12 @@
 #include <Scribble/Statement/GetStructureElementStatement.hpp>
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Value/Variable.hpp> // Variable class
+#include "ParserReference.hpp"
 
 namespace ScribbleCore {
 
 typedef std::vector<SmartPointer<Function>> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
-
-enum ParserReferenceType {
-	FunctionEvaluation,
-	StructureElementTypeEvaluation,
-	AssignElementTypeEvaluation
-};
-
-class ParserReference {
-private:
-	ParserReferenceType type_;
-
-public:
-
-	ParserReference(SmartPointer<FunctionReference> reference) {
-		type_ = FunctionEvaluation;
-		functionReference = reference;
-	}
-
-	ParserReference(GetStructureElementStatement* elementType) {
-		type_ = StructureElementTypeEvaluation;
-		structureElementType = elementType;
-	}
-
-	ParserReference(StructureAssignElement* assign) {
-		type_ = AssignElementTypeEvaluation;
-		assignElementType = assign;
-	}
-
-	ParserReferenceType type() {
-		return type_;
-	}
-
-	SmartPointer<FunctionReference> functionReference;
-	GetStructureElementStatement* structureElementType;
-	StructureAssignElement* assignElementType;
-};
 
 const static std::string ScribbleFileSuffix = ".sc";
 

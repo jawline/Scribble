@@ -122,5 +122,4 @@ func Test() {
  QuickSort(users, 0, 4);
  
  test.Assert(SortedUsers(users), true, "List of users is not sorted");
-
 }

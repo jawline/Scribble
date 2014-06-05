@@ -37,6 +37,7 @@ namespace ScribbleCore {
  */
 
 std::string Parser::getUniformPath(std::string const& currentPath) {
+
 	//TODO: This needs improving. Currently provides absolute path if the file exists otherwise returns the currentPath handed
 	char pBuf[PATH_MAX];
 
@@ -58,14 +59,13 @@ SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference>
 	//Grab a reference to the functions arguments.
 	std::vector<Type*> args = toFind->getTargetArguments();
 
-
 	for (unsigned int i = 0; i < set.size(); ++i) {
 
 		SmartPointer<Function> fn = set[i];
 
 		if (fn->getSignature().argumentsEqual(args)) {
-            return fn;
-        }
+			return fn;
+		}
 
 	}
 
@@ -78,17 +78,24 @@ void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
 
 		printf("%s(", fnName.c_str());
 
-		for (unsigned int j = 0; j < fs[i]->getSignature().getArguments().size(); j++) {
+		for (unsigned int j = 0;
+				j < fs[i]->getSignature().getArguments().size(); j++) {
 
 			if (j != 0) {
 				printf(", ");
 			}
 
-			printf("%s", fs[i]->getSignature().getArguments()[i]->type->getTypeName().c_str());
+			if (fs[i]->getSignature().getArguments()[i]->type != nullptr) {
+				printf("%s",
+						fs[i]->getSignature().getArguments()[i]->type->getTypeName().c_str());
+			} else {
+				printf("Type not evaluated\n");
+			}
 
 		}
 
-		printf(") : %s\n", fs[i]->getSignature().getReturnType()->type->getTypeName().c_str());
+		printf(") : %s\n",
+				fs[i]->getSignature().getReturnType()->type->getTypeName().c_str());
 	}
 
 }
@@ -349,7 +356,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 		case FunctionEvaluation: {
 
-			SmartPointer<FunctionReference> ref = references[i].functionReference;
+			SmartPointer<FunctionReference> ref = references[i].getFunctionReference();
 
 			NamespaceType selectedNamespace = Functions;
 
@@ -391,9 +398,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 							it->second.getFunctionSet());
 
 					if (searchResult.get() != nullptr) {
-
 						ref->setFunction(searchResult);
-
 					} else {
 
 						char errorText[256];
@@ -429,13 +434,8 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 			break;
 		}
 
-		case StructureElementTypeEvaluation: {
-			references[i].structureElementType->fix();
-			break;
-		}
-
-		case AssignElementTypeEvaluation: {
-			references[i].assignElementType->fix();
+		case Fixable: {
+			references[i].getFixable()->fix();
 			break;
 		}
 
@@ -443,7 +443,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
 }
 
-	//Generate all the initial values for variables.
 	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
 
 		//Check whether the user has tried to assign the variable to a null type.
@@ -552,7 +551,7 @@ std::map<std::string, NamespaceType> Parser::compileText(
 		std::map<std::string, NamespaceType> builtinNamespace) {
 	parser_free_all();
 
-//For calculate the path to the file
+	//For calculate the path to the file
 	auto pathEnd = file.find_last_of("/");
 	std::string path = "";
 	std::string filename = file;
