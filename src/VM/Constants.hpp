@@ -16,8 +16,20 @@ namespace VM {
 
 const static unsigned int vmOpCodeSize = 8;
 const static unsigned int GarbageCollectHitLimit = 400;
-const static unsigned int vmTrue = 1;
+
+/**
+ * VMFalse is the value which the virtual machine identifies as false.
+ */
+
 const static unsigned int vmFalse = 0;
+
+/**
+ * vmTrue is the internal value which the VM recognizes as a true boolean
+ * (While the VM recognizes anything which != vmFalse as true the BoolStatement
+ * needs a concrete value when loading).
+ */
+
+const static unsigned int vmTrue = 1;
 
 /**
  * The size of each stack block in bytes
@@ -36,6 +48,10 @@ const static unsigned int vmStackIncrement = 32;
  */
 
 const static unsigned int vmStackIncrease = vmStackBlockSize * vmStackIncrement;
+
+/**
+ * The separator used to separate package from function or structure in a package name
+ */
 
 const static char vmNamespaceSeperator = ':';
 

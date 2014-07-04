@@ -12,8 +12,13 @@
 namespace ScribbleCore {
 
 class CallFunctionReference: public Statement {
+private:
+	SafeStatement fn_;
+	std::vector<SafeStatement> args_;
+
 public:
-	CallFunctionReference(int lineNo, std::string sym, SafeStatement fn, std::vector<SafeStatement> args);
+	CallFunctionReference(int lineNo, std::string sym, SafeStatement fn,
+			std::vector<SafeStatement> args);
 	virtual ~CallFunctionReference();
 
 	virtual void checkTree(Type* functionType);

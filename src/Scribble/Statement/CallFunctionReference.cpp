@@ -18,4 +18,22 @@ CallFunctionReference::CallFunctionReference(int lineNo, std::string sym,
 CallFunctionReference::~CallFunctionReference() {
 }
 
+void CallFunctionReference::checkTree(Type* functionType) {
+
+	fn_->checkTree(functionType);
+
+	for (unsigned int i = 0; i < args_.size(); i++) {
+		args_[i]->checkTree(functionType);
+	}
+
+}
+
+TypeReference CallFunctionReference::type() {
+}
+
+int CallFunctionReference::generateCode(int resultRegister,
+		std::stringstream& generated) {
+
+}
+
 } /* namespace ScribbleCore */

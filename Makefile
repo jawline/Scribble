@@ -36,7 +36,7 @@ remove:
 	@rm $(INSTALL_EXE_PATH)$(OUTPUT_FILE)
 
 clean:
-	-@rm -r $(OBJ_DIR) $(EXECUTABLE) $(LIBRARY) $(GEN_DIR)
+	-@rm -r $(OBJ_DIR) $(EXECUTABLE) $(LIBRARY)
 
 #The executable rule compiles the set of objects into the target executable
 $(EXECUTABLE): $(OBJECTS)

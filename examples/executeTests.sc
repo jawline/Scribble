@@ -3,51 +3,14 @@
  * Copyright (c) Blake Loring 2013
  */
 
-package loopsTest := import("tests/loops");
-package logicalTest := import("tests/logical");
-package variablesTest := import("tests/variables");
-package recursionTest := import("tests/recursion");
-package arraysTest := import("tests/arrays");
-package primesTest := import("tests/primes");
-package sortsTest := import("tests/sorts");
-package floatsTest := import("tests/floats");
-package mathTest := import("tests/math");
-package structTest := import("tests/structures");
-package structQs := import("tests/structQuicksortTest");
-package refEqTest := import("tests/refEqualityTest");
-package listTest := import("tests/LinkedList");
-
 package sys := import("sys");
 package console := import("console");
-
-func R():int{
- return 5;
-}
-
-func R(x:int):bool {
- if x > 5 then return true; else return false;
-}
+package tests := import("tests/TestManager");
 
 /**
  * The main function executes all of the Scribble unit tests.
  */
  
 func main() {
-
- loopsTest.Test();
- arraysTest.Test();
- variablesTest.Test();
- recursionTest.Test();
- primesTest.Test();
- logicalTest.Test();
- sortsTest.Test();
- floatsTest.Test();
- mathTest.Test();
- structTest.Test();
- structQs.Test();
- refEqTest.Test();
- listTest.Test();
-
- var j := &R();
- var q := j;
+ tests.TestAll();
 }

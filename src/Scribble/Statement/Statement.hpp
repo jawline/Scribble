@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include "../Function/FunctionSignature.hpp"
 #include "../Parser/TypeReference.hpp"
 
 namespace ScribbleCore {

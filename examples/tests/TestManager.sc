@@ -1,7 +1,8 @@
 /**
- * Scribble tests execution file
- * Copyright (c) Blake Loring 2013
+ * Test Manager manages the testing suite
  */
+
+package console := import("console");
 
 package loopsTest := import("loops");
 package logicalTest := import("logical");
@@ -17,27 +18,54 @@ package structQs := import("structQuicksortTest");
 package refEqTest := import("refEqualityTest");
 package listTest := import("LinkedList");
 
-package sys := import("sys");
-package console := import("console");
+func TestAll() {
 
-/**
- * The main function executes all of the Scribble unit tests.
- */
- 
-func main() {
-
+ console.Log("Loop Test\n");
  loopsTest.Test();
+
+ console.Log("Arrays Test\n");
  arraysTest.Test();
+
+ console.Log("Variables Test\n");
  variablesTest.Test();
+
+ console.Log("Recursion Test\n");
  recursionTest.Test();
+
+ console.Log("Primes Test\n");
  primesTest.Test();
+
+ console.Log("Logical Test\n");
  logicalTest.Test();
+
+ console.Log("Sorts Test\n");
  sortsTest.Test();
+
+ console.Log("Floats Test\n");
  floatsTest.Test();
+
+ console.Log("Math Test\n");
  mathTest.Test();
+
+ console.Log("Struct Test\n");
  structTest.Test();
+
+ console.Log("Struct Quicksort Test\n");
  structQs.Test();
+
+ console.Log("Reference Equality test\n");
  refEqTest.Test();
+
+ console.Log("List Test\n");
  listTest.Test();
 
+}
+
+
+/**
+ * If executed as a program then run TestAll
+ */
+
+func main() {
+	TestAll();
 }

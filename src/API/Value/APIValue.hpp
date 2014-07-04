@@ -86,7 +86,7 @@ public:
 
 	bool getValueBoolean() {
 
-		if (val_ == VM::vmTrue) {
+		if (val_ != VM::vmFalse) {
 			return true;
 		}
 

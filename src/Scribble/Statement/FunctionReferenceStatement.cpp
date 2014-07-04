@@ -48,6 +48,8 @@ void FunctionReferenceStatement::checkTree(Type* functionType) {
 
 TypeReference FunctionReferenceStatement::type() {
 
+	printf("TODO: This generates potentially incorrect code. Fix this later\n");
+
 	if (func_->getFunction().get() == nullptr) {
 		return makeTypeReference(getTypeManager().getType(TypeUnresolved));
 	}

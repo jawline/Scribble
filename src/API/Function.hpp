@@ -7,8 +7,8 @@
 #include <VM/VirtualMachine.hpp>
 #include <API/Value/APIValue.hpp>
 #include <sstream>
-#include <Scribble/Value/Type.hpp>
 #include <Scribble/Function/FunctionSignature.hpp>
+#include <Scribble/Value/Type.hpp>
 
 namespace API {
 
@@ -33,7 +33,10 @@ public:
 
 	Function(std::string name, std::string ns) :
 			name_(name), namespace_(ns), signature_(
-					std::vector<ScribbleCore::TypeReference>(), ScribbleCore::makeTypeReference(ScribbleCore::getTypeManager().getType(ScribbleCore::TypeUnresolved))) {
+					std::vector<ScribbleCore::TypeReference>(),
+					ScribbleCore::makeTypeReference(
+							ScribbleCore::getTypeManager().getType(
+									ScribbleCore::TypeUnresolved))) {
 
 	}
 
