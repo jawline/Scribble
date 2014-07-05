@@ -26,14 +26,14 @@ void CallFunctionReference::checkTree(Type* functionType) {
 		args_[i]->checkTree(functionType);
 	}
 
-	if (fn_->type()->getType() != FunctionReferenceType) {
+	if (fn_->type()->type->getType() != FunctionReferenceType) {
 		throw StatementException(this, "Call cannot be used on a non function reference\n");
 	}
 
 }
 
 TypeReference CallFunctionReference::type() {
-	return fn_->type()->getReferenceReturnType();
+	return fn_->type()->type->getReferenceReturnType();
 }
 
 int CallFunctionReference::generateCode(int resultRegister,
