@@ -1,12 +1,17 @@
 package sys := import("sys");
 package console := import("console");
 
+func Tits():int {
+}
+
 func main() {
  console.Log("Write some words\n");
 
  for var i := 0; i < 100; i++ do {
   console.Log("Boilerplate\n");
  }
+
+ var j := &Tits();
 
  console.Log("Clothes kegged in poo\n");
 

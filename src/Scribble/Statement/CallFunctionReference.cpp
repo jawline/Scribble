@@ -11,7 +11,7 @@ namespace ScribbleCore {
 
 CallFunctionReference::CallFunctionReference(int lineNo, std::string sym,
 		SafeStatement fn, std::vector<SafeStatement> args) :
-		Statement(lineNo, sym) {
+		Statement(lineNo, sym), fn_(fn), args_(args) {
 
 }
 
@@ -26,9 +26,14 @@ void CallFunctionReference::checkTree(Type* functionType) {
 		args_[i]->checkTree(functionType);
 	}
 
+	if (fn_->type()->getType() != FunctionReferenceType) {
+		throw StatementException(this, "Call cannot be used on a non function reference\n");
+	}
+
 }
 
 TypeReference CallFunctionReference::type() {
+	return fn_->type()->getReferenceReturnType();
 }
 
 int CallFunctionReference::generateCode(int resultRegister,

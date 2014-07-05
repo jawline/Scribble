@@ -161,6 +161,14 @@ public:
 
 	}
 
+	TypeReference getReferenceReturnType() {
+		return referenceReturnType_;
+	}
+
+	std::vector<TypeReference> getReferenceArguments() {
+		return referenceArgumentTypes_;
+	}
+
 	/**
 	 * Get this types subtype.
 	 */

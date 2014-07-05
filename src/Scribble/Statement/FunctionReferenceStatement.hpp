@@ -15,6 +15,7 @@ namespace ScribbleCore {
 class FunctionReferenceStatement: public Statement {
 private:
 	SmartPointer<FunctionReference> func_;
+	TypeReference _refType;
 
 public:
 	FunctionReferenceStatement(int lineNo, std::string sym, SmartPointer<FunctionReference> func);
@@ -23,6 +24,7 @@ public:
 	TypeReference type();
 	void checkTree(Type* functionType);
 	int generateCode(int resultRegister, std::stringstream& generated);
+	void fix();
 };
 
 } /* namespace ScribbleCore */

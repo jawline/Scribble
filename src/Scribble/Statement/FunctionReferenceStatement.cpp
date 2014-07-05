@@ -11,6 +11,7 @@ namespace ScribbleCore {
 
 FunctionReferenceStatement::FunctionReferenceStatement(int lineNo,
 		std::string sym, SmartPointer<FunctionReference> func) : Statement(lineNo, sym), func_(func) {
+	_refType = makeTypeReference(getTypeManager().getType(TypeUnresolved));
 }
 
 FunctionReferenceStatement::~FunctionReferenceStatement() {
@@ -48,13 +49,7 @@ void FunctionReferenceStatement::checkTree(Type* functionType) {
 
 TypeReference FunctionReferenceStatement::type() {
 
-	printf("TODO: This generates potentially incorrect code. Fix this later\n");
-
-	if (func_->getFunction().get() == nullptr) {
-		return makeTypeReference(getTypeManager().getType(TypeUnresolved));
-	}
-
-	return func_->getFunction()->getSignature().getReturnType();
+	return _refType;
 }
 
 int FunctionReferenceStatement::generateCode(int resultRegister,
@@ -66,6 +61,16 @@ int FunctionReferenceStatement::generateCode(int resultRegister,
 					+ "\" $" << resultRegister << "\n";
 
 	return 1;
+}
+
+void FunctionReferenceStatement::fix() {
+
+	printf("FIXING\n");
+
+	_refType->type = getTypeManager().getType(
+			func_->getFunction()->getSignature().getArguments(),
+			func_->getFunction()->getSignature().getReturnType());
+
 }
 
 } /* namespace ScribbleCore */
