@@ -7,10 +7,17 @@ package sys := import("sys");
 package console := import("console");
 package tests := import("tests/TestManager");
 
+func T(x:int) {
+}
+
 /**
  * The main function executes all of the Scribble unit tests.
  */
  
 func main() {
+
+ var j := &T(int);
+ j();
+
  tests.TestAll();
 }

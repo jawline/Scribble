@@ -506,6 +506,10 @@ FunctionReference: AMP WORD LPAREN MultipleTypes RPAREN {
 	
 	$$ = new ScribbleCore::FunctionReferenceStatement(scribble_lineno, scribble_text, reference);
 	
+	ScribbleCore::ParserReference q($$);
+	StatementReferences.push_back(q);
+	
+	delete $2;
 	delete $4;
 } | AMP WORD LINK WORD LPAREN MultipleTypes RPAREN {
 	std::vector<ScribbleCore::TypeReference> argTypes = *$6;

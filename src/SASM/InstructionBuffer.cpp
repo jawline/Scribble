@@ -62,7 +62,6 @@ void DeleteInstructionBuffer() {
 void GrowConstant(int size) {
 
 	uint8_t* nc = new uint8_t[maxConst + size];
-
 	memcpy(nc, constant, maxConst);
 
 	delete[] constant;
