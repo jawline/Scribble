@@ -12,9 +12,9 @@ package console := import("console");
  */
 
 type Vector3 := struct {
-	x : float32;
-	y : float32;
-	z : float32;
+	x : float32,
+	y : float32,
+	z : float32
 }
 
 /**
@@ -72,11 +72,5 @@ func Dot(left : Vector3, right : Vector3) : float32 {
  */
 
 func Debug(v : Vector3) {
-	console.Log("X: ");
-	console.Log(sys.String(v->x));
-	console.Log(" Y: ");
-	console.Log(sys.String(v->y));
-	console.Log(" Z: ");
-	console.Log(sys.String(v->z));
-	console.Log("\n");
+	console.Log("X: " $ sys.String(v->x) $ " Y: " $ sys.String(v->y) $ " Z: " $ sys.String(v->z) $ "\n");
 }
