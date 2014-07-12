@@ -84,6 +84,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "!" return NOT;
 "[" return LSQBRACKET;
 "]" return RSQBRACKET;
+"&" return AMP;
 
 "\n" ;
 

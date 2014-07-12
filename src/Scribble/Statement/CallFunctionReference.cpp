@@ -38,7 +38,7 @@ TypeReference CallFunctionReference::type() {
 
 int CallFunctionReference::generateCode(int resultRegister,
 		std::stringstream& generated) {
-
+	generated << "ERROR CANNOT GENERATE YET\n";
 }
 
 } /* namespace ScribbleCore */

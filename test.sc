@@ -2,6 +2,7 @@ package sys := import("sys");
 package console := import("console");
 
 func Tits():int {
+ console.Log("Running Tits\n");
 }
 
 func main() {
@@ -10,8 +11,6 @@ func main() {
  for var i := 0; i < 100; i++ do {
   console.Log("Boilerplate\n");
  }
-
- var j := &Tits();
 
  console.Log("Clothes kegged in poo\n");
 

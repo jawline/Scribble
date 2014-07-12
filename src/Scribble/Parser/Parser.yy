@@ -38,6 +38,7 @@
 #include <Scribble/Statement/StructureStatement.hpp>
 #include <Scribble/Statement/GetStructureElementStatement.hpp>
 #include <Scribble/Statement/StructureAssignElement.hpp>
+#include <Scribble/Statement/CallFunctionReference.hpp>
 #include <Scribble/Parser/TypeReference.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Scribble/Function/ScriptedFunction.hpp>
@@ -112,7 +113,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 
 %token <string> WORD STRING
 %token <float32> FLOAT32
-%token <integer> INT
+%token <integer> INT AMP
 %token <token> PLUS MINUS TIMES DIVIDE EQUALS ASSIGN IF ELSE GREATER LESSER FOR TYPE_ARRAY RETURN WHILE NOT IMPORT LINK
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
@@ -496,7 +497,7 @@ Statements: {
  * Defines a function reference as Name(Type,Type,Type)
  */
  
-FunctionReference: '&' WORD LPAREN MultipleTypes RPAREN {
+FunctionReference: AMP WORD LPAREN MultipleTypes RPAREN {
 	std::vector<ScribbleCore::TypeReference> argTypes = *$4;
 	
 	SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("", *$2, argTypes, 0));
@@ -506,7 +507,7 @@ FunctionReference: '&' WORD LPAREN MultipleTypes RPAREN {
 	$$ = new ScribbleCore::FunctionReferenceStatement(scribble_lineno, scribble_text, reference);
 	
 	delete $4;
-} | '&' WORD LINK WORD LPAREN MultipleTypes RPAREN {
+} | AMP WORD LINK WORD LPAREN MultipleTypes RPAREN {
 	std::vector<ScribbleCore::TypeReference> argTypes = *$6;
 	delete $6;
 }
@@ -516,45 +517,38 @@ FunctionReference: '&' WORD LPAREN MultipleTypes RPAREN {
  */
 
 FunctionCall: WORD LPAREN Arguments RPAREN {
-	
-		std::vector<SmartPointer<ScribbleCore::Statement>> args;
-	
-		for (unsigned int i = 0; i < $3->size(); ++i) {
-			args.push_back($3->at(i));
-		}
-	
-		delete $3;
-		
-		SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("", *$1, args, 0));
-		
-		ScribbleCore::ParserReference r(reference);
-		StatementReferences.push_back(r);
 
-		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, args, Variables.size());
+		auto it = findVariable(*$1);
 		
-		//Free the name pointer
+		if (it.get() == nullptr) {
+			SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference("", *$1, *$3, 0));
+			StatementReferences.push_back(reference);
+			$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, *$3, Variables.size());
+		} else {
+			ScribbleCore::SafeStatement var = ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it));
+			$$ = new ScribbleCore::CallFunctionReference(scribble_lineno, scribble_text, var, *$3);
+		}
+		
+		ScribbleCore::ParserReference r($$);
+		StatementReferences.push_back(r);
+		
+		delete $3;
 		delete $1;
 		
 	} | WORD LINK WORD LPAREN Arguments RPAREN {
 	
-		std::vector<SmartPointer<ScribbleCore::Statement>> args;
+		SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference(*$1, *$3, *$5, 0));
+		StatementReferences.push_back(reference);
 	
-		for (unsigned int i = 0; i < $5->size(); ++i) {
-			args.push_back($5->at(i));
-		}
+		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, *$5, Variables.size());
 	
-		delete $5;
-	
-		SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference(*$1, *$3, args, 0));
-	
-		ScribbleCore::ParserReference r(reference);
-		StatementReferences.push_back(r);
-		
-		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, args, Variables.size());
+		ScribbleCore::ParserReference r($$);
+		StatementReferences.push_back(r);		
 	
 		//Free the name pointers
 		delete $1;
 		delete $3;
+		delete $5;
 	}
 ;
 
@@ -644,8 +638,6 @@ Expression: MINUS Expression {
 		ScribbleCore::ParserReference r($$);
 		StatementReferences.push_back(r);
 		
-	} | FunctionCall {
-		$$ = $1;
 	} | Expression PLUS Expression {
 		$$ = new ScribbleCore::OperateStatement(scribble_lineno, scribble_text, ScribbleCore::Add, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression MINUS Expression {
@@ -765,9 +757,10 @@ Expression: MINUS Expression {
 		StatementReferences.push_back(r);
 	
 		delete $3;
+	} | FunctionCall {
+		$$ = $1;
 	} | WORD {
 
-		
 		auto it = findVariable(*$1);
 
 		if (it.get() == nullptr) {
