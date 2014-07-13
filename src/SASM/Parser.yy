@@ -55,6 +55,8 @@ SASMFunction: {
 	} | SASMFunction CALL_FN STRING {
 		CallFunction($3->c_str());
 		delete $3;
+	} | SASMFunction CALL_FN REG {
+		CallFunctionFromRegister($3);
 	} | SASMFunction RETURN {
 		Return();
 	} | SASMFunction ARRAY_SET REG REG REG {

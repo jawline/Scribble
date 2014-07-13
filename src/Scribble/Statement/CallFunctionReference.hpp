@@ -8,6 +8,12 @@
 #ifndef CALLFUNCTIONREFERENCE_HPP_
 #define CALLFUNCTIONREFERENCE_HPP_
 #include "Statement.hpp"
+#include <Pointers/SmartPointer.hpp>
+#include <API/Function.hpp>
+#include <Scribble/Function/FunctionReference.hpp>
+#include <VM/Constants.hpp>
+#include <stdio.h>
+#include <vector>
 
 namespace ScribbleCore {
 
@@ -15,10 +21,11 @@ class CallFunctionReference: public Statement {
 private:
 	SafeStatement fn_;
 	std::vector<SafeStatement> args_;
+	int numDeclaredVariables_;
 
 public:
 	CallFunctionReference(int lineNo, std::string sym, SafeStatement fn,
-			std::vector<SafeStatement> args);
+			std::vector<SafeStatement> args, int numDeclaredVariables);
 	virtual ~CallFunctionReference();
 
 	virtual void checkTree(Type* functionType);

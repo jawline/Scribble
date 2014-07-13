@@ -197,6 +197,13 @@ void CallFunction(char const* name) {
 	IncreaseCurrent(2);
 }
 
+void CallFunctionFromRegister(uint8_t reg) {
+	Set(buffer, current, (uint8_t) VM::OpCallFn);
+	Set(buffer, current, (uint8_t) VM::Register);
+	Set(buffer, current, (uint8_t) reg);
+	IncreaseCurrent(5);
+}
+
 void Return() {
 	Set(buffer, current, (uint8_t) VM::OpReturn);
 	IncreaseCurrent(7);

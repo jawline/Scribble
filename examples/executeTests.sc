@@ -7,7 +7,16 @@ package sys := import("sys");
 package console := import("console");
 package tests := import("tests/TestManager");
 
-func T(x:int) {
+func Q() {
+ console.Log("Hello? This is Q\n");
+}
+
+func T(x:int):int{
+ console.Log(sys.String(x) $ "\n");
+
+ console.Log("Testing\n");
+ Q();
+ console.Log("Returning now\n");
 }
 
 /**
@@ -17,7 +26,9 @@ func T(x:int) {
 func main() {
 
  var j := &T(int);
- j();
+ var r := j(10);
+
+ console.Log("And we are back!\n");
 
  tests.TestAll();
 }

@@ -530,7 +530,7 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 			$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, *$3, Variables.size());
 		} else {
 			ScribbleCore::SafeStatement var = ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it));
-			$$ = new ScribbleCore::CallFunctionReference(scribble_lineno, scribble_text, var, *$3);
+			$$ = new ScribbleCore::CallFunctionReference(scribble_lineno, scribble_text, var, *$3, Variables.size());
 		}
 		
 		ScribbleCore::ParserReference r($$);

@@ -48,7 +48,6 @@ void FunctionReferenceStatement::checkTree(Type* functionType) {
 }
 
 TypeReference FunctionReferenceStatement::type() {
-
 	return _refType;
 }
 
@@ -64,8 +63,6 @@ int FunctionReferenceStatement::generateCode(int resultRegister,
 }
 
 void FunctionReferenceStatement::fix() {
-
-	printf("FIXING\n");
 
 	_refType->type = getTypeManager().getType(
 			func_->getFunction()->getSignature().getArguments(),

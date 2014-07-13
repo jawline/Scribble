@@ -24,6 +24,7 @@ void PopNil();
 void ArrayLength(uint8_t reg, uint8_t dst);
 void LoadLong(long val, uint8_t reg);
 void CallFunction(char const* name);
+void CallFunctionFromRegister(uint8_t reg);
 void Return();
 void PushRegisters(uint8_t start, uint8_t num);
 void PopRegisters(uint8_t start, uint8_t num);

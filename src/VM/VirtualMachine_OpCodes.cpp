@@ -172,10 +172,10 @@ void VirtualMachine::opGreaterThanOrEqual(InstructionSet& instructionSet) {
 void VirtualMachine::opPushRegisters(InstructionSet& instructionSet) {
 
 	uint8_t startRegister = instructionSet.getByte(currentInstruction + 1);
-
 	uint8_t numRegisters = instructionSet.getByte(currentInstruction + 2);
 
 	//printf("Pushing from %i registers from %i\n", numRegisters, startRegister);
+	//VM_PRINTF_LOG("Pushing %i registers from %i\n", numRegisters, startRegister);
 
 	for (uint8_t i = startRegister; i < startRegister + numRegisters; i++) {
 		pushRegister(i);
@@ -332,7 +332,7 @@ void VirtualMachine::opNewArray(InstructionSet& instructionSet) {
 }
 
 void VirtualMachine::opReturn(InstructionSet& instructionSet) {
-	//VM_PRINTF_DBG("VM Return at instruction %li\n", currentInstruction);
+	VM_PRINTF_LOG("VM Return at instruction %i\n", currentInstruction);
 
 	if (!returnToPreviousFunction(currentFunction, instructionSet)) {
 		shouldReturn = true;
@@ -352,21 +352,21 @@ void VirtualMachine::opCallFn(InstructionSet& instructionSet) {
 		name = instructionSet.getConstantString(
 				instructionSet.getInt(currentInstruction + 2));
 
-	} else {
+	} else if (modeRegister == Register) {
 
-		uint8_t reg = instructionSet.getConstantByte(currentInstruction + 2);
+		uint8_t reg = instructionSet.getByte(currentInstruction + 2);
 		long heapEntry = registers_[reg];
 
 		if (!heap_.validReference(heapEntry)) {
 			VM_PRINTF_FATAL(
-					"Entry %li is not a valid heap entry for function call\n",
-					heapEntry);
+					"Entry %i at register %i is not a valid heap entry for function call\n",
+					heapEntry, reg);
 		}
 
 		name = (char*) heap_.getAddress(heapEntry);
 	}
 
-	//VM_PRINTF_LOG("Calling function %s\n", name);
+	VM_PRINTF_LOG("Attempting to call function %s\n", name.c_str());
 
 	if (!VM::NamespaceEntry::searchNamespace(namespace_, name, functionEntry)
 			|| functionEntry.getType() != Function) {
@@ -643,10 +643,11 @@ void VirtualMachine::opStructGetField(InstructionSet& instructionSet) {
 }
 
 void VirtualMachine::opPopRegisters(InstructionSet& instructionSet) {
+
 	uint8_t startRegister = instructionSet.getByte(currentInstruction + 1);
 	uint8_t numRegisters = instructionSet.getByte(currentInstruction + 2);
 
-	//				VM_PRINTF_LOG("Popping from %i registers from %i\n", ((int)numRegisters), ((int)startRegister));
+	//VM_PRINTF_LOG("Popping %i registers from %i\n", numRegisters, startRegister);
 
 	for (uint8_t i = (startRegister + numRegisters); i > startRegister; i--) {
 		popStackLong(registers_[i - 1], registerReference_[i - 1]);
