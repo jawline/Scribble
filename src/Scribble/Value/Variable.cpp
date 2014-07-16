@@ -34,13 +34,7 @@ TypeReference Variable::getTypeReference() {
 }
 
 void Variable::setType(Type* type) {
-
-	if (type_.get() == nullptr) {
-		type_->type = getTypeManager().getType(TypeUnresolved);
-	} else {
-		type_->type = type;
-	}
-
+	type_->type = type;
 }
 
 void Variable::setPosition(int pos) {

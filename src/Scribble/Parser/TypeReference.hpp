@@ -23,8 +23,6 @@ struct TypeReferenceCore {
 	std::string typeNamespace;
 	std::string name;
 	Type* type;
-
-
 };
 
 typedef SmartPointer<TypeReferenceCore> TypeReference;

@@ -256,7 +256,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	//Store the global lists of things to be resolved and then clear them ( As the import or include functions will use these ).
 	std::vector<ParserReference> references = StatementReferences;
 	std::vector<TypeReference> typeReferences = TypeReferences;
-	std::vector<SmartPointer< Variable >> variableReferences = VariableReferences;
+	std::vector<SmartPointer<Variable>> variableReferences = VariableReferences;
 
 	//Look at the list of requested imports and attempt to resolve them.
 	for (auto iter = imports.begin(); iter != imports.end(); iter++) {
@@ -446,7 +446,9 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 	for (unsigned int i = 0; i < variableReferences.size(); ++i) {
 
 		//Check whether the user has tried to assign the variable to a null type.
-		if (variableReferences[i]->getType()->Equals(getNilType())
+		if (variableReferences[i]->getType()->Equals(
+				getTypeManager().getType(TypeUnresolved))
+				|| variableReferences[i]->getType()->Equals(getNilType())
 				|| variableReferences[i]->getType()->Equals(getVoidType())) {
 
 			throw ParserException(filename,

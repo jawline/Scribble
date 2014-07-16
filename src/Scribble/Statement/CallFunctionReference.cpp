@@ -16,6 +16,7 @@ CallFunctionReference::CallFunctionReference(int lineNo, std::string sym,
 		Statement(lineNo, sym), numDeclaredVariables_(numDeclaredVariables), fn_(
 				fn), args_(args) {
 
+	returnType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
 }
 
 CallFunctionReference::~CallFunctionReference() {
@@ -53,7 +54,11 @@ void CallFunctionReference::checkTree(Type* functionType) {
 }
 
 TypeReference CallFunctionReference::type() {
-	return fn_->type()->type->getReferenceReturnType();
+	return returnType_;
+}
+
+void CallFunctionReference::fix() {
+	returnType_->type = fn_->type()->type->getReferenceReturnType()->type;
 }
 
 int CallFunctionReference::generateCode(int resultRegister,

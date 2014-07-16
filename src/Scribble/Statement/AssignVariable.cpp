@@ -25,6 +25,7 @@ void AssignVariableStatement::checkTree(Type* functionType) {
 						+ var_->getType()->getTypeName());
 
 	}
+
 }
 
 int AssignVariableStatement::generateCode(int resultRegister,

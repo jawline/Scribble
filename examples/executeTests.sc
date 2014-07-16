@@ -11,12 +11,13 @@ func Q() {
  console.Log("Hello? This is Q\n");
 }
 
-func T(x:int):int{
- console.Log(sys.String(x) $ "\n");
-
- console.Log("Testing\n");
+func DoubleAndQ(x:int):int{
  Q();
- console.Log("Returning now\n");
+ return 2*x;
+}
+
+func RunDouble(x:int,fn:func(int):int):int {
+  return fn(x);
 }
 
 /**
@@ -25,8 +26,12 @@ func T(x:int):int{
  
 func main() {
 
- var j := &T(int);
- var r := j(10);
+ var j := &DoubleAndQ(int);
+
+ console.Log("Doubling 150 using pointerz\n");
+ var r := j(150);
+
+ console.Log("This some fancy shit! " $ sys.String(r) $ "\n");
 
  console.Log("And we are back!\n");
 

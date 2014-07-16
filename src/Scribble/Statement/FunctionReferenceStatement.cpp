@@ -64,6 +64,8 @@ int FunctionReferenceStatement::generateCode(int resultRegister,
 
 void FunctionReferenceStatement::fix() {
 
+	printf("FIXING FunctionReferenceStatement\n");
+
 	_refType->type = getTypeManager().getType(
 			func_->getFunction()->getSignature().getArguments(),
 			func_->getFunction()->getSignature().getReturnType());

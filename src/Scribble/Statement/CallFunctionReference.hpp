@@ -1,4 +1,4 @@
-/*
+	/*
  * CallFunctionReference.hpp
  *
  *  Created on: 5 Jun 2014
@@ -22,6 +22,7 @@ private:
 	SafeStatement fn_;
 	std::vector<SafeStatement> args_;
 	int numDeclaredVariables_;
+	TypeReference returnType_;
 
 public:
 	CallFunctionReference(int lineNo, std::string sym, SafeStatement fn,
@@ -37,6 +38,7 @@ public:
 	virtual TypeReference type();
 
 	int generateCode(int resultRegister, std::stringstream& generated);
+	void fix();
 };
 
 } /* namespace ScribbleCore */
