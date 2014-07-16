@@ -7,6 +7,16 @@ package sys := import("sys");
 package console := import("console");
 package tests := import("tests/TestManager");
 
+type User := struct {
+ name:string,
+ age:int,
+ callback:func(User)
+}
+
+func Cb(x:User) {
+ x->name := "ROO";
+}
+
 func Q() {
  console.Log("Hello? This is Q\n");
 }
@@ -26,11 +36,14 @@ func RunDouble(x:int,fn:func(int):int):int {
  
 func main() {
 
- var j := &DoubleAndQ(int);
+ var q := User{"Hello", 18, &Cb(User)};
+ var l := q->callback;
+ l(q);
+ console.Log(q->name$"\n");
 
+ var j := &DoubleAndQ(int);
  console.Log("Doubling 150 using pointerz\n");
  var r := j(150);
-
  console.Log("This some fancy shit! " $ sys.String(r) $ "\n");
 
  console.Log("And we are back!\n");
