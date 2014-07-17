@@ -142,6 +142,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <statement> Expression;
 %type <statement> FunctionReference;
 %type <types> MultipleTypes;
+%type <types> MultipleTypes_2;
 	
 %start Program
 %%
@@ -232,11 +233,17 @@ Type: TYPE_INT {
 	}
 ;
 
-MultipleTypes: Type {
+MultipleTypes: {
+ $$ = new std::vector<ScribbleCore::TypeReference>();
+} | MultipleTypes_2 {
+ $$ = $1;
+}
+
+MultipleTypes_2: Type {
 	$$ = new std::vector<ScribbleCore::TypeReference>;
 	$$->push_back(*$1);
 	delete $1;
-} | MultipleTypes COMMA Type {
+} | MultipleTypes_2 COMMA Type {
 	$$ = $1;
 	$$->push_back(*$3);
 	delete $3;
