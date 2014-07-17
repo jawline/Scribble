@@ -35,6 +35,7 @@ void StructureFieldSet(uint8_t tgtArray, uint8_t index, uint8_t data);
 void StructureFieldGet(uint8_t tgtArray, uint8_t index, uint8_t data);
 void Array(std::string type, uint8_t sizereg, uint8_t reg);
 void LoadString(char const* str, uint8_t reg);
+void LoadFunctionReference(char const* str, uint8_t reg);
 void Add(uint8_t left, uint8_t right, uint8_t dest);
 void Subtract(uint8_t left, uint8_t right, uint8_t dest);
 void Multiply(uint8_t left, uint8_t right, uint8_t dest);

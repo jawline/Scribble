@@ -46,6 +46,7 @@ float32 {real}f
 
 "\n" ;
 "load" return LOAD;
+"loadfn" return LOAD_FN;
 "add" return ADD;
 "sub" return SUBTRACT;
 "mul" return MULTIPLY;

@@ -204,7 +204,7 @@ public:
 
 		case FunctionReferenceType: {
 			//TODO: replace with dedicated fptr internal type
-			return "string";
+			return "__fnptr";
 		}
 
 		case StructureType:

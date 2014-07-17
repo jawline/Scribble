@@ -294,6 +294,21 @@ void LoadString(char const* str, uint8_t reg) {
 	IncreaseCurrent(2);
 }
 
+void LoadFunctionReference(char const* str, uint8_t reg) {
+
+	Set(buffer, current, (uint8_t) VM::OpLoadConstant);
+	Set(buffer, current, (int) currentConstant);
+	Set(buffer, current, (uint8_t) reg);
+
+	Set(constant, currentConstant, (uint8_t) VM::CArray);
+	Set(constant, currentConstant, "__fnptr");
+	Set(constant, currentConstant, (int) (strlen(str) + 1));
+	Set(constant, currentConstant, (int) (strlen(str) + 1));
+	Set(constant, currentConstant, str);
+
+	IncreaseCurrent(2);
+}
+
 void Add(uint8_t left, uint8_t right, uint8_t dest) {
 	Set(buffer, current, (uint8_t) VM::OpAdd);
 	Set(buffer, current, left);

@@ -59,6 +59,12 @@ VirtualMachine::VirtualMachine() :
 					SmartPointer < VMEntryType
 							> (new VMEntryType("int", 8, false))));
 
+	registerEntry("__fnptr",
+			NamespaceEntry(
+					SmartPointer < VMEntryType
+							> (new VMEntryType("__fnptr",
+									namespace_.find("char").getTypeReference()))));
+
 	registerEntry("string",
 			NamespaceEntry(
 					SmartPointer < VMEntryType

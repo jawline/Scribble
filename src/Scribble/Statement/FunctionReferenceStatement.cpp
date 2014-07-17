@@ -55,7 +55,7 @@ int FunctionReferenceStatement::generateCode(int resultRegister,
 		std::stringstream& generated) {
 
 	generated
-			<< "load \"" + func_->getFunction()->getNamespace()
+			<< "loadfn \"" + func_->getFunction()->getNamespace()
 					+ VM::vmNamespaceSeperator + func_->getFunction()->getName()
 					+ "\" $" << resultRegister << "\n";
 
