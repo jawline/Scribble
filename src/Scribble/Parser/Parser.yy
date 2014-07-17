@@ -230,8 +230,7 @@ Type: TYPE_INT {
 		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "function", ScribbleCore::getTypeManager().getType(*$3, *$6) ) );
 		delete $3;
 		delete $6;
-	}
-;
+	};
 
 MultipleTypes: {
  $$ = new std::vector<ScribbleCore::TypeReference>();
@@ -520,6 +519,18 @@ FunctionReference: AMP WORD LPAREN MultipleTypes RPAREN {
 	delete $4;
 } | AMP WORD LINK WORD LPAREN MultipleTypes RPAREN {
 	std::vector<ScribbleCore::TypeReference> argTypes = *$6;
+	
+	SmartPointer<ScribbleCore::FunctionReference> reference = SmartPointer<ScribbleCore::FunctionReference>(new ScribbleCore::FunctionReference(*$2, *$4, argTypes, 0));
+	ScribbleCore::ParserReference r(reference);
+	StatementReferences.push_back(r);
+	
+	$$ = new ScribbleCore::FunctionReferenceStatement(scribble_lineno, scribble_text, reference);
+	
+	ScribbleCore::ParserReference q($$);
+	StatementReferences.push_back(q);
+	
+	delete $2;
+	delete $4;
 	delete $6;
 }
 
@@ -752,6 +763,14 @@ Expression: MINUS Expression {
 		$$ = new ScribbleCore::AndStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression OR Expression {
 		$$ = new ScribbleCore::OrStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
+	} | Expression LPAREN Arguments RPAREN {
+	
+		$$ = new ScribbleCore::CallFunctionReference(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), *$3, Variables.size());
+		
+		ScribbleCore::ParserReference r($$);
+		StatementReferences.push_back(r);
+		
+		delete $3;
 	} | Expression POINT WORD {
 		
 		$$ = new ScribbleCore::GetStructureElementStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), *$3);

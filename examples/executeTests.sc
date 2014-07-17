@@ -37,8 +37,7 @@ func RunDouble(x:int,fn:func(int):int):int {
 func main() {
 
  var q := User{"Hello", 18, &Cb(User)};
- var l := q->callback;
- l(q);
+ q->callback(q);
  console.Log(q->name$"\n");
 
  var j := &DoubleAndQ(int);

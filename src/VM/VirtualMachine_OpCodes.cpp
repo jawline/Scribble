@@ -462,7 +462,7 @@ void VirtualMachine::opArrayGet(InstructionSet& instructionSet) {
 
 void VirtualMachine::opArraySet(InstructionSet& instructionSet) {
 
-	VM_PRINTF_LOG("%s", "Array set operation\n");
+	//VM_PRINTF_LOG("%s", "Array set operation\n");
 
 	uint8_t data = instructionSet.getByte(currentInstruction + 1);
 	uint8_t tgtArray = instructionSet.getByte(currentInstruction + 2);
