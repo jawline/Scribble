@@ -1,6 +1,0 @@
-<map id="VM::VirtualMachine::pushStackLong" name="VM::VirtualMachine::pushStackLong">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#a54a170b1214ed9daf309c889b7daf77e" title="API::APIValue::pushToVM" alt="" coords="189,5,368,35"/>
-<area shape="rect" id="node5" href="$class_v_m_1_1_virtual_machine.html#a5bf3b52879bae8c9199733031840a74d" title="VM::VirtualMachine\l::pushRegister" alt="" coords="211,58,347,105"/>
-<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="416,58,552,105"/>
-<area shape="rect" id="node9" href="$class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="600,67,723,96"/>
-</map>

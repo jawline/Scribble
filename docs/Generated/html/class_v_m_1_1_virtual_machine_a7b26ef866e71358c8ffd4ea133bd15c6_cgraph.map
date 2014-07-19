@@ -1,8 +1,0 @@
-<map id="VM::VirtualMachine::findType" name="VM::VirtualMachine::findType">
-<area shape="rect" id="node3" href="$class_v_m_1_1_namespace_entry.html#ad60d6ff4c19fdcd7ed3bf36ff6874bcf" title="VM::NamespaceEntry\l::searchNamespace" alt="" coords="191,5,340,51"/>
-<area shape="rect" id="node7" href="$class_v_m_1_1_namespace_entry.html#a64e7528f2d8403acc86ec3a249a07cf4" title="VM::NamespaceEntry\l::getType" alt="" coords="391,65,540,111"/>
-<area shape="rect" id="node9" href="$class_v_m_1_1_virtual_machine.html#afe501e1ac466c1799cbbc32db282fdf1" title="VM::VirtualMachine\l::registerEntry" alt="" coords="197,125,333,171"/>
-<area shape="rect" id="node14" href="$class_v_m_1_1_namespace_entry.html#a64c19caa303f4c34786e32b18b0d3449" title="VM::NamespaceEntry\l::getTypeReference" alt="" coords="191,194,340,241"/>
-<area shape="rect" id="node5" href="$class_hash_map.html#a2b444615edc86733e39fcfc239cba3eb" title="HashMap::find" alt="" coords="412,12,519,41"/>
-<area shape="rect" id="node11" href="$class_hash_map.html#a07cdeb5f7a6d9bf53fcfe7ef52ed6e8d" title="HashMap::insert" alt="" coords="407,135,524,164"/>
-</map>

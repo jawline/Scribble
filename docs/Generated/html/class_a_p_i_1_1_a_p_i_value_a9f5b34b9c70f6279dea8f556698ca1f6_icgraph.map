@@ -1,6 +1,0 @@
-<map id="API::APIValue::isReference" name="API::APIValue::isReference">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_function.html#a5acc2022cdbd5fe47c1a04769a1d8cf4" title="API::Function::execute" alt="" coords="252,5,407,35"/>
-<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#ac52ce1c55cc0a808016b557d1fb74995" title="API::APIValue::getField" alt="" coords="249,59,409,88"/>
-<area shape="rect" id="node7" href="$class_a_p_i_1_1_a_p_i_value.html#a799ace497f1988f95af61d6796d67a19" title="API::APIValue::getIndex" alt="" coords="247,112,412,141"/>
-<area shape="rect" id="node9" href="$class_a_p_i_1_1_a_p_i_value.html#a54a170b1214ed9daf309c889b7daf77e" title="API::APIValue::pushToVM" alt="" coords="240,165,419,195"/>
-</map>

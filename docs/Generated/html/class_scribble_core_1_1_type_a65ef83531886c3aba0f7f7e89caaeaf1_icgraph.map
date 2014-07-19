@@ -1,7 +1,0 @@
-<map id="ScribbleCore::Type::getSubtype" name="ScribbleCore::Type::getSubtype">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#a799ace497f1988f95af61d6796d67a19" title="API::APIValue::getIndex" alt="" coords="189,5,355,35"/>
-<area shape="rect" id="node5" href="$class_scribble_core_1_1_type.html#aa3eeef0216f910c6a2ae8047336b51f1" title="ScribbleCore::Type\l::getTypeName" alt="" coords="205,82,339,129"/>
-<area shape="rect" id="node7" href="$class_scribble_core_1_1_array_statement.html#aa5ac3da5af213e1c34092ab4a091a83e" title="ScribbleCore::ArrayStatement\l::generateCode" alt="" coords="415,13,609,59"/>
-<area shape="rect" id="node9" href="$class_scribble_core_1_1_return_statement.html#a4f93dfa382b64c53a404d9c381552670" title="ScribbleCore::ReturnStatement\l::checkTree" alt="" coords="411,82,613,129"/>
-<area shape="rect" id="node11" href="$class_scribble_core_1_1_structure_statement.html#a55d89fd9d10c1f5885da232a435014ab" title="ScribbleCore::StructureStatement\l::generateCode" alt="" coords="403,151,621,198"/>
-</map>

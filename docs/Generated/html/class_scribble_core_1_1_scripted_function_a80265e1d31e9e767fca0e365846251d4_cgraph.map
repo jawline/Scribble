@@ -1,7 +1,0 @@
-<map id="ScribbleCore::ScriptedFunction::generateScriptedFunc" name="ScribbleCore::ScriptedFunction::generateScriptedFunc">
-<area shape="rect" id="node3" href="$class_scribble_core_1_1_scripted_function.html#a7e5968b233124279a9a9ff4a6706bd41" title="ScribbleCore::ScriptedFunction\l::debugCode" alt="" coords="256,5,459,51"/>
-<area shape="rect" id="node5" href="$class_simple_a_s_m_1_1_parser.html#abb5d4c3b5a22575a8fa50999b644728f" title="SimpleASM::Parser::\lparse" alt="" coords="285,74,429,121"/>
-<area shape="rect" id="node11" href="$class_a_p_i_1_1_function.html#a201d120f73276bcc59bd2590195a5f4e" title="API::Function::getName" alt="" coords="276,144,439,173"/>
-<area shape="rect" id="node7" href="$_s_a_s_m_2_parser_8cpp.html#aacb262d439ac576e5f6fd81d5fc84073" title="sasm__scan_string" alt="" coords="508,56,641,85"/>
-<area shape="rect" id="node9" href="$_s_a_s_m_2_parser_8cpp.html#ad9afd7b8e9fb778771ad91d3ea73a334" title="sasm_parse" alt="" coords="528,109,621,139"/>
-</map>

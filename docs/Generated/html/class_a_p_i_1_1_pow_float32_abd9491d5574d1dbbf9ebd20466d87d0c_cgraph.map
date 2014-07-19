@@ -1,5 +1,0 @@
-<map id="API::PowFloat32::execute" name="API::PowFloat32::execute">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#a2374ba437041f0c57514be649825312b" title="API::APIValue::getValueFloat32" alt="" coords="231,5,439,35"/>
-<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#ae4d8ca7c8a72f24e3b7419cc4fc2127c" title="API::APIValue::makeFloat32" alt="" coords="240,59,429,88"/>
-<area shape="rect" id="node7" href="$namespace_scribble_core.html#aa3f28f968ebb23ba27adb182c1cf77cb" title="ScribbleCore::getFloat32Type" alt="" coords="488,59,683,88"/>
-</map>

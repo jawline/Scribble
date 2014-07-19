@@ -1,8 +1,0 @@
-<map id="ScribbleCore::ReturnStatement::checkTree" name="ScribbleCore::ReturnStatement::checkTree">
-<area shape="rect" id="node3" href="$class_scribble_core_1_1_type.html#add26d29b25d99be9bc7f769e53539c24" title="ScribbleCore::Type\l::Equals" alt="" coords="281,5,415,51"/>
-<area shape="rect" id="node5" href="$namespace_scribble_core.html#a99b82f82490b65c4118ab361700ba918" title="ScribbleCore::getVoidType" alt="" coords="259,75,437,104"/>
-<area shape="rect" id="node7" href="$namespace_scribble_core.html#ae1e28aec9a61765e4fe16c4b347493e4" title="ScribbleCore::getNilType" alt="" coords="264,128,432,157"/>
-<area shape="rect" id="node9" href="$class_scribble_core_1_1_type.html#aa3eeef0216f910c6a2ae8047336b51f1" title="ScribbleCore::Type\l::getTypeName" alt="" coords="281,205,415,251"/>
-<area shape="rect" id="node11" href="$class_scribble_core_1_1_type.html#a7b465695c97c0e07457f46c7ac18a96c" title="ScribbleCore::Type\l::getType" alt="" coords="487,170,620,217"/>
-<area shape="rect" id="node13" href="$class_scribble_core_1_1_type.html#a65ef83531886c3aba0f7f7e89caaeaf1" title="ScribbleCore::Type\l::getSubtype" alt="" coords="487,239,620,286"/>
-</map>

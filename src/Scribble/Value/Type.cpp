@@ -27,6 +27,7 @@ bool Type::Equals(Type* other) {
 
 	if (other == nullptr) {
 		printf("Equality check on nullptr\n");
+		return false;
 	}
 
 	if (other->rawType_ != rawType_) {
@@ -74,10 +75,12 @@ bool Type::Equals(Type* other) {
 			return false;
 		}
 
+		//TODO: This solution leads to two unresolved types being seen as different when they may be resolved to the same thing (Shock, horror!) and should be corrected (Just wastes RAM no issue with producing correct code)
 		for (unsigned int i = 0; i < referenceArgumentTypes_.size(); i++) {
 
-			if (!referenceArgumentTypes_[i]->type->Equals(
+			if (referenceArgumentTypes_[i] != nullptr && other->referenceArgumentTypes_[i]->type != nullptr && referenceArgumentTypes_[i]->type->Equals(
 					other->referenceArgumentTypes_[i]->type)) {
+			} else {
 				return false;
 			}
 

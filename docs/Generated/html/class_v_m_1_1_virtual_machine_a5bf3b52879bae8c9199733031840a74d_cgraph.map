@@ -1,6 +1,0 @@
-<map id="VM::VirtualMachine::pushRegister" name="VM::VirtualMachine::pushRegister">
-<area shape="rect" id="node3" href="$class_v_m_1_1_virtual_machine.html#a16e26b2033eb8a2689a29759aa864c7a" title="VM::VirtualMachine\l::markStackReference" alt="" coords="191,5,343,51"/>
-<area shape="rect" id="node5" href="$class_v_m_1_1_virtual_machine.html#a2e71b42c4b71774c38c068fac038ce86" title="VM::VirtualMachine\l::pushStackLong" alt="" coords="199,74,335,121"/>
-<area shape="rect" id="node7" href="$class_v_m_1_1_virtual_machine.html#a823add4bb2eb056811ab17cdae1840e5" title="VM::VirtualMachine\l::expandStack" alt="" coords="392,39,528,86"/>
-<area shape="rect" id="node9" href="$class_v_m_1_1_virtual_machine.html#a59e82138e4b6ffcaa63ba24948e463fb" title="VM::VirtualMachine\l::stackSetLong" alt="" coords="392,109,528,155"/>
-</map>

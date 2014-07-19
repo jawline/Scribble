@@ -1,7 +1,0 @@
-<map id="API::APIValue::getReferenceType" name="API::APIValue::getReferenceType">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#ac52ce1c55cc0a808016b557d1fb74995" title="API::APIValue::getField" alt="" coords="299,5,459,35"/>
-<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#a1506f360a478ac864b76fec0409bc117" title="API::APIValue::getArrayLength" alt="" coords="277,109,480,139"/>
-<area shape="rect" id="node7" href="$class_a_p_i_1_1_a_p_i_value.html#a799ace497f1988f95af61d6796d67a19" title="API::APIValue::getIndex" alt="" coords="528,71,693,100"/>
-<area shape="rect" id="node9" href="$class_a_p_i_1_1_a_p_i_value.html#aa8a379bf602fc10523bfc4a4867dbc55" title="API::APIValue::setIndex" alt="" coords="528,136,693,165"/>
-<area shape="rect" id="node12" href="$class_a_p_i_1_1_a_p_i_value.html#aa516e6d20f842e2dfd60c1c59a697312" title="API::APIValue::setField" alt="" coords="299,213,459,243"/>
-</map>

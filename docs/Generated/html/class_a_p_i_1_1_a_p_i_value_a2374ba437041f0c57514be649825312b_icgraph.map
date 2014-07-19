@@ -1,5 +1,0 @@
-<map id="API::APIValue::getValueFloat32" name="API::APIValue::getValueFloat32">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_int_from_float32.html#a034b5df56ab301b90062b0aa8e50291f" title="API::IntFromFloat32\l::execute" alt="" coords="283,5,421,51"/>
-<area shape="rect" id="node5" href="$class_a_p_i_1_1_pow_float32.html#abd9491d5574d1dbbf9ebd20466d87d0c" title="API::PowFloat32::execute" alt="" coords="265,75,439,104"/>
-<area shape="rect" id="node7" href="$class_float32_to_string_function.html#a37af0d9a46e186a0ae48a589123fb433" title="Float32ToStringFunction\l::execute" alt="" coords="271,127,433,174"/>
-</map>

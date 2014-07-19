@@ -764,12 +764,12 @@ Expression: MINUS Expression {
 	} | Expression OR Expression {
 		$$ = new ScribbleCore::OrStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression LPAREN Arguments RPAREN {
-	
+
 		$$ = new ScribbleCore::CallFunctionReference(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), *$3, Variables.size());
-		
+
 		ScribbleCore::ParserReference r($$);
 		StatementReferences.push_back(r);
-		
+
 		delete $3;
 	} | Expression POINT WORD {
 		

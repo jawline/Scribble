@@ -1,7 +1,0 @@
-<map id="ScribbleCore::getVoidType" name="ScribbleCore::getVoidType">
-<area shape="rect" id="node3" href="$class_a_p_i_1_1_a_p_i_value.html#ac687584e4a3f04eded7a7b2e178331ae" title="API::APIValue::APIValue" alt="" coords="249,5,420,35"/>
-<area shape="rect" id="node7" href="$class_write_function.html#af13b3f0f1a575a4836e7a0743dfc0016" title="WriteFunction::getType" alt="" coords="256,59,413,88"/>
-<area shape="rect" id="node9" href="$class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="273,112,396,141"/>
-<area shape="rect" id="node11" href="$class_scribble_core_1_1_return_statement.html#a4f93dfa382b64c53a404d9c381552670" title="ScribbleCore::ReturnStatement\l::checkTree" alt="" coords="233,165,436,211"/>
-<area shape="rect" id="node5" href="$class_a_p_i_1_1_a_p_i_value.html#ac52ce1c55cc0a808016b557d1fb74995" title="API::APIValue::getField" alt="" coords="487,5,647,35"/>
-</map>

@@ -10,7 +10,8 @@ package tests := import("tests/TestManager");
 type User := struct {
  name:string,
  age:int,
- callback:func(User)
+ callback:func(User),
+ callback2:func(User)
 }
 
 func Cb(x:User) {

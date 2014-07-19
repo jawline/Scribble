@@ -1,5 +1,0 @@
-<map id="generateSystemPackage" name="generateSystemPackage">
-<area shape="rect" id="node3" href="$namespace_scribble_core.html#aa3f28f968ebb23ba27adb182c1cf77cb" title="ScribbleCore::getFloat32Type" alt="" coords="645,5,840,35"/>
-<area shape="rect" id="node5" href="$_square_root_8cpp.html#a53a4af676bff5979614d4ec70c7875d6" title="SquareRootFloat32" alt="" coords="223,31,356,60"/>
-<area shape="rect" id="node7" href="$class_a_p_i_1_1_a_p_i_value.html#ae4d8ca7c8a72f24e3b7419cc4fc2127c" title="API::APIValue::makeFloat32" alt="" coords="407,31,596,60"/>
-</map>

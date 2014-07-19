@@ -1,5 +1,0 @@
-<map id="ScribbleCore::Type::getTypeName" name="ScribbleCore::Type::getTypeName">
-<area shape="rect" id="node3" href="$class_scribble_core_1_1_array_statement.html#aa5ac3da5af213e1c34092ab4a091a83e" title="ScribbleCore::ArrayStatement\l::generateCode" alt="" coords="201,5,396,51"/>
-<area shape="rect" id="node5" href="$class_scribble_core_1_1_return_statement.html#a4f93dfa382b64c53a404d9c381552670" title="ScribbleCore::ReturnStatement\l::checkTree" alt="" coords="197,74,400,121"/>
-<area shape="rect" id="node7" href="$class_scribble_core_1_1_structure_statement.html#a55d89fd9d10c1f5885da232a435014ab" title="ScribbleCore::StructureStatement\l::generateCode" alt="" coords="189,143,408,190"/>
-</map>

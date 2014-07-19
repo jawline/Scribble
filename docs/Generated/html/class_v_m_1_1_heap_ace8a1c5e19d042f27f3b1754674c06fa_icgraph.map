@@ -1,6 +1,0 @@
-<map id="VM::Heap::debugState" name="VM::Heap::debugState">
-<area shape="rect" id="node3" href="$class_v_m_1_1_virtual_machine.html#a3f19073759247713fb74a1f32f9c66cc" title="VM::VirtualMachine\l::printState" alt="" coords="208,49,344,95"/>
-<area shape="rect" id="node5" href="$class_a_p_i_1_1_concat.html#a8dbf36574a9a16077bff5bfd634669fd" title="API::Concat::execute" alt="" coords="393,5,540,35"/>
-<area shape="rect" id="node7" href="$class_scribble.html#aa540843227946815a077ae1ae9b65b8d" title="Scribble::execute" alt="" coords="589,88,712,117"/>
-<area shape="rect" id="node9" href="$class_v_m_1_1_virtual_machine.html#addc13d6dc68198f867b7ff8e21746af7" title="VM::VirtualMachine\l::execute" alt="" coords="399,109,535,155"/>
-</map>
