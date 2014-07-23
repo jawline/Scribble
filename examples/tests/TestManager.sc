@@ -17,6 +17,7 @@ package structTest := import("structures");
 package structQs := import("structQuicksortTest");
 package refEqTest := import("refEqualityTest");
 package listTest := import("LinkedList");
+package functionRefs := import("functionRefs");
 
 func TestAll() {
 
@@ -58,6 +59,9 @@ func TestAll() {
 
  console.Log("List Test\n");
  listTest.Test();
+
+ console.Log("Function References\n");
+ functionRefs.Test();
 
 }
 
