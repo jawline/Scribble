@@ -20,9 +20,9 @@ void AssignVariableStatement::checkTree(Type* functionType) {
 			|| exp_->type()->type->getType() == NilType)) {
 
 		throw StatementException(this,
-				std::string("Cannot assign value of type ")
-						+ exp_->type()->type->getTypeName() + " to variable of type "
-						+ var_->getType()->getTypeName());
+				std::string("Cannot assign a ")
+						+ exp_->type()->type->getTypeName() + " expression to a "
+						+ var_->getType()->getTypeName() + " variable");
 
 	}
 

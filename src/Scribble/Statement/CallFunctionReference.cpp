@@ -31,8 +31,15 @@ void CallFunctionReference::checkTree(Type* functionType) {
 	}
 
 	if (fn_->type()->type->getReferenceArguments().size() != args_.size()) {
-		throw StatementException(this,
-							"Wrong number of arguments\n");
+
+		std::stringstream errorMsg;
+
+		errorMsg << "the function takes "
+				<< fn_->type()->type->getReferenceArguments().size()
+				<< " arguments however only " << args_.size()
+				<< " where supplied";
+
+		throw StatementException(this, errorMsg.str());
 	}
 
 	for (unsigned int i = 0;
@@ -40,15 +47,23 @@ void CallFunctionReference::checkTree(Type* functionType) {
 
 		if (!fn_->type()->type->getReferenceArguments()[i]->type->Equals(
 				args_[i]->type()->type)) {
-			throw StatementException(this,
-					"Arguments do not match\n");
+
+			std::stringstream errorMsg;
+			errorMsg << "argument " << i << "was expected to be a "
+					<< fn_->type()->type->getReferenceArguments()[0]->type->getTypeName()
+					<< " however a " << args_[i]->type()->type->getTypeName()
+					<< " was supplied";
+
+			throw StatementException(this, errorMsg.str());
 		}
 
 	}
 
 	if (fn_->type()->type->getType() != FunctionReferenceType) {
 		throw StatementException(this,
-				"Call cannot be used on a non function reference\n");
+				std::string("value passed is a ")
+						+ fn_->type()->type->getTypeName()
+						+ " and not a function reference");
 	}
 
 }

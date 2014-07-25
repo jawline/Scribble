@@ -31,7 +31,7 @@ void GetArrayStatement::fix() {
 		type_->type = array_->type()->type->getSubtypeReference()->type;
 
 	} else {
-		printf("COULD NOT FIX GET ARRAY STATEMENT\n");
+		printf("ERROR: COULD NOT FIX GET ARRAY STATEMENT\n");
 	}
 
 }
@@ -42,11 +42,11 @@ void GetArrayStatement::checkTree(Type* functionType) {
 	index_->checkTree(functionType);
 
 	if (array_->type()->type->getType() != Array) {
-		throw StatementException(this, "This supplied value is not an array");
+		throw StatementException(this, std::string("the expression passed is an ") + array_->type()->type->getTypeName() + " not an array");
 	}
 
 	if (index_->type()->type->getType() != Int) {
-		throw StatementException(this, "Expected integer index");
+		throw StatementException(this, std::string("array index expression should be an integer and not a ") + index_->type()->type->getTypeName());
 	}
 
 }

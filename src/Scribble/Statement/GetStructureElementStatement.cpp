@@ -10,7 +10,6 @@
 #include <VM/Constants.hpp>
 #include "../Value/TypeManager.hpp"
 
-
 namespace ScribbleCore {
 
 GetStructureElementStatement::GetStructureElementStatement(int yylineno,
@@ -28,11 +27,13 @@ void GetStructureElementStatement::checkTree(Type* functionType) {
 
 	if (statement_->type()->type->getType() != StructureType) {
 
-		char errorText[256];
-		sprintf(errorText, "type %i is not a structure",
-				statement_->type()->type->getType());
+		std::stringstream errorMsg;
 
-		throw StatementException(this, errorText);
+		errorMsg << "the expression given is a "
+				<< statement_->type()->type->getTypeName()
+				<< " and is not a structure";
+
+		throw StatementException(this, errorMsg.str());
 	}
 }
 
