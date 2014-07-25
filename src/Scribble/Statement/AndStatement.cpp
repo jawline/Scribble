@@ -30,9 +30,9 @@ void AndStatement::checkTree(Type* functionType) {
 			|| !rhs_->type()->type->Equals(getTypeManager().getType(Boolean))) {
 
 		throw StatementException(this,
-				std::string("And on types ") + lhs_->type()->type->getTypeName()
+				std::string("and on types ") + lhs_->type()->type->getTypeName()
 						+ " and " + rhs_->type()->type->getTypeName()
-						+ " is not possible. And can only be performed on two booleans");
+						+ " is not possible. and comparison can only be performed on two booleans");
 
 	}
 

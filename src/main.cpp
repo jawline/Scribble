@@ -41,22 +41,52 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option) {
 	return std::find(begin, end, option) != end;
 }
 
-int main(int argc, char* argv[]) {
-	srand(time(0));
+bool isOption(std::string str) {
 
-	printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
-			VERSION_BUILD_NUMBER);
-
-	if (!cmdOptionExists(argv, argv + argc, "--file")
-			&& !cmdOptionExists(argv, argv + argc, "--exec")) {
-
-		printf(
-				"Error, both --file and --exec are unset. Set either --file to --exec to continue\n");
-
-		return -1;
+	if (str.compare("-r") == 0 || str.compare("--runtime") == 0) {
+		return true;
 	}
 
-	char const* targetFile = getCmdOption(argv, argv + argc, "", "--file");
+}
+
+bool lastOptionFile(char** begin, char** end, int argc) {
+
+	if (argc < 2) {
+		return false;
+	}
+
+	return !isOption(std::string(*(end-1)));
+}
+
+void printUsage(char** argv, int argc) {
+
+	char* exe;
+	if (argc < 1) {
+		exe = "scribble";
+	} else {
+		exe = *argv;
+	}
+
+	printf("Usage: %s [OPTIONS] file\n", exe);
+	printf("Options:\n-v --version: version information\n-r --runtime: output the time it takes for a script to execute\n");
+}
+
+int main(int argc, char** argv) {
+	srand(time(0));
+
+	if (cmdOptionExists(argv, argv + argc, "-v") || cmdOptionExists(argv, argv + argc, "--version")) {
+		printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
+				VERSION_BUILD_NUMBER);
+		return 0;
+	}
+
+	if (!lastOptionFile(argv, argv + argc, argc)) {
+		printf("Error: No script specified\n");
+		printUsage(argv, argc);
+		return 0;
+	}
+
+	char const* targetFile = *(argv + (argc-1));
 
 	try {
 
@@ -72,9 +102,13 @@ int main(int argc, char* argv[]) {
 		//Get the new current time
 		clock_t end = clock();
 
-		//Print out the time the execution took
-		printf("VM execution took time %f\n",
-				((double) (end - start)) / (double) CLOCKS_PER_SEC);
+		if (cmdOptionExists(argv, argv + argc, "-r") || cmdOptionExists(argv, argv + argc, "--runtime")) {
+
+			//Print out the time the execution took
+			printf("VM execution took time %f\n",
+					((double) (end - start)) / (double) CLOCKS_PER_SEC);
+
+		}
 
 	} catch (ScribbleCore::ParserException& ex) {
 		printf("Error: %s\n", ex.what());
