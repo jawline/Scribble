@@ -32,11 +32,11 @@ void OperateStatement::checkTree(Type* type) {
 
 	if (!(lhs_->type()->type->Equals(rhs_->type()->type))) {
 		throw StatementException(this,
-				"Cannot add variables of different types");
+				std::string("Cannot add values of types ") + lhs_->type()->type->getTypeName() + " " + rhs_->type()->type->getTypeName() + " can only add two values of the same type");
 	}
 
 	if (!(lhs_->type()->type->isPrimitive())) {
-		throw StatementException(this, "Cannot perform on non primitives");
+		throw StatementException(this, std::string("The add operator cannot be used with ") + lhs_->type()->type->getTypeName());
 	}
 }
 

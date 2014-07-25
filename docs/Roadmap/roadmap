@@ -5,12 +5,12 @@ Version 0.4 should include
 	Automatic typing variables. auto a := blah [DONE]
 	
 Version 0.5 should include
-	Memory profiling. [Largely done, fixed all runtime memory leaks. There is one nasty one left in the parser]
+	Memory profiling. [DONE]
 	Changes to parser interface. [DONE]
 	Change function definition from f(var a : int) to f(a:int) [DONE]
-	Threading support [DONE]
-	Support for arrays. [Almost done. Need := to nil]
-	Improved type support at runtime ( Implementing many operations or providing compile time checks for operations that should never be implemented ) [ Types are now much more complex. Improvement work should be carried over to next release]
+	Threading support [CANCELLED]
+	Support for arrays. [DONE]
+	Improved type support at runtime [DONE]
 
 Version 0.6 should include [ DONE ]
 	Support for function references [ CANCELLED ]
@@ -27,4 +27,6 @@ Version 0.8 should include
 	provide the runtime sys namespace.
 
 Version 0.9
-	Better debugging information for the programmer. [ PARTIAL ]
+	Better debugging information for the programmer.
+	Better API Support
+	

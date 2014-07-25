@@ -16,7 +16,7 @@ type TestStructure := struct {
 func Test() {
 
  //Test a structure from this package
- var k := TestStructure { 15, 30 };
+ var k := TestStructure{ 15, 30 };
 
  var x := k->Hello;
  test.Assert(x, 15, "Structure initialization on 15 construct incorrect");

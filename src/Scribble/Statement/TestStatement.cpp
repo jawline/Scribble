@@ -34,13 +34,11 @@ void TestStatement::checkTree(Type* functionType) {
 
 	if (!lhs_->type()->type->Equals(rhs_->type()->type)) {
 
-		if (lhs_->type()->type->getType() == NilType
-				|| rhs_->type()->type->getType() == NilType) {
-
-		} else {
+		if (!(lhs_->type()->type->getType() == NilType
+				|| rhs_->type()->type->getType() == NilType)) {
 
 			throw StatementException(this,
-					"Left hand side type should be the same as right hand side type");
+					"type comparison can only be done on values which are the same type");
 
 		}
 	}

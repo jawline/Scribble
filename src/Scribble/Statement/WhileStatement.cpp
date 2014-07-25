@@ -30,7 +30,7 @@ void WhileStatement::checkTree(Type* functionType) {
 
 	if (condition_->type()->type->getType() != Boolean) {
 		throw StatementException(this,
-				"While condition must evaluate to a boolean");
+				"The while condition expression (while * do) must be a boolean value");
 	}
 }
 
@@ -50,7 +50,6 @@ int WhileStatement::generateCode(int resultRegister,
 	for (unsigned int i = 0; i < statements_.size(); i++) {
 		numBodyInstrs += statements_[i]->generateCode(-1, body);
 	}
-
 
 	generated << "--while conditions\n";
 	numInstr += condition_->generateCode(VM::vmTempRegisterThree, generated);

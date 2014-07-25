@@ -31,12 +31,12 @@ void TernaryStatement::checkTree(Type* functionType) {
 
 	if (test_->type()->type->getType() != Boolean) {
 		throw StatementException(this,
-				"Ternary test should be a boolean expression");
+				"ternary condition expression (condition ? yes : no) should be a boolean value");
 	}
 
 	if (!lhs_->type()->type->Equals(rhs_->type()->type)) {
 		throw StatementException(this,
-				"Ternary options have to be the same type");
+				"ternary expressions (condition ? yesExpression : noExpression) have to be the same type");
 	}
 
 }

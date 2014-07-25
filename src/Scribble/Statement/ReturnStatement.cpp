@@ -16,15 +16,17 @@ ReturnStatement::ReturnStatement(int lineNo, std::string sym, SafeStatement stm)
 }
 
 ReturnStatement::~ReturnStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 void ReturnStatement::checkTree(Type* functionType) {
 
 	if (stm_.get() == nullptr) {
 
+		//Check if it's ok for a function to return nothing
 		if (!functionType->Equals(getVoidType())) {
-			throw StatementException(this, "expected return argument");
+			std::stringstream errorMsg;
+			errorMsg << "this function requires a return argument of type " << functionType->getTypeName();
+			throw StatementException(this, errorMsg.str());
 		}
 
 	} else {
@@ -36,9 +38,9 @@ void ReturnStatement::checkTree(Type* functionType) {
 			if (!stm_->type()->type->Equals(getNilType())) {
 
 				throw StatementException(this,
-						std::string("Return type differs from function type ( ")
-								+ functionType->getTypeName() + ", "
-								+ stm_->type()->type->getTypeName() + " )");
+						std::string("cannot return ")
+								+ stm_->type()->type->getTypeName() + " expression. This function returns a "
+								+ functionType->getTypeName());
 
 			}
 		}

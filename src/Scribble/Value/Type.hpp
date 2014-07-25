@@ -203,7 +203,6 @@ public:
 		}
 
 		case FunctionReferenceType: {
-			//TODO: replace with dedicated fptr internal type
 			return "__fnptr";
 		}
 

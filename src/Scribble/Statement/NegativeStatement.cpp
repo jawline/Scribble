@@ -25,8 +25,7 @@ void NegativeStatement::checkTree(Type* functionType) {
 	if (exp_->type()->type->getType() == Int) {
 	} else if (exp_->type()->type->getType() == Float32) {
 	} else {
-		throw StatementException(this,
-				"Negate not implemented on type yet. TODO");
+		throw StatementException(this, std::string("cannot negate type ") + exp_->type()->type->getTypeName());
 	}
 
 }

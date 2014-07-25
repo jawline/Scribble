@@ -43,15 +43,16 @@ void StructureAssignElement::checkTree(Type* functionType) {
 
 	if (lhs_->type()->type->getType() != StructureType) {
 
-		char errorText[256];
-		sprintf(errorText, "type %i is not a structure",
-				lhs_->type()->type->getType());
+		std::stringstream errorMsg;
+		errorMsg << "the expression given is a " << lhs_->type()->type->getTypeName() << " and is not a structure";
 
-		throw StatementException(this, errorText);
+		throw StatementException(this, errorMsg.str());
 	}
 
 	if (!(elementType_->type->Equals(rhs_->type()->type) || rhs_->type()->type->getType() == NilType)) {
-		throw StatementException(this, "Cannot assign to a different type");
+		std::stringstream errorMsg;
+		errorMsg << "The structure field " << elementName_ << " is a " << elementType_->type->getTypeName() << " and cannot be assigned to a " << rhs_->type()->type->getTypeName() << " expression";
+		throw StatementException(this, errorMsg.str());
 	}
 
 }

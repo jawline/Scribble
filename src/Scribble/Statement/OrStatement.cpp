@@ -26,12 +26,14 @@ void OrStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->type->Equals(getTypeManager().getType(Boolean))) {
-		throw StatementException(this, "And can only be performed on booleans");
-	}
+	if (!lhs_->type()->type->Equals(getTypeManager().getType(Boolean))
+			|| !rhs_->type()->type->Equals(getTypeManager().getType(Boolean))) {
 
-	if (!rhs_->type()->type->Equals(getTypeManager().getType(Boolean))) {
-		throw StatementException(this, "And can only be performed on booleans");
+		throw StatementException(this,
+				std::string("Or on types ") + lhs_->type()->type->getTypeName()
+						+ " and " + rhs_->type()->type->getTypeName()
+						+ " is not possible. And can only be performed on two booleans");
+
 	}
 
 }

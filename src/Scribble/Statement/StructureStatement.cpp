@@ -27,19 +27,24 @@ void StructureStatement::checkTree(Type* functionType) {
 	}
 
 	if (type()->type->getType() != StructureType) {
-		throw StatementException(this, "Expected type to be structure.");
+		throw StatementException(this, std::string() + "the type " + type()->type->getTypeName() + " does not need a structure constructor");
 	}
 
 	StructureInfo* info = (StructureInfo*) type()->type;
 
 	if (info->getNumIndexs() != statements_.size()) {
-		throw StatementException(this, "Invalid number of arguments");
+		std::stringstream errormsg;
+		errormsg << "invalid number of arguments supplied to constructor. The structure " << info->getName() << " requires " << info->getNumIndexs() << " arguments but only " << statements_.size() << " argument was supplied";
+		throw StatementException(this, errormsg.str());
 	}
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
 		if (!(statements_[i]->type()->type->Equals(info->getIndex(i).second->type) || statements_[i]->type()->type->getType() == NilType)) {
-			throw StatementException(this, "Invalid argument type");
+
+			std::stringstream errorMsg;
+			errorMsg << "the constructor argument " << i << " is a " << statements_[i]->type()->type->getTypeName() << " however a " << info->getIndex(i).second->type->getTypeName() << " was expected";
+			throw StatementException(this, errorMsg.str());
 		}
 
 	}
