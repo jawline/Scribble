@@ -43,7 +43,8 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option) {
 
 bool isOption(std::string str) {
 
-	if (str.compare("-r") == 0 || str.compare("--runtime") == 0) {
+	//Check if str starts with -, if it is then its an option
+	if (str.compare(0, 1, "-") == 0) {
 		return true;
 	}
 
