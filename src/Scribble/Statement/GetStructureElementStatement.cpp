@@ -45,7 +45,7 @@ void GetStructureElementStatement::fix() {
 
 	StructureInfo* type = (StructureInfo*) statement_->type()->type;
 
-	elementIndex_ = type->getIndex(elementName_);
+	elementIndex_ = type->getFieldIndex(elementName_);
 
 	if (elementIndex_ == -1) {
 		throw StatementException(this, "Does not exist in structure");

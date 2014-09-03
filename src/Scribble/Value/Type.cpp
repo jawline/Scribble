@@ -23,7 +23,7 @@ Type::Type(std::vector<TypeReference> argumentTypes, TypeReference returnType) :
 Type::~Type() {
 }
 
-bool Type::Equals(Type* other) {
+bool Type::Equals(Type* other) const {
 
 	if (other == nullptr) {
 		printf("Equality check on nullptr\n");

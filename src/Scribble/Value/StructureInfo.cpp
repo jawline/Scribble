@@ -26,7 +26,7 @@ unsigned int StructureInfo::getNumIndexs() {
 	return dataIndexs_.size();
 }
 
-int StructureInfo::getIndex(std::string const& name) {
+int StructureInfo::getFieldIndex(std::string const& name) {
 
 	for (unsigned int i = 0; i < dataIndexs_.size(); ++i) {
 
@@ -39,14 +39,14 @@ int StructureInfo::getIndex(std::string const& name) {
 	return -1;
 }
 
-bool StructureInfo::Equals(Type* other) {
-		return (other == this);
+bool StructureInfo::Equals(Type* other) const {
+	return other == this;
 }
 
 Type* StructureInfo::getType(std::string const& name) {
 
-	if (getIndex(name) != -1) {
-		return dataIndexs_[getIndex(name)].second->type;
+	if (getFieldIndex(name) != -1) {
+		return dataIndexs_[getFieldIndex(name)].second->type;
 	}
 
 	return nullptr;
@@ -70,6 +70,10 @@ std::string StructureInfo::getTypeName() const {
 
 std::string StructureInfo::getPackage() const {
 	return package_;
+}
+
+std::string StructureInfo::getName() const {
+	return name_;
 }
 
 }

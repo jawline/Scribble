@@ -28,7 +28,7 @@ void StructureAssignElement::fix() {
 
 	StructureInfo* type = (StructureInfo*) lhs_->type()->type;
 
-	elementIndex_ = type->getIndex(elementName_);
+	elementIndex_ = type->getFieldIndex(elementName_);
 
 	if (elementIndex_ == -1) {
 		throw StatementException(this, "Does not exist in structure");

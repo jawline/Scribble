@@ -20,5 +20,6 @@ bin/*
 obj/*
 
 VMLogFile
+*/VMLogFile
 a.out
 libscribble.so

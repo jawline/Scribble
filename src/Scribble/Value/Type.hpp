@@ -161,7 +161,7 @@ public:
 	 * Test whether this type is equivalent to a given type.
 	 */
 
-	virtual bool Equals(Type* other);
+	virtual bool Equals(Type* other) const;
 
 	/**
 	 * If this type is an array then this will return a reference to its subtype.

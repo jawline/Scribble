@@ -43,24 +43,47 @@ public:
 	void addInfo(std::string name, TypeReference type);
 	std::pair<std::string, TypeReference> getIndex(int i);
 	Type* getType(std::string const& name);
-	int getIndex(std::string const& name);
+	int getFieldIndex(std::string const& name);
 	unsigned int getNumIndexs();
 
-	void setName(std::string const& name);
-	void setPackage(std::string const& name);
-	bool Equals(Type* other);
+	/**
+	 * Set the stored name of the structure
+	 */
 
-	std::string getName() const {
-		return "__struct(" + name_ + ")";
-	}
+	void setName(std::string const& name);
+
+	/**
+	 * Change the stored name of the structures package
+	 * (NOTE: To do this moving it in any namespaces will be required.
+	 * setPackage will not immediately make this structure belong to
+	 * another package)
+	 */
+
+	void setPackage(std::string const& name);
+
+	/**
+	 * Returns true if this type is another type
+	 */
+
+	bool Equals(Type* other) const;
+
+	/**
+	 * Return the name of this package
+	 */
+
+	std::string getName() const;
+
+	/**
+	 * Return the name of the package in which this structure resides
+	 */
+
+	std::string getPackage() const;
 
 	/**
 	 * Overrides Type::getTypeName() to return more complex structure name.
 	 */
 
 	virtual std::string getTypeName() const;
-
-	std::string getPackage() const;
 
 };
 

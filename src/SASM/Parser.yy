@@ -50,6 +50,9 @@ SASMProgram: {
 	DeleteInstructionBuffer();
 };
 
+//TODO: During intermediate stage compilation convert function calls from full names to pointers somehow.
+//NOTE: This is a very important performance feature
+
 SASMFunction: {
 		InitInstructionBuffer();
 	} | SASMFunction CALL_FN STRING {

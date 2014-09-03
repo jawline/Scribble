@@ -77,7 +77,7 @@ void APIValue::setField(std::string const& name, API::APIValue val,
 
 	ScribbleCore::StructureInfo* info = (ScribbleCore::StructureInfo*) cType_;
 
-	int index = info->getIndex(name);
+	int index = info->getFieldIndex(name);
 
 	if (index == -1) {
 		return;
