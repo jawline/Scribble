@@ -64,11 +64,11 @@ void StructureInfo::setPackage(std::string const& name) {
 	package_ = name;
 }
 
-std::string StructureInfo::getTypeName() {
+std::string StructureInfo::getTypeName() const {
 	return getPackage() + VM::vmNamespaceSeperator + getName();
 }
 
-std::string StructureInfo::getPackage() {
+std::string StructureInfo::getPackage() const {
 	return package_;
 }
 

@@ -50,7 +50,7 @@ public:
 	void setPackage(std::string const& name);
 	bool Equals(Type* other);
 
-	std::string getName() {
+	std::string getName() const {
 		return "__struct(" + name_ + ")";
 	}
 
@@ -58,9 +58,9 @@ public:
 	 * Overrides Type::getTypeName() to return more complex structure name.
 	 */
 
-	virtual std::string getTypeName();
+	virtual std::string getTypeName() const;
 
-	std::string getPackage();
+	std::string getPackage() const;
 
 };
 

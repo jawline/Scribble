@@ -139,96 +139,41 @@ public:
 	 * Get this types primitive type.
 	 */
 
-	ValueType getType() {
-		return rawType_;
-	}
+	ValueType getType() const;
 
 	/**
 	 * Returns true if the value is a primitive type that fits into a register.
 	 */
 
-	bool isPrimitive() {
+	bool isPrimitive() const;
 
-		switch (rawType_) {
-		case ValueType::StringType:
-		case ValueType::Array:
-		case ValueType::StructureType:
-			return false;
+	TypeReference getReferenceReturnType() const;
 
-		default:
-			return true;
-		}
-
-	}
-
-	TypeReference getReferenceReturnType() {
-		return referenceReturnType_;
-	}
-
-	std::vector<TypeReference> getReferenceArguments() {
-		return referenceArgumentTypes_;
-	}
+	std::vector<TypeReference> getReferenceArguments() const;
 
 	/**
 	 * Get this types subtype.
 	 */
 
-	Type* getSubtype();
+	Type* getSubtype() const;
 
 	/**
 	 * Test whether this type is equivalent to a given type.
 	 */
+
 	virtual bool Equals(Type* other);
 
 	/**
 	 * If this type is an array then this will return a reference to its subtype.
 	 */
 
-	TypeReference getSubtypeReference();
+	TypeReference getSubtypeReference() const;
 
 	/**
 	 * Get the human readable name of this type.
 	 */
 
-	virtual std::string getTypeName() {
-
-		switch (getType()) {
-
-		case Array: {
-			if (getSubtype() != nullptr) {
-				return std::string("array(") + getSubtype()->getTypeName() + ")";
-			} else {
-				return "array(unresolved-type)";
-			}
-		}
-
-		case FunctionReferenceType: {
-			return "__fnptr";
-		}
-
-		case StructureType:
-			//StructureType overrides getTypeName. This should never execute.
-			return "INVALID-SHOULD-HAVE-BEEN-OVERWRITTEN";
-		case ValueType::Int:
-			return "int";
-		case ValueType::Boolean:
-			return "bool";
-		case ValueType::StringType:
-			return "string";
-		case ValueType::Void:
-			return "void";
-		case ValueType::NilType:
-			return "nil";
-		case ValueType::Float32:
-			return "float32";
-		case ValueType::TypeUnresolved:
-			return "unresolved-type";
-		case ValueType::ValueTypeMax:
-		default:
-			return "invalid";
-		}
-
-	}
+	virtual std::string getTypeName() const;
 
 };
 

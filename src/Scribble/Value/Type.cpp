@@ -78,8 +78,10 @@ bool Type::Equals(Type* other) {
 		//TODO: This solution leads to two unresolved types being seen as different when they may be resolved to the same thing (Shock, horror!) and should be corrected (Just wastes RAM no issue with producing correct code)
 		for (unsigned int i = 0; i < referenceArgumentTypes_.size(); i++) {
 
-			if (referenceArgumentTypes_[i] != nullptr && other->referenceArgumentTypes_[i]->type != nullptr && referenceArgumentTypes_[i]->type->Equals(
-					other->referenceArgumentTypes_[i]->type)) {
+			if (referenceArgumentTypes_[i] != nullptr
+					&& other->referenceArgumentTypes_[i]->type != nullptr
+					&& referenceArgumentTypes_[i]->type->Equals(
+							other->referenceArgumentTypes_[i]->type)) {
 			} else {
 				return false;
 			}
@@ -98,12 +100,78 @@ bool Type::Equals(Type* other) {
 	return true;
 }
 
-Type* Type::getSubtype() {
+Type* Type::getSubtype() const {
 	return subType_->type;
 }
 
-TypeReference Type::getSubtypeReference() {
+TypeReference Type::getSubtypeReference() const {
 	return subType_;
+}
+
+ValueType Type::getType() const {
+	return rawType_;
+}
+
+bool Type::isPrimitive() const {
+
+	switch (rawType_) {
+	case ValueType::StringType:
+	case ValueType::Array:
+	case ValueType::StructureType:
+		return false;
+
+	default:
+		return true;
+	}
+
+}
+
+TypeReference Type::getReferenceReturnType() const {
+	return referenceReturnType_;
+}
+
+std::vector<TypeReference> Type::getReferenceArguments() const {
+	return referenceArgumentTypes_;
+}
+
+std::string Type::getTypeName() const {
+
+	switch (getType()) {
+
+	case Array: {
+		if (getSubtype() != nullptr) {
+			return std::string("array(") + getSubtype()->getTypeName() + ")";
+		} else {
+			return "array(unresolved-type)";
+		}
+	}
+
+	case FunctionReferenceType: {
+		return "__fnptr";
+	}
+
+	case StructureType:
+		//StructureType overrides getTypeName. This should never execute.
+		return "INVALID-SHOULD-HAVE-BEEN-OVERWRITTEN";
+	case ValueType::Int:
+		return "int";
+	case ValueType::Boolean:
+		return "bool";
+	case ValueType::StringType:
+		return "string";
+	case ValueType::Void:
+		return "void";
+	case ValueType::NilType:
+		return "nil";
+	case ValueType::Float32:
+		return "float32";
+	case ValueType::TypeUnresolved:
+		return "unresolved-type";
+	case ValueType::ValueTypeMax:
+	default:
+		return "invalid";
+	}
+
 }
 
 }

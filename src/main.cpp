@@ -25,6 +25,8 @@
 
 #include <Scribble/Parser/ParserException.hpp>
 
+#include <Arguments/ArgumentsParser.hpp>
+
 char const* getCmdOption(char ** begin, char ** end, char const* defaultOption,
 		std::string option) {
 
@@ -48,6 +50,20 @@ bool isOption(std::string str) {
 		return true;
 	}
 
+	return false;
+}
+
+bool cmdFlagSet(char** begin, char** end, std::string const& option) {
+	return cmdOptionExists(begin, end, option);
+}
+
+bool cmdBoolSet(char** begin, char** end, bool defaultOption,
+		std::string const& option) {
+
+	return std::string("true").compare(
+			getCmdOption(begin, end, defaultOption ? "true" : "false", option))
+			== 0;
+
 }
 
 bool lastOptionFile(char** begin, char** end, int argc) {
@@ -56,26 +72,23 @@ bool lastOptionFile(char** begin, char** end, int argc) {
 		return false;
 	}
 
-	return !isOption(std::string(*(end-1)));
+	return !isOption(std::string(*(end - 1)));
 }
 
 void printUsage(char** argv, int argc) {
 
-	char* exe;
-	if (argc < 1) {
-		exe = "scribble";
-	} else {
-		exe = *argv;
-	}
+	char const* exe = argc < 1 ? "scribble" : *argv;
 
 	printf("Usage: %s [OPTIONS] file\n", exe);
-	printf("Options:\n-v --version: version information\n-r --runtime: output the time it takes for a script to execute\n");
+	printf(
+			"Options:\n-v --version: version information\n-r --runtime: output the time it takes for a script to execute\n");
 }
 
 int main(int argc, char** argv) {
 	srand(time(0));
 
-	if (cmdOptionExists(argv, argv + argc, "-v") || cmdOptionExists(argv, argv + argc, "--version")) {
+	if (cmdFlagSet(argv, argv + argc, "-v")
+			|| cmdFlagSet(argv, argv + argc, "--version")) {
 		printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
 				VERSION_BUILD_NUMBER);
 		return 0;
@@ -87,7 +100,7 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-	char const* targetFile = *(argv + (argc-1));
+	char const* targetFile = *(argv + (argc - 1));
 
 	try {
 
@@ -103,7 +116,8 @@ int main(int argc, char** argv) {
 		//Get the new current time
 		clock_t end = clock();
 
-		if (cmdOptionExists(argv, argv + argc, "-r") || cmdOptionExists(argv, argv + argc, "--runtime")) {
+		if (cmdFlagSet(argv, argv + argc, "-r")
+				|| cmdFlagSet(argv, argv + argc, "--runtime")) {
 
 			//Print out the time the execution took
 			printf("VM execution took time %f\n",
