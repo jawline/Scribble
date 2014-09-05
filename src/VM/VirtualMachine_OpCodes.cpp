@@ -27,6 +27,12 @@ void VirtualMachine::opDec(InstructionSet& instructionSet) {
 	currentInstruction += vmOpCodeSize;
 }
 
+void VirtualMachine::opNot(InstructionSet& instructionSet) {
+	uint8_t reg = instructionSet.getByte(currentInstruction + 1);
+	registers_[reg] = !registers_[reg];
+	currentInstruction += vmOpCodeSize;
+}
+
 void VirtualMachine::opAddFloat32(InstructionSet& instructionSet) {
 	uint8_t left = instructionSet.getByte(currentInstruction + 1);
 	uint8_t right = instructionSet.getByte(currentInstruction + 2);

@@ -28,7 +28,7 @@ ScriptedFunction::ScriptedFunction(std::string name, int version,
 ScriptedFunction::~ScriptedFunction() {
 }
 
-void ScriptedFunction::check() {
+void ScriptedFunction::check() const {
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 		statements_[i]->checkTree(getSignature().getReturnType()->type);
@@ -37,6 +37,7 @@ void ScriptedFunction::check() {
 }
 
 int ScriptedFunction::debugCode(std::stringstream& gen) {
+
 	int script = 0;
 
 	for (unsigned int i = 0; i < variableTemplates_.size(); i++) {
@@ -62,6 +63,18 @@ int ScriptedFunction::debugCode(std::stringstream& gen) {
 	gen << "ret\n";
 
 	return script;
+}
+
+APIValue ScriptedFunction::execute(API::APIValue* values,
+		VM::VirtualMachine* virt) {
+
+	printf("ERR should not get here\nScriptedFunction\n");
+	exit(1);
+}
+
+bool ScriptedFunction::isNativeFunction() const {
+
+	return false;
 }
 
 }

@@ -22,11 +22,11 @@ void StructureInfo::addInfo(std::string name, TypeReference t) {
 	dataIndexs_.push_back(std::pair<std::string, TypeReference>(name, t));
 }
 
-unsigned int StructureInfo::getNumIndexs() {
+unsigned int StructureInfo::getNumFields() const {
 	return dataIndexs_.size();
 }
 
-int StructureInfo::getFieldIndex(std::string const& name) {
+int StructureInfo::getFieldIndex(std::string const& name) const {
 
 	for (unsigned int i = 0; i < dataIndexs_.size(); ++i) {
 
@@ -43,16 +43,17 @@ bool StructureInfo::Equals(Type* other) const {
 	return other == this;
 }
 
-Type* StructureInfo::getType(std::string const& name) {
+Type* StructureInfo::getFieldType(std::string const& name) const {
+	int index;
 
-	if (getFieldIndex(name) != -1) {
-		return dataIndexs_[getFieldIndex(name)].second->type;
+	if ((index = getFieldIndex(name)) != -1) {
+		return dataIndexs_[index].second->type;
 	}
 
 	return nullptr;
 }
 
-std::pair<std::string, TypeReference> StructureInfo::getIndex(int index) {
+std::pair<std::string, TypeReference> StructureInfo::getField(int index) const {
 	return dataIndexs_[index];
 }
 

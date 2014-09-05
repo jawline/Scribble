@@ -39,6 +39,7 @@
 #include <Scribble/Statement/GetStructureElementStatement.hpp>
 #include <Scribble/Statement/StructureAssignElement.hpp>
 #include <Scribble/Statement/CallFunctionReference.hpp>
+#include <Scribble/Statement/NotStatement.hpp>
 #include <Scribble/Parser/TypeReference.hpp>
 #include <Pointers/SmartPointer.hpp>
 #include <Scribble/Function/ScriptedFunction.hpp>
@@ -123,6 +124,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %left PLUS MINUS
 %left TIMES DIVIDE
 %left TRUE FALSE EQUALS AND OR LINK
+%right NOT
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -631,6 +633,8 @@ Expression: MINUS Expression {
 
 		//Free string pointer
 		delete $1;
+	} | NOT Expression {
+		$$ = new ScribbleCore::NotStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2));
 	} | FunctionReference {
 		$$ = $1;
 	} | Type LBRACKET Arguments RBRACKET {

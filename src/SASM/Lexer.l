@@ -51,6 +51,7 @@ float32 {real}f
 "sub" return SUBTRACT;
 "mul" return MULTIPLY;
 "div" return DIVIDE;
+"not" return NOT;
 
 "addf32" return ADD_FLOAT32;
 "subf32" return SUBTRACT_FLOAT32;

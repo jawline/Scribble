@@ -26,7 +26,7 @@ public:
 	virtual ~Statement() {
 	}
 
-	virtual std::string generateDebugInformation() {
+	virtual std::string generateDebugInformation() const {
 		std::stringstream stream;
 		stream << "Line Number: ";
 		stream << lineNumber_;
@@ -51,15 +51,11 @@ public:
 	virtual void fix() {
 	}
 
-	virtual int generateCode(int resultRegister, std::stringstream& generated) {
-		printf("Unimplemented statement %s!!\n", symbolName_.c_str());
-		generated << std::string("#") + symbolName_ + " UNIMP\n";
+	/**
+	 * Generate code writes the SASM code for this statement (And the tree of child statements connected to it) to the stringstream generated
+	 */
 
-		throw StatementException(this,
-				"generate code is not implemented for this statement");
-
-		return 1;
-	}
+	virtual int generateCode(int resultRegister, std::stringstream& generated) = 0;
 };
 
 typedef SmartPointer<Statement> SafeStatement;

@@ -26,6 +26,7 @@ enum OpCodes {
 	OpDiv,
 	OpInc,
 	OpDec,
+	OpNot,
 
 	/**
 	 * Float operations

@@ -128,6 +128,7 @@ private:
 	void opArrayLength(InstructionSet& instructionSet);
 	void opCallFn(InstructionSet& instructionSet);
 	void opReturn(InstructionSet& instructionSet);
+	void opNot(InstructionSet& instructionSet);
 
 public:
 	VirtualMachine();

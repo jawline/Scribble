@@ -51,7 +51,7 @@ void GetStructureElementStatement::fix() {
 		throw StatementException(this, "Does not exist in structure");
 	}
 
-	elementType_->type = type->getIndex(elementIndex_).second->type;
+	elementType_->type = type->getField(elementIndex_).second->type;
 }
 
 TypeReference GetStructureElementStatement::type() {

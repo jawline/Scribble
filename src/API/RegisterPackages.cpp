@@ -83,15 +83,15 @@ void registerPackages(
 
 					std::vector<SmartPointer<VM::VMStructureField>> fields;
 
-					for (unsigned int i = 0; i < info->getNumIndexs(); i++) {
+					for (unsigned int i = 0; i < info->getNumFields(); i++) {
 
-						ScribbleCore::Type* fieldType = info->getIndex(i).second->type;
+						ScribbleCore::Type* fieldType = info->getField(i).second->type;
 
 						std::string fullTypeName = fieldType->getTypeName();
 
-						vm.logMessage(VM::Log, info->getIndex(i).first + " : " + fullTypeName + "\n");
+						vm.logMessage(VM::Log, info->getField(i).first + " : " + fullTypeName + "\n");
 
-						SmartPointer<VM::VMStructureField> newField = SmartPointer<VM::VMStructureField>(new VM::VMStructureField(info->getIndex(i).first, nullptr));
+						SmartPointer<VM::VMStructureField> newField = SmartPointer<VM::VMStructureField>(new VM::VMStructureField(info->getField(i).first, nullptr));
 						postResolveList.push_back(std::pair<std::string, SmartPointer<VM::VMStructureField>>(fullTypeName, newField));
 						fields.push_back( newField );
 					}

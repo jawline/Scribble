@@ -31,9 +31,7 @@ public:
 
 	virtual ~APIFunction();
 
-	APIValue execute(API::APIValue* values, VM::VirtualMachine* virt) {
-		return fn_(values, virt);
-	}
+	APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
 };
 

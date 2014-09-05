@@ -16,6 +16,14 @@ func Fatal(error:string) {
 
 }
 
+func Assert(val:bool, error:string) {
+
+    if !val then {
+        Fatal(error);
+    }
+
+}
+
 /**
  * Fatal error if val differs from target
  */

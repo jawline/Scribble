@@ -49,10 +49,7 @@ public:
 	 * @param virt The virtual machine this function is being run in the context of.
 	 * @return The resulting API value
 	 */
-
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt) {
-		return API::APIValue();
-	}
+	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt) = 0;
 
 	virtual void execute(VM::VirtualMachine* virt) {
 
@@ -93,11 +90,11 @@ public:
 		return 0;
 	}
 
-	virtual std::string getNamespace() {
+	virtual std::string getNamespace() const {
 		return namespace_;
 	}
 
-	virtual std::string getName() {
+	virtual std::string getName() const {
 		return name_;
 	}
 
@@ -105,7 +102,7 @@ public:
 	 * Returns true if this is a function written in Native code.
 	 */
 
-	virtual bool isNativeFunction() {
+	virtual bool isNativeFunction() const {
 		return true;
 	}
 
@@ -126,7 +123,7 @@ public:
 		return func->generateScriptedFunc();
 	}
 
-	ScribbleCore::FunctionSignature getSignature() {
+	ScribbleCore::FunctionSignature getSignature() const {
 		return signature_;
 	}
 

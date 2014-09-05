@@ -25,15 +25,16 @@ private:
 	/**
 	 * The name of the structure.
 	 */
-
 	std::string name_;
 
 	/**
 	 * The name of the package it is in
 	 */
-
 	std::string package_;
 
+	/**
+	 * Return a list of field pairs in the format (Name, TypeReference)
+	 */
 	std::vector<std::pair<std::string, TypeReference>> dataIndexs_;
 
 public:
@@ -41,10 +42,26 @@ public:
 	virtual ~StructureInfo();
 
 	void addInfo(std::string name, TypeReference type);
-	std::pair<std::string, TypeReference> getIndex(int i);
-	Type* getType(std::string const& name);
-	int getFieldIndex(std::string const& name);
-	unsigned int getNumIndexs();
+
+	/**
+	 * Return detailed information about a given field
+	 */
+	std::pair<std::string, TypeReference> getField(int i) const;
+
+	/**
+	 * Return the number of fields this structure has
+	 */
+	unsigned int getNumFields() const;
+
+	/**
+	 * Return a pointer to the type of the named field
+	 */
+	Type* getFieldType(std::string const& fieldName) const;
+
+	/**
+	 * Return a pointer the index of the field within the structure
+	 */
+	int getFieldIndex(std::string const& fieldName) const;
 
 	/**
 	 * Set the stored name of the structure

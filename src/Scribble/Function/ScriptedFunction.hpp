@@ -25,19 +25,19 @@ public:
 
 	ScriptedFunction(std::string name, int version, std::string nameSpace,
 			std::vector<SmartPointer<Statement>> statements,
-			std::vector<SmartPointer<Variable>> variableTemplates, FunctionSignature signature);
+			std::vector<SmartPointer<Variable>> variableTemplates,FunctionSignature signature);
 
 	virtual ~ScriptedFunction();
 
-	void check();
+	void check() const;
 
 	int debugCode(std::stringstream& gen);
 
-	bool isNativeFunction() {
-		return false;
-	}
+	bool isNativeFunction() const;
+
+	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 };
 
-		}
+}
 
 #endif /* SCRIPTEDFUNCTION_HPP_ */

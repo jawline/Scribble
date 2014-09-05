@@ -129,7 +129,6 @@ public:
 	/**
 	 * Create a new type with a given primitive type and subtype (Subtype null if type has no subtype).
 	 */
-
 	Type(ValueType rawType, TypeReference subType);
 	Type(std::vector<TypeReference> argumentTypes, TypeReference returnType);
 
@@ -138,13 +137,11 @@ public:
 	/**
 	 * Get this types primitive type.
 	 */
-
 	ValueType getType() const;
 
 	/**
 	 * Returns true if the value is a primitive type that fits into a register.
 	 */
-
 	bool isPrimitive() const;
 
 	TypeReference getReferenceReturnType() const;
@@ -154,25 +151,21 @@ public:
 	/**
 	 * Get this types subtype.
 	 */
-
 	Type* getSubtype() const;
 
 	/**
 	 * Test whether this type is equivalent to a given type.
 	 */
-
 	virtual bool Equals(Type* other) const;
 
 	/**
 	 * If this type is an array then this will return a reference to its subtype.
 	 */
-
 	TypeReference getSubtypeReference() const;
 
 	/**
 	 * Get the human readable name of this type.
 	 */
-
 	virtual std::string getTypeName() const;
 
 };

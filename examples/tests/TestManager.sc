@@ -4,6 +4,7 @@
 
 package console := import("console");
 
+package notTest := import("not");
 package loopsTest := import("loops");
 package logicalTest := import("logical");
 package variablesTest := import("variables");
@@ -20,6 +21,9 @@ package listTest := import("LinkedList");
 package functionRefs := import("functionRefs");
 
 func TestAll() {
+
+ console.Log("Not Test\n");
+ notTest.Test();
 
  console.Log("Loop Test\n");
  loopsTest.Test();

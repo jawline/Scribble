@@ -477,3 +477,9 @@ void TestEqualNil(uint8_t left) {
 	Set(buffer, current, left);
 	IncreaseCurrent(6);
 }
+
+void Not(uint8_t reg) {
+	Set(buffer, current, (uint8_t) VM::OpNot);
+	Set(buffer, current, (uint8_t) reg);
+	IncreaseCurrent(6);
+}

@@ -59,5 +59,6 @@ void Increment(uint8_t dest);
 void Decrement(uint8_t dest);
 void TestNotEqual(uint8_t left, uint8_t right);
 void TestEqualNil(uint8_t left);
+void Not(uint8_t reg);
 
 #endif //_INSTRUCTION_BUFFER_DEF_H_

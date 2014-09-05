@@ -271,6 +271,11 @@ void VirtualMachine::execute(std::string function) {
 				break;
 			}
 
+			case OpNot: {
+				opNot(instructionSet);
+				break;
+			}
+
 			case OpAddFloat32: {
 				opAddFloat32(instructionSet);
 				break;
