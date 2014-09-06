@@ -45,28 +45,29 @@ bool Type::Equals(Type* other) const {
 				return false;
 			}
 
-			if (subType_->type != nullptr) {
+			if (subType_->type() != nullptr) {
 
-				if (other->subType_->type == nullptr) {
+				if (other->subType_->type() == nullptr) {
 					return false;
 				}
 
-				return subType_->type->Equals(other->subType_->type);
+				return subType_->type()->Equals(other->subType_->type());
 			}
 
 			printf(
 					"TODO: Subtypes %s %s have not been resolved. Find out why\n",
-					subType_->name.c_str(), other->subType_->name.c_str());
+					subType_->getName().c_str(),
+					other->subType_->getName().c_str());
 			printf(
 					"WARNING: Currently assuming structures with the same resolve name are referencing the same thing. Fix this\n");
 
-			return subType_->name == other->subType_->name;
+			return subType_->getName() == other->subType_->getName();
 		}
 
 	} else if (rawType_ == FunctionReferenceType) {
 
-		if (!referenceReturnType_->type->Equals(
-				other->referenceReturnType_->type)) {
+		if (!referenceReturnType_->type()->Equals(
+				other->referenceReturnType_->type())) {
 			return false;
 		}
 
@@ -79,9 +80,9 @@ bool Type::Equals(Type* other) const {
 		for (unsigned int i = 0; i < referenceArgumentTypes_.size(); i++) {
 
 			if (referenceArgumentTypes_[i] != nullptr
-					&& other->referenceArgumentTypes_[i]->type != nullptr
-					&& referenceArgumentTypes_[i]->type->Equals(
-							other->referenceArgumentTypes_[i]->type)) {
+					&& other->referenceArgumentTypes_[i]->type() != nullptr
+					&& referenceArgumentTypes_[i]->type()->Equals(
+							other->referenceArgumentTypes_[i]->type())) {
 			} else {
 				return false;
 			}
@@ -101,7 +102,7 @@ bool Type::Equals(Type* other) const {
 }
 
 Type* Type::getSubtype() const {
-	return subType_->type;
+	return subType_->type();
 }
 
 TypeReference Type::getSubtypeReference() const {

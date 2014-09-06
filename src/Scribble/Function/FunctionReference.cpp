@@ -12,14 +12,14 @@ namespace ScribbleCore {
 FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
 		std::vector<SafeStatement> fnArgs, SmartPointer<Function> func) {
 
-	name_ = name;
-	fnNamespace_ = fnNamespace;
-	func_ = func;
+			name_ = name;
+			fnNamespace_ = fnNamespace;
+			func_ = func;
 
-	for (unsigned int i = 0; i < fnArgs.size(); i++) {
+			for (unsigned int i = 0; i < fnArgs.size(); i++) {
 
-		if (fnArgs[i]->type() == nullptr) {
-			printf("Error: Creating a function reference with a null arg ref %s\n", fnArgs[i]->generateDebugInformation().c_str());
+				if (fnArgs[i]->type() == nullptr) {
+					printf("Error: Creating a function reference with a null arg ref %s\n", fnArgs[i]->generateDebugInformation().c_str());
 		}
 
 		fnArgs_.push_back(fnArgs[i]->type());
@@ -30,11 +30,11 @@ FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
 
 FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
 		std::vector<TypeReference> fnArgs, SmartPointer<Function> func) {
-	name_ = name;
-	fnNamespace_ = fnNamespace;
-	func_ = func;
-	fnArgs_ = fnArgs;
-    returnType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
+			name_ = name;
+			fnNamespace_ = fnNamespace;
+			func_ = func;
+			fnArgs_ = fnArgs;
+			returnType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
 }
 
 FunctionReference::~FunctionReference() {
@@ -62,11 +62,11 @@ SmartPointer<Function> FunctionReference::getFunction() {
 
 void FunctionReference::setFunction(SmartPointer<Function> func) {
 	func_ = func;
-    returnType_->type = func_->getSignature().getReturnType()->type;
+	returnType_->setType(func_->getSignature().getReturnType()->type());
 }
 
 TypeReference FunctionReference::getReturnType() {
-    return returnType_;
+	return returnType_;
 }
 
 std::string const& FunctionReference::getName() {
@@ -83,19 +83,19 @@ std::string const& FunctionReference::getResolveIssue() {
 
 std::vector<Type*> FunctionReference::getTargetArguments() {
 
-    std::vector<Type*> args;
+	std::vector<Type*> args;
 
 	for (unsigned int i = 0; i < getArgTypes().size(); i++) {
 
 		if (getArgTypes()[i].get() == nullptr) {
 			args.push_back(getTypeManager().getType(TypeUnresolved));
 		} else {
-	        args.push_back(getArgTypes()[i]->type);
+			args.push_back(getArgTypes()[i]->type());
 		}
 
 	}
 
-    return args;
+	return args;
 }
 
 }

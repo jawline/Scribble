@@ -24,10 +24,10 @@ ArrayLengthStatement::~ArrayLengthStatement() {
 void ArrayLengthStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	if (exp_->type()->type->getType() != Array) {
+	if (exp_->type()->type()->getType() != Array) {
 		throw StatementException(this,
 				std::string("len does not work on ")
-						+ exp_->type()->type->getTypeName()
+						+ exp_->type()->type()->getTypeName()
 						+ " it can only be used on arrays");
 	}
 

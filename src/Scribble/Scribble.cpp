@@ -102,7 +102,7 @@ API::APIValue Scribble::execute(std::string function,
 
 	API::APIValue result;
 
-	if (!toExecute->getSignature().getReturnType()->type->Equals(ScribbleCore::getVoidType())) {
+	if (!toExecute->getSignature().getReturnType()->type()->Equals(ScribbleCore::getVoidType())) {
 
 		long val = 0;
 		bool ref = 0;
@@ -111,13 +111,13 @@ API::APIValue Scribble::execute(std::string function,
 
 		if (ref) {
 
-			result = API::APIValue(toExecute->getSignature().getReturnType()->type,
+			result = API::APIValue(toExecute->getSignature().getReturnType()->type(),
 					environment.getHeap().getType(val),
 					environment.getHeap().getSmartPointer(val), val);
 
 		} else {
 
-			result = API::APIValue(toExecute->getSignature().getReturnType()->type, val);
+			result = API::APIValue(toExecute->getSignature().getReturnType()->type(), val);
 
 		}
 

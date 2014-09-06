@@ -32,10 +32,10 @@ void TestStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->type->Equals(rhs_->type()->type)) {
+	if (!lhs_->type()->type()->Equals(rhs_->type()->type())) {
 
-		if (!(lhs_->type()->type->getType() == NilType
-				|| rhs_->type()->type->getType() == NilType)) {
+		if (!(lhs_->type()->type()->getType() == NilType
+				|| rhs_->type()->type()->getType() == NilType)) {
 
 			throw StatementException(this,
 					"type comparison can only be done on values which are the same type");
@@ -66,7 +66,7 @@ int TestStatement::generateCode(int resultRegister,
 	generated << "load 0 $" << VM::vmTempRegisterThree << "\n";
 	instrs++;
 
-	switch (lhs_->type()->type->getType()) {
+	switch (lhs_->type()->type()->getType()) {
 
 	/**
 	 * Strings, arrays and structures all have there reference tested

@@ -30,13 +30,13 @@ void OperateStatement::checkTree(Type* type) {
 	lhs_->checkTree(type);
 	rhs_->checkTree(type);
 
-	if (!(lhs_->type()->type->Equals(rhs_->type()->type))) {
+	if (!(lhs_->type()->type()->Equals(rhs_->type()->type()))) {
 		throw StatementException(this,
-				std::string("Cannot add values of types ") + lhs_->type()->type->getTypeName() + " " + rhs_->type()->type->getTypeName() + " can only add two values of the same type");
+				std::string("Cannot add values of types ") + lhs_->type()->type()->getTypeName() + " " + rhs_->type()->type()->getTypeName() + " can only add two values of the same type");
 	}
 
-	if (!(lhs_->type()->type->isPrimitive())) {
-		throw StatementException(this, std::string("The add operator cannot be used with ") + lhs_->type()->type->getTypeName());
+	if (!(lhs_->type()->type()->isPrimitive())) {
+		throw StatementException(this, std::string("The add operator cannot be used with ") + lhs_->type()->type()->getTypeName());
 	}
 }
 
@@ -45,7 +45,7 @@ int OperateStatement::generateCode(int resultRegister,
 
 	int instrs = 0;
 
-	switch (lhs_->type()->type->getType()) {
+	switch (lhs_->type()->type()->getType()) {
 	case Int: {
 
 		instrs = lhs_->generateCode(VM::vmTempRegisterOne, generated);

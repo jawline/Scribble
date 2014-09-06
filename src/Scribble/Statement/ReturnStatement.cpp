@@ -33,13 +33,13 @@ void ReturnStatement::checkTree(Type* functionType) {
 
 		stm_->checkTree(functionType);
 
-		if (!(functionType->Equals(stm_->type()->type))) {
+		if (!(functionType->Equals(stm_->type()->type()))) {
 
-			if (!stm_->type()->type->Equals(getNilType())) {
+			if (!stm_->type()->type()->Equals(getNilType())) {
 
 				throw StatementException(this,
 						std::string("cannot return ")
-								+ stm_->type()->type->getTypeName() + " expression. This function returns a "
+								+ stm_->type()->type()->getTypeName() + " expression. This function returns a "
 								+ functionType->getTypeName());
 
 			}

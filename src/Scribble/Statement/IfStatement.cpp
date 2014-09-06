@@ -26,8 +26,8 @@ IfStatement::~IfStatement() {
 void IfStatement::checkTree(Type* functionType) {
 	condition_->checkTree(functionType);
 
-	if (condition_->type()->type->getType() != Boolean) {
-		throw StatementException(this, std::string("If condition has to be boolean not ") + condition_->type()->type->getTypeName());
+	if (condition_->type()->type()->getType() != Boolean) {
+		throw StatementException(this, std::string("If condition has to be boolean not ") + condition_->type()->type()->getTypeName());
 	}
 
 	for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {

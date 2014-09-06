@@ -22,10 +22,10 @@ NegativeStatement::~NegativeStatement() {
 void NegativeStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	if (exp_->type()->type->getType() == Int) {
-	} else if (exp_->type()->type->getType() == Float32) {
+	if (exp_->type()->type()->getType() == Int) {
+	} else if (exp_->type()->type()->getType() == Float32) {
 	} else {
-		throw StatementException(this, std::string("cannot negate type ") + exp_->type()->type->getTypeName());
+		throw StatementException(this, std::string("cannot negate type ") + exp_->type()->type()->getTypeName());
 	}
 
 }
@@ -43,12 +43,12 @@ int NegativeStatement::generateCode(int resultRegister,
 
 		generated << "load 0 $" << VM::vmTempRegisterOne << "\n";
 
-		if (exp_->type()->type->getType() == Int) {
+		if (exp_->type()->type()->getType() == Int) {
 
 			generated << "sub $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
 
-		} else if (exp_->type()->type->getType() == Float32) {
+		} else if (exp_->type()->type()->getType() == Float32) {
 
 			generated << "subf32 $" << VM::vmTempRegisterOne << " $"
 					<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";

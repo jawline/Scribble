@@ -64,9 +64,10 @@ int FunctionReferenceStatement::generateCode(int resultRegister,
 
 void FunctionReferenceStatement::fix() {
 
-	_refType->type = getTypeManager().getType(
-			func_->getFunction()->getSignature().getArguments(),
-			func_->getFunction()->getSignature().getReturnType());
+	_refType->setType(
+			getTypeManager().getType(
+					func_->getFunction()->getSignature().getArguments(),
+					func_->getFunction()->getSignature().getReturnType()));
 
 }
 

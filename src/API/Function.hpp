@@ -63,11 +63,11 @@ public:
 			virt->popStackLong(val, ref);
 
 			if (ref) {
-				vals[i] = API::APIValue(getSignature().getArguments()[i]->type,
+				vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
 						virt->getHeap().getType(val),
 						virt->getHeap().getSmartPointer(val), val);
 			} else {
-				vals[i] = API::APIValue(getSignature().getArguments()[i]->type,
+				vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
 						val);
 			}
 

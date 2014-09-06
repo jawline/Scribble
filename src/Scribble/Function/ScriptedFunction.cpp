@@ -31,7 +31,7 @@ ScriptedFunction::~ScriptedFunction() {
 void ScriptedFunction::check() const {
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
-		statements_[i]->checkTree(getSignature().getReturnType()->type);
+		statements_[i]->checkTree(getSignature().getReturnType()->type());
 	}
 
 }

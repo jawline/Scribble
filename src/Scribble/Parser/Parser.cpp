@@ -85,9 +85,9 @@ void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
 				printf(", ");
 			}
 
-			if (fs[i]->getSignature().getArguments()[i]->type != nullptr) {
+			if (fs[i]->getSignature().getArguments()[i]->type() != nullptr) {
 				printf("%s",
-						fs[i]->getSignature().getArguments()[i]->type->getTypeName().c_str());
+						fs[i]->getSignature().getArguments()[i]->type()->getTypeName().c_str());
 			} else {
 				printf("Type not evaluated\n");
 			}
@@ -95,7 +95,7 @@ void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
 		}
 
 		printf(") : %s\n",
-				fs[i]->getSignature().getReturnType()->type->getTypeName().c_str());
+				fs[i]->getSignature().getReturnType()->type()->getTypeName().c_str());
 	}
 
 }
@@ -182,23 +182,23 @@ bool Parser::testFunctionEquivilence(SmartPointer<Function> function, SmartPoint
 
 void Parser::resolve(TypeReference reference, NamespaceType ns) {
 
-	if (reference->type != nullptr) {
+	if (reference->type() != nullptr) {
 		return;
 	}
 
-	if (reference->typeNamespace.size() != 0) {
-		ns = Namespace[reference->typeNamespace];
+	if (reference->getNamespace().size() != 0) {
+		ns = Namespace[reference->getNamespace()];
 	}
 
-	if (ns[reference->name].type() != TypeEntry) {
-		std::string error = reference->name;
+	if (ns[reference->getName()].type() != TypeEntry) {
+		std::string error = reference->getName();
 		throw StatementException(nullptr, error + " is not a type");
 	}
 
-	TypeReference ref = ns[reference->name].getType();
+	TypeReference ref = ns[reference->getName()].getType();
 	resolve(ref, ns);
 
-	reference->type = ref->type;
+	reference->setType(ref->type());
 }
 
 void Parser::resetImportList() {
@@ -327,18 +327,19 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 		//then set change the type namespace from the local representation to the internal parser representation
 		//Otherwise throw an error because the package has not been imported.
 
-		if (typeReferences[i]->typeNamespace.length() > 0) {
+		if (typeReferences[i]->getNamespace().length() > 0) {
 
-			if (imports.find(typeReferences[i]->typeNamespace)
+			if (imports.find(typeReferences[i]->getNamespace())
 					!= imports.end()) {
 
-				typeReferences[i]->typeNamespace = getUniformPath(
-						imports.find(typeReferences[i]->typeNamespace)->second);
+				typeReferences[i]->setNamespace(
+						getUniformPath(
+								imports.find(typeReferences[i]->getNamespace())->second));
 
 			} else {
 
 				throw ParserException(filename,
-						"Package " + typeReferences[i]->typeNamespace
+						"Package " + typeReferences[i]->getNamespace()
 								+ " has not been included");
 
 			}

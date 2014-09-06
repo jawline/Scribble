@@ -26,11 +26,11 @@ void StructureStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (type()->type->getType() != StructureType) {
-		throw StatementException(this, std::string() + "the type " + type()->type->getTypeName() + " does not need a structure constructor");
+	if (type()->type()->getType() != StructureType) {
+		throw StatementException(this, std::string() + "the type " + type()->type()->getTypeName() + " does not need a structure constructor");
 	}
 
-	StructureInfo* info = (StructureInfo*) type()->type;
+	StructureInfo* info = (StructureInfo*) type()->type();
 
 	if (info->getNumFields() != statements_.size()) {
 		std::stringstream errormsg;
@@ -40,10 +40,10 @@ void StructureStatement::checkTree(Type* functionType) {
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
-		if (!(statements_[i]->type()->type->Equals(info->getField(i).second->type) || statements_[i]->type()->type->getType() == NilType)) {
+		if (!(statements_[i]->type()->type()->Equals(info->getField(i).second->type()) || statements_[i]->type()->type()->getType() == NilType)) {
 
 			std::stringstream errorMsg;
-			errorMsg << "the constructor argument " << i << " is a " << statements_[i]->type()->type->getTypeName() << " however a " << info->getField(i).second->type->getTypeName() << " was expected";
+			errorMsg << "the constructor argument " << i << " is a " << statements_[i]->type()->type()->getTypeName() << " however a " << info->getField(i).second->type()->getTypeName() << " was expected";
 			throw StatementException(this, errorMsg.str());
 		}
 
@@ -60,7 +60,7 @@ int StructureStatement::generateCode(int result, std::stringstream& code) {
 	int instrs = 0;
 
 	//Create the structure reference
-	code << "newstruct \"" << type()->type->getTypeName() << "\" $"
+	code << "newstruct \"" << type()->type()->getTypeName() << "\" $"
 			<< VM::vmTempRegisterOne << "\n";
 	instrs += 1;
 

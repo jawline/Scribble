@@ -30,12 +30,12 @@ void CallFunctionReference::checkTree(Type* functionType) {
 		args_[i]->checkTree(functionType);
 	}
 
-	if (fn_->type()->type->getReferenceArguments().size() != args_.size()) {
+	if (fn_->type()->type()->getReferenceArguments().size() != args_.size()) {
 
 		std::stringstream errorMsg;
 
 		errorMsg << "the function takes "
-				<< fn_->type()->type->getReferenceArguments().size()
+				<< fn_->type()->type()->getReferenceArguments().size()
 				<< " arguments however only " << args_.size()
 				<< " where supplied";
 
@@ -43,15 +43,15 @@ void CallFunctionReference::checkTree(Type* functionType) {
 	}
 
 	for (unsigned int i = 0;
-			i < fn_->type()->type->getReferenceArguments().size(); i++) {
+			i < fn_->type()->type()->getReferenceArguments().size(); i++) {
 
-		if (!fn_->type()->type->getReferenceArguments()[i]->type->Equals(
-				args_[i]->type()->type)) {
+		if (!fn_->type()->type()->getReferenceArguments()[i]->type()->Equals(
+				args_[i]->type()->type())) {
 
 			std::stringstream errorMsg;
 			errorMsg << "argument " << i << "was expected to be a "
-					<< fn_->type()->type->getReferenceArguments()[0]->type->getTypeName()
-					<< " however a " << args_[i]->type()->type->getTypeName()
+					<< fn_->type()->type()->getReferenceArguments()[0]->type()->getTypeName()
+					<< " however a " << args_[i]->type()->type()->getTypeName()
 					<< " was supplied";
 
 			throw StatementException(this, errorMsg.str());
@@ -59,10 +59,10 @@ void CallFunctionReference::checkTree(Type* functionType) {
 
 	}
 
-	if (fn_->type()->type->getType() != FunctionReferenceType) {
+	if (fn_->type()->type()->getType() != FunctionReferenceType) {
 		throw StatementException(this,
 				std::string("value passed is a ")
-						+ fn_->type()->type->getTypeName()
+						+ fn_->type()->type()->getTypeName()
 						+ " and not a function reference");
 	}
 
@@ -73,7 +73,7 @@ TypeReference CallFunctionReference::type() {
 }
 
 void CallFunctionReference::fix() {
-	returnType_->type = fn_->type()->type->getReferenceReturnType()->type;
+	returnType_->setType(fn_->type()->type()->getReferenceReturnType()->type());
 }
 
 int CallFunctionReference::generateCode(int resultRegister,

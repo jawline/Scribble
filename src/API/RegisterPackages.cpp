@@ -75,17 +75,17 @@ void registerPackages(
 
 			} else if (iterator->second.type() == ScribbleCore::TypeEntry) {
 
-				if (iterator->second.getType()->type->getType() == ScribbleCore::StructureType) {
+				if (iterator->second.getType()->type()->getType() == ScribbleCore::StructureType) {
 					vm.logMessage(VM::Log, std::string("Registering Type ") + selectedNamespaceIter->first + VM::vmNamespaceSeperator + iterator->first + " {\n");
 
 					ScribbleCore::TypeReference type = iterator->second.getType();
-					ScribbleCore::StructureInfo* info = (ScribbleCore::StructureInfo*) iterator->second.getType()->type;
+					ScribbleCore::StructureInfo* info = (ScribbleCore::StructureInfo*) iterator->second.getType()->type();
 
 					std::vector<SmartPointer<VM::VMStructureField>> fields;
 
 					for (unsigned int i = 0; i < info->getNumFields(); i++) {
 
-						ScribbleCore::Type* fieldType = info->getField(i).second->type;
+						ScribbleCore::Type* fieldType = info->getField(i).second->type();
 
 						std::string fullTypeName = fieldType->getTypeName();
 

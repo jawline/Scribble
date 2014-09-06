@@ -17,8 +17,8 @@ std::string Variable::getName() {
 
 Type* Variable::getType() {
 
-	if (type_.get() != nullptr && type_->type != nullptr) {
-		return type_->type;
+	if (type_.get() != nullptr && type_->type() != nullptr) {
+		return type_->type();
 	}
 
 	/**
@@ -34,7 +34,7 @@ TypeReference Variable::getTypeReference() {
 }
 
 void Variable::setType(Type* type) {
-	type_->type = type;
+	type_->setType(type);
 }
 
 void Variable::setPosition(int pos) {

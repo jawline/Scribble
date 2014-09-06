@@ -15,14 +15,27 @@ namespace ScribbleCore {
 
 //TODO: Make this a class, It's used to often not to be one
 
-struct TypeReferenceCore {
+class TypeReferenceCore {
+private:
+	std::string typeNamespace_;
+	std::string name_;
+	Type* type_;
 
+public:
 	TypeReferenceCore(std::string name, Type* type);
 	TypeReferenceCore(std::string ns, std::string name, Type* type);
 
-	std::string typeNamespace;
-	std::string name;
-	Type* type;
+	std::string getNamespace() const;
+	std::string getName() const;
+	Type* type() const;
+	void setType(Type* type) {
+		type_ = type;
+	}
+
+	void setNamespace(std::string const& ns) {
+		typeNamespace_ = ns;
+	}
+
 };
 
 typedef SmartPointer<TypeReferenceCore> TypeReference;

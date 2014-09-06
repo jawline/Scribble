@@ -160,9 +160,9 @@ std::string Heap::debugState() {
 	/**
 	 for (auto iter = heapMap_.begin(); iter != heapMap_.end(); iter++) {
 	 dbg << "Entry: " << iter->first << " type "
-	 << iter->second.type->typeName();
+	 << iter->second.type->type()Name();
 
-	 if (iter->second.type->typeName().compare("string") == 0) {
+	 if (iter->second.type->type()Name().compare("string") == 0) {
 	 dbg << " string value: " << iter->second.pointer;
 	 }
 

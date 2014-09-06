@@ -20,7 +20,7 @@ NotStatement::~NotStatement() {
 void NotStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	if (!exp_->type()->type->Equals(getTypeManager().getType(Boolean))) {
+	if (!exp_->type()->type()->Equals(getTypeManager().getType(Boolean))) {
 
 		throw StatementException(this,
 				"A not expression (!expr) can only be used on a boolean value");
