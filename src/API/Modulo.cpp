@@ -10,8 +10,8 @@
 
 Modulo::Modulo(std::string names) : Function("NativeModulo", names) {
 
-
 	std::vector<ScribbleCore::TypeReference> refs;
+
 	refs.push_back(
 			ScribbleCore::makeTypeReference(
 					ScribbleCore::getTypeManager().getType(
@@ -25,11 +25,9 @@ Modulo::Modulo(std::string names) : Function("NativeModulo", names) {
 			ScribbleCore::getTypeManager().getType(ScribbleCore::Int));
 
 	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
-
 }
 
 Modulo::~Modulo() {
-	// TODO Auto-generated destructor stub
 }
 
 APIValue Modulo::execute(API::APIValue* values, VM::VirtualMachine* virt) {

@@ -11,7 +11,7 @@
 
 namespace ScribbleCore {
 
-Type* TypeManager::tFind(Type* desired) {
+Type* TypeManager::tFind(Type* desired) const {
 
 	for (unsigned int i = 0; i < types_.size(); ++i) {
 
@@ -36,7 +36,7 @@ TypeManager::~TypeManager() {
 }
 
 Type* TypeManager::getType(ValueType base) {
-	return getType(base, TypeReference( new TypeReferenceCore("", nullptr) ) );
+	return getType(base, TypeReference(new TypeReferenceCore("", nullptr)));
 }
 
 Type* TypeManager::getType(ValueType base, TypeReference subType) {
@@ -55,7 +55,8 @@ Type* TypeManager::getType(ValueType base, TypeReference subType) {
 	return desired;
 }
 
-Type* TypeManager::getType(std::vector<TypeReference> argumentTypes, TypeReference returnType) {
+Type* TypeManager::getType(std::vector<TypeReference> argumentTypes,
+		TypeReference returnType) {
 
 	Type* desired = new Type(argumentTypes, returnType);
 	Type* found = tFind(desired);

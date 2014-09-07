@@ -31,11 +31,11 @@ public:
 		next_ = 0;
 	}
 
-	std::string const& getName() {
+	std::string const& getName() const {
 		return name_;
 	}
 
-	T getData() {
+	T getData() const {
 		return data_;
 	}
 
@@ -43,7 +43,7 @@ public:
 		data_ = data;
 	}
 
-	HashItemLink<T>* getNext() {
+	HashItemLink<T>* getNext() const {
 		return next_;
 	}
 
@@ -68,11 +68,11 @@ public:
 			root_(nullptr) {
 	}
 
-	bool strEqual(std::string const& left, std::string const& right) {
+	bool strEqual(std::string const& left, std::string const& right) const {
 		return left.compare(right) == 0;
 	}
 
-	HashItemLink<T>* find(std::string const& id) {
+	HashItemLink<T>* find(std::string const& id) const {
 
 		if (root_ == nullptr) {
 			return nullptr;
@@ -212,20 +212,19 @@ public:
 
 	int hash(std::string const& id) {
 
-	    size_t len = id.size();
-	    uint32_t hash = 0;
-	    uint32_t i = 0;
+		size_t len = id.size();
+		uint32_t hash = 0;
+		uint32_t i = 0;
 
-	    for(hash = i = 0; i < len; ++i)
-	    {
-	        hash += id[i];
-	        hash += (hash << 10);
-	        hash ^= (hash >> 6);
-	    }
+		for (hash = i = 0; i < len; ++i) {
+			hash += id[i];
+			hash += (hash << 10);
+			hash ^= (hash >> 6);
+		}
 
-	    hash += (hash << 3);
-	    hash ^= (hash >> 11);
-	    hash += (hash << 15);
+		hash += (hash << 3);
+		hash ^= (hash >> 11);
+		hash += (hash << 15);
 
 		return hash % numBuckets_;
 	}

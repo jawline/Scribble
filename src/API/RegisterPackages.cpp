@@ -124,6 +124,5 @@ void registerPackages(
 		}
 
 	}
-
 }
 

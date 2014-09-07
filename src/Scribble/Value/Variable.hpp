@@ -23,13 +23,13 @@ public:
 	Variable(std::string name, int position, TypeReference type);
 	~Variable();
 
-	Type* getType();
-	TypeReference getTypeReference();
-	void setType(Type* type);
+	Type* getType() const;
+	TypeReference getTypeReference() const;
+	std::string getName() const;
+	int getPosition() const;
 
+	void setType(Type* type);
 	void setPosition(int pos);
-	int getPosition();
-	std::string getName();
 
 };
 

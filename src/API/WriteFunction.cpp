@@ -17,7 +17,6 @@ WriteFunction::WriteFunction(std::string ns) :
 			ScribbleCore::getTypeManager().getType(ScribbleCore::Void));
 
 	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
-
 }
 
 API::APIValue WriteFunction::execute(API::APIValue* values,

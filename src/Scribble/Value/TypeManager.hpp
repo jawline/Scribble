@@ -22,7 +22,7 @@ class TypeManager {
 private:
 	std::vector<Type*> types_;
 
-	Type* tFind(Type* desired);
+	Type* tFind(Type* desired) const;
 
 public:
 	TypeManager();

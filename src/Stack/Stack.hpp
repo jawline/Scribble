@@ -75,11 +75,11 @@ public:
 		return data_[current_];
 	}
 
-	s_Type get(unsigned int i) {
+	s_Type get(unsigned int i) const {
 		return data_[i];
 	}
 
-	size_t size() {
+	size_t size() const {
 		return current_;
 	}
 

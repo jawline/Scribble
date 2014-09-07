@@ -24,10 +24,7 @@ private:
 
 protected:
 	ScribbleCore::FunctionSignature signature_;
-
-	void setSignature(ScribbleCore::FunctionSignature sig) {
-		signature_ = sig;
-	}
+	void setSignature(ScribbleCore::FunctionSignature sig);
 
 public:
 
@@ -49,46 +46,12 @@ public:
 	 * @param virt The virtual machine this function is being run in the context of.
 	 * @return The resulting API value
 	 */
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt) = 0;
+	virtual APIValue execute(API::APIValue* values,
+			VM::VirtualMachine* virt) = 0;
 
-	virtual void execute(VM::VirtualMachine* virt) {
+	virtual void execute(VM::VirtualMachine* virt);
 
-		APIValue* vals = new APIValue[getSignature().getArguments().size()];
-
-		for (int i = getSignature().getArguments().size() - 1; i > -1; --i) {
-
-			int64_t val;
-			bool ref;
-
-			virt->popStackLong(val, ref);
-
-			if (ref) {
-				vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
-						virt->getHeap().getType(val),
-						virt->getHeap().getSmartPointer(val), val);
-			} else {
-				vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
-						val);
-			}
-
-		}
-
-		APIValue returnVal = execute(vals, virt);
-
-		if (returnVal.isReference()) {
-			virt->setRegister(VM::vmReturnResultRegister,
-					returnVal.getValue32(), true);
-			virt->hitGc();
-		} else {
-			virt->setRegister(VM::vmReturnResultRegister,
-					returnVal.getValue32(), false);
-		}
-	}
-
-	virtual int debugCode(std::stringstream& gen) {
-		gen << std::string("#NativeFunction");
-		return 0;
-	}
+	virtual int debugCode(std::stringstream& gen);
 
 	virtual std::string getNamespace() const {
 		return namespace_;

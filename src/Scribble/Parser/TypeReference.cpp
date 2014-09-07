@@ -19,18 +19,32 @@ TypeReferenceCore::TypeReferenceCore(std::string ns, std::string name,
 }
 
 std::string TypeReferenceCore::getNamespace() const {
+
 	return typeNamespace_;
 }
 
 std::string TypeReferenceCore::getName() const {
+
 	return name_;
 }
 
 Type* TypeReferenceCore::type() const {
+
 	return type_;
 }
 
+void TypeReferenceCore::setType(Type* type) {
+
+	type_ = type;
+}
+
+void TypeReferenceCore::setNamespace(std::string const& ns) {
+
+	typeNamespace_ = ns;
+}
+
 TypeReference makeTypeReference(Type* type) {
+
 	return TypeReference(new TypeReferenceCore(type->getTypeName(), type));
 }
 

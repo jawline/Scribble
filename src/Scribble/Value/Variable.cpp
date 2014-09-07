@@ -11,11 +11,11 @@ Variable::~Variable() {
 
 }
 
-std::string Variable::getName() {
+std::string Variable::getName() const {
 	return name_;
 }
 
-Type* Variable::getType() {
+Type* Variable::getType() const {
 
 	if (type_.get() != nullptr && type_->type() != nullptr) {
 		return type_->type();
@@ -29,7 +29,7 @@ Type* Variable::getType() {
 	return getTypeManager().getType(TypeUnresolved);
 }
 
-TypeReference Variable::getTypeReference() {
+TypeReference Variable::getTypeReference() const {
 	return type_;
 }
 
@@ -41,7 +41,7 @@ void Variable::setPosition(int pos) {
 	position_ = pos;
 }
 
-int Variable::getPosition() {
+int Variable::getPosition() const {
 	return position_;
 }
 

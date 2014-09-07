@@ -12,25 +12,23 @@
 RandomInt::RandomInt(std::string ns) :
 		Function("RandomInt", ns) {
 
-
 	std::vector<ScribbleCore::TypeReference> refs;
+
 	refs.push_back(
 			ScribbleCore::makeTypeReference(
-					ScribbleCore::getTypeManager().getType(
-							ScribbleCore::Int)));
+					ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
 
 	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
 			ScribbleCore::getTypeManager().getType(ScribbleCore::Int));
 
 	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
-
 }
 
 RandomInt::~RandomInt() {
-	// TODO Auto-generated destructor stub
 }
 
-APIValue RandomInt::execute(API::APIValue* values,
-		VM::VirtualMachine* virt) {
-	return API::APIValue(ScribbleCore::getIntType(), rand() % values[0].getValue32());
+APIValue RandomInt::execute(API::APIValue* values, VM::VirtualMachine* virt) {
+
+	return API::APIValue(ScribbleCore::getIntType(),
+			rand() % values[0].getValue32());
 }

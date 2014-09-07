@@ -3,12 +3,12 @@
 
 namespace VM {
 
-const static unsigned int vmNumRegisters = 32;
-const static unsigned int vmNumReservedRegisters = 3;
-const static unsigned int vmTempRegisterOne = 0;
-const static unsigned int vmTempRegisterTwo = 1;
-const static unsigned int vmTempRegisterThree = 2;
-const static unsigned int vmReturnResultRegister = vmTempRegisterThree;
+const static int vmNumRegisters = 32;
+const static int vmNumReservedRegisters = 3;
+const static int vmTempRegisterOne = 0;
+const static int vmTempRegisterTwo = 1;
+const static int vmTempRegisterThree = 2;
+const static int vmReturnResultRegister = vmTempRegisterThree;
 
 }
 

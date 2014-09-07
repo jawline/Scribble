@@ -28,14 +28,10 @@ public:
 	std::string getNamespace() const;
 	std::string getName() const;
 	Type* type() const;
-	void setType(Type* type) {
-		type_ = type;
-	}
 
-	void setNamespace(std::string const& ns) {
-		typeNamespace_ = ns;
-	}
+	void setType(Type* type);
 
+	void setNamespace(std::string const& ns);
 };
 
 typedef SmartPointer<TypeReferenceCore> TypeReference;

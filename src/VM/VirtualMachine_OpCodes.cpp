@@ -338,7 +338,7 @@ void VirtualMachine::opNewArray(InstructionSet& instructionSet) {
 }
 
 void VirtualMachine::opReturn(InstructionSet& instructionSet) {
-	VM_PRINTF_LOG("VM Return at instruction %i\n", currentInstruction);
+	VM_PRINTF_LOG("VM Return at instruction %li\n", currentInstruction);
 
 	if (!returnToPreviousFunction(currentFunction, instructionSet)) {
 		shouldReturn = true;
@@ -365,7 +365,7 @@ void VirtualMachine::opCallFn(InstructionSet& instructionSet) {
 
 		if (!heap_.validReference(heapEntry)) {
 			VM_PRINTF_FATAL(
-					"Entry %i at register %i is not a valid heap entry for function call\n",
+					"Entry %li at register %i is not a valid heap entry for function call\n",
 					heapEntry, reg);
 		}
 

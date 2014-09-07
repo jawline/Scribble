@@ -14,7 +14,17 @@
 
 namespace VM {
 
+/**
+ * The size of each OpCode in bytes
+ */
+
 const static unsigned int vmOpCodeSize = 8;
+
+/**
+ * The number of garbage collection 'hits' (changes to references)
+ * before the garbage collector is done again
+ */
+
 const static unsigned int GarbageCollectHitLimit = 400;
 
 /**

@@ -67,9 +67,7 @@ public:
 	 * Get the virtual machine context which has the packages loaded into it.
 	 */
 
-	VM::VirtualMachine* getEnvironment() {
-		return &environment;
-	}
+	VM::VirtualMachine* getEnvironment();
 
 	/**
 	 * Execute the function name with zero arguments ( Equivilent to execute(function, empty argument list); )

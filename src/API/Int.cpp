@@ -13,8 +13,8 @@ namespace API {
 IntFromFloat32::IntFromFloat32(std::string ns) :
 		Function("Int", ns) {
 
-
 	std::vector<ScribbleCore::TypeReference> refs;
+
 	refs.push_back(
 			ScribbleCore::makeTypeReference(
 					ScribbleCore::getTypeManager().getType(
@@ -24,15 +24,14 @@ IntFromFloat32::IntFromFloat32(std::string ns) :
 			ScribbleCore::getTypeManager().getType(ScribbleCore::Int));
 
 	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
-
 }
 
 IntFromFloat32::~IntFromFloat32() {
-	// TODO Auto-generated destructor stub
 }
 
 API::APIValue IntFromFloat32::execute(API::APIValue* values,
 		VM::VirtualMachine* virt) {
+
 	int val = values[0].getValueFloat32();
 	return API::APIValue(ScribbleCore::getIntType(), val);
 }

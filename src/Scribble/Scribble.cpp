@@ -152,3 +152,7 @@ void Scribble::load() {
 	//Compile the virtual machine from the packages.
 	registerPackages(compiledPackages, environment);
 }
+
+VM::VirtualMachine* Scribble::getEnvironment() {
+	return &environment;
+}

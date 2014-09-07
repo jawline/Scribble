@@ -69,7 +69,8 @@ public:
 	 * Returns the first argument found with one of either two names (Useful for -v or --version)
 	 */
 
-	Argument const search(std::string const& name, std::string const& alternative) const;
+	Argument const search(std::string const& name,
+			std::string const& alternative) const;
 
 	/**
 	 * Returns true if an argument with the following name exists
