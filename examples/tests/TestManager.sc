@@ -19,11 +19,15 @@ package structQs := import("structQuicksortTest");
 package refEqTest := import("refEqualityTest");
 package listTest := import("LinkedList");
 package functionRefs := import("functionRefs");
+package magicTest := import("magicTest");
 
 func TestAll() {
 
  console.Log("Not Test\n");
  notTest.Test();
+
+ console.Log("Magic numbers test\n");
+ magicTest.Test();
 
  console.Log("Loop Test\n");
  loopsTest.Test();
