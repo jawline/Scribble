@@ -30,7 +30,6 @@ Concat::Concat(std::string ns) :
 }
 
 Concat::~Concat() {
-	// TODO Auto-generated destructor stub
 }
 
 API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {

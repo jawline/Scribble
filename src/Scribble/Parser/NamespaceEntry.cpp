@@ -24,7 +24,6 @@ NamespaceEntry::NamespaceEntry(std::vector<SafeFunction> set) {
 }
 
 NamespaceEntry::~NamespaceEntry() {
-	// TODO Auto-generated destructor stub
 }
 
 EntryType NamespaceEntry::type() {

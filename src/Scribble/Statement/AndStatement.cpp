@@ -33,10 +33,10 @@ void AndStatement::checkTree(Type* functionType) {
 			std::string("and on types ") + lhs_->type()->type()->getTypeName()
 					+ " and " + rhs_->type()->type()->getTypeName()
 					+ " is not possible. and comparison can only be performed on two booleans");
-
 }
 
 TypeReference AndStatement::type() {
+
 	return makeTypeReference(getTypeManager().getType(Boolean));
 }
 

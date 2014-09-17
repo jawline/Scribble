@@ -10,12 +10,9 @@
 namespace API {
 
 FatalError::FatalError() {
-	// TODO Auto-generated constructor stub
-
 }
 
 FatalError::~FatalError() {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace API */

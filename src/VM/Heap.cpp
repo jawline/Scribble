@@ -23,7 +23,6 @@ Heap::Heap() {
 }
 
 Heap::~Heap() {
-	// TODO Auto-generated destructor stub
 }
 
 bool Heap::validReference(long entry) {

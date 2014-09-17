@@ -23,7 +23,6 @@ ForStatement::ForStatement(int lineNo, std::string sym, SafeStatement initial,
 }
 
 ForStatement::~ForStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 TypeReference ForStatement::type() {
