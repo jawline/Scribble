@@ -26,15 +26,13 @@ void AndStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (!lhs_->type()->type()->Equals(getTypeManager().getType(Boolean))
-			|| !rhs_->type()->type()->Equals(getTypeManager().getType(Boolean))) {
-
-		throw StatementException(this,
-				std::string("and on types ") + lhs_->type()->type()->getTypeName()
-						+ " and " + rhs_->type()->type()->getTypeName()
-						+ " is not possible. and comparison can only be performed on two booleans");
-
-	}
+	StatementAssert(this,
+			!lhs_->type()->type()->Equals(getTypeManager().getType(Boolean))
+					|| !rhs_->type()->type()->Equals(
+							getTypeManager().getType(Boolean)),
+			std::string("and on types ") + lhs_->type()->type()->getTypeName()
+					+ " and " + rhs_->type()->type()->getTypeName()
+					+ " is not possible. and comparison can only be performed on two booleans");
 
 }
 

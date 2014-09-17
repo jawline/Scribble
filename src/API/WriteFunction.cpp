@@ -1,6 +1,5 @@
 #include "WriteFunction.hpp"
 #include <stdio.h>
-#include <Scribble/Statement/StatementException.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 
 WriteFunction::WriteFunction(std::string ns) :
