@@ -19,7 +19,7 @@ StatementException::~StatementException() throw () {
 void StatementAssert(Statement* statement, bool assertionValue,
 		std::string error) {
 
-	if (assertionValue) {
+	if (!assertionValue) {
 		throw StatementException(statement, error);
 	}
 

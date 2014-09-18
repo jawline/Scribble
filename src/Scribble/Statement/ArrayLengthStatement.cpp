@@ -24,7 +24,7 @@ ArrayLengthStatement::~ArrayLengthStatement() {
 void ArrayLengthStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	StatementAssert(this, exp_->type()->type()->getType() != Array,
+	StatementAssert(this, exp_->type()->type()->getType() == Array,
 			std::string("len does not work on ")
 					+ exp_->type()->type()->getTypeName()
 					+ " it can only be used on arrays");

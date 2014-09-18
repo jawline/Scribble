@@ -29,19 +29,19 @@ void AssignArrayStatement::checkTree(Type* functionType) {
 	toAssign_->checkTree(functionType);
 	position_->checkTree(functionType);
 
-	StatementAssert(this, array_->type()->type()->getType() != Array,
+	StatementAssert(this, array_->type()->type()->getType() == Array,
 			std::string("Not an array, Type ")
 					+ array_->type()->type()->getTypeName()
 					+ " given when an array was expected.");
 
-	StatementAssert(this, position_->type()->type()->getType() != Int,
+	StatementAssert(this, position_->type()->type()->getType() == Int,
 			std::string("Type ") + position_->type()->type()->getTypeName()
 					+ " cannot be used as an index. Index must be an integer");
 
 	StatementAssert(this,
-			!(array_->type()->type()->getSubtype()->Equals(
+			array_->type()->type()->getSubtype()->Equals(
 					toAssign_->type()->type())
-					|| toAssign_->type()->type()->getType() == NilType),
+					|| toAssign_->type()->type()->getType() == NilType,
 			std::string("Value given is of type ")
 					+ toAssign_->type()->type()->getTypeName()
 					+ " which differs from expected type "

@@ -27,8 +27,8 @@ void AndStatement::checkTree(Type* functionType) {
 	rhs_->checkTree(functionType);
 
 	StatementAssert(this,
-			!lhs_->type()->type()->Equals(getTypeManager().getType(Boolean))
-					|| !rhs_->type()->type()->Equals(
+			lhs_->type()->type()->Equals(getTypeManager().getType(Boolean))
+					&& rhs_->type()->type()->Equals(
 							getTypeManager().getType(Boolean)),
 			std::string("and on types ") + lhs_->type()->type()->getTypeName()
 					+ " and " + rhs_->type()->type()->getTypeName()

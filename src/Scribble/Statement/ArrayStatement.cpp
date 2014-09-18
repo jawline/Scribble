@@ -27,7 +27,7 @@ TypeReference ArrayStatement::type() {
 void ArrayStatement::checkTree(Type* functionType) {
 	length_->checkTree(functionType);
 
-	StatementAssert(this, length_->type()->type()->getType() != Int,
+	StatementAssert(this, length_->type()->type()->getType() == Int,
 			std::string("Type ") + length_->type()->type()->getTypeName()
 					+ " cannot be used as the length of an array. Integer values must be used for array size.");
 }
