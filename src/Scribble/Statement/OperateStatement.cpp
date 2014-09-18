@@ -30,14 +30,16 @@ void OperateStatement::checkTree(Type* type) {
 	lhs_->checkTree(type);
 	rhs_->checkTree(type);
 
-	if (!(lhs_->type()->type()->Equals(rhs_->type()->type()))) {
-		throw StatementException(this,
-				std::string("Cannot add values of types ") + lhs_->type()->type()->getTypeName() + " " + rhs_->type()->type()->getTypeName() + " can only add two values of the same type");
-	}
+	StatementAssert(this, lhs_->type()->type()->Equals(rhs_->type()->type()),
+			std::string("Cannot add values of types ")
+					+ lhs_->type()->type()->getTypeName() + " "
+					+ rhs_->type()->type()->getTypeName()
+					+ " can only add two values of the same type");
 
-	if (!(lhs_->type()->type()->isPrimitive())) {
-		throw StatementException(this, std::string("The add operator cannot be used with ") + lhs_->type()->type()->getTypeName());
-	}
+	StatementAssert(this, lhs_->type()->type()->isPrimitive(),
+			std::string(
+					"The add operator can only be used on primative numbers (int, float) and not ")
+					+ lhs_->type()->type()->getTypeName());
 }
 
 int OperateStatement::generateCode(int resultRegister,
@@ -89,13 +91,13 @@ int OperateStatement::generateCode(int resultRegister,
 		}
 
 		default: {
-			throw StatementException(this, "Cannot generate int operation instruction");
+			throw StatementException(this,
+					"Cannot generate int operation instruction");
 			break;
 		}
 
 		}
 		break;
-
 
 	}
 	case Float32: {
@@ -140,7 +142,8 @@ int OperateStatement::generateCode(int resultRegister,
 		}
 
 		default: {
-			throw StatementException(this, "Cannot generate float32 operation instruction");
+			throw StatementException(this,
+					"Cannot generate float32 operation instruction");
 			break;
 		}
 
@@ -148,9 +151,9 @@ int OperateStatement::generateCode(int resultRegister,
 		break;
 	}
 
-
 	default: {
-		throw StatementException(this, "Operate statement cannot generate instruction for this type");
+		throw StatementException(this,
+				"Operate statement cannot generate instruction for this type");
 	}
 
 	}
