@@ -32,6 +32,7 @@ void TestStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
+	//TODO: Improve this compiler output
 	if (!lhs_->type()->type()->Equals(rhs_->type()->type())) {
 
 		if (!(lhs_->type()->type()->getType() == NilType

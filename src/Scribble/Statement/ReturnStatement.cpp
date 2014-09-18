@@ -22,28 +22,26 @@ void ReturnStatement::checkTree(Type* functionType) {
 
 	if (stm_.get() == nullptr) {
 
-		//Check if it's ok for a function to return nothing
-		if (!functionType->Equals(getVoidType())) {
-			std::stringstream errorMsg;
-			errorMsg << "this function requires a return argument of type " << functionType->getTypeName();
-			throw StatementException(this, errorMsg.str());
-		}
-
+		StatementAssert(this, functionType->Equals(getVoidType()),
+				std::string("this function requires a return argument of type ")
+						+ functionType->getTypeName());
 	} else {
 
 		stm_->checkTree(functionType);
 
-		if (!(functionType->Equals(stm_->type()->type()))) {
-
-			if (!stm_->type()->type()->Equals(getNilType())) {
-
-				throw StatementException(this,
-						std::string("cannot return ")
-								+ stm_->type()->type()->getTypeName() + " expression. This function returns a "
-								+ functionType->getTypeName());
-
-			}
-		}
+		//TODO: Verify that this doesn't allow return nil on void functions
+		/**
+		 * Example:
+		 * func main() { return nil; } should be invalid
+		 */
+		StatementAssert(this,
+				functionType->Equals(stm_->type()->type())
+						|| (!functionType->Equals(getVoidType())
+								&& stm_->type()->type()->Equals(getNilType())),
+				std::string("cannot return ")
+						+ stm_->type()->type()->getTypeName()
+						+ " expression. This function returns a "
+						+ functionType->getTypeName());
 	}
 }
 

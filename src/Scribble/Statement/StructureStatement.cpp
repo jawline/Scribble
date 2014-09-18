@@ -26,24 +26,34 @@ void StructureStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (type()->type()->getType() != StructureType) {
-		throw StatementException(this, std::string() + "the type " + type()->type()->getTypeName() + " does not need a structure constructor");
-	}
+	StatementAssert(this, type()->type()->getType() == StructureType,
+			std::string() + "the type " + type()->type()->getTypeName()
+					+ " does not need a structure constructor");
 
 	StructureInfo* info = (StructureInfo*) type()->type();
 
 	if (info->getNumFields() != statements_.size()) {
 		std::stringstream errormsg;
-		errormsg << "invalid number of arguments supplied to constructor. The structure " << info->getName() << " requires " << info->getNumFields() << " arguments but only " << statements_.size() << " argument was supplied";
+		errormsg
+				<< "invalid number of arguments supplied to constructor. The structure "
+				<< info->getName() << " requires " << info->getNumFields()
+				<< " arguments but only " << statements_.size()
+				<< " argument was supplied";
 		throw StatementException(this, errormsg.str());
 	}
 
 	for (unsigned int i = 0; i < statements_.size(); ++i) {
 
-		if (!(statements_[i]->type()->type()->Equals(info->getField(i).second->type()) || statements_[i]->type()->type()->getType() == NilType)) {
+		if (!(statements_[i]->type()->type()->Equals(
+				info->getField(i).second->type())
+				|| statements_[i]->type()->type()->getType() == NilType)) {
 
 			std::stringstream errorMsg;
-			errorMsg << "the constructor argument " << i << " is a " << statements_[i]->type()->type()->getTypeName() << " however a " << info->getField(i).second->type()->getTypeName() << " was expected";
+			errorMsg << "the constructor argument " << i << " is a "
+					<< statements_[i]->type()->type()->getTypeName()
+					<< " however a "
+					<< info->getField(i).second->type()->getTypeName()
+					<< " was expected";
 			throw StatementException(this, errorMsg.str());
 		}
 

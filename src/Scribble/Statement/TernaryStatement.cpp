@@ -29,16 +29,11 @@ void TernaryStatement::checkTree(Type* functionType) {
 	lhs_->checkTree(functionType);
 	rhs_->checkTree(functionType);
 
-	if (test_->type()->type()->getType() != Boolean) {
-		throw StatementException(this,
-				"ternary condition expression (condition ? yes : no) should be a boolean value");
-	}
+	StatementAssert(this, test_->type()->type()->getType() == Boolean,
+			"ternary condition expression (condition ? yes : no) should be a boolean value");
 
-	if (!lhs_->type()->type()->Equals(rhs_->type()->type())) {
-		throw StatementException(this,
-				"ternary expressions (condition ? yesExpression : noExpression) have to be the same type");
-	}
-
+	StatementAssert(this, lhs_->type()->type()->Equals(rhs_->type()->type()),
+			"ternary expressions (condition ? yesExpression : noExpression) have to be the same type");
 }
 
 int TernaryStatement::generateCode(int resultRegister,
