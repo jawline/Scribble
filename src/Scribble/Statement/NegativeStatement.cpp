@@ -22,12 +22,11 @@ NegativeStatement::~NegativeStatement() {
 void NegativeStatement::checkTree(Type* functionType) {
 	exp_->checkTree(functionType);
 
-	if (exp_->type()->type()->getType() == Int) {
-	} else if (exp_->type()->type()->getType() == Float32) {
-	} else {
-		throw StatementException(this, std::string("cannot negate type ") + exp_->type()->type()->getTypeName());
-	}
-
+	StatementAssert(this,
+			exp_->type()->type()->getType() == Int
+					|| exp_->type()->type()->getType() == Float32,
+			std::string("cannot negate type ")
+					+ exp_->type()->type()->getTypeName());
 }
 
 TypeReference NegativeStatement::type() {
