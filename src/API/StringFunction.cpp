@@ -6,7 +6,6 @@
  */
 
 #include "StringFunction.hpp"
-#include <Scribble/Statement/StatementException.hpp>
 #include <Scribble/Value/TypeManager.hpp>
 #include <sstream>
 

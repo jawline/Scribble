@@ -21,10 +21,9 @@ IncrementStatement::~IncrementStatement() {
 
 void IncrementStatement::checkTree(Type* functionType) {
 
-	if (variable_->getType()->getType() != Int) {
-		throw StatementException(this, std::string("Cannot use the increment operator on type ") + variable_->getType()->getTypeName());
-	}
-
+	StatementAssert(this, variable_->getType()->getType() == Int,
+			std::string("Cannot use the increment operator on type ")
+					+ variable_->getType()->getTypeName());
 }
 
 TypeReference IncrementStatement::type() {
@@ -44,7 +43,9 @@ int IncrementStatement::generateCode(int resultRegister,
 
 			//TODO: Inc operator
 
-			generated << "inc $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			generated << "inc $"
+					<< variable_->getPosition() + VM::vmNumReservedRegisters
+					<< "\n";
 			instrs += 1;
 
 			if (resultRegister != -1) {
@@ -66,7 +67,9 @@ int IncrementStatement::generateCode(int resultRegister,
 			}
 
 			//TODO: Inc operator
-			generated << "inc $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			generated << "inc $"
+					<< variable_->getPosition() + VM::vmNumReservedRegisters
+					<< "\n";
 			instrs += 1;
 		}
 
@@ -76,7 +79,9 @@ int IncrementStatement::generateCode(int resultRegister,
 
 		if (post_) {
 
-			generated << "dec $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			generated << "dec $"
+					<< variable_->getPosition() + VM::vmNumReservedRegisters
+					<< "\n";
 			instrs += 1;
 
 			if (resultRegister != -1) {
@@ -100,7 +105,9 @@ int IncrementStatement::generateCode(int resultRegister,
 
 			}
 
-			generated << "dec $" << variable_->getPosition() + VM::vmNumReservedRegisters << "\n";
+			generated << "dec $"
+					<< variable_->getPosition() + VM::vmNumReservedRegisters
+					<< "\n";
 			instrs += 1;
 		}
 

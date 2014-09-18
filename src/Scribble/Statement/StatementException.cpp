@@ -13,7 +13,16 @@ StatementException::StatementException(Statement* statement,
 	}
 }
 
-StatementException::~StatementException() throw() {
+StatementException::~StatementException() throw () {
+}
+
+void StatementAssert(Statement* statement, bool assertionValue,
+		std::string error) {
+
+	if (!assertionValue) {
+		throw StatementException(statement, error);
+	}
+
 }
 
 }

@@ -32,7 +32,6 @@ Pow::Pow(std::string ns) :
 }
 
 Pow::~Pow() {
-	// TODO Auto-generated destructor stub
 }
 
 APIValue Pow::execute(API::APIValue* values, VM::VirtualMachine* virt) {
@@ -60,7 +59,6 @@ PowFloat32::PowFloat32(std::string ns) :
 }
 
 PowFloat32::~PowFloat32() {
-	// TODO Auto-generated destructor stub
 }
 
 APIValue PowFloat32::execute(API::APIValue* values, VM::VirtualMachine* virt) {

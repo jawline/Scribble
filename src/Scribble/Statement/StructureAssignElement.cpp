@@ -30,9 +30,9 @@ void StructureAssignElement::fix() {
 
 	elementIndex_ = type->getFieldIndex(elementName_);
 
-	if (elementIndex_ == -1) {
-		throw StatementException(this, "Does not exist in structure");
-	}
+	StatementAssert(this, elementIndex_ != -1,
+			std::string("The field ") + elementName_
+					+ " does not exist in the structure");
 
 	elementType_ = type->getField(elementIndex_).second;
 }
@@ -44,14 +44,20 @@ void StructureAssignElement::checkTree(Type* functionType) {
 	if (lhs_->type()->type()->getType() != StructureType) {
 
 		std::stringstream errorMsg;
-		errorMsg << "the expression given is a " << lhs_->type()->type()->getTypeName() << " and is not a structure";
+		errorMsg << "the expression given is a "
+				<< lhs_->type()->type()->getTypeName()
+				<< " and is not a structure";
 
 		throw StatementException(this, errorMsg.str());
 	}
 
-	if (!(elementType_->type()->Equals(rhs_->type()->type()) || rhs_->type()->type()->getType() == NilType)) {
+	if (!(elementType_->type()->Equals(rhs_->type()->type())
+			|| rhs_->type()->type()->getType() == NilType)) {
 		std::stringstream errorMsg;
-		errorMsg << "The structure field " << elementName_ << " is a " << elementType_->type()->getTypeName() << " and cannot be assigned to a " << rhs_->type()->type()->getTypeName() << " expression";
+		errorMsg << "The structure field " << elementName_ << " is a "
+				<< elementType_->type()->getTypeName()
+				<< " and cannot be assigned to a "
+				<< rhs_->type()->type()->getTypeName() << " expression";
 		throw StatementException(this, errorMsg.str());
 	}
 

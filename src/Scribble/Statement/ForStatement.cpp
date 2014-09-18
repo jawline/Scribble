@@ -23,7 +23,6 @@ ForStatement::ForStatement(int lineNo, std::string sym, SafeStatement initial,
 }
 
 ForStatement::~ForStatement() {
-	// TODO Auto-generated destructor stub
 }
 
 TypeReference ForStatement::type() {
@@ -40,11 +39,10 @@ void ForStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (condition_->type()->type()->getType() != Boolean) {
-
-		throw StatementException(this, std::string("For condition cannot be a ") + condition_->type()->type()->getTypeName() + ", has to be a boolean");
-
-	}
+	StatementAssert(this, condition_->type()->type()->getType() == Boolean,
+			std::string("For condition cannot be a ")
+					+ condition_->type()->type()->getTypeName()
+					+ ", has to be a boolean");
 }
 
 int ForStatement::generateBody(std::stringstream& generated) {

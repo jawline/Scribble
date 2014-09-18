@@ -18,10 +18,8 @@ TypeReference GetVariableStatement::type() {
 
 void GetVariableStatement::checkTree(Type* functionType) {
 
-	if (var_->getType()->getType() == TypeUnresolved) {
-		throw StatementException(this, "Something strange has happened. The variable used has an unresolved type which likely indicates a compiler error.");
-	}
-
+	StatementAssert(this, var_->getType()->getType() != TypeUnresolved,
+			"Something strange has happened. The variable used has an unresolved type which likely indicates a compiler error.");
 }
 
 int GetVariableStatement::generateCode(int resultRegister,

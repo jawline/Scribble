@@ -11,14 +11,15 @@
 
 namespace ScribbleCore {
 
-IfStatement::IfStatement(int lineNo, std::string sym, SmartPointer<Statement> condition,
+IfStatement::IfStatement(int lineNo, std::string sym,
+		SmartPointer<Statement> condition,
 		std::vector<SmartPointer<Statement>> ifTrueStatements,
 		std::vector<SmartPointer<Statement>> ifFalseStatements) :
 		Statement(lineNo, sym) {
-	condition_ = condition;
-	ifTrueStatements_ = ifTrueStatements;
-	ifFalseStatements_ = ifFalseStatements;
-}
+			condition_ = condition;
+			ifTrueStatements_ = ifTrueStatements;
+			ifFalseStatements_ = ifFalseStatements;
+		}
 
 IfStatement::~IfStatement() {
 }
@@ -26,9 +27,9 @@ IfStatement::~IfStatement() {
 void IfStatement::checkTree(Type* functionType) {
 	condition_->checkTree(functionType);
 
-	if (condition_->type()->type()->getType() != Boolean) {
-		throw StatementException(this, std::string("If condition has to be boolean not ") + condition_->type()->type()->getTypeName());
-	}
+	StatementAssert(this, condition_->type()->type()->getType() == Boolean,
+			std::string("If condition has to be boolean not ")
+					+ condition_->type()->type()->getTypeName());
 
 	for (unsigned int i = 0; i < ifTrueStatements_.size(); ++i) {
 		ifTrueStatements_[i]->checkTree(functionType);
