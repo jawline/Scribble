@@ -41,20 +41,14 @@ void GetArrayStatement::checkTree(Type* functionType) {
 	array_->checkTree(functionType);
 	index_->checkTree(functionType);
 
-	if (array_->type()->type()->getType() != Array) {
-		throw StatementException(this,
-				std::string("the expression passed is an ")
-						+ array_->type()->type()->getTypeName()
-						+ " not an array");
-	}
+	StatementAssert(this, array_->type()->type()->getType() == Array,
+			std::string("the expression passed is an ")
+					+ array_->type()->type()->getTypeName() + " not an array");
 
-	if (index_->type()->type()->getType() != Int) {
-		throw StatementException(this,
-				std::string(
-						"array index expression should be an integer and not a ")
-						+ index_->type()->type()->getTypeName());
-	}
-
+	StatementAssert(this, index_->type()->type()->getType() == Int,
+			std::string(
+					"array index expression should be an integer and not a ")
+					+ index_->type()->type()->getTypeName());
 }
 
 int GetArrayStatement::generateCode(int resultRegister,

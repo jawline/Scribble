@@ -5,11 +5,11 @@
 namespace ScribbleCore {
 
 FunctionStatement::FunctionStatement(int lineNo, std::string sym,
-			SmartPointer<FunctionReference> function, std::vector<SafeStatement> args, int numDeclaredVariables) :
-			Statement(lineNo, sym), numDeclaredVariables_(numDeclaredVariables) {
-	func_ = function;
-	args_ = args;
-}
+		SmartPointer<FunctionReference> function, std::vector<SafeStatement> args, int numDeclaredVariables) :
+		Statement(lineNo, sym), numDeclaredVariables_(numDeclaredVariables) {
+			func_ = function;
+			args_ = args;
+		}
 
 void FunctionStatement::checkTree(Type* functionType) {
 
@@ -32,11 +32,10 @@ void FunctionStatement::checkTree(Type* functionType) {
 						+ func_->getResolveIssue());
 	}
 
-    //Double check the args have been resolved properly
-    if (!func_->getFunction()->getSignature().argumentsEqual(func_->getTargetArguments())) {
-		throw StatementException(this, "The resolved function has incorrect arguments. This is an internal compiler issue.");
-	}
-
+	StatementAssert(this,
+			func_->getFunction()->getSignature().argumentsEqual(
+					func_->getTargetArguments()),
+			"The resolved function has incorrect arguments. This is an internal compiler issue.");
 }
 
 TypeReference FunctionStatement::type() {

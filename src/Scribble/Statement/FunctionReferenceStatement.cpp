@@ -38,13 +38,10 @@ void FunctionReferenceStatement::checkTree(Type* functionType) {
 						+ func_->getResolveIssue());
 	}
 
-	//Double check the args have been resolved properly
-	if (!func_->getFunction()->getSignature().argumentsEqual(
-			func_->getTargetArguments())) {
-		throw StatementException(this,
-				"The resolved function has incorrect arguments. This is an internal compiler issue.");
-	}
-
+	StatementAssert(this,
+			func_->getFunction()->getSignature().argumentsEqual(
+					func_->getTargetArguments()),
+			"The resolved function has incorrect arguments. This is an internal compiler issue.");
 }
 
 TypeReference FunctionReferenceStatement::type() {

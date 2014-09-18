@@ -47,9 +47,9 @@ void GetStructureElementStatement::fix() {
 
 	elementIndex_ = type->getFieldIndex(elementName_);
 
-	if (elementIndex_ == -1) {
-		throw StatementException(this, "Does not exist in structure");
-	}
+	StatementAssert(this, elementIndex_ != -1,
+			std::string("Field ") + elementName_
+					+ " does not exist in structure");
 
 	elementType_->setType(type->getField(elementIndex_).second->type());
 }

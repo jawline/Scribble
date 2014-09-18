@@ -59,13 +59,11 @@ void CallFunctionReference::checkTree(Type* functionType) {
 
 	}
 
-	if (fn_->type()->type()->getType() != FunctionReferenceType) {
-		throw StatementException(this,
-				std::string("value passed is a ")
-						+ fn_->type()->type()->getTypeName()
-						+ " and not a function reference");
-	}
-
+	StatementAssert(this,
+			fn_->type()->type()->getType() == FunctionReferenceType,
+			std::string("value passed is a ")
+					+ fn_->type()->type()->getTypeName()
+					+ " and not a function reference");
 }
 
 TypeReference CallFunctionReference::type() {
