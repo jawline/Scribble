@@ -28,10 +28,8 @@ void WhileStatement::checkTree(Type* functionType) {
 		statements_[i]->checkTree(functionType);
 	}
 
-	if (condition_->type()->type()->getType() != Boolean) {
-		throw StatementException(this,
-				"The while condition expression (while * do) must be a boolean value");
-	}
+	StatementAssert(this, condition_->type()->type()->getType() == Boolean,
+			"The while condition expression (while * do) must be a boolean value");
 }
 
 TypeReference WhileStatement::type() {

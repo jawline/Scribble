@@ -33,17 +33,11 @@ void TestStatement::checkTree(Type* functionType) {
 	rhs_->checkTree(functionType);
 
 	//TODO: Improve this compiler output
-	if (!lhs_->type()->type()->Equals(rhs_->type()->type())) {
-
-		if (!(lhs_->type()->type()->getType() == NilType
-				|| rhs_->type()->type()->getType() == NilType)) {
-
-			throw StatementException(this,
-					"type comparison can only be done on values which are the same type");
-
-		}
-	}
-
+	StatementAssert(this,
+			lhs_->type()->type()->Equals(rhs_->type()->type())
+					|| (lhs_->type()->type()->getType() == NilType
+							|| rhs_->type()->type()->getType() == NilType),
+			"type comparison can only be done on values which are the same type");
 }
 
 int TestStatement::generateCode(int resultRegister,
