@@ -228,7 +228,7 @@ Type: TYPE_INT {
 	} | FUNCTION LPAREN MultipleTypes RPAREN {
 		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "function", ScribbleCore::getTypeManager().getType(*$3, ScribbleCore::makeTypeReference(ScribbleCore::getVoidType())) ) );
 		delete $3;
-	} | FUNCTION LPAREN MultipleTypes RPAREN COLON Type {
+	} | FUNCTION LPAREN MultipleTypes RPAREN POINT Type {
 		$$ = new ScribbleCore::TypeReference ( new ScribbleCore::TypeReferenceCore ( "function", ScribbleCore::getTypeManager().getType(*$3, *$6) ) );
 		delete $3;
 		delete $6;
@@ -357,7 +357,7 @@ ArgumentDefinitions: ArgumentDefinition {
  * and func Name ( Arguments ) : Type { Code } defines a function of a specific type.
  */
 
-Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBRACKET Statements RBRACKET {
+Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBRACKET Statements RBRACKET {
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
 		int pos = 0;
@@ -466,6 +466,55 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN COLON Type LBR
 		//Delete variables vector
 		delete $4;
 
+	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type EQUALS Expression END {
+		std::vector<SmartPointer<ScribbleCore::Variable>> values;
+
+		int pos = 0;
+
+		for (unsigned int i = 0; i < Variables.size(); i++) {
+			Variables[i]->setPosition(i);
+			values.push_back(Variables[i]);
+			pos++;
+		}
+
+		//Generate the function signature with all the type info about the fn
+		std::vector<ScribbleCore::TypeReference> arguments;
+		
+		for (unsigned int i = 0; i < $4->size(); i++) {
+		 arguments.push_back($4->at(i)->getTypeReference());
+		}
+		
+		SmartPointer<ScribbleCore::Statement> returnedStatement = SmartPointer<ScribbleCore::Statement>(new ScribbleCore::ReturnStatement($9->line(), $9->symbol(), SmartPointer<ScribbleCore::Statement>($9))); 
+		
+		ScribbleCore::FunctionSignature signature(arguments, *$7);
+		std::vector<SmartPointer<ScribbleCore::Statement>> statements;
+		statements.push_back(returnedStatement);
+		
+		SmartPointer<API::Function> fn = SmartPointer<API::Function>( new ScribbleCore::ScriptedFunction(*$2, lastuid++, currentNamespaceName, statements, values, signature));
+		
+		if (Functions[*$2].type() == ScribbleCore::EmptyEntry) {
+		
+			std::vector<SafeFunction> newSet;
+			newSet.push_back(fn);
+			Functions[*$2] = ScribbleCore::NamespaceEntry(newSet);
+		} else {
+		
+			if ( Functions[*$2].type() != ScribbleCore::FunctionSetEntry) {
+				yyerror("Not a function type");
+				return -1;
+			}
+			
+			std::vector<SafeFunction> functions = Functions[*$2].getFunctionSet();
+			Functions[*$2].addFunctionToSet(fn);
+		}
+		
+		Variables.clear();
+
+		//Delete name
+		delete $2;
+		//Delete variables vector
+		delete $4;
+		delete $7;
 	}
 ;
 
@@ -649,8 +698,8 @@ Expression: MINUS Expression {
 		delete $1;
 	} | AutoVariable {
 		$$ = $1;
-	} | IS Expression TERNARY Expression COLON Expression {
-		$$ = new ScribbleCore::TernaryStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), ScribbleCore::SafeStatement($4), ScribbleCore::SafeStatement($6));
+	} | Expression TERNARY Expression COLON Expression {
+		$$ = new ScribbleCore::TernaryStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3), ScribbleCore::SafeStatement($5));
 	} | LENGTH LPAREN Expression RPAREN {
 		$$ = new ScribbleCore::ArrayLengthStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($3));
 	} | LSQBRACKET Expression RSQBRACKET Type {

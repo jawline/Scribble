@@ -35,6 +35,14 @@ public:
 		return stream.str();
 	}
 
+	int line() {
+		return lineNumber_;
+	}
+
+	std::string symbol() {
+		return symbolName_;
+	}
+
 	virtual void checkTree(Type* functionType) = 0;
 
 	/**
