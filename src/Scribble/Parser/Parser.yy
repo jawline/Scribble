@@ -110,6 +110,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 	float32_t float32;
 	int integer;
 	ScribbleCore::TypeReference* type;
+	void* void_t;
 }
 
 %token <string> WORD STRING
@@ -145,6 +146,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <statement> FunctionReference;
 %type <types> MultipleTypes;
 %type <types> MultipleTypes_2;
+%type <void_t> PackageList
 	
 %start Program
 %%
@@ -153,11 +155,7 @@ Program: {
 		lastuid = 0;
 		Variables.clear();
 		$$ = 0;
-	} | Program PACKAGE WORD ASSIGN IMPORT LPAREN STRING RPAREN END {
-		ImportList[*$3] = *$7;
-		delete $7;
-		delete $3;
-		$$ = 0;
+	} | Program PACKAGE PackageList END {
 	} | Program Function {
 		$$ = 0;
 	} | Program TYPE WORD ASSIGN STRUCT LBRACKET BaseStructureInfo RBRACKET {
@@ -167,6 +165,18 @@ Program: {
 		delete $3;
 	}
 ;
+
+PackageList: WORD ASSIGN IMPORT LPAREN STRING RPAREN {
+		ImportList[*$1] = *$5;
+		delete $5;
+		delete $1;
+		$$ = 0;
+} | PackageList COMMA WORD ASSIGN IMPORT LPAREN STRING RPAREN {
+		ImportList[*$3] = *$7;
+		delete $7;
+		delete $3;
+		$$ = 0;
+};
 
 /**
  * BaseStructureInfo is the definition of each field within a structure in the form Name : Type.

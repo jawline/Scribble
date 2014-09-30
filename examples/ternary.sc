@@ -1,12 +1,13 @@
-package console := import("console");
-package sys := import("sys");
+package console := import("console"),
+		sys := import("sys");
+		
+func FiveTimes(x:int) -> int = 5*x;
 
-func f(x:int) -> int {
+func Five() -> int {
+	console.Log("Five\n");
 	return 5;
 }
 
-func r(x:int)->int = 5*x;
-
 func main() {
-   console.Log("Hello World " $ (true ? "True" : "False") $ sys.String(r(5)) $ "\n");
+   console.Log("Hello World " $ (true ? "True" : "False") $ " " $ sys.String(FiveTimes(Five())) $ "\n");
 }
