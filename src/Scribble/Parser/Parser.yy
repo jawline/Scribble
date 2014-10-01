@@ -476,7 +476,7 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBR
 		//Delete variables vector
 		delete $4;
 
-	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type EQUALS Expression END {
+	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type ASSIGN Expression END {
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
 		int pos = 0;
