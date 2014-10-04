@@ -85,6 +85,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "[" return LSQBRACKET;
 "]" return RSQBRACKET;
 "&" return AMP;
+"|" return GUARD;
 
 "\n" ;
 
@@ -114,6 +115,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "array" return TYPE_ARRAY;
 "len" return LENGTH;
 "is" return IS;
+"otherwise" return OTHERWISE;
 
 {integer} { SAVE_INT;
  return INT;

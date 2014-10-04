@@ -120,7 +120,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_FLOAT32 TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
-%token <token> TERNARY CONCAT END DO OR PACKAGE IS
+%token <token> TERNARY CONCAT END DO OR PACKAGE IS GUARD OTHERWISE
 
 %left PLUS MINUS
 %left TIMES DIVIDE
@@ -138,6 +138,8 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <variables> ArgumentDefinitions;
 %type <variables> OptionalArgumentDefinitions;
 %type <statement> AutoVariable;
+%type <statement> GuardOrExpression;
+%type <statement> Guard;
 %type <type> Type;
 %type <statement> FunctionCall;
 %type <structureinfo> BaseStructureInfo;
@@ -476,7 +478,7 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBR
 		//Delete variables vector
 		delete $4;
 
-	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type ASSIGN Expression END {
+	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type ASSIGN GuardOrExpression {
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
 		int pos = 0;
@@ -494,7 +496,7 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBR
 		 arguments.push_back($4->at(i)->getTypeReference());
 		}
 		
-		SmartPointer<ScribbleCore::Statement> returnedStatement = SmartPointer<ScribbleCore::Statement>(new ScribbleCore::ReturnStatement($9->line(), $9->symbol(), SmartPointer<ScribbleCore::Statement>($9))); 
+		SmartPointer<ScribbleCore::Statement> returnedStatement = SmartPointer<ScribbleCore::Statement>($9); 
 		
 		ScribbleCore::FunctionSignature signature(arguments, *$7);
 		std::vector<SmartPointer<ScribbleCore::Statement>> statements;
@@ -645,6 +647,39 @@ IfStatements: Statement {
 		$$ = stmts;
 	} | LBRACKET Statements RBRACKET {
 		$$ = $2;
+	}
+;
+
+/**
+ * Defines the options allowed when creating a single expression function (func F() -> int := 5 etc)
+ */
+ 
+GuardOrExpression: IF Guard END {
+		$$ = $2;
+	} | Expression END {
+		$$ = new ScribbleCore::ReturnStatement($1->line(), $1->symbol(), SmartPointer<ScribbleCore::Statement>($1));
+	}
+;
+
+/**
+ * Definition of a guard (ie. x = 0 -> 0 | otherwise -> 1)
+ */
+
+Guard: Expression THEN Expression GUARD Guard {
+		std::vector<SmartPointer<ScribbleCore::Statement>> expr;
+		std::vector<SmartPointer<ScribbleCore::Statement>> elseexpr;
+		SmartPointer<ScribbleCore::Statement> rStmt = SmartPointer<ScribbleCore::Statement>(new ScribbleCore::ReturnStatement($3->line(), $3->symbol(), SmartPointer<ScribbleCore::Statement>($3)));
+		SmartPointer<ScribbleCore::Statement> elseRStmt = SmartPointer<ScribbleCore::Statement>($5);
+		expr.push_back(rStmt);
+		elseexpr.push_back(elseRStmt);
+		$$ = new ScribbleCore::IfStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), expr, elseexpr);
+	} | Expression THEN Expression {
+		std::vector<SmartPointer<ScribbleCore::Statement>> expr;
+		SmartPointer<ScribbleCore::Statement> rStmt = SmartPointer<ScribbleCore::Statement>(new ScribbleCore::ReturnStatement($3->line(), $3->symbol(), SmartPointer<ScribbleCore::Statement>($3)));
+		expr.push_back(rStmt);
+		$$ = new ScribbleCore::IfStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), expr, std::vector<SmartPointer<ScribbleCore::Statement>>());
+	} | OTHERWISE Expression {
+		$$ = new ScribbleCore::ReturnStatement($2->line(), $2->symbol(), SmartPointer<ScribbleCore::Statement>($2));
 	}
 ;
 
