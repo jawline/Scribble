@@ -678,7 +678,7 @@ Guard: Expression THEN Expression GUARD Guard {
 		SmartPointer<ScribbleCore::Statement> rStmt = SmartPointer<ScribbleCore::Statement>(new ScribbleCore::ReturnStatement($3->line(), $3->symbol(), SmartPointer<ScribbleCore::Statement>($3)));
 		expr.push_back(rStmt);
 		$$ = new ScribbleCore::IfStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), expr, std::vector<SmartPointer<ScribbleCore::Statement>>());
-	} | OTHERWISE Expression {
+	} | ELSE Expression {
 		$$ = new ScribbleCore::ReturnStatement($2->line(), $2->symbol(), SmartPointer<ScribbleCore::Statement>($2));
 	}
 ;

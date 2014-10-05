@@ -338,7 +338,7 @@ void VirtualMachine::opNewArray(InstructionSet& instructionSet) {
 }
 
 void VirtualMachine::opReturn(InstructionSet& instructionSet) {
-	VM_PRINTF_LOG("VM Return at instruction %li\n", currentInstruction);
+	//VM_PRINTF_LOG("VM Return at instruction %li\n", currentInstruction);
 
 	if (!returnToPreviousFunction(currentFunction, instructionSet)) {
 		shouldReturn = true;
@@ -372,7 +372,7 @@ void VirtualMachine::opCallFn(InstructionSet& instructionSet) {
 		name = (char*) heap_.getAddress(heapEntry);
 	}
 
-	VM_PRINTF_LOG("Attempting to call function %s\n", name.c_str());
+	//VM_PRINTF_LOG("Attempting to call function %s\n", name.c_str());
 
 	if (!VM::NamespaceEntry::searchNamespace(namespace_, name, functionEntry)
 			|| functionEntry.getType() != Function) {

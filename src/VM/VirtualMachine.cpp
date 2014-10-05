@@ -88,7 +88,7 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string name) {
 
 	NamespaceEntry entry;
 
-	VM_PRINTF_LOG("Searching for type %s\n", name.c_str());
+	//VM_PRINTF_LOG("Searching for type %s\n", name.c_str());
 
 	//If the namespace entry is not found in the namespace
 	if (!VM::NamespaceEntry::searchNamespace(namespace_, name, entry)) {
