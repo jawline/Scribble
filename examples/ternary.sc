@@ -31,16 +31,14 @@ func Odd(x:int) -> bool :=
      | else Even(x-1);
 
 func Five() -> int := 5;
-
 func FiveTimes(x:int) -> int := 5 * x;
-
 func TenTimes(x:int) -> int := FiveTimes(2 * x);
-
 func TenTimesFive() -> int := TenTimes(Five());
-
 func Happy() -> string := "Something something daaa dee de de dee";
 
 func main() {
+   console.Log("Prime(7):" $ sys.String(math.Prime(7)) $ "\n");
+   console.Log("Diff(-7, 10):" $ sys.String(math.Diff(-7,10)) $ "\n");
    console.Log("Hello World " $ (true ? "True" : "False") $ " " $ sys.String(TenTimesFive()) $ "\n");
    console.Log(sys.String(Pow(2,6)) $ "\n");
    console.Log("Fibs: " $ sys.String(Fibs(15)) $ "\n");

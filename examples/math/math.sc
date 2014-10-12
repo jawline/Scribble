@@ -115,6 +115,10 @@ func Prime(n:int) -> bool {
 	return true;
 }
 
+/**
+ * Returns the value of the fibonacci sequence at a given index
+ */
+
 func Fibs(x:int) -> int := 
 	if x = 0 then 0
 	 | x = 1 then 1
