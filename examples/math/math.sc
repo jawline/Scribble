@@ -95,3 +95,18 @@ func Diff(val1:int, val2:int) -> int := Abs(val1 - val2);
  */
 
 func Diff(val1:float32, val2:float32) -> float32 := Abs(val1 - val2);
+
+func Prime(n:int) -> bool {
+
+	var i : int;
+
+	if n < 2 then
+		return false;
+
+	for i := 2; i < n; i++ do {
+		if sys.Mod(n, i) = 0 then
+			return false;
+	}
+
+	return true;
+}
