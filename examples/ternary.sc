@@ -1,5 +1,6 @@
 package console := import("console"),
-		sys := import("sys");
+		sys := import("sys"),
+		math := import("math/math");
 
 type Tree := struct {
 	a:int,

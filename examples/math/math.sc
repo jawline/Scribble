@@ -10,134 +10,88 @@ package sys := import("sys");
  * For a given variable n return e^n
  */
 
-func Exp(pow : float32) : float32 {
-
-	var e := 2.71828182846f;
-
-	return Pow(e, pow);
-}
+func Exp(pow:float32) -> float32 := Pow(2.71828182846f, pow);
 
 /**
  * Return x * e^n or x*Exp(n);
  */
 
-func Exp(x : float32, n : float32) : float32 {
-	return x * Exp(n);
-}
+func Exp(x:float32, n:float32) -> float32 := x * Exp(n);
 
 /**
  * Return the maximum of the left or right values
  */
 
-func Max(left : int, right : int) : int {	
-
-	if left > right then {
-		return left;
-	}
-	
-	return right;
-}
+func Max(left:int, right:int) -> int := 
+	if left > right then left
+	 | else right;
 
 /**
  * Return the minimum of the left or right values
  */
 
-func Min(left : int, right : int) : int {
-
-	if left < right then {
-		return left;
-	}
-
-	return right;
-}
+func Min(left:int, right:int) -> int :=
+	if left < right then left 
+	 | else right;
 
 /**
  * Return the max of the left or right values
  */
 
-func Max(left : float32, right : float32) : float32 {
-
-	if left > right then {
-		return left;
-	}
-	
-	return right;
-}
-
+func Max(left:float32, right:float32) -> float32 :=
+	if left > right then left
+	 | else right;
 
 /**
  * Return the min of the left or right values
  */
 
-func Min(left : float32, right : float32) : float32 {
-
-	if left < right then {
-		return left;
-	}
-
-	return right;
-}
+func Min(left:float32, right:float32) -> float32 :=
+	if left < right then left
+     | else right;
 
 /**
  * Return val to the power of pow ( val^pow )
  */
 
-func Pow(val : int, pow : int) : int {
-	return sys.PowInt(val, pow);
-}
+func Pow(val:int, pow:int) -> int := sys.PowInt(val, pow);
 
 /**
  * Return val to the power of pow ( val^pow )
  */
 
-func Pow(val : float32, pow : float32) : float32 {
-	return sys.PowFloat(val, pow);
-}
+func Pow(val:float32, pow:float32) -> float32 := sys.PowFloat(val, pow);
 
 /**
  * Return the remainder of the division of integer val by integer divisor
  */
 
-func Mod(val : int, divisor : int) : int {
-	return sys.Mod(val, divisor);
-}
+func Mod(val:int, divisor:int) -> int := sys.Mod(val, divisor);
 
 /**
  * Return the positive value of a given float.
  */
  
-func Abs(val : float32) : float32 {
-
-	if val < 0f then
-		return -val;
-
-	return val;
-}
+func Abs(val:float32) -> float32 :=
+	if val < 0f then -val
+	 | else val;
 
 /**
  * Return the positive value of a given integer.
  */
 
-func Abs(val : int) : int {
-
-	if val < 0 then
-		return -val;
-
-	return val;
-}
+func Abs(val:int) -> int := 
+	if val < 0 then -val
+	 | else val;
 
 /**
  * Return the positive difference between two integers.
  */
 
-func Diff(val1 : int, val2 : int) : int {
-	return Abs(val1 - val2);
-}
+func Diff(val1:int, val2:int) -> int := Abs(val1 - val2);
 
 /**
  * Return the positive difference between two floating point values.
  */
 
-func Diff(val1 : float32, val2 : float32) : float32 {
-	return Abs(val1 - val2);
-}
+func Diff(val1:float32, val2:float32) -> float32 := Abs(val1 - val2);
