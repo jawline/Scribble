@@ -84,7 +84,7 @@ VirtualMachine::VirtualMachine() :
 VirtualMachine::~VirtualMachine() {
 }
 
-SmartPointer<VMEntryType> VirtualMachine::findType(std::string name) {
+SmartPointer<VMEntryType> VirtualMachine::findType(std::string const& name) {
 
 	NamespaceEntry entry;
 
