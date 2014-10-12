@@ -96,6 +96,10 @@ func Diff(val1:int, val2:int) -> int := Abs(val1 - val2);
 
 func Diff(val1:float32, val2:float32) -> float32 := Abs(val1 - val2);
 
+/**
+ * Return true if the parameter n is a prime number
+ */
+
 func Prime(n:int) -> bool {
 
 	var i : int;
