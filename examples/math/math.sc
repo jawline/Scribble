@@ -114,3 +114,24 @@ func Prime(n:int) -> bool {
 
 	return true;
 }
+
+func Fibs(x:int) -> int := 
+	if x = 0 then 0
+	 | x = 1 then 1
+	 | else Fibs(x-1) + Fibs(x-2);
+
+/**
+ * Returns true if the given integer is an even number
+ */
+
+func Even(x:int) -> bool :=
+	if x = 0 then true
+	 | else Odd(x-1);
+
+/**
+ * Returns true if the given integer is an odd number
+ */
+
+func Odd(x:int) -> bool :=
+    if x = 0 then false
+     | else Even(x-1);
