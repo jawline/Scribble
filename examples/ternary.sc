@@ -36,7 +36,20 @@ func TenTimes(x:int) -> int := FiveTimes(2 * x);
 func TenTimesFive() -> int := TenTimes(Five());
 func Happy() -> string := "Something something daaa dee de de dee";
 
+func SumEvents(x:int) -> int {
+
+   var i := 0;
+   var sum := 0;
+	
+   for i = 0; i < 1000; i++ do {
+      if (math.Mod(i, 3) = 0) or (math.Mod(i, 5) = 0) then sum := sum + i;
+   }
+
+   return sum;
+}
+
 func main() {
+
    console.Log("Prime(7):" $ sys.String(math.Prime(7)) $ "\n");
    console.Log("Diff(-7, 10):" $ sys.String(math.Diff(-7,10)) $ "\n");
    console.Log("Hello World " $ (true ? "True" : "False") $ " " $ sys.String(TenTimesFive()) $ "\n");
