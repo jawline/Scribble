@@ -1,14 +1,29 @@
 #include "LibWiring.hpp"
+#include <wiringPi.h>
+
+bool isSetup = false;
+
+APIValue Setup() {
+
+	if (!isSetup) {
+		wiringPiSetup();
+	}
+
+	isSetup = true;
+	return API::APIValue();
+}
 
 APIValue SetMode(API::APIValue* values, VM::VirtualMachine* virt) {
+	pinMode(values[0].getValue32(), values[1].getValueBoolean() ? OUTPUT : INPUT);
     return API::APIValue();
 }
 
 APIValue Read(API::APIValue* values, VM::VirtualMachine* virt) {
-    return API::APIValue::makeBoolean(false);
+    return API::APIValue::makeBoolean(digitalRead(values[0].getValue32()));
 }
 
 APIValue Write(API::APIValue* values, VM::VirtualMachine* virt) {
+	digitalWrite(values[0].getValue32(), values[1].getValueBoolean() ? HIGH : LOW);
     return API::APIValue();
 }
 
@@ -18,6 +33,19 @@ void generateLibWiringPackage(
     ScribbleCore::NamespaceType wiring;
 
     std::vector<ScribbleCore::TypeReference> args;
+
+    std::vector<SafeFunction> setup;
+
+     setup.push_back(
+         SmartPointer < API::APIFunction
+         > (new API::APIFunction("Setup", "libWiring",
+                                 ScribbleCore::FunctionSignature(args,
+                                         ScribbleCore::makeTypeReference(
+                                             ScribbleCore::getVoidType())),
+                                 Setup)));
+
+     wiring["Setup"] = ScribbleCore::NamespaceEntry(setup);
+
     args.push_back(ScribbleCore::makeTypeReference(ScribbleCore::getIntType()));
     args.push_back(ScribbleCore::makeTypeReference(ScribbleCore::getBooleanType()));
 
