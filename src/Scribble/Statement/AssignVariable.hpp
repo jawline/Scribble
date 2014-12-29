@@ -11,44 +11,44 @@ namespace ScribbleCore {
  */
 
 class AssignVariableStatement: public Statement {
-private:
+  private:
 
-	/**
-	 * The expression which the variable is set to the result of.
-	 */
-	SafeStatement exp_;
+    /**
+     * The expression which the variable is set to the result of.
+     */
+    SafeStatement exp_;
 
-	/**
-	 * The variable which is modified.
-	 */
+    /**
+     * The variable which is modified.
+     */
 
-	SmartPointer<Variable> var_;
+    SmartPointer<Variable> var_;
 
-public:
+  public:
 
-	/**
-	 * Construct a AssignVariableStatement.
-	 * @param lineNo the line number which this occurs on.
-	 * @param sym The symbol this was constructed from.
-	 * @param var The variable to modify
-	 * @param exp The expression which the variable is set to the result of.
-	 */
+    /**
+     * Construct a AssignVariableStatement.
+     * @param lineNo the line number which this occurs on.
+     * @param sym The symbol this was constructed from.
+     * @param var The variable to modify
+     * @param exp The expression which the variable is set to the result of.
+     */
 
-	AssignVariableStatement(int lineNo, std::string sym, SmartPointer<Variable> var,
-			SafeStatement exp);
-	~AssignVariableStatement();
+    AssignVariableStatement(int lineNo, std::string sym, SmartPointer<Variable> var,
+                            SafeStatement exp);
+    ~AssignVariableStatement();
 
-	/**
-	 * Returns the type of the variable.
-	 * @return The type of the variable/expression.
-	 */
+    /**
+     * Returns the type of the variable.
+     * @return The type of the variable/expression.
+     */
 
-	TypeReference type() {
-		return exp_->type();
-	}
+    TypeReference type() {
+        return exp_->type();
+    }
 
-	void checkTree(Type* functionType);
-	int generateCode(int resultRegister, std::stringstream& generated);
+    void checkTree(Type* functionType);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

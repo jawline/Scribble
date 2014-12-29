@@ -13,31 +13,31 @@
 namespace ScribbleCore {
 
 ArrayStatement::ArrayStatement(int line, std::string text, TypeReference type,
-		SafeStatement length) :
-		Statement(line, text), type_(type), length_(length) {
+                               SafeStatement length) :
+    Statement(line, text), type_(type), length_(length) {
 }
 
 ArrayStatement::~ArrayStatement() {
 }
 
 TypeReference ArrayStatement::type() {
-	return type_;
+    return type_;
 }
 
 void ArrayStatement::checkTree(Type* functionType) {
-	length_->checkTree(functionType);
+    length_->checkTree(functionType);
 
-	StatementAssert(this, length_->type()->type()->getType() == Int,
-			std::string("Type ") + length_->type()->type()->getTypeName()
-					+ " cannot be used as the length of an array. Integer values must be used for array size.");
+    StatementAssert(this, length_->type()->type()->getType() == Int,
+                    std::string("Type ") + length_->type()->type()->getTypeName()
+                    + " cannot be used as the length of an array. Integer values must be used for array size.");
 }
 
 int ArrayStatement::generateCode(int resultRegister,
-		std::stringstream& generated) {
-	int instrs = length_->generateCode(VM::vmTempRegisterOne, generated);
-	generated << "newarray \"" << type_->type()->getTypeName() << "\" $"
-			<< VM::vmTempRegisterOne << " $" << resultRegister << "\n";
-	return instrs + 1;
+                                 std::stringstream& generated) {
+    int instrs = length_->generateCode(VM::vmTempRegisterOne, generated);
+    generated << "newarray \"" << type_->type()->getTypeName() << "\" $"
+              << VM::vmTempRegisterOne << " $" << resultRegister << "\n";
+    return instrs + 1;
 }
 
 }

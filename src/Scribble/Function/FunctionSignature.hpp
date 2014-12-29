@@ -16,19 +16,19 @@ namespace ScribbleCore {
  */
 
 class FunctionSignature {
-private:
+  private:
 
-	std::vector<TypeReference> arguments_;
-	TypeReference returnType_;
+    std::vector<TypeReference> arguments_;
+    TypeReference returnType_;
 
-public:
-	FunctionSignature(std::vector<TypeReference> arguments, TypeReference returnType);
-	virtual ~FunctionSignature();
+  public:
+    FunctionSignature(std::vector<TypeReference> arguments, TypeReference returnType);
+    virtual ~FunctionSignature();
 
-	std::vector<TypeReference> getArguments();
-	TypeReference getReturnType();
-	bool equalTo(FunctionSignature other);
-	bool argumentsEqual(std::vector<Type*> args);
+    std::vector<TypeReference> getArguments();
+    TypeReference getReturnType();
+    bool equalTo(FunctionSignature other);
+    bool argumentsEqual(std::vector<Type*> args);
 
 };
 

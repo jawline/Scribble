@@ -13,27 +13,27 @@
 namespace ScribbleCore {
 
 enum EntryType {
-	EmptyEntry,
-	FunctionSetEntry,
-	TypeEntry
+    EmptyEntry,
+    FunctionSetEntry,
+    TypeEntry
 };
 
 class NamespaceEntry {
-private:
-	EntryType type_;
-	TypeReference typeInfo_;
-	std::vector<SafeFunction> functionSet_;
+  private:
+    EntryType type_;
+    TypeReference typeInfo_;
+    std::vector<SafeFunction> functionSet_;
 
-public:
-	NamespaceEntry();
-	NamespaceEntry(TypeReference t);
-	NamespaceEntry(std::vector<SafeFunction> set);
-	virtual ~NamespaceEntry();
+  public:
+    NamespaceEntry();
+    NamespaceEntry(TypeReference t);
+    NamespaceEntry(std::vector<SafeFunction> set);
+    virtual ~NamespaceEntry();
 
-	EntryType type();
-	std::vector<SafeFunction> getFunctionSet();
-	void addFunctionToSet(SafeFunction f);
-	TypeReference getType();
+    EntryType type();
+    std::vector<SafeFunction> getFunctionSet();
+    void addFunctionToSet(SafeFunction f);
+    TypeReference getType();
 };
 
 }

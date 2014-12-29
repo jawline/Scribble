@@ -17,72 +17,72 @@
  */
 
 class Scribble {
-private:
+  private:
 
-	/**
-	 * Stores the loaded package name and path.
-	 */
+    /**
+     * Stores the loaded package name and path.
+     */
 
-	std::string packageName;
-	std::string packagePath;
-	std::string sourceCode;
+    std::string packageName;
+    std::string packagePath;
+    std::string sourceCode;
 
-	/**
-	 * The VM environment running the code.
-	 */
+    /**
+     * The VM environment running the code.
+     */
 
-	VM::VirtualMachine environment;
+    VM::VirtualMachine environment;
 
-	/**
-	 * Stores the compiled code
-	 */
+    /**
+     * Stores the compiled code
+     */
 
-	std::map<std::string, ScribbleCore::NamespaceType> compiledPackages;
+    std::map<std::string, ScribbleCore::NamespaceType> compiledPackages;
 
-	/**
-	 * Loads the package using code as init code.
-	 */
+    /**
+     * Loads the package using code as init code.
+     */
 
-	void load();
+    void load();
 
-public:
+  public:
 
-	/**
-	 * Loads, compiles and prepares the package for execution.
-	 * Throws a parser exception if anything goes wrong.
-	 */
+    /**
+     * Loads, compiles and prepares the package for execution.
+     * Throws a parser exception if anything goes wrong.
+     */
 
-	Scribble(std::string const& package);
+    Scribble(std::string const& package);
 
-	/**
-	 * Compiles and prepares the package packageName by using the source code provided.
-	 * Throws a parsing exception if anything goes wrong.
-	 */
+    /**
+     * Compiles and prepares the package packageName by using the source code provided.
+     * Throws a parsing exception if anything goes wrong.
+     */
 
-	Scribble(std::string const& packageName, std::string const& sourceCode);
+    Scribble(std::string const& packageName, std::string const& sourceCode);
 
-	virtual ~Scribble();
+    virtual ~Scribble();
 
-	/**
-	 * Get the virtual machine context which has the packages loaded into it.
-	 */
+    /**
+     * Get the virtual machine context which has the packages loaded into it.
+     */
 
-	VM::VirtualMachine* getEnvironment();
+    VM::VirtualMachine* getEnvironment();
 
-	/**
-	 * Execute the function name with zero arguments ( Equivilent to execute(function, empty argument list); )
-	 */
+    /**
+     * Execute the function name with zero arguments ( Equivilent to execute(function, empty argument list); )
+     */
 
-	API::APIValue execute(std::string function);
+    API::APIValue execute(std::string function);
 
-	/**
-	 * Execute the given function with the specified arguments, if not function of
-	 * that name which takes the specified arguments is found then an error will
-	 * be thrown.
-	 */
+    /**
+     * Execute the given function with the specified arguments, if not function of
+     * that name which takes the specified arguments is found then an error will
+     * be thrown.
+     */
 
-	API::APIValue execute(std::string function,
-			std::vector<API::APIValue> arguments);
+    API::APIValue execute(std::string function,
+                          std::vector<API::APIValue> arguments);
 };
 
 #endif /* SCRIBBLE_HPP_ */

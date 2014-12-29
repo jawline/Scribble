@@ -13,24 +13,24 @@
 namespace ScribbleCore {
 
 class GetStructureElementStatement: public Statement {
-private:
+  private:
 
-	SafeStatement statement_;
+    SafeStatement statement_;
 
-	std::string elementName_;
-	int elementIndex_;
-	TypeReference elementType_;
+    std::string elementName_;
+    int elementIndex_;
+    TypeReference elementType_;
 
-public:
-	GetStructureElementStatement(int yylineno, std::string sym,
-			SafeStatement stmt, std::string elementName);
-	virtual ~GetStructureElementStatement();
+  public:
+    GetStructureElementStatement(int yylineno, std::string sym,
+                                 SafeStatement stmt, std::string elementName);
+    virtual ~GetStructureElementStatement();
 
-	virtual void checkTree(Type* functionType);
-	virtual TypeReference type();
-	virtual void fix();
+    virtual void checkTree(Type* functionType);
+    virtual TypeReference type();
+    virtual void fix();
 
-	virtual int generateCode(int resultRegister, std::stringstream& generated);
+    virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

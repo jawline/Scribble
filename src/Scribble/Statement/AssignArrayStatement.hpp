@@ -16,46 +16,46 @@ namespace ScribbleCore {
  */
 
 class AssignArrayStatement: public Statement {
-private:
+  private:
 
-	/**
-	 * The array.
-	 */
+    /**
+     * The array.
+     */
 
-	SafeStatement array_;
+    SafeStatement array_;
 
-	/**
-	 * What to assign to the array.
-	 */
+    /**
+     * What to assign to the array.
+     */
 
-	SafeStatement toAssign_;
+    SafeStatement toAssign_;
 
-	/**
-	 * The position in the array to change.
-	 */
+    /**
+     * The position in the array to change.
+     */
 
-	SafeStatement position_;
+    SafeStatement position_;
 
-public:
+  public:
 
-	/**
-	 * Set the array at position to the value of assign.
-	 */
+    /**
+     * Set the array at position to the value of assign.
+     */
 
-	AssignArrayStatement(int lineno, std::string text, SafeStatement array,
-			SafeStatement assign, SafeStatement position);
+    AssignArrayStatement(int lineno, std::string text, SafeStatement array,
+                         SafeStatement assign, SafeStatement position);
 
-	virtual ~AssignArrayStatement();
+    virtual ~AssignArrayStatement();
 
-	/**
-	 * Returns the type of array.
-	 * @return array_'s type.
-	 */
+    /**
+     * Returns the type of array.
+     * @return array_'s type.
+     */
 
-	TypeReference type();
+    TypeReference type();
 
-	void checkTree(Type* functionType);
-	int generateCode(int resultRegister, std::stringstream& generated);
+    void checkTree(Type* functionType);
+    int generateCode(int resultRegister, std::stringstream& generated);
 
 };
 

@@ -7,19 +7,19 @@
 namespace ScribbleCore {
 
 class IntStatement: public Statement {
-private:
-	int intValue_;
+  private:
+    int intValue_;
 
-public:
-	IntStatement(int lineNo, std::string sym, int intValue);
+  public:
+    IntStatement(int lineNo, std::string sym, int intValue);
 
-	TypeReference type() {
-		return makeTypeReference(getTypeManager().getType(Int));
-	}
+    TypeReference type() {
+        return makeTypeReference(getTypeManager().getType(Int));
+    }
 
-	void checkTree(Type* functionType);
+    void checkTree(Type* functionType);
 
-	int generateCode(int resultRegister, std::stringstream& generated);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

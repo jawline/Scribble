@@ -12,17 +12,17 @@
 namespace ScribbleCore {
 
 class OrStatement: public Statement {
-private:
-	SafeStatement lhs_, rhs_;
+  private:
+    SafeStatement lhs_, rhs_;
 
-public:
-	OrStatement(int lineNo, std::string sym, SafeStatement leftHandSide,
-			SafeStatement rightHandSide);
-	virtual ~OrStatement();
+  public:
+    OrStatement(int lineNo, std::string sym, SafeStatement leftHandSide,
+                SafeStatement rightHandSide);
+    virtual ~OrStatement();
 
-	virtual void checkTree(Type* functionType);
-	virtual TypeReference type();
-	virtual int generateCode(int resultRegister, std::stringstream& generated);
+    virtual void checkTree(Type* functionType);
+    virtual TypeReference type();
+    virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

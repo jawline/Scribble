@@ -17,39 +17,39 @@ namespace HashMapUtils {
 
 template<class T>
 class HashItemLink {
-private:
+  private:
 
-	std::string name_;
-	T data_;
-	HashItemLink<T>* next_;
+    std::string name_;
+    T data_;
+    HashItemLink<T>* next_;
 
-public:
+  public:
 
-	HashItemLink(std::string name, T data) {
-		name_ = name;
-		data_ = data;
-		next_ = 0;
-	}
+    HashItemLink(std::string name, T data) {
+        name_ = name;
+        data_ = data;
+        next_ = 0;
+    }
 
-	std::string const& getName() const {
-		return name_;
-	}
+    std::string const& getName() const {
+        return name_;
+    }
 
-	T getData() const {
-		return data_;
-	}
+    T getData() const {
+        return data_;
+    }
 
-	void setData(T data) {
-		data_ = data;
-	}
+    void setData(T data) {
+        data_ = data;
+    }
 
-	HashItemLink<T>* getNext() const {
-		return next_;
-	}
+    HashItemLink<T>* getNext() const {
+        return next_;
+    }
 
-	void setNext(HashItemLink<T>* next) {
-		next_ = next;
-	}
+    void setNext(HashItemLink<T>* next) {
+        next_ = next;
+    }
 
 };
 
@@ -59,98 +59,98 @@ public:
 
 template<class T>
 class HashBucket {
-private:
-	HashItemLink<T>* root_;
+  private:
+    HashItemLink<T>* root_;
 
-public:
+  public:
 
-	HashBucket() :
-			root_(nullptr) {
-	}
+    HashBucket() :
+        root_(nullptr) {
+    }
 
-	bool strEqual(std::string const& left, std::string const& right) const {
-		return left.compare(right) == 0;
-	}
+    bool strEqual(std::string const& left, std::string const& right) const {
+        return left.compare(right) == 0;
+    }
 
-	HashItemLink<T>* find(std::string const& id) const {
+    HashItemLink<T>* find(std::string const& id) const {
 
-		if (root_ == nullptr) {
-			return nullptr;
-		}
+        if (root_ == nullptr) {
+            return nullptr;
+        }
 
-		HashItemLink<T>* iter = root_;
+        HashItemLink<T>* iter = root_;
 
-		while (iter != nullptr) {
+        while (iter != nullptr) {
 
-			if (strEqual(iter->getName(), id)) {
-				return iter;
-			}
+            if (strEqual(iter->getName(), id)) {
+                return iter;
+            }
 
-			iter = iter->getNext();
-		}
+            iter = iter->getNext();
+        }
 
-		return nullptr;
-	}
+        return nullptr;
+    }
 
-	void remove(std::string const& id) {
+    void remove(std::string const& id) {
 
-		HashItemLink<T>* iter = root_;
+        HashItemLink<T>* iter = root_;
 
-		if (strEqual(iter->getName(), iter->name_)) {
-			root_ = root_->getNext();
-			delete iter;
-			return;
-		}
+        if (strEqual(iter->getName(), iter->name_)) {
+            root_ = root_->getNext();
+            delete iter;
+            return;
+        }
 
-		while (iter->getNext() != nullptr) {
+        while (iter->getNext() != nullptr) {
 
-			if (strEqual(iter->getNext()->getName(), id)) {
-				HashItemLink<T>* str = iter->getNext();
-				iter->setNext(str->getNext());
-				delete str;
-				return;
-			}
+            if (strEqual(iter->getNext()->getName(), id)) {
+                HashItemLink<T>* str = iter->getNext();
+                iter->setNext(str->getNext());
+                delete str;
+                return;
+            }
 
-			iter = iter->getNext();
-		}
+            iter = iter->getNext();
+        }
 
-	}
+    }
 
-	void insert(std::string const& id, T data) {
+    void insert(std::string const& id, T data) {
 
-		//printf("Inserting %s\n", id.c_str());
+        //printf("Inserting %s\n", id.c_str());
 
-		//If there is no existing list then make one.
-		if (root_ == nullptr) {
-			root_ = new HashItemLink<T>(id, data);
-			//printf("Made %li next %li\n", root_, root_->getNext());
-			return;
-		}
+        //If there is no existing list then make one.
+        if (root_ == nullptr) {
+            root_ = new HashItemLink<T>(id, data);
+            //printf("Made %li next %li\n", root_, root_->getNext());
+            return;
+        }
 
-		//Iterate through all existing nodes. if it is the node we are looking to add then change it instead of inserting it.
-		HashItemLink<T>* iter = root_;
+        //Iterate through all existing nodes. if it is the node we are looking to add then change it instead of inserting it.
+        HashItemLink<T>* iter = root_;
 
-		while (iter->getNext() != nullptr) {
+        while (iter->getNext() != nullptr) {
 
-			if (strEqual(iter->getName(), id)) {
-				iter->setData(data);
-				return;
-			}
+            if (strEqual(iter->getName(), id)) {
+                iter->setData(data);
+                return;
+            }
 
-			//printf("Iter %li next %li\n", iter, iter->getNext());
+            //printf("Iter %li next %li\n", iter, iter->getNext());
 
-			iter = iter->getNext();
-		}
+            iter = iter->getNext();
+        }
 
-		//One last check to check the last element isn't the target
-		if (strEqual(iter->getName(), id)) {
-			iter->setData(data);
-			return;
-		}
+        //One last check to check the last element isn't the target
+        if (strEqual(iter->getName(), id)) {
+            iter->setData(data);
+            return;
+        }
 
-		//Set the new end of the list
-		iter->setNext(new HashItemLink<T>(id, data));
-	}
+        //Set the new end of the list
+        iter->setNext(new HashItemLink<T>(id, data));
+    }
 
 };
 
@@ -160,74 +160,74 @@ const static unsigned int numBucketsDefault = 128;
 
 template<class T>
 class HashMap {
-private:
-	HashMapUtils::HashBucket<T>* buckets_;
-	int numBuckets_;
+  private:
+    HashMapUtils::HashBucket<T>* buckets_;
+    int numBuckets_;
 
-public:
+  public:
 
-	HashMap() :
-			numBuckets_(numBucketsDefault) {
-		buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
-	}
+    HashMap() :
+        numBuckets_(numBucketsDefault) {
+        buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
+    }
 
-	HashMap(int numBuckets) :
-			numBuckets_(numBuckets) {
-		buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
-	}
+    HashMap(int numBuckets) :
+        numBuckets_(numBuckets) {
+        buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
+    }
 
-	virtual ~HashMap() {
-	}
+    virtual ~HashMap() {
+    }
 
-	void insert(std::string const& id, T data) {
-		buckets_[hash(id)].insert(id, data);
-	}
+    void insert(std::string const& id, T data) {
+        buckets_[hash(id)].insert(id, data);
+    }
 
-	void remove(std::string const& id) {
-		buckets_[hash(id)].remove(id);
-	}
+    void remove(std::string const& id) {
+        buckets_[hash(id)].remove(id);
+    }
 
-	bool exists(std::string const& id) {
+    bool exists(std::string const& id) {
 
-		if (buckets_[hash(id)].find(id) != nullptr) {
-			return true;
-		}
+        if (buckets_[hash(id)].find(id) != nullptr) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	HashMapUtils::HashItemLink<T>* get(std::string id) {
-		return buckets_[hash(id)].find(id);
-	}
+    HashMapUtils::HashItemLink<T>* get(std::string id) {
+        return buckets_[hash(id)].find(id);
+    }
 
-	T find(std::string const& id) {
-		HashMapUtils::HashItemLink<T>* linked = get(id);
+    T find(std::string const& id) {
+        HashMapUtils::HashItemLink<T>* linked = get(id);
 
-		if (linked != nullptr) {
-			return linked->getData();
-		}
+        if (linked != nullptr) {
+            return linked->getData();
+        }
 
-		return T();
-	}
+        return T();
+    }
 
-	int hash(std::string const& id) {
+    int hash(std::string const& id) {
 
-		size_t len = id.size();
-		uint32_t hash = 0;
-		uint32_t i = 0;
+        size_t len = id.size();
+        uint32_t hash = 0;
+        uint32_t i = 0;
 
-		for (hash = i = 0; i < len; ++i) {
-			hash += id[i];
-			hash += (hash << 10);
-			hash ^= (hash >> 6);
-		}
+        for (hash = i = 0; i < len; ++i) {
+            hash += id[i];
+            hash += (hash << 10);
+            hash ^= (hash >> 6);
+        }
 
-		hash += (hash << 3);
-		hash ^= (hash >> 11);
-		hash += (hash << 15);
+        hash += (hash << 3);
+        hash ^= (hash >> 11);
+        hash += (hash << 15);
 
-		return hash % numBuckets_;
-	}
+        return hash % numBuckets_;
+    }
 };
 
 #endif /* HASHMAP_HPP_ */

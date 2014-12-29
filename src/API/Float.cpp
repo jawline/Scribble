@@ -12,17 +12,17 @@
 namespace API {
 
 Float32FromInt::Float32FromInt(std::string ns) :
-		Function("Float", ns) {
+    Function("Float", ns) {
 
-	std::vector<ScribbleCore::TypeReference> refs;
-	refs.push_back(
-			ScribbleCore::makeTypeReference(
-					ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
+    std::vector<ScribbleCore::TypeReference> refs;
+    refs.push_back(
+        ScribbleCore::makeTypeReference(
+            ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
 
-	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
-			ScribbleCore::getTypeManager().getType(ScribbleCore::Float32));
+    ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+                ScribbleCore::getTypeManager().getType(ScribbleCore::Float32));
 
-	setSignature(ScribbleCore::FunctionSignature(refs, returnType));
+    setSignature(ScribbleCore::FunctionSignature(refs, returnType));
 
 }
 
@@ -30,9 +30,9 @@ Float32FromInt::~Float32FromInt() {
 }
 
 API::APIValue Float32FromInt::execute(API::APIValue* values,
-		VM::VirtualMachine* virt) {
-	return API::APIValue(ScribbleCore::getIntType(),
-			values[0].getValueFloat32());
+                                      VM::VirtualMachine* virt) {
+    return API::APIValue(ScribbleCore::getIntType(),
+                         values[0].getValueFloat32());
 }
 
 } /* namespace API */

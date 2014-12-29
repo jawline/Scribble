@@ -13,13 +13,13 @@
  * Random integer implementation. Returns a random integer between zero and n
  */
 class RandomInt: public Function {
-private:
-public:
-	RandomInt(std::string ns);
-	virtual ~RandomInt();
+  private:
+  public:
+    RandomInt(std::string ns);
+    virtual ~RandomInt();
 
 
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+    virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
 };
 

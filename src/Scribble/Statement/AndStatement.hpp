@@ -19,30 +19,30 @@ namespace ScribbleCore {
  */
 
 class AndStatement: public Statement {
-private:
+  private:
 
-	//The left hand statement to be checked.
-	SafeStatement lhs_;
+    //The left hand statement to be checked.
+    SafeStatement lhs_;
 
-	//The right hand statement to be checked.
-	SafeStatement rhs_;
+    //The right hand statement to be checked.
+    SafeStatement rhs_;
 
-public:
+  public:
 
-	AndStatement(int lineNo, std::string sym, SafeStatement leftHandSide,
-			SafeStatement rightHandSide);
+    AndStatement(int lineNo, std::string sym, SafeStatement leftHandSide,
+                 SafeStatement rightHandSide);
 
-	virtual ~AndStatement();
+    virtual ~AndStatement();
 
-	virtual void checkTree(Type* functionType);
+    virtual void checkTree(Type* functionType);
 
-	/**
-	 * AndStatements type is boolean.
-	 */
+    /**
+     * AndStatements type is boolean.
+     */
 
-	virtual TypeReference type();
+    virtual TypeReference type();
 
-	int generateCode(int resultRegister, std::stringstream& generated);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

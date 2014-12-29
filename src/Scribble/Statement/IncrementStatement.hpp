@@ -13,24 +13,24 @@
 namespace ScribbleCore {
 
 enum IncrementType {
-	Increment, Decrement
+    Increment, Decrement
 };
 
 class IncrementStatement: public Statement {
-private:
-	SmartPointer<Variable> variable_;
-	IncrementType operator_;
-	bool post_;
+  private:
+    SmartPointer<Variable> variable_;
+    IncrementType operator_;
+    bool post_;
 
-public:
+  public:
 
-	IncrementStatement(int line, std::string sym, SmartPointer<Variable> var,
-			IncrementType op, bool post);
-	virtual ~IncrementStatement();
+    IncrementStatement(int line, std::string sym, SmartPointer<Variable> var,
+                       IncrementType op, bool post);
+    virtual ~IncrementStatement();
 
-	virtual void checkTree(Type* functionType);
-	virtual TypeReference type();
-	virtual int generateCode(int resultRegister, std::stringstream& generated);
+    virtual void checkTree(Type* functionType);
+    virtual TypeReference type();
+    virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

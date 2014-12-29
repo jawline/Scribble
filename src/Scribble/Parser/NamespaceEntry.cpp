@@ -10,36 +10,36 @@
 namespace ScribbleCore {
 
 NamespaceEntry::NamespaceEntry() {
-	type_ = EmptyEntry;
+    type_ = EmptyEntry;
 }
 
 NamespaceEntry::NamespaceEntry(TypeReference t) {
-	type_ = TypeEntry;
-	typeInfo_ = t;
+    type_ = TypeEntry;
+    typeInfo_ = t;
 }
 
 NamespaceEntry::NamespaceEntry(std::vector<SafeFunction> set) {
-	type_ = FunctionSetEntry;
-	functionSet_ = set;
+    type_ = FunctionSetEntry;
+    functionSet_ = set;
 }
 
 NamespaceEntry::~NamespaceEntry() {
 }
 
 EntryType NamespaceEntry::type() {
-	return type_;
+    return type_;
 }
 
 std::vector<SafeFunction> NamespaceEntry::getFunctionSet() {
-	return functionSet_;
+    return functionSet_;
 }
 
 TypeReference NamespaceEntry::getType() {
-	return typeInfo_;
+    return typeInfo_;
 }
 
 void NamespaceEntry::addFunctionToSet(SafeFunction f) {
-	functionSet_.push_back(f);
+    functionSet_.push_back(f);
 }
 
 }

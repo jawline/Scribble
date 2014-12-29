@@ -13,11 +13,11 @@
 #include <string>
 
 class ReadLine : public Function {
-public:
-	ReadLine(std::string ns);
-	virtual ~ReadLine();
+  public:
+    ReadLine(std::string ns);
+    virtual ~ReadLine();
 
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+    virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
 };
 

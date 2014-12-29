@@ -15,7 +15,7 @@ namespace VM {
  */
 
 enum CallType {
-	Constant = 0, Register
+    Constant = 0, Register
 };
 
 }

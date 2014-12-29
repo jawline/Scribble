@@ -19,15 +19,15 @@ namespace ScribbleCore {
  */
 
 class ParserException: public std::exception {
-private:
-	std::string file_;
-	std::string details_;
-	std::string error_;
+  private:
+    std::string file_;
+    std::string details_;
+    std::string error_;
 
-public:
-	ParserException(std::string file, std::string details);
-	virtual ~ParserException() throw ();
-	virtual const char* what() const throw ();
+  public:
+    ParserException(std::string file, std::string details);
+    virtual ~ParserException() throw ();
+    virtual const char* what() const throw ();
 };
 
 }

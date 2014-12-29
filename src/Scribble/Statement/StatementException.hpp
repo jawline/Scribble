@@ -10,16 +10,16 @@ namespace ScribbleCore {
 class Statement;
 
 class StatementException: public exception {
-private:
-	std::string error_;
+  private:
+    std::string error_;
 
-public:
-	StatementException(Statement* statement, std::string error);
-	virtual ~StatementException() throw ();
+  public:
+    StatementException(Statement* statement, std::string error);
+    virtual ~StatementException() throw ();
 
-	virtual const char* what() const throw () {
-		return error_.c_str();
-	}
+    virtual const char* what() const throw () {
+        return error_.c_str();
+    }
 };
 
 /**
@@ -28,7 +28,7 @@ public:
  */
 
 void StatementAssert(Statement* statement, bool assertionValue,
-		std::string error);
+                     std::string error);
 
 }
 

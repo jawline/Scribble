@@ -13,19 +13,19 @@
 namespace ScribbleCore {
 
 class WhileStatement: public Statement {
-private:
-	SafeStatement condition_;
-	std::vector<SafeStatement> statements_;
+  private:
+    SafeStatement condition_;
+    std::vector<SafeStatement> statements_;
 
-public:
-	WhileStatement(int lineNumber, std::string symbol, SafeStatement condition,
-			std::vector<SafeStatement> statements);
-	virtual ~WhileStatement();
+  public:
+    WhileStatement(int lineNumber, std::string symbol, SafeStatement condition,
+                   std::vector<SafeStatement> statements);
+    virtual ~WhileStatement();
 
-	void checkTree(Type* functionType);
-	TypeReference type();
+    void checkTree(Type* functionType);
+    TypeReference type();
 
-	int generateCode(int resultRegister, std::stringstream& generated);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

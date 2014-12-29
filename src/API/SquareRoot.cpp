@@ -10,5 +10,5 @@
 #include <types.h>
 
 APIValue SquareRootFloat32(API::APIValue* values, VM::VirtualMachine* virt) {
-	return API::APIValue::makeFloat32(sqrtf(values[0].getValueFloat32()));
+    return API::APIValue::makeFloat32(sqrtf(values[0].getValueFloat32()));
 }

@@ -1,0 +1,43 @@
+\contentsline {chapter}{Abstract}{4}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation}{5}{section.1.1}
+\contentsline {chapter}{\numberline {2}The Language}{6}{chapter.2}
+\contentsline {section}{\numberline {2.1}Types}{6}{section.2.1}
+\contentsline {section}{\numberline {2.2}Arithmetic}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Tests \& Boolean operations}{7}{section.2.3}
+\contentsline {section}{\numberline {2.4}Expressions}{8}{section.2.4}
+\contentsline {section}{\numberline {2.5}Variables}{8}{section.2.5}
+\contentsline {section}{\numberline {2.6}Flow Control}{9}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}If}{9}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}While}{10}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}For}{10}{subsection.2.6.3}
+\contentsline {section}{\numberline {2.7}Arrays}{11}{section.2.7}
+\contentsline {section}{\numberline {2.8}Structures}{12}{section.2.8}
+\contentsline {section}{\numberline {2.9}Functions}{14}{section.2.9}
+\contentsline {subsection}{\numberline {2.9.1}Constraints}{15}{subsection.2.9.1}
+\contentsline {section}{\numberline {2.10}Packages}{16}{section.2.10}
+\contentsline {section}{\numberline {2.11}Operators Summary}{16}{section.2.11}
+\contentsline {chapter}{\numberline {3}The Compiler}{18}{chapter.3}
+\contentsline {section}{\numberline {3.1}Lexical Analysis}{18}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Flex}{18}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Parsing}{18}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Bison}{18}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}The Statement Tree}{18}{section.3.3}
+\contentsline {section}{\numberline {3.4}Type Inference}{19}{section.3.4}
+\contentsline {section}{\numberline {3.5}Function Matching}{19}{section.3.5}
+\contentsline {section}{\numberline {3.6}Error Checking}{19}{section.3.6}
+\contentsline {chapter}{\numberline {4}Intermediate Code}{21}{chapter.4}
+\contentsline {section}{\numberline {4.1}Parsing}{21}{section.4.1}
+\contentsline {chapter}{\numberline {5}The Virtual Machine}{22}{chapter.5}
+\contentsline {section}{\numberline {5.1}Registers}{22}{section.5.1}
+\contentsline {section}{\numberline {5.2}Primitives}{22}{section.5.2}
+\contentsline {section}{\numberline {5.3}Instructions}{23}{section.5.3}
+\contentsline {section}{\numberline {5.4}Instruction Set}{23}{section.5.4}
+\contentsline {section}{\numberline {5.5}Namespaces, Functions \& Types}{23}{section.5.5}
+\contentsline {section}{\numberline {5.6}Heap}{24}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Garbage Collection}{24}{subsection.5.6.1}
+\contentsline {section}{\numberline {5.7}Instructions List}{24}{section.5.7}
+\contentsline {chapter}{\numberline {6}Progress \& Second term goals}{26}{chapter.6}
+\contentsline {section}{\numberline {6.1} Current Progress }{26}{section.6.1}
+\contentsline {section}{\numberline {6.2} Future Tasks }{26}{section.6.2}
+\contentsline {chapter}{Bibliography}{27}{chapter*.3}

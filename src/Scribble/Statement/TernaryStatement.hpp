@@ -16,16 +16,16 @@ namespace ScribbleCore {
  */
 
 class TernaryStatement: public Statement {
-private:
-	SafeStatement test_;
-	SafeStatement lhs_, rhs_;
-public:
-	TernaryStatement(int line, std::string sym, SafeStatement test, SafeStatement lhs, SafeStatement rhs);
-	virtual ~TernaryStatement();
+  private:
+    SafeStatement test_;
+    SafeStatement lhs_, rhs_;
+  public:
+    TernaryStatement(int line, std::string sym, SafeStatement test, SafeStatement lhs, SafeStatement rhs);
+    virtual ~TernaryStatement();
 
-	TypeReference type();
-	void checkTree(Type* functionType);
-	int generateCode(int resultRegister, std::stringstream& generated);
+    TypeReference type();
+    void checkTree(Type* functionType);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 

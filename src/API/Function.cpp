@@ -11,59 +11,59 @@ namespace API {
 
 void Function::setSignature(ScribbleCore::FunctionSignature sig) {
 
-	signature_ = sig;
+    signature_ = sig;
 }
 
 void Function::execute(VM::VirtualMachine* virt) {
 
-	APIValue* vals = new APIValue[getSignature().getArguments().size()];
+    APIValue* vals = new APIValue[getSignature().getArguments().size()];
 
-	for (int i = getSignature().getArguments().size() - 1; i > -1; --i) {
+    for (int i = getSignature().getArguments().size() - 1; i > -1; --i) {
 
-		int64_t val;
-		bool ref;
+        int64_t val;
+        bool ref;
 
-		virt->popStackLong(val, ref);
+        virt->popStackLong(val, ref);
 
-		if (ref) {
-			vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
-					virt->getHeap().getType(val),
-					virt->getHeap().getSmartPointer(val), val);
-		} else {
-			vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
-					val);
-		}
+        if (ref) {
+            vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
+                                    virt->getHeap().getType(val),
+                                    virt->getHeap().getSmartPointer(val), val);
+        } else {
+            vals[i] = API::APIValue(getSignature().getArguments()[i]->type(),
+                                    val);
+        }
 
-	}
+    }
 
-	APIValue returnVal = execute(vals, virt);
+    APIValue returnVal = execute(vals, virt);
 
-	if (returnVal.isReference()) {
+    if (returnVal.isReference()) {
 
-		virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
-				true);
+        virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
+                          true);
 
-		virt->hitGc();
-	} else {
+        virt->hitGc();
+    } else {
 
-		virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
-				false);
-	}
+        virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
+                          false);
+    }
 
 }
 
 int Function::debugCode(std::stringstream& gen) {
 
-	if (isNativeFunction()) {
+    if (isNativeFunction()) {
 
-		gen << "#NativeFunction";
-	} else {
+        gen << "#NativeFunction";
+    } else {
 
-		//Should always be overwritten by Console
-		gen << "#NonNativeFunction";
-	}
+        //Should always be overwritten by Console
+        gen << "#NonNativeFunction";
+    }
 
-	return 0;
+    return 0;
 }
 
 }

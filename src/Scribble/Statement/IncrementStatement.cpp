@@ -12,110 +12,110 @@
 namespace ScribbleCore {
 
 IncrementStatement::IncrementStatement(int line, std::string sym,
-		SmartPointer<Variable> variable, IncrementType op, bool post) :
-		Statement(line, sym), variable_(variable), operator_(op), post_(post) {
-		}
+                                       SmartPointer<Variable> variable, IncrementType op, bool post) :
+    Statement(line, sym), variable_(variable), operator_(op), post_(post) {
+}
 
 IncrementStatement::~IncrementStatement() {
 }
 
 void IncrementStatement::checkTree(Type* functionType) {
 
-	StatementAssert(this, variable_->getType()->getType() == Int,
-			std::string("Cannot use the increment operator on type ")
-					+ variable_->getType()->getTypeName());
+    StatementAssert(this, variable_->getType()->getType() == Int,
+                    std::string("Cannot use the increment operator on type ")
+                    + variable_->getType()->getTypeName());
 }
 
 TypeReference IncrementStatement::type() {
-	return makeTypeReference(getTypeManager().getType(Int));
+    return makeTypeReference(getTypeManager().getType(Int));
 }
 
 int IncrementStatement::generateCode(int resultRegister,
-		std::stringstream& generated) {
+                                     std::stringstream& generated) {
 
-	int instrs = 0;
+    int instrs = 0;
 
-	switch (operator_) {
+    switch (operator_) {
 
-	case Increment:
+    case Increment:
 
-		if (post_) {
+        if (post_) {
 
-			//TODO: Inc operator
+            //TODO: Inc operator
 
-			generated << "inc $"
-					<< variable_->getPosition() + VM::vmNumReservedRegisters
-					<< "\n";
-			instrs += 1;
+            generated << "inc $"
+                      << variable_->getPosition() + VM::vmNumReservedRegisters
+                      << "\n";
+            instrs += 1;
 
-			if (resultRegister != -1) {
+            if (resultRegister != -1) {
 
-				generated << "move $"
-						<< variable_->getPosition() + VM::vmNumReservedRegisters
-						<< " $" << resultRegister << "\n";
+                generated << "move $"
+                          << variable_->getPosition() + VM::vmNumReservedRegisters
+                          << " $" << resultRegister << "\n";
 
-				instrs += 1;
-			}
+                instrs += 1;
+            }
 
-		} else {
+        } else {
 
-			if (resultRegister != -1) {
-				generated << "move $"
-						<< variable_->getPosition() + VM::vmNumReservedRegisters
-						<< " $" << resultRegister << "\n";
-				instrs++;
-			}
+            if (resultRegister != -1) {
+                generated << "move $"
+                          << variable_->getPosition() + VM::vmNumReservedRegisters
+                          << " $" << resultRegister << "\n";
+                instrs++;
+            }
 
-			//TODO: Inc operator
-			generated << "inc $"
-					<< variable_->getPosition() + VM::vmNumReservedRegisters
-					<< "\n";
-			instrs += 1;
-		}
+            //TODO: Inc operator
+            generated << "inc $"
+                      << variable_->getPosition() + VM::vmNumReservedRegisters
+                      << "\n";
+            instrs += 1;
+        }
 
-		break;
+        break;
 
-	case Decrement:
+    case Decrement:
 
-		if (post_) {
+        if (post_) {
 
-			generated << "dec $"
-					<< variable_->getPosition() + VM::vmNumReservedRegisters
-					<< "\n";
-			instrs += 1;
+            generated << "dec $"
+                      << variable_->getPosition() + VM::vmNumReservedRegisters
+                      << "\n";
+            instrs += 1;
 
-			if (resultRegister != -1) {
+            if (resultRegister != -1) {
 
-				generated << "move $"
-						<< variable_->getPosition() + VM::vmNumReservedRegisters
-						<< " $" << resultRegister << "\n";
+                generated << "move $"
+                          << variable_->getPosition() + VM::vmNumReservedRegisters
+                          << " $" << resultRegister << "\n";
 
-				instrs++;
-			}
+                instrs++;
+            }
 
-		} else {
+        } else {
 
-			if (resultRegister != -1) {
+            if (resultRegister != -1) {
 
-				generated << "move $"
-						<< variable_->getPosition() + VM::vmNumReservedRegisters
-						<< " $" << resultRegister << "\n";
+                generated << "move $"
+                          << variable_->getPosition() + VM::vmNumReservedRegisters
+                          << " $" << resultRegister << "\n";
 
-				instrs++;
+                instrs++;
 
-			}
+            }
 
-			generated << "dec $"
-					<< variable_->getPosition() + VM::vmNumReservedRegisters
-					<< "\n";
-			instrs += 1;
-		}
+            generated << "dec $"
+                      << variable_->getPosition() + VM::vmNumReservedRegisters
+                      << "\n";
+            instrs += 1;
+        }
 
-		break;
+        break;
 
-	}
+    }
 
-	return instrs;
+    return instrs;
 }
 
 }

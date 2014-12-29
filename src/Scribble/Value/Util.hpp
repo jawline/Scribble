@@ -14,20 +14,20 @@
  */
 
 class UtilException: public std::exception {
-private:
+  private:
 
-	/**
-	 * The reason why it cannot create the specified type.
-	 */
+    /**
+     * The reason why it cannot create the specified type.
+     */
 
-	std::string reason_;
+    std::string reason_;
 
-public:
+  public:
 
-	UtilException(std::string const& reason) throw ();
-	virtual ~UtilException() throw ();
+    UtilException(std::string const& reason) throw ();
+    virtual ~UtilException() throw ();
 
-	virtual const char* what() const throw ();
+    virtual const char* what() const throw ();
 
 };
 

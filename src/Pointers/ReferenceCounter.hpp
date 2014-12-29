@@ -2,22 +2,22 @@
 #define _REFERENCE_COUNTER_DEF_H_
 
 class ReferenceCounter {
-private:
-	int count_;
+  private:
+    int count_;
 
-public:
+  public:
 
-	ReferenceCounter() {
-		count_ = 0;
-	}
+    ReferenceCounter() {
+        count_ = 0;
+    }
 
-	void Attach() {
-		count_++;
-	}
+    void Attach() {
+        count_++;
+    }
 
-	int Release() {
-		return --count_;
-	}
+    int Release() {
+        return --count_;
+    }
 
 };
 

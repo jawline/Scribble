@@ -12,16 +12,16 @@
 namespace ScribbleCore {
 
 class NotStatement: public Statement {
-private:
-	SafeStatement exp_;
+  private:
+    SafeStatement exp_;
 
-public:
-	NotStatement(int lineno, std::string symb, SafeStatement exp);
-	virtual ~NotStatement();
+  public:
+    NotStatement(int lineno, std::string symb, SafeStatement exp);
+    virtual ~NotStatement();
 
-	void checkTree(Type* functionType);
-	TypeReference type();
-	int generateCode(int resultRegister, std::stringstream& generated);
+    void checkTree(Type* functionType);
+    TypeReference type();
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 } /* namespace ScribbleCore */

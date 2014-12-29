@@ -11,7 +11,7 @@
 namespace VM {
 
 enum JumpType {
-	DirectRelative = 0, DirectExact, RegisterRelative, RegisterExact
+    DirectRelative = 0, DirectExact, RegisterRelative, RegisterExact
 };
 
 }

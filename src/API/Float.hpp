@@ -12,12 +12,12 @@
 namespace API {
 
 class Float32FromInt: public Function {
-public:
-	Float32FromInt(std::string ns);
-	virtual ~Float32FromInt();
+  public:
+    Float32FromInt(std::string ns);
+    virtual ~Float32FromInt();
 
-	API::APIValue execute(API::APIValue* values,
-			VM::VirtualMachine* virt);
+    API::APIValue execute(API::APIValue* values,
+                          VM::VirtualMachine* virt);
 
 };
 

@@ -1,7 +1,8 @@
 package console := import("console"),
 		sys := import("sys"),
 		math := import("math/math"),
-		sieve := import("math/sieve");
+		sieve := import("math/sieve"),
+		wiring := import("libWiring");
 
 type Tree := struct {
 	a:int,
@@ -35,6 +36,16 @@ func FiveTimes(x:int) -> int := 5 * x;
 func TenTimes(x:int) -> int := FiveTimes(2 * x);
 func TenTimesFive() -> int := TenTimes(Five());
 func Happy() -> string := "Something something daaa dee de de dee";
+
+func SetMode(x:int, r:bool) { 
+ wiring.SetMode(x,r);
+}
+
+func Write(x:int, r:bool) {
+ wiring.Write(x,r);
+}
+
+func Read(x:int) -> bool := wiring.Read(x);
 
 func SumEvents(x:int) -> int {
 

@@ -11,36 +11,36 @@
 namespace ScribbleCore {
 
 NotStatement::NotStatement(int lineno, std::string symb, SafeStatement exp) :
-		Statement(lineno, symb), exp_(exp) {
+    Statement(lineno, symb), exp_(exp) {
 }
 
 NotStatement::~NotStatement() {
 }
 
 void NotStatement::checkTree(Type* functionType) {
-	exp_->checkTree(functionType);
+    exp_->checkTree(functionType);
 
-	StatementAssert(this,
-			exp_->type()->type()->Equals(getTypeManager().getType(Boolean)),
-			"A not expression (!expr) can only be used on a boolean value");
+    StatementAssert(this,
+                    exp_->type()->type()->Equals(getTypeManager().getType(Boolean)),
+                    "A not expression (!expr) can only be used on a boolean value");
 }
 
 TypeReference NotStatement::type() {
-	return makeTypeReference(getTypeManager().getType(Boolean));
+    return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
 int NotStatement::generateCode(int resultRegister,
-		std::stringstream& generated) {
-	int instrs = 0;
+                               std::stringstream& generated) {
+    int instrs = 0;
 
-	instrs += exp_->generateCode(resultRegister, generated);
+    instrs += exp_->generateCode(resultRegister, generated);
 
-	if (resultRegister != -1) {
-		generated << "not $" << resultRegister << "\n";
-		instrs++;
-	}
+    if (resultRegister != -1) {
+        generated << "not $" << resultRegister << "\n";
+        instrs++;
+    }
 
-	return instrs;
+    return instrs;
 }
 
 } /* namespace ScribbleCore */

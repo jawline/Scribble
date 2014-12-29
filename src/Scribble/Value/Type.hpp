@@ -29,7 +29,7 @@ typedef SmartPointer<TypeReferenceCore> TypeReference;
  */
 
 enum ValueOperator {
-	Add, Subtract, Divide, Multiply
+    Add, Subtract, Divide, Multiply
 };
 
 /**
@@ -38,67 +38,67 @@ enum ValueOperator {
 
 enum ValueType {
 
-	/**
-	 * Unresolved type used during parsing when a function call, variable type etc has not yet been inferred.
-	 */
+    /**
+     * Unresolved type used during parsing when a function call, variable type etc has not yet been inferred.
+     */
 
-	TypeUnresolved = -1,
+    TypeUnresolved = -1,
 
-	/**
-	 * String type, represented by std::string. n bytes
-	 */
+    /**
+     * String type, represented by std::string. n bytes
+     */
 
-	StringType = 0,
+    StringType = 0,
 
-	/**
-	 * 1 byte booleans.
-	 */
+    /**
+     * 1 byte booleans.
+     */
 
-	Boolean,
+    Boolean,
 
-	/**
-	 * Integer numbers. Stored as 4 byte signed integers.
-	 */
+    /**
+     * Integer numbers. Stored as 4 byte signed integers.
+     */
 
-	Int,
+    Int,
 
-	/**
-	 * 32 bit floating point numbers.
-	 */
+    /**
+     * 32 bit floating point numbers.
+     */
 
-	Float32,
+    Float32,
 
-	/**
-	 * Void type - Carries no data
-	 */
+    /**
+     * Void type - Carries no data
+     */
 
-	Void,
+    Void,
 
-	/**
-	 * Nil Type, Only auto cast type. Is equivilent to any other types initial state ( nilptr for references, 0 for numbers, false for booleans )
-	 */
+    /**
+     * Nil Type, Only auto cast type. Is equivilent to any other types initial state ( nilptr for references, 0 for numbers, false for booleans )
+     */
 
-	NilType,
+    NilType,
 
-	/**
-	 * Primitive array type, always grouped with a subtype used to tell what it is an array of.
-	 */
+    /**
+     * Primitive array type, always grouped with a subtype used to tell what it is an array of.
+     */
 
-	Array,
+    Array,
 
-	/**
-	 * Structure type. Subtype will be StructureInfo
-	 */
+    /**
+     * Structure type. Subtype will be StructureInfo
+     */
 
-	StructureType,
+    StructureType,
 
-	FunctionReferenceType,
+    FunctionReferenceType,
 
-	/**
-	 * Max hint used so that heaps can allocate arrays of the correct number of buckets.
-	 */
+    /**
+     * Max hint used so that heaps can allocate arrays of the correct number of buckets.
+     */
 
-	ValueTypeMax
+    ValueTypeMax
 };
 
 /**
@@ -107,66 +107,66 @@ enum ValueType {
  */
 
 class Type {
-private:
+  private:
 
-	/**
-	 * The raw primitive type (Array, Int, Void, etc)
-	 */
+    /**
+     * The raw primitive type (Array, Int, Void, etc)
+     */
 
-	ValueType rawType_;
+    ValueType rawType_;
 
-	/**
-	 * The sub type of this type. Only applicable to arrays & references.
-	 */
+    /**
+     * The sub type of this type. Only applicable to arrays & references.
+     */
 
-	TypeReference subType_;
+    TypeReference subType_;
 
-	std::vector<TypeReference> referenceArgumentTypes_;
-	TypeReference referenceReturnType_;
+    std::vector<TypeReference> referenceArgumentTypes_;
+    TypeReference referenceReturnType_;
 
-public:
+  public:
 
-	/**
-	 * Create a new type with a given primitive type and subtype (Subtype null if type has no subtype).
-	 */
-	Type(ValueType rawType, TypeReference subType);
-	Type(std::vector<TypeReference> argumentTypes, TypeReference returnType);
+    /**
+     * Create a new type with a given primitive type and subtype (Subtype null if type has no subtype).
+     */
+    Type(ValueType rawType, TypeReference subType);
+    Type(std::vector<TypeReference> argumentTypes, TypeReference returnType);
 
-	virtual ~Type();
+    virtual ~Type();
 
-	/**
-	 * Get this types primitive type.
-	 */
-	ValueType getType() const;
+    /**
+     * Get this types primitive type.
+     */
+    ValueType getType() const;
 
-	/**
-	 * Returns true if the value is a primitive type that fits into a register.
-	 */
-	bool isPrimitive() const;
+    /**
+     * Returns true if the value is a primitive type that fits into a register.
+     */
+    bool isPrimitive() const;
 
-	TypeReference getReferenceReturnType() const;
+    TypeReference getReferenceReturnType() const;
 
-	std::vector<TypeReference> getReferenceArguments() const;
+    std::vector<TypeReference> getReferenceArguments() const;
 
-	/**
-	 * Get this types subtype.
-	 */
-	Type* getSubtype() const;
+    /**
+     * Get this types subtype.
+     */
+    Type* getSubtype() const;
 
-	/**
-	 * Test whether this type is equivalent to a given type.
-	 */
-	virtual bool Equals(Type* other) const;
+    /**
+     * Test whether this type is equivalent to a given type.
+     */
+    virtual bool Equals(Type* other) const;
 
-	/**
-	 * If this type is an array then this will return a reference to its subtype.
-	 */
-	TypeReference getSubtypeReference() const;
+    /**
+     * If this type is an array then this will return a reference to its subtype.
+     */
+    TypeReference getSubtypeReference() const;
 
-	/**
-	 * Get the human readable name of this type.
-	 */
-	virtual std::string getTypeName() const;
+    /**
+     * Get the human readable name of this type.
+     */
+    virtual std::string getTypeName() const;
 
 };
 

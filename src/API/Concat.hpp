@@ -12,12 +12,12 @@
 namespace API {
 
 class Concat : public Function {
-public:
-	Concat(std::string ns);
-	virtual ~Concat();
+  public:
+    Concat(std::string ns);
+    virtual ~Concat();
 
-	API::APIValue execute(API::APIValue* values,
-			VM::VirtualMachine* virt);
+    API::APIValue execute(API::APIValue* values,
+                          VM::VirtualMachine* virt);
 };
 
 } /* namespace API */

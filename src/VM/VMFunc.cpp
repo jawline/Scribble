@@ -10,11 +10,11 @@
 namespace VM {
 
 VMFunc::VMFunc(std::string name, InstructionSet instrs) :
-        name_(name), instrs_(instrs), func_(nullptr) {
+    name_(name), instrs_(instrs), func_(nullptr) {
 }
 
 VMFunc::VMFunc(std::string name, SmartPointer<Function> func) :
-name_(name), func_(func) {
+    name_(name), func_(func) {
 }
 
 VMFunc::~VMFunc() {
@@ -22,11 +22,11 @@ VMFunc::~VMFunc() {
 
 bool VMFunc::isNative() {
 
-	if (func_ == nullptr) {
-		return false;
-	}
+    if (func_ == nullptr) {
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 } /* namespace VM */

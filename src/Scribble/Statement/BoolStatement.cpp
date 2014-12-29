@@ -12,35 +12,35 @@
 namespace ScribbleCore {
 
 BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) :
-		Statement(lineNo, sym) {
-	value_ = value;
+    Statement(lineNo, sym) {
+    value_ = value;
 }
 
 BoolStatement::~BoolStatement() {
 }
 
 TypeReference BoolStatement::type() {
-	return makeTypeReference(getTypeManager().getType(Boolean));
+    return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
 void BoolStatement::checkTree(Type* functionType) {
 }
 
 int BoolStatement::generateCode(int resultRegister,
-		std::stringstream& generated) {
+                                std::stringstream& generated) {
 
 
-	if (resultRegister != -1) {
+    if (resultRegister != -1) {
 
-		if (value_) {
-			generated << "load " << VM::vmTrue << " $" << resultRegister << "\n";
-		} else {
-			generated << "load " << VM::vmFalse << " $" << resultRegister << "\n";
-		}
+        if (value_) {
+            generated << "load " << VM::vmTrue << " $" << resultRegister << "\n";
+        } else {
+            generated << "load " << VM::vmFalse << " $" << resultRegister << "\n";
+        }
 
-	}
+    }
 
-	return 1;
+    return 1;
 }
 
 }

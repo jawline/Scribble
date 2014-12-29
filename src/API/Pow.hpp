@@ -12,34 +12,34 @@
 namespace API {
 
 class Pow: public Function {
-private:
-	std::string namespace_;
+  private:
+    std::string namespace_;
 
-public:
-	Pow(std::string ns);
-	virtual ~Pow();
+  public:
+    Pow(std::string ns);
+    virtual ~Pow();
 
-	/**
-	 * Returns the resulting modulo as an API value.
-	 */
+    /**
+     * Returns the resulting modulo as an API value.
+     */
 
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+    virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
 };
 
 class PowFloat32: public Function {
-private:
-	std::string namespace_;
+  private:
+    std::string namespace_;
 
-public:
-	PowFloat32(std::string ns);
-	virtual ~PowFloat32();
+  public:
+    PowFloat32(std::string ns);
+    virtual ~PowFloat32();
 
-	/**
-	 * Returns the resulting modulo as an API value.
-	 */
+    /**
+     * Returns the resulting modulo as an API value.
+     */
 
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+    virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
 };
 

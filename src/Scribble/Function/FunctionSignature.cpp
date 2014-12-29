@@ -16,11 +16,11 @@ FunctionSignature::~FunctionSignature() {
 }
 
 std::vector<TypeReference> FunctionSignature::getArguments() {
- return arguments_;
+    return arguments_;
 }
 
 TypeReference FunctionSignature::getReturnType() {
- return returnType_;
+    return returnType_;
 }
 
 bool FunctionSignature::argumentsEqual(std::vector<Type*> args) {
@@ -29,41 +29,41 @@ bool FunctionSignature::argumentsEqual(std::vector<Type*> args) {
         return false;
     }
 
-	for (unsigned int i = 0; i < args.size(); i++) {
+    for (unsigned int i = 0; i < args.size(); i++) {
 
-		if (args[i] == nullptr || arguments_[i].get() == nullptr || arguments_[i]->type() == nullptr) {
-			printf("Error. Function Signature cannot evaluate nullptr\n");
-			return false;
-		}
+        if (args[i] == nullptr || arguments_[i].get() == nullptr || arguments_[i]->type() == nullptr) {
+            printf("Error. Function Signature cannot evaluate nullptr\n");
+            return false;
+        }
 
-		if (!args[i]->Equals(arguments_[i]->type())) {
-			return false;
-		}
+        if (!args[i]->Equals(arguments_[i]->type())) {
+            return false;
+        }
 
-	}
+    }
 
-	return true;
+    return true;
 }
 
 bool FunctionSignature::equalTo(FunctionSignature other) {
 
-	if (getArguments().size() != other.getArguments().size()) {
-		return false;
-	}
+    if (getArguments().size() != other.getArguments().size()) {
+        return false;
+    }
 
-	for (unsigned int i = 0; i < getArguments().size(); i++) {
+    for (unsigned int i = 0; i < getArguments().size(); i++) {
 
-		if (!getArguments()[i]->type()->Equals(other.getArguments()[i]->type())) {
-			return false;
-		}
+        if (!getArguments()[i]->type()->Equals(other.getArguments()[i]->type())) {
+            return false;
+        }
 
-	}
+    }
 
-	if (!getReturnType()->type()->Equals(other.getReturnType()->type())) {
-		return false;
-	}
+    if (!getReturnType()->type()->Equals(other.getReturnType()->type())) {
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 

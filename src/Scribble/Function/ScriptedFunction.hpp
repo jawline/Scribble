@@ -17,25 +17,25 @@
 namespace ScribbleCore {
 
 class ScriptedFunction: public Function {
-private:
-	std::vector<SmartPointer<Statement>> statements_;
-	std::vector<SmartPointer<Variable>> variableTemplates_;
+  private:
+    std::vector<SmartPointer<Statement>> statements_;
+    std::vector<SmartPointer<Variable>> variableTemplates_;
 
-public:
+  public:
 
-	ScriptedFunction(std::string name, int version, std::string nameSpace,
-			std::vector<SmartPointer<Statement>> statements,
-			std::vector<SmartPointer<Variable>> variableTemplates,FunctionSignature signature);
+    ScriptedFunction(std::string name, int version, std::string nameSpace,
+                     std::vector<SmartPointer<Statement>> statements,
+                     std::vector<SmartPointer<Variable>> variableTemplates,FunctionSignature signature);
 
-	virtual ~ScriptedFunction();
+    virtual ~ScriptedFunction();
 
-	void check() const;
+    void check() const;
 
-	int debugCode(std::stringstream& gen);
+    int debugCode(std::stringstream& gen);
 
-	bool isNativeFunction() const;
+    bool isNativeFunction() const;
 
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+    virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 };
 
 }

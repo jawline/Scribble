@@ -11,13 +11,13 @@
 
 namespace API {
 
-class IntFromFloat32 : public Function  {
-public:
-	IntFromFloat32(std::string ns);
-	virtual ~IntFromFloat32();
+class IntFromFloat32 : public Function {
+  public:
+    IntFromFloat32(std::string ns);
+    virtual ~IntFromFloat32();
 
-	API::APIValue execute(API::APIValue* values,
-			VM::VirtualMachine* virt);
+    API::APIValue execute(API::APIValue* values,
+                          VM::VirtualMachine* virt);
 };
 
 } /* namespace API */

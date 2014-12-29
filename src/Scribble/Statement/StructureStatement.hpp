@@ -13,17 +13,17 @@
 namespace ScribbleCore {
 
 class StructureStatement: public Statement {
-private:
-	TypeReference type_;
-	std::vector<SafeStatement> statements_;
+  private:
+    TypeReference type_;
+    std::vector<SafeStatement> statements_;
 
-public:
-	StructureStatement(int lineno, std::string token, TypeReference type, std::vector<SafeStatement> initials);
-	virtual ~StructureStatement();
+  public:
+    StructureStatement(int lineno, std::string token, TypeReference type, std::vector<SafeStatement> initials);
+    virtual ~StructureStatement();
 
-	virtual void checkTree(Type* functionType);
-	virtual TypeReference type();
-	virtual int generateCode(int result, std::stringstream& code);
+    virtual void checkTree(Type* functionType);
+    virtual TypeReference type();
+    virtual int generateCode(int result, std::stringstream& code);
 };
 
 }

@@ -11,8 +11,8 @@
 namespace ScribbleCore {
 
 Float32Statement::Float32Statement(int yylineno, std::string yysym,
-		float32_t val) :
-		Statement(yylineno, yysym), val_(val) {
+                                   float32_t val) :
+    Statement(yylineno, yysym), val_(val) {
 
 }
 
@@ -20,15 +20,15 @@ Float32Statement::~Float32Statement() {
 }
 
 TypeReference Float32Statement::type() {
-	return makeTypeReference(getFloat32Type());
+    return makeTypeReference(getFloat32Type());
 }
 
 void Float32Statement::checkTree(Type* functionType) {
 }
 
 int Float32Statement::generateCode(int resultRegister, std::stringstream& generated) {
-	generated << "load " << val_ << "f $" << resultRegister << "\n";
-	return 1;
+    generated << "load " << val_ << "f $" << resultRegister << "\n";
+    return 1;
 }
 
 }

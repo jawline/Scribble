@@ -11,9 +11,9 @@
 namespace API {
 
 class FatalError {
-public:
-	FatalError();
-	virtual ~FatalError();
+  public:
+    FatalError();
+    virtual ~FatalError();
 };
 
 } /* namespace API */

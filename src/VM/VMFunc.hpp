@@ -20,33 +20,34 @@ using namespace API;
 namespace VM {
 
 class VMFunc {
-private:
-	std::string name_;
-	InstructionSet instrs_;SmartPointer<Function> func_;
+  private:
+    std::string name_;
+    InstructionSet instrs_;
+    SmartPointer<Function> func_;
 
-public:
+  public:
 
-	VMFunc() :
-	name_("INVALID") {
-	}
+    VMFunc() :
+        name_("INVALID") {
+    }
 
-	VMFunc(std::string name, InstructionSet instrs);
-	VMFunc(std::string name, SmartPointer<Function> func);
-	virtual ~VMFunc();
+    VMFunc(std::string name, InstructionSet instrs);
+    VMFunc(std::string name, SmartPointer<Function> func);
+    virtual ~VMFunc();
 
-	InstructionSet& getInstructions() {
-		return instrs_;
-	}
+    InstructionSet& getInstructions() {
+        return instrs_;
+    }
 
-	std::string getName() {
-		return name_;
-	}
+    std::string getName() {
+        return name_;
+    }
 
-	SmartPointer<Function> getFunction() {
-		return func_;
-	}
+    SmartPointer<Function> getFunction() {
+        return func_;
+    }
 
-	bool isNative();
+    bool isNative();
 };
 
 } /* namespace VM */

@@ -16,7 +16,7 @@ namespace VM {
 
 enum ConstantType {
 
-	CByte = 0, CShort, CInt, CLong, CFloat32, CDouble, CArray
+    CByte = 0, CShort, CInt, CLong, CFloat32, CDouble, CArray
 };
 
 }

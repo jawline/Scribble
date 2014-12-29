@@ -14,38 +14,39 @@
 namespace ScribbleCore {
 
 enum ParserReferenceType {
-	FunctionEvaluation, Fixable
+    FunctionEvaluation, Fixable
 };
 
 class ParserReference {
-private:
+  private:
 
-	ParserReferenceType type_;SmartPointer<FunctionReference> functionReference_;
-	Statement* fixableItem_;
+    ParserReferenceType type_;
+    SmartPointer<FunctionReference> functionReference_;
+    Statement* fixableItem_;
 
-public:
+  public:
 
-	ParserReference(SmartPointer<FunctionReference> reference) {
-		type_ = FunctionEvaluation;
-		functionReference_ = reference;
-	}
+    ParserReference(SmartPointer<FunctionReference> reference) {
+        type_ = FunctionEvaluation;
+        functionReference_ = reference;
+    }
 
-	ParserReference(Statement* elementType) {
-		type_ = Fixable;
-		fixableItem_ = elementType;
-	}
+    ParserReference(Statement* elementType) {
+        type_ = Fixable;
+        fixableItem_ = elementType;
+    }
 
-	ParserReferenceType type() {
-		return type_;
-	}
+    ParserReferenceType type() {
+        return type_;
+    }
 
-	SmartPointer<FunctionReference> getFunctionReference() {
-		return functionReference_;
-	}
+    SmartPointer<FunctionReference> getFunctionReference() {
+        return functionReference_;
+    }
 
-	Statement* getFixable() {
-		return fixableItem_;
-	}
+    Statement* getFixable() {
+        return fixableItem_;
+    }
 
 };
 

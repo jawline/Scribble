@@ -9,16 +9,16 @@
  */
 
 class WriteFunction: public Function {
-public:
+  public:
 
-	WriteFunction(std::string ns);
+    WriteFunction(std::string ns);
 
-	virtual API::APIValue execute(API::APIValue* values,
-			VM::VirtualMachine* virt);
+    virtual API::APIValue execute(API::APIValue* values,
+                                  VM::VirtualMachine* virt);
 
-	virtual std::string getName() {
-		return "NativeWriteString";
-	}
+    virtual std::string getName() {
+        return "NativeWriteString";
+    }
 
 };
 

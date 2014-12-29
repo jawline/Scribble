@@ -13,19 +13,19 @@
 namespace ScribbleCore {
 
 class ReturnStatement: public Statement {
-private:
-	SafeStatement stm_;
+  private:
+    SafeStatement stm_;
 
-public:
-	ReturnStatement(int lineno, std::string symb, SafeStatement stm);
-	virtual ~ReturnStatement();
+  public:
+    ReturnStatement(int lineno, std::string symb, SafeStatement stm);
+    virtual ~ReturnStatement();
 
-	virtual void checkTree(Type* functionType);
-	virtual TypeReference type() {
-		return makeTypeReference(getTypeManager().getType(Void));
-	}
+    virtual void checkTree(Type* functionType);
+    virtual TypeReference type() {
+        return makeTypeReference(getTypeManager().getType(Void));
+    }
 
-	int generateCode(int resultRegister, std::stringstream& generated);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

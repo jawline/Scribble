@@ -13,68 +13,68 @@
 namespace ScribbleCore {
 
 GetStructureElementStatement::GetStructureElementStatement(int yylineno,
-		std::string sym, SafeStatement stmt, std::string name) :
-		Statement(yylineno, sym), statement_(stmt), elementName_(name), elementIndex_(
-				0) {
-	elementType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
+        std::string sym, SafeStatement stmt, std::string name) :
+    Statement(yylineno, sym), statement_(stmt), elementName_(name), elementIndex_(
+        0) {
+    elementType_ = makeTypeReference(getTypeManager().getType(TypeUnresolved));
 }
 
 GetStructureElementStatement::~GetStructureElementStatement() {
 }
 
 void GetStructureElementStatement::checkTree(Type* functionType) {
-	statement_->checkTree(functionType);
+    statement_->checkTree(functionType);
 
-	if (statement_->type()->type()->getType() != StructureType) {
+    if (statement_->type()->type()->getType() != StructureType) {
 
-		std::stringstream errorMsg;
+        std::stringstream errorMsg;
 
-		errorMsg << "the expression given is a "
-				<< statement_->type()->type()->getTypeName()
-				<< " and is not a structure";
+        errorMsg << "the expression given is a "
+                 << statement_->type()->type()->getTypeName()
+                 << " and is not a structure";
 
-		throw StatementException(this, errorMsg.str());
-	}
+        throw StatementException(this, errorMsg.str());
+    }
 }
 
 void GetStructureElementStatement::fix() {
 
-	if (statement_->type()->type()->getType() != StructureType) {
-		return;
-	}
+    if (statement_->type()->type()->getType() != StructureType) {
+        return;
+    }
 
-	StructureInfo* type = (StructureInfo*) statement_->type()->type();
+    StructureInfo* type = (StructureInfo*) statement_->type()->type();
 
-	elementIndex_ = type->getFieldIndex(elementName_);
+    elementIndex_ = type->getFieldIndex(elementName_);
 
-	StatementAssert(this, elementIndex_ != -1,
-			std::string("Field ") + elementName_
-					+ " does not exist in structure");
+    StatementAssert(this, elementIndex_ != -1,
+                    std::string("Field ") + elementName_
+                    + " does not exist in structure");
 
-	elementType_->setType(type->getField(elementIndex_).second->type());
+    elementType_->setType(type->getField(elementIndex_).second->type());
 }
 
 TypeReference GetStructureElementStatement::type() {
-	return elementType_;
+    return elementType_;
 }
 
 int GetStructureElementStatement::generateCode(int resultRegister,
-		std::stringstream& code) {
-	int instrs = 0;
+        std::stringstream& code) {
+    int instrs = 0;
 
-	if (resultRegister != -1) {
-		instrs += statement_->generateCode(VM::vmTempRegisterOne, code);
+    if (resultRegister != -1) {
+        instrs += statement_->generateCode(VM::vmTempRegisterOne, code);
 
-		code << "load " << elementIndex_ << " $" << VM::vmTempRegisterTwo
-				<< "\n";
-		instrs++;
+        code << "load " << elementIndex_ << " $" << VM::vmTempRegisterTwo
+             << "\n";
+        instrs++;
 
-		code << "sget $" << VM::vmTempRegisterOne << " $"
-				<< VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
-		instrs++;
-	}
+        code << "sget $" << VM::vmTempRegisterOne << " $"
+             << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
+        instrs++;
+    }
 
-	return instrs;
+    return instrs;
 }
 
 }

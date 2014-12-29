@@ -13,16 +13,16 @@
 namespace ScribbleCore {
 
 class Float32Statement: public Statement {
-private:
-	float32_t val_;
+  private:
+    float32_t val_;
 
-public:
-	Float32Statement(int lineNo, std::string sym, float32_t val);
-	virtual ~Float32Statement();
+  public:
+    Float32Statement(int lineNo, std::string sym, float32_t val);
+    virtual ~Float32Statement();
 
-	TypeReference type();
-	void checkTree(Type* functionType);
-	int generateCode(int resultRegister, std::stringstream& generated);
+    TypeReference type();
+    void checkTree(Type* functionType);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

@@ -12,19 +12,19 @@
 namespace ScribbleCore {
 
 class OperateStatement: public Statement {
-private:
-	SafeStatement lhs_, rhs_;
-	ValueOperator op_;
+  private:
+    SafeStatement lhs_, rhs_;
+    ValueOperator op_;
 
-public:
-	OperateStatement(int lineNo, std::string symbol, ValueOperator op, SafeStatement lhs,
-			SafeStatement rhs);
-	virtual ~OperateStatement();
+  public:
+    OperateStatement(int lineNo, std::string symbol, ValueOperator op, SafeStatement lhs,
+                     SafeStatement rhs);
+    virtual ~OperateStatement();
 
-	TypeReference type();
-	void checkTree(Type* functionType);
+    TypeReference type();
+    void checkTree(Type* functionType);
 
-	int generateCode(int resultRegister, std::stringstream& generated);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

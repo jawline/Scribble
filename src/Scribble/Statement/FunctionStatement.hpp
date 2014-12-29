@@ -11,22 +11,22 @@
 namespace ScribbleCore {
 
 class FunctionStatement: public Statement {
-private:
-	SmartPointer<FunctionReference> func_;
-	std::vector<SafeStatement> args_;
+  private:
+    SmartPointer<FunctionReference> func_;
+    std::vector<SafeStatement> args_;
 
-	//This stores the number of declared variables when the function is called. This allows for the push/pop of registers to be optimized in the VM
-	int numDeclaredVariables_;
+    //This stores the number of declared variables when the function is called. This allows for the push/pop of registers to be optimized in the VM
+    int numDeclaredVariables_;
 
-public:
-	FunctionStatement(int lineNo, std::string sym,
-			SmartPointer<FunctionReference> function, std::vector<SafeStatement> args, int numDeclaredVariables);
+  public:
+    FunctionStatement(int lineNo, std::string sym,
+                      SmartPointer<FunctionReference> function, std::vector<SafeStatement> args, int numDeclaredVariables);
 
-	TypeReference type();
+    TypeReference type();
 
-	void checkTree(Type* functionType);
+    void checkTree(Type* functionType);
 
-	virtual int generateCode(int resultRegister, std::stringstream& generated);
+    virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

@@ -16,32 +16,32 @@ namespace ScribbleCore {
  */
 
 class BoolStatement: public Statement {
-private:
+  private:
 
-	/**
-	 * The value to generate.
-	 */
+    /**
+     * The value to generate.
+     */
 
-	bool value_;
+    bool value_;
 
-public:
+  public:
 
-	/**
-	 * Create a Bool statement
-	 * @param value The value to set the boolean to.
-	 */
+    /**
+     * Create a Bool statement
+     * @param value The value to set the boolean to.
+     */
 
-	BoolStatement(int lineNo, std::string sym, bool value);
-	virtual ~BoolStatement();
+    BoolStatement(int lineNo, std::string sym, bool value);
+    virtual ~BoolStatement();
 
-	/**
-	 * Returns a boolean
-	 * @return Boolean
-	 */
-	TypeReference type();
+    /**
+     * Returns a boolean
+     * @return Boolean
+     */
+    TypeReference type();
 
-	void checkTree(Type* functionType);
-	virtual int generateCode(int resultRegister, std::stringstream& generated);
+    void checkTree(Type* functionType);
+    virtual int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

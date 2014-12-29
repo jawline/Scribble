@@ -14,20 +14,17 @@
  */
 
 class Modulo: public Function {
-private:
-	std::string namespace_;
+  private:
+    std::string namespace_;
 
-public:
-	Modulo(std::string namesp);
-	virtual ~Modulo();
+  public:
+    Modulo(std::string namesp);
+    virtual ~Modulo();
 
-	/**
-	 * Returns the resulting modulo as an API value.
-	 */
-
-	virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
-
-
+    /**
+     * Returns the resulting modulo as an API value.
+     */
+    virtual APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 };
 
 #endif /* MODULO_HPP_ */

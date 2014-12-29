@@ -13,23 +13,23 @@ namespace ScribbleCore {
  */
 
 class Variable {
-private:
-	std::string name_;
-	TypeReference type_;
-	int position_;
+  private:
+    std::string name_;
+    TypeReference type_;
+    int position_;
 
-public:
+  public:
 
-	Variable(std::string name, int position, TypeReference type);
-	~Variable();
+    Variable(std::string name, int position, TypeReference type);
+    ~Variable();
 
-	Type* getType() const;
-	TypeReference getTypeReference() const;
-	std::string getName() const;
-	int getPosition() const;
+    Type* getType() const;
+    TypeReference getTypeReference() const;
+    std::string getName() const;
+    int getPosition() const;
 
-	void setType(Type* type);
-	void setPosition(int pos);
+    void setType(Type* type);
+    void setPosition(int pos);
 
 };
 

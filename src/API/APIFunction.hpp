@@ -19,19 +19,19 @@ namespace API {
  */
 
 class APIFunction: public Function {
-private:
-	ScribbleCore::Type* returnType_;
-	std::vector<ScribbleCore::Type*> types_;
-	API::APIValue (*fn_)(API::APIValue*, VM::VirtualMachine* virt);
+  private:
+    ScribbleCore::Type* returnType_;
+    std::vector<ScribbleCore::Type*> types_;
+    API::APIValue (*fn_)(API::APIValue*, VM::VirtualMachine* virt);
 
-public:
+  public:
 
-	APIFunction(std::string name, std::string package, ScribbleCore::FunctionSignature signature,
-			API::APIValue (*fn)(API::APIValue*, VM::VirtualMachine* virt));
+    APIFunction(std::string name, std::string package, ScribbleCore::FunctionSignature signature,
+                API::APIValue (*fn)(API::APIValue*, VM::VirtualMachine* virt));
 
-	virtual ~APIFunction();
+    virtual ~APIFunction();
 
-	APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
+    APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
 
 };
 

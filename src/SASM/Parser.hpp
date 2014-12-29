@@ -14,9 +14,9 @@
 namespace SimpleASM {
 
 class Parser {
-public:
+  public:
 
-	static VM::VMNamespace parse(std::string text);
+    static VM::VMNamespace parse(std::string text);
 };
 
 } /* namespace SimpleASM */

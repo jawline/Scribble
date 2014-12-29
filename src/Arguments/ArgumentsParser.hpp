@@ -13,88 +13,88 @@
 namespace ScribbleExtra {
 
 class Argument {
-public:
+  public:
 
-	enum ArgumentType {
-		Named, Unnamed
-	};
+    enum ArgumentType {
+        Named, Unnamed
+    };
 
-	Argument(std::string value) :
-			type_(Unnamed), value_(value) {
+    Argument(std::string value) :
+        type_(Unnamed), value_(value) {
 
-	}
+    }
 
-	Argument(std::string name, std::string value) :
-			type_(Named), name_(name), value_(value) {
-	}
+    Argument(std::string name, std::string value) :
+        type_(Named), name_(name), value_(value) {
+    }
 
-	ArgumentType getType() const {
-		return type_;
-	}
+    ArgumentType getType() const {
+        return type_;
+    }
 
-	std::string const& getName() const {
-		return name_;
-	}
+    std::string const& getName() const {
+        return name_;
+    }
 
-	std::string const& getValue() const {
-		return value_;
-	}
+    std::string const& getValue() const {
+        return value_;
+    }
 
-private:
+  private:
 
-	ArgumentType type_;
-	std::string name_;
-	std::string value_;
+    ArgumentType type_;
+    std::string name_;
+    std::string value_;
 
 };
 
 class ArgumentsParser {
-private:
-	std::vector<Argument> unnamedArguments_;
-	std::vector<Argument> namedArguments_;
+  private:
+    std::vector<Argument> unnamedArguments_;
+    std::vector<Argument> namedArguments_;
 
-	void parse(int argc, char** argv);
+    void parse(int argc, char** argv);
 
-public:
-	ArgumentsParser(int argc, char** argv);
-	virtual ~ArgumentsParser();
+  public:
+    ArgumentsParser(int argc, char** argv);
+    virtual ~ArgumentsParser();
 
-	/**
-	 * Searches for a named argument from the named arguments list
-	 */
+    /**
+     * Searches for a named argument from the named arguments list
+     */
 
-	Argument const search(std::string const& name) const;
+    Argument const search(std::string const& name) const;
 
-	/**
-	 * Returns the first argument found with one of either two names (Useful for -v or --version)
-	 */
+    /**
+     * Returns the first argument found with one of either two names (Useful for -v or --version)
+     */
 
-	Argument const search(std::string const& name,
-			std::string const& alternative) const;
+    Argument const search(std::string const& name,
+                          std::string const& alternative) const;
 
-	/**
-	 * Returns true if an argument with the following name exists
-	 */
+    /**
+     * Returns true if an argument with the following name exists
+     */
 
-	bool exists(std::string const& name) const;
+    bool exists(std::string const& name) const;
 
-	/**
-	 * Returns true if there is one argument of either name
-	 */
+    /**
+     * Returns true if there is one argument of either name
+     */
 
-	bool exists(std::string const& name, std::string const& alternative) const;
+    bool exists(std::string const& name, std::string const& alternative) const;
 
-	/**
-	 * Returns an argument from the unnamed arguments list
-	 */
+    /**
+     * Returns an argument from the unnamed arguments list
+     */
 
-	Argument const& get(unsigned int id) const;
+    Argument const& get(unsigned int id) const;
 
-	/**
-	 * Get the number of unnamed arguments
-	 */
+    /**
+     * Get the number of unnamed arguments
+     */
 
-	unsigned int getNumArguments() const;
+    unsigned int getNumArguments() const;
 
 };
 

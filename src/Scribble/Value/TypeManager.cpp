@@ -13,15 +13,15 @@ namespace ScribbleCore {
 
 Type* TypeManager::tFind(Type* desired) const {
 
-	for (unsigned int i = 0; i < types_.size(); ++i) {
+    for (unsigned int i = 0; i < types_.size(); ++i) {
 
-		if (types_[i]->Equals(desired)) {
-			return types_[i];
-		}
+        if (types_[i]->Equals(desired)) {
+            return types_[i];
+        }
 
-	}
+    }
 
-	return nullptr;
+    return nullptr;
 }
 
 TypeManager::TypeManager() {
@@ -29,89 +29,89 @@ TypeManager::TypeManager() {
 
 TypeManager::~TypeManager() {
 
-	for (unsigned int i = 0; i < types_.size(); ++i) {
-		delete types_[i];
-	}
+    for (unsigned int i = 0; i < types_.size(); ++i) {
+        delete types_[i];
+    }
 
 }
 
 Type* TypeManager::getType(ValueType base) {
-	return getType(base, TypeReference(new TypeReferenceCore("", nullptr)));
+    return getType(base, TypeReference(new TypeReferenceCore("", nullptr)));
 }
 
 Type* TypeManager::getType(ValueType base, TypeReference subType) {
 
-	Type* desired = new Type(base, subType);
-	Type* found = tFind(desired);
+    Type* desired = new Type(base, subType);
+    Type* found = tFind(desired);
 
-	//If already exists
-	if (found != nullptr) {
-		delete desired;
-		return found;
-	}
+    //If already exists
+    if (found != nullptr) {
+        delete desired;
+        return found;
+    }
 
-	//Else add
-	types_.push_back(desired);
-	return desired;
+    //Else add
+    types_.push_back(desired);
+    return desired;
 }
 
 Type* TypeManager::getType(std::vector<TypeReference> argumentTypes,
-		TypeReference returnType) {
+                           TypeReference returnType) {
 
-	Type* desired = new Type(argumentTypes, returnType);
-	Type* found = tFind(desired);
+    Type* desired = new Type(argumentTypes, returnType);
+    Type* found = tFind(desired);
 
-	//If already exists
-	if (found != nullptr) {
-		delete desired;
-		return found;
-	}
+    //If already exists
+    if (found != nullptr) {
+        delete desired;
+        return found;
+    }
 
-	//Else add
-	types_.push_back(desired);
-	return desired;
+    //Else add
+    types_.push_back(desired);
+    return desired;
 }
 
 TypeManager typeInstance;
 
 TypeManager& getTypeManager() {
-	return typeInstance;
+    return typeInstance;
 }
 
 Type* stringType = getTypeManager().getType(StringType);
 
 Type* getStringType() {
-	return stringType;
+    return stringType;
 }
 
 Type* intType = getTypeManager().getType(Int);
 
 Type* getIntType() {
-	return intType;
+    return intType;
 }
 
 Type* boolType = getTypeManager().getType(Boolean);
 
 Type* getBooleanType() {
-	return boolType;
+    return boolType;
 }
 
 Type* voidType = getTypeManager().getType(Void);
 
 Type* getVoidType() {
-	return voidType;
+    return voidType;
 }
 
 Type* nilType = getTypeManager().getType(NilType);
 
 Type* getNilType() {
-	return nilType;
+    return nilType;
 }
 
 Type* float32Type = getTypeManager().getType(Float32);
 
 Type* getFloat32Type() {
-	return float32Type;
+    return float32Type;
 }
 
 }

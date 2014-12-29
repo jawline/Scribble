@@ -12,70 +12,70 @@ namespace VM {
 
 enum OpCodes {
 
-	OpLoadConstant = 0,
-	OpMove,
-	OpJump,
+    OpLoadConstant = 0,
+    OpMove,
+    OpJump,
 
-	/**
-	 * Arithmetic operations
-	 */
+    /**
+     * Arithmetic operations
+     */
 
-	OpAdd,
-	OpSub,
-	OpMul,
-	OpDiv,
-	OpInc,
-	OpDec,
-	OpNot,
+    OpAdd,
+    OpSub,
+    OpMul,
+    OpDiv,
+    OpInc,
+    OpDec,
+    OpNot,
 
-	/**
-	 * Float operations
-	 */
+    /**
+     * Float operations
+     */
 
-	OpAddFloat32,
-	OpSubFloat32,
-	OpMulFloat32,
-	OpDivFloat32,
-	OpCmpFloat32,
+    OpAddFloat32,
+    OpSubFloat32,
+    OpMulFloat32,
+    OpDivFloat32,
+    OpCmpFloat32,
 
-	/**
-	 *  Tests
-	 */
+    /**
+     *  Tests
+     */
 
-	OpEqual,
-	OpNotEqual,
-	OpEqualZero,
-	OpLessThan,
-	OpLessThanOrEqual,
-	OpGreaterThan,
-	OpGreaterThanOrEqual,
+    OpEqual,
+    OpNotEqual,
+    OpEqualZero,
+    OpLessThan,
+    OpLessThanOrEqual,
+    OpGreaterThan,
+    OpGreaterThanOrEqual,
 
-	/**
-	 * Array operators
-	 */
+    /**
+     * Array operators
+     */
 
-	OpNewArray,
-	OpArraySet,
-	OpArrayGet,
-	OpArrayLength,
+    OpNewArray,
+    OpArraySet,
+    OpArrayGet,
+    OpArrayLength,
 
-	/**
-	 * Structure operators
-	 */
+    /**
+     * Structure operators
+     */
 
-	OpNewStruct,
-	OpStructSetField,
-	OpStructGetField,
+    OpNewStruct,
+    OpStructSetField,
+    OpStructGetField,
 
-	/**
-	 * Function & Stack operators
-	 */
+    /**
+     * Function & Stack operators
+     */
 
-	OpPushRegisters,
-	OpPopNil,
-	OpPopRegisters,
-	OpCallFn,
-	OpReturn
+    OpPushRegisters,
+    OpPopNil,
+    OpPopRegisters,
+    OpCallFn,
+    OpReturn
 };
 
 }

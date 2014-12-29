@@ -13,13 +13,13 @@
 namespace ScribbleCore {
 
 class NilStatement: public Statement {
-public:
-	NilStatement(int lineNo, std::string symbol);
-	virtual ~NilStatement();
+  public:
+    NilStatement(int lineNo, std::string symbol);
+    virtual ~NilStatement();
 
-	virtual void checkTree(Type* functionType);
-	virtual TypeReference type();
-	int generateCode(int resultRegister, std::stringstream& generated);
+    virtual void checkTree(Type* functionType);
+    virtual TypeReference type();
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 } /* namespace ScribbleCore */

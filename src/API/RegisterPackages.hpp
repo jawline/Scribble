@@ -12,6 +12,6 @@
 #include <VM/VMNamespace.hpp>
 
 void registerPackages(std::map<std::string, ScribbleCore::NamespaceType>& allNames,
-		VM::VirtualMachine& vm);
+                      VM::VirtualMachine& vm);
 
 #endif /* REGISTERPACKAGES_HPP_ */

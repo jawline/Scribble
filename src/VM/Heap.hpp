@@ -18,40 +18,40 @@
 namespace VM {
 
 class Heap {
-private:
-	std::vector<VMHeapEntry> heapItems_;
-	std::stack<int> unusedIndexs_;
+  private:
+    std::vector<VMHeapEntry> heapItems_;
+    std::stack<int> unusedIndexs_;
 
-	bool lastFlagState_;
+    bool lastFlagState_;
 
-public:
-	Heap();
-	virtual ~Heap();
+  public:
+    Heap();
+    virtual ~Heap();
 
-	/**
-	 * Returns a value > 0 which acts as a reference to an element on the heap.
-	 */
+    /**
+     * Returns a value > 0 which acts as a reference to an element on the heap.
+     */
 
-	long allocate(SmartPointer<VMEntryType> type, int size, uint8_t* initial);
+    long allocate(SmartPointer<VMEntryType> type, int size, uint8_t* initial);
 
-	bool validReference(long entry);
-	SmartPointer<VMEntryType> getType(long entry);
-	SmartPointer<uint8_t> getSmartPointer(long entry);
-	uint8_t* getAddress(long entry);
-	int getSize(long entry);
+    bool validReference(long entry);
+    SmartPointer<VMEntryType> getType(long entry);
+    SmartPointer<uint8_t> getSmartPointer(long entry);
+    uint8_t* getAddress(long entry);
+    int getSize(long entry);
 
-	void flag(long i);
+    void flag(long i);
 
-	void lock(long i);
-	void unlock(long i);
+    void lock(long i);
+    void unlock(long i);
 
-	/**
-	 * This function deletes any unflagged heap elements and then sets flag states for the next garbage collector run
-	 */
+    /**
+     * This function deletes any unflagged heap elements and then sets flag states for the next garbage collector run
+     */
 
-	int processUnflagged();
+    int processUnflagged();
 
-	std::string debugState();
+    std::string debugState();
 };
 
 } /* namespace VM */

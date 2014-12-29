@@ -8,95 +8,95 @@
 namespace VM {
 
 class StackEmptyException: public std::exception {
-	virtual const char* what() const throw () {
-		return "Pop called on empty stack";
-	}
+    virtual const char* what() const throw () {
+        return "Pop called on empty stack";
+    }
 
 };
 
 class VMStack {
-private:
-	uint8_t* data_;
-	size_t current_;
-	size_t max_;
+  private:
+    uint8_t* data_;
+    size_t current_;
+    size_t max_;
 
-	static const int cDefaultSize = 64;
-	static const int cExpandChunkSize = 64;
+    static const int cDefaultSize = 64;
+    static const int cExpandChunkSize = 64;
 
-	void expand() {
+    void expand() {
 
-		uint8_t* newData = new uint8_t[max_ + cExpandChunkSize];
+        uint8_t* newData = new uint8_t[max_ + cExpandChunkSize];
 
-		for (unsigned int i = 0; i < max_; ++i) {
-			newData[i] = data_[i];
-		}
+        for (unsigned int i = 0; i < max_; ++i) {
+            newData[i] = data_[i];
+        }
 
-		delete[] data_;
+        delete[] data_;
 
-		data_ = newData;
-		max_ = max_ + cExpandChunkSize;
-	}
+        data_ = newData;
+        max_ = max_ + cExpandChunkSize;
+    }
 
-public:
+  public:
 
-	VMStack() {
+    VMStack() {
 
-		data_ = new uint8_t[cDefaultSize];
-		current_ = 0;
-		max_ = cDefaultSize;
-	}
+        data_ = new uint8_t[cDefaultSize];
+        current_ = 0;
+        max_ = cDefaultSize;
+    }
 
-	~VMStack() {
+    ~VMStack() {
 
-		if (data_ != nullptr) {
-			delete[] data_;
-			current_ = 0;
-			max_ = 0;
-		}
+        if (data_ != nullptr) {
+            delete[] data_;
+            current_ = 0;
+            max_ = 0;
+        }
 
-	}
+    }
 
-	void pushByte(uint8_t a) {
+    void pushByte(uint8_t a) {
 
-		if (current_ >= max_) {
-			expand();
-		}
+        if (current_ >= max_) {
+            expand();
+        }
 
-		data_[current_] = a;
-		current_++;
-	}
+        data_[current_] = a;
+        current_++;
+    }
 
-	uint8_t popByte() {
+    uint8_t popByte() {
 
-		if (current_ == 0) {
-			throw StackEmptyException();
-		}
+        if (current_ == 0) {
+            throw StackEmptyException();
+        }
 
-		current_--;
-		return data_[current_];
-	}
+        current_--;
+        return data_[current_];
+    }
 
-	uint8_t getByte(unsigned int i) {
-		return data_[i];
-	}
+    uint8_t getByte(unsigned int i) {
+        return data_[i];
+    }
 
-	void pushLong(long i) {
-		*((long*) (data_+current_)) = i;
-		current_ += 8;
-	}
+    void pushLong(long i) {
+        *((long*) (data_+current_)) = i;
+        current_ += 8;
+    }
 
-	long popLong() {
-		current_ -= 8;
-		return *((long*)(data_+current_));
-	}
+    long popLong() {
+        current_ -= 8;
+        return *((long*)(data_+current_));
+    }
 
-	size_t size() {
-		return current_;
-	}
+    size_t size() {
+        return current_;
+    }
 
-	void reset() {
-		current_ = 0;
-	}
+    void reset() {
+        current_ = 0;
+    }
 };
 
 }

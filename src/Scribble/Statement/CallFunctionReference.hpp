@@ -1,9 +1,9 @@
-	/*
- * CallFunctionReference.hpp
- *
- *  Created on: 5 Jun 2014
- *      Author: blake
- */
+/*
+* CallFunctionReference.hpp
+*
+*  Created on: 5 Jun 2014
+*      Author: blake
+*/
 
 #ifndef CALLFUNCTIONREFERENCE_HPP_
 #define CALLFUNCTIONREFERENCE_HPP_
@@ -18,27 +18,27 @@
 namespace ScribbleCore {
 
 class CallFunctionReference: public Statement {
-private:
-	SafeStatement fn_;
-	std::vector<SafeStatement> args_;
-	int numDeclaredVariables_;
-	TypeReference returnType_;
+  private:
+    SafeStatement fn_;
+    std::vector<SafeStatement> args_;
+    int numDeclaredVariables_;
+    TypeReference returnType_;
 
-public:
-	CallFunctionReference(int lineNo, std::string sym, SafeStatement fn,
-			std::vector<SafeStatement> args, int numDeclaredVariables);
-	virtual ~CallFunctionReference();
+  public:
+    CallFunctionReference(int lineNo, std::string sym, SafeStatement fn,
+                          std::vector<SafeStatement> args, int numDeclaredVariables);
+    virtual ~CallFunctionReference();
 
-	virtual void checkTree(Type* functionType);
+    virtual void checkTree(Type* functionType);
 
-	/**
-	 * AndStatements type is boolean.
-	 */
+    /**
+     * AndStatements type is boolean.
+     */
 
-	virtual TypeReference type();
+    virtual TypeReference type();
 
-	int generateCode(int resultRegister, std::stringstream& generated);
-	void fix();
+    int generateCode(int resultRegister, std::stringstream& generated);
+    void fix();
 };
 
 } /* namespace ScribbleCore */

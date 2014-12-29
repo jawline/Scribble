@@ -16,7 +16,7 @@
 namespace VM {
 
 enum NamespaceEntryType {
-	Invalid, Function, Type, Namespace
+    Invalid, Function, Type, Namespace
 };
 
 class NamespaceEntry;
@@ -24,52 +24,52 @@ class NamespaceEntry;
 typedef HashMap<NamespaceEntry> VMNamespace;
 
 class NamespaceEntry {
-private:
+  private:
 
-	NamespaceEntryType type_;
-	SmartPointer<VMFunc> funcRef_;
-	SmartPointer<VMEntryType> typeRef_;
-	VMNamespace namespace_;
+    NamespaceEntryType type_;
+    SmartPointer<VMFunc> funcRef_;
+    SmartPointer<VMEntryType> typeRef_;
+    VMNamespace namespace_;
 
-public:
+  public:
 
-	NamespaceEntry() {
-		type_ = Invalid;
-	}
+    NamespaceEntry() {
+        type_ = Invalid;
+    }
 
-	NamespaceEntry(VMNamespace names) {
-		type_ = Namespace;
-		namespace_ = names;
-	}
+    NamespaceEntry(VMNamespace names) {
+        type_ = Namespace;
+        namespace_ = names;
+    }
 
-	NamespaceEntry(SmartPointer<VMFunc> func) {
-		type_ = Function;
-		funcRef_ = func;
-	}
+    NamespaceEntry(SmartPointer<VMFunc> func) {
+        type_ = Function;
+        funcRef_ = func;
+    }
 
-	NamespaceEntry(SmartPointer<VMEntryType> type) {
-		type_ = Type;
-		typeRef_ = type;
-	}
+    NamespaceEntry(SmartPointer<VMEntryType> type) {
+        type_ = Type;
+        typeRef_ = type;
+    }
 
-	VMNamespace getNamespace() {
-		return namespace_;
-	}
+    VMNamespace getNamespace() {
+        return namespace_;
+    }
 
-	SmartPointer<VMEntryType> getTypeReference() {
-		return typeRef_;
-	}
+    SmartPointer<VMEntryType> getTypeReference() {
+        return typeRef_;
+    }
 
-	SmartPointer<VMFunc> getFunction() {
-		return funcRef_;
-	}
+    SmartPointer<VMFunc> getFunction() {
+        return funcRef_;
+    }
 
-	NamespaceEntryType getType() {
-		return type_;
-	}
+    NamespaceEntryType getType() {
+        return type_;
+    }
 
-	static bool searchNamespace(VM::VMNamespace space, std::string target,
-			NamespaceEntry& entry);
+    static bool searchNamespace(VM::VMNamespace space, std::string target,
+                                NamespaceEntry& entry);
 };
 
 

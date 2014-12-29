@@ -15,23 +15,23 @@
 namespace ScribbleCore {
 
 class IfStatement: public Statement {
-private:
-	SmartPointer<Statement> condition_;
-	std::vector<SmartPointer<Statement>> ifTrueStatements_;
-	std::vector<SmartPointer<Statement>> ifFalseStatements_;
+  private:
+    SmartPointer<Statement> condition_;
+    std::vector<SmartPointer<Statement>> ifTrueStatements_;
+    std::vector<SmartPointer<Statement>> ifFalseStatements_;
 
-public:
-	IfStatement(int lineNo, std::string sym, SmartPointer<Statement> condition,
-			std::vector<SmartPointer<Statement>> ifTrueStatements,
-			std::vector<SmartPointer<Statement>> ifFalseStatements);
-	virtual ~IfStatement();
+  public:
+    IfStatement(int lineNo, std::string sym, SmartPointer<Statement> condition,
+                std::vector<SmartPointer<Statement>> ifTrueStatements,
+                std::vector<SmartPointer<Statement>> ifFalseStatements);
+    virtual ~IfStatement();
 
-	TypeReference type() {
-		return makeTypeReference(getTypeManager().getType(Void));
-	}
+    TypeReference type() {
+        return makeTypeReference(getTypeManager().getType(Void));
+    }
 
-	void checkTree(Type* functionType);
-	int generateCode(int resultRegister, std::stringstream& generated);
+    void checkTree(Type* functionType);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

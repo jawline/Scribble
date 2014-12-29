@@ -19,28 +19,28 @@ namespace ScribbleCore {
  */
 
 class TypeManager {
-private:
-	std::vector<Type*> types_;
+  private:
+    std::vector<Type*> types_;
 
-	Type* tFind(Type* desired) const;
+    Type* tFind(Type* desired) const;
 
-public:
-	TypeManager();
-	virtual ~TypeManager();
+  public:
+    TypeManager();
+    virtual ~TypeManager();
 
-	/**
-	 * Get a given primitive type (Int, Bool, etc)
-	 */
+    /**
+     * Get a given primitive type (Int, Bool, etc)
+     */
 
-	Type* getType(ValueType base);
+    Type* getType(ValueType base);
 
-	/**
-	 * Get a given complex type. (Array, Reference)
-	 */
+    /**
+     * Get a given complex type. (Array, Reference)
+     */
 
-	Type* getType(ValueType base, TypeReference subType);
+    Type* getType(ValueType base, TypeReference subType);
 
-	Type* getType(std::vector<TypeReference> argumentTypes, TypeReference returnType);
+    Type* getType(std::vector<TypeReference> argumentTypes, TypeReference returnType);
 };
 
 /**

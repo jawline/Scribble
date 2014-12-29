@@ -6,18 +6,18 @@
 namespace ScribbleCore {
 
 class StringStatement: public Statement {
-private:
-	std::string stringValue_;
+  private:
+    std::string stringValue_;
 
-public:
-	StringStatement(int lineNo, std::string sym, std::string stringValue);
+  public:
+    StringStatement(int lineNo, std::string sym, std::string stringValue);
 
-	TypeReference type() {
-		return makeTypeReference(getTypeManager().getType(StringType));
-	}
+    TypeReference type() {
+        return makeTypeReference(getTypeManager().getType(StringType));
+    }
 
-	void checkTree(Type* functionType);
-	int generateCode(int resultRegister, std::stringstream& generated);
+    void checkTree(Type* functionType);
+    int generateCode(int resultRegister, std::stringstream& generated);
 };
 
 }

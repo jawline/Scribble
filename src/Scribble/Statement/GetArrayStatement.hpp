@@ -12,20 +12,20 @@
 namespace ScribbleCore {
 
 class GetArrayStatement: public Statement {
-private:
-	SafeStatement array_;
-	SafeStatement index_;
-	TypeReference type_;
+  private:
+    SafeStatement array_;
+    SafeStatement index_;
+    TypeReference type_;
 
-public:
-	GetArrayStatement(int line, std::string sym, SafeStatement array, SafeStatement index);
-	virtual ~GetArrayStatement();
+  public:
+    GetArrayStatement(int line, std::string sym, SafeStatement array, SafeStatement index);
+    virtual ~GetArrayStatement();
 
-	TypeReference type();
+    TypeReference type();
 
-	void checkTree(Type* functionType);
-	int generateCode(int resultRegister, std::stringstream& generated);
-	void fix();
+    void checkTree(Type* functionType);
+    int generateCode(int resultRegister, std::stringstream& generated);
+    void fix();
 };
 
 }

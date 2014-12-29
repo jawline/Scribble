@@ -20,15 +20,15 @@ namespace SimpleASM {
 
 VM::VMNamespace Parser::parse(std::string text) {
 
-	//Parse the actual code
-	sasm__scan_string(text.c_str());
-	sasm_parse();
+    //Parse the actual code
+    sasm__scan_string(text.c_str());
+    sasm_parse();
 
-	VM::VMNamespace current = CurrentNamespace;
-	CurrentNamespace = VM::VMNamespace();
+    VM::VMNamespace current = CurrentNamespace;
+    CurrentNamespace = VM::VMNamespace();
 
-	//Copy the parsed instructions into an instruction set
-	return current;
+    //Copy the parsed instructions into an instruction set
+    return current;
 }
 
 } /* namespace SimpleASM */

@@ -12,16 +12,16 @@
 
 void generateConsolePackage(std::map<std::string, ScribbleCore::NamespaceType>& all) {
 
-	ScribbleCore::NamespaceType console;
+    ScribbleCore::NamespaceType console;
 
-	std::vector<SafeFunction> log;
-	log.push_back(SmartPointer< Function > (new WriteFunction("console")));
-	console["Log"] = ScribbleCore::NamespaceEntry(log);
+    std::vector<SafeFunction> log;
+    log.push_back(SmartPointer< Function > (new WriteFunction("console")));
+    console["Log"] = ScribbleCore::NamespaceEntry(log);
 
-	std::vector<SafeFunction> readLine;
-	readLine.push_back(SmartPointer< Function > (new ReadLine("console")));
-	console["ReadLine"] = ScribbleCore::NamespaceEntry(readLine);
+    std::vector<SafeFunction> readLine;
+    readLine.push_back(SmartPointer< Function > (new ReadLine("console")));
+    console["ReadLine"] = ScribbleCore::NamespaceEntry(readLine);
 
-	all["console"] = console;
+    all["console"] = console;
 
 }

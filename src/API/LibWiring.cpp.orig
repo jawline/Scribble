@@ -1,0 +1,68 @@
+#include "LibWiring.hpp"
+
+APIValue SetMode(API::APIValue* values, VM::VirtualMachine* virt)
+{
+    return API::APIValue();
+}
+
+APIValue Read(API::APIValue* values, VM::VirtualMachine* virt)
+{
+    return API::APIValue::makeBoolean(false);
+}
+
+APIValue Write(API::APIValue* values, VM::VirtualMachine* virt)
+{
+    return API::APIValue();
+}
+
+void generateLibWiringPackage(
+    std::map<std::string, ScribbleCore::NamespaceType>& all)
+{
+
+    ScribbleCore::NamespaceType wiring;
+
+    std::vector<ScribbleCore::TypeReference> args;
+    args.push_back(ScribbleCore::makeTypeReference(ScribbleCore::getIntType()));
+    args.push_back(ScribbleCore::makeTypeReference(ScribbleCore::getBooleanType()));
+
+    std::vector<SafeFunction> setmode;
+
+    setmode.push_back(
+        SmartPointer < API::APIFunction
+        > (new API::APIFunction("SetMode", "libWiring",
+                                ScribbleCore::FunctionSignature(args,
+                                        ScribbleCore::makeTypeReference(
+                                            ScribbleCore::getVoidType())),
+                                SetMode)));
+
+    wiring["SetMode"] = ScribbleCore::NamespaceEntry(setmode);
+
+    std::vector<SafeFunction> writeio;
+
+    writeio.push_back(
+        SmartPointer < API::APIFunction
+        > (new API::APIFunction("Write", "libWiring",
+                                ScribbleCore::FunctionSignature(args,
+                                        ScribbleCore::makeTypeReference(
+                                            ScribbleCore::getVoidType())),
+                                Write)));
+
+    wiring["Write"] = ScribbleCore::NamespaceEntry(writeio);
+
+    args.clear();
+    args.push_back(ScribbleCore::makeTypeReference(ScribbleCore::getIntType()));
+
+    std::vector<SafeFunction> read;
+
+    read.push_back(
+        SmartPointer < API::APIFunction
+        > (new API::APIFunction("Read", "libWiring",
+                                ScribbleCore::FunctionSignature(args,
+                                        ScribbleCore::makeTypeReference(
+                                            ScribbleCore::getBooleanType())),
+                                Read)));
+
+    wiring["Read"] = ScribbleCore::NamespaceEntry(read);
+
+    all["libWiring"] = wiring;
+}

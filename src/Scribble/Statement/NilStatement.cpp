@@ -21,12 +21,13 @@ void NilStatement::checkTree(Type* functionType) {
 }
 
 TypeReference NilStatement::type() {
-	return makeTypeReference(getNilType());
+    return makeTypeReference(getNilType());
 }
 
-int NilStatement::generateCode(int resultRegister, std::stringstream& generated) {;
-	generated << "load 0 $" << resultRegister << "\n";
-	return 1;
+int NilStatement::generateCode(int resultRegister, std::stringstream& generated) {
+    ;
+    generated << "load 0 $" << resultRegister << "\n";
+    return 1;
 }
 
 } /* namespace ScribbleCore */

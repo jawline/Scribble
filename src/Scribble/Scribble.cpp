@@ -27,132 +27,136 @@
 
 #include <API/System.hpp>
 #include <API/Console.hpp>
+#include <API/LibWiring.hpp>
 #include <API/RegisterPackages.hpp>
 
 Scribble::Scribble(std::string const& package) :
-		sourceCode("") {
-	packagePath = package;
-	load();
+    sourceCode("") {
+    packagePath = package;
+    load();
 }
 
 Scribble::Scribble(std::string const& package, std::string const& src) {
-	packagePath = package;
-	sourceCode = src;
-	load();
+    packagePath = package;
+    sourceCode = src;
+    load();
 }
 
 Scribble::~Scribble() {
 }
 
 SafeFunction findFunction(std::vector<API::APIValue> arguments,
-		ScribbleCore::FunctionSet set) {
+                          ScribbleCore::FunctionSet set) {
 
-	std::vector<ScribbleCore::Type*> types;
+    std::vector<ScribbleCore::Type*> types;
 
-	for (unsigned int i = 0; i < arguments.size(); i++) {
-		types.push_back(arguments[i].getType());
-	}
+    for (unsigned int i = 0; i < arguments.size(); i++) {
+        types.push_back(arguments[i].getType());
+    }
 
-	for (unsigned int i = 0; i < set.size(); i++) {
-		SafeFunction iter = set[i];
+    for (unsigned int i = 0; i < set.size(); i++) {
+        SafeFunction iter = set[i];
 
-		bool matched = iter->getSignature().argumentsEqual(types);
+        bool matched = iter->getSignature().argumentsEqual(types);
 
-		if (matched) {
-			return set[i];
-		}
+        if (matched) {
+            return set[i];
+        }
 
-	}
+    }
 
-	return nullptr;
+    return nullptr;
 }
 
 API::APIValue Scribble::execute(std::string function) {
 
-	//Make empty args list
-	std::vector<API::APIValue> args;
+    //Make empty args list
+    std::vector<API::APIValue> args;
 
-	//Execute function();
-	return execute(function, args);
+    //Execute function();
+    return execute(function, args);
 }
 
 API::APIValue Scribble::execute(std::string function,
-		std::vector<API::APIValue> arguments) {
+                                std::vector<API::APIValue> arguments) {
 
-	API::SafeFunction toExecute =
-			findFunction(arguments,
-					compiledPackages[ScribbleCore::Parser::getUniformPath(
-							packagePath)][function].getFunctionSet());
+    API::SafeFunction toExecute =
+        findFunction(arguments,
+                     compiledPackages[ScribbleCore::Parser::getUniformPath(
+                                          packagePath)][function].getFunctionSet());
 
-	if (toExecute.get() == nullptr) {
-		printf("Function %s does not exist\n", function.c_str());
-		return API::APIValue();
-	}
+    if (toExecute.get() == nullptr) {
+        printf("Function %s does not exist\n", function.c_str());
+        return API::APIValue();
+    }
 
-	std::string vmFuncName = toExecute->getNamespace()
-			+ VM::vmNamespaceSeperator + toExecute->getName();
+    std::string vmFuncName = toExecute->getNamespace()
+                             + VM::vmNamespaceSeperator + toExecute->getName();
 
-	//Push the arguments
-	for (unsigned int i = 0; i < arguments.size(); i++) {
-		arguments[i].pushToVM(&environment);
-	}
+    //Push the arguments
+    for (unsigned int i = 0; i < arguments.size(); i++) {
+        arguments[i].pushToVM(&environment);
+    }
 
-	environment.execute(vmFuncName);
-	environment.printState();
+    environment.execute(vmFuncName);
+    environment.printState();
 
-	API::APIValue result;
+    API::APIValue result;
 
-	if (!toExecute->getSignature().getReturnType()->type()->Equals(ScribbleCore::getVoidType())) {
+    if (!toExecute->getSignature().getReturnType()->type()->Equals(ScribbleCore::getVoidType())) {
 
-		long val = 0;
-		bool ref = 0;
+        long val = 0;
+        bool ref = 0;
 
-		environment.getRegister(VM::vmReturnResultRegister, val, ref);
+        environment.getRegister(VM::vmReturnResultRegister, val, ref);
 
-		if (ref) {
+        if (ref) {
 
-			result = API::APIValue(toExecute->getSignature().getReturnType()->type(),
-					environment.getHeap().getType(val),
-					environment.getHeap().getSmartPointer(val), val);
+            result = API::APIValue(toExecute->getSignature().getReturnType()->type(),
+                                   environment.getHeap().getType(val),
+                                   environment.getHeap().getSmartPointer(val), val);
 
-		} else {
+        } else {
 
-			result = API::APIValue(toExecute->getSignature().getReturnType()->type(), val);
+            result = API::APIValue(toExecute->getSignature().getReturnType()->type(), val);
 
-		}
+        }
 
-	} else {
-		result = API::APIValue();
-	}
+    } else {
+        result = API::APIValue();
+    }
 
-	return result;
+    return result;
 }
 
 void Scribble::load() {
 
-	//Generate the sys package
-	generateSystemPackage(compiledPackages);
+    //Generate the sys package
+    generateSystemPackage(compiledPackages);
 
-	//Generate the console package
-	generateConsolePackage(compiledPackages);
+    //Generate the console package
+    generateConsolePackage(compiledPackages);
 
-	if (sourceCode.length() == 0) {
+    //Generate the libWiring package
+    generateLibWiringPackage(compiledPackages);
 
-		//Compile the Function
-		compiledPackages = ScribbleCore::Parser::compile(packagePath,
-				compiledPackages);
+    if (sourceCode.length() == 0) {
 
-	} else {
+        //Compile the Function
+        compiledPackages = ScribbleCore::Parser::compile(packagePath,
+                           compiledPackages);
 
-		compiledPackages = ScribbleCore::Parser::compileText(sourceCode,
-				packagePath, compiledPackages);
+    } else {
 
-	}
+        compiledPackages = ScribbleCore::Parser::compileText(sourceCode,
+                           packagePath, compiledPackages);
 
-	//Compile the virtual machine from the packages.
-	registerPackages(compiledPackages, environment);
+    }
+
+    //Compile the virtual machine from the packages.
+    registerPackages(compiledPackages, environment);
 }
 
 VM::VirtualMachine* Scribble::getEnvironment() {
-	return &environment;
+    return &environment;
 }

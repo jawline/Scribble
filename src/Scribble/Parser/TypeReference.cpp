@@ -10,42 +10,42 @@
 namespace ScribbleCore {
 
 TypeReferenceCore::TypeReferenceCore(std::string name, Type* type) :
-		typeNamespace_(""), name_(name), type_(type) {
+    typeNamespace_(""), name_(name), type_(type) {
 }
 
 TypeReferenceCore::TypeReferenceCore(std::string ns, std::string name,
-		Type* type) :
-		typeNamespace_(ns), name_(name), type_(type) {
+                                     Type* type) :
+    typeNamespace_(ns), name_(name), type_(type) {
 }
 
 std::string TypeReferenceCore::getNamespace() const {
 
-	return typeNamespace_;
+    return typeNamespace_;
 }
 
 std::string TypeReferenceCore::getName() const {
 
-	return name_;
+    return name_;
 }
 
 Type* TypeReferenceCore::type() const {
 
-	return type_;
+    return type_;
 }
 
 void TypeReferenceCore::setType(Type* type) {
 
-	type_ = type;
+    type_ = type;
 }
 
 void TypeReferenceCore::setNamespace(std::string const& ns) {
 
-	typeNamespace_ = ns;
+    typeNamespace_ = ns;
 }
 
 TypeReference makeTypeReference(Type* type) {
 
-	return TypeReference(new TypeReferenceCore(type->getTypeName(), type));
+    return TypeReference(new TypeReferenceCore(type->getTypeName(), type));
 }
 
 }
