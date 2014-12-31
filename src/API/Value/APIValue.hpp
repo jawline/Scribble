@@ -50,7 +50,7 @@ class APIValue {
         data_ = nullptr;
     }
     APIValue(ScribbleCore::Type* type, int64_t val);
-    APIValue(ScribbleCore::Type* type, SmartPointer<VM::VMEntryType> vmType, SmartPointer<uint8_t> data, long val);
+    APIValue(ScribbleCore::Type* type, SmartPointer<VM::VMEntryType> vmType, SmartPointer<uint8_t> data, int64_t val);
     virtual ~APIValue();
 
     /**

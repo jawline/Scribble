@@ -105,7 +105,7 @@ API::APIValue Scribble::execute(std::string function,
 
     if (!toExecute->getSignature().getReturnType()->type()->Equals(ScribbleCore::getVoidType())) {
 
-        long val = 0;
+        int64_t val = 0;
         bool ref = 0;
 
         environment.getRegister(VM::vmReturnResultRegister, val, ref);
