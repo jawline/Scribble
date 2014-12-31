@@ -3,7 +3,7 @@
 
 bool isSetup = false;
 
-APIValue Setup() {
+APIValue Setup(API::APIValue* values, VM::VirtualMachine* virt) {
 
 	if (!isSetup) {
 		wiringPiSetup();
