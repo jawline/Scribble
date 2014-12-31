@@ -16,14 +16,12 @@ APIValue Setup(API::APIValue* values, VM::VirtualMachine* virt) {
 APIValue SetMode(API::APIValue* values, VM::VirtualMachine* virt) {
 
 	int mode = values[1].getValueBoolean() ? OUTPUT : INPUT;
-	printf("Setting mode to %i\n", mode);
 	pinMode(values[0].getValue32(), mode);
     return API::APIValue();
 }
 
 APIValue Read(API::APIValue* values, VM::VirtualMachine* virt) {
-	printf("Reading %i %i\n", values[0].getValue32(), digitalRead(values[0].getValue32()) == HIGH ? true : false);
-    return API::APIValue::makeBoolean(digitalRead(values[0].getValue32()) == HIGH ? true : false);
+	return API::APIValue::makeBoolean(digitalRead(values[0].getValue32()) == HIGH ? true : false);
 }
 
 APIValue Write(API::APIValue* values, VM::VirtualMachine* virt) {
