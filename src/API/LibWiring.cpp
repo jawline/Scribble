@@ -22,7 +22,7 @@ APIValue SetMode(API::APIValue* values, VM::VirtualMachine* virt) {
 }
 
 APIValue Read(API::APIValue* values, VM::VirtualMachine* virt) {
-	printf("Reading\n");
+	printf("Reading %i %i\n", values[0].getValue32(), digitalRead(values[0].getValue32()) == HIGH ? true : false);
     return API::APIValue::makeBoolean(digitalRead(values[0].getValue32()) == HIGH ? true : false);
 }
 
