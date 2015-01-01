@@ -9,19 +9,16 @@ package sys := import("sys");
 /**
  * For a given variable n return e^n
  */
-
 func Exp(pow:float32) -> float32 := Pow(2.71828182846f, pow);
 
 /**
  * Return x * e^n or x*Exp(n);
  */
-
 func Exp(x:float32, n:float32) -> float32 := x * Exp(n);
 
 /**
  * Return the maximum of the left or right values
  */
-
 func Max(left:int, right:int) -> int := 
 	if left > right then left
 	 | else right;
@@ -29,7 +26,6 @@ func Max(left:int, right:int) -> int :=
 /**
  * Return the minimum of the left or right values
  */
-
 func Min(left:int, right:int) -> int :=
 	if left < right then left 
 	 | else right;
@@ -37,7 +33,6 @@ func Min(left:int, right:int) -> int :=
 /**
  * Return the max of the left or right values
  */
-
 func Max(left:float32, right:float32) -> float32 :=
 	if left > right then left
 	 | else right;
@@ -45,7 +40,6 @@ func Max(left:float32, right:float32) -> float32 :=
 /**
  * Return the min of the left or right values
  */
-
 func Min(left:float32, right:float32) -> float32 :=
 	if left < right then left
      | else right;
@@ -53,25 +47,21 @@ func Min(left:float32, right:float32) -> float32 :=
 /**
  * Return val to the power of pow ( val^pow )
  */
-
 func Pow(val:int, pow:int) -> int := sys.PowInt(val, pow);
 
 /**
  * Return val to the power of pow ( val^pow )
  */
-
 func Pow(val:float32, pow:float32) -> float32 := sys.PowFloat(val, pow);
 
 /**
  * Return the remainder of the division of integer val by integer divisor
  */
-
 func Mod(val:int, divisor:int) -> int := sys.Mod(val, divisor);
 
 /**
  * Return the positive value of a given float.
  */
- 
 func Abs(val:float32) -> float32 :=
 	if val < 0f then -val
 	 | else val;
@@ -79,7 +69,6 @@ func Abs(val:float32) -> float32 :=
 /**
  * Return the positive value of a given integer.
  */
-
 func Abs(val:int) -> int := 
 	if val < 0 then -val
 	 | else val;
@@ -87,19 +76,16 @@ func Abs(val:int) -> int :=
 /**
  * Return the positive difference between two integers.
  */
-
 func Diff(val1:int, val2:int) -> int := Abs(val1 - val2);
 
 /**
  * Return the positive difference between two floating point values.
  */
-
 func Diff(val1:float32, val2:float32) -> float32 := Abs(val1 - val2);
 
 /**
  * Return true if the parameter n is a prime number
  */
-
 func Prime(n:int) -> bool {
 
 	var i : int;
@@ -118,7 +104,6 @@ func Prime(n:int) -> bool {
 /**
  * Returns the value of the fibonacci sequence at a given index
  */
-
 func Fibs(x:int) -> int := 
 	if x = 0 then 0
 	 | x = 1 then 1
@@ -127,7 +112,6 @@ func Fibs(x:int) -> int :=
 /**
  * Returns true if the given integer is an even number
  */
-
 func Even(x:int) -> bool :=
 	if x = 0 then true
 	 | else Odd(x-1);
@@ -135,7 +119,6 @@ func Even(x:int) -> bool :=
 /**
  * Returns true if the given integer is an odd number
  */
-
 func Odd(x:int) -> bool :=
     if x = 0 then false
      | else Even(x-1);
