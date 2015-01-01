@@ -9,11 +9,10 @@ package console := import("console");
 
 func Fatal(error:string) {
 
- console.Log( "FATAL ERROR HANG: " $ error $ "\n" );
+ console.Log("FATAL ERROR HANG: " $ error $ "\n");
 
  while true do {
  }
-
 }
 
 func Assert(val:bool, error:string) {
@@ -21,7 +20,6 @@ func Assert(val:bool, error:string) {
     if !val then {
         Fatal(error);
     }
-
 }
 
 /**
