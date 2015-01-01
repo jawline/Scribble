@@ -6,7 +6,7 @@ type ListNode := struct {
 	next : ListNode
 }
 
-func Sum(n : ListNode) : int {
+func Sum(n : ListNode)->int {
  if n = nil then return 0;
  return Sum(n->next) + n->payload;
 }

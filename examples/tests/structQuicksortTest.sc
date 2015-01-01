@@ -12,8 +12,7 @@ type User := struct {
  * The function Younger will return true if a user is younger than 
  * another, used by the QuickSort function when comparing users
  */
-
-func Younger( left : User, right : User) : bool {
+func Younger(left:User, right:User)->bool {
 
  if left->age < right->age then {
   return true;
@@ -26,8 +25,7 @@ func Younger( left : User, right : User) : bool {
  * The function Older will return true if a user is older than 
  * another, used by the QuickSort function when comparing users
  */
-
-func Older( left : User, right : User) : bool {
+func Older(left:User, right:User)->bool {
 
  if left->age > right->age then {
   return true;
@@ -41,7 +39,7 @@ func Older( left : User, right : User) : bool {
  * generated user to the screen
  */
 
-func PrintUser(user : User) {
+func PrintUser(user:User) {
  console.Log("Name: ");
  console.Log(user->name);
  
@@ -53,14 +51,12 @@ func PrintUser(user : User) {
  console.Log("\n");
 }
 
-func SortedUsers(users : array(User)) : bool {
+func SortedUsers(users:array(User))->bool {
 
  for var i := 0; i < len(users) - 1; i++ do {
- 
   if Older(users[i], users[i+1]) then {
    return false;
   }
- 
  }
 
  return true;
@@ -71,8 +67,7 @@ func SortedUsers(users : array(User)) : bool {
  * and sorts it by moving any value lower than a selected pivot value to the left of it and any higher
  * value to the right and then repeating for the arrays to the left and right of the pivot value until the array is sorted.
  */
-
-func QuickSort( n:array(User), low : int, high : int) {
+func QuickSort( n:array(User), low:int, high:int) {
 
  var i := low;
  var j := high;
@@ -102,11 +97,13 @@ func QuickSort( n:array(User), low : int, high : int) {
 
  }
  
- if low < j then 
+ if low < j then {
  	QuickSort(n, low, j);
+ }
  
- if i < high then 
+ if i < high then {
  	QuickSort(n, i, high);
+ }
 }
 
 func Test() {
@@ -118,8 +115,7 @@ func Test() {
  users[2] := User{"John", "j@email.com", 22 };
  users[3] := User{"Jim", "jim@email.com", 90 };
  users[4] := User{"Jim", "jim@email.com", 30 };
- 
+
  QuickSort(users, 0, 4);
- 
  test.Assert(SortedUsers(users), true, "List of users is not sorted");
 }

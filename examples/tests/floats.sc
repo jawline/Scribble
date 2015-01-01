@@ -1,15 +1,14 @@
-package test := import("test");
-package sys := import("sys");
+package test := import("test"),
+	sys := import("sys");
 
-func floatArgument(f : float32) {
+func floatArgument(f:float32) {
 	
  if f != 36.45f then {
   test.Fatal("Float argument fail");
  }
-	
 }
 
-func floatReturn() : float32 {
+func floatReturn() -> float32 {
  return 16.45f;
 }
 

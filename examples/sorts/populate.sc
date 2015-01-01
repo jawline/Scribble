@@ -11,7 +11,7 @@ package console := import("console");
  * Populate the given array with reverse order values
  */
 
-func PopulateWorstCase( list : array(int)) : array(int) {
+func PopulateWorstCase(list:array(int))->array(int) {
 
 	for var i := 0; i < len(list); i++ do {
 		list[i] := len(list) - i;
@@ -24,7 +24,7 @@ func PopulateWorstCase( list : array(int)) : array(int) {
  * Populate the specified array with a pre sorted list
  */
 
-func PopulateBestCase(list : array(int)) : array(int) {
+func PopulateBestCase(list:array(int))->array(int) {
 
 	for var i := 0; i < len(list); i++ do {
 		list[i] := i;
@@ -37,7 +37,7 @@ func PopulateBestCase(list : array(int)) : array(int) {
  * Print out the array of integers from left to right
  */
 
-func PrintList(list : array(int)) {
+func PrintList(list:array(int)) {
 
 	for var i := 0; i < len(list); i++ do {
 		console.Log( sys.String(list[i]) );
