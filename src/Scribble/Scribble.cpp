@@ -27,12 +27,11 @@
 
 #include <API/System.hpp>
 #include <API/Console.hpp>
-#include <API/LibWiring.hpp>
 #include <API/RegisterPackages.hpp>
 
-Scribble::Scribble(std::string const& package) :
-    sourceCode("") {
-    packagePath = package;
+Scribble::Scribble(std::string const& package) {
+	sourceCode = "";
+	packagePath = package;
     load();
 }
 
@@ -70,11 +69,7 @@ SafeFunction findFunction(std::vector<API::APIValue> arguments,
 
 API::APIValue Scribble::execute(std::string function) {
 
-    //Make empty args list
-    std::vector<API::APIValue> args;
-
-    //Execute function();
-    return execute(function, args);
+    return execute(function, std::vector<API::APIValue>());
 }
 
 API::APIValue Scribble::execute(std::string function,
@@ -93,7 +88,6 @@ API::APIValue Scribble::execute(std::string function,
     std::string vmFuncName = toExecute->getNamespace()
                              + VM::vmNamespaceSeperator + toExecute->getName();
 
-    //Push the arguments
     for (unsigned int i = 0; i < arguments.size(); i++) {
         arguments[i].pushToVM(&environment);
     }
@@ -131,29 +125,17 @@ API::APIValue Scribble::execute(std::string function,
 
 void Scribble::load() {
 
-    //Generate the sys package
     generateSystemPackage(compiledPackages);
-
-    //Generate the console package
     generateConsolePackage(compiledPackages);
 
-    //Generate the libWiring package
-    generateLibWiringPackage(compiledPackages);
-
     if (sourceCode.length() == 0) {
-
-        //Compile the Function
         compiledPackages = ScribbleCore::Parser::compile(packagePath,
                            compiledPackages);
-
     } else {
-
         compiledPackages = ScribbleCore::Parser::compileText(sourceCode,
                            packagePath, compiledPackages);
-
     }
 
-    //Compile the virtual machine from the packages.
     registerPackages(compiledPackages, environment);
 }
 

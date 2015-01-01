@@ -23,7 +23,7 @@ GENERATED_FILE= $(GEN_DIR)/generated_parser
 CC=g++
 STD_VER=c++0x
 CFLAGS=-c -Wall -I $(SOURCE_DIR) -I $(GEN_DIR) -std=$(STD_VER) -g -fPIC
-LDFLAGS=-pthread -lpthread -lwiringPi -fPIC -g
+LDFLAGS=-pthread -lpthread -fPIC -g
  
 #Rules to find source code - TODO: Look for a better way to scan directories. Nonrecursive works but is a bit ugly
 SOURCES=$(GEN_FILES) $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp) $(wildcard $(SOURCE_DIR)/**/**/*.cpp)

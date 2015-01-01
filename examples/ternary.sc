@@ -1,8 +1,7 @@
 package console := import("console"),
 		sys := import("sys"),
 		math := import("math/math"),
-		sieve := import("math/sieve"),
-		wiring := import("libWiring");
+		sieve := import("math/sieve");
 
 type Tree := struct {
 	a:int,
