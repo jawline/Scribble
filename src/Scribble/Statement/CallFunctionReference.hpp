@@ -19,9 +19,9 @@ namespace ScribbleCore {
 
 class CallFunctionReference: public Statement {
   private:
+	int numDeclaredVariables_;
     SafeStatement fn_;
     std::vector<SafeStatement> args_;
-    int numDeclaredVariables_;
     TypeReference returnType_;
 
   public:

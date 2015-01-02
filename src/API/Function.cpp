@@ -39,26 +39,20 @@ void Function::execute(VM::VirtualMachine* virt) {
     APIValue returnVal = execute(vals, virt);
 
     if (returnVal.isReference()) {
-
         virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
                           true);
-
         virt->hitGc();
     } else {
-
         virt->setRegister(VM::vmReturnResultRegister, returnVal.getValue32(),
                           false);
     }
-
 }
 
 int Function::debugCode(std::stringstream& gen) {
 
     if (isNativeFunction()) {
-
         gen << "#NativeFunction";
     } else {
-
         //Should always be overwritten by Console
         gen << "#NonNativeFunction";
     }
@@ -67,4 +61,3 @@ int Function::debugCode(std::stringstream& gen) {
 }
 
 }
-;

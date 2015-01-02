@@ -136,7 +136,6 @@ class APIValue {
      * If the APIvalue is not an array reference or the reference is a null
      * reference then 0 will be returned.
      */
-
     unsigned int getArrayLength(VM::VirtualMachine* vm) const;
 
     APIValue getIndex(unsigned int index, VM::VirtualMachine* vm);
@@ -149,7 +148,6 @@ class APIValue {
      * Pushes this APIValue to the virtual machine stack and marks it as a
      * reference if it resides on the heap.
      */
-
     void pushToVM(VM::VirtualMachine* virt);
 
     static API::APIValue makeBoolean(bool val);

@@ -31,7 +31,6 @@ IntFromFloat32::~IntFromFloat32() {
 
 API::APIValue IntFromFloat32::execute(API::APIValue* values,
                                       VM::VirtualMachine* virt) {
-
     int val = values[0].getValueFloat32();
     return API::APIValue(ScribbleCore::getIntType(), val);
 }

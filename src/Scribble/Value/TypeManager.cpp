@@ -8,6 +8,7 @@
 #include "TypeManager.hpp"
 #include <stdio.h>
 #include <Scribble/Parser/TypeReference.hpp>
+#include <stdarg.h>
 
 namespace ScribbleCore {
 
@@ -70,6 +71,20 @@ Type* TypeManager::getType(std::vector<TypeReference> argumentTypes,
     //Else add
     types_.push_back(desired);
     return desired;
+}
+
+std::vector<Type*> TypeManager::makeTypeList(int count, ...) {
+
+	std::vector<Type*> types;
+
+    va_list list;
+    va_start(list, count); //Requires the last fixed parameter (to get the address)
+    for (unsigned int i = 0; i < count; i++) {
+    	types.push_back(va_arg(list, Type*));
+    }
+    va_end(list);
+
+    return types;
 }
 
 TypeManager typeInstance;

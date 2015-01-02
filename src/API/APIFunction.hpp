@@ -32,7 +32,6 @@ class APIFunction: public Function {
     virtual ~APIFunction();
 
     APIValue execute(API::APIValue* values, VM::VirtualMachine* virt);
-
 };
 
 } /* namespace API */

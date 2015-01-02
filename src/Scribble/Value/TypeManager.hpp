@@ -31,22 +31,24 @@ class TypeManager {
     /**
      * Get a given primitive type (Int, Bool, etc)
      */
-
     Type* getType(ValueType base);
 
     /**
      * Get a given complex type. (Array, Reference)
      */
-
     Type* getType(ValueType base, TypeReference subType);
 
     Type* getType(std::vector<TypeReference> argumentTypes, TypeReference returnType);
+
+    /**
+     * Makes a type list from the number of types and a list of the types
+     */
+    std::vector<Type*> makeTypeList(int count, ...);
 };
 
 /**
  * Return a pointer to a singleton type manager which can return pointers to base and array types ( Structures are generated at the end of a parse and not on demand ).
  */
-
 TypeManager& getTypeManager();
 
 Type* getStringType();
@@ -54,33 +56,27 @@ Type* getStringType();
 /**
  * Return a pointer to the int type singleton.
  */
-
 Type* getIntType();
 
 /**
  * Return a pointer to the boolean type singleton.
  */
-
 Type* getBooleanType();
 
 /**
  * Return a pointer to the void type singleton.
  */
-
 Type* getVoidType();
 
 /**
  * Return a pointer to the float32 type singleton.
  */
-
 Type* getFloat32Type();
 
 /**
  * Return a pointer to the nil type singleton.
  */
-
 Type* getNilType();
-
 }
 
 #endif /* TYPEMANAGER_HPP_ */

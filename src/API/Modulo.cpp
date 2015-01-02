@@ -21,7 +21,7 @@ Modulo::Modulo(std::string names) : Function("NativeModulo", names) {
             ScribbleCore::getTypeManager().getType(
                 ScribbleCore::Int)));
 
-    ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
+	ScribbleCore::TypeReference returnType = ScribbleCore::makeTypeReference(
                 ScribbleCore::getTypeManager().getType(ScribbleCore::Int));
 
     setSignature(ScribbleCore::FunctionSignature(refs, returnType));

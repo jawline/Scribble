@@ -15,6 +15,7 @@ Float32FromInt::Float32FromInt(std::string ns) :
     Function("Float", ns) {
 
     std::vector<ScribbleCore::TypeReference> refs;
+
     refs.push_back(
         ScribbleCore::makeTypeReference(
             ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
@@ -23,7 +24,6 @@ Float32FromInt::Float32FromInt(std::string ns) :
                 ScribbleCore::getTypeManager().getType(ScribbleCore::Float32));
 
     setSignature(ScribbleCore::FunctionSignature(refs, returnType));
-
 }
 
 Float32FromInt::~Float32FromInt() {

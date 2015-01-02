@@ -14,6 +14,7 @@ Concat::Concat(std::string ns) :
     Function("StringConcat", ns) {
 
     std::vector<ScribbleCore::TypeReference> refs;
+
     refs.push_back(
         ScribbleCore::makeTypeReference(
             ScribbleCore::getTypeManager().getType(
@@ -38,14 +39,9 @@ API::APIValue Concat::execute(API::APIValue* values, VM::VirtualMachine* virt) {
     char* rhs = values[1].getValueString();
 
     if (lhs == nullptr || rhs == nullptr) {
-
         virt->printState();
-
         printf("Concat FCall Error\n");
-
-        for (;;) {
-        }
-
+        exit(0);
     }
 
     std::string result = std::string(lhs) + std::string(rhs);
