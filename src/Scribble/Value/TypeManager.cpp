@@ -73,16 +73,13 @@ Type* TypeManager::getType(std::vector<TypeReference> argumentTypes,
     return desired;
 }
 
-std::vector<Type*> TypeManager::makeTypeList(int count, ...) {
+std::vector<TypeReference> TypeManager::makeTypeList(unsigned int count, va_list list) {
 
-	std::vector<Type*> types;
+	std::vector<TypeReference> types;
 
-    va_list list;
-    va_start(list, count); //Requires the last fixed parameter (to get the address)
     for (unsigned int i = 0; i < count; i++) {
-    	types.push_back(va_arg(list, Type*));
+    	types.push_back(ScribbleCore::makeTypeReference(va_arg(list, Type*)));
     }
-    va_end(list);
 
     return types;
 }
@@ -127,6 +124,14 @@ Type* float32Type = getTypeManager().getType(Float32);
 
 Type* getFloat32Type() {
     return float32Type;
+}
+
+std::vector<TypeReference> makeTypeList(unsigned int count, ...) {
+	 va_list argptr;
+	 va_start(argptr, count);
+	 std::vector<TypeReference> list = getTypeManager().makeTypeList(count, argptr);
+	 va_end(argptr);
+	 return list;
 }
 
 }

@@ -43,7 +43,7 @@ class TypeManager {
     /**
      * Makes a type list from the number of types and a list of the types
      */
-    std::vector<Type*> makeTypeList(int count, ...);
+    std::vector<TypeReference> makeTypeList(unsigned int count, va_list list);
 };
 
 /**
@@ -77,6 +77,11 @@ Type* getFloat32Type();
  * Return a pointer to the nil type singleton.
  */
 Type* getNilType();
+
+/**
+ * Makes a type list from the number of types and a list of the types
+ */
+std::vector<TypeReference> makeTypeList(unsigned int count, ...);
 }
 
 #endif /* TYPEMANAGER_HPP_ */
