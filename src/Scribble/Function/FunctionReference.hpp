@@ -19,7 +19,6 @@ namespace ScribbleCore {
  * Without these all functions would have to be defined before they are referenced. with these however the function
  * references can be evaluated post parsing making recursion possible and forward declaration unnecessary.
  */
-
 class FunctionReference {
   private:
 
@@ -36,7 +35,6 @@ class FunctionReference {
     /**
      * Contains the issue if the function could not be resolved (like function x does not exist in the given namespace).
      */
-
     std::string resolveIssue_;
 
     std::vector<TypeReference> fnArgs_;
@@ -44,18 +42,17 @@ class FunctionReference {
     /**
      * A smart pointer to the function in question, SmartPointer to nullptr if it has not been resolved.
      */
-
-    SmartPointer<Function> func_;
+    SafeFunction func_;
 
     TypeReference returnType_;
 
   public:
 
     FunctionReference(std::string fnNamespace, std::string name,
-                      std::vector<SafeStatement> fnArgs, SmartPointer<Function> func);
+                      std::vector<SafeStatement> fnArgs, SafeFunction func);
 
     FunctionReference(std::string fnNamespace, std::string name,
-                      std::vector<TypeReference> fnArgs, SmartPointer<Function> func);
+                      std::vector<TypeReference> fnArgs, SafeFunction func);
 
     virtual ~FunctionReference();
 
@@ -68,16 +65,15 @@ class FunctionReference {
     /**
      * Get the arguments to be matched against when looking for the function.
      */
-
     std::vector<Type*> getTargetArguments();
 
     std::vector<TypeReference> const& getArgTypes();
 
-    SmartPointer<Function> getFunction();
+    SafeFunction getFunction();
     TypeReference getReturnType();
 
     void setResolveIssue(std::string issue);
-    void setFunction(SmartPointer<Function> func);
+    void setFunction(SafeFunction func);
 };
 
 }

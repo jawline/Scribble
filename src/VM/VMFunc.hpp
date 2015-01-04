@@ -12,7 +12,7 @@
 #include "InstructionSet.hpp"
 
 namespace API {
-class Function;
+	class Function;
 }
 
 using namespace API;

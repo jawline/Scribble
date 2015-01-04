@@ -48,7 +48,7 @@ std::string Parser::getUniformPath(std::string const& currentPath) {
     return std::string(pBuf);
 }
 
-SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference> toFind,
+SafeFunction Parser::findFunctionInSet(SmartPointer<FunctionReference> toFind,
         FunctionSet const& set) {
 
     //If the target set is empty return null
@@ -61,7 +61,7 @@ SmartPointer<Function> Parser::findFunctionInSet(SmartPointer<FunctionReference>
 
     for (unsigned int i = 0; i < set.size(); ++i) {
 
-        SmartPointer<Function> fn = set[i];
+        SafeFunction fn = set[i];
 
         if (fn->getSignature().argumentsEqual(args)) {
             return fn;
@@ -176,7 +176,7 @@ bool Parser::listContains(std::string target,
     return false;
 }
 
-bool Parser::testFunctionEquivilence(SmartPointer<Function> function, SmartPointer<Function> compared) {
+bool Parser::testFunctionEquivilence(SafeFunction function, SafeFunction compared) {
     return function->getSignature().equalTo(compared->getSignature());
 }
 
@@ -395,7 +395,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
                 } else {
 
-                    SmartPointer<Function> searchResult = Parser::findFunctionInSet(ref,
+                    SafeFunction searchResult = Parser::findFunctionInSet(ref,
                                                           it->second.getFunctionSet());
 
                     if (searchResult.get() != nullptr) {

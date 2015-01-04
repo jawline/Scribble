@@ -22,7 +22,7 @@ std::string outputCode(ScribbleCore::NamespaceType names,
                 iterator->second.getFunctionSet();
 
             for (unsigned int i = 0; i < functionSet.size(); i++) {
-                SmartPointer<Function> function = functionSet[i];
+                SafeFunction function = functionSet[i];
 
                 if (!function->isNativeFunction()) {
                     packageCode << function->getName() << " {\n";
@@ -65,7 +65,7 @@ void registerPackages(
 
                 for (unsigned int i = 0; i < functionSet.size(); i++) {
 
-                    SmartPointer<Function> function = functionSet[i];
+                    SafeFunction function = functionSet[i];
 
                     if (function->isNativeFunction()) {
                         newSpace.insert(function->getName(), VM::NamespaceEntry(API::Function::getNativeFunction(function)));

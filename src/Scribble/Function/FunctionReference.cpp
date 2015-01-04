@@ -10,7 +10,7 @@
 namespace ScribbleCore {
 
 FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
-                                     std::vector<SafeStatement> fnArgs, SmartPointer<Function> func) {
+                                     std::vector<SafeStatement> fnArgs, SafeFunction func) {
 
     name_ = name;
     fnNamespace_ = fnNamespace;
@@ -29,7 +29,7 @@ FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
 }
 
 FunctionReference::FunctionReference(std::string fnNamespace, std::string name,
-                                     std::vector<TypeReference> fnArgs, SmartPointer<Function> func) {
+                                     std::vector<TypeReference> fnArgs, SafeFunction func) {
     name_ = name;
     fnNamespace_ = fnNamespace;
     func_ = func;
@@ -56,11 +56,11 @@ void FunctionReference::setResolveIssue(std::string issue) {
     resolveIssue_ = issue;
 }
 
-SmartPointer<Function> FunctionReference::getFunction() {
+SafeFunction FunctionReference::getFunction() {
     return func_;
 }
 
-void FunctionReference::setFunction(SmartPointer<Function> func) {
+void FunctionReference::setFunction(SafeFunction func) {
     func_ = func;
     returnType_->setType(func_->getSignature().getReturnType()->type());
 }

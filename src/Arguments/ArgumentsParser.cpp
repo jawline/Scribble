@@ -12,7 +12,6 @@ namespace ScribbleExtra {
 
 ArgumentsParser::ArgumentsParser(int argc, char** argv) {
     parse(argc, argv);
-
 }
 
 ArgumentsParser::~ArgumentsParser() {

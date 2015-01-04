@@ -17,7 +17,7 @@
 
 namespace ScribbleCore {
 
-typedef std::vector<SmartPointer<Function>> FunctionSet;
+typedef std::vector<SafeFunction> FunctionSet;
 typedef std::map<std::string, NamespaceEntry> NamespaceType;
 
 const static std::string ScribbleFileSuffix = ".sc";
@@ -63,13 +63,13 @@ class Parser {
      * Check whether the set already contains an equivalent function
      */
 
-    static bool testFunctionEquivilence(SmartPointer<Function> function, SmartPointer<Function> other);
+    static bool testFunctionEquivilence(SafeFunction function, SafeFunction other);
 
     /**
      * Attempt to find a function that meets the criteria of a reference within a function set.
      */
 
-    static SmartPointer<Function> findFunctionInSet(SmartPointer<FunctionReference> toFind,
+    static SafeFunction findFunctionInSet(SmartPointer<FunctionReference> toFind,
             FunctionSet const& set);
 
 

@@ -53,11 +53,17 @@ int Function::debugCode(std::stringstream& gen) {
     if (isNativeFunction()) {
         gen << "#NativeFunction";
     } else {
-        //Should always be overwritten by Console
+        //Should always be overridden
         gen << "#NonNativeFunction";
     }
 
     return 0;
+}
+
+std::vector<SafeFunction> makeFunctionList(SafeFunction function) {
+	std::vector<SafeFunction> list;
+	list.push_back(function);
+	return list;
 }
 
 }
