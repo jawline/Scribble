@@ -14,11 +14,9 @@ namespace HashMapUtils {
 /**
  * The class that builds the linked list in each hasmap bucket.
  */
-
 template<class T>
 class HashItemLink {
   private:
-
     std::string name_;
     T data_;
     HashItemLink<T>* next_;
@@ -50,13 +48,11 @@ class HashItemLink {
     void setNext(HashItemLink<T>* next) {
         next_ = next;
     }
-
 };
 
 /**
  * The bucket class stores a linked list of things if the bucket is not empty
  */
-
 template<class T>
 class HashBucket {
   private:
@@ -118,12 +114,9 @@ class HashBucket {
 
     void insert(std::string const& id, T data) {
 
-        //printf("Inserting %s\n", id.c_str());
-
         //If there is no existing list then make one.
         if (root_ == nullptr) {
             root_ = new HashItemLink<T>(id, data);
-            //printf("Made %li next %li\n", root_, root_->getNext());
             return;
         }
 
@@ -136,8 +129,6 @@ class HashBucket {
                 iter->setData(data);
                 return;
             }
-
-            //printf("Iter %li next %li\n", iter, iter->getNext());
 
             iter = iter->getNext();
         }

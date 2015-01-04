@@ -25,27 +25,23 @@ const static std::string ScribbleFileSuffix = ".sc";
 /**
  * Parser facade, hides the Parser implementation and provides function to convert between files and returns low level code.
  */
-
 class Parser {
   private:
 
     /**
      * Buffer the given file and return it's contents as a std::string.
      */
-
     static std::string bufferText(std::string const& filePath);
 
     /**
      * Include the specified file, resolving it from the path.
      */
-
     static std::string include(std::string const& inputFile,
                                std::string const& path);
 
     /**
      * Include the given source text as the specified filename.
      */
-
     static std::string includeText(std::string source,
                                    std::string const& filename, std::string const& path);
 
@@ -62,28 +58,23 @@ class Parser {
     /**
      * Check whether the set already contains an equivalent function
      */
-
     static bool testFunctionEquivilence(SafeFunction function, SafeFunction other);
 
     /**
      * Attempt to find a function that meets the criteria of a reference within a function set.
      */
-
     static SafeFunction findFunctionInSet(SmartPointer<FunctionReference> toFind,
             FunctionSet const& set);
-
 
     /**
      * Search a list of strings and return true if it contains the target string
      */
-
     static bool listContains(std::string target,
                              std::vector<std::string> const& list);
 
     /**
      * Static function which will return the resulting namespace of the parsing of a given file.
      */
-
     static std::map<std::string, NamespaceType> compile(std::string const& file,
             std::map<std::string, NamespaceType> builtinNamespace);
 
@@ -94,7 +85,6 @@ class Parser {
      * Return an internal uniform path of a given file ( For example ../src/Test and Test would return the same string ) if the file exists
      * or return input string if the file does not exist.
      */
-
     static std::string getUniformPath(std::string const& path);
 
 };

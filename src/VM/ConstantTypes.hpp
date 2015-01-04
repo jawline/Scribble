@@ -13,10 +13,8 @@ namespace VM {
 /**
  * The different types which can be loaded by a constant
  */
-
 enum ConstantType {
-
-    CByte = 0, CShort, CInt, CLong, CFloat32, CDouble, CArray
+	CByte = 0, CShort, CInt, CLong, CFloat32, CDouble, CArray
 };
 
 }
