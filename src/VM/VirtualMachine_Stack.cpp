@@ -11,16 +11,10 @@
 namespace VM {
 
 long VirtualMachine::stackLong(int64_t pos) {
-    //VM_PRINTF_LOG("Returning stack value at address %li\n", pos);
-
-    //Return the value of the stack at a given position pos in bytes.
-
     return *((long*) (stack_ + pos));
 }
 
 void VirtualMachine::stackSetLong(int64_t pos, int64_t v) {
-    //VM_PRINTF_LOG("Setting stack value at position %li\n", pos);
-    //Set the value of the stack at index pos in bytes to the value v.
     *((long*) (stack_ + pos)) = v;
 }
 
@@ -40,8 +34,6 @@ void VirtualMachine::popStackLong(int64_t& val, bool& ref) {
         stackReferences_.pop_back();
         ref = true;
     }
-
-    //VM_PRINTF_LOG("Popped long %li from stack. Current Stack pointer is now %li\n", val, stackCurrentPointer);
 }
 
 void VirtualMachine::pushStackLong(int64_t v) {
@@ -56,8 +48,6 @@ void VirtualMachine::pushStackLong(int64_t v) {
 
     stackSetLong(stackCurrentPointer, v);
     stackCurrentPointer = stackCurrentPointer + 8;
-
-    //VM_PRINTF_LOG("Pushed long to stack now %li value %li\n", stackCurrentPointer, v);
 }
 
 void VirtualMachine::expandStack() {
@@ -75,12 +65,7 @@ void VirtualMachine::expandStack() {
     //Change the stack to the new stack
     stack_ = newStack;
     currentStackHeight_ += vmStackIncrease;
-
 }
-
-/**
- * Mark the next entry pushed to the stack as a reference
- */
 
 void VirtualMachine::markStackReference() {
     stackReferences_.push_back(stackCurrentPointer);
