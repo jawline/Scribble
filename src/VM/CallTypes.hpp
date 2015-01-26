@@ -14,7 +14,8 @@ namespace VM {
  * Defines whether the call is a constant reference or a reference stored in a register.
  */
 enum CallType {
-    Constant = 0, Register
+    Constant = 0,
+    Register
 };
 
 }
