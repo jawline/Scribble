@@ -43,31 +43,26 @@ class VirtualMachine {
     /**
      * Pointer to the actual stack memory
      */
-
     uint8_t* stack_;
 
     /**
      * Current max stack height
      */
-
     long currentStackHeight_;
 
     /**
      * A list of the location of each reference on the stack.
      */
-
     std::vector<long> stackReferences_;
 
     /**
      * The virtual machine state stack is pushed every time a function call is made with the new instruction set and popped on return. The storedPc is used to store the value of the PC register on a function call so on return it can be restored.
      */
-
     std::stack<VMState> currentVmState_;
 
     /**
      * Pointer to registers and whether they are a reference.
      */
-
     long currentInstruction;
     long stackBasePointer;
     long stackCurrentPointer;
@@ -80,13 +75,11 @@ class VirtualMachine {
     /**
      * The VM heap.
      */
-
     Heap heap_;
 
     /**
      * The parent namespace node.
      */
-
     VMNamespace namespace_;
 
     SmartPointer<VMFunc> currentFunction;
