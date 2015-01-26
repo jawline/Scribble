@@ -10,8 +10,14 @@
 
 namespace VM {
 
+/**
+ * Enum with all the possible options for a jump
+ */
 enum JumpType {
-    DirectRelative = 0, DirectExact, RegisterRelative, RegisterExact
+    DirectRelative = 0,
+    DirectExact,
+    RegisterRelative,
+    RegisterExact
 };
 
 }
