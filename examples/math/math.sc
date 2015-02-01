@@ -90,7 +90,7 @@ func Prime(n:int) -> bool {
 	if n < 2 then
 		return false;
 
-	for var i:int := 2; i < n; i++ do {
+	for var i:int := 2; i < n; i++; {
 		if sys.Mod(n, i) = 0 then
 			return false;
 	}
