@@ -62,38 +62,32 @@ class ArgumentsParser {
     /**
      * Searches for a named argument from the named arguments list
      */
-
     Argument const search(std::string const& name) const;
 
     /**
      * Returns the first argument found with one of either two names (Useful for -v or --version)
      */
-
     Argument const search(std::string const& name,
                           std::string const& alternative) const;
 
     /**
      * Returns true if an argument with the following name exists
      */
-
     bool exists(std::string const& name) const;
 
     /**
      * Returns true if there is one argument of either name
      */
-
     bool exists(std::string const& name, std::string const& alternative) const;
 
     /**
      * Returns an argument from the unnamed arguments list
      */
-
     Argument const& get(unsigned int id) const;
 
     /**
      * Get the number of unnamed arguments
      */
-
     unsigned int getNumArguments() const;
 
 };
