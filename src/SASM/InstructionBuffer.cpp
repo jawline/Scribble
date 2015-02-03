@@ -235,7 +235,7 @@ void ArrayGet(uint8_t arrayReg, uint8_t indexReg, uint8_t dataReg) {
     IncreaseCurrent(4);
 }
 
-void Structure(std::string type, uint8_t dst) {
+void Structure(std::string const& type, uint8_t dst) {
     Set(buffer, currentBuffer, (uint8_t) VM::OpNewStruct);
     Set(buffer, currentBuffer, (int) currentConstant);
     Set(buffer, currentBuffer, (uint8_t) dst);
@@ -262,7 +262,7 @@ void StructureFieldGet(uint8_t tgtArray, uint8_t index, uint8_t data) {
     IncreaseCurrent(4);
 }
 
-void Array(std::string type, uint8_t sizereg, uint8_t reg) {
+void Array(std::string const& type, uint8_t sizereg, uint8_t reg) {
     Set(buffer, currentBuffer, (uint8_t) VM::OpNewArray);
     Set(buffer, currentBuffer, (uint8_t) sizereg);
     Set(buffer, currentBuffer, (uint8_t) reg);
