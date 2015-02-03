@@ -20,13 +20,12 @@ Type::Type(std::vector<TypeReference> argumentTypes, TypeReference returnType) :
         returnType) {
 }
 
-Type::~Type() {
-}
+Type::~Type() {}
 
 bool Type::Equals(Type* other) const {
 
     if (other == nullptr) {
-        printf("Equality check on nullptr\n");
+        printf("Checking type against nullptr\n");
         return false;
     }
 
@@ -38,9 +37,7 @@ bool Type::Equals(Type* other) const {
 
     //Check if the array is the same
     if (rawType_ == Array) {
-
         if (subType_.get() != nullptr) {
-
             if (other->subType_.get() == nullptr) {
                 return false;
             }
@@ -63,7 +60,6 @@ bool Type::Equals(Type* other) const {
 
             return subType_->getName() == other->subType_->getName();
         }
-
     } else if (rawType_ == FunctionReferenceType) {
 
         if (!referenceReturnType_->type()->Equals(
@@ -76,9 +72,9 @@ bool Type::Equals(Type* other) const {
             return false;
         }
 
-        //TODO: This solution leads to two unresolved types being seen as different when they may be resolved to the same thing (Shock, horror!) and should be corrected (Just wastes RAM no issue with producing correct code)
+        //TODO: This solution leads to two unresolved types being seen as different when they may be resolved
+        //to the same thing (Shock, horror!) and should be corrected
         for (unsigned int i = 0; i < referenceArgumentTypes_.size(); i++) {
-
             if (referenceArgumentTypes_[i] != nullptr
                     && other->referenceArgumentTypes_[i]->type() != nullptr
                     && referenceArgumentTypes_[i]->type()->Equals(
@@ -86,16 +82,10 @@ bool Type::Equals(Type* other) const {
             } else {
                 return false;
             }
-
         }
-
     } else if (rawType_ == StructureType) {
-
         //Structure check is overloaded in StructureInfo
         printf("ERR SHOULD NOT BE HERE\n");
-        for (;;) {
-        }
-
     }
 
     return true;
