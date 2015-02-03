@@ -44,7 +44,6 @@ class AssignArrayStatement: public Statement {
 
     /**
      * Returns the type of array.
-     * @return array_'s type.
      */
     TypeReference type();
 
