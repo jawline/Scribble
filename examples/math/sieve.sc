@@ -8,7 +8,7 @@
 func Sieve(n:int) -> array(bool) {
  var results := [n]bool;
  for var i between 2 and n {
-  results[i] := true;
+     results[i] := true;
  }
  for i between 2 and n do {
      if results[i] then {
