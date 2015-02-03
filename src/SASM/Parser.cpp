@@ -1,5 +1,5 @@
 /*
- * SAsm.cpp
+ * Parser.cpp
  *
  *  Created on: 11 Jun 2013
  *      Author: blake
@@ -18,7 +18,7 @@ extern VM::VMNamespace CurrentNamespace;
 
 namespace SimpleASM {
 
-VM::VMNamespace Parser::parse(std::string text) {
+VM::VMNamespace Parser::parse(std::string const& text) {
 
     //Parse the actual code
     sasm__scan_string(text.c_str());
