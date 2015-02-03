@@ -1,6 +1,6 @@
 package math    := import("math/math"),
-        sys		:= import("sys"),
-		console := import("console");
+        sys     := import("sys"),
+        console := import("console");
 
 func fizzOrBuzz(x:int)->string :=
 	if math.Mod(x, 15) = 0 then "fizzbuzz"
@@ -9,7 +9,7 @@ func fizzOrBuzz(x:int)->string :=
 	|  else sys.String(x);
 
 func main() {
-	for var i := 0; i < 150; i++; {
-		console.Log(fizzOrBuzz(i) $ "\n");
-	}
+    for var i := 0; i < 150; i++; {
+        console.Log(fizzOrBuzz(i) $ "\n");
+    }
 }
