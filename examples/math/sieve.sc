@@ -14,7 +14,7 @@ func Sieve(n:int) -> array(bool) {
      if results[i] then {
          for var j := i*i; j < n; j := j + i do {
              results[j] := false;
-  	 }
+         }
      }
  }
  return results;
