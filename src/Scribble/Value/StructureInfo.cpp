@@ -29,11 +29,9 @@ unsigned int StructureInfo::getNumFields() const {
 int StructureInfo::getFieldIndex(std::string const& name) const {
 
     for (unsigned int i = 0; i < dataIndexs_.size(); ++i) {
-
         if (dataIndexs_[i].first == name) {
             return i;
         }
-
     }
 
     return -1;
