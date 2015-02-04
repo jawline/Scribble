@@ -86,7 +86,6 @@ class Parser {
      * or return input string if the file does not exist.
      */
     static std::string getUniformPath(std::string const& path);
-
 };
 
 }

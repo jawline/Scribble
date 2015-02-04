@@ -4,7 +4,6 @@
  *  Created on: 27 Dec 2013
  *      Author: blake
  */
-
 #include "Scribble.hpp"
 
 #include <string.h>
@@ -24,14 +23,13 @@
 /**
  * API/System defines the generateSystemPackage function which creates the sys library.
  */
-
 #include <API/System.hpp>
 #include <API/Console.hpp>
 #include <API/RegisterPackages.hpp>
 
 Scribble::Scribble(std::string const& package) {
-	sourceCode = "";
-	packagePath = package;
+    sourceCode = "";
+    packagePath = package;
     load();
 }
 
@@ -41,12 +39,10 @@ Scribble::Scribble(std::string const& package, std::string const& src) {
     load();
 }
 
-Scribble::~Scribble() {
-}
+Scribble::~Scribble() {}
 
 SafeFunction findFunction(std::vector<API::APIValue> arguments,
                           ScribbleCore::FunctionSet set) {
-
     std::vector<ScribbleCore::Type*> types;
 
     for (unsigned int i = 0; i < arguments.size(); i++) {
@@ -55,20 +51,16 @@ SafeFunction findFunction(std::vector<API::APIValue> arguments,
 
     for (unsigned int i = 0; i < set.size(); i++) {
         SafeFunction iter = set[i];
-
         bool matched = iter->getSignature().argumentsEqual(types);
-
         if (matched) {
             return set[i];
         }
-
     }
 
     return nullptr;
 }
 
 API::APIValue Scribble::execute(std::string function) {
-
     return execute(function, std::vector<API::APIValue>());
 }
 
@@ -98,24 +90,18 @@ API::APIValue Scribble::execute(std::string function,
     API::APIValue result;
 
     if (!toExecute->getSignature().getReturnType()->type()->Equals(ScribbleCore::getVoidType())) {
-
         int64_t val = 0;
         bool ref = 0;
-
+        
         environment.getRegister(VM::vmReturnResultRegister, val, ref);
-
+        
         if (ref) {
-
             result = API::APIValue(toExecute->getSignature().getReturnType()->type(),
                                    environment.getHeap().getType(val),
                                    environment.getHeap().getSmartPointer(val), val);
-
         } else {
-
             result = API::APIValue(toExecute->getSignature().getReturnType()->type(), val);
-
         }
-
     } else {
         result = API::APIValue();
     }
@@ -135,7 +121,7 @@ void Scribble::load() {
         compiledPackages = ScribbleCore::Parser::compileText(sourceCode,
                            packagePath, compiledPackages);
     }
-
+    
     registerPackages(compiledPackages, environment);
 }
 

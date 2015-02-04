@@ -14,26 +14,22 @@ namespace ScribbleCore {
 /**
  * Assigns element assign at the specified position in the given array.
  */
-
 class AssignArrayStatement: public Statement {
   private:
 
     /**
-     * The array.
+     * The expression which will generate the array
      */
-
     SafeStatement array_;
 
     /**
-     * What to assign to the array.
+     * The expression which generates the value to assign
      */
-
     SafeStatement toAssign_;
 
     /**
-     * The position in the array to change.
+     * The expression which generates the array index
      */
-
     SafeStatement position_;
 
   public:
@@ -41,7 +37,6 @@ class AssignArrayStatement: public Statement {
     /**
      * Set the array at position to the value of assign.
      */
-
     AssignArrayStatement(int lineno, std::string text, SafeStatement array,
                          SafeStatement assign, SafeStatement position);
 
@@ -49,9 +44,7 @@ class AssignArrayStatement: public Statement {
 
     /**
      * Returns the type of array.
-     * @return array_'s type.
      */
-
     TypeReference type();
 
     void checkTree(Type* functionType);

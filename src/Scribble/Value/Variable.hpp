@@ -8,10 +8,8 @@ namespace ScribbleCore {
 
 /**
  * The variable class is used to store meta data about a
- * variable when it is defined in a package function ( It's type
- * and position in registers )
+ * variable when it is defined in a package function (It's type and target register)
  */
-
 class Variable {
   private:
     std::string name_;
@@ -27,10 +25,8 @@ class Variable {
     TypeReference getTypeReference() const;
     std::string getName() const;
     int getPosition() const;
-
     void setType(Type* type);
     void setPosition(int pos);
-
 };
 
 }

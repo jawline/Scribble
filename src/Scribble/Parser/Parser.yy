@@ -165,8 +165,7 @@ Program: {
 		$7->setPackage(currentNamespaceName);
 		Functions[*$3] = ScribbleCore::NamespaceEntry(ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore(*$3, $7)));
 		delete $3;
-	}
-;
+	};
 
 PackageList: WORD ASSIGN IMPORT LPAREN STRING RPAREN {
 		ImportList[*$1] = *$5;
@@ -184,7 +183,6 @@ PackageList: WORD ASSIGN IMPORT LPAREN STRING RPAREN {
  * BaseStructureInfo is the definition of each field within a structure in the form Name : Type.
  * Accepts 1 or more definition.
  */
-
 BaseStructureInfo: WORD COLON Type {
 
 		$$ = new ScribbleCore::StructureInfo("INVALID");
@@ -199,14 +197,12 @@ BaseStructureInfo: WORD COLON Type {
 		
 		delete $3;
 		delete $5;
-	}
-;
+	};
 
 /**
  * Definition of a type. Either a primitive ( int, string, float, bool ) or an array or Structure. NOTE: Structures and arrays are defined 
  * as references which are resolved after parsing to allow for structures which are defined after they are used in the file.
  */
-
 Type: TYPE_INT {
 		$$ = new ScribbleCore::TypeReference( new ScribbleCore::TypeReferenceCore ( "int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int) ) );
 	} | TYPE_STRING {
@@ -265,7 +261,6 @@ MultipleTypes_2: Type {
 /**
  * The definition of a variable with an explicit type ( var Name : Type )
  */
-
 Variable:  VARIABLE WORD COLON Type {
 
 		//Check if the variable is already defined.
@@ -286,13 +281,11 @@ Variable:  VARIABLE WORD COLON Type {
 		
 		delete $2;
 		delete $4;
-	}
-;
+	};
 
 /**
  * The definition of a variable that has it's type inferred from the type of the expresion it is assigned to.
  */
-
 AutoVariable: VARIABLE WORD ASSIGN Expression {
 
 		auto it = findVariable(*$2);
@@ -312,13 +305,11 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 		}
 		
 		delete $2;
-	}
-;
+	};
 
 /**
  * Defines the syntax of an argument, written like Name : Type
  */
-
 ArgumentDefinition: WORD COLON Type {
 
 		auto it = findVariable(*$1);
@@ -335,24 +326,20 @@ ArgumentDefinition: WORD COLON Type {
 		
 		delete $1;
 		delete $3;
-	}
-;
+	};
 
 /**
  * Accept zero or more argument definitions
  */
-
 OptionalArgumentDefinitions: {
 		$$ = new std::vector<SmartPointer<ScribbleCore::Variable>>();
 	} | ArgumentDefinitions {
 		$$ = $1;
-	}
-;
+	};
 
 /**	
  * Accept one or more argument definitions in the form Name : Type, Name : Type..
  */
-
 ArgumentDefinitions: ArgumentDefinition {
 		$$ = new std::vector<SmartPointer<ScribbleCore::Variable>>();
 		$$->push_back(*$1);
@@ -361,14 +348,12 @@ ArgumentDefinitions: ArgumentDefinition {
 		$$ = $1;
 		$$->push_back(*$3);
 		delete $3;
-	}
-;
+	};
 
 /**
  * The definition of a function. func Name ( Arguments ) { Code } defines a function of void type
  * and func Name ( Arguments ) : Type { Code } defines a function of a specific type.
  */
-
 Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBRACKET Statements RBRACKET {
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
@@ -527,19 +512,16 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBR
 		//Delete variables vector
 		delete $4;
 		delete $7;
-	}
-;
+	};
 
 /**
  * Defines the arguments for a functional call or structure constructor.
  */
- 
 Arguments: {
 		$$ = new std::vector<SmartPointer<ScribbleCore::Statement>>();
 	} | Arguments_2 {
 		$$ = $1;
-	}
-;
+	};
 
 Arguments_2: Expression {
 		$$ = new std::vector<SmartPointer<ScribbleCore::Statement>>();
@@ -547,25 +529,21 @@ Arguments_2: Expression {
 	} | Arguments COMMA Expression {
 		$$ = $1;
 		$$->push_back(ScribbleCore::SafeStatement($3));
-	}
-;
+	};
 
 /**
  * Define statements as zero or more Statement rules.
  */
-
 Statements: {
 		$$ = new std::vector<SmartPointer<ScribbleCore::Statement>>();
 	} | Statements Statement {
 		$$ = $1;
 		$$->push_back(ScribbleCore::SafeStatement($2));
-	}
-;
+	};
 
 /**
  * Defines a function reference as Name(Type,Type,Type)
  */
- 
 FunctionReference: AMP WORD LPAREN MultipleTypes RPAREN {
 	std::vector<ScribbleCore::TypeReference> argTypes = *$4;
 	
@@ -600,7 +578,6 @@ FunctionReference: AMP WORD LPAREN MultipleTypes RPAREN {
 /**
  * Defines a functional call as either Name ( Args ) or Package.Name ( Args ).
  */
-
 FunctionCall: WORD LPAREN Arguments RPAREN {
 
 		auto it = findVariable(*$1);
@@ -634,37 +611,31 @@ FunctionCall: WORD LPAREN Arguments RPAREN {
 		delete $1;
 		delete $3;
 		delete $5;
-	}
-;
+	};
 
 /**
- * either a single Statement or many statements inside some curly brackets { }.
+ * Either a single Statement or many statements inside some curly brackets { }.
  */
-
 IfStatements: Statement {
 		std::vector<ScribbleCore::SafeStatement>* stmts = new std::vector<ScribbleCore::SafeStatement>();
 		stmts->push_back(ScribbleCore::SafeStatement($1));
 		$$ = stmts;
 	} | LBRACKET Statements RBRACKET {
 		$$ = $2;
-	}
-;
+	};
 
 /**
  * Defines the options allowed when creating a single expression function (func F() -> int := 5 etc)
  */
- 
 GuardOrExpression: IF Guard END {
 		$$ = $2;
 	} | Expression END {
 		$$ = new ScribbleCore::ReturnStatement($1->line(), $1->symbol(), SmartPointer<ScribbleCore::Statement>($1));
-	}
-;
+	};
 
 /**
  * Definition of a guard (ie. x = 0 -> 0 | otherwise -> 1)
  */
-
 Guard: Expression THEN Expression GUARD Guard {
 		std::vector<SmartPointer<ScribbleCore::Statement>> expr;
 		std::vector<SmartPointer<ScribbleCore::Statement>> elseexpr;
@@ -680,14 +651,12 @@ Guard: Expression THEN Expression GUARD Guard {
 		$$ = new ScribbleCore::IfStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), expr, std::vector<SmartPointer<ScribbleCore::Statement>>());
 	} | ELSE Expression {
 		$$ = new ScribbleCore::ReturnStatement($2->line(), $2->symbol(), SmartPointer<ScribbleCore::Statement>($2));
-	}
-;
+	};
 
 /**
  * Defines a statement as either one of the three control 
  * structures, a return statement or an expression.
  */
-
 Statement: Expression END {
 		$$ = $1;
 	} | IF Expression THEN IfStatements  {
@@ -697,18 +666,17 @@ Statement: Expression END {
 		$$ = new ScribbleCore::IfStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), *$4, *$6);
 		delete $4;
 		delete $6;
-	} | FOR Expression END Expression END Expression DO IfStatements {
-		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), ScribbleCore::SafeStatement($4), ScribbleCore::SafeStatement($6), *$8);
-		delete $8;
-	} | WHILE Expression DO LBRACKET Statements RBRACKET {
+	} | FOR Expression END Expression END Expression END LBRACKET Statements RBRACKET {
+		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), ScribbleCore::SafeStatement($4), ScribbleCore::SafeStatement($6), *$9);
+		delete $9;
+	} | WHILE Expression END LBRACKET Statements RBRACKET {
 		$$ = new ScribbleCore::WhileStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), *$5);
 		delete $5;
 	} | RETURN Expression END {	
 		$$ = new ScribbleCore::ReturnStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2));	
 	} | RETURN END {
 		$$ = new ScribbleCore::ReturnStatement(scribble_lineno, scribble_text, nullptr);
-	}
-;
+	};
 
 Expression: MINUS Expression {
 		$$ = new ScribbleCore::NegativeStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2));
@@ -724,8 +692,6 @@ Expression: MINUS Expression {
 		$$ = new ScribbleCore::NilStatement(scribble_lineno, scribble_text);
 	} | STRING {
 		$$ = new ScribbleCore::StringStatement(scribble_lineno, scribble_text, *$1);
-
-		//Free string pointer
 		delete $1;
 	} | NOT Expression {
 		$$ = new ScribbleCore::NotStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2));
@@ -757,7 +723,6 @@ Expression: MINUS Expression {
 		
 		ScribbleCore::ParserReference r($$);
 		StatementReferences.push_back(r);
-		
 	} | Expression PLUS Expression {
 		$$ = new ScribbleCore::OperateStatement(scribble_lineno, scribble_text, ScribbleCore::Add, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression MINUS Expression {
@@ -781,7 +746,6 @@ Expression: MINUS Expression {
 	} | LPAREN Expression RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Expression {
-		
 		auto it = findVariable(*$1);
 
 		if (it.get() == nullptr) {
@@ -790,11 +754,8 @@ Expression: MINUS Expression {
 			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($3));
 		}
 		
-		//Free up string pointer.
 		delete $1;
-		
 	} | Expression CONCAT Expression {
-
 		std::vector<ScribbleCore::SafeStatement> args;
 		args.push_back(ScribbleCore::SafeStatement($1));
 		args.push_back(ScribbleCore::SafeStatement($3));
@@ -805,9 +766,7 @@ Expression: MINUS Expression {
 		StatementReferences.push_back(r);
 		
 		$$ = new ScribbleCore::FunctionStatement(scribble_lineno, scribble_text, reference, args, Variables.size());
-	
 	} | WORD INCREMENT {
-	
 		auto it = findVariable(*$1);
 
 		if (it.get() == nullptr) {
@@ -816,11 +775,8 @@ Expression: MINUS Expression {
 			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, false);
 		}
 		
-		//Free name pointer
 		delete $1;
-		
 	} | INCREMENT WORD {
-		
 		auto it = findVariable(*$2);
 
 		if (it.get() == nullptr) {
@@ -829,11 +785,8 @@ Expression: MINUS Expression {
 			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, true);
 		}
 		
-		//Free name pointer
 		delete $2;
-		
 	} | WORD DECREMENT {
-		
 		auto it = findVariable(*$1);
 
 		if (it.get() == nullptr) {
@@ -842,11 +795,8 @@ Expression: MINUS Expression {
 			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Decrement, false);
 		}
 		
-		//Free name pointer
 		delete $1;
-		
 	} | DECREMENT WORD {
-		
 		auto it = findVariable(*$2);
 
 		if (it.get() == nullptr) {
@@ -855,14 +805,12 @@ Expression: MINUS Expression {
 			$$ = new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Decrement, true);
 		}
 		
-		//Free name pointer
 		delete $2;
 	} | Expression AND Expression {
 		$$ = new ScribbleCore::AndStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression OR Expression {
 		$$ = new ScribbleCore::OrStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression LPAREN Arguments RPAREN {
-
 		$$ = new ScribbleCore::CallFunctionReference(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), *$3, Variables.size());
 
 		ScribbleCore::ParserReference r($$);
@@ -870,7 +818,6 @@ Expression: MINUS Expression {
 
 		delete $3;
 	} | Expression POINT WORD {
-		
 		$$ = new ScribbleCore::GetStructureElementStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), *$3);
 		
 		ScribbleCore::ParserReference r($$);
@@ -878,7 +825,6 @@ Expression: MINUS Expression {
 		
 		delete $3;
 	} | Expression POINT WORD ASSIGN Expression {
-	
 		$$ = new ScribbleCore::StructureAssignElement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($5), *$3);
 		
 		ScribbleCore::ParserReference r($$);
@@ -888,7 +834,6 @@ Expression: MINUS Expression {
 	} | FunctionCall {
 		$$ = $1;
 	} | WORD {
-
 		auto it = findVariable(*$1);
 
 		if (it.get() == nullptr) {
@@ -898,9 +843,7 @@ Expression: MINUS Expression {
 			$$ = new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it);
 		}
 
-		//Free name pointer
 		delete $1;
-		
 	}
 ;
 

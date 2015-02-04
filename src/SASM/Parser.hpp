@@ -4,7 +4,6 @@
  *  Created on: 11 Jun 2013
  *      Author: blake
  */
-
 #ifndef SASM_HPP_
 #define SASM_HPP_
 #include <VM/InstructionSet.hpp>
@@ -15,8 +14,7 @@ namespace SimpleASM {
 
 class Parser {
   public:
-
-    static VM::VMNamespace parse(std::string text);
+    static VM::VMNamespace parse(std::string const& text);
 };
 
 } /* namespace SimpleASM */

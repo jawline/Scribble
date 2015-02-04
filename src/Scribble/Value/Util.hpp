@@ -12,14 +12,12 @@
 /**
  * This exception is thrown when the utility class is unable to create the specified type.
  */
-
 class UtilException: public std::exception {
   private:
 
     /**
      * The reason why it cannot create the specified type.
      */
-
     std::string reason_;
 
   public:

@@ -18,7 +18,6 @@ namespace ScribbleCore {
  * StructureInfo contains the fields ( Name and type )  within a structure, its name and namespace.
  * The order in which fields are defined
  */
-
 class StructureInfo: public Type {
   private:
 
@@ -66,7 +65,6 @@ class StructureInfo: public Type {
     /**
      * Set the stored name of the structure
      */
-
     void setName(std::string const& name);
 
     /**
@@ -75,31 +73,26 @@ class StructureInfo: public Type {
      * setPackage will not immediately make this structure belong to
      * another package)
      */
-
     void setPackage(std::string const& name);
 
     /**
      * Returns true if this type is another type
      */
-
     bool Equals(Type* other) const;
 
     /**
      * Return the name of this package
      */
-
     std::string getName() const;
 
     /**
      * Return the name of the package in which this structure resides
      */
-
     std::string getPackage() const;
 
     /**
      * Overrides Type::getTypeName() to return more complex structure name.
      */
-
     virtual std::string getTypeName() const;
 
 };
