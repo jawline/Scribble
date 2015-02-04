@@ -16,30 +16,22 @@ BoolStatement::BoolStatement(int lineNo, std::string sym, bool value) :
     value_ = value;
 }
 
-BoolStatement::~BoolStatement() {
-}
+BoolStatement::~BoolStatement() {}
 
 TypeReference BoolStatement::type() {
     return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
-void BoolStatement::checkTree(Type* functionType) {
-}
+void BoolStatement::checkTree(Type* functionType) {}
 
-int BoolStatement::generateCode(int resultRegister,
-                                std::stringstream& generated) {
-
-
+int BoolStatement::generateCode(int resultRegister, std::stringstream& generated) {
     if (resultRegister != -1) {
-
         if (value_) {
             generated << "load " << VM::vmTrue << " $" << resultRegister << "\n";
         } else {
             generated << "load " << VM::vmFalse << " $" << resultRegister << "\n";
         }
-
     }
-
     return 1;
 }
 
