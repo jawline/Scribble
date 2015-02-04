@@ -21,8 +21,7 @@ IfStatement::IfStatement(int lineNo, std::string sym,
     ifFalseStatements_ = ifFalseStatements;
 }
 
-IfStatement::~IfStatement() {
-}
+IfStatement::~IfStatement() {}
 
 void IfStatement::checkTree(Type* functionType) {
     condition_->checkTree(functionType);
