@@ -666,10 +666,10 @@ Statement: Expression END {
 		$$ = new ScribbleCore::IfStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), *$4, *$6);
 		delete $4;
 		delete $6;
-	} | FOR Expression END Expression END Expression END LBRACKET Statements RBRACKET {
+	} | FOR Expression END Expression END Expression DO LBRACKET Statements RBRACKET {
 		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), ScribbleCore::SafeStatement($4), ScribbleCore::SafeStatement($6), *$9);
 		delete $9;
-	} | WHILE Expression END LBRACKET Statements RBRACKET {
+	} | WHILE Expression DO LBRACKET Statements RBRACKET {
 		$$ = new ScribbleCore::WhileStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), *$5);
 		delete $5;
 	} | RETURN Expression END {	
