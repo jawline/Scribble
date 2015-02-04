@@ -22,8 +22,7 @@ Heap::Heap() {
     heapItems_.push_back( entry );
 }
 
-Heap::~Heap() {
-}
+Heap::~Heap() {}
 
 bool Heap::validReference(long entry) {
 
