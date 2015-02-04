@@ -23,7 +23,7 @@ typedef std::map<std::string, NamespaceEntry> NamespaceType;
 const static std::string ScribbleFileSuffix = ".sc";
 
 /**
- * Parser facade, hides the Parser implementation and provides function to convert between files and returns low level code.
+ * Code parser & compiler, parses source text into a program which can be executed
  */
 class Parser {
   private:
