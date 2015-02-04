@@ -10,22 +10,17 @@
 
 namespace ScribbleCore {
 
-NilStatement::NilStatement(int lineNo, std::string symbol) : Statement(lineNo, symbol) {
-}
+NilStatement::NilStatement(int lineNo, std::string symbol) : Statement(lineNo, symbol) {}
 
-NilStatement::~NilStatement() {
-}
+NilStatement::~NilStatement() {}
 
-void NilStatement::checkTree(Type* functionType) {
-
-}
+void NilStatement::checkTree(Type* functionType) {}
 
 TypeReference NilStatement::type() {
     return makeTypeReference(getNilType());
 }
 
 int NilStatement::generateCode(int resultRegister, std::stringstream& generated) {
-    ;
     generated << "load 0 $" << resultRegister << "\n";
     return 1;
 }
