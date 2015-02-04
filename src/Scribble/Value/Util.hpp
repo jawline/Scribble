@@ -26,7 +26,6 @@ class UtilException: public std::exception {
     virtual ~UtilException() throw ();
 
     virtual const char* what() const throw ();
-
 };
 
 #endif /* UTIL_HPP_ */
