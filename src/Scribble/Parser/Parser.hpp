@@ -78,6 +78,9 @@ class Parser {
     static std::map<std::string, NamespaceType> compile(std::string const& file,
             std::map<std::string, NamespaceType> builtinNamespace);
 
+    /**
+     * Static function which will create a namespace from a piece of source text given as a string
+     */
     static std::map<std::string, NamespaceType> compileText(std::string const&text, std::string const& packageName,
             std::map<std::string, NamespaceType> builtinNamespace);
 
