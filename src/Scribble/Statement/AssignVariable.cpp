@@ -7,16 +7,12 @@ namespace ScribbleCore {
 
 AssignVariableStatement::AssignVariableStatement(int lineNo, std::string sym,
         SmartPointer<Variable> var, SafeStatement exp) :
-    Statement(lineNo, sym), exp_(exp), var_(var) {
-}
+    Statement(lineNo, sym), exp_(exp), var_(var) {}
 
-AssignVariableStatement::~AssignVariableStatement() {
-}
+AssignVariableStatement::~AssignVariableStatement() {}
 
 void AssignVariableStatement::checkTree(Type* functionType) {
-
     exp_->checkTree(functionType);
-
     StatementAssert(this,
                     var_->getType()->Equals(exp_->type()->type())
                     || exp_->type()->type()->getType() == NilType,
@@ -25,17 +21,14 @@ void AssignVariableStatement::checkTree(Type* functionType) {
                     + var_->getType()->getTypeName() + " variable");
 }
 
-int AssignVariableStatement::generateCode(int resultRegister,
-        std::stringstream& generated) {
-
+int AssignVariableStatement::generateCode(int resultRegister, std::stringstream& generated) {
     generated << "--set " << var_->getName() << "\n";
-
-    //Assigning a variable in the VM is as simply as moving the result of the statement into the variables assigned slot in the registers.
-    int num = exp_->generateCode(
-                  var_->getPosition() + VM::vmNumReservedRegisters, generated);
-
+    
+    //Assigning a variable in the VM is as simply as moving the result of the
+    //statement into the variables assigned slot in the registers.
+    int num = exp_->generateCode(var_->getPosition() + VM::vmNumReservedRegisters, generated);
+    
     generated << "--end set " << var_->getName() << " size " << num << "\n";
-
     return num;
 }
 

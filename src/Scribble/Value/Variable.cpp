@@ -4,12 +4,9 @@
 namespace ScribbleCore {
 
 Variable::Variable(std::string name, int position, TypeReference type) :
-    name_(name), type_(type), position_(position) {
-}
+    name_(name), type_(type), position_(position) {}
 
-Variable::~Variable() {
-
-}
+Variable::~Variable() {}
 
 std::string Variable::getName() const {
     return name_;
@@ -20,11 +17,6 @@ Type* Variable::getType() const {
     if (type_.get() != nullptr && type_->type() != nullptr) {
         return type_->type();
     }
-
-    /**
-     if (getValue()) {
-     return getValue()->type();
-     }*/
 
     return getTypeManager().getType(TypeUnresolved);
 }

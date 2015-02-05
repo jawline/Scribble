@@ -13,15 +13,12 @@ namespace ScribbleCore {
 
 NegativeStatement::NegativeStatement(int line, std::string text,
                                      SafeStatement exp) :
-    Statement(line, text), exp_(exp) {
-}
+    Statement(line, text), exp_(exp) {}
 
-NegativeStatement::~NegativeStatement() {
-}
+NegativeStatement::~NegativeStatement() {}
 
 void NegativeStatement::checkTree(Type* functionType) {
     exp_->checkTree(functionType);
-
     StatementAssert(this,
                     exp_->type()->type()->getType() == Int
                     || exp_->type()->type()->getType() == Float32,
@@ -35,30 +32,21 @@ TypeReference NegativeStatement::type() {
 
 int NegativeStatement::generateCode(int resultRegister,
                                     std::stringstream& generated) {
-
     int instr = exp_->generateCode(VM::vmTempRegisterTwo, generated);
-
+    
     if (resultRegister != -1) {
-
         generated << "load 0 $" << VM::vmTempRegisterOne << "\n";
-
         StatementAssert(this,
                         exp_->type()->type()->getType() == Int
                         || exp_->type()->type()->getType() == Float32,
                         "Code generation on negation of value not supported");
-
         if (exp_->type()->type()->getType() == Int) {
-
             generated << "sub $" << VM::vmTempRegisterOne << " $"
                       << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
-
         } else if (exp_->type()->type()->getType() == Float32) {
-
             generated << "subf32 $" << VM::vmTempRegisterOne << " $"
                       << VM::vmTempRegisterTwo << " $" << resultRegister << "\n";
-
         }
-
         instr += 2;
     }
 

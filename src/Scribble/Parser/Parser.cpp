@@ -60,13 +60,10 @@ SafeFunction Parser::findFunctionInSet(SmartPointer<FunctionReference> toFind,
     std::vector<Type*> args = toFind->getTargetArguments();
 
     for (unsigned int i = 0; i < set.size(); ++i) {
-
         SafeFunction fn = set[i];
-
         if (fn->getSignature().argumentsEqual(args)) {
             return fn;
         }
-
     }
 
     return nullptr;
@@ -75,11 +72,9 @@ SafeFunction Parser::findFunctionInSet(SmartPointer<FunctionReference> toFind,
 void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
 
     for (unsigned int i = 0; i < fs.size(); i++) {
-
         printf("%s(", fnName.c_str());
-
-        for (unsigned int j = 0;
-                j < fs[i]->getSignature().getArguments().size(); j++) {
+        
+        for (unsigned int j = 0;j < fs[i]->getSignature().getArguments().size(); j++) {
 
             if (j != 0) {
                 printf(", ");
@@ -91,31 +86,25 @@ void Parser::printFunctionSet(std::string fnName, FunctionSet fs) {
             } else {
                 printf("Type not evaluated\n");
             }
-
         }
-
+        
         printf(") : %s\n",
                fs[i]->getSignature().getReturnType()->type()->getTypeName().c_str());
     }
-
 }
 
 void Parser::printNamespace(NamespaceType const& ns) {
-
     for (auto iter = ns.begin(); iter != ns.end(); iter++) {
         printf("%s\n", iter->first.c_str());
     }
-
 }
 
 void Parser::printAllSpaces(std::map<std::string, NamespaceType> const& ns) {
-
     for (auto iter = ns.begin(); iter != ns.end(); iter++) {
         printf("--%s--\n", iter->first.c_str());
         printNamespace(iter->second);
         printf("--END--\n");
     }
-
 }
 
 std::string Parser::bufferText(std::string const& filePath) {
@@ -164,13 +153,10 @@ std::string Parser::bufferText(std::string const& filePath) {
 bool Parser::listContains(std::string target,
                           std::vector<std::string> const& list) {
 
-    //Check each member of the list to see if it contains the target string.
     for (unsigned int i = 0; i < list.size(); i++) {
-
         if (list[i].compare(target) == 0) {
             return true;
         }
-
     }
 
     return false;
@@ -220,8 +206,7 @@ void Parser::resetFunctions() {
     Functions = NamespaceType();
 }
 
-std::string Parser::includeText(std::string source, std::string const& filename,
-                                std::string const& path) {
+std::string Parser::includeText(std::string source, std::string const& filename, std::string const& path) {
 
     //Reset all the information generated in the last parse
     resetImportList();
@@ -295,55 +280,39 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
     //Loop through every function set and test for duplicates.
     for (auto iter = Functions.begin(); iter != Functions.end(); iter++) {
-
         if (iter->second.type() == FunctionSetEntry) {
-
             FunctionSet setToTest = iter->second.getFunctionSet();
-
+            
             for (unsigned int i = 0; i < setToTest.size(); i++) {
-
                 for (unsigned int j = i + 1; j < setToTest.size(); j++) {
-
+                    
                     if (testFunctionEquivilence(setToTest[i], setToTest[j])) {
                         throw ParserException(filename,
                                               std::string("Function set ") + iter->first
                                               + " contains two identical functions ( Same number of arguments and return type )");
                     }
-
                 }
-
             }
-
         }
-
     }
 
     // For every unresolved reference ( Function statatements etcetera ) modify the
     //import path to its internal representation then resolve it.
-
     for (unsigned int i = 0; i < typeReferences.size(); ++i) {
 
         //If the package can be found in the imports list ( Which maps package names to their internal names )
         //then set change the type namespace from the local representation to the internal parser representation
         //Otherwise throw an error because the package has not been imported.
-
         if (typeReferences[i]->getNamespace().length() > 0) {
 
-            if (imports.find(typeReferences[i]->getNamespace())
-                    != imports.end()) {
-
-                typeReferences[i]->setNamespace(
-                    getUniformPath(
-                        imports.find(typeReferences[i]->getNamespace())->second));
-
+            if (imports.find(typeReferences[i]->getNamespace()) != imports.end()) {
+                auto uniformPath = getUniformPath(imports.find(typeReferences[i]->getNamespace())->second);
+                typeReferences[i]->setNamespace(uniformPath);
             } else {
-
                 throw ParserException(filename,
                                       "Package " + typeReferences[i]->getNamespace()
                                       + " has not been included");
-
             }
-
         }
 
         //Attempt to resolve the given type reference.
@@ -352,28 +321,19 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
     //Loop through all of the references and resolve them.
     for (unsigned int i = 0; i < references.size(); ++i) {
-
         switch (references[i].type()) {
-
         case FunctionEvaluation: {
-
             SmartPointer<FunctionReference> ref = references[i].getFunctionReference();
-
             NamespaceType selectedNamespace = Functions;
-
             if (ref->getNamespace().size() != 0) {
-
                 //Check the namespace has been loaded. If not then do not resolve the reference.
                 if (imports.find(ref->getNamespace()) != imports.end()) {
                     selectedNamespace = Namespace[imports.find(ref->getNamespace())->second];
                 } else {
-
                     ref->setResolveIssue(
                         std::string("Namespace ") + ref->getNamespace()
                         + " has not been imported.");
-
                 }
-
             }
 
             //Search for function in namespace.
@@ -381,27 +341,19 @@ std::string Parser::includeText(std::string source, std::string const& filename,
 
             //If the function is in the namespace then resolve it. otherwise leave it blank and the statement will throw an exception when checked.
             if (it == selectedNamespace.end()) {
-
                 ref->setResolveIssue(
                     std::string("the function ") + ref->getDebugName()
                     + " is not defined in " + ref->getNamespace());
-
             } else {
-
                 if (it->second.type() != FunctionSetEntry) {
-
                     ref->setResolveIssue(
                         ref->getDebugName() + " is not a function");
-
                 } else {
-
                     SafeFunction searchResult = Parser::findFunctionInSet(ref,
                                                           it->second.getFunctionSet());
-
                     if (searchResult.get() != nullptr) {
                         ref->setFunction(searchResult);
                     } else {
-
                         char errorText[256];
 
                         printf("Definitions of %s\n", ref->getName().c_str());
@@ -415,7 +367,6 @@ std::string Parser::includeText(std::string source, std::string const& filename,
                             if (i != 0) {
                                 types += ", ";
                             }
-
                         }
 
                         types += ")";
@@ -425,11 +376,8 @@ std::string Parser::includeText(std::string source, std::string const& filename,
                                 ref->getDebugName().c_str());
 
                         ref->setResolveIssue(errorText);
-
                     }
-
                 }
-
             }
 
             break;
@@ -445,39 +393,28 @@ std::string Parser::includeText(std::string source, std::string const& filename,
     }
 
     for (unsigned int i = 0; i < variableReferences.size(); ++i) {
-
         //Check whether the user has tried to assign the variable to a null type.
         if (variableReferences[i]->getType()->Equals(
                     getTypeManager().getType(TypeUnresolved))
                 || variableReferences[i]->getType()->Equals(getNilType())
                 || variableReferences[i]->getType()->Equals(getVoidType())) {
-
             throw ParserException(filename,
                                   "cannot declare a variable of type nil or void");
-
         }
-
     }
 
     try {
-
         //Run the check function on all functions which will throw StatementExceptions if there is an issue.
         if (Functions.size() > 0) {
-
             for (auto it = Functions.begin(); it != Functions.end(); it++) {
-
                 if (it->second.type() == FunctionSetEntry) {
                     std::vector<SafeFunction> set = it->second.getFunctionSet();
-
                     for (unsigned int i = 0; i < set.size(); ++i) {
                         ((ScriptedFunction *) set[i].get())->check();
                     }
                 }
-
             }
-
         }
-
     } catch (StatementException& e) {
         throw ParserException(filename, e.what());
     }
@@ -500,7 +437,6 @@ std::string Parser::include(std::string const& filename,
 
     //If the path is root and the file is not found then search the root.
     if (path.size() > 0) {
-
         try {
             //Create the inputSource from the buffer
             inputSource = bufferText(currentNamespaceName);
@@ -508,12 +444,9 @@ std::string Parser::include(std::string const& filename,
             //printf("Parser exception looking for %s, looking in the top level\n", (currentNamespaceName).c_str());
             return include(filename, "");
         }
-
     } else {
-
         //If path is root and the file is not found then let the resolution fail ( So the import path  is CURRENT/file then if that fails it checks /file and if that fails it throws an error.
         inputSource = bufferText(filename);
-
     }
 
     //Clear and previous errors

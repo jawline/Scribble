@@ -14,15 +14,11 @@ namespace ScribbleCore {
 
 AndStatement::AndStatement(int lineNo, std::string sym,
                            SafeStatement leftHandSide, SafeStatement rightHandSide) :
-    Statement(lineNo, sym), lhs_(leftHandSide), rhs_(rightHandSide) {
+    Statement(lineNo, sym), lhs_(leftHandSide), rhs_(rightHandSide) {}
 
-}
-
-AndStatement::~AndStatement() {
-}
+AndStatement::~AndStatement() {}
 
 void AndStatement::checkTree(Type* functionType) {
-
     lhs_->checkTree(functionType);
     rhs_->checkTree(functionType);
 
@@ -36,16 +32,19 @@ void AndStatement::checkTree(Type* functionType) {
 }
 
 TypeReference AndStatement::type() {
-
     return makeTypeReference(getTypeManager().getType(Boolean));
 }
 
 int AndStatement::generateCode(int resultRegister,
                                std::stringstream& generated) {
+                                                          
+    /**
+     * The AND statement code generator will place a 0 in the result register if the left or right expression are falsey (0)
+     * Otherwise it will place a 1 in the result register
+     */
 
     //If the result of the and statement is to be ignored then place the result in temp register 1 ( In this case the and statement should still be executed in case the functions involved had desired side
     //effects, though anything that causes this would be very badly written code )
-
     if (resultRegister == -1) {
         resultRegister = VM::vmTempRegisterOne;
     }
@@ -74,8 +73,6 @@ int AndStatement::generateCode(int resultRegister,
     //Add the second statement test to the code.
     generated << secondStatement.str();
     instrs += secondInstrs;
-
-    //TODO: Needs to be verified
 
     generated << "--End of and test\n";
 

@@ -17,7 +17,6 @@ namespace ScribbleCore {
  * ( And therefore the pointers will alyways be to that type and unique to that type).
  * Structures are generated at the end of a parse and not on demand and thus are not involved with this class.
  */
-
 class TypeManager {
   private:
     std::vector<Type*> types_;

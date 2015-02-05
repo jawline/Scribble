@@ -12,11 +12,9 @@ namespace ScribbleCore {
 
 StructureInfo::StructureInfo(std::string name) :
     Type(StructureType, nullptr), name_(name), package_(
-        "__INVALID__NAMESPACE__") {
-}
+        "__INVALID__NAMESPACE__") {}
 
-StructureInfo::~StructureInfo() {
-}
+StructureInfo::~StructureInfo() {}
 
 void StructureInfo::addInfo(std::string name, TypeReference t) {
     dataIndexs_.push_back(std::pair<std::string, TypeReference>(name, t));

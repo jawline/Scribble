@@ -14,14 +14,11 @@ namespace ScribbleCore {
 
 WhileStatement::WhileStatement(int lineNo, std::string sym,
                                SafeStatement condition, std::vector<SafeStatement> statements) :
-    Statement(lineNo, sym), condition_(condition), statements_(statements) {
-}
+    Statement(lineNo, sym), condition_(condition), statements_(statements) {}
 
-WhileStatement::~WhileStatement() {
-}
+WhileStatement::~WhileStatement() {}
 
 void WhileStatement::checkTree(Type* functionType) {
-
     condition_->checkTree(functionType);
 
     for (unsigned int i = 0; i < statements_.size(); ++i) {
@@ -36,8 +33,7 @@ TypeReference WhileStatement::type() {
     return makeTypeReference(getTypeManager().getType(Void));
 }
 
-int WhileStatement::generateCode(int resultRegister,
-                                 std::stringstream& generated) {
+int WhileStatement::generateCode(int resultRegister, std::stringstream& generated) {
 
     std::stringstream body;
     int numInstr = 0;
@@ -65,7 +61,6 @@ int WhileStatement::generateCode(int resultRegister,
 
     generated << "--return to sender\n";
     generated << "jmpr -" << (numInstr) << "\n";
-
     numInstr++;
 
     return numInstr;

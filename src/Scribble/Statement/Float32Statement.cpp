@@ -12,12 +12,9 @@ namespace ScribbleCore {
 
 Float32Statement::Float32Statement(int yylineno, std::string yysym,
                                    float32_t val) :
-    Statement(yylineno, yysym), val_(val) {
+    Statement(yylineno, yysym), val_(val) {}
 
-}
-
-Float32Statement::~Float32Statement() {
-}
+Float32Statement::~Float32Statement() {}
 
 TypeReference Float32Statement::type() {
     return makeTypeReference(getFloat32Type());

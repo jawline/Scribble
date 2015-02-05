@@ -14,20 +14,17 @@ namespace ScribbleCore {
 /**
  * ArrayStatement which returns a new Array of length returned by the supplied statement.
  */
-
 class ArrayStatement: public Statement {
   private:
 
     /**
      * The type of array being generated.
      */
-
     TypeReference type_;
 
     /**
      * Statement which returns the length of the new array.
      */
-
     SafeStatement length_;
 
   public:
@@ -39,15 +36,12 @@ class ArrayStatement: public Statement {
      * @param type The type of array to be generated.
      * @param length The statement which returns the length.
      */
-
     ArrayStatement(int line, std::string text, TypeReference type, SafeStatement length);
     virtual ~ArrayStatement();
 
     /**
      * Returns Array type.
-     * @return Array.
      */
-
     TypeReference type();
 
     void checkTree(Type* functionType);
