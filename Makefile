@@ -47,6 +47,12 @@ remove:
  
 clean:
 	-rm -f -r $(OBJ_DIR) $(EXECUTABLE) $(LIBRARY)
+
+pull:
+	-git pull
+
+test:
+	-$(OUTPUT_DIR)$(OUTPUT_FILE) ./examples/executeTests.sc
  
 #The executable rule compiles the set of objects into the target executable
 $(EXECUTABLE): $(OBJECTS)

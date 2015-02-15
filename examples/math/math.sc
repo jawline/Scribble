@@ -41,7 +41,7 @@ func Max(left:float32, right:float32) -> float32 :=
  */
 func Min(left:float32, right:float32) -> float32 :=
 	if left < right then left
-     	 | else right;
+     | else right;
 
 /**
  * Return val to the power of pow ( val^pow )
