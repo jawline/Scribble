@@ -48,8 +48,8 @@ remove:
 clean:
 	-rm -f -r $(OBJ_DIR) $(EXECUTABLE) $(LIBRARY)
 
-stashpull:
-	-git stash
+resetgitandpull:
+	-git reset --hard
 	-git pull
 
 test:
