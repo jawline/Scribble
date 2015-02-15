@@ -86,13 +86,13 @@ int main(int argc, char** argv) {
         printf("Scribble %i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR,
                VERSION_BUILD_NUMBER);
         return 0;
-    }
+    }dad
 
     if (!lastOptionFile(argv, argv + argc, argc)) {
         printf("Error: No script specified\n");
         printUsage(argv, argc);
         return -1;
-    }
+    }x\
 
     char const* targetFile = *(argv + (argc - 1));
 
