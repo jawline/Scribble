@@ -87,8 +87,6 @@ int main(int argc, char** argv) {
                VERSION_BUILD_NUMBER);
         return 0;
     }
-    
-    sdadsa
 
     if (!lastOptionFile(argv, argv + argc, argc)) {
         printf("Error: No script specified\n");
