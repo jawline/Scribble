@@ -41,7 +41,7 @@ func Max(left:float32, right:float32) -> float32 :=
  */
 func Min(left:float32, right:float32) -> float32 :=
 	if left < right then left
-     	 | else right;
+     | else right;
 
 /**
  * Return val to the power of pow ( val^pow )
@@ -90,7 +90,7 @@ func Prime(n:int) -> bool {
 	if n < 2 then
 		return false;
 
-	for var i:int := 2; i < n; i++; {
+	for var i := 2; i < n; i++ do {
 		if sys.Mod(n, i) = 0 then
 			return false;
 	}
