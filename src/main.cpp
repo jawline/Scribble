@@ -95,7 +95,6 @@ int main(int argc, char** argv) {
     }
 
     char const* targetFile = *(argv + (argc - 1));
-sdadsadada
     try {
         Scribble environment(targetFile);
         clock_t start = clock();
