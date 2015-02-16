@@ -12,7 +12,6 @@
 namespace ScribbleCore {
 
 std::string makeName(std::string name, int version) {
-
     std::stringstream funcName;
     funcName << name << "#" << version;
     return funcName.str();
@@ -25,19 +24,15 @@ ScriptedFunction::ScriptedFunction(std::string name, int version,
     setSignature(signature);
 }
 
-ScriptedFunction::~ScriptedFunction() {
-}
+ScriptedFunction::~ScriptedFunction() {}
 
 void ScriptedFunction::check() const {
-
     for (unsigned int i = 0; i < statements_.size(); ++i) {
         statements_[i]->checkTree(getSignature().getReturnType()->type());
     }
-
 }
 
 int ScriptedFunction::debugCode(std::stringstream& gen) {
-
     int script = 0;
 
     for (unsigned int i = 0; i < variableTemplates_.size(); i++) {
@@ -67,13 +62,11 @@ int ScriptedFunction::debugCode(std::stringstream& gen) {
 
 APIValue ScriptedFunction::execute(API::APIValue* values,
                                    VM::VirtualMachine* virt) {
-
     printf("ERR should not get here\nScriptedFunction\n");
     exit(1);
 }
 
 bool ScriptedFunction::isNativeFunction() const {
-
     return false;
 }
 
