@@ -9,11 +9,12 @@
 
 namespace ScribbleCore {
 
-FunctionSignature::FunctionSignature(std::vector<TypeReference> args, TypeReference returnType) : arguments_(args), returnType_(returnType) {
+FunctionSignature::FunctionSignature(std::vector<TypeReference> args, TypeReference returnType) {
+    arguments_ = args;
+    returnType_ = returnType;
 }
 
-FunctionSignature::~FunctionSignature() {
-}
+FunctionSignature::~FunctionSignature() {}
 
 std::vector<TypeReference> FunctionSignature::getArguments() {
     return arguments_;
@@ -30,16 +31,13 @@ bool FunctionSignature::argumentsEqual(std::vector<Type*> args) {
     }
 
     for (unsigned int i = 0; i < args.size(); i++) {
-
         if (args[i] == nullptr || arguments_[i].get() == nullptr || arguments_[i]->type() == nullptr) {
             printf("Error. Function Signature cannot evaluate nullptr\n");
             return false;
         }
-
         if (!args[i]->Equals(arguments_[i]->type())) {
             return false;
         }
-
     }
 
     return true;
@@ -52,11 +50,9 @@ bool FunctionSignature::equalTo(FunctionSignature other) {
     }
 
     for (unsigned int i = 0; i < getArguments().size(); i++) {
-
         if (!getArguments()[i]->type()->Equals(other.getArguments()[i]->type())) {
             return false;
         }
-
     }
 
     if (!getReturnType()->type()->Equals(other.getReturnType()->type())) {
