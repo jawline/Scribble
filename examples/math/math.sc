@@ -101,12 +101,13 @@ func Prime(n:int) -> bool {
 
 	if n < 2 then
 		return false;
-	
-	if Mod(n,2) = 0 or Mod(n,3) = 0 then
+		
+	//TODO: Fix language parser, why does this need bracketing?
+	if (Mod(n,2) = 0) or (Mod(n,3) = 0) then
 		return false;
 
 	for var i := 5; i*i <= n; i := i + 6 do {
-		if sys.Mod(n, i) = 0 or sys.Mod(n, i+2) = 0 then
+		if (sys.Mod(n, i) = 0) or (sys.Mod(n, i+2) = 0) then
 			return false;
 	}
 
