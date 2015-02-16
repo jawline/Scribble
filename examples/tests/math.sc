@@ -9,6 +9,7 @@ package exp := import("exp");
 package abs := import("abs");
 package max := import("max");
 package dif := import("dif");
+package ntheory := import("ntheory");
 
 func Test() {
  pow.Test();
@@ -16,4 +17,5 @@ func Test() {
  max.Test();
  abs.Test();
  dif.Test();
+ ntheory.Test();
 }
