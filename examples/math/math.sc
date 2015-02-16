@@ -101,9 +101,12 @@ func Prime(n:int) -> bool {
 
 	if n < 2 then
 		return false;
+	
+	if Mod(n,2) or Mod(n,3) then
+		return false;
 
-	for var i := 2; i < n; i++ do {
-		if sys.Mod(n, i) = 0 then
+	for var i := 5; i*i <= n; i := i + 6 do {
+		if sys.Mod(n, i) = 0 or sys.Mod(n, i+2) = 0 then
 			return false;
 	}
 
