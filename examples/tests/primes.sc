@@ -15,7 +15,12 @@ func Test() {
 
  for var i := 0; i < len(primesList); i++ do {
   var isPrimeResult := math.Prime(i);
-  test.Assert(isPrimeResult, primesList[i], "IsPrime differs from primelist result");
+  test.Assert(isPrimeResult, primesList[i], "IsPrime differs from primelist result at "
+   $ sys.String(i)
+   $ " isPrime " 
+   $ sys.String(isPrimeResult) 
+   $ " primesList " 
+   $ sys.String(primesList[i]));
  }
 
 }
