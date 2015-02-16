@@ -40,9 +40,8 @@ bool StructureInfo::Equals(Type* other) const {
 }
 
 Type* StructureInfo::getFieldType(std::string const& name) const {
-    int index;
 
-    if ((index = getFieldIndex(name)) != -1) {
+    if ((int index = getFieldIndex(name)) != -1) {
         return dataIndexs_[index].second->type();
     }
 
