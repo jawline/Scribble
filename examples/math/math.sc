@@ -62,7 +62,7 @@ func Mod(val:int, divisor:int) -> int := sys.Mod(val, divisor);
  * Return the greatest common divisor of two integers
  */
  func Gcd(a:int, b:int) -> int :=
- 	if b == 0 then a
+ 	if b = 0 then a
  	| else Gcd(b, Mod(a, b));
 
 /**
