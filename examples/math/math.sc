@@ -99,15 +99,11 @@ func Diff(val1:float32, val2:float32) -> float32 := Abs(val1 - val2);
  */
 func Prime(n:int) -> bool {
 
-	if n < 2 then
-		return false;
-		
-	//TODO: Fix language parser, why does this need bracketing?
-	if (Mod(n,2) = 0) or (Mod(n,3) = 0) then
-		return false;
+	if n <= 3 then
+		return n > 1;
 
-	for var i := 5; i*i <= n; (i := i + 6) do {
-		if (sys.Mod(n, i) = 0) or (sys.Mod(n, i+2) = 0) then
+	for var i := 4; i*i <= n; i++ do {
+		if sys.Mod(n, i) = 0 then
 			return false;
 	}
 
