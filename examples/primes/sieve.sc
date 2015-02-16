@@ -2,7 +2,7 @@
  * This package provides functions to run the sieve of eratosthenes prime number algorithm and return an array of 
  * booleans signalling whether a number is true or false
  *
- * Copyright (c) Blake Loring 2013
+ * Copyright (c) Blake Loring 2013-2015
  */
 
 func Sieve(n:int)->array(bool) {
