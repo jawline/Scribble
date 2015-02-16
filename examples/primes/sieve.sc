@@ -12,7 +12,9 @@ func Sieve(n:int)->array(bool) {
   results[i] := true;
  }
  
+ //Set 0 and 1 to false, the sieve doesn't catch them
  results[0] := false;
+ results[1] := false;
  
  for i := 2; i < n; i++ do {
   if results[i] then {
