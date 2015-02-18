@@ -125,13 +125,9 @@ func Fibs(x:int) -> int :=
 /**
  * Returns true if the given integer is an even number
  */
-func Even(x:int) -> bool :=
-	if x = 0 then true
-	 | else Odd(x-1);
+func Even(x:int) -> bool := Mod(x,2) = 0;
 
 /**
  * Returns true if the given integer is an odd number
  */
-func Odd(x:int) -> bool :=
-	if x = 0 then false
-	 | else Even(x-1);
+func Odd(x:int) -> bool := Mod(x, 2) != 0;
