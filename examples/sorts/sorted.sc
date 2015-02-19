@@ -7,7 +7,6 @@
 /**
  * IsSorted returns true if the array n passed is a sorted array of integers
  */
-
 func IsSorted(n:array(int))->bool {
 
 	for var i := 1; i < len(n); i++ do {
