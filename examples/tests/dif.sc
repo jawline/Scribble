@@ -8,7 +8,6 @@
  package test := import("test");
  
  func Test() {
- 
  //Dif tests on integers.
  test.Assert(math.Diff(0, 15), 15, "Dif 0 15 failed");
  test.Assert(math.Diff(0, -15), 15, "Dif 0 -15 failed");
@@ -24,5 +23,4 @@
  test.Assert(math.Diff(-15f, 15f), 30f, 0.01f, "Dif -15 15 failed");
  test.Assert(math.Diff(-15f, -30f), 15f, 0.01f, "Dif -15 -30 failed");
  test.Assert(math.Diff(-15f, -100f), 85f, 0.01f, "Dif -15 -100 failed");
- 
  }
