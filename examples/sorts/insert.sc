@@ -7,8 +7,7 @@
 /**
  * Sort a given array of integers using an insertion sort algorithm.
  */
-
-func Sort(n:array(int))->array(int) {
+func Sort(n:array(int)) -> array(int) {
  
  for var i := 1; i < len(n); i++ do {
  	var k := n[i];
