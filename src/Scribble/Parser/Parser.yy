@@ -123,6 +123,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %left PLUS MINUS
 %left TIMES DIVIDE
 %left GREATER LESSER GREATER_EQUAL LESSER_EQUAL NOT_EQUAL
+%left INCREMENT DECREMENT
 %left EQUALS AND OR LINK
 %left COMMA
 %left LPAREN RPAREN LBRACKET RBRACKET
