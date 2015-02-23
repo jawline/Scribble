@@ -740,9 +740,9 @@ Expression: MINUS Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestGreater, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression LESSER Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLess, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
-	} | Expression LESSER EQUALS Expression {
+	} | Expression LESSER_EQUAL Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLessOrEqual, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($4));
-	} | Expression GREATER EQUALS Expression {
+	} | Expression GREATER_EQUAL Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestGreaterOrEqual, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($4));
 	} | LPAREN Expression RPAREN {
 		$$ = $2;
