@@ -29,7 +29,7 @@ LDFLAGS=-pthread -lpthread -fPIC -g
 SOURCES=$(GEN_FILES) $(wildcard $(SOURCE_DIR)/*.cpp) $(wildcard $(SOURCE_DIR)/**/*.cpp) $(wildcard $(SOURCE_DIR)/**/**/*.cpp)
 OBJECTS=$(patsubst %.cpp,obj/%.o,$(SOURCES))
  
-all: warn preprocess $(SOURCES) $(EXECUTABLE) $(LIBRARY)
+all: generate_parser warn preprocess $(SOURCES) $(EXECUTABLE) $(LIBRARY)
  
 warn:
 ifeq ($(wildcard $(GENERATED_FILE)),)
