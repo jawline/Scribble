@@ -79,6 +79,8 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "," return COMMA;
 ";" return END;
 ":" return COLON;
+">=" return GREATER_EQUAL;
+"<=" return LESSER_EQUAL;
 ">" return GREATER;
 "<" return LESSER;
 "!" return NOT;
