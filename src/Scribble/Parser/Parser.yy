@@ -82,11 +82,9 @@ void parser_free_all() {
 SmartPointer<ScribbleCore::Variable> findVariable(std::string name) {
 
 	for (unsigned int i = 0; i < Variables.size(); i++) {
-		
 		if (name.compare(Variables[i]->getName()) == 0) {
 			return Variables[i];
 		}
-		
 	}
 
 	return SmartPointer<ScribbleCore::Variable>(nullptr);
@@ -106,7 +104,6 @@ extern char *scribble_text;	// defined and maintained in lex.c
 	SmartPointer<ScribbleCore::Variable>* variable;
 	std::vector<ScribbleCore::TypeReference>* types;
 	std::string* string;
-	
 	float32_t float32;
 	int integer;
 	ScribbleCore::TypeReference* type;
@@ -122,10 +119,14 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> TYPE_INT TYPE_FLOAT32 TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
 %token <token> TERNARY CONCAT END DO OR PACKAGE IS GUARD OTHERWISE
 
+%right NOT
 %left PLUS MINUS
 %left TIMES DIVIDE
-%left TRUE FALSE EQUALS AND OR LINK
-%right NOT
+%left GREATER LESSER
+%left EQUALS AND OR LINK
+%left COMMA
+%left LPAREN RPAREN LBRACKET RBRACKET
+%right IF FOR WHILE ASSIGN RETURN
 
 %type <statement> Statement;
 %type <statements> Program;
