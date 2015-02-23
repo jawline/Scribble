@@ -721,7 +721,6 @@ Expression: MINUS Expression {
 		$$ = new ScribbleCore::AssignArrayStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($6), ScribbleCore::SafeStatement($3));
 	} | Expression LSQBRACKET Expression RSQBRACKET {
 		$$ = new ScribbleCore::GetArrayStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
-		
 		ScribbleCore::ParserReference r($$);
 		StatementReferences.push_back(r);
 	} | Expression PLUS Expression {
@@ -734,16 +733,16 @@ Expression: MINUS Expression {
 		$$ = new ScribbleCore::OperateStatement(scribble_lineno, scribble_text, ScribbleCore::Divide, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression EQUALS Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestEquals, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
-	} | Expression NOT EQUALS Expression {
-		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestNotEquals, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($4));
+	} | Expression NOT_EQUAL Expression {
+		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestNotEquals, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression GREATER Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestGreater, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression LESSER Expression {
 		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLess, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression LESSER_EQUAL Expression {
-		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLessOrEqual, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($4));
+		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLessOrEqual, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | Expression GREATER_EQUAL Expression {
-		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestGreaterOrEqual, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($4));
+		$$ = new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestGreaterOrEqual, ScribbleCore::SafeStatement($1), ScribbleCore::SafeStatement($3));
 	} | LPAREN Expression RPAREN {
 		$$ = $2;
 	} | WORD ASSIGN Expression {
