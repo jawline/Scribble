@@ -83,6 +83,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "<=" return LESSER_EQUAL;
 ">" return GREATER;
 "<" return LESSER;
+"!=" return NOT_EQUAL;
 "!" return NOT;
 "[" return LSQBRACKET;
 "]" return RSQBRACKET;
