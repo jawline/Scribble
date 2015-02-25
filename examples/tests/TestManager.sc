@@ -72,6 +72,8 @@ func TestAll() {
 
  console.Log("Function References\n");
  functionRefs.Test();
+ 
+ console.Log("End of tests\n");
 }
 
 
