@@ -54,11 +54,9 @@ bool cmdFlagSet(char** begin, char** end, std::string const& option) {
 
 bool cmdBoolSet(char** begin, char** end, bool defaultOption,
                 std::string const& option) {
-
     return std::string("true").compare(
                getCmdOption(begin, end, defaultOption ? "true" : "false", option))
            == 0;
-
 }
 
 bool lastOptionFile(char** begin, char** end, int argc) {
@@ -95,6 +93,7 @@ int main(int argc, char** argv) {
     }
 
     char const* targetFile = *(argv + (argc - 1));
+    
     try {
         Scribble environment(targetFile);
         clock_t start = clock();
