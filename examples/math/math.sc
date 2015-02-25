@@ -106,7 +106,7 @@ func Prime(n:int) -> bool {
 		return false;
 
 	//TODO: Why do I have to bracket (i*i). Sort out left/right association
-	for var i := 4; (i*i) <= n; i++ do {
+	for var i := 4; i*i <= n; i++ do {
 		if sys.Mod(n, i) = 0 then
 			return false;
 	}

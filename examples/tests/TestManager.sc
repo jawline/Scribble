@@ -17,11 +17,16 @@ package console       := import("console"),
 	refEqTest := import("refEqualityTest"),
 	listTest := import("LinkedList"),
 	functionRefs := import("functionRefs"),
+	assignments := import("assignments"),
 	magicTest := import("magicTest");
 
 func TestAll() {
+
  console.Log("Not Test\n");
  notTest.Test();
+
+ console.Log("Assignments\n");
+ assignments.Test();
 
  console.Log("Magic numbers test\n");
  magicTest.Test();

@@ -68,6 +68,9 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "$" return CONCAT;
 
 ":=" return ASSIGN;
+"+=" return PLUS_ASSIGN;
+"-=" return MINUS_ASSIGN;
+
 "=" return EQUALS;
 
 "?" return TERNARY;

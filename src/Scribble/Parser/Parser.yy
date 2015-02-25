@@ -114,23 +114,23 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <float32> FLOAT32
 %token <integer> INT AMP
 %token <token> PLUS MINUS TIMES DIVIDE EQUALS ASSIGN IF ELSE GREATER LESSER GREATER_EQUAL LESSER_EQUAL FOR TYPE_ARRAY RETURN WHILE NOT NOT_EQUAL IMPORT LINK
-%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT TYPE_BOOL TRUE FALSE AND NIL TYPE
+%token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT PLUS_ASSIGN MINUS_ASSIGN TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_FLOAT32 TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
 %token <token> TERNARY CONCAT END DO OR PACKAGE IS GUARD OTHERWISE
 
 
 %left END
-%right VAR IF FOR WHILE ASSIGN RETURN
+%right VAR IF FOR WHILE RETURN
 %left LPAREN RPAREN LBRACKET RBRACKET
 %left COMMA
 %left AND OR LINK LEN
+%right ASSIGN MINUS_ASSIGN PLUS_ASSIGN
 %left EQUALS
 %left GREATER LESSER GREATER_EQUAL LESSER_EQUAL NOT_EQUAL
 %left TIMES DIVIDE
 %left PLUS MINUS
-%right NOT INCREMENT DECREMENT
-%left INT
+%right NOT
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -711,6 +711,32 @@ Expression: MINUS Expression {
 		delete $1;
 	} | Variable ASSIGN Expression {
 		$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, *$1, ScribbleCore::SafeStatement($3));
+		delete $1;
+	} | WORD PLUS_ASSIGN Expression {
+		auto it = findVariable(*$1);
+		auto add = ScribbleCore::SafeStatement(
+			new ScribbleCore::OperateStatement(
+				scribble_lineno,
+				scribble_text,
+				ScribbleCore::Add,
+				ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno,scribble_text, it)),
+				ScribbleCore::SafeStatement($3)
+			)
+		);
+		$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, add);
+		delete $1;
+	} | WORD MINUS_ASSIGN Expression {
+		auto it = findVariable(*$1);
+		auto add = ScribbleCore::SafeStatement(
+			new ScribbleCore::OperateStatement(
+				scribble_lineno,
+				scribble_text,
+				ScribbleCore::Subtract,
+				ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno,scribble_text, it)),
+				ScribbleCore::SafeStatement($3)
+			)
+		);
+		$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, add);
 		delete $1;
 	} | AutoVariable {
 		$$ = $1;
