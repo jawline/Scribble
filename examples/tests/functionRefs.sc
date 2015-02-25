@@ -10,14 +10,11 @@ func FunctionOne(x:int,y:float32) -> int {
  return 10;
 }
 
-func PassAFunction(numExecutes:int,fn:func(int, float32)->int) {
-
+func PassAFunction(numExecutes:int,fn:func(int, float32) -> int) {
  test.Assert(fn != nil, "Fn should != nil");
-
  for var i := 0; i < numExecutes; i++ do {
   test.Assert(fn(5, 5f) = 10, "Fn return incorrect in PassAFunction");
  }
-
 }
 
 func Test() {
@@ -38,5 +35,5 @@ func Test() {
 
  test.Assert((k(5,5) + r(5,5)) = other(5,5.0f), true, "k(5,5) + r(5,5) = other(5,5.0f) should be true");
 
- PassAFunction(150, &FunctionOne(int,float32));
+ PassAFunction(150, &FunctionOne(int, float32));
 }

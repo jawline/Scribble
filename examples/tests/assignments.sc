@@ -23,5 +23,4 @@ func Test() {
 
  test.Assert(true, true, "true true fail so false many fail");
  test.Assert(false, false, "so fail many false");
-
 }
