@@ -24,13 +24,15 @@ func WhileTest() {
   }
   i++;
  }
-
  test.Assert(iter, 10000, "Iter is not correct. Loops test has failed on a while loop");
 }
 
 func ForBetweenTest() {
- for var k between 0 and 1000 do {
+ var k := 0;
+ for var i between 0 and 1000 do {
+  k += 1;
  }
+ test.Assert(i, 999, "i is not correct");
  test.Assert(k, 999, "k is not correct");
 }
 
