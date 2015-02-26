@@ -14,6 +14,7 @@ func ForTest() {
 func WhileTest() {
  var i := 0;
  var j := 0;
+ var iter := 0;
  
  while i < 100 do {
   j := 0;
