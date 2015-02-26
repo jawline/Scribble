@@ -11,7 +11,7 @@ package sys     := import("sys"),
  */
 func PopulateWorstCase(list:array(int)) -> array(int) {
 
-	for var i := 0; i < len(list); i++ do {
+	for var i between 0 and len(list) do {
 		list[i] := len(list) - i;
 	}
 
@@ -23,7 +23,7 @@ func PopulateWorstCase(list:array(int)) -> array(int) {
  */
 func PopulateBestCase(list:array(int)) -> array(int) {
 
-	for var i := 0; i < len(list); i++ do {
+	for var i between 0 and len(list) do {
 		list[i] := i;
 	}
 
@@ -35,7 +35,7 @@ func PopulateBestCase(list:array(int)) -> array(int) {
  */
 func PrintList(list:array(int)) {
 
-	for var i := 0; i < len(list); i++ do {
+	for var i between 0 and len(list) do {
 		console.Log( sys.String(list[i]) );
 		console.Log(" ");
 	}
