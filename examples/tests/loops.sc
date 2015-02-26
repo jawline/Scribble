@@ -31,9 +31,10 @@ func ForBetweenTest() {
  var k := 0;
  for var i between 0 and 1000 do {
   k += 1;
+  console.Log(sys.String(i) $ " " $ sys.String(k) $ "\n"):
  }
  test.Assert(i, 999, "i is not correct");
- test.Assert(k, 999, "k is not correct");
+ test.Assert(k, 1000, "k is not correct");
 }
 
 func Test() {
