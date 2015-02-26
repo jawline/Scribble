@@ -44,7 +44,7 @@ func ForBetweenArray() {
   k[i] := i;
  }
  
- for i between 0 and len(k) {
+ for i between 0 and len(k) do {
   test.Assert(k[i], i, "k[i] != i");
  }
 }
