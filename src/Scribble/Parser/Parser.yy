@@ -136,6 +136,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <statements> Program;
 %type <variable> Variable;
 %type <variable> ArgumentDefinition;
+%type <variable> IntVariable;
 %type <statements> Arguments;
 %type <statements> Arguments_2;
 %type <statements> Statements;
@@ -307,6 +308,31 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 			Variables.push_back(nVar);
 			
 			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, nVar, sp);
+		}
+		
+		delete $2;
+	};
+	
+/**
+ * Gives syntax for variable declaration when the new variable is guarenteed to be an integer (for var i between 0 and x)
+ */
+IntVariable: VAR WORD {
+
+		//Check if the variable is already defined.
+		//If it isn't then create a new one and add a
+		//reference to the list of variables so any extra data can be resolved.
+		
+		auto it = findVariable(*$2);
+			
+		if (it.get() != nullptr) {
+			yyerror("Variable already defined.");
+			return -1;
+		} else {
+			auto intTypeReference = ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore("int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
+			SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, intTypeReference));
+			VariableReferences.push_back(*nVar);
+			Variables.push_back(*nVar);
+			$$ = nVar;
 		}
 		
 		delete $2;
@@ -704,32 +730,23 @@ Statement: Expression END {
 		
 		delete $2;
 		delete $9;
-	} | FOR VAR WORD BETWEEN Expression AND Expression DO LBRACKET Statements RBRACKET {
-	
-		//Check if the variable is already defined.
-		//If it isn't then create a new one and add a
-		//reference to the list of variables so any extra data can be resolved
-		auto it = findVariable(*$3);
-			
-		if (it.get() != nullptr) {
-			yyerror("Variable already defined.");
-			return -1;
-		}
-		
-		auto intTypeReference = ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore("int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
-		auto var = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$3, 0, intTypeReference));
-		VariableReferences.push_back(var);
-		Variables.push_back(var);
+	} | FOR IntVariable BETWEEN Expression AND Expression DO LBRACKET Statements RBRACKET {
+		auto it = *$2;
 
-		auto start = ScribbleCore::SafeStatement(new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($5)));
+		auto start = ScribbleCore::SafeStatement(new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($4)));
+
 		auto getVar = ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it));
-		auto end = ScribbleCore::SafeStatement(new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLess, getVar, ScribbleCore::SafeStatement($7)));
+			
+
+		auto end = ScribbleCore::SafeStatement(new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLess, getVar, ScribbleCore::SafeStatement($6)));
+			
 		//The increment step is just +1 on the variable supplied
 		auto inc = ScribbleCore::SafeStatement(new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, false));
-		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, start, end, inc, *$10);
+
+		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, start, end, inc, *$9);
 		
-		delete $3;
-		delete $10;
+		delete $2;
+		delete $9;
 	} | WHILE Expression DO LBRACKET Statements RBRACKET {
 		$$ = new ScribbleCore::WhileStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), *$5);
 		delete $5;
