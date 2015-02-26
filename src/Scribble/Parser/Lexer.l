@@ -122,6 +122,7 @@ word [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 "len" return LENGTH;
 "is" return IS;
 "otherwise" return OTHERWISE;
+"between" return BETWEEN;
 
 {integer} { SAVE_INT;
  return INT;

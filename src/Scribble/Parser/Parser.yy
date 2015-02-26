@@ -117,7 +117,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> LPAREN RPAREN LBRACKET RBRACKET COMMA DECREMENT INCREMENT PLUS_ASSIGN MINUS_ASSIGN TYPE_BOOL TRUE FALSE AND NIL TYPE
 %token <token> FUNCTION VARIABLE STRUCT LENGTH POINT
 %token <token> TYPE_INT TYPE_FLOAT32 TYPE_STRING COLON LSQBRACKET RSQBRACKET THEN
-%token <token> TERNARY CONCAT END DO OR PACKAGE IS GUARD OTHERWISE
+%token <token> TERNARY CONCAT END DO OR PACKAGE IS GUARD OTHERWISE BETWEEN
 
 
 %left END
@@ -674,6 +674,44 @@ Statement: Expression END {
 	} | FOR Expression END Expression END Expression DO LBRACKET Statements RBRACKET {
 		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), ScribbleCore::SafeStatement($4), ScribbleCore::SafeStatement($6), *$9);
 		delete $9;
+	} | FOR WORD BETWEEN Expression AND Expression DO LBRACKET Statements RBRACKET {
+		auto it = findVariable(*$2);
+
+		if (it.get() == nullptr) {
+			scribble_error((std::string(*$2) + " is not defined").c_str());
+		} else {
+			auto start = ScribbleCore::SafeStatement(new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($4)));
+
+			auto getVar = ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it));
+			
+
+			auto end = ScribbleCore::SafeStatement(new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLess, getVar, ScribbleCore::SafeStatement($6)));
+			
+			//The increment step is just +1 on the variable supplied
+			auto inc = ScribbleCore::SafeStatement(new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, false));
+
+			$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, start, end, inc, *$9);
+		}
+
+		delete $2;
+		delete $9;
+	} | FOR Variable BETWEEN Expression AND Expression DO LBRACKET Statements RBRACKET {
+		auto it = *$2;
+
+		auto start = ScribbleCore::SafeStatement(new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($4)));
+
+		auto getVar = ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it));
+			
+
+		auto end = ScribbleCore::SafeStatement(new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLess, getVar, ScribbleCore::SafeStatement($6)));
+			
+		//The increment step is just +1 on the variable supplied
+		auto inc = ScribbleCore::SafeStatement(new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, false));
+
+		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, start, end, inc, *$9);
+		
+		delete $2;
+		delete $9;
 	} | WHILE Expression DO LBRACKET Statements RBRACKET {
 		$$ = new ScribbleCore::WhileStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), *$5);
 		delete $5;
@@ -714,29 +752,39 @@ Expression: MINUS Expression {
 		delete $1;
 	} | WORD PLUS_ASSIGN Expression {
 		auto it = findVariable(*$1);
-		auto add = ScribbleCore::SafeStatement(
-			new ScribbleCore::OperateStatement(
-				scribble_lineno,
-				scribble_text,
-				ScribbleCore::Add,
-				ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno,scribble_text, it)),
-				ScribbleCore::SafeStatement($3)
-			)
-		);
-		$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, add);
+
+		if (it.get() == nullptr) {
+			scribble_error((std::string(*$1) + " is not defined").c_str());
+		} else {
+			auto add = ScribbleCore::SafeStatement(
+				new ScribbleCore::OperateStatement(
+					scribble_lineno,
+					scribble_text,
+					ScribbleCore::Add,
+					ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno,scribble_text, it)),
+					ScribbleCore::SafeStatement($3)
+				)
+			);
+			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, add);
+		}
 		delete $1;
 	} | WORD MINUS_ASSIGN Expression {
 		auto it = findVariable(*$1);
-		auto add = ScribbleCore::SafeStatement(
-			new ScribbleCore::OperateStatement(
-				scribble_lineno,
-				scribble_text,
-				ScribbleCore::Subtract,
-				ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno,scribble_text, it)),
-				ScribbleCore::SafeStatement($3)
-			)
-		);
-		$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, add);
+
+		if (it.get() == nullptr) {
+			scribble_error((std::string(*$1) + " is not defined").c_str());
+		} else {
+			auto add = ScribbleCore::SafeStatement(
+				new ScribbleCore::OperateStatement(
+					scribble_lineno,
+					scribble_text,
+					ScribbleCore::Subtract,
+					ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno,scribble_text, it)),
+					ScribbleCore::SafeStatement($3)
+				)
+			);
+			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, add);
+		}
 		delete $1;
 	} | AutoVariable {
 		$$ = $1;

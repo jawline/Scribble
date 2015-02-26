@@ -7,8 +7,10 @@
 /**
  * Sorts an array of integers using the bubble sort algorithm.
  */
-func Sort(n:array(int))->array(int) {
+func Sort(n:array(int)) -> array(int) {
+ 
  var swapped := true;
+
  for var i := len(n) - 1; i > 0; i-- do {
   swapped := false;
   for var j := 0; j < i; j++ do {

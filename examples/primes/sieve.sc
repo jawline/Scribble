@@ -5,7 +5,7 @@
  * Copyright (c) Blake Loring 2013-2015
  */
 
-func Sieve(n:int)->array(bool) {
+func Sieve(n:int) -> array(bool) {
  var results := [n]bool;
 
  for var i := 0; i < n; i++ do {

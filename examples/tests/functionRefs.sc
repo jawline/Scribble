@@ -19,7 +19,7 @@ func PassAFunction(numExecutes:int,fn:func(int, float32) -> int) {
 
 func Test() {
 
- var k:func(int,int)->int;
+ var k:func(int,int)->int := nil;
  test.Assert(k = nil, true, "k should equal nil");
 
  k := &FunctionOne(int,int);

@@ -7,8 +7,7 @@
 /**
  * Perform a quicksort on a given array of integers between the low and high indexs.
  */
-
-func qs( n:array(int), low : int, high : int) {
+func qs(n:array(int), low:int, high:int) {
 
  var i := low;
  var j := high;
@@ -17,7 +16,6 @@ func qs( n:array(int), low : int, high : int) {
  var pivot := n[i];
 
  while i <= j do {
-
   while n[i] < pivot do {
   	i++;
   }
@@ -35,23 +33,17 @@ func qs( n:array(int), low : int, high : int) {
    i++;
    j--;
   }
-
  }
  
- if low < j then {
- 	qs(n, low, j);
- }
- 
- if i < high then {
- 	qs(n, i, high);
- }
+ if low < j then qs(n, low, j);
+ if i < high then qs(n, i, high);
 }
 
 /**
  * Sort a given array of integers using the quicksort algorithm
  */
 
-func Sort(n : array(int)) -> array(int) {
+func Sort(n:array(int)) -> array(int) {
 	qs(n, 0, len(n) - 1);
 	return n;
 }

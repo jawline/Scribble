@@ -3,6 +3,7 @@
  *
  * Copyright (c) Blake Loring 2013
  */
+
 package sys := import("sys");
 
 /**
@@ -41,7 +42,7 @@ func Max(left:float32, right:float32) -> float32 :=
  */
 func Min(left:float32, right:float32) -> float32 :=
 	if left < right then left
-         | else right;
+     | else right;
 
 /**
  * Return val to the power of pow ( val^pow )
@@ -63,12 +64,12 @@ func Mod(val:int, divisor:int) -> int := sys.Mod(val, divisor);
  */
 func Gcd(a:int, b:int) -> int :=
  	if b = 0 then a
- 	 | else Gcd(b, Mod(a, b));
+ 	 | else Gcd(b, Mod(a,b));
 
 /**
  * Returns the least common multiple of two numbers
  */
-func Lcm(a:int, b:int) -> int := Abs(a*b) / Gcd(a,b);
+func Lcm(a:int, b:int) -> int := Abs(a * b) / Gcd(a,b);
 
 /**
  * Return the positive value of a given float.
@@ -129,4 +130,4 @@ func Even(x:int) -> bool := Mod(x,2) = 0;
 /**
  * Returns true if the given integer is an odd number
  */
-func Odd(x:int) -> bool := Mod(x, 2) != 0;
+func Odd(x:int) -> bool := Mod(x,2) != 0;
