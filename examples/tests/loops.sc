@@ -40,7 +40,7 @@ func ForBetweenTest() {
 func ForBetweenArray() {
  var k := [15]int;
  
- for var i between 0 and len(k) {
+ for var i between 0 and len(k) do {
   k[i] := i;
  }
  
