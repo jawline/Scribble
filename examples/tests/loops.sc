@@ -8,14 +8,17 @@ func Test() {
  var iter := 0;
 	
  for i := 0; i < 100; i++ do {
-  
   for j := 0; j < 100; j++ do {
    iter++;
   }
-  
  }
 
  test.Assert(iter, 10000, "Iter is not correct. Loops test has failed on a for loop");
+ 
+ for var k between 0 and 1000 do {
+ }
+ 
+ test.Assert(k, 999, "k is not correct");
 	
  i := 0;
  iter := 0;
