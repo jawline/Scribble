@@ -121,7 +121,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 
 
 %left END BETWEEN
-%right VAR IF FOR WHILE RETURN
+%right IF FOR WHILE RETURN
 %left LPAREN RPAREN LBRACKET RBRACKET
 %left COMMA
 %left AND OR LINK LEN
@@ -130,7 +130,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %left GREATER LESSER GREATER_EQUAL LESSER_EQUAL NOT_EQUAL
 %left TIMES DIVIDE
 %left PLUS MINUS
-%right NOT
+%right NOT VARIABLE
 
 %type <statement> Statement;
 %type <statements> Program;
