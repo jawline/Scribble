@@ -136,7 +136,6 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %type <statements> Program;
 %type <variable> Variable;
 %type <variable> ArgumentDefinition;
-%type <variable> IntVariable;
 %type <statements> Arguments;
 %type <statements> Arguments_2;
 %type <statements> Statements;
@@ -310,30 +309,6 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 			$$ = new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, nVar, sp);
 		}
 		
-		delete $2;
-	};
-	
-/**
- * Gives syntax for variable declaration when the new variable is guarenteed to be an integer (for var i between 0 and x)
- */
-IntVariable: VAR WORD {
-
-		//Check if the variable is already defined.
-		//If it isn't then create a new one and add a
-		//reference to the list of variables so any extra data can be resolved.
-		
-		auto it = findVariable(*$2);
-			
-		if (it.get() != nullptr) {
-			yyerror("Variable already defined.");
-			return -1;
-		}
-		
-		auto intTypeReference = ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore("int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
-		SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, intTypeReference));
-		VariableReferences.push_back(*nVar);
-		Variables.push_back(*nVar);
-		$$ = nVar;
 		delete $2;
 	};
 
