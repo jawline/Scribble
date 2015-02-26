@@ -3,10 +3,9 @@
  *
  * Copyright (c) Blake Loring 2015
  */
- 
-package math    := import("../math/math");
-package console := import("console");
-package test    := import("test");
+package math    := import("../math/math"),
+        console := import("console"),
+        test    := import("test");
 
 func Test() {
  console.Log("Number theory tests\n");
