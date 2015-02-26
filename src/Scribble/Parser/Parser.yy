@@ -749,11 +749,9 @@ Statement: Expression END {
 		auto start = ScribbleCore::SafeStatement(new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($5)));
 		auto getVar = ScribbleCore::SafeStatement(new ScribbleCore::GetVariableStatement(scribble_lineno, scribble_text, it));
 		auto end = ScribbleCore::SafeStatement(new ScribbleCore::TestStatement(scribble_lineno, scribble_text, ScribbleCore::TestLess, getVar, ScribbleCore::SafeStatement($7)));
-			
 		//The increment step is just +1 on the variable supplied
 		auto inc = ScribbleCore::SafeStatement(new ScribbleCore::IncrementStatement(scribble_lineno, scribble_text, it, ScribbleCore::Increment, false));
-
-		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, start, end, inc, *$9);
+		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, start, end, inc, *$10);
 		
 		delete $3;
 		delete $10;
