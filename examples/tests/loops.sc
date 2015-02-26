@@ -37,8 +37,21 @@ func ForBetweenTest() {
  test.Assert(k, 1000, "k is not correct");
 }
 
+func ForBetweenArray() {
+ var k := [15]int;
+ 
+ for var i between 0 and len(k) {
+  k[i] := i;
+ }
+ 
+ for i between 0 and len(k) {
+  test.Assert(k[i], i, "k[i] != i");
+ }
+}
+
 func Test() {
  WhileTest();
  ForTest();
  ForBetweenTest();
+ ForBetweenArray();
 }
