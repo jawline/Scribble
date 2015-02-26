@@ -3,17 +3,16 @@
  *
  * Copyright (c) Blake Loring 2013
  */
-
-package test := import("test");
-package sys := import("sys");
-package sieve := import("../primes/sieve");
-package math := import("../math/math");
+package test := import("test"),
+        sys := import("sys"),
+        sieve := import("../primes/sieve"),
+        math := import("../math/math");
 
 func Test() {
 
  var primesList := sieve.Sieve(150);
 
- for var i := 0; i < len(primesList); i++ do {
+ for var i between 0 and len(primesList) do {
   var isPrimeResult := math.Prime(i);
   test.Assert(isPrimeResult, primesList[i], "IsPrime differs from primelist result at "
    $ sys.String(i)
