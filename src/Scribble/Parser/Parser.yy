@@ -316,7 +316,7 @@ AutoVariable: VARIABLE WORD ASSIGN Expression {
 /**
  * Gives syntax for variable declaration when the new variable is guarenteed to be an integer (for var i between 0 and x)
  */
-IntVariable: VAR WORD {
+IntVariable: VARIABLE WORD {
 
 		//Check if the variable is already defined.
 		//If it isn't then create a new one and add a
