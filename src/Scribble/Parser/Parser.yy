@@ -327,14 +327,13 @@ IntVariable: VAR WORD {
 		if (it.get() != nullptr) {
 			yyerror("Variable already defined.");
 			return -1;
-		} else {
-			auto intTypeReference = ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore("int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
-			SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, intTypeReference));
-			VariableReferences.push_back(*nVar);
-			Variables.push_back(*nVar);
-			$$ = nVar;
 		}
 		
+		auto intTypeReference = ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore("int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
+		SmartPointer<ScribbleCore::Variable>* nVar = new SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, intTypeReference));
+		VariableReferences.push_back(*nVar);
+		Variables.push_back(*nVar);
+		$$ = nVar;
 		delete $2;
 	};
 
@@ -730,8 +729,23 @@ Statement: Expression END {
 		
 		delete $2;
 		delete $9;
-	} | FOR IntVariable BETWEEN Expression AND Expression DO LBRACKET Statements RBRACKET {
-		auto it = *$2;
+	} | FOR VAR WORD BETWEEN Expression AND Expression DO LBRACKET Statements RBRACKET {
+	
+		//Check if the variable is already defined.
+		//If it isn't then create a new one and add a
+		//reference to the list of variables so any extra data can be resolved.
+		
+		auto it = findVariable(*$2);
+			
+		if (it.get() != nullptr) {
+			yyerror("Variable already defined.");
+			return -1;
+		}
+		
+		auto intTypeReference = ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore("int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
+		auto var = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, intTypeReference));
+		VariableReferences.push_back(var);
+		Variables.push_back(var);
 
 		auto start = ScribbleCore::SafeStatement(new ScribbleCore::AssignVariableStatement(scribble_lineno, scribble_text, it, ScribbleCore::SafeStatement($4)));
 
@@ -745,8 +759,8 @@ Statement: Expression END {
 
 		$$ = new ScribbleCore::ForStatement(scribble_lineno, scribble_text, start, end, inc, *$9);
 		
-		delete $2;
-		delete $9;
+		delete $3;
+		delete $10;
 	} | WHILE Expression DO LBRACKET Statements RBRACKET {
 		$$ = new ScribbleCore::WhileStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2), *$5);
 		delete $5;
