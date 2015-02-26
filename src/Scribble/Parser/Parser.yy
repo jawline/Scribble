@@ -120,7 +120,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %token <token> TERNARY CONCAT END DO OR PACKAGE IS GUARD OTHERWISE BETWEEN
 
 
-%left END
+%left END BETWEEN
 %right VAR IF FOR WHILE RETURN
 %left LPAREN RPAREN LBRACKET RBRACKET
 %left COMMA
@@ -130,6 +130,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %left GREATER LESSER GREATER_EQUAL LESSER_EQUAL NOT_EQUAL
 %left TIMES DIVIDE
 %left PLUS MINUS
+%left WORD INT
 %right NOT
 
 %type <statement> Statement;
