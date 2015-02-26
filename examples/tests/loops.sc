@@ -2,6 +2,7 @@ package sys := import("sys");
 package test := import("test");
 
 func ForTest() {
+ var iter := 0;
  for var i := 0; i < 100; i++ do {
   for var j := 0; j < 100; j++ do {
    iter++;
