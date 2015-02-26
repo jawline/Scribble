@@ -2,26 +2,25 @@
  * Test Manager manages the testing suite
  */
 package console       := import("console"),
-	notTest       := import("not"),
-	loopsTest     := import("loops"),
-	logicalTest   := import("logical"),
-	variablesTest := import("variables"),
-	recursionTest := import("recursion"),
-	arraysTest    := import("arrays"),
-	primesTest    := import("primes"),
-	sortsTest     := import("sorts"),
-	floatsTest    := import("floats"),
-	mathTest      := import("math"),
-	structTest    := import("structures"),
-	structQs := import("structQuicksortTest"),
-	refEqTest := import("refEqualityTest"),
-	listTest := import("LinkedList"),
-	functionRefs := import("functionRefs"),
-	assignments := import("assignments"),
-	magicTest := import("magicTest");
+	    notTest       := import("not"),
+	    loopsTest     := import("loops"),
+	    logicalTest   := import("logical"),
+	    variablesTest := import("variables"),
+	    recursionTest := import("recursion"),
+	    arraysTest    := import("arrays"),
+	    primesTest    := import("primes"),
+	    sortsTest     := import("sorts"),
+	    floatsTest    := import("floats"),
+	    mathTest      := import("math"),
+	    structTest    := import("structures"),
+	    structQs      := import("structQuicksortTest"),
+	    refEqTest     := import("refEqualityTest"),
+	    listTest      := import("LinkedList"),
+	    functionRefs  := import("functionRefs"),
+	    assignments   := import("assignments"),
+	    magicTest     := import("magicTest");
 
 func TestAll() {
-
  console.Log("Not Test\n");
  notTest.Test();
 
