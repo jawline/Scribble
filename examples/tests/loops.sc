@@ -1,5 +1,6 @@
-package sys := import("sys");
-package test := import("test");
+package sys     := import("sys"),
+        console := import("console"),
+        test    := import("test");
 
 func ForTest() {
  var iter := 0;
