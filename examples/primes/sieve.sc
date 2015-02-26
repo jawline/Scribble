@@ -18,10 +18,8 @@ func Sieve(n:int) -> array(bool) {
  results[1] := false;
  
  for i between 2 and n do {
-  if results[i] then {
-  	for var j := i*i; j < n; j := j + i do {
-  		results[j] := false;
-  	}
+  for var j := i*i; j < n; j := j + i do {
+   results[j] := false;
   }
  }
 
