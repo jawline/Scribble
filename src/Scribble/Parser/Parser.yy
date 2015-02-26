@@ -388,12 +388,9 @@ ArgumentDefinitions: ArgumentDefinition {
 Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBRACKET Statements RBRACKET {
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
-		int pos = 0;
-
 		for (unsigned int i = 0; i < Variables.size(); i++) {
 			Variables[i]->setPosition(i);
 			values.push_back(Variables[i]);
-			pos++;
 		}
 
 		//Generate the function signature with all the type info about the fn
@@ -443,11 +440,9 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBR
 	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN LBRACKET Statements RBRACKET {
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
-		int pos = 0;
 		for (unsigned int i = 0; i < Variables.size(); i++) {
 			Variables[i]->setPosition(i);
 			values.push_back(Variables[i]);
-			pos++;
 		}
 
 		//Generate the function signature
@@ -497,12 +492,9 @@ Function: FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type LBR
 	} | FUNCTION WORD LPAREN OptionalArgumentDefinitions RPAREN POINT Type ASSIGN GuardOrExpression {
 		std::vector<SmartPointer<ScribbleCore::Variable>> values;
 
-		int pos = 0;
-
 		for (unsigned int i = 0; i < Variables.size(); i++) {
 			Variables[i]->setPosition(i);
 			values.push_back(Variables[i]);
-			pos++;
 		}
 
 		//Generate the function signature with all the type info about the fn
