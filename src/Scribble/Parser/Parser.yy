@@ -733,9 +733,8 @@ Statement: Expression END {
 	
 		//Check if the variable is already defined.
 		//If it isn't then create a new one and add a
-		//reference to the list of variables so any extra data can be resolved.
-		
-		auto it = findVariable(*$2);
+		//reference to the list of variables so any extra data can be resolved
+		auto it = findVariable(*$3);
 			
 		if (it.get() != nullptr) {
 			yyerror("Variable already defined.");
@@ -743,7 +742,7 @@ Statement: Expression END {
 		}
 		
 		auto intTypeReference = ScribbleCore::TypeReference(new ScribbleCore::TypeReferenceCore("int", ScribbleCore::getTypeManager().getType(ScribbleCore::Int)));
-		auto var = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$2, 0, intTypeReference));
+		auto var = SmartPointer<ScribbleCore::Variable>(new ScribbleCore::Variable(*$3, 0, intTypeReference));
 		VariableReferences.push_back(var);
 		Variables.push_back(var);
 
