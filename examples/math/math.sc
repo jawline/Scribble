@@ -3,7 +3,6 @@
  *
  * Copyright (c) Blake Loring 2013
  */
-
 package sys := import("sys");
 
 /**
