@@ -58,7 +58,7 @@ class Parser {
     /**
      * Check whether the set already contains an equivalent function
      */
-    static bool testFunctionEquivilence(SafeFunction function, SafeFunction other);
+    static bool signatureEquals(SafeFunction function, SafeFunction other);
 
     /**
      * Attempt to find a function that meets the criteria of a reference within a function set.

@@ -4,8 +4,8 @@
  * Copyright (c) Blake Loring 2013
  */
  
-package sys := import("sys");
-package console := import("console");
+package sys 	:= import("sys"),
+		console := import("console");
 
 /**
  * Vector3 structure takes 3 floating points as variables x, y and z
@@ -20,7 +20,7 @@ type Vector3 := struct {
  * Compute the addition of two vectors and return a new structure containing the result.
  */
 func Add(left:Vector3, right:Vector3) -> Vector3 {
-	return Vector3{
+	return Vector3 {
 		left->x + right->x,
 		left->y + right->y,
 		left->z + right->z

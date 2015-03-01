@@ -18,7 +18,8 @@ package console       := import("console"),
 	    listTest      := import("LinkedList"),
 	    functionRefs  := import("functionRefs"),
 	    assignments   := import("assignments"),
-	    magicTest     := import("magicTest");
+	    magicTest     := import("magicTest"),
+	    vectorTest    := import("vector");
 
 func TestAll() {
  console.Log("Not Test\n");
@@ -71,6 +72,9 @@ func TestAll() {
 
  console.Log("Function References\n");
  functionRefs.Test();
+
+ console.Log("Vectors\n");
+ vectorTest.Test();
  
  console.Log("End of tests\n");
 }

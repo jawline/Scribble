@@ -162,7 +162,7 @@ bool Parser::listContains(std::string target,
     return false;
 }
 
-bool Parser::testFunctionEquivilence(SafeFunction function, SafeFunction compared) {
+bool Parser::signatureEquals(SafeFunction function, SafeFunction compared) {
     return function->getSignature().equalTo(compared->getSignature());
 }
 
@@ -286,7 +286,7 @@ std::string Parser::includeText(std::string source, std::string const& filename,
             for (unsigned int i = 0; i < setToTest.size(); i++) {
                 for (unsigned int j = i + 1; j < setToTest.size(); j++) {
                     
-                    if (testFunctionEquivilence(setToTest[i], setToTest[j])) {
+                    if (signatureEquals(setToTest[i], setToTest[j])) {
                         throw ParserException(filename,
                                               std::string("Function set ") + iter->first
                                               + " contains two identical functions ( Same number of arguments and return type )");
