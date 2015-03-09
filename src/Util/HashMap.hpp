@@ -57,11 +57,26 @@ template<class T>
 class HashBucket {
   private:
     HashItemLink<T>* root_;
+    
+    void freeAllEntries() {
+      HashItemLink<T> *current, *next;
+      current = root_;
+      
+      while (current) {
+        next = current->getNext();
+        delete current;
+        current = next;
+      }
+    }
 
   public:
 
     HashBucket() {
       root_ = nullptr;
+    }
+    
+    ~HashBucket() {
+      freeAllEntries();
     }
 
     inline bool strEqual(std::string const& left, std::string const& right) const {
