@@ -23,7 +23,7 @@ class HashItemLink {
 
   public:
 
-    HashItemLink(std::string name, T data) {
+    HashItemLink(std::string const& name, T const& data) {
         name_ = name;
         data_ = data;
         next_ = 0;
@@ -37,7 +37,7 @@ class HashItemLink {
         return data_;
     }
 
-    void setData(T data) {
+    void setData(T const& data) {
         data_ = data;
     }
 
