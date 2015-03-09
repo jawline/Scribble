@@ -76,7 +76,7 @@ class HashBucket {
     }
     
     ~HashBucket() {
-      freeAllEntries();
+      //freeAllEntries();
     }
 
     inline bool strEqual(std::string const& left, std::string const& right) const {
