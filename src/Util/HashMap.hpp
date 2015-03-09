@@ -181,7 +181,7 @@ class HashMap {
     }
 
     virtual ~HashMap() {
-      delete[] buckets;
+      delete[] buckets_;
     }
 
     void insert(std::string const& id, T data) {
