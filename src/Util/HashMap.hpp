@@ -109,7 +109,6 @@ class HashBucket {
 
             iter = iter->getNext();
         }
-
     }
 
     void insert(std::string const& id, T data) {
@@ -142,7 +141,6 @@ class HashBucket {
         //Set the new end of the list
         iter->setNext(new HashItemLink<T>(id, data));
     }
-
 };
 
 }
@@ -157,13 +155,13 @@ class HashMap {
 
   public:
 
-    HashMap() :
-        numBuckets_(numBucketsDefault) {
+    HashMap() {
+        numBuckets_ = numBucketsDefault;
         buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
     }
 
-    HashMap(int numBuckets) :
-        numBuckets_(numBuckets) {
+    HashMap(int numBuckets) {
+        numBuckets_ = numBuckets;
         buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
     }
 
