@@ -64,7 +64,7 @@ class HashBucket {
         root_(nullptr) {
     }
 
-    bool strEqual(std::string const& left, std::string const& right) const {
+    inline bool strEqual(std::string const& left, std::string const& right) const {
         return left.compare(right) == 0;
     }
 
@@ -165,8 +165,7 @@ class HashMap {
         buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
     }
 
-    virtual ~HashMap() {
-    }
+    virtual ~HashMap() {}
 
     void insert(std::string const& id, T data) {
         buckets_[hash(id)].insert(id, data);
