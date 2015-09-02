@@ -130,7 +130,7 @@ extern char *scribble_text;	// defined and maintained in lex.c
 %left GREATER LESSER GREATER_EQUAL LESSER_EQUAL NOT_EQUAL
 %left TIMES DIVIDE
 %left PLUS MINUS
-%right NOT VARIABLE
+%right NOT VARIABLE UMINUS
 
 %type <statement> Statement;
 %type <statements> Program;
@@ -756,7 +756,7 @@ Statement: Expression END {
 		$$ = new ScribbleCore::ReturnStatement(scribble_lineno, scribble_text, nullptr);
 	};
 
-Expression: MINUS Expression {
+Expression: MINUS Expression %prec UMINUS {
 		$$ = new ScribbleCore::NegativeStatement(scribble_lineno, scribble_text, ScribbleCore::SafeStatement($2));
 	} | TRUE {
 		$$ = new ScribbleCore::BoolStatement(scribble_lineno, scribble_text, true);

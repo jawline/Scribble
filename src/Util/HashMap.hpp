@@ -23,7 +23,7 @@ class HashItemLink {
 
   public:
 
-    HashItemLink(std::string name, T data) {
+    HashItemLink(std::string const& name, T const& data) {
         name_ = name;
         data_ = data;
         next_ = 0;
@@ -37,7 +37,7 @@ class HashItemLink {
         return data_;
     }
 
-    void setData(T data) {
+    void setData(T const& data) {
         data_ = data;
     }
 
@@ -57,14 +57,29 @@ template<class T>
 class HashBucket {
   private:
     HashItemLink<T>* root_;
+    
+    void freeAllEntries() {
+      HashItemLink<T> *current, *next;
+      current = root_;
+      
+      while (current) {
+        next = current->getNext();
+        delete current;
+        current = next;
+      }
+    }
 
   public:
 
-    HashBucket() :
-        root_(nullptr) {
+    HashBucket() {
+      root_ = nullptr;
+    }
+    
+    ~HashBucket() {
+      //freeAllEntries();
     }
 
-    bool strEqual(std::string const& left, std::string const& right) const {
+    inline bool strEqual(std::string const& left, std::string const& right) const {
         return left.compare(right) == 0;
     }
 
@@ -109,7 +124,6 @@ class HashBucket {
 
             iter = iter->getNext();
         }
-
     }
 
     void insert(std::string const& id, T data) {
@@ -142,7 +156,6 @@ class HashBucket {
         //Set the new end of the list
         iter->setNext(new HashItemLink<T>(id, data));
     }
-
 };
 
 }
@@ -157,17 +170,18 @@ class HashMap {
 
   public:
 
-    HashMap() :
-        numBuckets_(numBucketsDefault) {
+    HashMap() {
+        numBuckets_ = numBucketsDefault;
         buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
     }
 
-    HashMap(int numBuckets) :
-        numBuckets_(numBuckets) {
+    HashMap(int numBuckets) {
+        numBuckets_ = numBuckets;
         buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
     }
 
     virtual ~HashMap() {
+      delete[] buckets_;
     }
 
     void insert(std::string const& id, T data) {

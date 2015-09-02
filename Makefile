@@ -53,7 +53,7 @@ resetgitandpull:
 	-git pull
 
 test:
-	-$(OUTPUT_DIR)$(OUTPUT_FILE) ./examples/executeTests.sc
+	-$(OUTPUT_DIR)$(OUTPUT_FILE) -r ./examples/executeTests.sc
  
 #The executable rule compiles the set of objects into the target executable
 $(EXECUTABLE): $(OBJECTS)
