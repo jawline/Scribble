@@ -61,7 +61,7 @@ template<class T>
 class HashMap {
   private:
     HashMapUtils::HashBucket<T>* buckets_;
-    int numBuckets_;
+    unsigned int numBuckets_;
 
   public:
 
@@ -76,8 +76,21 @@ class HashMap {
     }
 
     virtual ~HashMap() {
-        //TODO: There's a nasty bug here - buckets should be copied on assigment
         //delete[] buckets_;
+    }
+
+    HashMap<T>& operator=(HashMap<T> const& other) {
+        
+        if (this != &other) {
+            delete[] buckets_;
+            numBuckets_ = other.numBuckets_;
+            buckets_ = new HashMapUtils::HashBucket<T>[numBuckets_];
+            for (unsigned int i = 0; i < numBuckets_; i++) {
+                buckets_[i] = other.buckets_[i];
+            }
+        }
+
+        return *this;
     }
 
     void set(std::string const& id, T data) {
