@@ -8,153 +8,48 @@
 #ifndef HASHMAP_HPP_
 #define HASHMAP_HPP_
 #include <string>
+#include <vector>
 
 namespace HashMapUtils {
 
-/**
- * The class that builds the linked list in each hasmap bucket.
- */
-template<class T>
-class HashItemLink {
-  private:
-    std::string name_;
-    T data_;
-    HashItemLink<T>* next_;
-
-  public:
-
-    HashItemLink(std::string const& name, T const& data) {
-        name_ = name;
-        data_ = data;
-        next_ = 0;
-    }
-
-    std::string const& getName() const {
-        return name_;
-    }
-
-    T getData() const {
-        return data_;
-    }
-
-    void setData(T const& data) {
-        data_ = data;
-    }
-
-    HashItemLink<T>* getNext() const {
-        return next_;
-    }
-
-    void setNext(HashItemLink<T>* next) {
-        next_ = next;
-    }
-};
-
-/**
- * The bucket class stores a linked list of things if the bucket is not empty
- */
 template<class T>
 class HashBucket {
   private:
-    HashItemLink<T>* root_;
-    
-    void freeAllEntries() {
-      HashItemLink<T> *current, *next;
-      current = root_;
-      
-      while (current) {
-        next = current->getNext();
-        delete current;
-        current = next;
-      }
-    }
+    std::vector<std::pair<std::string, T>> root_;
 
   public:
 
-    HashBucket() {
-      root_ = nullptr;
-    }
-    
-    ~HashBucket() {
-      //freeAllEntries();
+    inline bool itemIsNamed(unsigned int i, std::string const& str) const {
+        return root_[i].first.compare(str) == 0;
     }
 
-    inline bool strEqual(std::string const& left, std::string const& right) const {
-        return left.compare(right) == 0;
-    }
-
-    HashItemLink<T>* find(std::string const& id) const {
-
-        if (root_ == nullptr) {
-            return nullptr;
-        }
-
-        HashItemLink<T>* iter = root_;
-
-        while (iter != nullptr) {
-
-            if (strEqual(iter->getName(), id)) {
-                return iter;
+    bool get(std::string const& id, T& target) const {
+        for (unsigned int i = 0; i < root_.size(); i++) {
+            if (itemIsNamed(i, id)) {
+                target = root_[i].second;
+                return true;
             }
-
-            iter = iter->getNext();
         }
-
-        return nullptr;
+        return false;
     }
 
     void remove(std::string const& id) {
-
-        HashItemLink<T>* iter = root_;
-
-        if (strEqual(iter->getName(), iter->name_)) {
-            root_ = root_->getNext();
-            delete iter;
-            return;
-        }
-
-        while (iter->getNext() != nullptr) {
-
-            if (strEqual(iter->getNext()->getName(), id)) {
-                HashItemLink<T>* str = iter->getNext();
-                iter->setNext(str->getNext());
-                delete str;
+        for (unsigned int i = 0; i < root_.size(); i++) {
+            if (itemIsNamed(i, id)) {
+                root_.erase(root_.begin() + i);
                 return;
             }
-
-            iter = iter->getNext();
         }
     }
 
-    void insert(std::string const& id, T data) {
-
-        //If there is no existing list then make one.
-        if (root_ == nullptr) {
-            root_ = new HashItemLink<T>(id, data);
-            return;
-        }
-
-        //Iterate through all existing nodes. if it is the node we are looking to add then change it instead of inserting it.
-        HashItemLink<T>* iter = root_;
-
-        while (iter->getNext() != nullptr) {
-
-            if (strEqual(iter->getName(), id)) {
-                iter->setData(data);
+    void set(std::string const& id, T data) {
+        for (unsigned int i = 0; i < root_.size(); i++) {
+            if (itemIsNamed(i, id)) {
+                root_[i].second = data;
                 return;
             }
-
-            iter = iter->getNext();
         }
-
-        //One last check to check the last element isn't the target
-        if (strEqual(iter->getName(), id)) {
-            iter->setData(data);
-            return;
-        }
-
-        //Set the new end of the list
-        iter->setNext(new HashItemLink<T>(id, data));
+        root_.push_back(std::pair<std::string, T>(id, data));
     }
 };
 
@@ -181,38 +76,20 @@ class HashMap {
     }
 
     virtual ~HashMap() {
+        //TODO: There's a nasty bug here - buckets should be copied on assigment
         //delete[] buckets_;
     }
 
-    void insert(std::string const& id, T data) {
-        buckets_[hash(id)].insert(id, data);
+    void set(std::string const& id, T data) {
+        buckets_[hash(id)].set(id, data);
     }
 
     void remove(std::string const& id) {
         buckets_[hash(id)].remove(id);
     }
 
-    bool exists(std::string const& id) {
-
-        if (buckets_[hash(id)].find(id) != nullptr) {
-            return true;
-        }
-
-        return false;
-    }
-
-    HashMapUtils::HashItemLink<T>* get(std::string id) {
-        return buckets_[hash(id)].find(id);
-    }
-
-    T find(std::string const& id) {
-        HashMapUtils::HashItemLink<T>* linked = get(id);
-
-        if (linked != nullptr) {
-            return linked->getData();
-        }
-
-        return T();
+    bool get(std::string const& id, T& target) {
+        return buckets_[hash(id)].get(id, target);
     }
 
     int hash(std::string const& id) {

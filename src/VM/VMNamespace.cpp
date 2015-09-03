@@ -8,33 +8,33 @@
 #include "VMNamespace.hpp"
 #include <VM/Constants.hpp>
 
-bool VM::NamespaceEntry::searchNamespace(VMNamespace space, std::string target,
-        NamespaceEntry& entry) {
+bool VM::NamespaceEntry::searchNamespace(VMNamespace space, std::string target, NamespaceEntry& result) {
 
     size_t pos = target.find(VM::vmNamespaceSeperator);
 
     if (pos == std::string::npos) {
 
-        NamespaceEntry spaceSearch = space.find(target);
+        NamespaceEntry spaceSearch;
+        bool found = space.get(target, spaceSearch);
 
-        if (spaceSearch.getType() == Invalid) {
-            //	printf("Could not find %s\n", target.c_str());
+        if (!found || spaceSearch.getType() == Invalid) {
             return false;
         }
 
-        entry = spaceSearch;
+        result = spaceSearch;
         return true;
     } else {
 
         std::string prefix = target.substr(0, pos);
         target = target.substr(pos + 1);
+        NamespaceEntry localEntry;
+        bool found = space.get(prefix, localEntry);
 
-        if (space.find(prefix).getType() != Namespace) {
-            //	printf("Could not find %s\n", target.c_str());
+        if (!found || localEntry.getType() != Namespace) {
             return false;
         }
 
-        return searchNamespace(space.find(prefix).getNamespace(), target, entry);
+        return searchNamespace(localEntry.getNamespace(), target, result);
     }
 
 }

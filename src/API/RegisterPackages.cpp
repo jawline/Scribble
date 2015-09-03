@@ -56,25 +56,16 @@ void registerPackages(
 
         ScribbleCore::NamespaceType names = selectedNamespaceIter->second;
 
-        for (auto iterator = names.begin(); iterator != names.end();
-                iterator++) {
-
+        for (auto iterator = names.begin(); iterator != names.end(); iterator++) {
             if (iterator->second.type() == ScribbleCore::FunctionSetEntry) {
-
                 ScribbleCore::FunctionSet functionSet = iterator->second.getFunctionSet();
-
                 for (unsigned int i = 0; i < functionSet.size(); i++) {
-
                     SafeFunction function = functionSet[i];
-
                     if (function->isNativeFunction()) {
-                        newSpace.insert(function->getName(), VM::NamespaceEntry(API::Function::getNativeFunction(function)));
+                        newSpace.set(function->getName(), VM::NamespaceEntry(API::Function::getNativeFunction(function)));
                     }
-
                 }
-
             } else if (iterator->second.type() == ScribbleCore::TypeEntry) {
-
                 if (iterator->second.getType()->type()->getType() == ScribbleCore::StructureType) {
                     vm.logMessage(VM::Log, std::string("Registering Type ") + selectedNamespaceIter->first + VM::vmNamespaceSeperator + iterator->first + " {\n");
 
@@ -96,19 +87,15 @@ void registerPackages(
                         fields.push_back( newField );
                     }
 
-                    newSpace.insert(info->getName(), VM::NamespaceEntry(SmartPointer<VM::VMEntryType>(new VM::VMEntryType(info->getName(), fields))));
+                    newSpace.set(info->getName(), VM::NamespaceEntry(SmartPointer<VM::VMEntryType>(new VM::VMEntryType(info->getName(), fields))));
 
                     vm.logMessage(VM::Log, "}\n");
                     vm.logMessage(VM::Log, std::string("Registered type ") + info->getName() + " inside " + selectedNamespaceIter->first + "\n");
                 }
-
             }
-
         }
 
-        vm.registerEntry(selectedNamespaceIter->first,
-                         VM::NamespaceEntry(newSpace));
-
+        vm.registerEntry(selectedNamespaceIter->first, VM::NamespaceEntry(newSpace));
     }
 
     for (auto iter = postResolveList.begin(); iter != postResolveList.end(); iter++) {

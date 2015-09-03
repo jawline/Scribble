@@ -145,7 +145,7 @@ class VirtualMachine {
     virtual SmartPointer<VMEntryType> findType(std::string const& name);
 
     virtual void registerEntry(std::string const& name, NamespaceEntry entry) {
-        namespace_.insert(name, entry);
+        namespace_.set(name, entry);
     }
 
     virtual void execute(std::string function);

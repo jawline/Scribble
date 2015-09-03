@@ -16,7 +16,7 @@
 namespace VM {
 
 enum NamespaceEntryType {
-    Invalid, Function, Type, Namespace
+    Invalid = 0, Function, Type, Namespace
 };
 
 class NamespaceEntry;

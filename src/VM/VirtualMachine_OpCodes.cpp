@@ -764,11 +764,12 @@ void VirtualMachine::opLoadConstant(InstructionSet& instructionSet) {
     case CArray: {
 
         //Read in the type of array from the constant data with this instruction set.
-        std::string type = instructionSet.getConstantString(
-                               constantDataStart + 1);
+        std::string type = instructionSet.getConstantString(constantDataStart + 1);
 
-        //Check the type is valid
-        if (namespace_.find(type).getType() != Type) {
+        NamespaceEntry entry;
+        bool found = namespace_.get(type, entry);
+
+        if (!found || entry.getType() != Type) {
             VM_PRINTF_FATAL("Invalid type %s\n", type.c_str());
         }
 
@@ -793,8 +794,7 @@ void VirtualMachine::opLoadConstant(InstructionSet& instructionSet) {
             next++;
         }
 
-        registers_[destinationRegister] = heap_.allocate(
-                                              namespace_.find(type).getTypeReference(), sizeBytes, initial);
+        registers_[destinationRegister] = heap_.allocate(entry.getTypeReference(), sizeBytes, initial);
 
         delete[] initial;
 

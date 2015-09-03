@@ -28,56 +28,21 @@ VirtualMachine::VirtualMachine() :
         registerReference_[i] = false;
     }
 
+    auto charType = SmartPointer<VMEntryType>(new VMEntryType("char", 1, false));
+
     //Register all the primitive types
-    registerEntry("char",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("char", 1, false))));
+    registerEntry("char", charType);
+    registerEntry("bool", NamespaceEntry(SmartPointer<VMEntryType>(new VMEntryType("bool", 1, false))));
+    registerEntry("short", NamespaceEntry(SmartPointer<VMEntryType>(new VMEntryType("short", 2, false))));
+    registerEntry("int", NamespaceEntry(SmartPointer<VMEntryType>(new VMEntryType("int", 4, false))));
+    registerEntry("float32", NamespaceEntry(SmartPointer<VMEntryType>(new VMEntryType("float32", 4, false))));
 
-    registerEntry("bool",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("bool", 1, false))));
+    registerEntry("long", NamespaceEntry(SmartPointer<VMEntryType>(new VMEntryType("int", 8, false))));
+    registerEntry("__fnptr",NamespaceEntry(SmartPointer<VMEntryType>(new VMEntryType("__fnptr", charType))));
+    registerEntry("string", NamespaceEntry(SmartPointer<VMEntryType>(new VMEntryType("string", charType))));
 
-    registerEntry("short",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("short", 2, false))));
-
-    registerEntry("int",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("int", 4, false))));
-
-    registerEntry("float32",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("float32", 4, false))));
-
-    registerEntry("long",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("int", 8, false))));
-
-    registerEntry("__fnptr",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("__fnptr",
-                                         namespace_.find("char").getTypeReference()))));
-
-    registerEntry("string",
-                  NamespaceEntry(
-                      SmartPointer < VMEntryType
-                      > (new VMEntryType("string",
-                                         namespace_.find("char").getTypeReference()))));
-
-    //Allocate the stack
     stack_ = new uint8_t[vmStackIncrease];
-
-    //Initialize the stack height
     currentStackHeight_ = vmStackIncrease;
-
-    //Initialize garbage collection variables.
     gcStat_ = 0;
 }
 
@@ -87,8 +52,6 @@ VirtualMachine::~VirtualMachine() {
 SmartPointer<VMEntryType> VirtualMachine::findType(std::string const& name) {
 
     NamespaceEntry entry;
-
-    //VM_PRINTF_LOG("Searching for type %s\n", name.c_str());
 
     //If the namespace entry is not found in the namespace
     if (!VM::NamespaceEntry::searchNamespace(namespace_, name, entry)) {
@@ -100,16 +63,14 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string const& name) {
 
         if (strncmp(prefix, name.c_str(), strlen(prefix)) == 0) {
 
-            std::string subtypeName = name.substr(strlen(prefix),
-                                                  name.size() - strlen(prefix) - 1);
+            std::string subtypeName = name.substr(strlen(prefix), name.size() - strlen(prefix) - 1);
 
             VM_PRINTF_LOG("Generating subtype %s\n", subtypeName.c_str());
 
             SmartPointer<VMEntryType> subtype = findType(subtypeName);
 
             if (subtype.get() == nullptr) {
-                VM_PRINTF_FATAL("Cannot create array of invalid subtype %s\n",
-                                subtypeName.c_str());
+                VM_PRINTF_FATAL("Cannot create array of invalid subtype %s\n", subtypeName.c_str());
                 return nullptr;
             }
 
@@ -119,15 +80,13 @@ SmartPointer<VMEntryType> VirtualMachine::findType(std::string const& name) {
             return entryType;
         } else {
             VM_PRINTF_LOG("Prefix of %s does not match with array(\n", name.c_str());
+            return nullptr;
         }
-
-        //If it does not start with array then return NULL so that the VM error handler can catch it
-        return nullptr;
     }
 
     //If the entry in the namespace specified is not a type then return null
     if (entry.getType() != Type) {
-        VM_PRINTF_LOG("Error searched type %s\n", name.c_str());
+        VM_PRINTF_LOG("Error searched type %s (%i)\n", name.c_str(), entry.getType());
         return nullptr;
     }
 

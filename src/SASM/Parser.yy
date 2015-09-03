@@ -18,7 +18,7 @@ void sasm_error(const char* s);
 extern int sasm_lineno;	// defined and maintained in lex.c
 extern char *sasm_text;	// defined and maintained in lex.c
 
-VM::VMNamespace CurrentNamespace;
+VM::VMNamespace* currentNamespace;
 	
 %}
 
@@ -43,9 +43,9 @@ VM::VMNamespace CurrentNamespace;
 %%
 
 SASMProgram: {
-	CurrentNamespace = VM::VMNamespace();
+	currentNamespace = new VM::VMNamespace();
 } | SASMProgram WORD LBRACKET SASMFunction RBRACKET {
-	CurrentNamespace.insert(*$2, VM::NamespaceEntry(SmartPointer<VM::VMFunc>(new VM::VMFunc(*$2, VM::InstructionSet(getInstructionBuffer(), getInstructionBufferSize(), getInstructionConstant(), getInstructionConstantSize(), 0)))));
+	currentNamespace->set(*$2, VM::NamespaceEntry(SmartPointer<VM::VMFunc>(new VM::VMFunc(*$2, VM::InstructionSet(getInstructionBuffer(), getInstructionBufferSize(), getInstructionConstant(), getInstructionConstantSize(), 0)))));
 	delete $2;
 	DeleteInstructionBuffer();
 };
