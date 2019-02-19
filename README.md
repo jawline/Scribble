@@ -1,4 +1,4 @@
-#Scribble Language
+# Scribble Language
 To compile Scribble bison, flex and a version of g++ with C++11 support must be installed and in the path.
 
 If using a version of these which has not been installed to your path by default you can add it to the path by typing export PATH=$PATH:Path/To/Tool/Directory on Linux and other UNIX systems.
