@@ -11,8 +11,8 @@ The program has been tested on windows through Cygwin and works. After the parse
 (make generate_parser) the source could be compatable with most C++ compilers on windows, but this is not guarenteed
 
 To compile the program run the program make generate_parser and then make when inside the Scribble directory.
-For example if the Scribble directory was ~/Scribble then you would type 
-`cd ~/Scribble && make generate_parser && make` this will place the generated executable in ~/Scribble/bin/
+For example if the Scribble directory was `~/Scribble` then you would type 
+`cd ~/Scribble && make generate_parser && make` this will place the generated executable in `~/Scribble/bin/`
 
 To install Scribble to /usr/bin type make install with elevated privileges (E.g. sudo make install)
 
